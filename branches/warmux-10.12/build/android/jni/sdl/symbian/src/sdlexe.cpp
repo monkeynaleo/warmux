@@ -95,6 +95,24 @@ LOCAL_C void MakeCCmdLineL(const TDesC8& aParam, CDesC8Array& aArray)
         }
     }  
 
+void GetPrivatePath(RFs& aFs, TDes& aName)
+    {
+    RFs fs;
+    TChar drive;
+    TFileName name = RProcess().FileName();
+    drive = name[0];
+    drive.UpperCase();
+    if(drive == 'Z')
+        drive = 'C';
+    
+    aName.Append(drive);
+    aName.Append(':');
+
+    aFs.PrivatePath(name);
+   
+    aName.Append(name);
+    }
+
 
 NONSHARABLE_CLASS(CZoomer) : public CBase, public MBlitter
 	{
@@ -288,12 +306,13 @@ NONSHARABLE_CLASS(TSdlClass)
 	{
 	public:
 		TSdlClass();
-		void SetMain(const TMainFunc& aFunc, TInt aFlags, MSDLMainObs* aObs, TInt aExeFlags);
+		void SetMain(const TMainFunc& aFunc, MSDLMainObs* aObs);
 		TInt SdlFlags() const;
 		const TMainFunc& Main() const;
 		void SendEvent(TInt aEvent, TInt aParam, CSDL* aSDL);
 		TInt AppFlags() const; 
 		void AppFlags(TInt aFlags); 
+		void SetFlags(TInt aSdlFlags, TInt aExeFlags);
 	private:
 		TMainFunc iFunc;
 		TInt iSdlFlags;
@@ -318,11 +337,15 @@ TInt TSdlClass::AppFlags() const
 	return iExeFlags;
 	}
 	
-void TSdlClass::SetMain(const TMainFunc& aFunc, TInt aFlags, MSDLMainObs* aObs, TInt aExeFlags)
+void TSdlClass::SetFlags(TInt aSdlFlags, TInt aExeFlags)
+    {
+    iSdlFlags = aSdlFlags;
+    iExeFlags = aExeFlags;
+    }
+
+void TSdlClass::SetMain(const TMainFunc& aFunc, MSDLMainObs* aObs)
 	{	
 	iFunc = aFunc;
-	iSdlFlags = aFlags;
-	iExeFlags = aExeFlags;
 	iObs = aObs;
 	}
 	
@@ -357,8 +380,8 @@ NONSHARABLE_CLASS(CSDLApplication) : public CAknApplication
         CApaDocument* CreateDocumentL(); 
         TFileName ResourceFileName() const;
         TUid AppDllUid() const; 
-      		void FindMeL();
-     		TUid iUid;
+      	void FindMeL();
+     	TUid iUid;
     };
     
 NONSHARABLE_CLASS(CSDLDocument)  : public CEikDocument
@@ -406,15 +429,15 @@ NONSHARABLE_CLASS(CSDLWin) : public CCoeControl
 	{
 	public:
 	    CSDLWin(MSDLDraw& aSdlDraw);
-		void ConstructL(const TRect& aRect);
+		void ConstructL(const TRect& aRect, TBool aBackup);
 		RWindow& GetWindow() const;
 		void SetNoDraw();
+		~CSDLWin();
 	private:
 		void Draw(const TRect& aRect) const;
 	private:
 	    MSDLDraw& iSdlDraw;
 		TBool iNoDraw;
-		
 	}; 	
 	
 
@@ -424,6 +447,7 @@ NONSHARABLE_CLASS(CSDLAppUi) : public CAknAppUi, public MExitWait, public MSDLOb
 	{
 	public:
 		~CSDLAppUi();
+		static void FlagsFromFileL(TInt& aSdlFlags, TInt& aExeFlags);
    	private: // New functions
  		void ConstructL(); 
  		void HandleCommandL(TInt aCommand);
@@ -453,8 +477,10 @@ NONSHARABLE_CLASS(CSDLAppUi) : public CAknAppUi, public MExitWait, public MSDLOb
     
     	void SdlDraw();
     	
-    	TInt FlagsFromFileL() const;
-    	
+    	static void ParseFlags(const TDesC8& aString, TInt& aSdlFlags, TInt& aExeFlags);
+    	static void FlagsFromFileL(const TDesC& aFile, TInt& aSdlFlags, TInt& aExeFlags);
+    	static void MakeCCmdLineL(const TDesC8& Cmd, CDesC8Array& aArray);
+    	static TBool FindFileL(const TDesC& aFile, TDes& aName);
 	private:
 		CExitWait* iWait;
 		CSDLWin* iSDLWin;
@@ -553,6 +579,10 @@ CSDLDocument::CSDLDocument(CEikApplication& aApp) : CEikDocument(aApp)
     
 CEikAppUi* CSDLDocument::CreateAppUiL()
 	{
+	TInt sdlFlags = gSDLClass.SdlFlags();
+	TInt exeFlags = gSDLClass.AppFlags();
+	CSDLAppUi::FlagsFromFileL(sdlFlags, exeFlags);
+	gSDLClass.SetFlags(sdlFlags, exeFlags);
 	return new (ELeave) CSDLAppUi;
 	}
 	
@@ -561,9 +591,12 @@ CEikAppUi* CSDLDocument::CreateAppUiL()
 CSDLWin::CSDLWin(MSDLDraw& aSdlDraw) : iSdlDraw(aSdlDraw)
     {}
 
-void CSDLWin:: ConstructL(const TRect& aRect)	
+void CSDLWin:: ConstructL(const TRect& aRect, TBool aBackup)	
 	{
-	CreateWindowL();
+    if(aBackup)
+        CreateBackedUpWindowL(iEikonEnv->RootWin());
+    else
+        CreateWindowL();
 	SetRect(aRect);
 	ActivateL();	
 	}
@@ -583,11 +616,25 @@ void CSDLWin::Draw(const TRect& /*aRect*/) const
 		}
 	}	
 	
+/*
+void CSDLWin::SetCanvasL(TInt aHandle)
+    {
+    if(iBmp == NULL)
+        iBmp = new CWsBitmap(iEikonEnv->WsSession());
+    else
+        iBmp->Reset();
+    User::LeaveIfError(iBmp->Duplicate(aHandle));
+    }
+*/
 void CSDLWin::SetNoDraw()
 	{
 	iNoDraw = ETrue;
 	}
 
+CSDLWin::~CSDLWin()
+    {
+//     delete iBmp;
+    }
 
 /////////////////////////////////////////////////////////////////////////			
 	
@@ -615,63 +662,134 @@ NONSHARABLE_STRUCT(SFlag)
     TPtrC8 iName;
     TInt iValue;
     };
+
+void CSDLAppUi::ParseFlags(const TDesC8& aString, TInt& aSdlFlags, TInt& aExeFlags)
+    {
+    
+    const SFlag sdlFlags[] = {
+            {_L8("EnableFocusStop"), CSDL::EEnableFocusStop },  
+            {_L8("DrawModeDSB"), CSDL::EDrawModeDSB },    
+            {_L8("AllowImageResize"), CSDL::EAllowImageResize},
+            {_L8("DrawModeDSBDoubleBuffer"), CSDL::EDrawModeDSBDoubleBuffer},       
+            {_L8("DrawModeDSBIncrementalUpdate"), CSDL::EDrawModeDSBIncrementalUpdate},
+            {_L8("AllowImageResizeKeepRatio"),  CSDL::EAllowImageResizeKeepRatio},     
+            {_L8("DrawModeGdi"),  CSDL::EDrawModeGdi}, 
+       //     {_L8("DrawModeGdiGc"),  CSDL::EDrawModeGdiGc},  
+            {_L8("DrawModeDSBAsync"), CSDL::EDrawModeDSBAsync},              
+            {_L8("EOwnThread"),  CSDL::EOwnThread},                    
+            {_L8("MainThread"), CSDL::EMainThread},                   
+            {_L8("ImageResizeZoomOut"), CSDL::EImageResizeZoomOut},            
+            {_L8("AutoOrientation"), CSDL::EAutoOrientation},             
+            {_L8("DisableVolumeKeys"), CSDL::EDisableVolumeKeys}                     
+    };
+    
+    
+    const SFlag exeFlags[] = {
+            {_L8("ParamQuery"),SDLEnv::EParamQuery}, 
+            {_L8("AllowConsoleView"),SDLEnv::EAllowConsoleView}, 
+            {_L8("VirtualMouse"),SDLEnv::EVirtualMouse}, 
+            {_L8("ParamQueryDialog"),SDLEnv::EParamQueryDialog},
+            {_L8("FastZoomBlitter"),SDLEnv::EFastZoomBlitter},
+            {_L8("EnableVirtualMouseMoveEvents"),SDLEnv::EEnableVirtualMouseMoveEvents},
+    };
+
+    
+            
+    TLex8 lx(aString);
+    
+    
+    while(!lx.Eos())
+        {
+        const TPtrC8 token = lx.NextToken();
+        if(0 == token.CompareF(_L8("reset")))
+            {
+            aSdlFlags = 0;
+            aExeFlags = 0;
+            }
+        
+        for(TInt i = 0; i < sizeof(sdlFlags) / sizeof(SFlag); i++)
+            {
+            if(0 == token.CompareF(sdlFlags[i].iName))
+                {
+                aSdlFlags |= sdlFlags[i].iValue;
+                }
+            }
+        
+        for(TInt i = 0; i < sizeof(exeFlags) / sizeof(SFlag); i++)
+            {
+            if(0 == token.CompareF(exeFlags[i].iName))
+                {
+                aExeFlags |= exeFlags[i].iValue;
+                }            
+            }
+        }
+    }
 	
-TInt CSDLAppUi::FlagsFromFileL() const
+void CSDLAppUi::FlagsFromFileL(TInt& aSdlFlags, TInt& aExeFlags) 
      {
-     _LIT(name, "sdl_flags.txt" );
+     _LIT(flagsfile, "sdl_flags.txt" );
+     TFileName name;
+     if(FindFileL(flagsfile, name))
+         FlagsFromFileL(name, aSdlFlags, aExeFlags);
+     }
+
+TBool CSDLAppUi::FindFileL(const TDesC& aFile, TDes& aName)
+     {
+     RFs& fs = CEikonEnv::Static()->FsSession();
+     GetPrivatePath(fs, aName);
+     aName.Append(aFile);
      TEntry entry;
-     if(iEikonEnv->FsSession().Entry(name, entry) == KErrNone)
+     TBool found = ETrue;
+     if(fs.Entry(aName, entry) != KErrNone)
          {
-         RBuf8 buf;
-         buf.CreateL(entry.iSize);
-         buf.CleanupClosePushL();
-         
-         RFile file;
-         User::LeaveIfError(file.Open(iEikonEnv->FsSession(), name, EFileRead));
-         file.Read(buf);
-         file.Close();
-      
-         const SFlag tokens[] = {
-                 {_L8("EnableFocusStop"), CSDL::EEnableFocusStop },  
-                 {_L8("DrawModeDSB"), CSDL::EDrawModeDSB },    
-                 {_L8("AllowImageResize"), CSDL::EAllowImageResize},
-                 {_L8("DrawModeDSBDoubleBuffer"), CSDL::EDrawModeDSBDoubleBuffer},       
-                 {_L8("DrawModeDSBIncrementalUpdate"), CSDL::EDrawModeDSBIncrementalUpdate},
-                 {_L8("AllowImageResizeKeepRatio"),  CSDL::EAllowImageResizeKeepRatio},     
-                 {_L8("DrawModeGdi"),  CSDL::EDrawModeGdi},                  
-                 {_L8("DrawModeDSBAsync"), CSDL::EDrawModeDSBAsync},              
-                 {_L8("EOwnThread"),  CSDL::EOwnThread},                    
-                 {_L8("MainThread"), CSDL::EMainThread},                   
-                 {_L8("ImageResizeZoomOut"), CSDL::EImageResizeZoomOut},            
-                 {_L8("AutoOrientation"), CSDL::EAutoOrientation},             
-                 {_L8("DisableVolumeKeys"), CSDL::EDisableVolumeKeys}                     
-         };
-         
-         TLex8 lx(buf);
-         
-         TInt flags = gSDLClass.SdlFlags();
-         
-         while(!lx.Eos())
-             {
-             const TPtrC8 token = lx.NextToken();
-             if(0 == token.CompareF(_L8("reset")))
+         found = EFalse;
+         TDriveList drivelist;
+         User::LeaveIfError(fs.DriveList(drivelist)); 
+         for(TInt driveNumber = EDriveA;
+             driveNumber <= EDriveZ && !found;
+             driveNumber++) 
+             { 
+             if (drivelist[driveNumber]) 
                  {
-                 flags = 0;
-                 }
-             for(TInt i = 0; i < sizeof(tokens) / sizeof(SFlag); i++)
-                 {
-                 if(0 == token.CompareF(tokens[i].iName))
+                 if(fs.Entry(aName, entry)   != KErrNone)
                      {
-                     flags |= tokens[i].iValue;
+                     TChar driveLetter; 
+                     User::LeaveIfError(
+                             fs.DriveToChar(driveNumber,driveLetter));
+                     if(driveLetter != aName[0])
+                         {
+                         aName[0] = driveLetter;
+                         if(fs.Entry(aName, entry) == KErrNone)
+                             {
+                             found = ETrue;
+                             }
+                         }
                      }
                  }
              }
-      
-        CleanupStack::PopAndDestroy();
-        return flags;
-        }
-    return KErrNotFound;
+         }
+    return found;
     }
+    
+ void CSDLAppUi::FlagsFromFileL(const TDesC& aName, TInt& aSdlFlags, TInt& aExeFlags) 
+     { 
+     RFile file;
+     User::LeaveIfError(file.Open(CEikonEnv::Static()->FsSession(), aName, EFileRead));
+     
+     CleanupClosePushL(file);
+   
+     RBuf8 buf;
+     TInt size; 
+     User::LeaveIfError(file.Size(size));
+     buf.CreateL(size); 
+     CleanupClosePushL(buf);
+     
+     file.Read(buf);
+     
+     ParseFlags(buf, aSdlFlags, aExeFlags);
+
+     CleanupStack::PopAndDestroy(2); //f
+     }  
 		
 void CSDLAppUi::ConstructL()
  	{
@@ -681,36 +799,9 @@ void CSDLAppUi::ConstructL()
  	iIdle = CIdle::NewL(CActive::EPriorityIdle);
  	
  	iSDLWin = new (ELeave) CSDLWin(*this);
- 	iSDLWin->ConstructL(ApplicationRect());
  	
- 	
- 	TInt flags = FlagsFromFileL();
- 	
- 	if(flags == KErrNotFound)
- 	    {
- 	    flags = gSDLClass.SdlFlags();
- 	    }
- 	 	
- 	iSdl = CSDL::NewL(flags);
- 	
- 	iSdl->SetObserver(this);
- 	
- 	gSDLClass.SendEvent(MSDLMainObs::ESDLCreated, 0, iSdl);
- 	
- 	iSdl->DisableKeyBlocking(*this);
- 	iSdl->SetContainerWindowL(
- 					iSDLWin->GetWindow(), 
-        			iEikonEnv->WsSession(),
-        			*iEikonEnv->ScreenDevice());
-    
-    if(gSDLClass.AppFlags() & SDLEnv::EFastZoomBlitter)
-        {
-        iZoomer = CZoomer::NewL();
-        iSdl->SetBlitter(iZoomer);
-        }
-    
         			
-    iStarter = CIdle::NewL(CActive::EPriorityLow);   
+    iStarter = CIdle::NewL(CActive::EPriorityIdle);   
     iStarter->Start(TCallBack(StartL, this));
     
     
@@ -734,12 +825,37 @@ void CSDLAppUi::PrepareToExit()
 	CAknAppUiBase::PrepareToExit(); //aknappu::PrepareToExit crashes
 	iCoeEnv->DeleteResourceFile(iResOffset);
 	}
-	
+
+void CSDLAppUi::MakeCCmdLineL(const TDesC8& aCmd, CDesC8Array& aArray)
+    {
+    const TInt apos = aCmd.LocateReverse('|');
+    
+    if(apos >= 0 && aCmd[0] == '|')
+        {
+        const TInt len = apos - 1;
+        if(len > 0)
+            {
+            TInt sdlFlags = gSDLClass.SdlFlags();
+            TInt exeFlags = gSDLClass.AppFlags();
+            ParseFlags(aCmd.Mid(1, apos - 1), sdlFlags, exeFlags);
+            gSDLClass.SetFlags(sdlFlags, exeFlags);
+            }
+        if(apos > 0)
+            ::MakeCCmdLineL(aCmd.Mid(apos + 1), aArray);
+        }
+    else
+        {
+        ::MakeCCmdLineL(aCmd, aArray);
+        }
+    }
+
 TBool CSDLAppUi::ProcessCommandParametersL(CApaCommandLine &aCommandLine)
 	{
 	const TPtrC8 cmdLine = aCommandLine.TailEnd();
 	iParams = new (ELeave) CDesC8ArrayFlat(8);
+	
 	MakeCCmdLineL(cmdLine, *iParams);
+	    
 	return EFalse;
 	}
  	
@@ -757,16 +873,19 @@ TBool CSDLAppUi::ProcessCommandParametersL(CApaCommandLine &aCommandLine)
  	{ 		
  	if(gSDLClass.AppFlags() & SDLEnv::EParamQuery)
  		{
- 		TBuf8<256> cmd;
- 		RFile file;
- 		TInt err = file.Open(iEikonEnv->FsSession(), _L("sdl_param.txt"),EFileRead);
- 		if(err == KErrNone)
- 			{
- 			file.Read(cmd);
- 			file.Close();	
- 			MakeCCmdLineL(cmd, *iParams);
- 			}
- 		if(err != KErrNone || gSDLClass.AppFlags() & (SDLEnv::EParamQueryDialog ^ SDLEnv::EParamQuery))
+ 	     _LIT(paramFile, "sdl_param.txt");
+ 	     TFileName name;
+ 	     const TBool found = FindFileL(paramFile, name);
+         TBuf8<256> cmd;
+ 	     if(found)
+ 	         {
+ 	         RFile file;
+ 	         User::LeaveIfError(file.Open(iEikonEnv->FsSession(), name ,EFileRead));
+ 	         file.Read(cmd);
+ 	         file.Close();	
+ 	         MakeCCmdLineL(cmd, *iParams);
+ 	         }
+ 		if(!found || gSDLClass.AppFlags() & (SDLEnv::EParamQueryDialog ^ SDLEnv::EParamQuery))
  			{
  			TBuf<256> buffer;
  			if(ParamEditorL(buffer))
@@ -776,6 +895,29 @@ TBool CSDLAppUi::ProcessCommandParametersL(CApaCommandLine &aCommandLine)
  				}	
  			}
  		}
+ 	
+ 	iSDLWin->ConstructL(ApplicationRect(), gSDLClass.SdlFlags() & CSDL::EDrawModeGdi);   
+ 	
+ 	iSdl = CSDL::NewL(gSDLClass.SdlFlags());
+ 	        
+    iSdl->SetObserver(this);
+    
+    gSDLClass.SendEvent(MSDLMainObs::ESDLCreated, 0, iSdl);
+    
+    iSdl->DisableKeyBlocking(*this);
+    iSdl->SetContainerWindowL(
+                    iSDLWin->GetWindow(), 
+                    iEikonEnv->WsSession(),
+                    *iEikonEnv->ScreenDevice());
+    iSdl->AppendOverlay(iCursor, 0);
+    
+    if(gSDLClass.AppFlags() & SDLEnv::EFastZoomBlitter)
+        {
+        iZoomer = CZoomer::NewL();
+        iSdl->SetBlitter(iZoomer);
+        }
+ 	        
+ 	
  	iWait = new (ELeave) CExitWait(*this);
  	iSdl->CallMainL(gSDLClass.Main(), &iWait->iStatus, iParams, CSDL::ENoParamFlags, 0xA000);
  	}
@@ -801,9 +943,9 @@ void CSDLAppUi::HandleCommandL(TInt aCommand)
 			  	event.SetType(EEventSwitchOff),
 				event.SetTimeNow();
 			  	iSdl->AppendWsEvent(event);
-			  	User::After(1000000);
+			  //	User::After(1000000);
 			  	iExitRequest = ETrue; //trick how SDL can be closed!
-			  	iSdl->Suspend();
+			  //	iSdl->Suspend();
 			  	} 
 			break;
 		}
@@ -845,7 +987,7 @@ TBool CSDLAppUi::HandleKeyL(const TWsEvent& aEvent)
 				iCursor.Move(1, 0);
 				break; 
 			case EStdKeyDevice3:
-				if(type == EEventKeyUp)
+				if(type == EEventKeyUp && iSdl != NULL)
 					{
 					TWsEvent event;
 					TPointerEvent::TType type = iCursor.IsMove() ? 
@@ -894,7 +1036,7 @@ TBool CSDLAppUi::HandleKeyL(const TWsEvent& aEvent)
  void CSDLAppUi::HandleResourceChangeL(TInt aType)
  	{
     CAknAppUi::HandleResourceChangeL(aType);
-    if(aType == KEikDynamicLayoutVariantSwitch)
+    if(iSdl != NULL && aType == KEikDynamicLayoutVariantSwitch)
         {  	
         iSDLWin->SetRect(ApplicationRect());
       	iSdl->SetContainerWindowL(
@@ -915,21 +1057,6 @@ void CSDLAppUi::DoExit(TInt/*Err*/)
     
  TInt CSDLAppUi::SdlThreadEvent(TInt aEvent, TInt /*aParam*/)    
 	{
-	switch(aEvent)
-		{
-		case MSDLObserver::EEventResume:
-			break;
-		case MSDLObserver::EEventSuspend:
-			//if(iExitRequest)
-			//	return MSDLObserver::ESuspendNoSuspend;
-			break;
-		case MSDLObserver::EEventWindowReserved:
-			break;
-		case MSDLObserver::EEventWindowNotAvailable:
-			break;
-		case MSDLObserver::EEventScreenSizeChanged:
-            break;
-		}
 	return KErrNone; //MSDLObserver::EParameterNone;	
 	}
 	    
@@ -1016,8 +1143,9 @@ CApaApplication* NewApplication()
 	
 EXPORT_C TInt SDLEnv::SetMain(const TMainFunc& aFunc, TInt aSdlFlags, MSDLMainObs* aObs, TInt aSdlExeFlags)
 	{
-	gSDLClass.SetMain(aFunc, aSdlFlags, aObs, aSdlExeFlags);
-  	return EikStart::RunApplication(NewApplication);
+	gSDLClass.SetMain(aFunc, aObs);
+	gSDLClass.SetFlags(aSdlFlags, aSdlExeFlags);
+	return EikStart::RunApplication(NewApplication);
 	}	
 	
 //////////////////////////////////////////////////////////////////////

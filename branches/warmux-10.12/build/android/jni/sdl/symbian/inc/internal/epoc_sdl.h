@@ -61,7 +61,7 @@ extern "C"
 
 TInt Panic(TInt aErr, TInt aLine);
 
-const TInt KPointerBufferSize = 64;
+const TInt KPointerBufferSize = 32;
 
 NONSHARABLE_CLASS(MEventQueue)
         {
@@ -114,13 +114,13 @@ NONSHARABLE_CLASS(EpocSdlEnv)
     static TBool AddUpdateRect(TUint8* aAddress, const TRect& aUpdateRect, const TRect& aTargetRect);
     static void PanicMain(TInt aErr);
     static void PanicMain(const TDesC& aInfo, TInt aErr);
-    static void WaitDeviceChange();
+  //  static void WaitDeviceChange();
     static TInt SetPalette(TInt aFirstcolor, TInt aColorCount, TUint32* aPalette);
     static void ObserverEvent(TInt aService, TInt aParam = 0);
     static void WaitDsaAvailable();
     static void LockPalette(TBool aLock);
-    static void DoResume(TBool aSilent, TBool aRendezvous = EFalse);
-    static void DoSuspend();
+    static void DoResume(TBool aInternal, TBool aRendezvous = EFalse);
+    static void DoSuspend(TBool aInternal);
     static TInt AppendCleanupItem(const TSdlCleanupItem& aItem);
     static void RemoveCleanupItem(TAny* aItem);
     static void CleanupItems();
@@ -136,13 +136,16 @@ NONSHARABLE_CLASS(EpocSdlEnv)
     static void PostUpdate();
     static TInt StackSize();
     static TBool IsVideoThread();
-    static void ScreenSizeChanged();
+ //   static void ScreenSizeChanged();
     static void EnableDraw();
     static void DisableDraw();
     static void ResumeDsa();
     static TUint32 BgColor();
     static void RemoveThread(TInt aThreadId);
     static void AppendThread(TInt aThreadId);
+    static TBool IsSuspend();
+    static void ScreenSizeChanged();
+    //static const CFbsBitmap** BitGdiCanvas();
    //  static CSDL::TAppOrientation AppOrientation();
    // static TInt SetVolume(TInt aVolume);
    // static TInt Volume();

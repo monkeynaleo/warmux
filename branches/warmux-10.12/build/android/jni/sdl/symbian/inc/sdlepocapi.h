@@ -108,6 +108,7 @@ NONSHARABLE_CLASS(MSDLObserver)
 			EEventKeyMapInit, //Keymap is inited and can now be rewritten
 			EEventMainExit,  //Main thread is about to exit
 			EEventVolumeChange, //New audio volume level. Maximum is 256
+			EEventScreenSurfaceCreated //SDL screen surface is created
 			};
 
 		virtual TInt SdlEvent(TInt aEvent, TInt aParam) = 0; //event is called in application thread	
@@ -124,17 +125,17 @@ class CSDL : public CBase
     	EEnableFocusStop   = 0x1, //let SDL thread to be stopped if not on top
     	EDrawModeDSB	   = 0x2, //Depricated, Default drawmode is DSA, but if you request a antitearing this flag may help 
     	EAllowImageResize  = 0x4, //image is resized if requested image does not fit to screen
-    	EDrawModeDSBDoubleBuffer 		= 0xA,  //Depricated
-    	EDrawModeDSBIncrementalUpdate 	= 0x12, //Depricated
+    	EDrawModeDSBDoubleBuffer 		= 0xA,      //Depricated
+    	EDrawModeDSBIncrementalUpdate 	= 0x12,     //Depricated
     	EAllowImageResizeKeepRatio		= 0x24,	
-    	EDrawModeGdi					= 0x40,	  //Depricated, use BITGDI surface instead of Direct Screen Access
+     	EDrawModeGdi					= 0x40,	  //Depricated, use BITGDI surface instead of Direct Screen Access
     	EDrawModeDSBAsync				= 0x82,   //Depricated, set DSB to drawn asynchrounsuly, all frames may not be viewed
      	EOwnThread						= 0x1000, //always put SDL running its own thread. Has issues, plz avoid if possible :-)
      	EMainThread						= 0x2000, //always put SDL in application thread. Default
     	EImageResizeZoomOut             = 0x4000, //Zooms automatically if screen surface is smaller that given window.
-        EAutoOrientation                = 0x8000, //  set orientation automatically if either of dimension requests to window size, affects only if TAppOrientation is EDefault
+        EAutoOrientation                = 0x8000, //set orientation automatically if either of dimension requests to window size, affects only if TAppOrientation is EDefault
         EDisableVolumeKeys              =0x10000, //Volumekeys does not affect to audio           
-    	};
+        };
     
     enum TOrientationMode
     	{
@@ -190,7 +191,8 @@ class CSDL : public CBase
     IMPORT_C TThreadId CallMainL(const TMainFunc& aFunc, TRequestStatus* const aStatus, const CDesC8Array* const iArg, TInt aFlags, TInt aStackSize); //internal
     IMPORT_C TInt Extension_(TUint aExtensionId, TAny*& a0, TAny* a1); 
     //this is a pretty useless function, just example of using Extension_ 
-    inline TInt BuildDate(TDes& aDes);
+    inline TInt BuildDate(TDes& aDes) const;
+  //  inline TInt BitGdiCanvas() const;
     
     protected:
     IMPORT_C CSDL();
@@ -219,16 +221,20 @@ inline TThreadId CSDL::CallMainL(const CDesC8Array& iArg, TInt aFlags, TInt aSta
     }
 
 const TInt KSDLExtensionBuildDate   = 0x5544;
-const TInt KSDLExtensionSetBgColor =  0x5545;
+//const TInt KSDLExtensionBitGdiCanvas =  0x5545;
 
-inline TInt CSDL::BuildDate(TDes& aDes)
+inline TInt CSDL::BuildDate(TDes& aDes) const
     {
     TAny* null = NULL;
-    return Extension_(KSDLExtensionBuildDate, null, static_cast<TAny*>(&aDes));
+    return const_cast<CSDL*>(this)->Extension_(KSDLExtensionBuildDate, null, static_cast<TAny*>(&aDes));
     }
-
-
-
+/*
+inline TInt CSDL::BitGdiCanvas() const
+    {
+    TAny* null = NULL;
+    return  const_cast<CSDL*>(this)->Extension_(KSDLExtensionBitGdiCanvas, null, NULL);
+    }
+*/
 
 #endif
 
