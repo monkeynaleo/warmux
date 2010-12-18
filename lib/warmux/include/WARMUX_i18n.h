@@ -38,7 +38,7 @@ char * localization(const char * buffer);
 #  endif /* USE_FRIBIDI */
 #else
 #  define _(X) X
-#  define ngettext(sing_, plur_, val) ((val<2) ? (sing_) : (plur_)), val
+#  define ngettext(sing_, plur_, val) ((val<2) ? (sing_) : (plur_))
 #endif /* ENABLE_NLS aka gettext */
 
 std::string Format (const char *format, ...);
