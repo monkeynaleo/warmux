@@ -39,8 +39,7 @@ const uint TIME_BETWEEN_REBOUND = 600;
 
 class Gnu : public WeaponProjectile
 {
-private:
-  int m_sens;
+  bool flipped;
   int save_x, save_y;
   uint last_rebound_time;
 protected:
@@ -61,6 +60,7 @@ Gnu::Gnu(ExplosiveWeaponConfig& cfg,
   explode_with_collision = false;
   explode_with_timeout = true;
   last_rebound_time = 0;
+  image->EnableCaches(true, 0); // Only cache flipping
 }
 
 void Gnu::Shoot(Double strength)
@@ -72,10 +72,7 @@ void Gnu::Shoot(Double strength)
 
   Double angle = ActiveCharacter().GetFiringAngle();
 
-  if (angle<HALF_PI && angle>-HALF_PI)
-    m_sens = 1;
-  else
-    m_sens = -1;
+  flipped = angle>=HALF_PI || angle<=-HALF_PI;
 }
 
 void Gnu::Refresh()
@@ -85,14 +82,15 @@ void Gnu::Refresh()
     return;
   }
   int tmp = GetMSSinceTimeoutStart();
-  if(cfg.timeout && tmp > 1000 * (GetTotalTimeout())) SignalTimeout();
+  if (cfg.timeout && tmp > 1000 * (GetTotalTimeout()))
+    SignalTimeout();
 
   Double norm, angle;
   //When we hit the ground, jump !
-  if(!IsMoving()&& !FootsInVacuum()) {
+  if (!IsMoving()&& !FootsInVacuum()) {
     // Limiting number of rebound to avoid desync
-    if(last_rebound_time + TIME_BETWEEN_REBOUND > Time::GetInstance()->Read()) {
-      image->SetRotation_rad(0.0);
+    if (last_rebound_time + TIME_BETWEEN_REBOUND > Time::GetInstance()->Read()) {
+      image->SetRotation_rad(ZERO);
       return;
     }
     last_rebound_time = Time::GetInstance()->Read();
@@ -100,15 +98,15 @@ void Gnu::Refresh()
     //If the GNU is stuck in ground -> change direction
     int x = GetX();
     int y = GetY();
-    if(x==save_x && y==save_y)
-      m_sens = - m_sens;
+    if (x==save_x && y==save_y)
+      flipped = !flipped;;
     save_x = x;
     save_y = y;
 
     //Do the jump
     norm = RandomSync().GetDouble(2.0, 5.0);
     PutOutOfGround();
-    SetSpeedXY(Point2d(m_sens * norm , - norm * THREE));
+    SetSpeedXY(Point2d((flipped) ? -norm : norm , - norm * THREE));
     JukeBox::GetInstance()->Play("default", "weapon/gnu_bounce");
   }
 
@@ -117,7 +115,7 @@ void Gnu::Refresh()
   GetSpeed(norm, angle);
 
   angle = RestrictAngle(angle)*ONE_HALF;
-  if(m_sens == -1) {
+  if (flipped) {
     if (angle > ZERO)
       angle -= HALF_PI;
     else
@@ -125,7 +123,7 @@ void Gnu::Refresh()
   }
 
   image->SetRotation_rad(angle);
-  image->Scale((Double)m_sens,1.0);
+  image->SetFlipped(flipped);
   image->Update();
 }
 
