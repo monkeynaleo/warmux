@@ -421,7 +421,7 @@ TileItem_ColorKey24::TileItem_ColorKey24(void *pixels, int pitch, uint8_t thresh
   // Set pixels considered as transparent as colorkey
   for (y=0; y<CELL_SIZE.y; y++) {
     for (x=0; x<CELL_SIZE.x; x++)
-      if (!ptr[x*4 + ALPHA_OFFSET])
+      if (ptr[x*4 + ALPHA_OFFSET] == SDL_ALPHA_TRANSPARENT)
         *((Uint32*)(ptr + x*4)) = COLOR_KEY;
     ptr += pitch;
   }
@@ -537,6 +537,7 @@ void TileItem_AlphaSoftware::ForceEmpty()
 {
   TileItem_NonEmpty::ForceEmpty();
   m_surface.Fill(0);
+  transparent = false;
 }
 
 TileItem_AlphaSoftware::TileItem_AlphaSoftware(void *pixels, int pitch, uint8_t alpha_threshold)
@@ -547,6 +548,22 @@ TileItem_AlphaSoftware::TileItem_AlphaSoftware(void *pixels, int pitch, uint8_t 
   // Required to have a copy of the area
   m_surface = Surface(SDL_DisplayFormatAlpha(surf));
   SDL_FreeSurface(surf);
+
+  // Check if the tile is in fact transparent (ie even if empty, must not be deleted)
+  const Uint32 *ptr = (Uint32*)pixels;
+  for (int y=0; y<CELL_SIZE.y; y++) {
+    for (int x=0; x<CELL_SIZE.x; x++) {
+      Uint32 pix = ptr[x];
+      // Does the pixel have data but is considered empty?
+      if (pix&0xFFFFFF && (pix>>24)<alpha_threshold) {
+        transparent = true;
+        return;
+      }
+    }
+    ptr += pitch>>2;
+  }
+
+  transparent = false;
 }
 
 void TileItem_AlphaSoftware::ScalePreview(uint8_t *odata, int x, uint opitch, uint shift)
@@ -678,6 +695,11 @@ bool TileItem_AlphaSoftware::CheckEmpty()
   }
 
   // Make sure it is empty
+  if (transparent) {
+    m_is_empty = false;
+    m_need_check_empty = false;
+    return false;
+  }
   if (m_is_empty)
     CheckEmptyField();
   return m_is_empty;
