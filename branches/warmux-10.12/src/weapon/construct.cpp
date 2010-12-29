@@ -58,7 +58,7 @@ Construct::Construct() : Weapon(WEAPON_CONSTRUCT, "construct",
 
   construct_spr = GetResourceManager().LoadSprite( weapons_res_profile, "construct_spr");
   // The 12 is the result of (TWO * PI) / DELTA_ANGLE
-  construct_spr->EnableCaches(false, 12, GetMinAngle(), GetMaxAngle());
+  construct_spr->EnableCaches(false, 12);
   m_name = _("Construct");
   m_category = TOOL;
   m_can_change_weapon = true;
