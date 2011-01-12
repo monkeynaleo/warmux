@@ -1,3 +1,0 @@
-ADD_SUBDIRECTORY(warmux)
-ADD_SUBDIRECTORY(warmux-server)
-ADD_SUBDIRECTORY(fixedpoint)
