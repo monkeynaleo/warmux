@@ -17,8 +17,8 @@
 #endif
 
 1 VERSIONINFO
-FILEVERSION 0,9,3,0
-PRODUCTVERSION 0,9,3,0
+FILEVERSION 10,12,0,0
+PRODUCTVERSION 10,12,0,0
 FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
 FILEFLAGS VS_FF_DEBUG | VS_FF_SPECIALBUILD
@@ -37,7 +37,7 @@ FILETYPE VFT_APP
             VALUE "FileDescription", "Warmux is a convivial mass murder game."
             VALUE "FileVersion", PACKAGE_VERSION
             VALUE "InternalName", "warmux"
-            VALUE "LegalCopyright", "Copyright (C) 2001-2010 The Warmux Project"
+            VALUE "LegalCopyright", "Copyright (C) 2001-2011 The Warmux Project"
             //VALUE "LegalTrademarks", "test"
             VALUE "OriginalFilename", "warmux.exe"
             VALUE "ProductName", "warmux"
