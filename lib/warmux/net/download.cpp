@@ -50,6 +50,7 @@ Downloader::Downloader()
   curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, download_callback);
   curl_error_buf = new char[CURL_ERROR_SIZE];
   curl_easy_setopt(curl, CURLOPT_ERRORBUFFER, curl_error_buf);
+  curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1);
 }
 
 Downloader::~Downloader()
