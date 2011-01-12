@@ -18,10 +18,10 @@ APP_SRCS := $(addprefix src/, $(SRC_SRCS)) \
             $(addprefix lib/warmux/, $(WMX_SRCS)) \
             $(addprefix lib/fixedpoint/, $(FP_SRCS)) \
 
-LOCAL_CFLAGS := -DINSTALL_DATADIR=\"./data/\" \
+LOCAL_CFLAGS := -fno-exceptions -fno-rtti \
+                -DINSTALL_DATADIR=\"./data/\" \
                 -DINSTALL_LOCALEDIR=\"./locale\" \
                 -DFONT_FILE=\"data/font/Ubuntu-R.ttf\" \
-                -DPACKAGE_VERSION=\"svn\" \
                 -DSDL_JAVA_PACKAGE_PATH=$(SDL_JAVA_PACKAGE_PATH)
 
 
