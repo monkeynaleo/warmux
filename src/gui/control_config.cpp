@@ -24,7 +24,6 @@
 #include "gui/horizontal_box.h"
 #include "gui/label.h"
 #include "gui/null_widget.h"
-#include "gui/picture_widget.h"
 #include "gui/question.h"
 #include "gui/select_box.h"
 #include "interface/keyboard.h"
@@ -33,12 +32,9 @@
 
 #define MIN_ACTION_WIDTH  310
 #define MIN_KEY_WIDTH      50
-#define KEY_CTRL_WIDTH     49
-#define KEY_ALT_WIDTH      42
-#define KEY_SHIFT_WIDTH    82
-#define KEY_HEIGHT         37
 #define SPACING_WIDTH       8
 #define MODIFIERS_WIDTH    64
+#define CHECKBOX_WIDTH     18
 
 class ControlItem : public HBox
 {
@@ -47,7 +43,7 @@ class ControlItem : public HBox
   bool  read_only;
 
   Label *label_action, *label_key;
-  PictureWidget *shift_box, *alt_box, *ctrl_box;
+  CheckBox *shift_box, *alt_box, *ctrl_box;
 
 public:
   // Ease parsing all other keys
@@ -73,26 +69,16 @@ public:
 
     // Modifiers
     int key_code = kbd->GetKeyAssociatedToAction(key_action);
-
-    ctrl_box = new PictureWidget(Point2i(KEY_CTRL_WIDTH, KEY_HEIGHT),
-				 "menu/key_ctrl");
-    if (!kbd->HasControlModifier(key_code)) {
-      ctrl_box->Disable();
-    }
+    ctrl_box  = new CheckBox("", CHECKBOX_WIDTH,
+                             kbd->HasControlModifier(key_code));
     AddWidget(ctrl_box);
 
-    alt_box = new PictureWidget(Point2i(KEY_ALT_WIDTH, KEY_HEIGHT),
-				"menu/key_alt");
-    if (!kbd->HasAltModifier(key_code)) {
-      alt_box->Disable();
-    }
+    alt_box   = new CheckBox("", CHECKBOX_WIDTH,
+                             kbd->HasAltModifier(key_code));
     AddWidget(alt_box);
 
-    shift_box = new PictureWidget(Point2i(KEY_SHIFT_WIDTH, KEY_HEIGHT),
-				  "menu/key_shift");
-    if (!kbd->HasShiftModifier(key_code)) {
-      shift_box->Disable();
-    }
+    shift_box = new CheckBox("", CHECKBOX_WIDTH,
+                             kbd->HasShiftModifier(key_code));
     AddWidget(shift_box);
 
     // Second spacing
@@ -138,15 +124,14 @@ public:
     }
 #endif
 
-    ctrl_box->Disable();
-    alt_box->Disable();
-    shift_box->Disable();
-
     // Reset some configs if pure backspace is pressed
     if ((SDLK_BACKSPACE == key_code || SDLK_DELETE == key_code) &&
         !has_ctrl && !has_alt && !has_shift) {
       kbd->ClearKeyAction(key_action);
       label_key->SetText(_("None"));
+      ctrl_box->SetValue(false);
+      alt_box->SetValue(false);
+      shift_box->SetValue(false);
 
       // A simple NeedRedraw would reset the packing
       Pack();
@@ -160,9 +145,9 @@ public:
       const ControlItem *c = (*it);
 
       if (c!=this && c->key_value==key_code
-          && has_ctrl  == c->ctrl_box->IsEnabled()
-          && has_alt   == c->alt_box->IsEnabled()
-          && has_shift == c->shift_box->IsEnabled()) {
+          && has_ctrl  == c->ctrl_box->GetValue()
+          && has_alt   == c->alt_box->GetValue()
+          && has_shift == c->shift_box->GetValue()) {
         // A box different from this already has this setting
         Question question(Question::WARNING);
         question.Set(Format(_("This key has already been attributed to '%s'"),
@@ -178,12 +163,9 @@ public:
     key_value = key_code;
     label_key->SetText(kbd->GetKeyNameFromKey(key_value));
 
-    if (has_ctrl)
-      ctrl_box->Enable();
-    if (has_alt)
-      alt_box->Enable();
-    if (has_shift)
-      shift_box->Enable();
+    ctrl_box->SetValue(has_ctrl);
+    alt_box->SetValue(has_alt);
+    shift_box->SetValue(has_shift);
 
     // A simple NeedRedraw would reset the packing
     Pack();
@@ -196,7 +178,7 @@ public:
     // First this so that HBox::Pack does not reset label_key width back
     // to its minimal value
     label_key->SetSizeX(size.x - MIN_ACTION_WIDTH -
-                        2*SPACING_WIDTH - (KEY_CTRL_WIDTH + KEY_ALT_WIDTH + KEY_SHIFT_WIDTH));
+                        2*SPACING_WIDTH - 3*CHECKBOX_WIDTH);
 
     // Call first HBox::Pack to set positions
     HBox::Pack();
@@ -212,9 +194,9 @@ public:
     if (!read_only && key_value!=SDLK_UNKNOWN) {
       kbd->ClearKeyAction(key_action);
       kbd->SaveKeyEvent(key_action, key_value,
-                        ctrl_box->IsEnabled(),
-                        alt_box->IsEnabled(),
-                        shift_box->IsEnabled());
+                        ctrl_box->GetValue(),
+                        alt_box->GetValue(),
+                        shift_box->GetValue());
     }
   }
 };

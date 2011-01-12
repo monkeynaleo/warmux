@@ -5,22 +5,16 @@
   <!-- VOICES -->
 
   <sound sample="jump"                           file="voices/jump.ogg" />
-  <sound sample="superjump"                      file="voices/superjump.ogg" />
+  <sound sample="superjump"                      file="voices/jump.ogg" />
   <sound sample="back_jump"                      file="voices/backjump.ogg" />
   
   <sound sample="death"                          file="voices/death1.ogg" />
   <sound sample="death"                          file="voices/death2.ogg" />
-  <sound sample="death"                          file="voices/death3.ogg" />
-  <sound sample="death"                          file="voices/death4.ogg" />
-  <sound sample="death"                          file="voices/death5.ogg" />
-  
   <sound sample="suicide"                        file="voices/suicide.ogg" />
   
   <sound sample="injured_light"                  file="voices/injured_light1.ogg" />
   <sound sample="injured_light"                  file="voices/injured_light2.ogg" />
   <sound sample="injured_light"                  file="voices/injured_light3.ogg" />
-  <sound sample="injured_light"                  file="voices/injured_light4.ogg" />
-  <sound sample="injured_light"                  file="voices/injured_light5.ogg" />
   <sound sample="injured_medium"                 file="voices/injured_medium1.ogg" />
   <sound sample="injured_medium"                 file="voices/injured_medium2.ogg" />
   <sound sample="injured_medium"                 file="voices/injured_medium3.ogg" />
@@ -29,36 +23,19 @@
   <sound sample="injured_high"                   file="voices/injured_high1.ogg" />
   <sound sample="injured_high"                   file="voices/injured_high2.ogg" />
   <sound sample="injured_high"                   file="voices/injured_high3.ogg" />
-  <sound sample="injured_high"                   file="voices/injured_high4.ogg" />
-  <sound sample="injured_high"                   file="voices/injured_high5.ogg" />
 
   <sound sample="fire"                           file="voices/fire1.ogg" />
   <sound sample="fire"                           file="voices/fire2.ogg" />
   <sound sample="fire"                           file="voices/fire3.ogg" />
   <sound sample="fire"                           file="voices/fire4.ogg" />
-  <sound sample="fire"                           file="voices/fire5.ogg" />
-  <sound sample="fire"                           file="voices/fire6.ogg" />
   
   <sound sample="friendly_fire"                  file="voices/friendly_fire1.ogg" />
   <sound sample="friendly_fire"                  file="voices/friendly_fire2.ogg" />
-  <sound sample="friendly_fire"                  file="voices/friendly_fire3.ogg" />
-  
+
   <sound sample="happy"                          file="voices/happy1.ogg" />
 
   <sound sample="out"                            file="voices/out.ogg" />
 
-  <sound sample="leader_change"                  file="voices/theme1.ogg" />
-  <sound sample="leader_change"                  file="voices/theme2.ogg" />
-  <sound sample="leader_change"                  file="voices/theme3.ogg" />
-  <sound sample="leader_change"                  file="voices/theme4.ogg" />
-  <sound sample="leader_change"                  file="voices/theme5.ogg" />
-  <sound sample="leader_change"                  file="voices/theme6.ogg" />
-  <sound sample="leader_change"                  file="voices/theme7.ogg" />
-  <sound sample="leader_change"                  file="voices/theme8.ogg" />
-  <sound sample="leader_change"                  file="voices/theme9.ogg" />
-  
-  
-  
   <!-- WEAPONS -->
   
   <sound sample="weapon/aircraft_bomb_falling"   file="weapons/aircraft_bomb_falling.ogg" />
@@ -82,7 +59,6 @@
   <sound sample="weapon/explosion"               file="weapons/explosion6.ogg" />
   <sound sample="weapon/explosion"               file="weapons/explosion7.ogg" />
   <sound sample="weapon/explosion"               file="weapons/explosion8.ogg" />
-  <sound sample="weapon/explosion"               file="weapons/explosion9.ogg" />
   <sound sample="weapon/flamethrower"            file="weapons/flame.ogg" />
   <sound sample="weapon/gnu_bounce"              file="weapons/gnu_bounce.ogg" />
   <sound sample="weapon/grapple_attaching"       file="weapons/grapple_attaching.ogg" />
@@ -150,5 +126,5 @@
   <sound sample="victory"                        file="misc/victory.ogg" />
 
   <sound sample="music/grenouilles"              file="misc/frog_music.ogg" />
-  
+
 </profile>

@@ -1,7 +1,7 @@
 ; Polish NSIS installer translation
 
 !define WARMUX_PROMPT_NO_RIGHTS "Brak uprawnieñ do instalacji, koñczenie pracy"
-!define WARMUX_PROMPT_CONTINUE  "Nie mo¿na odinstalowaæ bie¿¹cej wersji Wormuksa. Nowa wersja zostanie zainstalowana bez usuwania wersji bie¿¹cej."
+!define WARMUX_PROMPT_CONTINUE  "Nie mo¿na odinstalowaæ bie¿¹cej wersji programu Warmux. Nowa wersja zostanie zainstalowana bez usuwania wersji bie¿¹cej."
 
 ; License Page
 !define WARMUX_TITLE            "Warmux"
@@ -10,10 +10,10 @@
 !define WARMUX_BUTTON           "Dalej >"
 
 !define WARMUX_SHORTCUTS_DESC   "Instalacja skrótów"
-!define WARMUX_DESKTOP_SC_DESC  "Umieœæ skrót do Wormuksa na pulpicie"
+!define WARMUX_DESKTOP_SC_DESC  "Umieœæ skrót do programu Warmux na pulpicie"
 !define WARMUX_STARTM_SC_DESC   "Umieœæ skrót w menu start, w grupie Warmux"
-!define WARMUX_UNINST_SC_DESC   "Umieœæ skrót do dezinstalacji Wormuksa w menu start"
-!define WARMUX_RESET_SC_DESC    "Shortcut to force reset of Warmux config file"
+!define WARMUX_UNINST_SC_DESC   "Umieœæ skrót do dezinstalacji programu Warmux w menu start"
+!define WARMUX_RESET_SC_DESC    "Skrót do wymuszonego wyczyszczenia pliku konfiguracyjnego programu Warmux"
 !define WARMUX_SHORCUTS_TITLE   "Instalacja skrótów"
 !define WARMUX_REMOVE_TITLE     "Odinstaluj poprzedni¹ wersjê"
 

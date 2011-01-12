@@ -64,7 +64,7 @@ HelpMenu::HelpMenu()
   w = new FigureWidget(Point2i(max_w,
                                tabs->GetSizeY() - tabs->GetHeaderHeight()),
                        "help/game_mode", Font::FONT_BIG);
-  w->AddCaption(_("Experiment new game rules"), 192, 70, 381);// TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Experiment new game rules"), 192, 70, 381);// Select between "classic", "blitz" and "unlimited" rules
   w->AddCaption(_("Increase this if you are a slow player"), 193, 24, 381);// TRANSLATORS: please be imaginative and keep it short!
   w->AddCaption(_("When a character can be switched"), 607, 24, 381);// TRANSLATORS: please be imaginative and keep it short!
   w->AddCaption(_("More energy, more shots needed"), 607, 70, 379);// TRANSLATORS: please be imaginative and keep it short!

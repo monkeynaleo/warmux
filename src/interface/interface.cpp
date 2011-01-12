@@ -210,7 +210,7 @@ void Interface::Reset()
   weapons_menu.Reset();
   help->Reset();
   energy_bar->InitVal(0, 0, GameMode::GetInstance()->character.init_energy);
-  TeamEnergy::SetSpacing((187-MARGIN)*zoom / TeamsList::GetInstance()->GetPlayingList().size());
+  TeamEnergy::SetSpacing((174-MARGIN)*zoom / TeamsList::GetInstance()->GetPlayingList().size());
   FOR_EACH_TEAM(tmp_team)
     (*tmp_team)->GetEnergyBar().SetHeight(default_toolbar.GetHeight());
 }

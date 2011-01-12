@@ -76,7 +76,6 @@ public:
   // Apply a transparency color mask
   void Disable() { disabled = true; };
   void Enable() { disabled = false; };
-  bool IsEnabled() { return !disabled; };
   Point2i GetPicturePosition() const;
   Point2f GetScale() const;
 };
