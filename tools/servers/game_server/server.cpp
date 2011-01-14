@@ -123,6 +123,7 @@ void NetworkGame::SendAdminMessage(const std::string& message)
 {
   Action a(Action::ACTION_CHAT_MESSAGE);
   std::string msg = "***" + message;
+  a.Push(0);
   a.Push(msg);
   SendActionToAll(a);
 }
