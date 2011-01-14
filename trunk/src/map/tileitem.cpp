@@ -238,9 +238,12 @@ void TileItem_BaseColorKey::Dig(const Point2i &position, const Surface& dig)
   m_start_check.SetValues(position.max(Point2i(0, 0)));
   m_end_check.SetValues(m_surface.GetSize().min(position+dig.GetSize()));
 
+  const SDL_PixelFormat *fmt = dig.GetSurface()->format;
+  Uint32 dig_ckey = (fmt->BitsPerPixel==32) ? 0 : fmt->colorkey;
+
   for (int py = m_start_check.y ; py < m_end_check.y ; py++) {
     for (int px = m_start_check.x ; px < m_end_check.x ; px++) {
-      if (dig.GetPixel(px-position.x, py-position.y) != 0)
+      if (dig.GetPixel(px-position.x, py-position.y) != dig_ckey)
         m_surface.PutPixel(px, py, color_key);
     }
   }
@@ -287,12 +290,15 @@ void TileItem_BaseColorKey::MergeSprite(const Point2i &position, Surface& spr)
   m_start_check.SetValues(position.max(Point2i(0, 0)));
   m_end_check.SetValues(m_surface.GetSize().min(position+spr.GetSize()));
 
+  const SDL_PixelFormat *fmt = spr.GetSurface()->format;
+  Uint32 spr_ckey = (fmt->BitsPerPixel==32) ? 0 : fmt->colorkey;
+
   spr.Lock();
 
   for (int py = m_start_check.y ; py < m_end_check.y ; py++) {
     for (int px = m_start_check.x ; px < m_end_check.x ; px++) {
       Uint32 pixel = spr.GetPixel(px-position.x, py-position.y);
-      if (pixel) {
+      if (pixel != spr_ckey) {
         Uint8 r, g, b, a;
         spr.GetRGBA(pixel, r, g, b, a);
         if (a < m_alpha_threshold) {
