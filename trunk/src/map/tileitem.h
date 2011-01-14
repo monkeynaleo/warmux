@@ -154,6 +154,9 @@ public:
 
 class TileItem_AlphaSoftware : public TileItem_NonEmpty
 {
+  // A tile can have all alpha to 0, be empty but still have image data
+  bool transparent;
+
 protected:
   void ForceEmpty();
 
