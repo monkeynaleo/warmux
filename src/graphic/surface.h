@@ -108,7 +108,8 @@ public:
    *
    * Should be used carefully.
    */
-  inline SDL_Surface *GetSurface() { return surface; };
+  SDL_Surface *GetSurface() { return surface; };
+  const SDL_Surface *GetSurface() const { return surface; };
 
   void NewSurface(const Point2i &size, Uint32 flags, bool useAlpha = true);
   int SetAlpha(Uint32 flags, Uint8 alpha);
