@@ -120,6 +120,7 @@ void RailGun::IncMissedShots()
   if (!hits) {
     WeaponLauncher::IncMissedShots();
   } else if (hits > 1) {
+    // The shot efficiency was improved by having more than one target hit
     Weapon::Message(Format(_("Woah! Combo of %u!"), hits));
   }
   hits = 0;
@@ -127,6 +128,7 @@ void RailGun::IncMissedShots()
 
 std::string RailGun::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
+  // The weapon bullet goes through characters, so it's like you're having a BBQ out of them
   return Format(ngettext(
             "%s team has won %u rail gun! It's skewer time!",
             "%s team has won %u rail guns! It's skewer time!",
