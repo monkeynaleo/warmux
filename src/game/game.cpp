@@ -739,6 +739,8 @@ void Game::MessageEndOfGame() const
 
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_STANDARD);
 
+  JukeBox::GetInstance()->StopAll();
+
   if (!benching) {
     std::vector<TeamResults*>* results_list = TeamResults::createAllResults();
     ResultsMenu menu(*results_list, disconnected);
