@@ -58,7 +58,7 @@ VIAddVersionKey         "FileDescription"       "Warmux Installer"
 VIAddVersionKey         "ProductName"           "Warmux"
 VIAddVersionKey         "FileVersion"           "@PACKAGE_VERSION@"
 VIAddVersionKey         "ProductVersion"        "@PACKAGE_VERSION@"
-VIAddVersionKey         "LegalCopyright"        "(C) 2001-2008 The Warmux Project"
+VIAddVersionKey         "LegalCopyright"        "(C) 2001-2011 The Warmux Project"
 
 ;General
 OutFile "${LOCAL_PATH}\Warmux-Setup-@PACKAGE_VERSION@.exe"
