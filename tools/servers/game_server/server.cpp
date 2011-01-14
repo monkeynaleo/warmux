@@ -44,7 +44,7 @@ void NetworkGame::AddCpu(DistantComputer* cpu)
   cpulist.push_back(cpu);
 
   std::string msg = Format("[Game %s] New client connected: %s - total: %zd",
-			   game_name.c_str(), cpu->ToString().c_str(), cpulist.size());
+                           game_name.c_str(), cpu->ToString().c_str(), cpulist.size());
 
   DPRINT(INFO, "%s", msg.c_str());
 
@@ -79,7 +79,7 @@ NetworkGame::CloseConnection(std::list<DistantComputer*>::iterator closed)
   it = cpulist.erase(closed);
 
   DPRINT(INFO, "[Game %s] Client disconnected: %s - total: %zd", game_name.c_str(),
-	 host->ToString().c_str(), cpulist.size());
+         host->ToString().c_str(), cpulist.size());
 
   delete host;
 
@@ -98,7 +98,7 @@ uint NetworkGame::NextPlayerId() const
 
     for (player = players.begin(); player != players.end(); player++) {
       if (player_id <= player->GetId()) {
-	player_id = player->GetId() + 1;
+        player_id = player->GetId() + 1;
       }
     }
   }
@@ -113,7 +113,7 @@ void NetworkGame::ElectGameMaster()
   DistantComputer* host = cpulist.front();
 
   DPRINT(INFO, "[Game %s] New game master: %s", game_name.c_str(),
-	 host->ToString().c_str());
+         host->ToString().c_str());
 
   Action a(Action::ACTION_NETWORK_SET_GAME_MASTER);
   SendActionToOne(a, host);
@@ -160,10 +160,10 @@ void NetworkGame::SendAction(const Action& a, DistantComputer* client, bool clt_
   } else {
 
     for (std::list<DistantComputer*>::const_iterator it = cpulist.begin();
-	 it != cpulist.end(); it++) {
+         it != cpulist.end(); it++) {
 
       if ((*it) != client) {
-	(*it)->SendData(packet, size);
+        (*it)->SendData(packet, size);
       }
     }
   }
@@ -206,10 +206,10 @@ void NetworkGame::ForwardPacket(const char *buffer, size_t len, DistantComputer*
     if (a.GetType() == Action::ACTION_NETWORK_MASTER_CHANGE_STATE) {
       int net_state = a.PopInt();
       if (net_state == WNet::NETWORK_LOADING_DATA) {
-	StartGame();
+        StartGame();
       }
       else if (net_state == WNet::NETWORK_NEXT_GAME) {
-	StopGame();
+        StopGame();
       }
     }
   }
@@ -285,10 +285,10 @@ bool GameServer::ConnectToIndexServer()
   if (conn != CONNECTED) {
     if (conn == CONN_WRONG_VERSION) {
       fprintf(stderr,"%s\n", Format(_("Sorry, your version is not supported anymore. "
-			       "Supported versions are %s. "
-			       "You can download an updated version "
-			       "from http://www.warmux.org/wiki/download.php"),
-			     IndexServer::GetInstance()->GetSupportedVersions().c_str()).c_str());
+                               "Supported versions are %s. "
+                               "You can download an updated version "
+                               "from http://www.warmux.org/wiki/download.php"),
+                             IndexServer::GetInstance()->GetSupportedVersions().c_str()).c_str());
     } else {
       fprintf(stderr, "ERROR: Fail to connect to the index server\n");
     }
@@ -325,8 +325,8 @@ bool GameServer::RefreshConnexionToIndexServer()
 }
 
 bool GameServer::ServerStart(uint _port, uint _max_nb_games, uint max_nb_clients,
-			     const std::string& _game_name, std::string& _password,
-			     bool _is_public)
+                             const std::string& _game_name, std::string& _password,
+                             bool _is_public)
 {
   max_nb_games = _max_nb_games;
   game_name = _game_name;
@@ -362,11 +362,11 @@ bool GameServer::HandShake(uint game_id, WSocket& client_socket, std::string& ni
     client_will_be_master = true;
 
   bool r = WNet::Server_HandShake(client_socket, GetGame(game_id).GetName(), GetGame(game_id).GetPassword(),
-				  nickname, player_id, client_will_be_master);
+                                  nickname, player_id, client_will_be_master);
 
   if (r && client_will_be_master)
     DPRINT(INFO, "[Game %s] %s (%s) will be game master", GetGame(game_id).GetName().c_str(),
-	   nickname.c_str(), client_socket.GetAddress().c_str());
+           nickname.c_str(), client_socket.GetAddress().c_str());
 
   return r;
 }
@@ -467,41 +467,41 @@ void GameServer::RunLoop()
     for (gamelst_it = games.begin(); gamelst_it != games.end(); gamelst_it++) {
 
       for (dst_cpu = gamelst_it->second.GetCpus().begin();
-	   dst_cpu != gamelst_it->second.GetCpus().end();
-	   dst_cpu++) {
+           dst_cpu != gamelst_it->second.GetCpus().end();
+           dst_cpu++) {
 
-	if ((*dst_cpu)->SocketReady()) {// Check if this socket contains data to receive
+        if ((*dst_cpu)->SocketReady()) {// Check if this socket contains data to receive
 
-	  if (!(*dst_cpu)->ReceiveData(&buffer, &packet_size)) {
-	    // An error occured during the reception
+          if (!(*dst_cpu)->ReceiveData(&buffer, &packet_size)) {
+            // An error occured during the reception
 
-	    bool turn_master_lost = (dst_cpu == gamelst_it->second.GetCpus().begin());
-	    dst_cpu = gamelst_it->second.CloseConnection(dst_cpu);
+            bool turn_master_lost = (dst_cpu == gamelst_it->second.GetCpus().begin());
+            dst_cpu = gamelst_it->second.CloseConnection(dst_cpu);
 
-	    if (clients_socket_set->NbSockets() + 1 == clients_socket_set->MaxNbSockets()) {
-	      // A new player will be able to connect, so we reopen the socket
-	      // For incoming connections
-	      DPRINT(INFO, "Allowing new connections (%d/%d)",
-		     clients_socket_set->NbSockets(), clients_socket_set->MaxNbSockets());
-	      server_socket.AcceptIncoming(port);
-	    }
+            if (clients_socket_set->NbSockets() + 1 == clients_socket_set->MaxNbSockets()) {
+              // A new player will be able to connect, so we reopen the socket
+              // For incoming connections
+              DPRINT(INFO, "Allowing new connections (%d/%d)",
+                     clients_socket_set->NbSockets(), clients_socket_set->MaxNbSockets());
+              server_socket.AcceptIncoming(port);
+            }
 
-	    if (gamelst_it->second.GetCpus().size() != 0) {
-	      if (turn_master_lost) {
-		GetGame(gamelst_it->first).ElectGameMaster();
-	      }
-	    } else {
-	      DeleteGame(gamelst_it);
-	      goto loop;
-	    }
+            if (gamelst_it->second.GetCpus().size() != 0) {
+              if (turn_master_lost) {
+                GetGame(gamelst_it->first).ElectGameMaster();
+              }
+            } else {
+              DeleteGame(gamelst_it);
+              goto loop;
+            }
 
-	  } else if (buffer && packet_size) {
-	    // buffer may be NULL and packet_size equal to zero if there is not yet
-	    // enough data to read a packet.
-	    GetGame(gamelst_it->first).ForwardPacket(buffer, packet_size, *dst_cpu);
-	    free(buffer);
-	  }
-	}
+          } else if (buffer && packet_size) {
+            // buffer may be NULL and packet_size equal to zero if there is not yet
+            // enough data to read a packet.
+            GetGame(gamelst_it->first).ForwardPacket(buffer, packet_size, *dst_cpu);
+            free(buffer);
+          }
+        }
       } // loop on distant cpu
     } // loop on games
   } // while (true)
