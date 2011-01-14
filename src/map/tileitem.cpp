@@ -109,6 +109,10 @@ uint16_t TileItem_NonEmpty::GetChecksum() const
   uint16_t        crc = 0xFFFF;
   const uint8_t  *ptr = m_empty_bitfield;
   int             i   = (CELL_SIZE.y*CELL_SIZE.x)>>3;
+  // Some tiles completely empty are not deleted because of some pixel data
+  // being actually displayed. The 16bpp rendering however doesn't keep them
+  // as it can't differenciate such pixel data, and really delete the tiles.
+  bool            non_empty = false;
 
   static const uint16_t table[] = {
     0x0000, 0x1021, 0x2042, 0x3063, 0x4084, 0x50A5, 0x60C6, 0x70E7,
@@ -146,10 +150,12 @@ uint16_t TileItem_NonEmpty::GetChecksum() const
   };
 
 
-  while (i--)
+  while (i--) {
+    non_empty |= *ptr!=0;
     crc = (crc<<8) ^ table[(crc>>8) ^ *(ptr++)];
+  }
 
-  return crc;
+  return non_empty ? crc : 0;
 }
 
 void TileItem_NonEmpty::CheckEmptyField()
