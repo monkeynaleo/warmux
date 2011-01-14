@@ -122,8 +122,8 @@ void NetworkGame::ElectGameMaster()
 void NetworkGame::SendAdminMessage(const std::string& message)
 {
   Action a(Action::ACTION_CHAT_MESSAGE);
-  a.Push(std::string("***"));
-  a.Push(message);
+  std::string msg = "***" + message;
+  a.Push(msg);
   SendActionToAll(a);
 }
 
