@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Warmux</string>
+
     <string name="init">Initialisiere</string>
     <string name="readme">^Bitte warte, während die Dateien heruntergeladen werden.</string>
 
@@ -23,7 +25,7 @@
 
     <string name="controls_arrows">Pfeiltasten / Joystick / dpad</string>
     <string name="controls_trackball">Trackball</string>
-    <string name="controls_accel">Accelerometer</string>
+    <string name="controls_none">Nichts</string>
     <string name="controls_question">Welche Arten von Navigationstasten hat das Gerät?</string>
 
     <string name="trackball_no_dampening">Keine Dämpfung</string>
@@ -35,7 +37,12 @@
     <string name="accel_fast">Schnell</string>
     <string name="accel_medium">Mittel</string>
     <string name="accel_slow">Langsam</string>
-    <string name="accel_question">Empfindlichkeit des Accelerometers</string>
+    <string name="accel_question">Empfindlichkeit des Beschleunigungssensors</string>
+
+    <string name="accel_floating">Fließend</string>
+    <string name="accel_fixed_start">Fixiert, wenn Anwendung startet</string>
+    <string name="accel_fixed_horiz">horizontal fixiert</string>
+    <string name="accel_question_center">Zentrierung des Beschleunigungssensors</string>
 
     <string name="audiobuf_small">Klein (für schnelle Geräte)</string>
     <string name="audiobuf_medium">Mittel</string>
