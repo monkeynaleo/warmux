@@ -90,7 +90,7 @@ Team::Team(XmlReader& doc, Profile* res,
 
   // Load flag
   flag = LOAD_RES_IMAGE("flag");
-  mini_flag = flag.RotoZoom(0.0, 0.5, 0.5, true);
+  mini_flag = flag.RotoZoom(ZERO, ONE_HALF, ONE_HALF);
   death_flag = LOAD_RES_IMAGE("death_flag");
   big_flag = LOAD_RES_IMAGE("big_flag");
   GetResourceManager().UnLoadXMLProfile(res);

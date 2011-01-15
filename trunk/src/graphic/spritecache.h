@@ -33,9 +33,9 @@
 class Sprite;
 
 #if 0 //def ANDROID
-#  define RotoZoomC(a, x, y, s) RotoZoom(a, x, y, s).DisplayFormatColorKey(128)
+#  define RotoZoomC(a, x, y) RotoZoom(a, x, y).DisplayFormatColorKey(128)
 #else
-#  define RotoZoomC(a, x, y, s) RotoZoom(a, x, y, s)
+#  define RotoZoomC(a, x, y) RotoZoom(a, x, y)
 #endif
 
 class SpriteSubframeCache
