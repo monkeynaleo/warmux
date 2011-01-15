@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
-"POT-Creation-Date: 2010-12-10 13:28+0100\n"
+"POT-Creation-Date: 2011-01-15 13:46+0100\n"
 "PO-Revision-Date: 2010-11-06 07:00+0100\n"
 "Last-Translator: Christophe GISQUET <christophe.gisquet@gmail.com>\n"
 "Language-Team:  <fr@li.org>\n"
@@ -62,34 +62,34 @@ msgstr "Équipe %s"
 msgid "%s Team - Remote"
 msgstr "Équipe %s - Distante"
 
-#: src/game/game.cpp:1024
+#: src/game/game.cpp:1028
 #, c-format
 msgid "%s from %s team committed suicide!"
 msgstr "%s de l'équipe %s s'est suicidé !"
 
 #. Could be modified, but for now, save on translation
-#: src/game/game.cpp:1050 src/game/game.cpp:1069
+#: src/game/game.cpp:1054 src/game/game.cpp:1073
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s de l'équipe %s est mort."
 
-#: src/game/game.cpp:1016
+#: src/game/game.cpp:1020
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s de l'équipe %s est tombé dans l'eau."
 
-#: src/game/game.cpp:1010
+#: src/game/game.cpp:1014
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s de l'équipe %s est sorti du terrain !"
 
-#: src/game/game.cpp:1030
+#: src/game/game.cpp:1034
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s de l'équipe %s a touché le sol trop fort !"
 
 #. The playing character killed himself
-#: src/game/game.cpp:1037
+#: src/game/game.cpp:1041
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s de l'équipe %s est mort à cause de sa maladresse !"
@@ -113,7 +113,7 @@ msgstr ""
 msgid "%s has won %u points of energy!"
 msgstr "%s a gagné %u points de vie !"
 
-#: src/game/game.cpp:1061
+#: src/game/game.cpp:1065
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s est un psychopathe, il a tué un membre de son équipe (%s) !"
@@ -128,7 +128,7 @@ msgstr "%s est près d'une mine !"
 msgid "%s kicked from game"
 msgstr "%s bouté hors de la partie"
 
-#: src/include/action_handler.cpp:436
+#: src/include/action_handler.cpp:439
 #, c-format
 msgid "%s needs a pause."
 msgstr "%s a besoin d'une pause"
@@ -152,7 +152,7 @@ msgid_plural "%s team has won %u Cluster bazookas!"
 msgstr[0] "L'équipe %s a gagné %u Bazooka à Fragmentation !"
 msgstr[1] "L'équipe %s a gagné %u Bazookas à Fragmentation !"
 
-#: src/weapon/gnu.cpp:241
+#: src/weapon/gnu.cpp:239
 #, c-format
 msgid "%s team has won %u Gnu! Blow them all, cowboy!"
 msgid_plural "%s team has won %u Gnus! Blow them all, cowboy!"
@@ -344,7 +344,7 @@ msgid_plural "%s team has won %u polecats! You have your gas mask, right?"
 msgstr[0] "L'équipe %s a gagné %u Putois ! Sortez les masques à gaz !"
 msgstr[1] "L'équipe %s a gagné %u Putois ! Sortez les masques à gaz !"
 
-#: src/weapon/rail_gun.cpp:131
+#: src/weapon/rail_gun.cpp:133
 #, c-format
 msgid "%s team has won %u rail gun! It's skewer time!"
 msgid_plural "%s team has won %u rail guns! It's skewer time!"
@@ -433,7 +433,7 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "L'équipe %s a été décimée."
 
-#: src/game/game.cpp:1045 src/game/game.cpp:1057
+#: src/game/game.cpp:1049 src/game/game.cpp:1061
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s a emmené un membre de l'équipe %s dans la tombe avec lui !"
@@ -500,7 +500,7 @@ msgstr ""
 "système !"
 
 #. Action name
-#: src/gui/control_config.cpp:218
+#: src/gui/control_config.cpp:236
 msgid "Action"
 msgstr "Action"
 
@@ -775,7 +775,7 @@ msgstr "Construction"
 msgid "Controlled by: "
 msgstr "Contrôlé par :"
 
-#: lib/warmux/net/download.cpp:198
+#: lib/warmux/net/download.cpp:199
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr "N'a pu récupéré la dernière version à partir de %s"
@@ -933,7 +933,7 @@ msgid "Error: Unable to start the server"
 msgstr "Erreur : Impossible de démarrer le serveur"
 
 #: src/menu/network_connection_menu.cpp:497
-#: tools/servers/game_server/server.cpp:302
+#: tools/servers/game_server/server.cpp:303
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -973,12 +973,12 @@ msgstr "Régler le retardateur à %u"
 msgid "FPS"
 msgstr "Cadence"
 
-#: lib/warmux/net/download.cpp:183 lib/warmux/net/download.cpp:224
+#: lib/warmux/net/download.cpp:184 lib/warmux/net/download.cpp:225
 #, c-format
 msgid "Fail to create temporary file: %s"
 msgstr "Impossible de créer le fichier temporaire: %s"
 
-#: lib/warmux/net/download.cpp:190
+#: lib/warmux/net/download.cpp:191
 #, c-format
 msgid "Fail to open temporary file: %s"
 msgstr "Impossible d'ouvrir le fichier temporaire: %s"
@@ -1013,7 +1013,7 @@ msgstr "Mode de jeu"
 msgid "Game name:"
 msgstr "Nom de la partie :"
 
-#: src/weapon/gnu.cpp:164
+#: src/weapon/gnu.cpp:162
 msgid "Gnu Launcher"
 msgstr "Lance-Gnu"
 
@@ -1113,7 +1113,7 @@ msgstr "Augmenter le volume sonore"
 msgid "Increase this for faster death mode end"
 msgstr "Permet d'accélérer le final de la partie"
 
-#. TRANSLATORS: please be imaginative and keep it short!
+#. Select between "classic", "blitz" and "unlimited" rules
 #: src/menu/help_menu.cpp:68
 msgid "Increase this if you are a slow player"
 msgstr "Si vous êtes lents, augmentez-le!"
@@ -1171,7 +1171,7 @@ msgstr "Interface"
 msgid "Interface and touch controls, more details in other tabs"
 msgstr "Interface, plus de détails dans un autre onglet"
 
-#: src/game/game.cpp:900
+#: src/game/game.cpp:902
 msgid "It's a present!"
 msgstr "C'est un cadeau !"
 
@@ -1199,7 +1199,7 @@ msgstr ""
 "Une munition par tour"
 
 #. Actual key
-#: src/gui/control_config.cpp:230
+#: src/gui/control_config.cpp:248
 msgid "Key"
 msgstr "Touche"
 
@@ -1307,7 +1307,7 @@ msgid "Misc"
 msgstr "Divers"
 
 #. Modifiers
-#: src/gui/control_config.cpp:224
+#: src/gui/control_config.cpp:242
 msgid "Modifiers"
 msgstr "Mods"
 
@@ -1425,7 +1425,7 @@ msgstr ""
 msgid "No player connected"
 msgstr "Aucun joueur connecté"
 
-#: lib/warmux/net/download.cpp:139
+#: lib/warmux/net/download.cpp:140
 msgid "No pointer"
 msgstr "Pas de pointeur"
 
@@ -1433,7 +1433,7 @@ msgstr "Pas de pointeur"
 msgid "Nobody!"
 msgstr "Personne !"
 
-#: src/gui/control_config.cpp:89 src/gui/control_config.cpp:131
+#: src/gui/control_config.cpp:103 src/gui/control_config.cpp:149
 #: src/interface/man_machine_interface.cpp:1197
 msgid "None"
 msgstr "Aucune"
@@ -1646,7 +1646,7 @@ msgstr "Rail Gun"
 msgid "Random map"
 msgstr "Terrain aléatoire"
 
-#: lib/warmux/net/download.cpp:133
+#: lib/warmux/net/download.cpp:134
 #, c-format
 msgid "Read only %i bytes"
 msgstr "Lu seulement %i octets"
@@ -1713,7 +1713,7 @@ msgstr ""
 "Appuyez sur espace pour tirer\n"
 "Gauche/droite pour changer la direction"
 
-#: src/weapon/gnu.cpp:165 src/weapon/polecat.cpp:195
+#: src/weapon/gnu.cpp:163 src/weapon/polecat.cpp:195
 msgid ""
 "Set timer 1-6 using +/- or 1-6 keys\n"
 "Press space to shoot\n"
@@ -1787,7 +1787,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Désolé, il n'y a actuellement aucun jeu en attente de joueurs"
 
 #: src/menu/network_connection_menu.cpp:446
-#: tools/servers/game_server/server.cpp:287
+#: tools/servers/game_server/server.cpp:288
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1878,7 +1878,7 @@ msgstr ""
 msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr "La Ballon Explosif a quitté le champ de bataille avant d'exploser."
 
-#: src/weapon/gnu.cpp:139
+#: src/weapon/gnu.cpp:137
 msgid "The Gnu left the battlefield before exploding!"
 msgstr "Le Gnu a déserté le champ de bataille avant d'exploser."
 
@@ -1969,7 +1969,7 @@ msgid_plural "There are only %i teams."
 msgstr[0] "Il n'y a qu' %i équipe."
 msgstr[1] "Il n'y a que %i équipes."
 
-#: src/gui/control_config.cpp:153
+#: src/gui/control_config.cpp:168
 #, c-format
 msgid "This key has already been attributed to '%s'"
 msgstr "Cette touche a déjà été attribuée à '%s'"
@@ -2195,12 +2195,12 @@ msgstr "Site web : "
 msgid "Welcome to %s on %s!"
 msgstr "Bienvenue dans la partie %s du serveur %s!"
 
-#: src/game/game.cpp:1003
+#: src/game/game.cpp:1007
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr "Homerun ! %s de l'équipe %s est dans un autre monde…"
 
-#: src/game/game.cpp:1066
+#: src/game/game.cpp:1070
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Trop la honte pour %s : il a été tué par un simple pistolet !"
@@ -2226,7 +2226,8 @@ msgstr ""
 msgid "Winner"
 msgstr "Vainqueur"
 
-#: src/weapon/rail_gun.cpp:123
+#. The shot efficiency was improved by having more than one target hit
+#: src/weapon/rail_gun.cpp:124
 #, c-format
 msgid "Woah! Combo of %u!"
 msgstr "Ouah! Combo de %u!"
@@ -2243,7 +2244,7 @@ msgstr "Nom du terrain erroné !"
 msgid "Wrong team!"
 msgstr "Equipe erronée !"
 
-#: lib/warmux/net/download.cpp:149
+#: lib/warmux/net/download.cpp:150
 #, c-format
 msgid "Wrote %i/%i bytes"
 msgstr "Seulement %i/%i octets écrits"

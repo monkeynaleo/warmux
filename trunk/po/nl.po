@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Warmux 0.8\n"
 "Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
-"POT-Creation-Date: 2010-12-10 13:28+0100\n"
+"POT-Creation-Date: 2011-01-15 13:46+0100\n"
 "PO-Revision-Date: 2010-01-10 17:48+0100\n"
 "Last-Translator: Paul Smits <paul.l.smits@gmail.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -64,34 +64,34 @@ msgstr "Team %s"
 msgid "%s Team - Remote"
 msgstr "Team %s - Op afstand"
 
-#: src/game/game.cpp:1024
+#: src/game/game.cpp:1028
 #, fuzzy, c-format
 msgid "%s from %s team committed suicide!"
 msgstr "%s van team %s pleegde zelfmoord!"
 
 #. Could be modified, but for now, save on translation
-#: src/game/game.cpp:1050 src/game/game.cpp:1069
+#: src/game/game.cpp:1054 src/game/game.cpp:1073
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s van team %s is overleden."
 
-#: src/game/game.cpp:1016
+#: src/game/game.cpp:1020
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s van team %s is in het water gevallen."
 
-#: src/game/game.cpp:1010
+#: src/game/game.cpp:1014
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s van team %s is van de kaart gevallen!"
 
-#: src/game/game.cpp:1030
+#: src/game/game.cpp:1034
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s van team %s heeft de grond te hard geraakt!"
 
 #. The playing character killed himself
-#: src/game/game.cpp:1037
+#: src/game/game.cpp:1041
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s van team %s is dood door zijn onhandigheid!"
@@ -115,7 +115,7 @@ msgstr ""
 msgid "%s has won %u points of energy!"
 msgstr "%s heeft %u punt energie gekregen!"
 
-#: src/game/game.cpp:1061
+#: src/game/game.cpp:1065
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s is een psychopaat, hij vermoorde een lid van team %s!"
@@ -130,7 +130,7 @@ msgstr "%s staat naast een mijn!"
 msgid "%s kicked from game"
 msgstr ""
 
-#: src/include/action_handler.cpp:436
+#: src/include/action_handler.cpp:439
 #, c-format
 msgid "%s needs a pause."
 msgstr "%s heeft een momentje rust nodig."
@@ -154,7 +154,7 @@ msgid_plural "%s team has won %u Cluster bazookas!"
 msgstr[0] "Team %s heeft %u clusterbazooka gekregen!"
 msgstr[1] "Team %s heeft %u clusterbazooka's gekregen!"
 
-#: src/weapon/gnu.cpp:241
+#: src/weapon/gnu.cpp:239
 #, c-format
 msgid "%s team has won %u Gnu! Blow them all, cowboy!"
 msgid_plural "%s team has won %u Gnus! Blow them all, cowboy!"
@@ -344,7 +344,7 @@ msgstr[0] ""
 msgstr[1] ""
 "Team %s heeft %u stinkdieren gekregen! U heeft uw gasmasker, nietwaar?"
 
-#: src/weapon/rail_gun.cpp:131
+#: src/weapon/rail_gun.cpp:133
 #, fuzzy, c-format
 msgid "%s team has won %u rail gun! It's skewer time!"
 msgid_plural "%s team has won %u rail guns! It's skewer time!"
@@ -440,7 +440,7 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "Team %s is afgeslacht."
 
-#: src/game/game.cpp:1045 src/game/game.cpp:1057
+#: src/game/game.cpp:1049 src/game/game.cpp:1061
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s nam een lid van team %s met zich mee in het graf!"
@@ -513,7 +513,7 @@ msgstr ""
 "een update beschikbaar is voor uw besturingssysteem!"
 
 #. Action name
-#: src/gui/control_config.cpp:218
+#: src/gui/control_config.cpp:236
 #, fuzzy
 msgid "Action"
 msgstr "Opties"
@@ -786,7 +786,7 @@ msgstr "Bouw"
 msgid "Controlled by: "
 msgstr "Bestuurd door: "
 
-#: lib/warmux/net/download.cpp:198
+#: lib/warmux/net/download.cpp:199
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr "Kon de laatste versie van %s niet verwerven"
@@ -938,7 +938,7 @@ msgid "Error: Unable to start the server"
 msgstr "Fout: Kon server niet starten"
 
 #: src/menu/network_connection_menu.cpp:497
-#: tools/servers/game_server/server.cpp:302
+#: tools/servers/game_server/server.cpp:303
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -977,12 +977,12 @@ msgstr ""
 msgid "FPS"
 msgstr ""
 
-#: lib/warmux/net/download.cpp:183 lib/warmux/net/download.cpp:224
+#: lib/warmux/net/download.cpp:184 lib/warmux/net/download.cpp:225
 #, c-format
 msgid "Fail to create temporary file: %s"
 msgstr ""
 
-#: lib/warmux/net/download.cpp:190
+#: lib/warmux/net/download.cpp:191
 #, fuzzy, c-format
 msgid "Fail to open temporary file: %s"
 msgstr "Kon de kaartendirectory (%s) niet openen!"
@@ -1018,7 +1018,7 @@ msgstr "Spelmodus"
 msgid "Game name:"
 msgstr "Spelnaam:"
 
-#: src/weapon/gnu.cpp:164
+#: src/weapon/gnu.cpp:162
 msgid "Gnu Launcher"
 msgstr "Gnu Lanceren"
 
@@ -1114,7 +1114,7 @@ msgstr ""
 msgid "Increase this for faster death mode end"
 msgstr "Duur voor doodsmodus"
 
-#. TRANSLATORS: please be imaginative and keep it short!
+#. Select between "classic", "blitz" and "unlimited" rules
 #: src/menu/help_menu.cpp:68
 msgid "Increase this if you are a slow player"
 msgstr ""
@@ -1174,7 +1174,7 @@ msgstr "Interface verbergen/tonen"
 msgid "Interface and touch controls, more details in other tabs"
 msgstr ""
 
-#: src/game/game.cpp:900
+#: src/game/game.cpp:902
 msgid "It's a present!"
 msgstr "Het is een cadeau!"
 
@@ -1203,7 +1203,7 @@ msgstr ""
 "eenmaal per beurt"
 
 #. Actual key
-#: src/gui/control_config.cpp:230
+#: src/gui/control_config.cpp:248
 msgid "Key"
 msgstr ""
 
@@ -1314,7 +1314,7 @@ msgid "Misc"
 msgstr "Overigen"
 
 #. Modifiers
-#: src/gui/control_config.cpp:224
+#: src/gui/control_config.cpp:242
 msgid "Modifiers"
 msgstr ""
 
@@ -1438,7 +1438,7 @@ msgstr "Element <%s> niet gevonden het xml config bestand!"
 msgid "No player connected"
 msgstr "Geen spelers verbonden"
 
-#: lib/warmux/net/download.cpp:139
+#: lib/warmux/net/download.cpp:140
 msgid "No pointer"
 msgstr ""
 
@@ -1446,7 +1446,7 @@ msgstr ""
 msgid "Nobody!"
 msgstr "Niemand!"
 
-#: src/gui/control_config.cpp:89 src/gui/control_config.cpp:131
+#: src/gui/control_config.cpp:103 src/gui/control_config.cpp:149
 #: src/interface/man_machine_interface.cpp:1197
 #, fuzzy
 msgid "None"
@@ -1642,7 +1642,7 @@ msgstr ""
 msgid "Random map"
 msgstr "Willekeurige kaart"
 
-#: lib/warmux/net/download.cpp:133
+#: lib/warmux/net/download.cpp:134
 #, fuzzy, c-format
 msgid "Read only %i bytes"
 msgstr "Er is maar %i team."
@@ -1705,7 +1705,7 @@ msgid ""
 "Use Left/Right to change direction"
 msgstr ""
 
-#: src/weapon/gnu.cpp:165 src/weapon/polecat.cpp:195
+#: src/weapon/gnu.cpp:163 src/weapon/polecat.cpp:195
 msgid ""
 "Set timer 1-6 using +/- or 1-6 keys\n"
 "Press space to shoot\n"
@@ -1776,7 +1776,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Sorry, er is op dit moment geen spel dat op spelers wacht"
 
 #: src/menu/network_connection_menu.cpp:446
-#: tools/servers/game_server/server.cpp:287
+#: tools/servers/game_server/server.cpp:288
 #, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1866,7 +1866,7 @@ msgstr "De Clusterbom heeft het slagveld verlaten alvorens te ontploffen."
 msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr "De voetbalbom heeft het slagveld verlaten alvorens te ontploffen."
 
-#: src/weapon/gnu.cpp:139
+#: src/weapon/gnu.cpp:137
 msgid "The Gnu left the battlefield before exploding!"
 msgstr "De Gnu heeft het slagveld verlaten alvorens te ontploffen!"
 
@@ -1955,7 +1955,7 @@ msgid_plural "There are only %i teams."
 msgstr[0] "Er is maar %i team."
 msgstr[1] "Er zijn maar %i teams."
 
-#: src/gui/control_config.cpp:153
+#: src/gui/control_config.cpp:168
 #, c-format
 msgid "This key has already been attributed to '%s'"
 msgstr ""
@@ -2188,12 +2188,12 @@ msgstr "Website: "
 msgid "Welcome to %s on %s!"
 msgstr "Welkom bij %s op %s!"
 
-#: src/game/game.cpp:1003
+#: src/game/game.cpp:1007
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr "Wat een prachtige homerun! %s van team %s is in een andere wereld..."
 
-#: src/game/game.cpp:1066
+#: src/game/game.cpp:1070
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Wat een schande voor %s - hij is gedood door een simpel geweer!"
@@ -2218,7 +2218,8 @@ msgstr ""
 msgid "Winner"
 msgstr "Winnaar"
 
-#: src/weapon/rail_gun.cpp:123
+#. The shot efficiency was improved by having more than one target hit
+#: src/weapon/rail_gun.cpp:124
 #, c-format
 msgid "Woah! Combo of %u!"
 msgstr ""
@@ -2235,7 +2236,7 @@ msgstr "Verkeerde kaartnaam!"
 msgid "Wrong team!"
 msgstr "Verkeerd team!"
 
-#: lib/warmux/net/download.cpp:149
+#: lib/warmux/net/download.cpp:150
 #, c-format
 msgid "Wrote %i/%i bytes"
 msgstr ""
