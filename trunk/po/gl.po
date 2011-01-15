@@ -5,7 +5,7 @@
 #
 # Ignacio Casal Quinteiro <icq@xxxxxxxxxxxxx>, 2007.
 # Adrián Chaves Fernández <adriyetichaves@xxxxxxxxx>, 2008, 2009, 2010.
-(Proxecto Trasno <proxecto@xxxxxxxxxx>).
+# (Proxecto Trasno <proxecto@xxxxxxxxxx>).
 # Adrián Chaves Fernández (Gallaecio) <adriyetichaves@xxxxxxxxx>, 2010.
 msgid ""
 msgstr ""
@@ -63,8 +63,7 @@ msgstr "%s <%s>, de %s."
 msgid "%s Team"
 msgstr "Equipo %s"
 
-#. translators: this is the team listing and will expand in a context like
-"OOo team - Remote"
+#. translators: this is the team listing and will expand in a context like "OOo team - Remote"
 #: src/menu/team_box.cpp:252
 #, c-format
 msgid "%s Team - Remote"
@@ -110,8 +109,7 @@ msgstr "%s está a apuntar a %s."
 #: src/weapon/polecat.cpp:117
 #, c-format
 msgid ""
-"%s has done something for the environment, he has not ordered the polecat to
-"
+"%s has done something for the environment, he has not ordered the polecat to"
 "fart."
 msgstr "%s fixo algo polo medio ambiente: non lle mandou peidear á mofeta."
 
@@ -184,8 +182,7 @@ msgid_plural ""
 "%s team has won %u airhammers! Don't make too much noise with them! Thanks, "
 "your neighbours."
 msgstr[0] ""
-"O equipo %s gañou %u taladradora! «A ver se non montas moito barullo con
-iso."
+"O equipo %s gañou %u taladradora! «A ver se non montas moito barullo con iso."
 "» ─ Os teus veciños."
 msgstr[1] ""
 "O equipo %s gañou %u taladradoras! «A ver se non montas moito barullo con "
@@ -222,14 +219,12 @@ msgstr[1] "O equipo %s gañou %u bazucas!"
 #: src/weapon/blowtorch.cpp:154
 #, c-format
 msgid ""
-"%s team has won %u blowtorch! If you're under 18, ask your parents to use
-it."
+"%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
 msgid_plural ""
 "%s team has won %u blowtorchs! If you're under 18, ask your parents to use "
 "it."
 msgstr[0] ""
-"O equipo %s gañou %u soplete! Se es menor de idade, pídelle permiso aos teus
-"
+"O equipo %s gañou %u soplete! Se es menor de idade, pídelle permiso aos teus"
 "pais."
 msgstr[1] ""
 "O equipo %s gañou %u sopletes! Se es menor de idade, pídelle permiso aos "
@@ -316,8 +311,7 @@ msgstr[1] "O equipo %s gañou %u mochilas de impulsión! E a voar!"
 #: src/weapon/lowgrav.cpp:83
 #, c-format
 msgid ""
-"%s team has won %u lowgrav! Small step for man, giant leap for free
-software!"
+"%s team has won %u lowgrav! Small step for man, giant leap for free software!"
 msgid_plural ""
 "%s team has won %u lowgravs! Small step for man, giant leap for free "
 "software!"
@@ -366,8 +360,7 @@ msgstr[0] ""
 "O equipo %s gañou %u bomba antimateria! Que espelidos son estes científicos "
 "do software libre!"
 msgstr[1] ""
-"O equipo %s gañou %u bombas antimateria! Que espelidos son estes científicos
-"
+"O equipo %s gañou %u bombas antimateria! Que espelidos son estes científicos "
 "do software libre!"
 
 #: src/weapon/shotgun.cpp:127
@@ -409,8 +402,7 @@ msgid "%s team has won %u suicide!"
 msgid_plural "%s team has won %u suicides! Use them all for an extra bonus!"
 msgstr[0] "O equipo %s gañou %u suicidio!"
 msgstr[1] ""
-"O equipo %s gañou %u suicidios! Úsaos todos para conseguir unha bonificación
-"
+"O equipo %s gañou %u suicidios! Úsaos todos para conseguir unha bonificación "
 "especial!"
 
 #: src/weapon/syringe.cpp:120
@@ -736,8 +728,7 @@ msgstr ""
 "permiten cambiar a dirección."
 
 #: src/menu/help_menu.cpp:58
-msgid "Click to let a player handle the team instead of the AI, and vice
-versa"
+msgid "Click to let a player handle the team instead of the AI, and vice versa"
 msgstr ""
 "Preme aquí para que o equipo o controle un xogador en vez de a "
 "intelixencia artificial, e viceversa."
@@ -926,8 +917,7 @@ msgstr ""
 
 #: src/team/custom_team.cpp:125
 #, c-format
-msgid "Error while deleting the file \"%s\". Unable to delete the custom
-team."
+msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr ""
 "Houbo un erro ao eliminar o ficheiro «%s». Non se puido eliminar o equipo "
 "personalizado."
@@ -941,8 +931,7 @@ msgstr "Houbo un erro: non se puido conectarse a «%s: %s»."
 #: src/menu/network_connection_menu.cpp:476
 msgid "Error: Unable to contact the index server to host a game"
 msgstr ""
-"Houbo un erro: non se puido contactar co servidor principal para aloxar unha
-"
+"Houbo un erro: non se puido contactar co servidor principal para aloxar unha "
 "partida."
 
 #: src/menu/network_connection_menu.cpp:387
@@ -962,14 +951,12 @@ msgstr "Houbo un erro: non se puido iniciar o servidor."
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration: TCP Port %s must accept connections from the outside. If you "
-"are not directly connected to the internet, check your router configuration:
-"
+"are not directly connected to the internet, check your router configuration:"
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
 "Houbo un erro: non se pode acceder ao teu servidor dende a Internet. "
 "Comproba "
-"a configuración da devasa: o porto TCP %s ten que aceptar conexións
-externas."
+"a configuración da devasa: o porto TCP %s ten que aceptar conexións externas."
 " "
 "Se non estás conectado directamente á Internet, bótalle unha ollada á "
 "configuración "
@@ -1113,8 +1100,7 @@ msgid ""
 "If you found a bug or have a feature request send us an email (in english, "
 "please):"
 msgstr ""
-"Se atopas un erro ou tes en mente algunha mellora ou nova funcionalidade que
-"
+"Se atopas un erro ou tes en mente algunha mellora ou nova funcionalidade que "
 "lle engadirías ao xogo, envíanos un correo electrónico (en inglés):"
 
 #. TRANSLATORS: please be imaginative and keep it short!
@@ -1434,8 +1420,7 @@ msgstr "Partida na rede"
 msgid "Never"
 msgstr "Nunca"
 
-#. TRANSLATORS: after this string there will be a time stamp or the string
-'(unknown time)'
+#. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
 #: src/network/chatlogger.cpp:46
 msgid "New network game at "
 msgstr "Nova partida na rede en "
@@ -1823,12 +1808,11 @@ msgstr "Nestes momentos non hai partidas agardando por xogadores."
 #: tools/servers/game_server/server.cpp:287
 #, c-format
 msgid ""
-"Sorry, your version is not supported anymore. Supported versions are %s. You
-"
-"can download an updated version from http://www.warmux.org/wiki/download.php";
+"Sorry, your version is not supported anymore. Supported versions are %s. You "
+"can download an updated version from http://www.warmux.org/wiki/download.php"
 msgstr ""
 "A túa versión xa non está mantida. As versións mantidas son: "
-"%s. Podes baixar unha versión máis nova de http://www.warmux.";
+"%s. Podes baixar unha versión máis nova de http://www.warmux."
 "org/wiki/download.php"
 
 #: src/menu/options_menu.cpp:310
@@ -1935,8 +1919,7 @@ msgstr "Canto máis grande, máis fácil caer!"
 
 #: src/menu/game_mode_editor.cpp:132
 msgid ""
-"The blitz mode does not reset the time between each team turn. A team looses
-"
+"The blitz mode does not reset the time between each team turn. A team looses "
 "when it has no players left or its time has ran out."
 msgstr ""
 "O modo agresivo non restablece o tempo entre as quendas dos xogadores. Os "
@@ -2074,8 +2057,7 @@ msgstr "Controis táctiles"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:98
-msgid "Touch/click the left or right arrows to move respectively left or
-right"
+msgid "Touch/click the left or right arrows to move respectively left or right"
 msgstr ""
 "Toca ou preme as teclas de esquerda e dereita para moverte a sendas "
 "direccións."
@@ -2171,8 +2153,7 @@ msgid ""
 msgstr ""
 "Uso: preme co botón esquerdo do rato no obxectivo.\n"
 "Águlo de disparo inicial: arriba e abaixo.\n"
-"Disparo: mantén premida a barra espaciadora ata acadar a potencia
-desexada.\n"
+"Disparo: mantén premida a barra espaciadora ata acadar a potencia desexada.\n"
 "Un uso por quenda."
 
 #: src/main.cpp:179
