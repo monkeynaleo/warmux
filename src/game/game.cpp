@@ -930,7 +930,8 @@ void Game::SetState(game_loop_state_t new_state, bool begin_game)
 
   state = new_state;
 
-  Interface::GetInstance()->weapons_menu.Hide();
+  Interface *interf = Interface::GetInstance();
+  interf->weapons_menu.Hide();
 
   switch (state) {
   // Beginning of a new turn:
@@ -946,6 +947,7 @@ void Game::SetState(game_loop_state_t new_state, bool begin_game)
   // Little pause at the end of the turn
   case END_TURN:
     __SetState_END_TURN();
+    interf->DisableControl();
     m_current_turn++;
     break;
   }

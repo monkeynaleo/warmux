@@ -151,6 +151,7 @@ public:
   Point2i GetMenuPosition() const { return bottom_bar_pos; }
   bool IsDisplayed () const { return display; }
   bool IsControl() const { return is_control; }
+  void DisableControl() { is_control = false; Hide(); }
   void EnableDisplay(bool _display) { display = _display; }
   void Show();
   void Hide();
