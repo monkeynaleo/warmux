@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Μετάφραση Σκουλήκιουξ\n"
 "Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
-"POT-Creation-Date: 2010-12-10 13:28+0100\n"
+"POT-Creation-Date: 2011-01-15 13:46+0100\n"
 "PO-Revision-Date: 2010-02-24 19:48+0200\n"
 "Last-Translator: Steve <gba2211 AT gmail DOT com>\n"
 "Language-Team: \n"
@@ -65,34 +65,34 @@ msgstr "Ομάδα %s"
 msgid "%s Team - Remote"
 msgstr "Ομάδα %s - Απομακρυσμένη"
 
-#: src/game/game.cpp:1024
+#: src/game/game.cpp:1028
 #, fuzzy, c-format
 msgid "%s from %s team committed suicide!"
 msgstr "O %s από την ομάδα %s αυτοκτόνησε!"
 
 #. Could be modified, but for now, save on translation
-#: src/game/game.cpp:1050 src/game/game.cpp:1069
+#: src/game/game.cpp:1054 src/game/game.cpp:1073
 #, c-format
 msgid "%s from %s team has died."
 msgstr "O %s από την ομάδα %s πέθανε."
 
-#: src/game/game.cpp:1016
+#: src/game/game.cpp:1020
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "O %s από την ομάδα %s έπεσε στο νερό!"
 
-#: src/game/game.cpp:1010
+#: src/game/game.cpp:1014
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "O %s από την ομάδα %s έπεσε εκτός χάρτη!"
 
-#: src/game/game.cpp:1030
+#: src/game/game.cpp:1034
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "Ο %s από την ομάδα %s χτύπησε στο έδαφος πολύ δυνατά!"
 
 #. The playing character killed himself
-#: src/game/game.cpp:1037
+#: src/game/game.cpp:1041
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "O %s από την ομάδα %s πέθανε από αδεξιότητα!"
@@ -115,7 +115,7 @@ msgstr ""
 msgid "%s has won %u points of energy!"
 msgstr "Ο παίκτης %s κέρδισε %u πόντο ζωής!"
 
-#: src/game/game.cpp:1061
+#: src/game/game.cpp:1065
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "O %s είναι ψυχοπαθής, σκότωσε ένα μέλος της ομάδας του (%s)!"
@@ -130,7 +130,7 @@ msgstr "O %s είναι δίπλα σε νάρκη!"
 msgid "%s kicked from game"
 msgstr ""
 
-#: src/include/action_handler.cpp:436
+#: src/include/action_handler.cpp:439
 #, c-format
 msgid "%s needs a pause."
 msgstr "Ο %s χρειάζεται ένα διάλειμμα."
@@ -154,7 +154,7 @@ msgid_plural "%s team has won %u Cluster bazookas!"
 msgstr[0] "Η ομάδα %s κέρδισε %u μπαζούκα διασποράς!"
 msgstr[1] "Η ομάδα %s κέρδισε %u μπαζούκας διασποράς!"
 
-#: src/weapon/gnu.cpp:241
+#: src/weapon/gnu.cpp:239
 #, c-format
 msgid "%s team has won %u Gnu! Blow them all, cowboy!"
 msgid_plural "%s team has won %u Gnus! Blow them all, cowboy!"
@@ -349,7 +349,7 @@ msgstr[0] "Η ομάδα %s κέρδισε %u ασβό! Βγάλτε τις αν
 msgstr[1] "Η ομάδα %s κέρδισε %u ασβούς! Βγάλτε τις αντιασφυξιογόνες μάσκες!"
 
 # L'équipe %s a gagné %u bombe à fragmentation ! Attention à ne pas trop se disperser !
-#: src/weapon/rail_gun.cpp:131
+#: src/weapon/rail_gun.cpp:133
 #, fuzzy, c-format
 msgid "%s team has won %u rail gun! It's skewer time!"
 msgid_plural "%s team has won %u rail guns! It's skewer time!"
@@ -445,7 +445,7 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "Η ομάδα %s αποδεκατίστηκε."
 
-#: src/game/game.cpp:1045 src/game/game.cpp:1057
+#: src/game/game.cpp:1049 src/game/game.cpp:1061
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "Ο %s πήρε ένα μέλος της ομάδας %s μαζί του στον τάφο!"
@@ -518,7 +518,7 @@ msgstr ""
 "θέλετε να ελέγξετε εάν είναι διαθέσιμη για το λειτουργικό σας σύστημα! "
 
 #. Action name
-#: src/gui/control_config.cpp:218
+#: src/gui/control_config.cpp:236
 #, fuzzy
 msgid "Action"
 msgstr "Επιλογές"
@@ -796,7 +796,7 @@ msgstr "Κατασκευή"
 msgid "Controlled by: "
 msgstr "Ελεγχόμενος από:"
 
-#: lib/warmux/net/download.cpp:198
+#: lib/warmux/net/download.cpp:199
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr "Δεν μπόρεσε να πάρει την τελευταία έκδοση από τον %s"
@@ -953,7 +953,7 @@ msgstr "Αδύνατη η έναρξη του διακομιστή."
 
 # Erreur : Votre serveur n'est pas accessible depuis Internet. Vérifier la configuration de votre firewall : le port TCP %s doit accepter les connexions extérieures. Si vous n'êtes pas directement connecté à Internet, vérifier la configuration de votre routeur : le port TCP %s doit être redirigé vers votre ordinateur.
 #: src/menu/network_connection_menu.cpp:497
-#: tools/servers/game_server/server.cpp:302
+#: tools/servers/game_server/server.cpp:303
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -993,12 +993,12 @@ msgstr ""
 msgid "FPS"
 msgstr ""
 
-#: lib/warmux/net/download.cpp:183 lib/warmux/net/download.cpp:224
+#: lib/warmux/net/download.cpp:184 lib/warmux/net/download.cpp:225
 #, c-format
 msgid "Fail to create temporary file: %s"
 msgstr ""
 
-#: lib/warmux/net/download.cpp:190
+#: lib/warmux/net/download.cpp:191
 #, fuzzy, c-format
 msgid "Fail to open temporary file: %s"
 msgstr "Αδύνατον να ανοίξει ο φάκελος με τους χάρτες (%s)!"
@@ -1035,7 +1035,7 @@ msgstr "Κατάσταση παιχνιδιού"
 msgid "Game name:"
 msgstr "Όνομα παιχνιδιού:"
 
-#: src/weapon/gnu.cpp:164
+#: src/weapon/gnu.cpp:162
 msgid "Gnu Launcher"
 msgstr "Εκτόξευση Gnu"
 
@@ -1132,7 +1132,7 @@ msgstr ""
 msgid "Increase this for faster death mode end"
 msgstr "Διάρκεια μέχρι την κατάσταση θανάτου"
 
-#. TRANSLATORS: please be imaginative and keep it short!
+#. Select between "classic", "blitz" and "unlimited" rules
 #: src/menu/help_menu.cpp:68
 msgid "Increase this if you are a slow player"
 msgstr ""
@@ -1192,7 +1192,7 @@ msgstr "Δείξε/Κρύψε τη διεπαφή"
 msgid "Interface and touch controls, more details in other tabs"
 msgstr ""
 
-#: src/game/game.cpp:900
+#: src/game/game.cpp:902
 msgid "It's a present!"
 msgstr "Πάρε ένα δωράκι!"
 
@@ -1221,7 +1221,7 @@ msgstr ""
 "ένα από τα πολεμοφόδια ανά γύρο"
 
 #. Actual key
-#: src/gui/control_config.cpp:230
+#: src/gui/control_config.cpp:248
 msgid "Key"
 msgstr ""
 
@@ -1332,7 +1332,7 @@ msgid "Misc"
 msgstr "Διάφορα"
 
 #. Modifiers
-#: src/gui/control_config.cpp:224
+#: src/gui/control_config.cpp:242
 msgid "Modifiers"
 msgstr ""
 
@@ -1456,7 +1456,7 @@ msgstr "Κανένα στοιχείο <%s> δεν βρέθηκε στο αρχε
 msgid "No player connected"
 msgstr "Κανένας παίκτης συνδέδεμένος"
 
-#: lib/warmux/net/download.cpp:139
+#: lib/warmux/net/download.cpp:140
 msgid "No pointer"
 msgstr ""
 
@@ -1464,7 +1464,7 @@ msgstr ""
 msgid "Nobody!"
 msgstr "Κανένας!"
 
-#: src/gui/control_config.cpp:89 src/gui/control_config.cpp:131
+#: src/gui/control_config.cpp:103 src/gui/control_config.cpp:149
 #: src/interface/man_machine_interface.cpp:1197
 #, fuzzy
 msgid "None"
@@ -1663,7 +1663,7 @@ msgid "Random map"
 msgstr "Τυχαίος χάρτης"
 
 # Il n'y a que %i équipe.
-#: lib/warmux/net/download.cpp:133
+#: lib/warmux/net/download.cpp:134
 #, fuzzy, c-format
 msgid "Read only %i bytes"
 msgstr "Υπάρχει μόνο %i ομάδα."
@@ -1727,7 +1727,7 @@ msgid ""
 "Use Left/Right to change direction"
 msgstr ""
 
-#: src/weapon/gnu.cpp:165 src/weapon/polecat.cpp:195
+#: src/weapon/gnu.cpp:163 src/weapon/polecat.cpp:195
 msgid ""
 "Set timer 1-6 using +/- or 1-6 keys\n"
 "Press space to shoot\n"
@@ -1801,7 +1801,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Συγγνώμη, δεν υπάρχει κανένα παιχνίδι να περιμένει παίκτες"
 
 #: src/menu/network_connection_menu.cpp:446
-#: tools/servers/game_server/server.cpp:287
+#: tools/servers/game_server/server.cpp:288
 #, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1893,7 +1893,7 @@ msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr "Η εκρηκτική μπάλα εγκατέλειψε το πεδίο μάχης πριν την έκρηξη."
 
 # Le Gnu a déserté le champ de bataille avant d'exploser.
-#: src/weapon/gnu.cpp:139
+#: src/weapon/gnu.cpp:137
 msgid "The Gnu left the battlefield before exploding!"
 msgstr "Το Gnu εγκατέλειψε το πεδίο μάχης πριν ανατιναχτεί."
 
@@ -1992,7 +1992,7 @@ msgid_plural "There are only %i teams."
 msgstr[0] "Υπάρχει μόνο %i ομάδα."
 msgstr[1] "Υπάρχουν μόνο %i ομάδες."
 
-#: src/gui/control_config.cpp:153
+#: src/gui/control_config.cpp:168
 #, c-format
 msgid "This key has already been attributed to '%s'"
 msgstr ""
@@ -2227,13 +2227,13 @@ msgstr "Ιστοσελίδα: "
 msgid "Welcome to %s on %s!"
 msgstr "Καλώς ήρθες στο παιχνίδι %s στον %s!"
 
-#: src/game/game.cpp:1003
+#: src/game/game.cpp:1007
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr "Τι καλό παιχνίδι! O %s από την ομάδα %s είναι στον άλλο κόσμο..."
 
 # Trop la honte pour %s : il a été tué par un simple pistolet !
-#: src/game/game.cpp:1066
+#: src/game/game.cpp:1070
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Τι ντροπή για τον %s: σκοτώθηκε από ένα απλό πιστόλι!"
@@ -2258,7 +2258,8 @@ msgstr ""
 msgid "Winner"
 msgstr "Νικητής"
 
-#: src/weapon/rail_gun.cpp:123
+#. The shot efficiency was improved by having more than one target hit
+#: src/weapon/rail_gun.cpp:124
 #, c-format
 msgid "Woah! Combo of %u!"
 msgstr ""
@@ -2277,7 +2278,7 @@ msgstr "Λάθος όνομα χάρτη!"
 msgid "Wrong team!"
 msgstr "Λάθος ομάδα!"
 
-#: lib/warmux/net/download.cpp:149
+#: lib/warmux/net/download.cpp:150
 #, c-format
 msgid "Wrote %i/%i bytes"
 msgstr ""

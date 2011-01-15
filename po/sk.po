@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Warmux 0.9.2\n"
 "Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
-"POT-Creation-Date: 2010-12-10 13:28+0100\n"
+"POT-Creation-Date: 2011-01-15 13:46+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Martin Benčík <zrebec@zrebec.sk>\n"
 "Language-Team: zrebec <zrebec@zrebec.sk>\n"
@@ -62,34 +62,34 @@ msgstr "%s tím"
 msgid "%s Team - Remote"
 msgstr "%s tím - vzdialený"
 
-#: src/game/game.cpp:1024
+#: src/game/game.cpp:1028
 #, fuzzy, c-format
 msgid "%s from %s team committed suicide!"
 msgstr "%s z tímu %s spáchal samovraždu!"
 
 #. Could be modified, but for now, save on translation
-#: src/game/game.cpp:1050 src/game/game.cpp:1069
+#: src/game/game.cpp:1054 src/game/game.cpp:1073
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s z %s tímu zomrel."
 
-#: src/game/game.cpp:1016
+#: src/game/game.cpp:1020
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s z %s tímu sa utopil!"
 
-#: src/game/game.cpp:1010
+#: src/game/game.cpp:1014
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s z %s tímu sa ocitol mimo mapy!"
 
-#: src/game/game.cpp:1030
+#: src/game/game.cpp:1034
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s z tímu %s sa príliš silno udrel o zem!"
 
 #. The playing character killed himself
-#: src/game/game.cpp:1037
+#: src/game/game.cpp:1041
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s z tímu %s zomrel pretože je nemotorný!"
@@ -111,7 +111,7 @@ msgstr "%s niečo vypustil do ovzdušia, objednal si niekto tchora?"
 msgid "%s has won %u points of energy!"
 msgstr "%s získal %u život!"
 
-#: src/game/game.cpp:1061
+#: src/game/game.cpp:1065
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "psychopat %s. zabil člena %s tímu!"
@@ -126,7 +126,7 @@ msgstr "%s stupil na mínu!"
 msgid "%s kicked from game"
 msgstr ""
 
-#: src/include/action_handler.cpp:436
+#: src/include/action_handler.cpp:439
 #, c-format
 msgid "%s needs a pause."
 msgstr "%s potrebuje pauzu."
@@ -151,7 +151,7 @@ msgstr[0] "Tím %s získal %u trieštivú bazuku!"
 msgstr[1] "Tím %s získal %u trieštivé bazuky!"
 msgstr[2] "Tím %s získal %u trieštivých bazúk!"
 
-#: src/weapon/gnu.cpp:241
+#: src/weapon/gnu.cpp:239
 #, c-format
 msgid "%s team has won %u Gnu! Blow them all, cowboy!"
 msgid_plural "%s team has won %u Gnus! Blow them all, cowboy!"
@@ -374,7 +374,7 @@ msgstr[0] "Tím %s získal %u tchora! Máš plynovú masku po ruke?"
 msgstr[1] "Tím %s získal %u tchorov! Máš plynovú masku po ruke?"
 msgstr[2] "Tím %s získal %u tchorov! Máš plynovú masku po ruke?"
 
-#: src/weapon/rail_gun.cpp:131
+#: src/weapon/rail_gun.cpp:133
 #, fuzzy, c-format
 msgid "%s team has won %u rail gun! It's skewer time!"
 msgid_plural "%s team has won %u rail guns! It's skewer time!"
@@ -475,7 +475,7 @@ msgstr[2] ""
 msgid "%s team was fragged down."
 msgstr "Tím %s bol roznesený na kopytách."
 
-#: src/game/game.cpp:1045 src/game/game.cpp:1057
+#: src/game/game.cpp:1049 src/game/game.cpp:1061
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s pochoval člena %s tímu do hrobu s ním!"
@@ -548,7 +548,7 @@ msgstr ""
 "skontrolovať či je dostupná aj pre tvoj operačný systém !"
 
 #. Action name
-#: src/gui/control_config.cpp:218
+#: src/gui/control_config.cpp:236
 #, fuzzy
 msgid "Action"
 msgstr "Nastavenia"
@@ -821,7 +821,7 @@ msgstr "Stavať"
 msgid "Controlled by: "
 msgstr "Ovládal:"
 
-#: lib/warmux/net/download.cpp:198
+#: lib/warmux/net/download.cpp:199
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr ""
@@ -967,7 +967,7 @@ msgid "Error: Unable to start the server"
 msgstr "Chyba: Nemôžem naštartovať server"
 
 #: src/menu/network_connection_menu.cpp:497
-#: tools/servers/game_server/server.cpp:302
+#: tools/servers/game_server/server.cpp:303
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -1006,12 +1006,12 @@ msgstr ""
 msgid "FPS"
 msgstr ""
 
-#: lib/warmux/net/download.cpp:183 lib/warmux/net/download.cpp:224
+#: lib/warmux/net/download.cpp:184 lib/warmux/net/download.cpp:225
 #, c-format
 msgid "Fail to create temporary file: %s"
 msgstr ""
 
-#: lib/warmux/net/download.cpp:190
+#: lib/warmux/net/download.cpp:191
 #, fuzzy, c-format
 msgid "Fail to open temporary file: %s"
 msgstr "Nemôžem otvoriť priečinok s mapami (%s)!"
@@ -1047,7 +1047,7 @@ msgstr "Herný mód"
 msgid "Game name:"
 msgstr "Názov hry:"
 
-#: src/weapon/gnu.cpp:164
+#: src/weapon/gnu.cpp:162
 msgid "Gnu Launcher"
 msgstr "Odpaľovač Gnu"
 
@@ -1143,7 +1143,7 @@ msgstr ""
 msgid "Increase this for faster death mode end"
 msgstr "Dĺžka pred začiatkom smrtiaceho módu"
 
-#. TRANSLATORS: please be imaginative and keep it short!
+#. Select between "classic", "blitz" and "unlimited" rules
 #: src/menu/help_menu.cpp:68
 msgid "Increase this if you are a slow player"
 msgstr ""
@@ -1203,7 +1203,7 @@ msgstr "Ukázať/skryť rozhranie"
 msgid "Interface and touch controls, more details in other tabs"
 msgstr ""
 
-#: src/game/game.cpp:900
+#: src/game/game.cpp:902
 msgid "It's a present!"
 msgstr "Darček!"
 
@@ -1232,7 +1232,7 @@ msgstr ""
 "jeden zasobník na jeden ťah"
 
 #. Actual key
-#: src/gui/control_config.cpp:230
+#: src/gui/control_config.cpp:248
 msgid "Key"
 msgstr ""
 
@@ -1343,7 +1343,7 @@ msgid "Misc"
 msgstr "Rôzne"
 
 #. Modifiers
-#: src/gui/control_config.cpp:224
+#: src/gui/control_config.cpp:242
 msgid "Modifiers"
 msgstr ""
 
@@ -1467,7 +1467,7 @@ msgstr "Nenašiel som element <%s> v konfiguračnom xml súbore!"
 msgid "No player connected"
 msgstr "Nie je pripojený žiadny hráč"
 
-#: lib/warmux/net/download.cpp:139
+#: lib/warmux/net/download.cpp:140
 msgid "No pointer"
 msgstr ""
 
@@ -1475,7 +1475,7 @@ msgstr ""
 msgid "Nobody!"
 msgstr "Nikto!"
 
-#: src/gui/control_config.cpp:89 src/gui/control_config.cpp:131
+#: src/gui/control_config.cpp:103 src/gui/control_config.cpp:149
 #: src/interface/man_machine_interface.cpp:1197
 #, fuzzy
 msgid "None"
@@ -1671,7 +1671,7 @@ msgstr ""
 msgid "Random map"
 msgstr "Náhodná mapa"
 
-#: lib/warmux/net/download.cpp:133
+#: lib/warmux/net/download.cpp:134
 #, fuzzy, c-format
 msgid "Read only %i bytes"
 msgstr "Je tu iba %i tím."
@@ -1734,7 +1734,7 @@ msgid ""
 "Use Left/Right to change direction"
 msgstr ""
 
-#: src/weapon/gnu.cpp:165 src/weapon/polecat.cpp:195
+#: src/weapon/gnu.cpp:163 src/weapon/polecat.cpp:195
 msgid ""
 "Set timer 1-6 using +/- or 1-6 keys\n"
 "Press space to shoot\n"
@@ -1805,7 +1805,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Prepáč, ale žiadna hra nečaká na hráčov"
 
 #: src/menu/network_connection_menu.cpp:446
-#: tools/servers/game_server/server.cpp:287
+#: tools/servers/game_server/server.cpp:288
 #, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1896,7 +1896,7 @@ msgstr ""
 "Futbalová bomba opustila bojové pole ešte pred tým než by vôbec stihla "
 "explodovať"
 
-#: src/weapon/gnu.cpp:139
+#: src/weapon/gnu.cpp:137
 msgid "The Gnu left the battlefield before exploding!"
 msgstr "Pán Gnu opustil bojové pole pred svojim výbuchom"
 
@@ -1987,7 +1987,7 @@ msgstr[0] "Je tu iba %i tím."
 msgstr[1] "Sú tu iba %i tímy."
 msgstr[2] "Je tu iba %i tímov."
 
-#: src/gui/control_config.cpp:153
+#: src/gui/control_config.cpp:168
 #, c-format
 msgid "This key has already been attributed to '%s'"
 msgstr ""
@@ -2221,12 +2221,12 @@ msgstr "Web stránka:"
 msgid "Welcome to %s on %s!"
 msgstr "Vitajte v %s na %s!"
 
-#: src/game/game.cpp:1003
+#: src/game/game.cpp:1007
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr "To bol ale krásny homerun! %s z %s tímu sa ocitol na druhom svete..."
 
-#: src/game/game.cpp:1066
+#: src/game/game.cpp:1070
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Hanba pre %s - bol zabitý obyčajnou pištoľou!"
@@ -2251,7 +2251,8 @@ msgstr ""
 msgid "Winner"
 msgstr "Víťaz"
 
-#: src/weapon/rail_gun.cpp:123
+#. The shot efficiency was improved by having more than one target hit
+#: src/weapon/rail_gun.cpp:124
 #, c-format
 msgid "Woah! Combo of %u!"
 msgstr ""
@@ -2268,7 +2269,7 @@ msgstr "Neplatný názov mapy"
 msgid "Wrong team!"
 msgstr "Neplatný tím"
 
-#: lib/warmux/net/download.cpp:149
+#: lib/warmux/net/download.cpp:150
 #, c-format
 msgid "Wrote %i/%i bytes"
 msgstr ""
