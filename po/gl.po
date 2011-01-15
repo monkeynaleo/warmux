@@ -3,19 +3,18 @@
 # Copyright (C) 2008 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Ignacio Casal Quinteiro <icq@xxxxxxxxxxxxx>, 2007.
-# Adrián Chaves Fernández <adriyetichaves@xxxxxxxxx>, 2008, 2009, 2010.
-# (Proxecto Trasno <proxecto@xxxxxxxxxx>).
-# Adrián Chaves Fernández (Gallaecio) <adriyetichaves@xxxxxxxxx>, 2010.
+# Ignacio Casal Quinteiro <icq@cvs.gnome.org>, 2007.
+# Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2008, 2009, 2010. (Proxecto Trasno <proxecto@trasno.net>).
+# Adrián Chaves Fernández (Gallaecio) <adriyetichaves@gmail.com>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: Warmux. gl\n"
-"Report-Msgid-Bugs-To: warmux-dev@xxxxxxx\n"
+"Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
 "POT-Creation-Date: 2010-12-10 13:28+0100\n"
 "PO-Revision-Date: 2010-12-11 20:42+0100\n"
 "Last-Translator: Adrián Chaves Fernández (Gallaecio) <adriyetichaves@gmail."
 "com>\n"
-"Language-Team: American English <proxecto@xxxxxxxxxx>\n"
+"Language-Team: American English <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -109,7 +108,7 @@ msgstr "%s está a apuntar a %s."
 #: src/weapon/polecat.cpp:117
 #, c-format
 msgid ""
-"%s has done something for the environment, he has not ordered the polecat to"
+"%s has done something for the environment, he has not ordered the polecat to "
 "fart."
 msgstr "%s fixo algo polo medio ambiente: non lle mandou peidear á mofeta."
 
@@ -224,7 +223,7 @@ msgid_plural ""
 "%s team has won %u blowtorchs! If you're under 18, ask your parents to use "
 "it."
 msgstr[0] ""
-"O equipo %s gañou %u soplete! Se es menor de idade, pídelle permiso aos teus"
+"O equipo %s gañou %u soplete! Se es menor de idade, pídelle permiso aos teus "
 "pais."
 msgstr[1] ""
 "O equipo %s gañou %u sopletes! Se es menor de idade, pídelle permiso aos "
@@ -951,7 +950,7 @@ msgstr "Houbo un erro: non se puido iniciar o servidor."
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration: TCP Port %s must accept connections from the outside. If you "
-"are not directly connected to the internet, check your router configuration:"
+"are not directly connected to the internet, check your router configuration: "
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
 "Houbo un erro: non se pode acceder ao teu servidor dende a Internet. "
@@ -2356,3 +2355,145 @@ msgstr "o Cargando o perfil de son: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Son aberto a %d Hz e %d bits"
+
+#, fuzzy
+#~ msgid "Selected weapon and ammo left"
+#~ msgstr "Cambiar a categoría da arma"
+
+#, fuzzy
+#~ msgid "Change per team number of players"
+#~ msgstr "Número máximo de xogadores:"
+
+#, fuzzy
+#~ msgid "Edit player name"
+#~ msgstr "Nome do xogador"
+
+#~ msgid "Fullscreen / window"
+#~ msgstr "Pantalla completa / Fiestra"
+
+#~ msgid "Quit battle"
+#~ msgstr "Saír da batalla"
+
+#~ msgid "You are alone..."
+#~ msgstr "Estás só..."
+
+#~ msgid ""
+#~ "How to use it : keep the space key pressed\n"
+#~ "an ammo per turn"
+#~ msgstr ""
+#~ "Modo de uso: mantén premida a barra espaciadora\n"
+#~ "Un uso por turno"
+
+#~ msgid "Head commander: "
+#~ msgstr "Capitán: "
+
+#~ msgid "Click: Center the camera on the character"
+#~ msgstr "Clic: centrar a cámara na personaxe"
+
+#~ msgid ""
+#~ "Error:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Erro:\n"
+#~ "%s"
+
+#~ msgid "Join #warmux on irc.freenode.net to find some opponents."
+#~ msgstr ""
+#~ "Únete á canle #warmux en irc.freenode.net para atopar algún adversario."
+
+#~ msgid "%s has decided to injure %s"
+#~ msgstr "%s decidiu ferir a %s"
+
+#~ msgid "%s tries to connect with a different version : client=%s, me=%s."
+#~ msgstr "%s tenta conectar cunha versión diferente: cliente=%s, eu=%s."
+
+#~ msgid "%s will shoot %s"
+#~ msgstr "%s vai darlle a %s"
+
+#~ msgid "Add custom team"
+#~ msgstr "Engadir equipo personalizado"
+
+#~ msgid "Automatically join a game"
+#~ msgstr "Unirse a unha partida automáticamente"
+
+#~ msgid "Connect !"
+#~ msgstr "Conectar !"
+
+#~ msgid "Connect to an internet game"
+#~ msgstr "Conectar a un xogo en rede"
+
+#~ msgid "Delete custom team"
+#~ msgstr "Eliminar o equipo actual"
+
+#~ msgid "Error in %s:%lu (Warmux %s) : %s"
+#~ msgstr "Erro en %s:%lu (Warmux %s) : %s"
+
+#~ msgid "Error loading team's data %s:"
+#~ msgstr "Erro ao cargar os datos do equipo %s:"
+
+#~ msgid "Error while loading configuration file: %s"
+#~ msgstr "Erro ao cargar o ficheiro de configuración: %s"
+
+#~ msgid "Error while loading default configuration file: %s"
+#~ msgstr "Erro ao cargar o ficheiro de configuración predeterminado: %s"
+
+#~ msgid "Error while loading game mode %s (file %s):"
+#~ msgstr "Erro ao cargar o modo de partida %s (ficheiro %s):"
+
+#~ msgid ""
+#~ "Error: Your server is not reachable from the internet. Check your "
+#~ "firewall configuration"
+#~ msgstr ""
+#~ "Erro: O teu servidor non é accesible desde a rede. Comproba a "
+#~ "configuración do teu firewall"
+
+#~ msgid ""
+#~ "Error: Your server is not reachable from the internet. Check your "
+#~ "firewall configuration: TCP Port %u must accept connection from the "
+#~ "outside. If you are not directly connected to the internet, check your "
+#~ "router configuration: TCP Port %u must be forwarded on your computer."
+#~ msgstr ""
+#~ "Erro: o teu servidor non é accesible dende a Internet. Comproba a "
+#~ "configuración do teu firewall: o porto TCP %u ten que aceptar conexións "
+#~ "externas. Se non estás conectado directamente á Internet, bótalle unha "
+#~ "ollada á configuración do teu router: o porto TCP %u ten que estarlle "
+#~ "permitido á túa computadora."
+
+#~ msgid "HOME directory (environment variable $HOME) could not be found!"
+#~ msgstr ""
+#~ "Non puido atoparse o directorio HOME (a variable de contorno $HOME)!"
+
+#, fuzzy
+#~ msgid "Head commander:"
+#~ msgstr "Capitán: "
+
+#~ msgid "Network initialization"
+#~ msgstr "Inicialización da rede"
+
+#~ msgid ""
+#~ "No public servers available and incorrect manual connection settings. Try "
+#~ "connecting manually."
+#~ msgstr ""
+#~ "Non hai servidores públicos dispoñibles e a configuración de conexión "
+#~ "manual é incorrecta. Probe a conectar manualmente."
+
+#~ msgid "Refresh"
+#~ msgstr "Actualizar"
+
+#~ msgid ""
+#~ "Sorry, your version is not supported anymore. Supported version are %s. "
+#~ "You can download a updated version on http://www.warmux.org/wiki/download."
+#~ "php"
+#~ msgstr ""
+#~ "Sentímolo, pero a túa versión xa non ten soporte. A versión con soporte é "
+#~ "a %s. Podes baixar unha versión actualizada en http://www.warmux.org/wiki/"
+#~ "download.php"
+
+#~ msgid "Tools"
+#~ msgstr "Ferramentas"
+
+#~ msgid "Unnamed"
+#~ msgstr "Sen nome"
+
+#~ msgid "XML error during loading map '%s': "
+#~ msgstr "Erro de XML durante a carga do mapa '%s':"
