@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-CN\n"
 "Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
-"POT-Creation-Date: 2010-12-10 13:28+0100\n"
+"POT-Creation-Date: 2011-01-15 13:46+0100\n"
 "PO-Revision-Date: 2010-12-13 23:19+1100\n"
 "Last-Translator: jiero <lililjlj@gmail.com>\n"
 "Language-Team: Simplified Chinese <i18n-zh@googlegroups.com>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: utf-8\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"Plural-Forms: nplurals=1; plural=0 \n"
 
 #: src/map/maps_list.cpp:376
 #, c-format
@@ -62,35 +62,35 @@ msgstr " %s 队伍"
 msgid "%s Team - Remote"
 msgstr " %s 队伍- 遥控"
 
-#: src/game/game.cpp:1024
+#: src/game/game.cpp:1028
 #, c-format
 msgid "%s from %s team committed suicide!"
 msgstr "%s (%s) 自尽了 ！"
 
 #. Could be modified, but for now, save on translation
-#: src/game/game.cpp:1050 src/game/game.cpp:1069
+#: src/game/game.cpp:1054 src/game/game.cpp:1073
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s (%s)死掉了。。。"
 
-#: src/game/game.cpp:1016
+#: src/game/game.cpp:1020
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s (%s)入水——深呼吸，沉了！"
 
-#: src/game/game.cpp:1010
+#: src/game/game.cpp:1014
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s (%s)飞出地图边缘。。。诀别！"
 
-#: src/game/game.cpp:1030
+#: src/game/game.cpp:1034
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s (%s) 亲吻大地，可是对方太硬了！"
 
 # what about female names?
 #. The playing character killed himself
-#: src/game/game.cpp:1037
+#: src/game/game.cpp:1041
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s (%s)的死因是: 太笨 ！"
@@ -112,7 +112,7 @@ msgstr "%s 造成了环境影响，明明没给那只臭鼬下命令！"
 msgid "%s has won %u points of energy!"
 msgstr "%s 取得了 %u 点能量！"
 
-#: src/game/game.cpp:1061
+#: src/game/game.cpp:1065
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s 是疯子，他干掉了一个%s的倒霉蛋！"
@@ -127,7 +127,7 @@ msgstr "%s 在地雷身边！"
 msgid "%s kicked from game"
 msgstr "%s 被踢出游戏"
 
-#: src/include/action_handler.cpp:436
+#: src/include/action_handler.cpp:439
 #, c-format
 msgid "%s needs a pause."
 msgstr "%s 需要叫暂停。"
@@ -150,7 +150,7 @@ msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
 msgstr[0] "%s 队得到 %u 火箭炮！"
 
-#: src/weapon/gnu.cpp:241
+#: src/weapon/gnu.cpp:239
 #, c-format
 msgid "%s team has won %u Gnu! Blow them all, cowboy!"
 msgid_plural "%s team has won %u Gnus! Blow them all, cowboy!"
@@ -299,19 +299,17 @@ msgid "%s team has won %u polecat! You have your gas mask, right?"
 msgid_plural "%s team has won %u polecats! You have your gas mask, right?"
 msgstr[0] "%s 队得到 %u 臭鼬！带上面具喽？"
 
-#: src/weapon/rail_gun.cpp:131
+#: src/weapon/rail_gun.cpp:133
 #, c-format
 msgid "%s team has won %u rail gun! It's skewer time!"
 msgid_plural "%s team has won %u rail guns! It's skewer time!"
 msgstr[0] "%s 队得到 %u 轨道枪！串烧时间！"
-msgstr[1] "%s 队得到 %u 轨道枪！串烧时间！"
 
 #: src/weapon/riot_bomb.cpp:131
 #, c-format
 msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
 msgstr[0] "%s 队得到 %u  碎片炸弹！"
-msgstr[1] "%s 队得到 %u 碎片炸弹！串烧时间！"
 
 #: src/weapon/shotgun.cpp:127
 #, c-format
@@ -373,7 +371,7 @@ msgstr[0] "%s 队得到 %u 企鹅发射器！ 没见过满天飞的企鹅吗?"
 msgid "%s team was fragged down."
 msgstr "%s 被打垮了。"
 
-#: src/game/game.cpp:1045 src/game/game.cpp:1057
+#: src/game/game.cpp:1049 src/game/game.cpp:1061
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s 带走了 %s 的一员！"
@@ -438,7 +436,7 @@ msgstr ""
 "新版本 %s 可用，您的版本是 %s。也许您想查下，是否有针对您的操作系统的升级。"
 
 #. Action name
-#: src/gui/control_config.cpp:218
+#: src/gui/control_config.cpp:236
 msgid "Action"
 msgstr "动作"
 
@@ -711,7 +709,7 @@ msgstr "建筑工具"
 msgid "Controlled by: "
 msgstr "控制者: "
 
-#: lib/warmux/net/download.cpp:198
+#: lib/warmux/net/download.cpp:199
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr "不能从 %s获取最新版本"
@@ -853,7 +851,7 @@ msgid "Error: Unable to start the server"
 msgstr "错误: 无法开始服务器"
 
 #: src/menu/network_connection_menu.cpp:497
-#: tools/servers/game_server/server.cpp:302
+#: tools/servers/game_server/server.cpp:303
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -891,12 +889,12 @@ msgstr "%u 的起爆延迟"
 msgid "FPS"
 msgstr "FPS"
 
-#: lib/warmux/net/download.cpp:183 lib/warmux/net/download.cpp:224
+#: lib/warmux/net/download.cpp:184 lib/warmux/net/download.cpp:225
 #, c-format
 msgid "Fail to create temporary file: %s"
 msgstr "无法创建临时文件: %s"
 
-#: lib/warmux/net/download.cpp:190
+#: lib/warmux/net/download.cpp:191
 #, c-format
 msgid "Fail to open temporary file: %s"
 msgstr "无法打开临时文件: %s"
@@ -931,7 +929,7 @@ msgstr "游戏模式"
 msgid "Game name:"
 msgstr "游戏名:"
 
-#: src/weapon/gnu.cpp:164
+#: src/weapon/gnu.cpp:162
 msgid "Gnu Launcher"
 msgstr "Gnu-北美野牛发射器"
 
@@ -1029,7 +1027,7 @@ msgstr "提升音量"
 msgid "Increase this for faster death mode end"
 msgstr "提升这个会快点进入死亡模式"
 
-#. TRANSLATORS: please be imaginative and keep it short!
+#. Select between "classic", "blitz" and "unlimited" rules
 #: src/menu/help_menu.cpp:68
 msgid "Increase this if you are a slow player"
 msgstr "提升这个，假如你是慢性玩家"
@@ -1087,7 +1085,7 @@ msgstr "界面"
 msgid "Interface and touch controls, more details in other tabs"
 msgstr "界面和触摸控制，更多细节在其他标签页"
 
-#: src/game/game.cpp:900
+#: src/game/game.cpp:902
 msgid "It's a present!"
 msgstr "就是现在！"
 
@@ -1115,7 +1113,7 @@ msgstr ""
 "每回合一个弹夹"
 
 #. Actual key
-#: src/gui/control_config.cpp:230
+#: src/gui/control_config.cpp:248
 msgid "Key"
 msgstr "按键"
 
@@ -1223,7 +1221,7 @@ msgid "Misc"
 msgstr "其他"
 
 #. Modifiers
-#: src/gui/control_config.cpp:224
+#: src/gui/control_config.cpp:242
 msgid "Modifiers"
 msgstr "修正"
 
@@ -1340,7 +1338,7 @@ msgstr "没找到 <%s>重点 xml配置文件 ！"
 msgid "No player connected"
 msgstr "没有玩家连接"
 
-#: lib/warmux/net/download.cpp:139
+#: lib/warmux/net/download.cpp:140
 msgid "No pointer"
 msgstr "无指针"
 
@@ -1348,7 +1346,7 @@ msgstr "无指针"
 msgid "Nobody!"
 msgstr "空房间！"
 
-#: src/gui/control_config.cpp:89 src/gui/control_config.cpp:131
+#: src/gui/control_config.cpp:103 src/gui/control_config.cpp:149
 #: src/interface/man_machine_interface.cpp:1197
 msgid "None"
 msgstr "无"
@@ -1563,7 +1561,7 @@ msgstr "轨道枪"
 msgid "Random map"
 msgstr "随机读取地图"
 
-#: lib/warmux/net/download.cpp:133
+#: lib/warmux/net/download.cpp:134
 #, c-format
 msgid "Read only %i bytes"
 msgstr "只读取 %i 比特"
@@ -1628,7 +1626,7 @@ msgstr ""
 "按下空格键发射\n"
 "使用左/右键改变方向"
 
-#: src/weapon/gnu.cpp:165 src/weapon/polecat.cpp:195
+#: src/weapon/gnu.cpp:163 src/weapon/polecat.cpp:195
 msgid ""
 "Set timer 1-6 using +/- or 1-6 keys\n"
 "Press space to shoot\n"
@@ -1702,7 +1700,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "抱歉噢。没人等你。"
 
 #: src/menu/network_connection_menu.cpp:446
-#: tools/servers/game_server/server.cpp:287
+#: tools/servers/game_server/server.cpp:288
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1791,7 +1789,7 @@ msgstr "集束炸弹离开战场---"
 msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr "集束炸弹离开战场---"
 
-#: src/weapon/gnu.cpp:139
+#: src/weapon/gnu.cpp:137
 msgid "The Gnu left the battlefield before exploding!"
 msgstr "Gnu-野牛离开战场。。。"
 
@@ -1874,7 +1872,7 @@ msgid "There is only %i team."
 msgid_plural "There are only %i teams."
 msgstr[0] "只有 %i 队"
 
-#: src/gui/control_config.cpp:153
+#: src/gui/control_config.cpp:168
 #, c-format
 msgid "This key has already been attributed to '%s'"
 msgstr "这个键已经标注了 '%s'"
@@ -2099,12 +2097,12 @@ msgstr "网站："
 msgid "Welcome to %s on %s!"
 msgstr "欢迎来到 %s %s！"
 
-#: src/game/game.cpp:1003
+#: src/game/game.cpp:1007
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr "光彩的回老家了！%s 已经离开 %s ，到达了另一个世界。"
 
-#: src/game/game.cpp:1066
+#: src/game/game.cpp:1070
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr " %s 悲惨死去，不能瞑目！"
@@ -2131,7 +2129,8 @@ msgstr ""
 msgid "Winner"
 msgstr "胜者"
 
-#: src/weapon/rail_gun.cpp:123
+#. The shot efficiency was improved by having more than one target hit
+#: src/weapon/rail_gun.cpp:124
 #, c-format
 msgid "Woah! Combo of %u!"
 msgstr "哇！%u 组合！"
@@ -2148,7 +2147,7 @@ msgstr "地图名错误！"
 msgid "Wrong team!"
 msgstr "队伍错了！"
 
-#: lib/warmux/net/download.cpp:149
+#: lib/warmux/net/download.cpp:150
 #, c-format
 msgid "Wrote %i/%i bytes"
 msgstr "写入 %i/%i 比特"
