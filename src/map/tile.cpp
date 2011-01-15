@@ -177,9 +177,13 @@ TileItem_NonEmpty* Tile::CreateNonEmpty(uint8_t *ptr, int stride)
   Uint32 *pix = (Uint32 *)ptr;
 
   for (int y=0; y<CELL_SIZE.y; y++) {
-    for (int x=0; x<CELL_SIZE.x; x++)
-      if (pix[x])
-        return new TileItem_AlphaSoftware(ptr, stride, m_alpha_threshold);
+    for (int x=0; x<CELL_SIZE.x; x++) {
+      if (pix[x]) {
+        if (SDL_GetVideoInfo()->vfmt->BytesPerPixel > 2)
+          return new TileItem_AlphaSoftware(ptr, stride, m_alpha_threshold);
+        return new TileItem_ColorKey16(ptr, stride, m_alpha_threshold);
+      }
+    }
     pix += stride>>2;
   }
 
@@ -579,6 +583,7 @@ Surface Tile::GetPart(const Rectanglei& rec)
   Point2i firstCell = Clamp(rec.GetPosition() / CELL_SIZE);
   Point2i lastCell = Clamp((rec.GetPosition() + rec.GetSize()) / CELL_SIZE);
   Point2i i = nbCells - 1;
+  bool    force_copy = SDL_GetVideoInfo()->vfmt->BytesPerPixel>2;
 
   for (i.y = firstCell.y; i.y <= lastCell.y; i.y++) {
     for (i.x = firstCell.x; i.x <= lastCell.x; i.x++) {
@@ -604,9 +609,9 @@ Surface Tile::GetPart(const Rectanglei& rec)
       if (dst.x < 0) dst.x = 0;
       if (dst.y < 0) dst.y = 0;
 
-      tin->GetSurface().SetAlpha(0, 0);
+      if (force_copy) tin->GetSurface().SetAlpha(0, 0);
       part.Blit(tin->GetSurface(), src, dst);
-      tin->GetSurface().SetAlpha(SDL_SRCALPHA, 0);
+      if (force_copy) tin->GetSurface().SetAlpha(SDL_SRCALPHA, 0);
     }
   }
   return part;
