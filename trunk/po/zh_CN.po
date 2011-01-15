@@ -2,17 +2,17 @@
 # Copyright (C) 2007 Warmux Development Team
 # This file is distributed under the same license as the warmux package.
 #
-# <luojie-dune@xxxxxxxxxxxxx>,2007.
-# jiero <lililjlj@xxxxxxxxx>, 2010.
+# <luojie-dune@operamail.com>,2007.
+# jiero <lililjlj@gmail.com>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: zh-CN\n"
-"Report-Msgid-Bugs-To: warmux-dev@xxxxxxx\n"
+"Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
 "POT-Creation-Date: 2010-12-10 13:28+0100\n"
 "PO-Revision-Date: 2010-12-13 23:19+1100\n"
-"Last-Translator: jiero <lililjlj@xxxxxxxxx>\n"
-"Language-Team: Simplified Chinese <i18n-zh@xxxxxxxxxxxxxxxx>\n"
+"Last-Translator: jiero <lililjlj@gmail.com>\n"
+"Language-Team: Simplified Chinese <i18n-zh@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: utf-8\n"
@@ -56,8 +56,7 @@ msgstr "%s <%s> 从 %s"
 msgid "%s Team"
 msgstr " %s 队伍"
 
-#. translators: this is the team listing and will expand in a context like
-"OOo team - Remote"
+#. translators: this is the team listing and will expand in a context like "OOo team - Remote"
 #: src/menu/team_box.cpp:252
 #, c-format
 msgid "%s Team - Remote"
@@ -104,8 +103,7 @@ msgstr "%s 处理 %s"
 #: src/weapon/polecat.cpp:117
 #, c-format
 msgid ""
-"%s has done something for the environment, he has not ordered the polecat to
-"
+"%s has done something for the environment, he has not ordered the polecat to "
 "fart."
 msgstr "%s 造成了环境影响，明明没给那只臭鼬下命令！"
 
@@ -201,8 +199,7 @@ msgstr[0] "%s 队得到 %u 火箭炮！"
 #: src/weapon/blowtorch.cpp:154
 #, c-format
 msgid ""
-"%s team has won %u blowtorch! If you're under 18, ask your parents to use
-it."
+"%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
 msgid_plural ""
 "%s team has won %u blowtorchs! If you're under 18, ask your parents to use "
 "it."
@@ -278,8 +275,7 @@ msgstr[0] "%s 队得到 %u 喷射包了！帅啊！"
 #: src/weapon/lowgrav.cpp:83
 #, c-format
 msgid ""
-"%s team has won %u lowgrav! Small step for man, giant leap for free
-software!"
+"%s team has won %u lowgrav! Small step for man, giant leap for free software!"
 msgid_plural ""
 "%s team has won %u lowgravs! Small step for man, giant leap for free "
 "software!"
@@ -657,8 +653,7 @@ msgstr ""
 "放置前使用上/下调整方向"
 
 #: src/menu/help_menu.cpp:58
-msgid "Click to let a player handle the team instead of the AI, and vice
-versa"
+msgid "Click to let a player handle the team instead of the AI, and vice versa"
 msgstr "点击让一个玩家取代AI操控，反之亦可"
 
 #. TRANSLATORS: please be imaginative and keep it short!
@@ -835,8 +830,7 @@ msgstr "删除目录 \"%s\"失败: 不能删除自定义队伍。"
 
 #: src/team/custom_team.cpp:125
 #, c-format
-msgid "Error while deleting the file \"%s\". Unable to delete the custom
-team."
+msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr "删除文件 \"%s\"失败: 不能删除自定义队伍。"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
@@ -864,8 +858,7 @@ msgstr "错误: 无法开始服务器"
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
 "configuration: TCP Port %s must accept connections from the outside. If you "
-"are not directly connected to the internet, check your router configuration:
-"
+"are not directly connected to the internet, check your router configuration: "
 "TCP Port %s must be forwarded on your computer."
 msgstr ""
 "错误：你的服务器无法从Internet连接到。检查防火墙设置：TCP端口 %s 必须允许外部"
@@ -1325,8 +1318,7 @@ msgstr "网络游戏"
 msgid "Never"
 msgstr "没有"
 
-#. TRANSLATORS: after this string there will be a time stamp or the string
-'(unknown time)'
+#. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
 #: src/network/chatlogger.cpp:46
 msgid "New network game at "
 msgstr "网上游戏"
@@ -1713,11 +1705,10 @@ msgstr "抱歉噢。没人等你。"
 #: tools/servers/game_server/server.cpp:287
 #, c-format
 msgid ""
-"Sorry, your version is not supported anymore. Supported versions are %s. You
-"
-"can download an updated version from http://www.warmux.org/wiki/download.php";
+"Sorry, your version is not supported anymore. Supported versions are %s. You "
+"can download an updated version from http://www.warmux.org/wiki/download.php"
 msgstr ""
-"抱歉哦，你的版本已经不支持了。现在使用%s。下载吧，http://www.warmux.org/wiki/";
+"抱歉哦，你的版本已经不支持了。现在使用%s。下载吧，http://www.warmux.org/wiki/"
 "download.php 最好。"
 
 #: src/menu/options_menu.cpp:310
@@ -1823,8 +1814,7 @@ msgstr "越大越快代表失败!"
 
 #: src/menu/game_mode_editor.cpp:132
 msgid ""
-"The blitz mode does not reset the time between each team turn. A team looses
-"
+"The blitz mode does not reset the time between each team turn. A team looses "
 "when it has no players left or its time has ran out."
 msgstr "闪电战模式不会重记时，一个队伍的失利或者是全员损失，或者是时间耗尽。"
 
@@ -1951,8 +1941,7 @@ msgstr "触摸控制"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:98
-msgid "Touch/click the left or right arrows to move respectively left or
-right"
+msgid "Touch/click the left or right arrows to move respectively left or right"
 msgstr "触碰/点击左或右箭头向左或右移动"
 
 #. TRANSLATORS: please be imaginative and keep it short!
@@ -2246,3 +2235,130 @@ msgstr "o读取音乐文件 : %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o音乐 %d Hz %d bit"
+
+#, fuzzy
+#~ msgid "Selected weapon and ammo left"
+#~ msgstr "改变武器分类"
+
+#, fuzzy
+#~ msgid "Change per team number of players"
+#~ msgstr "玩家满员:"
+
+#, fuzzy
+#~ msgid "Edit player name"
+#~ msgstr "请问尊姓大名?"
+
+#~ msgid "Fullscreen / window"
+#~ msgstr "全屏 / 窗口"
+
+#~ msgid "Quit battle"
+#~ msgstr "推出战斗"
+
+#~ msgid "You are alone..."
+#~ msgstr "你是孤单的。。。"
+
+#~ msgid ""
+#~ "How to use it : keep the space key pressed\n"
+#~ "an ammo per turn"
+#~ msgstr ""
+#~ "如何使用: 按住空格键\n"
+#~ "每回合一个弹夹"
+
+#
+#~ msgid "Head commander: "
+#~ msgstr "指挥官: "
+
+#~ msgid "Click: Center the camera on the character"
+#~ msgstr "点击：镜头对准角色"
+
+#~ msgid ""
+#~ "Error:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "错误:\n"
+#~ "%s"
+
+# URM0-1: search URM0-2 for next line
+#~ msgid "Join #warmux on irc.freenode.net to find some opponents."
+#~ msgstr "加入#warmux IRC irc。freenode。net 找对手"
+
+#~ msgid "%s has decided to injure %s"
+#~ msgstr "%s 决定攻击 %s"
+
+#~ msgid "%s tries to connect with a different version : client=%s, me=%s."
+#~ msgstr "%s 试着连接一个不同版本 : client=%s, me=%s."
+
+#~ msgid "%s will shoot %s"
+#~ msgstr "%s 将要攻击 %s"
+
+#~ msgid "Connect !"
+#~ msgstr "连接!"
+
+#~ msgid "Connect to an internet game"
+#~ msgstr "连上网去玩"
+
+#~ msgid "Do you really want to quit? (Y/N)"
+#~ msgstr "您真的想退出吗? (\"Y\"是 或 \"N\"不)"
+
+#~ msgid "Error in %s:%lu (Warmux %s) : %s"
+#~ msgstr "错误出现%s:%lu (Warmux %s) : %s"
+
+#~ msgid "Error loading team's data %s:"
+#~ msgstr "读取队伍数据 %s 时出错 :"
+
+#~ msgid "Error while loading configuration file: %s"
+#~ msgstr "读取设置文件出错: %s"
+
+#~ msgid "Error while loading default configuration file: %s"
+#~ msgstr "正读取默认设置文件发生错误: %s"
+
+#~ msgid "Error while loading game mode %s (file %s):"
+#~ msgstr "读取游戏模式时出错%s (file %s):"
+
+#~ msgid ""
+#~ "Error: Your server is not reachable from the internet. Check your "
+#~ "firewall configuration"
+#~ msgstr "错误: 无法从互联网上获取服务器.请检查防火墙."
+
+#~ msgid ""
+#~ "Error: Your server is not reachable from the internet. Check your "
+#~ "firewall configuration: TCP Port %u must accept connection from the "
+#~ "outside. If you are not directly connected to the internet, check your "
+#~ "router configuration: TCP Port %u must be forwarded on your computer."
+#~ msgstr ""
+#~ "错误：你的服务器无法经由Internet连接。检查防火墙设置：TCP端口 %u 必须能够"
+#~ "接受外部连接。假如你不是直接连接互联网，请检查路由器设置：TCP端口 %u 必须"
+#~ "在前。"
+
+#~ msgid "HOME directory (environment variable $HOME) could not be found!"
+#~ msgstr " 找不到家目录 (environment variable $HOME) !"
+
+#~ msgid "Head commander:"
+#~ msgstr "指挥官: "
+
+#~ msgid "Host a game (Windows clients only)"
+#~ msgstr "建立主机（仅windows客户端）"
+
+#~ msgid "Network initialization"
+#~ msgstr "网络初始化"
+
+#~ msgid "Refresh"
+#~ msgstr "刷新"
+
+#, fuzzy
+#~ msgid ""
+#~ "Sorry, your version is not supported anymore. Supported version are %s. "
+#~ "You can download a updated version on http://www.warmux.org/wiki/download."
+#~ "php"
+#~ msgstr ""
+#~ "抱歉哦，你的版本已经不支持了。现在使用%s。。下载吧，http://www。warmux。"
+#~ "org/wiki/download。php 最好。"
+
+#~ msgid "Tools"
+#~ msgstr "工具"
+
+#~ msgid "Unnamed"
+#~ msgstr "未命名"
+
+#~ msgid "XML error during loading map '%s': "
+#~ msgstr "读取地图 '%s' 时出现XML错误"
