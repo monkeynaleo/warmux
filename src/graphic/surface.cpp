@@ -648,14 +648,15 @@ mirror(void *d, uint dpitch,
        const void* s, uint spitch,
        int w, int h)
 {
-  uint8_t *dst = (uint8_t*)d;
-  const uint8_t *src = (uint8_t*)s+(w-1)*sizeof(pixel);
+  pixel *dst = (pixel*)d;
+  const pixel *src = ((pixel*)s)+(w-1);
+
+  dpitch /= sizeof(pixel);
+  spitch /= sizeof(pixel);
 
   while (h--) {
     for (int x=0; x<w; x++)
-      *(((pixel*)dst)+x) = *(((pixel*)src)-x);
-    // Try to avoid having garbage sdl_gfx < 2.0.22 actually reads
-    memset(dst+w*sizeof(pixel), 0, dpitch-w*sizeof(pixel));
+      dst[x] = src[-x];
     dst += dpitch;
     src += spitch;
   }
