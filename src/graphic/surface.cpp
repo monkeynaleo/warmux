@@ -642,6 +642,7 @@ end:
   return ret;
 }
 
+#if SDL_GFXPRIMITIVES_MICRO > 20
 template<typename pixel>
 void
 mirror(void *d, uint dpitch,
@@ -661,9 +662,11 @@ mirror(void *d, uint dpitch,
     src += spitch;
   }
 }
+#endif
 
 Surface Surface::Mirror()
 {
+#if SDL_GFXPRIMITIVES_MICRO > 20
   const SDL_PixelFormat *fmt = surface->format;
   SDL_Surface *surf = SDL_CreateRGBSurface(surface->flags, surface->w, surface->h, fmt->BitsPerPixel,
                                            fmt->Rmask, fmt->Gmask, fmt->Bmask, fmt->Amask);
@@ -713,6 +716,9 @@ Surface Surface::Mirror()
     SDL_SetColorKey(surf, SDL_SRCCOLORKEY, surface->format->colorkey);
 
   return Surface(surf);
+#else
+  return Surface(zoomSurface(surface, -1, 1, 0));
+#endif
 }
 
 /**
