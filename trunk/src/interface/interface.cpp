@@ -658,8 +658,11 @@ void AbsoluteDraw(const Surface &s, const Point2i& pos)
 bool Interface::ControlClick(const Point2i &mouse_pos, ClickType type, Point2i old_mouse_pos)
 {
   // Make sure we don't go in there while we shouldn't
-  if (!ActiveTeam().IsLocalHuman() || ActiveCharacter().IsDead() ||
-      Game::GetInstance()->ReadState() != Game::PLAYING)
+  if (!ActiveTeam().IsLocalHuman()
+      || ActiveCharacter().IsDead()
+      || (Game::GetInstance()->ReadState() != Game::PLAYING
+	  // movement should be possible just after shooting
+	  && Game::GetInstance()->ReadState() != Game::HAS_PLAYED))
     return false;
 
   Character *active_char = &ActiveCharacter();
@@ -745,6 +748,9 @@ bool Interface::ControlClick(const Point2i &mouse_pos, ClickType type, Point2i o
   // Check if we clicked the shoot icon: start firing!
   Rectanglei shoot_button(Point2i(546*zoom, 0), button_size);
   if (shoot_button.Contains(mouse_rel_pos)) {
+    if (Game::GetInstance()->ReadState() != Game::PLAYING)
+      return false;
+
     switch (type) {
       case CLICK_TYPE_LONG: break;
       case CLICK_TYPE_DOWN:
@@ -753,11 +759,6 @@ bool Interface::ControlClick(const Point2i &mouse_pos, ClickType type, Point2i o
         Action *a;
         if (type == CLICK_TYPE_UP) {
           a = new Action(Action::ACTION_WEAPON_STOP_SHOOTING);
-          // If we don't have ammo left for the weapon,
-          if (ActiveTeam().ReadNbUnits() < 2) {
-            is_control = false;
-            Hide();
-          }
         } else {
           a = new Action(Action::ACTION_WEAPON_START_SHOOTING);
         }
