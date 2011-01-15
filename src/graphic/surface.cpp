@@ -36,8 +36,6 @@
 
 #include "graphic/fading_effect.h"
 
-#define BUGGY_SDLGFX 1
-
 /**
  * Constructor building a surface by reading the image from a file.
  *
@@ -731,32 +729,20 @@ Surface Surface::Mirror()
 * but when accessing thanks to GetSurfaceForAngle the index is using radian
 * (because we juste need an index in array, not an angle) */
 static const Double ratio_deg_to_rad = 180 / PI;
-Surface Surface::RotoZoom(Double angle, Double zoomx, Double zoomy, int smooth)
+Surface Surface::RotoZoom(Double angle, Double zoomx, Double zoomy)
 {
   SDL_Surface *surf;
 
-#ifdef BUGGY_SDLGFX
-  /* From SDLGFX website,
-   * 'zoomx' and 'zoomy' are scaling factors that
-   * can also be negative. In this case the corresponding axis is flipped.
-   * Note: Flipping currently only works with antialiasing turned off
-   */
-  if (zoomx == -1 && zoomy == ONE) {
-    if (EqualsZero(angle)) return Mirror();
-    smooth = 0;
-  }
-#endif
-
   if (EqualsZero(angle)) {
     if (zoomx!=ONE || zoomy!=ONE)
-      surf = zoomSurface(surface, zoomx.toDouble(), zoomy.toDouble(), smooth);
+      surf = zoomSurface(surface, zoomx.toDouble(), zoomy.toDouble(), 1);
     else {
       return *this;
     }
   } else if (zoomx == zoomy && zoomx > ZERO) {
-    surf = rotozoomSurface(surface, (angle * ratio_deg_to_rad).toDouble() , zoomx.toDouble(), smooth);
+    surf = rotozoomSurface(surface, (angle * ratio_deg_to_rad).toDouble() , zoomx.toDouble(), 1);
   } else {
-    surf = rotozoomSurfaceXY(surface, (angle * ratio_deg_to_rad).toDouble() , zoomx.toDouble(), zoomy.toDouble(), smooth);
+    surf = rotozoomSurfaceXY(surface, (angle * ratio_deg_to_rad).toDouble() , zoomx.toDouble(), zoomy.toDouble(), 1);
   }
 
   if (!surf)

@@ -46,7 +46,7 @@ Surface SpriteSubframeCache::GetSurfaceForAngle(Double angle)
   // On demand-cache
   if (rotated[index].IsNull()) {
     angle = min + (max-min)*(1-index/(Double)rotated.size());
-    rotated[index] = surface.RotoZoomC(angle, ONE, ONE, true);
+    rotated[index] = surface.RotoZoomC(angle, ONE, ONE);
   }
   return rotated[index];
 }
@@ -83,7 +83,7 @@ void SpriteCache::FixParameters(const Double& rotation_rad,
   for (uint i=0; i<size(); i++) {
     SpriteFrameCache& frame = operator[](i);
     if (rotozoom)
-      frame.normal.surface = frame.normal.surface.RotoZoom(rotation_rad, scale_x, scale_y, true);
+      frame.normal.surface = frame.normal.surface.RotoZoom(rotation_rad, scale_x, scale_y);
     if (force_color_key)
       frame.normal.surface = frame.normal.surface.DisplayFormatColorKey(128);
   }
