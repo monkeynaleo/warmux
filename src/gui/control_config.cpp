@@ -75,21 +75,21 @@ public:
     int key_code = kbd->GetKeyAssociatedToAction(key_action);
 
     ctrl_box = new PictureWidget(Point2i(KEY_CTRL_WIDTH, KEY_HEIGHT),
-				 "menu/key_ctrl");
+                                 "menu/key_ctrl");
     if (!kbd->HasControlModifier(key_code)) {
       ctrl_box->Disable();
     }
     AddWidget(ctrl_box);
 
     alt_box = new PictureWidget(Point2i(KEY_ALT_WIDTH, KEY_HEIGHT),
-				"menu/key_alt");
+                                "menu/key_alt");
     if (!kbd->HasAltModifier(key_code)) {
       alt_box->Disable();
     }
     AddWidget(alt_box);
 
     shift_box = new PictureWidget(Point2i(KEY_SHIFT_WIDTH, KEY_HEIGHT),
-				  "menu/key_shift");
+                                  "menu/key_shift");
     if (!kbd->HasShiftModifier(key_code)) {
       shift_box->Disable();
     }
