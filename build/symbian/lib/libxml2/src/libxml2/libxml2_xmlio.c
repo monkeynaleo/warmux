@@ -3189,87 +3189,49 @@ xmlOutputBufferWriteString(xmlOutputBufferPtr out, const char *str)
 XMLPUBFUNEXPORT int
 xmlOutputBufferFlush(xmlOutputBufferPtr out)
 {
-    int ret = 0;
+    int nbchars = 0, ret = 0;
 
-    if (!out || out->error)
-        return(-1);
-
-// XMLENGINE: Replaced code
-/*
-    if (out->conv && out->encoder)
-    {
-        int nbchars = xmlCharEncOutFunc(out->encoder, out->conv, out->buffer);
-        if (nbchars < 0) {
-            xmlIOErr(XML_IO_ENCODER, NULL);
-            out->error = XML_IO_ENCODER;
-            return(-1);
-        }
+    if ((out == NULL) || (out->error)) return(-1);
+    /*
+     * first handle encoding stuff.
+     */
+    if ((out->conv != NULL) && (out->encoder != NULL)) {
+	/*
+	 * convert as much as possible to the parser reading buffer.
+	 */
+	nbchars = xmlCharEncOutFunc(out->encoder, out->conv, out->buffer);
+	if (nbchars < 0) {
+	    xmlIOErr(XML_IO_ENCODER, NULL);
+	    out->error = XML_IO_ENCODER;
+	    return(-1);
+	}
     }
 
-    if (out->conv) &&
-        out->encoder &&
-        out->writecallback)
-    {
-        ret = out->writecallback(
-                        out->context,
-                        (const char *)out->conv->content,
-                        out->conv->use);
-        if (ret >= 0)
-            xmlBufferShrink(out->conv, ret);
+    /*
+     * second flush the stuff to the I/O channel
+     */
+    if ((out->conv != NULL) && (out->encoder != NULL) &&
+	(out->writecallback != NULL)) {
+	ret = out->writecallback(out->context,
+	           (const char *)out->conv->content, out->conv->use);
+	if (ret >= 0)
+	    xmlBufferShrink(out->conv, ret);
     } else if (out->writecallback != NULL) {
-        ret = out->writecallback(
-                        out->context,
-                        (const char*) out->buffer->content,
-                        out->buffer->use);
-        if (ret >= 0)
-            xmlBufferShrink(out->buffer, ret);
-    }
-*/
-// -----------
-    if (out->writecallback)
-    {
-        xmlBufferPtr buffer;
-
-        /*
-        * first handle encoding stuff.
-        */
-        if (out->conv && out->encoder)
-        {
-            /*
-            * convert as much as possible to the parser reading buffer.
-            */
-            int nbchars;
-
-            buffer = out->conv;
-            nbchars = xmlCharEncOutFunc(out->encoder, out->conv, out->buffer);
-            if (nbchars < 0) {
-                xmlIOErr(XML_IO_ENCODER, NULL);
-                out->error = XML_IO_ENCODER;
-                return(-1);
-            }
-        } else {
-            buffer = out->buffer;
-        }
-
-        /*
-        * second flush the stuff to the I/O channel
-        */
-        ret = out->writecallback(
-                        out->context,
-                        (const char*) buffer->content,
-                        buffer->use);
-        if (ret >= 0)
-            xmlBufferShrink(buffer, ret);
+	ret = out->writecallback(out->context,
+	           (const char *)out->buffer->content, out->buffer->use);
+	if (ret >= 0)
+	    xmlBufferShrink(out->buffer, ret);
     }
     if (ret < 0) {
-        xmlIOErr(XML_IO_FLUSH, NULL);
-        out->error = XML_IO_FLUSH;
-        return(ret);
+	xmlIOErr(XML_IO_FLUSH, NULL);
+	out->error = XML_IO_FLUSH;
+	return(ret);
     }
     out->written += ret;
 
 #ifdef DEBUG_INPUT
-    xmlGenericError(xmlGenericErrorContext, "I/O: flushed %d chars\n", ret);
+    xmlGenericError(xmlGenericErrorContext,
+	    "I/O: flushed %d chars\n", ret);
 #endif
     return(ret);
 }
