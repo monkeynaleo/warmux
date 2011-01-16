@@ -112,6 +112,8 @@ const std::string NetworkTeamsSelectionBox::GetLocalPlayerName()
   delete[] name;
 #elif defined(ANDROID)
   result = "Android";
+#elif defined(__SYMBIAN32__)
+  result = "Symbian";
 #else
   result = getenv("USER");
 #endif
