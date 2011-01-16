@@ -297,9 +297,9 @@ OptionMenu::OptionMenu() :
   else
     current_sound_freq = "11025";
 
+#ifndef HAVE_HANDHELD
   cbox_sound_freq = new ComboBox(_("Sound frequency"), "menu/sound_frequency",
                                  option_size, sound_freqs, current_sound_freq);
-#ifndef HAVE_HANDHELD
   sound_options->AddWidget(cbox_sound_freq);
 #endif
 
@@ -433,7 +433,9 @@ void OptionMenu::SaveOptions()
 #endif
 
   // Sound settings - volume already saved
+#ifndef HAVE_HANDHELD
   config->SetSoundFrequency(cbox_sound_freq->GetIntValue());
+#endif
   config->SetSoundMusic(music_cbox->GetValue());
   config->SetSoundEffects(effects_cbox->GetValue());
 
@@ -466,10 +468,12 @@ void OptionMenu::SaveOptions()
   controls->SaveControlConfig();
 
   // Sound
+#ifndef HAVE_HANDHELD
   std::string sfreq = cbox_sound_freq->GetValue();
   int freq;
   if (str2int(sfreq,freq))
     JukeBox::GetInstance()->SetFrequency(freq);
+#endif
   config->SetWarnOnNewPlayer(warn_cbox->GetValue());
 
   JukeBox::GetInstance()->Init(); // commit modification on sound options

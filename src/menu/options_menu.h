@@ -49,13 +49,15 @@ private:
   CheckBox *opt_display_multisky;
 #endif
 
-#ifndef ANDROID
+#ifndef HAVE_HANDHELD
   ComboBox *cbox_video_mode;
 #endif
   SpinButtonWithPicture *opt_max_fps;
 
   /* Sound options controllers */
+#ifndef HAVE_HANDHELD
   ComboBox *cbox_sound_freq;
+#endif
   uint initial_vol_mus;
   uint initial_vol_eff;
   SpinButtonWithPicture *volume_music;
