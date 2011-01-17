@@ -16,6 +16,7 @@ SYSTEMINCLUDE   \epoc32\include\SDL
 SYSTEMINCLUDE   \epoc32\include\libpng-1.2
 SYSTEMINCLUDE   ..\..\..\lib\warmux\include
 SYSTEMINCLUDE   ..\..\..\lib\fixedpoint
+SYSTEMINCLUDE   ..\lib\curl\include
 
 USERINCLUDE   ..\..\..\src
 

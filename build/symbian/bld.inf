@@ -1,6 +1,7 @@
 /* Master build file for Warmux and libraries */
 
 #include "lib/libxml2/group/bld.inf"
+#include "lib/curl/packages/Symbian/group/bld.inf"
 #include "../android/jni/jpeg/symbian/group/bld.inf"
 #include "../android/jni/png/symbian/group/bld.inf"
 #include "../android/jni/tremor/symbian/group/bld.inf"
