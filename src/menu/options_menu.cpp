@@ -122,7 +122,7 @@ OptionMenu::OptionMenu() :
 #endif
   graphic_options->AddWidget(opt_max_fps);
 
-#ifndef HAVE_TOUCHSCREEN
+#ifndef HAVE_HANDHELD
   // Get available video resolution
   const std::list<Point2i>& video_res = app->video->GetAvailableConfigs();
   std::list<Point2i>::const_iterator mode;
@@ -442,7 +442,7 @@ void OptionMenu::SaveOptions()
   AppWarmux * app = AppWarmux::GetInstance();
   app->video->SetMaxFps(opt_max_fps->GetValue());
 
-#ifndef HAVE_TOUCHSCREEN
+#ifndef HAVE_HANDHELD
   // Video mode
   std::string s_mode = cbox_video_mode->GetValue();
 
