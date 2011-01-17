@@ -43,11 +43,7 @@ void GameMode::LoadDefaultValues()
 {
   rules = "none";
   nb_characters = 6;
-#ifdef __SYMBIAN32__
-  max_teams = 4;
-#else
   max_teams = 8;
-#endif
   duration_turn = 60;
   duration_move_player = 3;
   duration_exchange_player = 2;
