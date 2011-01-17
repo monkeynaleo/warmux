@@ -17,6 +17,7 @@ SYSTEMINCLUDE   \epoc32\include\SDL
 SYSTEMINCLUDE   \epoc32\include\libpng-1.2
 SYSTEMINCLUDE   ..\..\..\lib\warmux\include
 SYSTEMINCLUDE   ..\..\..\lib\fixedpoint
+SYSTEMINCLUDE   ..\lib\curl\include
 
 USERINCLUDE   ..\..\..\src
 
@@ -80,6 +81,7 @@ LIBRARY         centralrepository.lib apgrfx.lib
 STATICLIBRARY   SDL_mixer.lib
 STATICLIBRARY   sdl.lib
 STATICLIBRARY   warmux_lib.lib
+STATICLIBRARY   libcurl.lib
 STATICLIBRARY   SDL_net.lib
 STATICLIBRARY   sdl_gfx.lib
 STATICLIBRARY   sdl_image.lib
@@ -113,6 +115,6 @@ START RESOURCE ../res/warmux_reg.rss
 TARGETPATH \private\10003a3f\apps
 END
 
-//CAPABILITY NetworkServices ReadUserData WriteUserData
+CAPABILITY NetworkServices
 
 ALWAYS_BUILD_AS_ARM
