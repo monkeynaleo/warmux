@@ -75,10 +75,8 @@ void Interface::LoadDataInternal(Profile *res)
   // The optimization below depends on fastpath being implemented
   // for RGB565 with surface alpha *and* colorkey
   default_toolbar = default_toolbar.DisplayFormatColorKey(64);
-  control_toolbar = control_toolbar.DisplayFormatColorKey(64);
   small_interface = small_interface.DisplayFormatColorKey(64);
   default_toolbar.SetAlpha(SDL_SRCALPHA, 128);
-  control_toolbar.SetAlpha(SDL_SRCALPHA, 128);
   small_interface.SetAlpha(SDL_SRCALPHA, 128);
 #endif
 
