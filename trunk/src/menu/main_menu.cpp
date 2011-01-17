@@ -55,10 +55,8 @@ MainMenu::MainMenu() :
   play = new ButtonPic(_("Play"), "menu/ico_play", size);
   box->AddWidget(play);
 
-#ifndef __SYMBIAN32__
   network = new ButtonPic(_("Network Game"), "menu/ico_network_menu", size);
   box->AddWidget(network);
-#endif
 
   options = new ButtonPic(_("Options"), "menu/ico_options_menu", size);
   box->AddWidget(options);
