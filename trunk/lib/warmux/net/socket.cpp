@@ -179,12 +179,15 @@ WSocket::~WSocket()
 
 connection_state_t WSocket::ConnectTo(const std::string &host, const int &port)
 {
+  connection_state_t r;
   WNet::Init();
 
-  connection_state_t r = WNet::CheckHost(host, port);
+#ifndef __SYMBIAN32__
+  r = WNet::CheckHost(host, port);
   if (r != CONNECTED)
     return r;
-
+#endif
+  
   Lock();
   ASSERT(socket == NULL);
 
