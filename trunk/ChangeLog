@@ -1,10 +1,11 @@
 > 2011/01/xx - 11.01 release
   - Name and numbering change!
+  - Android port
+  - Symbian^3 port (number of characters/teams subject to memory constraint)
   - More toonesque than ever characters! Cuteness not considered a weapon :)
   - New maps: Japan-themed "ninja", nature-themed "Birds" and
     Space-themed "urban heights"
-  - Android port
-  - Symbian^3 port (number of characters/teams subject to memory constraint)
+  - Increased number of teams playable in a single game to 8
   - Massive memory optimizations, and 16 bits-per-pixel rendering
   - Massive speed optimization allowing better gameplay
   - Help is now much richer; please help us translate it even more!
@@ -22,8 +23,10 @@
 
 > 2010/04/16 - 0.9.2 release
   - The rope of grapple no longer gets stuck in ground.
-  - Network games between specific computers which didn't work properly before should work now.
-  - A bug has been fixed which prevented the bugzilla team to have more then three players.
+  - Network games between specific computers which didn't work properly
+    before should work now.
+  - A bug has been fixed which prevented the bugzilla team to have more
+    than three players.
   - Poisoned characters die now when they have to less health.
 
 > 2010/03/08 - 0.9.1 release
@@ -41,7 +44,8 @@
   - Update translations
 
 > 2010/01/26 - 0.9.0 release
-  - Artificial Intelligence!!! No more hidden feature AI-stupid. The new AI is smart.
+  - Artificial Intelligence!!! No more hidden feature AI-stupid. The new
+    AI is smart.
   - Improved quality of network games
   - Two new teams: Postfix and Hexley
   - Add 3 new maps. Delete 3 old ones.
@@ -58,7 +62,8 @@
   - Refresh the public network games list
   - Multi-layer sky
   - Camera enhancement
-  - Weapon behavior: gnu, supertux and polecat now explode when pressing space, M16 repeats shoot
+  - Weapon behavior: gnu, supertux and polecat now explode
+    when pressing space, M16 repeats shoot
   - Lefthand-operated mouse option
   - Small skin animation enhancements
   - Automatically create personal directories for maps, teams and game_mode
@@ -87,7 +92,8 @@
   - Fix Blowtorch weapon
   - Fix behavior of floor on closed maps
   - Compile with -Werror flag only in debug mode
-  - Fix code to make it possible to do a static version on Linux (remove gethostbyname usage)
+  - Fix code to make it possible to do a static version on Linux
+    (remove gethostbyname usage)
   - Fix compilation on OpenBSD
   - Adding translation: Greek
   - Other minor bug fixes
@@ -118,7 +124,8 @@
   - Water/lava particles added
   - Some sounds added, useless ones deleted
   - Menus compatible with smallest resolutions
-  - Help section added (menu explaining shortkeys and howtoplay.pdf documentation provided)
+  - Help section added (menu explaining shortkeys and howtoplay.pdf
+    documentation provided)
   - "Looking for updates" option
   - Volume control option
   - Weapons damages tweaking
@@ -232,7 +239,8 @@
   - Improved "Options" menu
   - Improved "Play" menu
   - Better character and weapon animations
-  - New weapons (Sniper rifle, Shotgun, Riot bomb, Syringe, Polecat launcher, Anvil, Airhammer, Construct, Blowtorch)
+  - New weapons (Sniper rifle, Shotgun, Riot bomb, Syringe,
+    Polecat launcher, Anvil, Airhammer, Construct, Blowtorch)
   - New map (Easter Island) and some improvements on other maps
   - Improved particle engine
   - Exloding barrels
@@ -274,10 +282,12 @@
   - Graphic enhancement in menus and loading screen
   - Improved game graphics (explosions with smoke)
   - New maps: Desert, Monkey Bubble, King Kong, Wild West DV,
-  - New teams: Tux team, Nupik, Wilber, PHP, Snort, Thunderbird, WorkRave, BattleNight
+  - New teams: Tux team, Nupik, Wilber, PHP, Snort, Thunderbird,
+    WorkRave, BattleNight
   - New weapons: bounce ball
   - Translations: Dutch, Romanian, Danish,
-  - Code cleaning: implement some design patterns, translate some variables and functions name, remove dead Clanlib code
+  - Code cleaning: implement some design patterns, translate some
+    variables and functions name, remove dead Clanlib code
   - Compilation process more clean
   - Bug fixes
 
@@ -310,7 +320,8 @@
 
 > 2005/06/29 (Korgon)
   - Jetpack weapon
-  - Add a secondary unit for weapons ammo. Draw a box with secondary weapon units remaining when using such a weapon.
+  - Add a secondary unit for weapons ammo. Draw a box with secondary
+    weapon units remaining when using such a weapon.
 
 > 2005/06/19 (Gentildemon)
   - New game loop
@@ -367,8 +378,10 @@
   - Various BUGFIXs
 
 > 2005/01/06 (Haypo)
-  - Write fist part of a network game initialisation : server set game mode, than map, then create teams, than move characters
-  - Convert old Action struct to modern C++ class : it was not possible to use a string in an union
+  - Write fist part of a network game initialisation : server set game
+    mode, than map, then create teams, than move characters
+  - Convert old Action struct to modern C++ class : it was not possible
+    to use a string in an union
   - Action can write into an output source, and read data from input source
   - Teams are identified by an id
   - Translate some team members into english
@@ -384,20 +397,26 @@
 > 2005/01/03 (Haypo & Gentildemon)
   - When a character fall in water, display a message.
   - Fix around global variables creation (time).
-  - Clean wind particle code : use n instances of CL_Sprite instead of a global one.
-  - Use CL_Sprite options (<image><animation speed="...">) in map config.xml file for wind particles.
+  - Clean wind particle code : use n instances of CL_Sprite instead of
+    a global one.
+  - Use CL_Sprite options (<image><animation speed="...">) in map
+    config.xml file for wind particles.
   - Listbox get arrows
 
 > 2005/01/01 (Haypo)
-   - Clean po/Makefile.am : remove POT-Creation-time from all .po files and all comands become quiet
+   - Clean po/Makefile.am : remove POT-Creation-time from all .po files
+     and all comands become quiet
    - Also read skins and teams from ~/.wormux/ (skin/ and team/ subdir)
    - Translate game mode into english
    - When loading a game mode, try to open ~/.wormux/game_mode/<mode>.xml first
-   - Fix a lot of bugs around game mode : set default character options value, character energy progress bar use initial energy instead of 100 for maximum value, etc.
+   - Fix a lot of bugs around game mode : set default character options
+     value, character energy progress bar use initial energy instead
+     of 100 for maximum value, etc.
    - gravity becomes a game option
    - When the last character of a team die, end the current turn
    - Fix network state when we don't use network (is a server by default)
-   - Fix auto. bazooka, air attack and teleportation : use action instead of calling directly Tire() function (it had to call Shoot())
+   - Fix auto. bazooka, air attack and teleportation : use action
+     instead of calling directly Tire() function (it had to call Shoot())
 
 > 2004/12/23 (Haypo)
    - Max fps is configurable in config.xml file
@@ -437,8 +456,11 @@
    - English FAQ/Hackers.txt/Install files
 
 > 2004/10/27 (Haypo)
-   - Translate physical object class in english (big part, was very boring and long)
-   - Fix physical engine : characters move 1 pixel to the bottom of the map (collision test was uncorrected), and support closed maps : characters can walk on map bottom border (code was broken)
+   - Translate physical object class in english (big part, was very
+     boring and long)
+   - Fix physical engine : characters move 1 pixel to the bottom of
+     the map (collision test was uncorrected), and support closed maps :
+     characters can walk on map bottom border (code was broken)
    - Sky also use tile
    - Use map preview instead loading all datas
    - It's now possible to change data & locale directories in config file
@@ -449,12 +471,14 @@
    - Fix a bug in Pause function (more exactly in asking question)
 
 > 2004/10/16 (Lodesi)
-   - Switch to autotools, thanks to ... (mailto wormux-dev@gna.org, if you want your name here)
+   - Switch to autotools, thanks to ... (mailto wormux-dev@gna.org,
+     if you want your name here)
 
 > 2004/10/06 (Haypo)
    - Only apply sound configuration when Config::Applique() is called
    - Add sound frequency in configuration
-   - Add allow_character_selection in game mode. It can have three values: always, never, before_first_action
+   - Add allow_character_selection in game mode. It can have three values:
+     always, never, before_first_action
 
 > 2004/10/05 (Haypo)
    - Move map/*/images.scr resources into map/*/config.xml
@@ -476,7 +500,8 @@
    - Add an option to use SDL or GL in option menu
    - Fix scale to (direction,1) when teleportation end
    - Remove '.xml' from game mode in config file
-   - Change the whole code of weapon config : all classes herit form the class EmptyWeaponConfig. This class has a virtual 'LoadXml' member.
+   - Change the whole code of weapon config : all classes herit form the
+    class EmptyWeaponConfig. This class has a virtual 'LoadXml' member.
    - Question class catch mouse clic : it's action is the "default action"
    - Merge HEAD (old ClanLib 0.6.5 code) and CL07 (new ClanLib 0.7.8 code) CVS branches
 
@@ -512,18 +537,26 @@
 
 > 2004/08/20 [CL 0.6.5] (Lodesi)
    - New weapon: Cluster bombs
-   - New weapon menu (with a fonction to add new weapons to the menu "en 1 clin d'oeil") ;)
+   - New weapon menu (with a fonction to add new weapons to the menu
+     "en 1 clin d'oeil") ;)
    - Time remaining before a grenade explodes is now drawn.
 
 > 2004/08/14 [CL 0.6.5] (Lami & Gentidemon)
    - Modification de la gestion des collisions avec l'eau.
-   - Utilisation d'une image "noye" dans la configuration des avatars pour la collision avec l'eau.
+   - Utilisation d'une image "noye" dans la configuration des avatars
+     pour la collision avec l'eau.
    - Image "noye" pour l'avatar ver
    - Modification du terrain "space" (fermeture)
    - Correction de l'ordre d'affichage ver/eau.
    - Translate data/* and src/* file names in english
-   - Move src/*.cpp and src/*.h into subdirectories. I use relative file name instead of "-I../include/ -I../team/ (...)" hack (which I used for my other project, HaypoCALC, for example). It's not very pratical, but doesn't break file's path. So we can use Emacs to find errors from Makefile (for example, vi should also works :))
-   - Adapt Makefile to support subdirectories : use now "build.o" files which contains all objects from a subdirectory. Each subdirectory have its own Makefile.
+   - Move src/*.cpp and src/*.h into subdirectories. I use relative
+     filename instead of "-I../include/ -I../team/ (...)" hack (which I
+     used for my other project, HaypoCALC, for example). It's not very
+     pratical, but doesn't break file's path. So we can use Emacs to
+     find errors from Makefile (for example, vi should also works :))
+   - Adapt Makefile to support subdirectories : use now "build.o" files
+     which contains all objects from a subdirectory. Each subdirectory
+     have its own Makefile.
    - Translate the last (?) french words in src/Makefile and src/make.env
 
 > 2004/07/03 (Gentildemon)
@@ -531,7 +564,8 @@
    - Random choice between many that are for the same action in the same profile.
 
 > 2004/07/02 (Haypo)
-   - Translate last strings (team, map and skin loading, video mode change, a team give her turn, etc.)
+   - Translate last strings (team, map and skin loading, video mode
+     change, a team give her turn, etc.)
    - Translate text in the interface (use strings instead of graphics)
    - Add bugbug skin from Dino
    - Update spanish and catalan translations from Templer
@@ -542,7 +576,8 @@
    - Progress bar can now have a "reference value". It's used for the wind.
 
 > 2004/06/26 (Haypo)
-   - Correct code to support map smaller than the screen resolution. Now works with map which are smaller in X and/or Y
+   - Correct code to support map smaller than the screen resolution.
+     Now works with map which are smaller in X and/or Y
    - The sky now move with the camera
 
 > 2004/06/25 (Haypo)
@@ -551,18 +586,23 @@
    - Add alpha channel to progress bar
 
 > 2004/06/24 (Haypo)
-   - Use pkg-config _or_ clanlib-config to get "libs" and "cflags" arguments for GCC
+   - Use pkg-config _or_ clanlib-config to get "libs" and "cflags"
+     arguments for GCC
    - Add german translation from Michael Prager
    - Add transparency for team energy jauge
    - Descative ref variable in barre_prog.cpp because it's buggy
    - Rename ".pot" files in ".po"
-   - Load sound whereas file doesn't exist (use NULL pointer). Now sound loading errors are only printed one time.
-   - BUGIX: Correction of animation.cpp : set frame to zero when animation type is changed
+   - Load sound whereas file doesn't exist (use NULL pointer).
+     Now sound loading errors are only printed one time.
+   - BUGIX: Correction of animation.cpp : set frame to zero when
+     animation type is changed
 
 > 2004/06/19 (Gentildemon & Matt)
    - La grenade tourne lorsqu'elle est en mouvement
    - Possibilité de gérer un son de rebond différent par objet rebondissant
-   - Ajout de sons pour le lancement de la grenade, le bazooka, le bazooka à tête chercheuse, la téléportation. Ces sons ont été réalisé par Gottfried Hofmann.
+   - Ajout de sons pour le lancement de la grenade, le bazooka, le
+     bazooka à tête chercheuse, la téléportation. Ces sons ont été
+     réalisés par Gottfried Hofmann.
    - Changement du son pour le saut.
 
 > 2004/06/15 (Gentildemon & Matt)
@@ -571,9 +611,13 @@
 
 > 2004/06/14 (Haypo)
    - Début de l'i18n (internationalisation)
-   - Création d'une fonction Format qui a le même prototype que le classique printf sur <stdio.h>, sauf que ça renvoie un std::string
-   - Mise en place de gettext : initialise la librairie en utilisant le domaine "wormux", et remplace les chaînes françaises "..." par _("...") où ... est le texte en anglais
-   - Le nom des armes est défini dans la fonction <arme>::Init() plutôt qu'avec le constructeur car gettext() n'est pas encore initialisé ...
+   - Création d'une fonction Format qui a le même prototype que le
+     classique printf sur <stdio.h>, sauf que ça renvoie un std::string
+   - Mise en place de gettext : initialise la librairie en utilisant le
+     domaine "wormux", et remplace les chaînes françaises "..." par
+     _("...") où ... est le texte en anglais
+   - Le nom des armes est défini dans la fonction <arme>::Init()
+     plutôt qu'avec le constructeur car gettext() n'est pas encore initialisé ...
 
 > 2004/06/13 (Laurent/Gentildemon/Matt)
    - Ajout de barres d'énergie aux équipes
@@ -583,10 +627,12 @@
 > 2004/06/10 (Lawrence)
    - Ajout de 2 animations d'un ver qui meurt.
    - Sprite d'explosion pour le bazooka.
-   - Correction de l'arme "Mine", a present elles n'explosent pas sans prevenir...
+   - Correction de l'arme "Mine", a present elles n'explosent pas sans prévenir...
      1- A une certaine distance elle s'active apres un temps.
      2- Elle explose si on la touche et se desarme si on s'eloigne
-   - Correction du mini moteur de placement des caisses/mines,(problème d'assert) y'avait trop de boucle donc provocation d'un assert. A présent même le "y" est en random.
+   - Correction du mini moteur de placement des caisses/mines, (problème
+     d'assert) y'avait trop de boucle donc provocation d'un assert.
+     A présent même le "y" est en random.
    - Modification du code de la gestion de l'eau pour tuer un ver qui tombe dans l'eau.
 
 > 2004/06/09 (Haypo)
