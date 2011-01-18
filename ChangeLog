@@ -1,17 +1,20 @@
-> 2010/12/xx - 10.12 release
-  - Name change!
+> 2011/01/xx - 11.01 release
+  - Name and numbering change!
   - More toonesque than ever characters! Cuteness not considered a weapon :)
-  - New maps: Japan-themed "ninja" and Space-themed "urban heights"
+  - New maps: Japan-themed "ninja", nature-themed "Birds" and
+    Space-themed "urban heights"
   - Android port
-  - Limited Symbian^3 port (no network, max 4 teams)
+  - Symbian^3 port (number of characters/teams subject to memory constraint)
   - Massive memory optimizations, and 16 bits-per-pixel rendering
-  - Massive speed optimization allowing better gameplay on N900 and Android
+  - Massive speed optimization allowing better gameplay
   - Help is now much richer; please help us translate it even more!
   - Widget in options menu to edit keybindings
   - Kinetic scrolling to browse the map
-  - Traditional in-game toolbar clickable
-  - Control toolbar switchable with traditional one for complete touch control
-  - Improved minimap: can be resized, can be clicked to move around faster
+  - Traditional in-game toolbar clickable, click wind indicator to
+    display touch controls!
+  - Improved minimap: now displays boxes, can be resized, can be clicked
+    to move around faster
+  - Custom teams
   - Troublesome bugs fixed: OSX fullscreen, explosion when firing near a wall
 
 > 2010/04/20 - 0.9.2.1 release
