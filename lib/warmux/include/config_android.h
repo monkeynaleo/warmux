@@ -1,5 +1,7 @@
 /* src/config.h.  Generated from config.h.in by configure.  */
 /* src/config.h.in.  Generated from configure.ac by autoheader.  */
+#ifndef CONFIG_ANDROID_H
+#define CONFIG_ANDROID_H
 
 /* Define to 1 if translation of program messages to the user's native
    language is requested. */
@@ -93,16 +95,16 @@
 #define PACKAGE_NAME "Warmux"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "Warmux svn"
+#define PACKAGE_STRING "Warmux 11.01"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "warmux"
 
 /* Define to the home page for this package. */
-#define PACKAGE_URL ""
+#define PACKAGE_URL "http://www.warmux.org"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "svn"
+#define PACKAGE_VERSION "11.01"
 
 /* Define to 1 if you have the ANSI C header files. */
 #define STDC_HEADERS 1
@@ -114,7 +116,9 @@
 /* #undef USE_X11 */
 
 /* Version number of package */
-#define VERSION "svn"
+#define VERSION "11.01"
 
 #define HAVE_TOUCHSCREEN
 #define HAVE_HANDHELD
+
+#endif // CONFIG_ANDROID_H
