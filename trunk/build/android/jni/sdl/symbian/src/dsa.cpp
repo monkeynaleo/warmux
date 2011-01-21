@@ -1222,7 +1222,45 @@ TBool CDsa::AddUpdateRect(const TUint8* aBits, const TRect& aUpdateRect, const T
 		Rotate(updateRect);
 		}
 		
-	if(iSourceMode != DisplayMode() ||  targetRect != sourceRect || targetRect != updateRect || ((iStateFlags & EOrientationFlags) != 0))
+	if( (BytesPerPixel(iSourceMode) == 2) && (BytesPerPixel(DisplayMode()) == 4) )
+		{
+		TUint16* target = (TUint16*)iTargetAddr;
+		TSize aSize = aRect.Size();
+		TSize ss = SwSize();
+	
+		if( aSize.iWidth <= ss.iWidth && aSize.iHeight <= ss.iHeight )
+			{
+			TUint32* dst;
+			dst = (TUint32*)(target
+				+ ( ( ss.iHeight - aSize.iHeight ) / 2 ) * ss.iWidth
+				+ ( ss.iWidth - aSize.iWidth ) / 2);
+			int skip = ss.iWidth - aSize.iWidth;
+	
+			unsigned int h = aSize.iHeight;
+
+			TUint16* src = (TUint16*)aBits;
+			do
+				{
+				unsigned int w = aSize.iWidth;
+				do
+					{
+					*dst = (*src & 0xF800)<< 8;
+					*dst |= (*src & 0xE01F) << 3; 
+
+					*dst |= (*src & 0x07E0) << 5;
+					*dst |= (*src & 0x600) >> 1;
+
+					*dst |= (*src & 0x1C) >> 2;
+					dst++;
+					src++;
+					}
+				while( --w );
+				dst += skip;
+				}
+			while( --h );
+			}
+		}
+	else if(iSourceMode != DisplayMode() ||  targetRect != sourceRect || targetRect != updateRect || ((iStateFlags & EOrientationFlags) != 0))
 		{
 		sourceRect.Intersection(targetRect); //so source always smaller or equal than target		//updateRect.Intersection(targetRect);
 		ClipCopy(target, aBits, updateRect, sourceRect);
