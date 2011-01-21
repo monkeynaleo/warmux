@@ -100,13 +100,13 @@
 #define PACKAGE_NAME "Warmux"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "Warmux svn"
+#define PACKAGE_STRING "Warmux 11.01"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "warmux"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "svn"
+#define PACKAGE_VERSION "11.01"
 
 /* ANSI C header files. */
 #define STDC_HEADERS 1
@@ -115,7 +115,7 @@
 #define USE_FRIBIDI 1
 
 /* Version number of package */
-#define VERSION "svn"
+#define VERSION "11.01"
 
 /* Define curl_free() as free() if our version of curl lacks curl_free. */
 /* #undef curl_free */

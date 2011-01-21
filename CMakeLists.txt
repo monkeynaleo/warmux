@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.4.4)
 
 # Project name
 PROJECT(Warmux)
-SET(VERSION "svn")
+SET(VERSION "11.01")
 
 # change the default install prefix to /usr
 SET(CMAKE_INSTALL_PREFIX /usr)
