@@ -72,7 +72,7 @@ public:
   void Init(Surface& surface, const Point2i &frameSize, int nb_frames_x, int nb_frames_y);
   Surface& GetSurface()
   {
-    assert(!current_surface.IsNull());
+    ASSERT(!current_surface.IsNull());
     return current_surface;
   }
   bool IsFlipped() const { return flipped; }
