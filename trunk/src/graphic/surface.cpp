@@ -189,7 +189,11 @@ void Surface::SwapClipRect(Rectanglei& rect)
 
 int Surface::Blit(const Surface& src, SDL_Rect *srcRect, SDL_Rect *dstRect)
 {
-  return SDL_BlitSurface(src.surface, srcRect, surface, dstRect);
+  int ret = SDL_BlitSurface(src.surface, srcRect, surface, dstRect);
+  if (ret < 0) {
+    printf("Blit failed (code=%i): %s\n", ret, SDL_GetError());
+  }
+  return ret;
 }
 
 /**
@@ -747,6 +751,7 @@ Surface Surface::RotoZoom(Double angle, Double zoomx, Double zoomy)
 
   if (!surf)
     Error("Unable to make a rotozoom on the surface !");
+  surf->flags &= ~SDL_RLEACCELOK; // avoid useless RLE acceleration
 
   return surface->format->Amask ? Surface(surf).DisplayFormatAlpha() : Surface(surf).DisplayFormat();
 }
