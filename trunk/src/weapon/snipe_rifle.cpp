@@ -56,6 +56,8 @@ BaseSnipeRifle::BaseSnipeRifle(Weapon_type type, const std::string &id)
   targeting_something = false;
   m_laser_image = new Sprite(GetResourceManager().LoadImage(weapons_res_profile,m_id+"_laser"));
   laser_beam_color = GetResourceManager().LoadColor(weapons_res_profile,m_id+"_laser_color");
+  laser_beam_end_color = laser_beam_color;
+  laser_beam_end_color.SetAlpha(0);
 }
 
 BaseSnipeRifle::~BaseSnipeRifle()
@@ -150,10 +152,12 @@ void BaseSnipeRifle::DrawBeam()
   Point2i pos2 = targeted_point - Camera::GetInstance()->GetPosition();
   Double dst = laser_beam_start.Distance(targeted_point);
 
+#if 1
   GetMainWindow().
-    AAFadingLineColor(pos1.x, pos2.x, pos1.y, pos2.y, laser_beam_color, laser_beam_color);
-
-  // GetMainWindow().AALineColor(pos1.x, pos2.x, pos1.y, pos2.y, laser_beam_color);
+    AAFadingLineColor(pos1.x, pos2.x, pos1.y, pos2.y, laser_beam_color, laser_beam_end_color);
+#else
+  GetMainWindow().AALineColor(pos1.x, pos2.x, pos1.y, pos2.y, laser_beam_color);
+#endif
 
   // Set area of the screen to be redrawn:
   // Splited into little rectangles to avoid too large area of redraw
