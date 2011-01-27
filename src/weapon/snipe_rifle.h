@@ -37,7 +37,7 @@ private:
   Point2i targeted_point;
 
   Sprite * m_laser_image;
-  Color laser_beam_color;
+  Color laser_beam_color, laser_beam_end_color;
 
   void ComputeCrossPoint(bool force);
 
