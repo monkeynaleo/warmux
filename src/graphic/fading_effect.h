@@ -45,7 +45,7 @@
 #define CLIP_REJECT(a,b) (a&b)
 #define CLIP_ACCEPT(a,b) (!(a|b))
 
-static int clipEncode(Sint16 x, Sint16 y, Sint16 left, Sint16 top, Sint16 right, Sint16 bottom)
+int clipEncode(Sint16 x, Sint16 y, Sint16 left, Sint16 top, Sint16 right, Sint16 bottom)
 {
   int code = 0;
 
@@ -62,13 +62,13 @@ static int clipEncode(Sint16 x, Sint16 y, Sint16 left, Sint16 top, Sint16 right,
   return code;
 }
 
-static int clipLine(SDL_Surface * dst, Sint16 * x1, Sint16 * y1, Sint16 * x2, Sint16 * y2)
+int clipLine(SDL_Surface * dst, Sint16 * x1, Sint16 * y1, Sint16 * x2, Sint16 * y2)
 {
   Sint16 left, right, top, bottom;
   int code1, code2;
   int draw = 0;
   Sint16 swaptmp;
-  Double m;
+  float m;
 
   /*
    * Get clipping boundary
@@ -99,7 +99,7 @@ static int clipLine(SDL_Surface * dst, Sint16 * x1, Sint16 * y1, Sint16 * x2, Si
         code1 = swaptmp;
       }
       if (*x2 != *x1) {
-        m = (*y2 - *y1) / (Double) (*x2 - *x1);
+        m = (*y2 - *y1) / (float) (*x2 - *x1);
       } else {
         m = 1.0f;
       }
@@ -126,37 +126,16 @@ static int clipLine(SDL_Surface * dst, Sint16 * x1, Sint16 * y1, Sint16 * x2, Si
   return draw;
 }
 
-int _putPixelAlpha(SDL_Surface * surface, Sint16 x, Sint16 y, Uint32 color, Uint8 alpha)
+inline int _putPixelAlpha(SDL_Surface * surface, Sint16 x, Sint16 y, Uint32 color, Uint8 alpha)
 {
-  Uint32 Rmask = surface->format->Rmask, Gmask =
-    surface->format->Gmask, Bmask = surface->format->Bmask, Amask = surface->format->Amask;
+  SDL_PixelFormat *fmt = surface->format;
+  Uint32 Rmask = fmt->Rmask, Gmask = fmt->Gmask, Bmask = fmt->Bmask, Amask = fmt->Amask;
   Uint32 R, G, B, A = 0;
 
   if (x >= clip_xmin(surface) && x <= clip_xmax(surface)
     && y >= clip_ymin(surface) && y <= clip_ymax(surface)) {
 
-    switch (surface->format->BytesPerPixel) {
-    case 1:       /* Assuming 8-bpp */
-      if (alpha == 255) {
-        *((Uint8 *) surface->pixels + y * surface->pitch + x) = color;
-      } else {
-        Uint8 *pixel = (Uint8 *) surface->pixels + y * surface->pitch + x;
-
-        Uint8 dR = surface->format->palette->colors[*pixel].r;
-        Uint8 dG = surface->format->palette->colors[*pixel].g;
-        Uint8 dB = surface->format->palette->colors[*pixel].b;
-        Uint8 sR = surface->format->palette->colors[color].r;
-        Uint8 sG = surface->format->palette->colors[color].g;
-        Uint8 sB = surface->format->palette->colors[color].b;
-
-        dR = dR + ((sR - dR) * alpha >> 8);
-        dG = dG + ((sG - dG) * alpha >> 8);
-        dB = dB + ((sB - dB) * alpha >> 8);
-
-        *pixel = SDL_MapRGB(surface->format, dR, dG, dB);
-      }
-      break;
-
+    switch (fmt->BytesPerPixel) {
     case 2:        /* Probably 15-bpp or 16-bpp */
       if (alpha == 255) {
         *((Uint16 *) surface->pixels + y * surface->pitch / 2 + x) = color;
@@ -177,17 +156,17 @@ int _putPixelAlpha(SDL_Surface * surface, Sint16 x, Sint16 y, Uint32 color, Uint
     case 3:        /* Slow 24-bpp mode, usually not used */
       {
         Uint8 *pix = (Uint8 *) surface->pixels + y * surface->pitch + x * 3;
-        Uint8 rshift8 = surface->format->Rshift / 8;
-        Uint8 gshift8 = surface->format->Gshift / 8;
-        Uint8 bshift8 = surface->format->Bshift / 8;
-        Uint8 ashift8 = surface->format->Ashift / 8;
+        Uint8 rshift8 = fmt->Rshift / 8;
+        Uint8 gshift8 = fmt->Gshift / 8;
+        Uint8 bshift8 = fmt->Bshift / 8;
+        Uint8 ashift8 = fmt->Ashift / 8;
 
 
         if (alpha == 255) {
-          *(pix + rshift8) = color >> surface->format->Rshift;
-          *(pix + gshift8) = color >> surface->format->Gshift;
-          *(pix + bshift8) = color >> surface->format->Bshift;
-          *(pix + ashift8) = color >> surface->format->Ashift;
+          *(pix + rshift8) = color >> fmt->Rshift;
+          *(pix + gshift8) = color >> fmt->Gshift;
+          *(pix + bshift8) = color >> fmt->Bshift;
+          *(pix + ashift8) = color >> fmt->Ashift;
         } else {
           Uint8 dR, dG, dB, dA = 0;
           Uint8 sR, sG, sB, sA = 0;
@@ -199,10 +178,10 @@ int _putPixelAlpha(SDL_Surface * surface, Sint16 x, Sint16 y, Uint32 color, Uint
           dB = *((pix) + bshift8);
           dA = *((pix) + ashift8);
 
-          sR = (color >> surface->format->Rshift) & 0xff;
-          sG = (color >> surface->format->Gshift) & 0xff;
-          sB = (color >> surface->format->Bshift) & 0xff;
-          sA = (color >> surface->format->Ashift) & 0xff;
+          sR = (color >> fmt->Rshift) & 0xff;
+          sG = (color >> fmt->Gshift) & 0xff;
+          sB = (color >> fmt->Bshift) & 0xff;
+          sA = (color >> fmt->Ashift) & 0xff;
 
           dR = dR + ((sR - dR) * alpha >> 8);
           dG = dG + ((sG - dG) * alpha >> 8);
@@ -239,7 +218,7 @@ int _putPixelAlpha(SDL_Surface * surface, Sint16 x, Sint16 y, Uint32 color, Uint
   return (0);
 }
 
-int pixelColorNolock(SDL_Surface * dst, Sint16 x, Sint16 y, Uint32 color)
+inline int pixelColorNolock(SDL_Surface * dst, Sint16 x, Sint16 y, Uint32 color)
 {
   Uint8 alpha;
   Uint32 mcolor;
@@ -261,7 +240,7 @@ int pixelColorNolock(SDL_Surface * dst, Sint16 x, Sint16 y, Uint32 color)
   return result;
 }
 
-int pixelColorWeightNolock(SDL_Surface * dst, Sint16 x, Sint16 y, Uint32 color, Uint32 weight)
+inline int pixelColorWeightNolock(SDL_Surface * dst, Sint16 x, Sint16 y, Uint32 color, Uint32 weight)
 {
   /* Get alpha */
   Uint32 a = color & 0x000000ffU;
@@ -274,13 +253,13 @@ int pixelColorWeightNolock(SDL_Surface * dst, Sint16 x, Sint16 y, Uint32 color, 
   return pixelColorNolock(dst, x, y, (color & 0xffffff00U) | a);
 }
 
-int interpolateInt(int start, int stop, Double step)
+inline int interpolateInt(int start, int stop, float step)
 {
-  Double diff = stop - start;
+  float diff = stop - start;
   return start + (int)(diff * step);
 }
 
-Uint32 interpolateColor(Uint32 color1, Uint32 color2, Double step)
+inline Uint32 interpolateColor(Uint32 color1, Uint32 color2, float step)
 {
   int c1 = interpolateInt(color1 & 0xFF000000, color2 & 0xFF000000, step) & 0xFF000000;
   int c2 = interpolateInt(color1 & 0x00FF0000, color2 & 0x00FF0000, step) & 0x00FF0000;
@@ -289,14 +268,14 @@ Uint32 interpolateColor(Uint32 color1, Uint32 color2, Double step)
   return (Uint32)(c1 | c2 | c3 | c4);
 }
 
-int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint32 color1,
-                         Uint32 color2, int draw_endpoint)
+int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2,
+                         Uint32 color1, Uint32 color2, int draw_endpoint)
 {
   Sint32 xx0, yy0, xx1, yy1;
   int result;
   int dx, dy, tmp, xdir;
   Uint32 color = color1;
-  Double step;
+  float step;
 
   if (y1 == y2) {
     /* Horizontal line */
@@ -311,7 +290,7 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
     }
     step = dx;
     while (--dx) {
-      color = interpolateColor(color2, color1, (Double)dx / step);
+      color = interpolateColor(color2, color1, dx / step);
       result |= pixelColorNolock(dst, x1, y1, color);
       x1 += xdir;
     }
@@ -386,7 +365,7 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
     /* Vertical line */
     step = dy;
     while (--dy) {
-      color = interpolateColor(color2, color1, (Double)dy / step);
+      color = interpolateColor(color2, color1, dy / step);
       result |= pixelColorNolock(dst, x1, ++yy0, color);
     }
   } else if (dy == 0) {
@@ -394,7 +373,7 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
     /* Diagonal line */
     step = dx;
     while (--dx) {
-      color = interpolateColor(color2, color1, (Double)dx / step);
+      color = interpolateColor(color2, color1, dx / step);
       result |= pixelColorNolock(dst, xx0, ++yy0, color);
       xx0 += xdir;
     }
@@ -427,7 +406,7 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
       int x0pxdir = xx0 + xdir;
       step = dy;
       while (--dy) {
-        color = interpolateColor(color2, color1, (Double)dy / step);
+        color = interpolateColor(color2, color1, dy / step);
         erracctmp = erracc;
         erracc += erradj;
         if (erracc <= erracctmp) {
@@ -469,7 +448,7 @@ int aafadingLineColorInt(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
       int y0p1 = yy0 + 1;
       step = dx;
       while (--dx) {
-        color = interpolateColor(color2, color1, (Double)dx / step);
+        color = interpolateColor(color2, color1, dx / step);
         erracctmp = erracc;
         erracc += erradj;
         if (erracc <= erracctmp) {
