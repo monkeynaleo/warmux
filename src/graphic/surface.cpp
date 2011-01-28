@@ -722,7 +722,7 @@ Surface Surface::Mirror()
   if (surface->flags & SDL_SRCALPHA)
     SDL_SetAlpha(surf, SDL_SRCALPHA, surface->format->alpha);
   if (surface->flags & SDL_SRCCOLORKEY)
-    SDL_SetColorKey(surf, SDL_SRCCOLORKEY, surface->format->colorkey);
+    SDL_SetColorKey(surf, SDL_SRCCOLORKEY|SDL_RLEACCEL, surface->format->colorkey);
 
   return Surface(surf);
 #else
@@ -894,7 +894,8 @@ SDL_Rect Surface::GetSDLRect(const Point2i &pt)
 }
 
 Surface Surface::DisplayFormatColorKey(const uint32_t* data, SDL_PixelFormat *sfmt,
-                                       int w, int h, int stride, uint8_t threshold)
+                                       int w, int h, int stride,
+                                       uint8_t threshold, bool rle)
 {
   SDL_PixelFormat *fmt   = SDL_GetVideoSurface()->format;
   uint             bpp   = fmt->BitsPerPixel==16 ? 16 : 24;
@@ -917,16 +918,20 @@ Surface Surface::DisplayFormatColorKey(const uint32_t* data, SDL_PixelFormat *sf
   }
 
   surf.Unlock();
-  surf.SetColorKey(SDL_SRCCOLORKEY, ckey);
+  if (rle)
+    surf.SetColorKey(SDL_SRCCOLORKEY|SDL_RLEACCEL, ckey);
+  else
+    surf.SetColorKey(SDL_SRCCOLORKEY, ckey);
 
   return surf;
 }
 
-Surface Surface::DisplayFormatColorKey(uint8_t alpha_threshold)
+Surface Surface::DisplayFormatColorKey(uint8_t alpha_threshold, bool rle)
 {
   Lock();
   Surface tmp = DisplayFormatColorKey((uint32_t*)surface->pixels, surface->format,
-                                      surface->w, surface->h, surface->pitch, alpha_threshold);
+                                      surface->w, surface->h, surface->pitch,
+                                      alpha_threshold, rle);
   Unlock();
   return tmp;
 }

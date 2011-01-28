@@ -93,7 +93,7 @@ void Water::Init()
   surface = GetResourceManager().LoadImage(res, image, false);
   pattern.NewSurface(Point2i(PATTERN_WIDTH, PATTERN_HEIGHT),
                      SDL_SWSURFACE|SDL_SRCCOLORKEY, false);
-  pattern.SetColorKey(SDL_SRCCOLORKEY, 0);
+  pattern.SetColorKey(SDL_SRCCOLORKEY|SDL_RLEACCEL, 0);
 #else
   surface = GetResourceManager().LoadImage(res, image, true);
   pattern.NewSurface(Point2i(PATTERN_WIDTH, PATTERN_HEIGHT),
