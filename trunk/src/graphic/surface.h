@@ -32,8 +32,6 @@
 struct SDL_Surface;
 struct SDL_PixelFormat;
 
-#define USE_LOCK  0
-
 class Surface
 {
 private:
@@ -42,9 +40,6 @@ private:
   int Blit(const Surface& src, SDL_Rect *srcRect, SDL_Rect *dstRect);
   static SDL_Rect GetSDLRect(const Rectanglei &r);
   static SDL_Rect GetSDLRect(const Point2i &r);
-
-  int InternalLock();
-  void InternalUnlock();
 
 public:
   /**
@@ -114,8 +109,8 @@ public:
   void NewSurface(const Point2i &size, Uint32 flags, bool useAlpha = true);
   int SetAlpha(Uint32 flags, Uint8 alpha);
 
-  int Lock() { return (USE_LOCK) ? InternalLock() : 1; }
-  void Unlock() { if (USE_LOCK) InternalUnlock(); }
+  void Lock();
+  void Unlock();
 
   void SwapClipRect(Rectanglei& rect);
 
