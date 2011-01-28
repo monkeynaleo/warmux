@@ -257,7 +257,7 @@ void Text::RenderMultiLines()
   tmp = font->CreateSurface(ret_lines[0], color);
   Uint32 ckey = tmp.GetSurface()->format->colorkey;
   surf.Fill(ckey);
-  surf.SetColorKey(SDL_SRCCOLORKEY, ckey);
+  surf.SetColorKey(SDL_SRCCOLORKEY|SDL_RLEACCEL, ckey);
   surf.Blit(tmp);
 
   // for all remaining lines
@@ -276,7 +276,7 @@ void Text::RenderMultiLines()
   tmp = font->CreateSurface(ret_lines[0], black_color);
   ckey = tmp.GetSurface()->format->colorkey;
   background.Fill(ckey);
-  background.SetColorKey(SDL_SRCCOLORKEY, ckey);
+  background.SetColorKey(SDL_SRCCOLORKEY|SDL_RLEACCEL, ckey);
   background.Blit(tmp);
 
   // Putting pixels of each image in destination surface

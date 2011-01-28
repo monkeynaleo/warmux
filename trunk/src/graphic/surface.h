@@ -182,8 +182,9 @@ public:
   unsigned char *GetPixels() const { return (unsigned char *)surface->pixels; }
 
   static Surface DisplayFormatColorKey(const uint32_t* data, SDL_PixelFormat *fmt,
-                                       int w, int h, int stride, uint8_t alpha_threshold);
-  Surface DisplayFormatColorKey(uint8_t alpha_threshold);
+                                       int w, int h, int stride,
+                                       uint8_t alpha_threshold, bool rle=false);
+  Surface DisplayFormatColorKey(uint8_t alpha_threshold, bool rle=false);
 
   Surface Crop(const Rectanglei& area) const;
 
