@@ -158,16 +158,21 @@ int Surface::SetAlpha(Uint32 flags, Uint8 alpha)
  * Lock the surface to permit direct access.
  *
  */
-int Surface::InternalLock()
+void Surface::Lock()
 {
-  return SDL_LockSurface(surface);
+  if (SDL_MUSTLOCK(surface)) {
+    if (SDL_LockSurface(surface) < 0) {
+      fprintf(stderr, "Failed to lock surface: %s\n", SDL_GetError());
+      exit(-1);
+    }
+  }
 }
 
 /**
  * Unlock the surface.
  *
  */
-void Surface::InternalUnlock()
+void Surface::Unlock()
 {
   SDL_UnlockSurface(surface);
 }
@@ -673,8 +678,10 @@ Surface Surface::Mirror()
   SDL_Surface *surf = SDL_CreateRGBSurface(surface->flags, surface->w, surface->h, fmt->BitsPerPixel,
                                            fmt->Rmask, fmt->Gmask, fmt->Bmask, fmt->Amask);
 
-  if (USE_LOCK) SDL_LockSurface(surface);
-  if (USE_LOCK) SDL_LockSurface(surf);
+  if (SDL_MUSTLOCK(surface))
+    SDL_LockSurface(surface);
+  if (SDL_MUSTLOCK(surf))
+    SDL_LockSurface(surf);
 
   switch (fmt->BitsPerPixel)
   {
@@ -709,8 +716,8 @@ Surface Surface::Mirror()
   default: fprintf(stderr, "Unsupported bpp %i\n", fmt->BitsPerPixel); exit(1);
   }
 
-  if (USE_LOCK) SDL_UnlockSurface(surf);
-  if (USE_LOCK) SDL_UnlockSurface(surface);
+  SDL_UnlockSurface(surf);
+  SDL_UnlockSurface(surface);
 
   if (surface->flags & SDL_SRCALPHA)
     SDL_SetAlpha(surf, SDL_SRCALPHA, surface->format->alpha);
@@ -751,7 +758,6 @@ Surface Surface::RotoZoom(Double angle, Double zoomx, Double zoomy)
 
   if (!surf)
     Error("Unable to make a rotozoom on the surface !");
-  surf->flags &= ~SDL_RLEACCELOK; // avoid useless RLE acceleration
 
   return surface->format->Amask ? Surface(surf).DisplayFormatAlpha() : Surface(surf).DisplayFormat();
 }
