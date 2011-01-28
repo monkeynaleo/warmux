@@ -287,7 +287,7 @@ void Tile::InitPreview()
     delete m_preview;
   if (GetMainWindow().GetBytesPerPixel() == 2) {
     m_preview = new Surface(world_size, SDL_SWSURFACE, false);
-    m_preview->SetColorKey(SDL_SRCCOLORKEY, 0xF81F);
+    m_preview->SetColorKey(SDL_SRCCOLORKEY|SDL_RLEACCEL, 0xF81F);
     m_preview->Fill(0xF81F);
   } else {
     m_preview = new Surface(world_size, SDL_SWSURFACE, true);
