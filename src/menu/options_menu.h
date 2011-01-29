@@ -56,6 +56,7 @@ private:
 
 #ifndef HAVE_TOUCHSCREEN
   ComboBox *cbox_video_mode;
+  CheckBox *full_screen;
 #endif
   SpinButtonWithPicture *opt_max_fps;
 
@@ -75,7 +76,6 @@ private:
 #if USE_MISC_TAB
   CheckBox *opt_updates;
 # ifndef HAVE_TOUCHSCREEN
-  CheckBox *full_screen;
   CheckBox *opt_lefthanded_mouse;
   CheckBox *opt_scroll_on_border;
   SpinButtonWithPicture * opt_scroll_border_size;
