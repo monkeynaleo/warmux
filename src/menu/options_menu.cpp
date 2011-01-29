@@ -121,6 +121,10 @@ OptionMenu::OptionMenu() :
                               option_size, 30, 5, 20,  60);
 #endif
   graphic_options->AddWidget(opt_max_fps);
+  opt_quality =
+    new SpinButtonWithPicture(_("Quality"), "menu/fps",
+                              option_size, config->GetQuality(), 1, QUALITY_16BPP, QUALITY_32BPP);
+  graphic_options->AddWidget(opt_quality);
 
 #ifndef HAVE_TOUCHSCREEN
   // Get available video resolution
@@ -409,7 +413,6 @@ void OptionMenu::OnClickUp(const Point2i &mousePosition, int button)
   else if (w == NULL && lbox_teams->Contains(mousePosition)) {
     SelectTeam();
   }
-
 }
 
 void OptionMenu::SaveOptions()
@@ -444,20 +447,21 @@ void OptionMenu::SaveOptions()
 #endif
   config->SetSoundMusic(music_cbox->GetValue());
   config->SetSoundEffects(effects_cbox->GetValue());
+  config->SetQuality((Quality)opt_quality->GetValue());
 
   AppWarmux * app = AppWarmux::GetInstance();
   app->video->SetMaxFps(opt_max_fps->GetValue());
 
-#ifndef HAVE_TOUCHSCREEN
+#ifdef HAVE_TOUCHSCREEN
+  app->video->SetConfig(w, h, true);
+#else
   // Video mode
   std::string s_mode = cbox_video_mode->GetValue();
 
   int w, h;
   sscanf(s_mode.c_str(),"%dx%d", &w, &h);
 
-
   app->video->SetConfig(w, h, full_screen->GetValue());
-
 
   uint x = (app->video->window.GetWidth() - actions_buttons->GetSizeX())/2;
   uint y = app->video->window.GetHeight() - actions_buttons->GetSizeY();
