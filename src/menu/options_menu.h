@@ -25,6 +25,11 @@
 #include "menu.h"
 #include <vector>
 
+#if !defined (MAEMO) && !defined (__SYMBIAN32__) && !defined(ANDROID)
+#  define USE_MISC_TAB  0
+#else
+#  define USE_MISC_TAB  1
+#endif
 
 class ButtonPic;
 class ItemBox;
@@ -49,7 +54,7 @@ private:
   CheckBox *opt_display_multisky;
 #endif
 
-#ifndef HAVE_HANDHELD
+#ifndef HAVE_TOUCHSCREEN
   ComboBox *cbox_video_mode;
 #endif
   SpinButtonWithPicture *opt_max_fps;
@@ -67,12 +72,14 @@ private:
   CheckBox *warn_cbox;
 
   /* Misc options controllers */
+#if USE_MISC_TAB
   CheckBox *opt_updates;
-#ifndef HAVE_TOUCHSCREEN
+# ifndef HAVE_TOUCHSCREEN
   CheckBox *full_screen;
   CheckBox *opt_lefthanded_mouse;
   CheckBox *opt_scroll_on_border;
   SpinButtonWithPicture * opt_scroll_border_size;
+# endif
 #endif
 
   void SaveOptions();
