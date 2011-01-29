@@ -179,7 +179,7 @@ TileItem_NonEmpty* Tile::CreateNonEmpty(uint8_t *ptr, int stride)
   for (int y=0; y<CELL_SIZE.y; y++) {
     for (int x=0; x<CELL_SIZE.x; x++) {
       if (pix[x]) {
-        if (SDL_GetVideoInfo()->vfmt->BytesPerPixel > 2)
+        if (GetMainWindow().GetBytesPerPixel() > 2)
           return new TileItem_AlphaSoftware(ptr, stride, m_alpha_threshold);
         return new TileItem_ColorKey16(ptr, stride, m_alpha_threshold);
       }
@@ -376,7 +376,7 @@ bool Tile::LoadImage(const std::string& filename,
   png_infop    info_ptr = NULL;
   bool         ret      = false;
   uint8_t     *buffer   = NULL;
-  uint8_t      bpp      = SDL_GetVideoInfo()->vfmt->BytesPerPixel;
+  uint8_t      bpp      = GetMainWindow().GetBytesPerPixel();
   int          stride;
   int          offsetx, offsety, endoffy;
   Point2i      i, world_size;
@@ -472,11 +472,11 @@ bool Tile::LoadImage(const std::string& filename,
     for (; i.x < endCell.x; i.x++) {
       TileItem_NonEmpty *ti;
 
-      if (bpp==2) {
+      if (bpp>2) {
+        ti = CreateNonEmpty(buffer + ((i.x - startCell.x)<<(CELL_BITS+2)), stride);
+      } else {
         ti = new TileItem_ColorKey16(buffer + ((i.x - startCell.x)<<(CELL_BITS+2)),
                                      stride, m_alpha_threshold);
-      } else {
-        ti = CreateNonEmpty(buffer + ((i.x - startCell.x)<<(CELL_BITS+2)), stride);
       }
 
       if (ti->NeedDelete()) {
@@ -576,9 +576,9 @@ void Tile::DrawTile_Clipped(const Rectanglei & worldClip) const
 Surface Tile::GetPart(const Rectanglei& rec)
 {
   Surface part(rec.GetSize(), SDL_SWSURFACE|SDL_SRCALPHA, true);
-  part.SetAlpha(0,0);
+  part.SetAlpha(0, 0);
   part.Fill(0x00000000);
-  part.SetAlpha(SDL_SRCALPHA,0);
+  part.SetAlpha(SDL_SRCALPHA, 0);
 
   Point2i firstCell = Clamp(rec.GetPosition() / CELL_SIZE);
   Point2i lastCell = Clamp((rec.GetPosition() + rec.GetSize()) / CELL_SIZE);
