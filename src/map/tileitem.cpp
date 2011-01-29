@@ -189,21 +189,6 @@ void TileItem_NonEmpty::ForceEmpty()
   m_need_check_empty = false;
 }
 
-TileItem_NonEmpty* TileItem_NonEmpty::NewEmpty(uint8_t bpp, uint8_t alpha_threshold)
-{
-  TileItem_NonEmpty *ti;
-
-  switch (bpp) {
-  case 2: ti = new TileItem_ColorKey16(alpha_threshold); break;
-  // Otherwise, we probably need to merge a sprite in, so let's be clean
-  default: ti = new TileItem_AlphaSoftware(alpha_threshold); break;
-  }
-
-  ti->ForceEmpty();
-
-  return ti;
-}
-
 // === Implemenation of TileItem_BaseColorKey ==============================
 TileItem_BaseColorKey::TileItem_BaseColorKey(uint8_t alpha_threshold)
   : TileItem_NonEmpty(alpha_threshold)

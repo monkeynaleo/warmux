@@ -21,6 +21,7 @@
 #include <SDL.h>
 #include <png.h>
 #include "map/tileitem.h"
+#include "game/config.h"
 #include "game/game.h"
 #include "game/game_time.h"
 #include "graphic/surface.h"
@@ -32,10 +33,11 @@
 // We need only one empty tile
 TileItem_Empty EmptyTile;
 
-Tile::Tile() :
-  nbCells(Point2i(0, 0)),
-  m_preview(NULL),
-  m_last_preview_redraw(0)
+Tile::Tile()
+  : m_use_alpha(true)
+  , nbCells(Point2i(0, 0))
+  , m_preview(NULL)
+  , m_last_preview_redraw(0)
 {
   ASSERT(CELL_BITS > 3);
 }
@@ -156,14 +158,16 @@ void Tile::Dig(const Point2i &center, const uint radius)
   m_last_preview_redraw = Time::GetInstance()->Read();
 }
 
-TileItem_NonEmpty* Tile::GetNonEmpty(uint x, uint y, uint8_t bpp)
+TileItem_NonEmpty* Tile::GetNonEmpty(uint x, uint y)
 {
   TileItem          *ti  = item[y*nbCells.x + x];
   TileItem_NonEmpty *tin = NULL;
 
   if (ti->IsTotallyEmpty()) {
     // Do not delete the tile, it's a empty one!
-    tin = TileItem_BaseColorKey::NewEmpty(bpp, m_alpha_threshold);
+    if (m_use_alpha) tin = new TileItem_AlphaSoftware(m_alpha_threshold);
+    else             tin = new TileItem_ColorKey16(m_alpha_threshold);
+    tin->ForceEmpty();
     item[y*nbCells.x +x] = tin;
   } else {
     tin = static_cast<TileItem_NonEmpty*>(ti);
@@ -179,7 +183,7 @@ TileItem_NonEmpty* Tile::CreateNonEmpty(uint8_t *ptr, int stride)
   for (int y=0; y<CELL_SIZE.y; y++) {
     for (int x=0; x<CELL_SIZE.x; x++) {
       if (pix[x]) {
-        if (GetMainWindow().GetBytesPerPixel() > 2)
+        if (m_use_alpha)
           return new TileItem_AlphaSoftware(ptr, stride, m_alpha_threshold);
         return new TileItem_ColorKey16(ptr, stride, m_alpha_threshold);
       }
@@ -193,7 +197,6 @@ TileItem_NonEmpty* Tile::CreateNonEmpty(uint8_t *ptr, int stride)
 void Tile::PutSprite(const Point2i& pos, Sprite* spr)
 {
   Rectanglei rec(pos, spr->GetSizeMax());
-  uint8_t    bpp       = SDL_GetVideoInfo()->vfmt->BytesPerPixel;
   Point2i    firstCell = Clamp(pos/CELL_SIZE);
   Point2i    lastCell  = Clamp((pos + spr->GetSizeMax())/CELL_SIZE);
   Surface    s         = spr->GetSurface();
@@ -231,7 +234,7 @@ void Tile::PutSprite(const Point2i& pos, Sprite* spr)
         dst.SetPositionY(0);
       dst.SetSize(src.GetSize());
 
-      TileItem_NonEmpty *tin = GetNonEmpty(c.x, c.y, bpp);
+      TileItem_NonEmpty *tin = GetNonEmpty(c.x, c.y);
       tin->GetSurface().Blit(s, dst, src.GetPosition());
       tin->GetSurface().Lock();
       tin->ScalePreview(pdst, c.x-startCell.x, pitch, m_shift);
@@ -264,7 +267,7 @@ void Tile::MergeSprite(const Point2i &position, Surface& surf)
     for (c.x = firstCell.x; c.x <= lastCell.x; c.x++) {
 
       Point2i offset = position - (c<<CELL_BITS);
-      TileItem_NonEmpty *tin = GetNonEmpty(c.x, c.y, bpp);
+      TileItem_NonEmpty *tin = GetNonEmpty(c.x, c.y);
 
       tin->GetSurface().Lock();
       tin->MergeSprite(offset, surf);
@@ -285,11 +288,15 @@ void Tile::InitPreview()
 
   if (m_preview)
     delete m_preview;
-  if (GetMainWindow().GetBytesPerPixel() == 2) {
+  Quality qual = Config::GetInstance()->GetQuality();
+  m_use_alpha = qual > QUALITY_16BPP;
+  if (!m_use_alpha) {
+    printf("OK\n");
     m_preview = new Surface(world_size, SDL_SWSURFACE, false);
     m_preview->SetColorKey(SDL_SRCCOLORKEY|SDL_RLEACCEL, 0xF81F);
     m_preview->Fill(0xF81F);
   } else {
+    printf("Bleh\n");
     m_preview = new Surface(world_size, SDL_SWSURFACE, true);
     // Having an alpha channel forces SDL_SRCALPHA, so we must remove it
     m_preview->SetAlpha(0, 0);
@@ -376,7 +383,6 @@ bool Tile::LoadImage(const std::string& filename,
   png_infop    info_ptr = NULL;
   bool         ret      = false;
   uint8_t     *buffer   = NULL;
-  uint8_t      bpp      = GetMainWindow().GetBytesPerPixel();
   int          stride;
   int          offsetx, offsety, endoffy;
   Point2i      i, world_size;
@@ -472,7 +478,7 @@ bool Tile::LoadImage(const std::string& filename,
     for (; i.x < endCell.x; i.x++) {
       TileItem_NonEmpty *ti;
 
-      if (bpp>2) {
+      if (m_use_alpha) {
         ti = CreateNonEmpty(buffer + ((i.x - startCell.x)<<(CELL_BITS+2)), stride);
       } else {
         ti = new TileItem_ColorKey16(buffer + ((i.x - startCell.x)<<(CELL_BITS+2)),

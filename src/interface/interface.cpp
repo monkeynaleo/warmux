@@ -24,6 +24,7 @@
 #include "interface/weapon_help.h"
 #include "interface/mouse.h"
 #include "character/character.h"
+#include "game/config.h"
 #include "game/game.h"
 #include "game/game_mode.h"
 #include "game/game_time.h"
@@ -371,16 +372,17 @@ void Interface::DrawTeamEnergy() const
 void Interface::DrawMapPreview()
 {
   Surface   &window  = GetMainWindow();
-  Point2i    offset(window.GetWidth() - GetWorld().ground.GetPreviewSize().x - 2*MARGIN,
+  Ground    &ground  = GetWorld().ground;
+  Point2i    offset(window.GetWidth() - ground.GetPreviewSize().x - 2*MARGIN,
                     2*MARGIN);
-  Rectanglei rect_preview(offset, GetWorld().ground.GetPreviewSize());
+  Rectanglei rect_preview(offset, ground.GetPreviewSize());
 
   Rectanglei clip = rect_preview;
   SwapWindowClip(clip);
 
-  if (window.GetBytesPerPixel() == 2) {
-    window.Blit(*GetWorld().ground.GetPreview(),
-                offset-GetWorld().ground.GetPreviewRect().GetPosition());
+  if (!ground.IsPreviewHQ()) {
+    window.Blit(*ground.GetPreview(),
+                offset-ground.GetPreviewRect().GetPosition());
 
     // Draw water
     if (GetWorld().water.IsActive()) {
@@ -388,7 +390,7 @@ void Interface::DrawMapPreview()
 
       // Scale water height according to preview size
       int y = GetWorld().GetSize().GetY() - GetWorld().water.GetSelfHeight();
-      int h = GetWorld().ground.PreviewCoordinates(Point2i(0, y)).GetY();
+      int h = ground.PreviewCoordinates(Point2i(0, y)).GetY();
 
       color.SetAlpha(200);
       window.BoxColor(Rectanglei(Point2i(0, h)+offset, rect_preview.GetSize() - Point2i(0, h)),
@@ -396,11 +398,11 @@ void Interface::DrawMapPreview()
     }
   } else {
     if (minimap == NULL ||
-        GetWorld().ground.GetLastPreviewRedrawTime() > m_last_minimap_redraw ||
+        ground.GetLastPreviewRedrawTime() > m_last_minimap_redraw ||
         GetWorld().water.GetLastPreviewRedrawTime() > m_last_minimap_redraw) {
 
       m_last_minimap_redraw = Time::GetInstance()->Read();
-      const Point2i& preview_size = GetWorld().ground.GetPreviewSize();
+      const Point2i& preview_size = ground.GetPreviewSize();
 
       // Check whether the whole minimap must be updated
       if (m_last_preview_size != preview_size) {
@@ -425,8 +427,8 @@ void Interface::DrawMapPreview()
       if (!scratch)
         scratch = new Surface(preview_size, SDL_SWSURFACE, true);
 
-      Point2i mergePos = -GetWorld().ground.GetPreviewRect().GetPosition();
-      scratch->Blit(*GetWorld().ground.GetPreview(), mergePos);
+      Point2i mergePos = -ground.GetPreviewRect().GetPosition();
+      scratch->Blit(*ground.GetPreview(), mergePos);
 
       // Draw water
       if (GetWorld().water.IsActive()) {
@@ -434,7 +436,7 @@ void Interface::DrawMapPreview()
 
         // Scale water height according to preview size
         int y = GetWorld().GetSize().GetY() - GetWorld().water.GetSelfHeight();
-        int h = GetWorld().ground.PreviewCoordinates(Point2i(0, y)).GetY();
+        int h = ground.PreviewCoordinates(Point2i(0, y)).GetY();
 
         color.SetAlpha(200);
         scratch->BoxColor(Rectanglei(Point2i(0, h), rect_preview.GetSize() - Point2i(0, h)),
@@ -443,7 +445,7 @@ void Interface::DrawMapPreview()
 
       //scratch->SetAlpha(SDL_SRCALPHA, 0);
       if (!mask) {
-        m_last_preview_size = GetWorld().ground.GetPreviewSize();
+        m_last_preview_size = ground.GetPreviewSize();
         mask = new Surface(m_last_preview_size, SDL_SWSURFACE, true);
 
         GenerateStyledBorder(*mask, DecoratedBox::STYLE_ROUNDED);
@@ -468,7 +470,7 @@ void Interface::DrawMapPreview()
       const Surface* icon = box->GetIcon();
 
       // The real icon
-      coord = GetWorld().ground.PreviewCoordinates(box->GetPosition())
+      coord = ground.PreviewCoordinates(box->GetPosition())
             + offset - Point2i(icon->GetWidth()>>1, (3*icon->GetHeight())>>2);
       window.Blit(*icon, coord);
       GetWorld().ToRedrawOnScreen(Rectanglei(coord, icon->GetSize()));
@@ -487,7 +489,7 @@ void Interface::DrawMapPreview()
         continue;
       }
 
-      coord = GetWorld().ground.PreviewCoordinates(character->GetPosition()) + offset;
+      coord = ground.PreviewCoordinates(character->GetPosition()) + offset;
       Point2i icoord = coord - (icon.GetSize()>>1);
       window.Blit(icon, icoord);
 
@@ -504,8 +506,8 @@ void Interface::DrawMapPreview()
   }
 
   const Camera* cam = Camera::GetConstInstance();
-  Point2i TopLeft = GetWorld().ground.PreviewCoordinates(cam->GetPosition());
-  Point2i BottomR = GetWorld().ground.PreviewCoordinates(cam->GetPosition()+cam->GetSize());
+  Point2i TopLeft = ground.PreviewCoordinates(cam->GetPosition());
+  Point2i BottomR = ground.PreviewCoordinates(cam->GetPosition()+cam->GetSize());
 
   GetMainWindow().RectangleColor(Rectanglei(TopLeft + offset, BottomR-TopLeft),
                                  m_camera_preview_color);
