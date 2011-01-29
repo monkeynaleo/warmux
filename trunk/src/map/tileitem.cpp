@@ -230,7 +230,7 @@ void TileItem_BaseColorKey::ForceEmpty()
 void TileItem_BaseColorKey::MapColorKey()
 {
   color_key = m_surface.MapRGBA(255, 0, 255, 0);
-  m_surface.SetColorKey(SDL_SRCCOLORKEY, color_key);
+  m_surface.SetColorKey(SDL_SRCCOLORKEY|SDL_RLEACCEL, color_key);
 }
 
 void TileItem_BaseColorKey::Dig(const Point2i &position, const Surface& dig)
