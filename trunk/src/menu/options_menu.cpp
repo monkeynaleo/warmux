@@ -451,9 +451,10 @@ void OptionMenu::SaveOptions()
 
   AppWarmux * app = AppWarmux::GetInstance();
   app->video->SetMaxFps(opt_max_fps->GetValue());
+  Surface &window = app->video->window;
 
 #ifdef HAVE_TOUCHSCREEN
-  app->video->SetConfig(w, h, true);
+  app->video->SetConfig(window.GetWidth(), window.GetHeight(), true);
 #else
   // Video mode
   std::string s_mode = cbox_video_mode->GetValue();
@@ -463,8 +464,8 @@ void OptionMenu::SaveOptions()
 
   app->video->SetConfig(w, h, full_screen->GetValue());
 
-  uint x = (app->video->window.GetWidth() - actions_buttons->GetSizeX())/2;
-  uint y = app->video->window.GetHeight() - actions_buttons->GetSizeY();
+  uint x = (window.GetWidth() - actions_buttons->GetSizeX())/2;
+  uint y = window.GetHeight() - actions_buttons->GetSizeY();
 
   SetActionButtonsXY(x, y);
 #endif
