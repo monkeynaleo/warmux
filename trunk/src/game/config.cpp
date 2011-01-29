@@ -124,7 +124,6 @@ Config::Config()
   , m_network_server_game_name("Warmux party")
   , m_network_server_port(WARMUX_NETWORK_PORT)
   , m_network_server_public(true)
-  , transparency(ALPHA)
 {
   // Set audio volume
   volume_music = JukeBox::GetMaxVolume()/2;
@@ -639,11 +638,6 @@ bool Config::SaveXml(bool save_current_teams)
   doc.WriteElement(video_node, "height", uint2str(video->window.GetHeight()));
   doc.WriteElement(video_node, "full_screen", bool2str(video->IsFullScreen()));
   doc.WriteElement(video_node, "max_fps", uint2str(video->GetMaxFps()));
-
-  if (transparency == ALPHA)
-    doc.WriteElement(video_node, "transparency", "alpha");
-  else if (transparency == COLORKEY)
-    doc.WriteElement(video_node, "transparency", "colorkey");
 
   //=== Sound ===
   xmlNode *sound_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"sound"));

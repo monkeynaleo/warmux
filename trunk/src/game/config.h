@@ -54,9 +54,6 @@ typedef struct _xmlNode xmlNode;
 class Config : public Singleton<Config>
 {
 public:
-  static const int ALPHA = 0;
-  static const int COLORKEY = 1;
-
   const ObjectConfig &GetObjectConfig(const std::string &name,
                                       const std::string &xml_config) const;
   void RemoveAllObjectConfigs();
@@ -128,8 +125,6 @@ public:
   std::list<ConfigTeam> & AccessTeamList() { return teams; };
   const std::string & GetMapName() const { return map_name; };
   void SetMapName(const std::string& new_name) { map_name = new_name; }
-
-  int GetTransparency() const { return transparency; };
 
   const std::string& GetTtfFilename();
 
