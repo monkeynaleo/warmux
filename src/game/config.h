@@ -54,8 +54,8 @@ typedef struct _xmlNode xmlNode;
 typedef enum
 {
   QUALITY_16BPP = 0,
-  QUALITY_MIX,
-  QUALITY_32BPP
+  QUALITY_MIX   = 1,
+  QUALITY_32BPP = 2
 } Quality;
 
 class Config : public Singleton<Config>
