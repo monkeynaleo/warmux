@@ -125,7 +125,7 @@ Config::Config()
   , m_network_server_port(WARMUX_NETWORK_PORT)
   , m_network_server_public(true)
 
-#ifdef HAVE_TOUCHSCREEN
+#ifdef HAVE_HANDHELD
   , quality(QUALITY_16BPP)
 #else
   , quality(QUALITY_32BPP)
