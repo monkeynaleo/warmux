@@ -122,7 +122,7 @@ OptionMenu::OptionMenu() :
 #endif
   graphic_options->AddWidget(opt_max_fps);
 
-#ifndef HAVE_HANDHELD
+#ifndef HAVE_TOUCHSCREEN
   // Get available video resolution
   const std::list<Point2i>& video_res = app->video->GetAvailableConfigs();
   std::list<Point2i>::const_iterator mode;
@@ -229,6 +229,7 @@ OptionMenu::OptionMenu() :
     team_name = NULL;
   }
 
+#if USE_MISC_TAB
   /* Misc options */
   Box * misc_options = new GridBox(3, 3, 0, false);
 
@@ -253,7 +254,7 @@ OptionMenu::OptionMenu() :
                               option_size, 50, 5, 5, 80);
   misc_options->AddWidget(opt_scroll_border_size);
 #endif
-#if !defined (MAEMO) && !defined (__SYMBIAN32__)
+
   tabs->AddNewTab("unused", _("Misc"), misc_options);
 #endif
 
@@ -366,12 +367,15 @@ OptionMenu::OptionMenu() :
     AddLanguageItem("中文（正體）Traditional Chinese", "zh_TW");
 #endif
 
+#if USE_MISC_TAB
   opt_updates->SetValue(config->GetCheckUpdates());
-#ifndef HAVE_TOUCHSCREEN
+# ifndef HAVE_TOUCHSCREEN
   opt_lefthanded_mouse->SetValue(config->GetLeftHandedMouse());
   opt_scroll_on_border->SetValue(config->GetScrollOnBorder());
   opt_scroll_border_size->SetValue(config->GetScrollBorderSize());
+# endif
 #endif
+
   GetResourceManager().UnLoadXMLProfile(res);
 
   widgets.AddWidget(tabs);
@@ -425,11 +429,13 @@ void OptionMenu::SaveOptions()
   config->SetDisplayNameCharacter(opt_display_name->GetValue());
 
   // Misc options
+#if USE_MISC_TAB
   config->SetCheckUpdates(opt_updates->GetValue());
-#ifndef HAVE_TOUCHSCREEN
+# ifndef HAVE_TOUCHSCREEN
   config->SetLeftHandedMouse(opt_lefthanded_mouse->GetValue());
   config->SetScrollOnBorder(opt_scroll_on_border->GetValue());
   config->SetScrollBorderSize(opt_scroll_border_size->GetValue());
+# endif
 #endif
 
   // Sound settings - volume already saved
@@ -442,7 +448,7 @@ void OptionMenu::SaveOptions()
   AppWarmux * app = AppWarmux::GetInstance();
   app->video->SetMaxFps(opt_max_fps->GetValue());
 
-#ifndef HAVE_HANDHELD
+#ifndef HAVE_TOUCHSCREEN
   // Video mode
   std::string s_mode = cbox_video_mode->GetValue();
 
@@ -506,6 +512,7 @@ bool OptionMenu::signal_cancel()
 
 void OptionMenu::CheckUpdates()
 {
+#if USE_MISC_TAB
   if (!Config::GetInstance()->GetCheckUpdates()
       || Constants::WARMUX_VERSION.find("svn") != std::string::npos)
     return;
@@ -526,6 +533,7 @@ void OptionMenu::CheckUpdates()
     AppWarmux::DisplayError(Format(_("Version verification failed because: %s"),
                                    dl->GetLastError().c_str()));
   }
+#endif
 }
 
 uint OptionMenu::toVolume(uint level)
