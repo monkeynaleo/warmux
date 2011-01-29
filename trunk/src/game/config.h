@@ -51,6 +51,13 @@ typedef struct _xmlNode xmlNode;
 
 //-----------------------------------------------------------------------------
 
+typedef enum
+{
+  QUALITY_16BPP = 0,
+  QUALITY_MIX,
+  QUALITY_32BPP
+} Quality;
+
 class Config : public Singleton<Config>
 {
 public:
@@ -229,7 +236,7 @@ protected:
   std::string font_dir;
   std::string ttf_filename;
 
-  int transparency;
+  Quality quality;
 
   friend class Singleton<Config>;
   Config();

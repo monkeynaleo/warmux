@@ -124,6 +124,12 @@ Config::Config()
   , m_network_server_game_name("Warmux party")
   , m_network_server_port(WARMUX_NETWORK_PORT)
   , m_network_server_public(true)
+
+#ifdef HAVE_TOUCHSCREEN
+  , quality(QUALITY_16BPP)
+#else
+  , quality(QUALITY_32BPP)
+#endif
 {
   // Set audio volume
   volume_music = JukeBox::GetMaxVolume()/2;
@@ -485,6 +491,11 @@ void Config::LoadXml(const xmlNode *xml)
     XmlReader::ReadUint(elem, "width", video_width);
     XmlReader::ReadUint(elem, "height", video_height);
     XmlReader::ReadBool(elem, "full_screen", video_fullscreen);
+
+    uint qual;
+    XmlReader::ReadUint(elem, "quality", qual);
+    if (qual>QUALITY_32BPP) qual=QUALITY_32BPP;
+    quality = (Quality)qual;
   }
 
   //=== Sound ===
@@ -637,6 +648,7 @@ bool Config::SaveXml(bool save_current_teams)
   doc.WriteElement(video_node, "width", uint2str(video->window.GetWidth()));
   doc.WriteElement(video_node, "height", uint2str(video->window.GetHeight()));
   doc.WriteElement(video_node, "full_screen", bool2str(video->IsFullScreen()));
+  doc.WriteElement(video_node, "quality", uint2str(quality));
   doc.WriteElement(video_node, "max_fps", uint2str(video->GetMaxFps()));
 
   //=== Sound ===
