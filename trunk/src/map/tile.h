@@ -44,6 +44,7 @@ public:
 
 private:
   uint8_t m_alpha_threshold;
+  bool    m_use_alpha;
 
 public:
   Tile ();
@@ -86,6 +87,7 @@ public:
   const Point2i& GetPreviewSize() const { return m_preview_size; };
   const Rectanglei& GetPreviewRect() const { return m_preview_rect; };
   uint GetLastPreviewRedrawTime() const { return m_last_preview_redraw; };
+  bool IsPreviewHQ() const { return m_use_alpha; }
   void SetPreviewSizeDelta(int delta);
 
   // Translate world coordinates into a preview ones and vice versa
@@ -102,7 +104,7 @@ public:
 
 protected:
   void InitTile(const Point2i &pSize, const Point2i & upper_left_offset, const Point2i & lower_right_offset);
-  TileItem_NonEmpty* GetNonEmpty(uint x, uint y, uint8_t bpp);
+  TileItem_NonEmpty* GetNonEmpty(uint x, uint y);
   TileItem_NonEmpty* CreateNonEmpty(uint8_t *ptr, int stride);
 
   void FreeMem();

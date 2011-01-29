@@ -73,20 +73,18 @@ protected:
   TileItem_NonEmpty(uint8_t alpha_threshold);
 
   void CheckEmptyField();
-  virtual void ForceEmpty();
 
 public:
   ~TileItem_NonEmpty() { delete[] m_empty_bitfield; }
 
   virtual bool CheckEmpty() = 0;
+  virtual void ForceEmpty();
   virtual void MergeSprite(const Point2i &position, Surface& spr) = 0;
   virtual void Empty(int start_x, int end_x, uint8_t* buf) = 0;
   virtual void Darken(int start_x, int end_x, uint8_t* buf) = 0;
   virtual void Dig(const Point2i &position, const Surface& dig) = 0;
 
   void ForceRecheck();
-
-  static TileItem_NonEmpty* NewEmpty(uint8_t bpp, uint8_t alpha_threshold);
 
   bool NeedDelete()
   {
@@ -119,11 +117,11 @@ protected:
   TileItem_BaseColorKey(uint8_t alpha_threshold);
 
   void MapColorKey();
-  void ForceEmpty();
 
 public:
   static const Uint32 COLOR_KEY = 0xFF00FF;
 
+  void ForceEmpty();
   void MergeSprite(const Point2i &position, Surface& spr);
 
   void Dig(const Point2i &position, const Surface& dig);
@@ -157,9 +155,6 @@ class TileItem_AlphaSoftware : public TileItem_NonEmpty
   // A tile can have all alpha to 0, be empty but still have image data
   bool transparent;
 
-protected:
-  void ForceEmpty();
-
 public:
   TileItem_AlphaSoftware(uint8_t threshold);
   TileItem_AlphaSoftware(void *pixels, int stride, uint8_t threshold);
@@ -173,6 +168,7 @@ public:
   }
 
   bool CheckEmpty();
+  void ForceEmpty();
   void Empty(int start_x, int end_x, uint8_t* buf);
   void Darken(int start_x, int end_x, uint8_t* buf);
   void Dig(const Point2i &position, const Surface& dig);
