@@ -100,6 +100,9 @@ public:
   uint GetVideoHeight() const { return video_height; };
   void SetVideoHeight(const uint height) { video_height = height; };
 
+  Quality GetQuality() const { return quality; }
+  void SetQuality(Quality qual) { quality = qual; }
+
   std::list<Point2i> & GetResolutionAvailable() { return resolution_available; };
   uint GetMaxFps() const { return max_fps; };
 
