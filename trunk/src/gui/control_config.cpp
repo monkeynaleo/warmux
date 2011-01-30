@@ -171,7 +171,7 @@ public:
     // Reset some configs if pure backspace is pressed
     if ((SDLK_BACKSPACE == key_code || SDLK_DELETE == key_code) &&
         !has_ctrl && !has_alt && !has_shift) {
-      kbd->ClearKeyAction(key_action);
+      key_value = SDLK_UNKNOWN;
       label_key->SetText(_("None"));
 #ifdef ANDROID
       ctrl_box->SetValue(false);
@@ -185,6 +185,7 @@ public:
       return true;
     }
 
+    // Check the current state of bindings, not the one in use
     for (std::vector<ControlItem*>::const_iterator it = selves->begin();
          it != selves->end();
          ++it) {
@@ -256,18 +257,20 @@ public:
 
   void SaveAction(Keyboard *kbd)
   {
-    if (!read_only && key_value!=SDLK_UNKNOWN) {
+    if (!read_only) {
       kbd->ClearKeyAction(key_action);
-      kbd->SaveKeyEvent(key_action, key_value,
+      if (key_value != SDLK_UNKNOWN) {
+        kbd->SaveKeyEvent(key_action, key_value,
 #ifdef ANDROID
-                        ctrl_box->GetValue(),
-                        alt_box->GetValue(),
-                        shift_box->GetValue());
+                          ctrl_box->GetValue(),
+                          alt_box->GetValue(),
+                          shift_box->GetValue());
 #else
-                        ctrl_box->IsEnabled(),
-                        alt_box->IsEnabled(),
-                        shift_box->IsEnabled());
+                          ctrl_box->IsEnabled(),
+                          alt_box->IsEnabled(),
+                          shift_box->IsEnabled());
 #endif
+      }
     }
   }
 };
