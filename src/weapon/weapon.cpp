@@ -171,6 +171,9 @@ void Weapon::Select()
 
 void Weapon::Deselect()
 {
+  if (IsLoading())
+    StopLoading();
+
   ActiveTeam().crosshair.SetActive(false);
   ActiveCharacter().SetFiringAngle(0);
   ActiveCharacter().SetMovement("breathe");
