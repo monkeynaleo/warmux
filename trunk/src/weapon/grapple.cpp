@@ -435,6 +435,9 @@ void Grapple::AttachRope(const Point2i& contact_point)
 
 void Grapple::DetachRope()
 {
+  if (!attached)
+    return;
+
   ActiveCharacter().UnsetPhysFixationPoint();
   rope_nodes.clear();
   attached = false;
