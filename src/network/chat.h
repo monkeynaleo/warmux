@@ -36,7 +36,6 @@ union SDL_Event;
 
 class Chat
 {
-private:
   TextList chat;
   Text* input;
   Text* msg;
@@ -47,7 +46,7 @@ private:
 
   void CloseInput();
 
- public:
+public:
   Chat();
   ~Chat();
   void Show();
