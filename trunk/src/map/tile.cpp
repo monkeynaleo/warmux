@@ -251,7 +251,6 @@ void Tile::PutSprite(const Point2i& pos, Sprite* spr)
 
 void Tile::MergeSprite(const Point2i &position, Surface& surf)
 {
-  uint8_t  bpp       = SDL_GetVideoInfo()->vfmt->BytesPerPixel;
   Point2i  firstCell = Clamp(position/CELL_SIZE);
   Point2i  lastCell  = Clamp((position + surf.GetSize())/CELL_SIZE);
 
