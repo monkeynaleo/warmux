@@ -268,11 +268,11 @@ bool Keyboard::HandleKeyEvent(const SDL_Event& evnt)
   }
 
   //Handle input text for Chat session in Network game
-  if (Game::chatsession.CheckInput()) {
+  if (Game::GetInstance()->chatsession.CheckInput()) {
     if (event_type == KEY_PRESSED)
-      Game::chatsession.HandleKeyPressed(evnt);
+      Game::GetInstance()->chatsession.HandleKeyPressed(evnt);
     else if (event_type == KEY_RELEASED)
-      Game::chatsession.HandleKeyReleased(evnt);
+      Game::GetInstance()->chatsession.HandleKeyReleased(evnt);
     return false;
   }
 
