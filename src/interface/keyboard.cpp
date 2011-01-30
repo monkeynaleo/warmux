@@ -249,11 +249,11 @@ bool Keyboard::IsModifier(int raw_key_code)
   return raw_key_code>=SDLK_NUMLOCK && raw_key_code<=SDLK_COMPOSE;
 }
 
-void Keyboard::HandleKeyEvent(const SDL_Event& evnt)
+bool Keyboard::HandleKeyEvent(const SDL_Event& evnt)
 {
   // Not a registred event
   if (!IsRegistredEvent(evnt.type))
-    return;
+    return false;
 
   Key_Event_t event_type;
   switch(evnt.type) {
@@ -264,16 +264,16 @@ void Keyboard::HandleKeyEvent(const SDL_Event& evnt)
     event_type = KEY_RELEASED;
     break;
   default:
-    return;
+    return false;
   }
 
   //Handle input text for Chat session in Network game
-  if (Game::GetInstance()->chatsession.CheckInput()) {
+  if (Game::chatsession.CheckInput()) {
     if (event_type == KEY_PRESSED)
-      Game::GetInstance()->chatsession.HandleKeyPressed(evnt);
+      Game::chatsession.HandleKeyPressed(evnt);
     else if (event_type == KEY_RELEASED)
-      Game::GetInstance()->chatsession.HandleKeyReleased(evnt);
-    return;
+      Game::chatsession.HandleKeyReleased(evnt);
+    return false;
   }
 
   int previous_modifier_bits = modifier_bits;
@@ -281,7 +281,7 @@ void Keyboard::HandleKeyEvent(const SDL_Event& evnt)
   SDLKey basic_key_code = evnt.key.keysym.sym;
   // Also ignore real key code of a modifier, fix bug #15238
   if (IsModifier(basic_key_code))
-    return;
+    return false;
 #ifdef MAEMO
   if (SDL_GetModState() & KMOD_MODE) {
     if (basic_key_code == SDLK_LEFT) basic_key_code = SDLK_UP;
@@ -312,4 +312,5 @@ void Keyboard::HandleKeyEvent(const SDL_Event& evnt)
     HandleKeyComboEvent(key_code, KEY_RELEASED);
     pressed_keys.erase(basic_key_code);
   }
+  return true;
 }

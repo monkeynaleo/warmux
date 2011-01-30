@@ -132,7 +132,7 @@ protected:
   virtual ~ManMachineInterface() { };
 
 public:
-  virtual void HandleKeyEvent(const SDL_Event& evnt) = 0;
+  virtual bool HandleKeyEvent(const SDL_Event& evnt) = 0;
   virtual void Reset();
 
   // Get the key associated to an action.

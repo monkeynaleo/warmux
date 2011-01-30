@@ -71,14 +71,14 @@ int Joystick::GetNumberOfJoystick() const
   return (init) ? 0 : SDL_NumJoysticks();
 }
 
-void Joystick::HandleKeyEvent(const SDL_Event& evnt)
+bool Joystick::HandleKeyEvent(const SDL_Event& evnt)
 {
   // Not a registred event
   if (!init || !IsRegistredEvent(evnt.type))
-    return;
+    return false;
 
   if (GetNumberOfJoystick() == 0)
-    return;
+    return false;
 
   Key_Event_t event_type;
   switch (evnt.type) {
@@ -97,7 +97,7 @@ void Joystick::HandleKeyEvent(const SDL_Event& evnt)
     break;
 
   default:
-    return;
+    return false;
   }
 
   if (event_type == X_AXIS_MOTION) {
@@ -111,7 +111,7 @@ void Joystick::HandleKeyEvent(const SDL_Event& evnt)
         previous_x_axis = KEY_MOVE_LEFT;
       HandleKeyPressed(previous_x_axis);
     }
-    return;
+    return true;
   } else if (event_type == Y_AXIS_MOTION) {
     if (evnt.jaxis.value > -100 && evnt.jaxis.value < 100) {
       if(previous_y_axis != KEY_NONE)
@@ -123,13 +123,13 @@ void Joystick::HandleKeyEvent(const SDL_Event& evnt)
         previous_y_axis = KEY_UP;
       HandleKeyPressed(previous_y_axis);
     }
-    return;
+    return true;
   }
 
   std::map<int, std::vector<Key_t> >::iterator it = layout.find(evnt.jbutton.button);
 
   if (it == layout.end())
-    return;
+    return false;
 
   std::vector<Key_t> keys = it->second;
   std::vector<Key_t>::const_iterator itv;
@@ -137,14 +137,16 @@ void Joystick::HandleKeyEvent(const SDL_Event& evnt)
   for (itv = keys.begin(); itv != keys.end() ; itv++) {
     if (event_type == KEY_PRESSED) {
       HandleKeyPressed(*itv);
-      return;
+      return true;
     }
 
     if (event_type == KEY_RELEASED) {
       HandleKeyReleased(*itv);
-      return;
+      return true;
     }
   }
+
+  return false;
 }
 
 void Joystick::Reset()

@@ -42,7 +42,7 @@ protected:
 
 public:
   int GetNumberOfJoystick() const;
-  void HandleKeyEvent(const SDL_Event& event);
+  bool HandleKeyEvent(const SDL_Event& event);
   void Reset();
 };
 

@@ -41,7 +41,7 @@ protected:
   void SetDefaultConfig();
 
 public:
-  void HandleKeyEvent(const SDL_Event& evnt);
+  bool HandleKeyEvent(const SDL_Event& evnt);
   void SetConfig(const xmlNode *node);
   void SaveConfig(xmlNode *node) const;
 
