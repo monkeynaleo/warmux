@@ -276,8 +276,6 @@ bool Keyboard::HandleKeyEvent(const SDL_Event& evnt)
     return false;
   }
 
-  int previous_modifier_bits = modifier_bits;
-  modifier_bits = GetModifierBitsFromSDL();
   SDLKey basic_key_code = evnt.key.keysym.sym;
   // Also ignore real key code of a modifier, fix bug #15238
   if (IsModifier(basic_key_code))
@@ -288,17 +286,19 @@ bool Keyboard::HandleKeyEvent(const SDL_Event& evnt)
     if (basic_key_code == SDLK_RIGHT) basic_key_code = SDLK_DOWN;
   }
 #endif
+
   int key_code;
+  int previous_modifier_bits = modifier_bits;
+  modifier_bits = GetModifierBitsFromSDL();
+
   if (modifier_bits != previous_modifier_bits) {
-    std::set<SDLKey>::iterator it;
-    for (it = pressed_keys.begin();  it !=  pressed_keys.end(); it++) {
-      int basic_key_code_it = *it;
-      if (basic_key_code != basic_key_code_it) {
-        key_code = basic_key_code_it + MODIFIER_OFFSET * previous_modifier_bits;
-        HandleKeyComboEvent(key_code, KEY_RELEASED);
-        key_code = basic_key_code_it + MODIFIER_OFFSET * modifier_bits;
-        HandleKeyComboEvent(key_code, KEY_PRESSED);
-      }
+    std::set<SDLKey>::const_iterator it = pressed_keys.find(basic_key_code);
+    if (it !=  pressed_keys.end()) {
+      key_code = basic_key_code + MODIFIER_OFFSET * previous_modifier_bits;
+      HandleKeyComboEvent(key_code, KEY_RELEASED);
+      key_code = basic_key_code + MODIFIER_OFFSET * modifier_bits;
+      HandleKeyComboEvent(key_code, KEY_PRESSED);
+      return true;
     }
   }
 
