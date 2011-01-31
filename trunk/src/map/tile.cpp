@@ -295,7 +295,6 @@ void Tile::InitPreview()
     m_preview->SetColorKey(SDL_SRCCOLORKEY|SDL_RLEACCEL, 0xF81F);
     m_preview->Fill(0xF81F);
   } else {
-    printf("Bleh\n");
     m_preview = new Surface(world_size, SDL_SWSURFACE, true);
     // Having an alpha channel forces SDL_SRCALPHA, so we must remove it
     m_preview->SetAlpha(0, 0);
