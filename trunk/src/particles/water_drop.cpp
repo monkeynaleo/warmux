@@ -48,7 +48,7 @@ WaterParticle::~WaterParticle()
 
 void WaterParticle::Refresh()
 {
-  uint now = Time::GetInstance()->Read();
+  uint now = GameTime::GetInstance()->Read();
   UpdatePosition();
   image->Update();
 

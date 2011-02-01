@@ -41,7 +41,7 @@ static int GetRandomDigGroundTime()
 
 FireParticle::FireParticle()
   : Particle("fire_particle")
-  , creation_time(Time::GetInstance()->Read())
+  , creation_time(GameTime::GetInstance()->Read())
   , on_ground(false)
   , oscil_delta(GetRandomDigGroundTime())
 {
@@ -67,7 +67,7 @@ FireParticle::~FireParticle()
 
 void FireParticle::Refresh()
 {
-  uint now = Time::GetInstance()->Read();
+  uint now = GameTime::GetInstance()->Read();
   UpdatePosition();
   image->Update();
 

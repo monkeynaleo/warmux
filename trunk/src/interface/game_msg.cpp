@@ -63,7 +63,7 @@ void GameMessages::Refresh()
   iterator i;
   for (i=list.begin(); i!=list.end();) {
     Message * msg = *i;
-    if (MSG_LIFESPAN < Time::GetInstance()->Read()-msg->get_time()) {
+    if (MSG_LIFESPAN < GameTime::GetInstance()->Read()-msg->get_time()) {
       delete (msg);
       /* erase method return the next element */
       i = list.erase(i);
@@ -80,7 +80,7 @@ void GameMessages::Add(const std::string &message, const Color& color)
   std::cout << "o MSG: " << message << std::endl;
   // Add message at the end of the list
   Message * newMessage = new Message(message, color, Font::FONT_MEDIUM,
-                                     Font::FONT_BOLD, Time::GetInstance()->Read());
+                                     Font::FONT_BOLD, GameTime::GetInstance()->Read());
   newMessage->SetMaxWidth(GetMainWindow().GetWidth()-8);
   list.push_back(newMessage);
 

@@ -354,7 +354,7 @@ void Camera::HandleMouseMovement()
     last_mouse_pos = curr_pos;
 
     if (m_begin_controlled_move_time == 0) {
-      m_begin_controlled_move_time = Time::GetInstance()->Read();
+      m_begin_controlled_move_time = GameTime::GetInstance()->Read();
     }
 
     if (SDL_GetModState() & KMOD_CTRL) {
@@ -369,7 +369,7 @@ void Camera::HandleMouseMovement()
     // if the mouse has not moved at all since the user pressed the middle button, we center the camera!
     if (abs((int)first_mouse_pos.x - curr_pos.x) < 5 &&
         abs((int)first_mouse_pos.y - curr_pos.y) < 5 &&
-        Time::GetInstance()->Read() - m_begin_controlled_move_time < 500) {
+        GameTime::GetInstance()->Read() - m_begin_controlled_move_time < 500) {
       CenterOnActiveCharacter();
     }
 
@@ -460,7 +460,7 @@ void Camera::CenterOnActiveCharacter()
 
 Point2i Camera::ComputeShake() const
 {
-  uint time = Time::GetInstance()->Read();
+  uint time = GameTime::GetInstance()->Read();
   ASSERT(time >= m_started_shaking);
 
   if (time > m_started_shaking + m_shake_duration || m_shake_duration == 0) {
@@ -502,7 +502,7 @@ void Camera::Shake(uint how_long_msec, const Point2i & amplitude, const Point2i 
 {
   MSG_DEBUG("camera.shake", "Shake added!");
 
-  uint time = Time::GetInstance()->Read();
+  uint time = GameTime::GetInstance()->Read();
 
   ASSERT(time >= m_started_shaking);
 

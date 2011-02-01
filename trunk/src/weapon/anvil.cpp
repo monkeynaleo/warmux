@@ -81,7 +81,7 @@ void Anvil::SignalObjectCollision(const Point2d& /* my_speed_before */,
                                   PhysicalObj * obj,
                                   const Point2d& /* obj_speed_before */)
 {
-  merge_time = Time::GetInstance()->Read() + 5000;
+  merge_time = GameTime::GetInstance()->Read() + 5000;
   obj->SetEnergyDelta(-200, &ActiveCharacter());
   PlayCollisionSound();
 
@@ -90,7 +90,7 @@ void Anvil::SignalObjectCollision(const Point2d& /* my_speed_before */,
 
 void Anvil::SignalGroundCollision(const Point2d& /* speed_before */)
 {
-  merge_time = Time::GetInstance()->Read() + 5000;
+  merge_time = GameTime::GetInstance()->Read() + 5000;
   PlayCollisionSound();
 
   WeaponProjectile::Collision();
@@ -103,7 +103,7 @@ void Anvil::SignalOutOfMap()
 
 void Anvil::Refresh()
 {
-  if(merge_time != 0 && merge_time < Time::GetInstance()->Read()) {
+  if(merge_time != 0 && merge_time < GameTime::GetInstance()->Read()) {
     GetWorld().MergeSprite(GetPosition(), image);
     Ghost();
   } else {

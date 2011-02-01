@@ -320,7 +320,7 @@ void Interface::DrawClock(const Point2i &time_pos) const
   clock->DrawXY(tmp_point);
 
   // Draw global timer
-  std::string tmp(Time::GetInstance()->GetString());
+  std::string tmp(GameTime::GetInstance()->GetString());
   global_timer->SetText(tmp);
   global_timer->DrawCenter(time_pos + Point2i(0, default_toolbar.GetHeight()/3));
 }
@@ -346,7 +346,7 @@ void Interface::DrawSmallInterface() const
   if (display)
     return;
   Surface& window = GetMainWindow();
-  int height = ((int)Time::GetInstance()->Read() - start_hide_display - 1000) / 3 - 30;
+  int height = ((int)GameTime::GetInstance()->Read() - start_hide_display - 1000) / 3 - 30;
   height = height > 0 ? height : 0;
   height = (height < small_interface.GetHeight()) ? height : small_interface.GetHeight();
   Point2i position((window.GetWidth() - small_interface.GetWidth())>>1,
@@ -405,7 +405,7 @@ void Interface::DrawMapPreview()
         ground.GetLastPreviewRedrawTime() > m_last_minimap_redraw ||
         GetWorld().water.GetLastPreviewRedrawTime() > m_last_minimap_redraw) {
 
-      m_last_minimap_redraw = Time::GetInstance()->Read();
+      m_last_minimap_redraw = GameTime::GetInstance()->Read();
       const Point2i& preview_size = ground.GetPreviewSize();
 
       // Check whether the whole minimap must be updated
@@ -571,11 +571,11 @@ void Interface::Draw()
 int Interface::GetHeight() const
 {
   if (!display) {
-    int height = GetMenuHeight() - ((int)Time::GetInstance()->Read() - start_hide_display)/3;
+    int height = GetMenuHeight() - ((int)GameTime::GetInstance()->Read() - start_hide_display)/3;
     height = (height > 0 ? height : 0);
     return (height < GetMenuHeight() ? height : GetMenuHeight());
   } else if (start_show_display != 0) {
-    int height = ((int)Time::GetInstance()->Read() - start_show_display)/3;
+    int height = ((int)GameTime::GetInstance()->Read() - start_show_display)/3;
     height = (height < GetMenuHeight() ? height : GetMenuHeight());
     return (height < GetMenuHeight() ? height : GetMenuHeight());
   }
@@ -591,7 +591,7 @@ void Interface::Show()
 {
   if (display) return;
   display = true;
-  uint now = Time::GetInstance()->Read();
+  uint now = GameTime::GetInstance()->Read();
   if (start_show_display + 1000 < (int)now)
     start_show_display = now;
   else
@@ -602,7 +602,7 @@ void Interface::Hide()
 {
   if (!display) return;
   display = false;
-  uint now = Time::GetInstance()->Read();
+  uint now = GameTime::GetInstance()->Read();
   if (start_hide_display + 1000 < (int)now)
     start_hide_display = now;
   else

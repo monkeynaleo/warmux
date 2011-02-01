@@ -116,7 +116,7 @@ void Tile::Dig(const Point2i &position, const Surface& dig)
 
   m_preview->Unlock();
 
-  m_last_preview_redraw = Time::GetInstance()->Read();
+  m_last_preview_redraw = GameTime::GetInstance()->Read();
 }
 
 void Tile::Dig(const Point2i &center, const uint radius)
@@ -155,7 +155,7 @@ void Tile::Dig(const Point2i &center, const uint radius)
   }
 
   m_preview->Unlock();
-  m_last_preview_redraw = Time::GetInstance()->Read();
+  m_last_preview_redraw = GameTime::GetInstance()->Read();
 }
 
 TileItem_NonEmpty* Tile::GetNonEmpty(uint x, uint y)
@@ -246,7 +246,7 @@ void Tile::PutSprite(const Point2i& pos, Sprite* spr)
   s.SetAlpha(SDL_SRCALPHA, 0);
 
   m_preview->Unlock();
-  m_last_preview_redraw = Time::GetInstance()->Read();
+  m_last_preview_redraw = GameTime::GetInstance()->Read();
 }
 
 void Tile::MergeSprite(const Point2i &position, Surface& surf)
@@ -277,7 +277,7 @@ void Tile::MergeSprite(const Point2i &position, Surface& surf)
   }
 
   m_preview->Unlock();
-  m_last_preview_redraw = Time::GetInstance()->Read();
+  m_last_preview_redraw = GameTime::GetInstance()->Read();
 }
 
 // Initialize preview depending on current video and map sizes
@@ -305,14 +305,14 @@ void Tile::InitPreview()
   m_preview_rect = Rectanglei((m_upper_left_offset & CELL_MASK)>>m_shift,
                               m_preview_size);
 
-  m_last_preview_redraw = Time::GetInstance()->Read();
+  m_last_preview_redraw = GameTime::GetInstance()->Read();
 }
 
 // Rerender all of the preview
 void Tile::CheckPreview(bool force)
 {
   if (m_last_preview_redraw == 0) {
-    m_last_preview_redraw = Time::GetInstance()->Read();
+    m_last_preview_redraw = GameTime::GetInstance()->Read();
   }
 
   const Surface& window = GetMainWindow();

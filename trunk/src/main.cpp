@@ -185,7 +185,7 @@ void AppWarmux::DisplayLoadingPicture()
   loading_image.ScaleSize(video->window.GetSize());
   loading_image.Blit(video->window, 0, 0);
 
-  Time::GetInstance()->Reset();
+  GameTime::GetInstance()->Reset();
 
   Text text1(_("Warmux launching..."), white_color,
              Font::FONT_HUGE, Font::FONT_BOLD, true);
@@ -292,7 +292,7 @@ bool AppWarmux::CheckInactive(SDL_Event& evnt)
 #else
       JukeBox::GetInstance()->Pause();
 #endif
-      Time::GetInstance()->SetWaitingForUser(true);
+      GameTime::GetInstance()->SetWaitingForUser(true);
       while (SDL_WaitEvent(&evnt)) {
 #ifdef MAEMO
   Osso::Process();
@@ -305,7 +305,7 @@ bool AppWarmux::CheckInactive(SDL_Event& evnt)
 #else
           JukeBox::GetInstance()->Resume();
 #endif
-          Time::GetInstance()->SetWaitingForUser(false);
+          GameTime::GetInstance()->SetWaitingForUser(false);
           break;
         }
       }

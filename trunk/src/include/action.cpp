@@ -29,7 +29,7 @@
 uint Action_TimeStamp()
 {
   if (Game::IsRunning())
-    return Time::GetInstance()->Read();
+    return GameTime::GetInstance()->Read();
 
   return 0;
 }

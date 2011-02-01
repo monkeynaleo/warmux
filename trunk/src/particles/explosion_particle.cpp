@@ -47,7 +47,7 @@ ExplosionParticle::ExplosionParticle() :
 
 void ExplosionParticle::Refresh()
 {
-  uint time = Time::GetInstance()->Read() - m_last_refresh;
+  uint time = GameTime::GetInstance()->Read() - m_last_refresh;
 
   image->Update();
 
@@ -55,7 +55,7 @@ void ExplosionParticle::Refresh()
     if (m_left_time_to_live <= 0) return ;
 
     m_left_time_to_live--;
-    m_last_refresh = Time::GetInstance()->Read() ;
+    m_last_refresh = GameTime::GetInstance()->Read() ;
   }
 }
 

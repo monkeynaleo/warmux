@@ -183,7 +183,7 @@ bool Grapple::p_Shoot()
 {
   last_broken_node_angle = 100;
 
-  last_mvt = Time::GetInstance()->Read();
+  last_mvt = GameTime::GetInstance()->Read();
 
   if (!TryAttachRope()) // We have failed to attach!
     return false;
@@ -502,9 +502,9 @@ void Grapple::SetRopeSize(Double length) const
 
 void Grapple::GoUp()
 {
-  if(Time::GetInstance()->Read()<last_mvt+DT_MVT)
+  if(GameTime::GetInstance()->Read()<last_mvt+DT_MVT)
     return;
-  last_mvt = Time::GetInstance()->Read();
+  last_mvt = GameTime::GetInstance()->Read();
 
   delta_len = -0.1 ;
   ActiveCharacter().ChangePhysRopeSize (delta_len);
@@ -519,9 +519,9 @@ void Grapple::StopUp()
 
 void Grapple::GoDown()
 {
-  if(Time::GetInstance()->Read()<last_mvt+DT_MVT)
+  if(GameTime::GetInstance()->Read()<last_mvt+DT_MVT)
     return;
-  last_mvt = Time::GetInstance()->Read();
+  last_mvt = GameTime::GetInstance()->Read();
 
   if (ActiveCharacter().GetRopeLength()*PIXEL_PER_METER >= (int)cfg().max_rope_length)
     return;

@@ -110,7 +110,7 @@ void Character::SetBody(Body * char_body)
 static uint GetRandomAnimationTimeValue()
 {
   MSG_DEBUG("random.get", "Character::SetBody(...) body frame");
-  return Time::GetInstance()->Read() + RandomSync().GetUint(ANIM_PAUSE_MIN, ANIM_PAUSE_MAX);
+  return GameTime::GetInstance()->Read() + RandomSync().GetUint(ANIM_PAUSE_MIN, ANIM_PAUSE_MAX);
 }
 
 Character::Character(Team& my_team, const std::string &name, Body *char_body) :
@@ -404,7 +404,7 @@ void Character::SetEnergyDelta(int delta, Character* dealer)
       SetMovement("breathe");
     }
     // Delay a bit the occurrence of the animation
-    animation_time = Time::GetInstance()->Read()
+    animation_time = GameTime::GetInstance()->Read()
                    + (ANIM_PAUSE_MAX + ANIM_PAUSE_MIN)/2;
   } else
     lost_energy = 0;
@@ -466,7 +466,7 @@ void Character::Die(Character* killer)
     Game::GetInstance()->SignalCharacterDeath(this, killer);
   }
 
-  damage_stats->SetDeathTime(Time::GetInstance()->Read());
+  damage_stats->SetDeathTime(GameTime::GetInstance()->Read());
   Camera::GetInstance()->StopFollowingObj(this);
 }
 
@@ -540,7 +540,7 @@ void Character::Jump(Double strength, Double angle /*in radian */)
   Camera::GetInstance()->FollowObject(this);
 
   UpdateLastMovingTime();
-  walking_time = Time::GetInstance()->Read();
+  walking_time = GameTime::GetInstance()->Read();
 
   if (!CanJump()) return;
 
@@ -595,11 +595,11 @@ void Character::PrepareShoot()
 void Character::DoShoot()
 {
   if (Game::GetInstance()->ReadState() != Game::PLAYING) {
-    MSG_DEBUG("weapon.shoot", "DoShoot cancelled! time: %u", Time::GetInstance()->Read());
+    MSG_DEBUG("weapon.shoot", "DoShoot cancelled! time: %u", GameTime::GetInstance()->Read());
     return; // hack related to bugs 8656 and 9462
   }
 
-  MSG_DEBUG("weapon.shoot", "-> begin at time %u", Time::GetInstance()->Read());
+  MSG_DEBUG("weapon.shoot", "-> begin at time %u", GameTime::GetInstance()->Read());
   SetMovementOnce("weapon-" + ActiveTeam().GetWeapon().GetID() + "-end-shoot");
   body->Build(); // Refresh the body
   damage_stats->OneMoreShot();
@@ -609,7 +609,7 @@ void Character::DoShoot()
 
 void Character::UpdateLastMovingTime()
 {
-  do_nothing_time = Time::GetInstance()->Read();
+  do_nothing_time = GameTime::GetInstance()->Read();
 }
 
 void Character::Refresh()
@@ -626,7 +626,7 @@ void Character::Refresh()
 
   if (IsDead()) return;
 
-  Time * global_time = Time::GetInstance();
+  GameTime * global_time = GameTime::GetInstance();
 
   // center on character who is falling
   if (IsFalling()) {
@@ -687,7 +687,7 @@ void Character::Refresh()
   if (Game::GetInstance()->ReadState() == Game::END_TURN && body->IsWalking())
     body->StopWalking();
 
-  if (Time::GetInstance()->Read() > animation_time
+  if (GameTime::GetInstance()->Read() > animation_time
       && !IsActiveCharacter()
       && !IsDead()
       && !IsFalling()
@@ -695,7 +695,7 @@ void Character::Refresh()
       && body->GetClothe().compare(0, 9, "animation")) {
     body->PlayAnimation();
     MSG_DEBUG("random.get", "Character::Refresh()");
-    animation_time = Time::GetInstance()->Read() + body->GetMovementDuration()
+    animation_time = GameTime::GetInstance()->Read() + body->GetMovementDuration()
                    + RandomSync().GetUint(ANIM_PAUSE_MIN, ANIM_PAUSE_MAX);
   }
 
@@ -749,7 +749,7 @@ void Character::PrepareTurn()
 {
   damage_stats->HandleMostDamage();
   lost_energy = 0;
-  rl_motion_pause = Time::GetInstance()->Read();
+  rl_motion_pause = GameTime::GetInstance()->Read();
 }
 
 // Signal the end of a fall
@@ -758,7 +758,7 @@ void Character::Collision(const Point2d& speed_vector)
   // Do not manage dead characters.
   if (IsDead()) return;
 
-  rl_motion_pause = Time::GetInstance()->Read();
+  rl_motion_pause = GameTime::GetInstance()->Read();
 
   GameMode * game_mode = GameMode::GetInstance();
   if (body->GetClothe() != "weapon-" + m_team.GetWeapon().GetID()
@@ -985,7 +985,7 @@ void Character::StartOrStopWalkingIfNecessary()
   if (should_walk) {
     if (lr_move_intention->GetDirection() != GetDirection() && !IsChangingDirection()) {
       SetDirection(lr_move_intention->GetDirection());
-      last_direction_change = Time::GetInstance()->Read();
+      last_direction_change = GameTime::GetInstance()->Read();
     }
   }
   if (should_walk && !IsChangingDirection()) {
@@ -1002,8 +1002,8 @@ void Character::StartOrStopWalkingIfNecessary()
 
 void Character::StartWalking(bool slowly)
 {
-  walking_time = Time::GetInstance()->Read();
-  rl_motion_pause = max(rl_motion_pause , Time::GetInstance()->Read());
+  walking_time = GameTime::GetInstance()->Read();
+  rl_motion_pause = max(rl_motion_pause , GameTime::GetInstance()->Read());
   step_sound_played = true;
   walking_slowly = slowly;
 
@@ -1059,9 +1059,9 @@ void Character::MakeSteps()
   }
 
   // Check we can move (to go not too fast)
-  while (rl_motion_pause+walking_pause < Time::GetInstance()->Read() &&
+  while (rl_motion_pause+walking_pause < GameTime::GetInstance()->Read() &&
          ComputeHeightMovement(height)) {
-    walking_time = Time::GetInstance()->Read();
+    walking_time = GameTime::GetInstance()->Read();
     rl_motion_pause = rl_motion_pause + walking_pause;
 
     // Eventually moves the character
@@ -1074,7 +1074,7 @@ void Character::MakeSteps()
 
 bool Character::IsChangingDirection()
 {
-  return last_direction_change + PAUSE_CHG_DIRECTION >= Time::GetInstance()->Read();
+  return last_direction_change + PAUSE_CHG_DIRECTION >= GameTime::GetInstance()->Read();
 }
 
 bool Character::ComputeHeightMovement(int & height)

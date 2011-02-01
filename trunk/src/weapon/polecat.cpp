@@ -91,7 +91,7 @@ void Polecat::Fart()
   Double norme = Double(RandomSync().GetInt(0, 500))/100;
   Double angle = Double(RandomSync().GetInt(0, 3000))/100;
   ParticleEngine::AddNow(GetPosition(), 3, particle_POLECAT_FART, true, angle, norme);
-  last_fart_time = Time::GetInstance()->Read();
+  last_fart_time = GameTime::GetInstance()->Read();
   JukeBox::GetInstance()->Play("default", "weapon/polecat_fart");
 }
 
@@ -122,18 +122,18 @@ void Polecat::Refresh()
   }
 
   Double norm, angle;
-  if (last_fart_time && last_fart_time + TIME_BETWEEN_FART < Time::GetInstance()->Read()) {
+  if (last_fart_time && last_fart_time + TIME_BETWEEN_FART < GameTime::GetInstance()->Read()) {
     Fart();
   }
 
   //When we hit the ground, jump !
   if(!IsMoving() && !FootsInVacuum()) {
     // Limiting number of rebound to avoid desync
-    if(last_rebound_time + TIME_BETWEEN_REBOUND > Time::GetInstance()->Read()) {
+    if(last_rebound_time + TIME_BETWEEN_REBOUND > GameTime::GetInstance()->Read()) {
       image->SetRotation_rad(0.0);
       return;
     }
-    last_rebound_time = Time::GetInstance()->Read();
+    last_rebound_time = GameTime::GetInstance()->Read();
     MSG_DEBUG("weapon.polecat", "Jump ! (time = %d)", last_rebound_time);
     //If the GNU is stuck in ground -> change direction
     int x = GetX();
@@ -212,7 +212,7 @@ void PolecatLauncher::Refresh()
   if (current_polecat)
     return;
 
-  if (polecat_death_time && polecat_death_time + 2000 < Time::GetInstance()->Read()) {
+  if (polecat_death_time && polecat_death_time + 2000 < GameTime::GetInstance()->Read()) {
 
     UseAmmoUnit();
     polecat_death_time = 0;
@@ -259,7 +259,7 @@ void PolecatLauncher::SignalEndOfProjectile()
     return;
 
   current_polecat = NULL;
-  polecat_death_time = Time::GetInstance()->Read();
+  polecat_death_time = GameTime::GetInstance()->Read();
 }
 
 WeaponProjectile * PolecatLauncher::GetProjectileInstance()

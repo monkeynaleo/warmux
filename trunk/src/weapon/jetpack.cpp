@@ -91,7 +91,7 @@ void JetPack::Refresh()
 
     if (!F.IsNull()) {
       // We are using fuel !!!
-      uint current = Time::GetInstance()->Read() ;
+      uint current = GameTime::GetInstance()->Read() ;
       int64_t delta = current - m_last_fuel_down;
 
       while (delta >= DELTA_FUEL_DOWN) {
@@ -130,7 +130,7 @@ void JetPack::StartFlying()
 
   ActiveCharacter().SetMovement("jetpack-fire");
 
-  m_last_fuel_down = Time::GetInstance()->Read();
+  m_last_fuel_down = GameTime::GetInstance()->Read();
   flying_sound.Play(ActiveTeam().GetSoundProfile(),"weapon/jetpack", -1);
 
   Camera::GetInstance()->FollowObject(&ActiveCharacter(), true);

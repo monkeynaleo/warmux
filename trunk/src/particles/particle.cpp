@@ -55,7 +55,7 @@ Particle::Particle(const std::string &name) :
   m_left_time_to_live(0),
   m_check_move_on_end_turn(false),
   m_time_between_scale(0),
-  m_last_refresh(Time::GetInstance()->Read()),
+  m_last_refresh(GameTime::GetInstance()->Read()),
   image(NULL)
 {
   SetCollisionModel(false, false, false);
@@ -75,7 +75,7 @@ void Particle::Draw()
 
 void Particle::Refresh()
 {
-  uint time = Time::GetInstance()->Read() - m_last_refresh;
+  uint time = GameTime::GetInstance()->Read() - m_last_refresh;
 
   UpdatePosition();
 
@@ -102,14 +102,14 @@ void Particle::Refresh()
       image->Scale(1.0, 1.0);
       image->SetAlpha(alpha);
     }
-    m_last_refresh = Time::GetInstance()->Read() ;
+    m_last_refresh = GameTime::GetInstance()->Read() ;
   }
 }
 
 // ==============================================
 
 ParticleEngine::ParticleEngine(uint time):
-  m_last_refresh(Time::GetInstance()->Read()),
+  m_last_refresh(GameTime::GetInstance()->Read()),
   m_time_between_add(time)
 {}
 
@@ -118,8 +118,8 @@ void ParticleEngine::AddPeriodic(const Point2i &position, particle_t type,
                                  Double angle, Double norme)
 {
   // time spent since last refresh (in milliseconds)
-  uint time = Time::GetInstance()->Read() - m_last_refresh;
-  uint tmp = Time::GetInstance()->Read();
+  uint time = GameTime::GetInstance()->Read() - m_last_refresh;
+  uint tmp = GameTime::GetInstance()->Read();
 
   MSG_DEBUG("random.get", "ParticleEngine::AddPeriodic(...)");
   uint delta = uint(m_time_between_add * Double(RandomSync().GetUint(3, 40)) / 10);

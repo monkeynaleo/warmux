@@ -48,7 +48,7 @@ MagicStarParticle::MagicStarParticle() :
 
 void MagicStarParticle::Refresh()
 {
-  uint time = Time::GetInstance()->Read() - m_last_refresh;
+  uint time = GameTime::GetInstance()->Read() - m_last_refresh;
   if (time >= m_time_between_scale) {
     if (m_left_time_to_live <= 0) return ;
     Double lived_time = m_initial_time_to_live - m_left_time_to_live;

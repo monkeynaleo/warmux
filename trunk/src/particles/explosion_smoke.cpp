@@ -50,7 +50,7 @@ ExplosionSmoke::ExplosionSmoke(const uint size_init) :
 
 void ExplosionSmoke::Refresh()
 {
-  uint time = Time::GetInstance()->Read() - m_last_refresh;
+  uint time = GameTime::GetInstance()->Read() - m_last_refresh;
 
   UpdatePosition();
 
@@ -61,7 +61,7 @@ void ExplosionSmoke::Refresh()
     if (m_left_time_to_live <= 0) return ;
 
     m_left_time_to_live--;
-    m_last_refresh = Time::GetInstance()->Read() ;
+    m_last_refresh = GameTime::GetInstance()->Read() ;
   }
 }
 

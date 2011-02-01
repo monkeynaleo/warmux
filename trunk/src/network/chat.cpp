@@ -56,7 +56,7 @@ Chat::Chat():
 
 void Chat::Show()
 {
-  uint now = Time::GetInstance()->ReadSec();
+  uint now = GameTime::GetInstance()->ReadSec();
 
   if (now - last_time >= MAXSECONDS){
     chat.DeleteLine();
@@ -95,7 +95,7 @@ void Chat::ShowInput()
 void Chat::NewMessage(const std::string &msg, const Color& color)
 {
   if (!chat.Size()){
-    uint now = Time::GetInstance()->ReadSec();
+    uint now = GameTime::GetInstance()->ReadSec();
     last_time = now;
   }
 

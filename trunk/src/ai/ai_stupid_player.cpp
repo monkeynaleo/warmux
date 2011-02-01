@@ -165,7 +165,7 @@ void AIStupidPlayer::Reset()
   best_strategy = new DoNothingStrategy();
   best_strategy_counter = 1;
   item_iterator = items.begin();
-  game_time_at_turn_start = Time::GetInstance()->Read();
+  game_time_at_turn_start = GameTime::GetInstance()->Read();
 }
 
 void AIStupidPlayer::Refresh()
@@ -178,7 +178,7 @@ void AIStupidPlayer::Refresh()
     return;
   if (command_executed)
     return;
-  uint now = Time::GetInstance()->Read();
+  uint now = GameTime::GetInstance()->Read();
   bool is_thinking = (command == NULL);
   if (is_thinking) {
     bool think_time_over = now >= game_time_at_turn_start + MAX_GAME_TIME_USED_THINKING_IN_MS;

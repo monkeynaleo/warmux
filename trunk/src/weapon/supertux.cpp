@@ -109,7 +109,7 @@ void SuperTux::Shoot(Double strength)
   WeaponProjectile::Shoot(strength);
   angle_rad = ActiveCharacter().GetFiringAngle();
 
-  Time * global_time = Time::GetInstance();
+  GameTime * global_time = GameTime::GetInstance();
   time_next_action = global_time->Read();
   last_move = global_time->Read();
   StartTimeout();
@@ -120,11 +120,11 @@ void SuperTux::Refresh()
   WeaponProjectile::Refresh();
 
   image->SetRotation_rad(angle_rad + HALF_PI);
-  if ((last_move+animation_deltat)<Time::GetInstance()->Read())
+  if ((last_move+animation_deltat)<GameTime::GetInstance()->Read())
   {
     SetExternForce(static_cast<SuperTuxWeaponConfig&>(cfg).speed, angle_rad);
     image->Update();
-    last_move = Time::GetInstance()->Read();
+    last_move = GameTime::GetInstance()->Read();
   }
 
   if (!swimming)
@@ -138,7 +138,7 @@ void SuperTux::Refresh()
 
 void SuperTux::turn_left()
 {
-  time_now = Time::GetInstance()->Read();
+  time_now = GameTime::GetInstance()->Read();
   if (time_next_action<time_now)
     {
       time_next_action=time_now + time_delta;
@@ -148,7 +148,7 @@ void SuperTux::turn_left()
 
 void SuperTux::turn_right()
 {
-  time_now = Time::GetInstance()->Read();
+  time_now = GameTime::GetInstance()->Read();
   if (time_next_action<time_now)
     {
       time_next_action=time_now + time_delta;
@@ -253,7 +253,7 @@ void TuxLauncher::Refresh()
         current_tux->turn_right();
     }
   } else {
-    if (tux_death_time && tux_death_time + 2000 < Time::GetInstance()->Read()) {
+    if (tux_death_time && tux_death_time + 2000 < GameTime::GetInstance()->Read()) {
       UseAmmoUnit();
       tux_death_time = 0;
     }
@@ -266,7 +266,7 @@ void TuxLauncher::SignalEndOfProjectile()
     return;
 
   current_tux = NULL;
-  tux_death_time = Time::GetInstance()->Read();
+  tux_death_time = GameTime::GetInstance()->Read();
 }
 
 void TuxLauncher::StartShooting()

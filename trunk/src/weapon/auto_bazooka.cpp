@@ -104,7 +104,7 @@ void RPG::Shoot(Double strength)
 
 void RPG::Refresh()
 {
-  uint time = Time::GetInstance()->Read();
+  uint time = GameTime::GetInstance()->Read();
   Double flying_time = GetMSSinceTimeoutStart();
   uint timestep = time - m_lastrefresh;
   m_lastrefresh = time;

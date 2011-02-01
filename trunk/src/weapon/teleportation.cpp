@@ -81,7 +81,7 @@ void Teleportation::Refresh()
     return;
   if (done)
     return;
-  if (Time::GetInstance()->Read() - m_last_fire_time > TELEPORTATION_ANIM_DURATION) {
+  if (GameTime::GetInstance()->Read() - m_last_fire_time > TELEPORTATION_ANIM_DURATION) {
     Character& achar = ActiveCharacter();
     achar.SetXY(dst);
     achar.SetSpeed(ZERO, ZERO);

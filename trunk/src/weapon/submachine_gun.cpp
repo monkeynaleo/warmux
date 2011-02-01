@@ -124,9 +124,9 @@ bool SubMachineGun::p_Shoot()
   Point2i pos;
   ActiveCharacter().GetHandPosition(pos);
   Double angle =  - HALF_PI - ActiveCharacter().GetDirection()
-               * (Double)(Time::GetInstance()->Read() % 100) * QUARTER_PI / (Double)100.0;
+               * (Double)(GameTime::GetInstance()->Read() % 100) * QUARTER_PI / (Double)100.0;
   particle.AddNow(pos, 1, particle_BULLET, true, angle,
-                  FIVE + (Time::GetInstance()->Read() % 6));
+                  FIVE + (GameTime::GetInstance()->Read() % 6));
 
   announce_missed_shots = false;
 
