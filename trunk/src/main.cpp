@@ -474,7 +474,7 @@ void ParseArgs(int argc, char * argv[])
 
 extern "C" int main(int argc, char *argv[])
 {
-#ifndef WIN32
+#if !defined(WIN32) && !defined(__SYMBIAN32__)
   signal(SIGPIPE, SIG_IGN);
 #endif
 
