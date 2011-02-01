@@ -10,12 +10,12 @@ MACRO __SYMBIAN_STDCPP_SUPPORT__
 SYSTEMINCLUDE   \epoc32\include\stlport
 SYSTEMINCLUDE   \epoc32\include\stdapis
 SYSTEMINCLUDE   \epoc32\include
-SYSTEMINCLUDE   \epoc32\include\stdapis\libxml2
 SYSTEMINCLUDE   \epoc32\include\SDL
 SYSTEMINCLUDE   \epoc32\include\libpng-1.2
 SYSTEMINCLUDE   ..\..\..\lib\warmux\include
 SYSTEMINCLUDE   ..\..\..\lib\fixedpoint
 SYSTEMINCLUDE   ..\lib\curl\include
+SYSTEMINCLUDE   ..\lib\libxml2\inc\libxml2
 
 USERINCLUDE   ..\..\..\src
 
