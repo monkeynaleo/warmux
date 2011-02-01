@@ -45,7 +45,7 @@ void BulletParticle::Refresh()
     m_left_time_to_live = 0;
     return;
   }
-  int current_time = Time::GetInstance()->Read();
+  int current_time = GameTime::GetInstance()->Read();
   UpdatePosition();
   image->Update();
   if(start_to_fade > 0) {
@@ -54,7 +54,7 @@ void BulletParticle::Refresh()
     image->SetAlpha(ONE - ((Double)(current_time - start_to_fade)) / BULLET_PARTICLE_FADE_TIME);
   } else {
     // FIXME this is still a ugly hack
-    image->SetRotation_rad((Time::GetInstance()->Read()/4) % 3 /* 3 is arbitrary */ );
+    image->SetRotation_rad((GameTime::GetInstance()->Read()/4) % 3 /* 3 is arbitrary */ );
   }
 }
 
@@ -63,5 +63,5 @@ void BulletParticle::SignalRebound()
   PhysicalObj::SignalRebound();
   //SetCollisionModel(false, false, false);
   StopMoving();
-  start_to_fade = Time::GetInstance()->Read();
+  start_to_fade = GameTime::GetInstance()->Read();
 }

@@ -41,7 +41,7 @@ TeleportMemberParticle::TeleportMemberParticle(Sprite& spr, const Point2i& posit
   SetOnTop(true);
   destination = dest;
   start = position;
-  time = Time::GetInstance()->Read();
+  time = GameTime::GetInstance()->Read();
 
   MSG_DEBUG("random.get", "TeleportMemberParticle::TeleportMemberParticle(...)");
   sin_x_max = RandomSync().GetDouble(QUARTER_PI, THREE * QUARTER_PI);
@@ -58,7 +58,7 @@ TeleportMemberParticle::~TeleportMemberParticle()
 
 void TeleportMemberParticle::Refresh()
 {
-  uint now = Time::GetInstance()->Read();
+  uint now = GameTime::GetInstance()->Read();
   if (now > time + TELEPORTATION_ANIM_DURATION)
     m_left_time_to_live = 0;
 

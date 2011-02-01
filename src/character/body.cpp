@@ -453,10 +453,10 @@ void Body::Build()
 
   if (walking || current_mvt->GetType() != "walk") {
 
-    if (Time::GetInstance()->Read() > last_refresh + current_mvt->GetFrameDuration()) {
+    if (GameTime::GetInstance()->Read() > last_refresh + current_mvt->GetFrameDuration()) {
 
       // Compute the new frame number
-      current_frame += (Time::GetInstance()->Read()-last_refresh) / current_mvt->GetFrameDuration();
+      current_frame += (GameTime::GetInstance()->Read()-last_refresh) / current_mvt->GetFrameDuration();
       last_refresh += (current_frame-last_frame) * current_mvt->GetFrameDuration();
 
       // This is the end of the animation
@@ -698,7 +698,7 @@ void Body::SetMovement(const std::string & name)
     current_mvt       = itMvt->second;
     current_frame     = 0;
     current_loop      = 0;
-    last_refresh      = Time::GetInstance()->Read();
+    last_refresh      = GameTime::GetInstance()->Read();
     main_rotation_rad = 0;
     need_rebuild      = true;
     previous_mvt      = NULL;
@@ -764,7 +764,7 @@ void Body::SetMovementOnce(const std::string & name)
     current_mvt = itMvt->second;
     current_frame = 0;
     current_loop = 0;
-    last_refresh = Time::GetInstance()->Read();
+    last_refresh = GameTime::GetInstance()->Read();
     main_rotation_rad = 0;
     need_rebuild = true;
   } else {
@@ -794,7 +794,7 @@ void Body::StartWalking()
 {
   ASSERT(!walking);
   walking = true;
-  last_refresh = Time::GetInstance()->Read();
+  last_refresh = GameTime::GetInstance()->Read();
 }
 
 void Body::StopWalking()

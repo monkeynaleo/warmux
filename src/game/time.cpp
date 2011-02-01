@@ -28,13 +28,13 @@
 #include <sstream>
 #include <iomanip>
 
-Time::Time()
+GameTime::GameTime()
 {
   delta_t = 20;
   Reset();
 }
 
-void Time::Reset()
+void GameTime::Reset()
 {
   current_time = 0;
   waiting_for_user = false;
@@ -48,7 +48,7 @@ void Time::Reset()
   }
 }
 
-void Time::Increase()
+void GameTime::Increase()
 {
   ASSERT(!IsWaiting());
   ASSERT(CanBeIncreased());
@@ -56,12 +56,12 @@ void Time::Increase()
   MSG_DEBUG("time.increase","Real time without pause: %d; Game time: %d", stopwatch.GetValue(), current_time);
 }
 
-bool Time::CanBeIncreased()
+bool GameTime::CanBeIncreased()
 {
   return stopwatch.GetValue() >= current_time;
 }
 
-void Time::LetRealTimePassUntilFrameEnd()
+void GameTime::LetRealTimePassUntilFrameEnd()
 {
   ASSERT(!IsWaiting());
   int64_t delay;
@@ -74,17 +74,17 @@ void Time::LetRealTimePassUntilFrameEnd()
   } while (delay > 0);
 }
 
-bool Time::IsWaiting()
+bool GameTime::IsWaiting()
 {
   return waiting_for_user || waiting_for_network;
 }
 
-bool Time::IsWaitingForUser()
+bool GameTime::IsWaitingForUser()
 {
   return waiting_for_user;
 }
 
-void Time::SetWaitingForUser(bool value)
+void GameTime::SetWaitingForUser(bool value)
 {
   if (waiting_for_user == value)
     return;
@@ -92,12 +92,12 @@ void Time::SetWaitingForUser(bool value)
   stopwatch.SetPause(IsWaiting());
 }
 
-bool Time::IsWaitingForNetwork()
+bool GameTime::IsWaitingForNetwork()
 {
   return waiting_for_network;
 }
 
-void Time::SetWaitingForNetwork(bool value)
+void GameTime::SetWaitingForNetwork(bool value)
 {
   if (waiting_for_network == value)
     return;
@@ -111,7 +111,7 @@ void Time::SetWaitingForNetwork(bool value)
   stopwatch.SetPause(IsWaiting());
 }
 
-uint Time::GetMSWaitingForNetwork()
+uint GameTime::GetMSWaitingForNetwork()
 {
   if (waiting_for_network)
     return network_wait_time_stopwatch.GetValue();
@@ -120,7 +120,7 @@ uint Time::GetMSWaitingForNetwork()
 }
 
 
-std::string Time::GetString() const
+std::string GameTime::GetString() const
 {
   std::ostringstream ss;
 

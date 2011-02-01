@@ -97,14 +97,14 @@ bool WeaponMenuItem::IsMouseOver()
 void WeaponMenuItem::SetZoom(bool value)
 {
   zoom = value;
-  zoom_start_time = Time::GetInstance()->Read();
+  zoom_start_time = GameTime::GetInstance()->Read();
 }
 
 void WeaponMenuItem::Draw(Surface * dest)
 {
   Double scale = DEFAULT_ICON_SCALE;
-  if (zoom || zoom_start_time + GetZoomTime() > Time::GetInstance()->Read()) {
-    scale = (Time::GetInstance()->Read() - zoom_start_time) / (Double)GetZoomTime();
+  if (zoom || zoom_start_time + GetZoomTime() > GameTime::GetInstance()->Read()) {
+    scale = (GameTime::GetInstance()->Read() - zoom_start_time) / (Double)GetZoomTime();
     if (zoom) {
       scale = DEFAULT_ICON_SCALE + (MAX_ICON_SCALE - DEFAULT_ICON_SCALE) * scale;
       scale = (scale > MAX_ICON_SCALE ? MAX_ICON_SCALE : scale);
@@ -254,10 +254,10 @@ void WeaponsMenu::Show(const Point2i& pos)
 
   ShowGameInterface();
   if (!show) {
-    if (motion_start_time + GetIconsDrawTime() < Time::GetInstance()->Read())
-      motion_start_time = Time::GetInstance()->Read();
+    if (motion_start_time + GetIconsDrawTime() < GameTime::GetInstance()->Read())
+      motion_start_time = GameTime::GetInstance()->Read();
     else
-      motion_start_time = Time::GetInstance()->Read() - (GetIconsDrawTime() - (Time::GetInstance()->Read() - motion_start_time));
+      motion_start_time = GameTime::GetInstance()->Read() - (GetIconsDrawTime() - (GameTime::GetInstance()->Read() - motion_start_time));
     show = true;
 
     JukeBox::GetInstance()->Play("default", "menu/weapon_menu_show");
@@ -270,10 +270,10 @@ void WeaponsMenu::Hide(bool play_sound)
 {
   if (show) {
     Interface::GetInstance()->SetCurrentOverflyWeapon(NULL);
-    if (motion_start_time + GetIconsDrawTime() < Time::GetInstance()->Read())
-      motion_start_time = Time::GetInstance()->Read();
+    if (motion_start_time + GetIconsDrawTime() < GameTime::GetInstance()->Read())
+      motion_start_time = GameTime::GetInstance()->Read();
     else
-      motion_start_time = Time::GetInstance()->Read() - (GetIconsDrawTime() - (Time::GetInstance()->Read() - motion_start_time));
+      motion_start_time = GameTime::GetInstance()->Read() - (GetIconsDrawTime() - (GameTime::GetInstance()->Read() - motion_start_time));
     show = false;
 
     if (play_sound)
@@ -343,7 +343,7 @@ AffineTransform2D WeaponsMenu::ComputeToolTransformation()
 
   // Define the animation
   position.SetTranslationAnimation(motion_start_time, GetIconsDrawTime(),
-                                   Time::GetInstance()->Read(),
+                                   GameTime::GetInstance()->Read(),
                                    !show, start, end);
 
   return position ;
@@ -362,7 +362,7 @@ AffineTransform2D WeaponsMenu::ComputeWeaponTransformation()
 
   // Define the animation
   position.SetTranslationAnimation(motion_start_time, GetIconsDrawTime(),
-                                   Time::GetInstance()->Read(),
+                                   GameTime::GetInstance()->Read(),
                                    !show, start, click_pos);
 
   return position;
@@ -370,7 +370,7 @@ AffineTransform2D WeaponsMenu::ComputeWeaponTransformation()
 
 void WeaponsMenu::Draw()
 {
-  if (!show && (motion_start_time == 0 || Time::GetInstance()->Read() >= motion_start_time + GetIconsDrawTime()))
+  if (!show && (motion_start_time == 0 || GameTime::GetInstance()->Read() >= motion_start_time + GetIconsDrawTime()))
     return;
 
   // Update animation

@@ -74,7 +74,7 @@ Weapon::Weapon(Weapon_type type,
   m_id = id;
   m_help = "";
 
-  m_time_anim_begin = Time::GetInstance()->Read();
+  m_time_anim_begin = GameTime::GetInstance()->Read();
   m_available_after_turn = 0;
   m_initial_nb_ammo = INFINITE_AMMO;
   m_initial_nb_unit_per_ammo = 1;
@@ -152,7 +152,7 @@ void Weapon::Select()
 {
   MSG_DEBUG("weapon.change", "Select %s", m_name.c_str());
 
-  m_time_anim_begin = Time::GetInstance()->Read();
+  m_time_anim_begin = GameTime::GetInstance()->Read();
   m_strength = 0;
   m_last_fire_time = 0;
   ActiveTeam().ResetNbUnits();
@@ -251,7 +251,7 @@ bool Weapon::Shoot()
     MSG_DEBUG("weapon.shoot", "shoot has failed!!");
     return false;
   }
-  m_last_fire_time = Time::GetInstance()->Read();
+  m_last_fire_time = GameTime::GetInstance()->Read();
 
   MSG_DEBUG("weapon.shoot", "shoot!");
 
@@ -329,7 +329,7 @@ void Weapon::StopShooting()
 
 void Weapon::RepeatShoot()
 {
-  uint current_time = Time::GetInstance()->Read();
+  uint current_time = GameTime::GetInstance()->Read();
 
   if (current_time - m_last_fire_time >= m_time_between_each_shot) {
     PrepareShoot();
@@ -461,7 +461,7 @@ void Weapon::UpdateStrength(){
   if (max_strength==0 || !m_first_time_loading)
     return ;
 
-  uint time = Time::GetInstance()->Read() - m_first_time_loading;
+  uint time = GameTime::GetInstance()->Read() - m_first_time_loading;
   Double val = (max_strength * time*time) / (MAX_TIME_LOADING*MAX_TIME_LOADING);
 
   m_strength = InRange_Double (val, 0.0, max_strength);
@@ -469,7 +469,7 @@ void Weapon::UpdateStrength(){
 
 bool Weapon::IsOnCooldownFromShot() const
 {
-  return (m_last_fire_time > 0 && m_last_fire_time + m_time_between_each_shot > Time::GetInstance()->Read());
+  return (m_last_fire_time > 0 && m_last_fire_time + m_time_between_each_shot > GameTime::GetInstance()->Read());
 }
 
 void Weapon::InitLoading(){
@@ -479,7 +479,7 @@ void Weapon::InitLoading(){
 
   loading_sound.Play("default","weapon/load");
 
-  m_first_time_loading = Time::GetInstance()->Read();
+  m_first_time_loading = GameTime::GetInstance()->Read();
 
   m_strength = 0;
 
@@ -494,11 +494,11 @@ void Weapon::StopLoading(){
 
 void Weapon::Draw(){
   if (Game::GetInstance()->ReadState() != Game::PLAYING &&
-      m_last_fire_time + 100 < Time::GetInstance()->Read())
+      m_last_fire_time + 100 < GameTime::GetInstance()->Read())
     return;
 
 #ifndef DEBUG_HOLE
-  if (m_last_fire_time + m_fire_remanence_time > Time::GetInstance()->Read())
+  if (m_last_fire_time + m_fire_remanence_time > GameTime::GetInstance()->Read())
 #endif
     DrawWeaponFire();
 
@@ -533,16 +533,16 @@ void Weapon::Draw(){
   PosXY (x, y);
 
   // Animate the display of the weapon:
-  if (m_time_anim_begin + ANIM_DISPLAY_TIME > Time::GetInstance()->Read()) {
+  if (m_time_anim_begin + ANIM_DISPLAY_TIME > GameTime::GetInstance()->Read()) {
     if (!EqualsZero(min_angle - max_angle)) {
       Double angle = m_image->GetRotation_rad();
-      angle += sin(HALF_PI * Double(Time::GetInstance()->Read() - m_time_anim_begin) / ANIM_DISPLAY_TIME)
+      angle += sin(HALF_PI * Double(GameTime::GetInstance()->Read() - m_time_anim_begin) / ANIM_DISPLAY_TIME)
              * TWO_PI;
       m_image->SetRotation_rad(angle);
       m_image->Scale(ONE, ONE);
     }
     else {
-      Double scale = sin((Double)1.5 * HALF_PI * Double(Time::GetInstance()->Read() - m_time_anim_begin) / ANIM_DISPLAY_TIME)
+      Double scale = sin((Double)1.5 * HALF_PI * Double(GameTime::GetInstance()->Read() - m_time_anim_begin) / ANIM_DISPLAY_TIME)
                    / sin((Double)1.5 * HALF_PI);
       if (scale.IsNotZero()) {
         m_image->Scale(scale, scale);

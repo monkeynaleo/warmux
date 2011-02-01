@@ -28,7 +28,7 @@
 #include "game/stopwatch.h"
 
 // XXX uint wrap-around (or at least system timer) not handled
-class Time : public Singleton<Time>
+class GameTime : public Singleton<GameTime>
 {
 private:
   Stopwatch   stopwatch;
@@ -39,8 +39,8 @@ private:
   Stopwatch   network_wait_time_stopwatch;
 
 protected:
-  friend class Singleton<Time>;
-  Time();
+  friend class Singleton<GameTime>;
+  GameTime();
 
 public:
 

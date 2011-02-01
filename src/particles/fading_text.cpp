@@ -34,13 +34,13 @@ FadingText::FadingText(const std::string & text) : ExplosionSmoke(20)
 {
   delete image;
   image = new Sprite(Font::GetInstance(Font::FONT_MEDIUM)->CreateSurface(text, Color(0, 255)));
-  start_to_fade = Time::GetInstance()->Read() + INIT_DISPLAY_TIME;
+  start_to_fade = GameTime::GetInstance()->Read() + INIT_DISPLAY_TIME;
 }
 
 void FadingText::Refresh()
 {
   if (m_left_time_to_live <= 0) return ;
-  uint current_time = Time::GetInstance()->Read();
+  uint current_time = GameTime::GetInstance()->Read();
   m_left_time_to_live--;
   image->Scale(1.0, 1.0);
   if(start_to_fade < current_time) {

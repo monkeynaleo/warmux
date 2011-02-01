@@ -120,7 +120,7 @@ void Game::InitEverything()
   Mouse::GetInstance()->Hide();
 
   std::cout << "o " << _("Initialisation") << std::endl;
-  Time::GetInstance()->Reset();
+  GameTime::GetInstance()->Reset();
 
   // initialize gaming data
   if (Network::GetInstance()->IsGameMaster())
@@ -182,7 +182,7 @@ void Game::InitEverything()
   SetState(END_TURN, true); // begin with a small pause
 
   // Reset time at end of initialisation, so that the first player doesn't loose a few seconds.
-  Time::GetInstance()->Reset();
+  GameTime::GetInstance()->Reset();
 
   std::cout << std::endl;
   std::cout << "[ " << _("Starting a new game") << " ]" << std::endl;
@@ -342,9 +342,9 @@ void Game::DisplayError(const std::string &msg)
 
   Question question(Question::WARNING);
   question.Set(msg, true, 0);
-  Time::GetInstance()->SetWaitingForUser(true);
+  GameTime::GetInstance()->SetWaitingForUser(true);
   question.Ask();
-  Time::GetInstance()->SetWaitingForUser(false);
+  GameTime::GetInstance()->SetWaitingForUser(false);
 }
 
 uint Game::Start(bool bench)
@@ -619,7 +619,7 @@ void Game::Draw()
   if (benching) {
     float avg = fps->GetLastValue();
     if (avg > 0.0) {
-      bench_res.push_back(std::make_pair(Time::GetInstance()->Read()/1000.0f, avg));
+      bench_res.push_back(std::make_pair(GameTime::GetInstance()->Read()/1000.0f, avg));
     }
   }
 
@@ -630,7 +630,7 @@ void Game::Draw()
     StatStop("GameDraw:chatsession");
   }
 
-  if (Time::GetInstance()->GetMSWaitingForNetwork() > MAX_WAIT_TIME_WITHOUT_MESSAGE_IN_MS) {
+  if (GameTime::GetInstance()->GetMSWaitingForNetwork() > MAX_WAIT_TIME_WITHOUT_MESSAGE_IN_MS) {
     Point2i pos = GetMainWindow().GetSize()/2;
     std::string text = Format(_("Waiting for %s"), ActiveTeam().GetPlayerName().c_str());
     waiting_for_network_text.SetText(text);
@@ -754,10 +754,10 @@ void Game::MainLoop()
 {
   static bool draw = true;
 
-  if (!Time::GetInstance()->IsWaitingForUser()) {
+  if (!GameTime::GetInstance()->IsWaitingForUser()) {
     // If we are waiting for the network then we have already done those steps.
-    if (!Time::GetInstance()->IsWaitingForNetwork()) {
-      Time::GetInstance()->Increase();
+    if (!GameTime::GetInstance()->IsWaitingForNetwork()) {
+      GameTime::GetInstance()->Increase();
 
       // Refresh clock value
       RefreshClock();
@@ -781,12 +781,12 @@ void Game::MainLoop()
 
 #ifdef DEBUG
         Action* action = new Action(Action::ACTION_TIME_VERIFY_SYNC);
-        action->Push((int)Time::GetInstance()->Read());
+        action->Push((int)GameTime::GetInstance()->Read());
         ActionHandler::GetInstance()->NewAction(action);
 #endif
       }
 
-      if (Time::GetInstance()->Read() % 1000 == 20 && Network::GetInstance()->IsGameMaster())
+      if (GameTime::GetInstance()->Read() % 1000 == 20 && Network::GetInstance()->IsGameMaster())
         PingClient();
     }
     StatStart("Game:RefreshInput()");
@@ -798,13 +798,13 @@ void Game::MainLoop()
 
     bool is_turn_master = Network::GetInstance()->IsTurnMaster();
     if (is_turn_master) {
-      Time::GetInstance()->SetWaitingForNetwork(false);
+      GameTime::GetInstance()->SetWaitingForNetwork(false);
       Action *a = new Action(Action::ACTION_GAME_CALCULATE_FRAME);
       ActionHandler::GetInstance()->NewAction(a);
     }
     bool actions_executed = ActionHandler::GetInstance()->ExecActionsForOneFrame();
     ASSERT(actions_executed || !is_turn_master);
-    Time::GetInstance()->SetWaitingForNetwork(!actions_executed);
+    GameTime::GetInstance()->SetWaitingForNetwork(!actions_executed);
 
     if (actions_executed) {
       StatStart("Game:RefreshObject()");
@@ -837,7 +837,7 @@ void Game::MainLoop()
     // try to adjust to max Frame by seconds
     draw = time_of_next_frame < SDL_GetTicks();
     // Only display if the physic engine isn't late
-    draw = draw && !(Time::GetInstance()->CanBeIncreased() && !Time::GetInstance()->IsWaiting());
+    draw = draw && !(GameTime::GetInstance()->CanBeIncreased() && !GameTime::GetInstance()->IsWaiting());
   }
 
   if (draw) {
@@ -855,8 +855,8 @@ void Game::MainLoop()
     if (time_of_next_frame < SDL_GetTicks())
       time_of_next_frame = SDL_GetTicks();
   }
-  if (!Time::GetInstance()->IsWaiting())
-    Time::GetInstance()->LetRealTimePassUntilFrameEnd();
+  if (!GameTime::GetInstance()->IsWaiting())
+    GameTime::GetInstance()->LetRealTimePassUntilFrameEnd();
 }
 
 bool Game::NewBox()
@@ -1119,7 +1119,7 @@ bool Game::MenuQuitPause()
 {
   JukeBox::GetInstance()->Pause();
 
-  Time::GetInstance()->SetWaitingForUser(true);
+  GameTime::GetInstance()->SetWaitingForUser(true);
 
   Action a(Action::ACTION_ANNOUNCE_PAUSE);
   Network::GetInstance()->SendActionToAll(a);
@@ -1130,7 +1130,7 @@ bool Game::MenuQuitPause()
   delete menu;
   menu = NULL;
 
-  Time::GetInstance()->SetWaitingForUser(false);
+  GameTime::GetInstance()->SetWaitingForUser(false);
 
   JukeBox::GetInstance()->Resume();
 
@@ -1141,7 +1141,7 @@ void Game::MenuHelpPause()
 {
   JukeBox::GetInstance()->Pause();
 
-  Time::GetInstance()->SetWaitingForUser(true);
+  GameTime::GetInstance()->SetWaitingForUser(true);
 
   Action a(Action::ACTION_ANNOUNCE_PAUSE);
   Network::GetInstance()->SendActionToAll(a);
@@ -1151,7 +1151,7 @@ void Game::MenuHelpPause()
   delete menu;
   menu = NULL;
 
-  Time::GetInstance()->SetWaitingForUser(false);
+  GameTime::GetInstance()->SetWaitingForUser(false);
 
   JukeBox::GetInstance()->Resume();
 }

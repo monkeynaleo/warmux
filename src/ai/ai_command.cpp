@@ -221,7 +221,7 @@ DoNothingCommand::DoNothingCommand(uint duration_in_ms):
 
 bool DoNothingCommand::Execute()
 {
-  uint now = Time::GetInstance()->Read();
+  uint now = GameTime::GetInstance()->Read();
   if (!start_time) {
     start_time = now;
   }

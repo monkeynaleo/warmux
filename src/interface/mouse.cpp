@@ -378,7 +378,7 @@ void Mouse::Draw() const
 void Mouse::Show()
 {
 #ifndef HAVE_TOUCHSCREEN
-  if (Time::GetConstInstance()->Read()-last_hide_time > 10000 && visible == MOUSE_HIDDEN) {
+  if (GameTime::GetConstInstance()->Read()-last_hide_time > 10000 && visible == MOUSE_HIDDEN) {
     CenterPointer();
   }
 #endif
@@ -394,7 +394,7 @@ void Mouse::Hide()
 {
   if (visible == MOUSE_VISIBLE)
   {
-    last_hide_time = Time::GetConstInstance()->Read();
+    last_hide_time = GameTime::GetConstInstance()->Read();
   }
   visible = MOUSE_HIDDEN;
   SDL_ShowCursor(false); // be sure cursor is invisible

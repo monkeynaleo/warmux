@@ -49,8 +49,8 @@ Physics::Physics ():
   m_pos_x(),
   m_pos_y(),
   m_extern_force(),
-  m_last_move(Time::GetInstance()->Read()),
-  m_last_physical_engine_run(Time::GetInstance()->Read()),
+  m_last_move(GameTime::GetInstance()->Read()),
+  m_last_physical_engine_run(GameTime::GetInstance()->Read()),
   m_phys_width(),
   m_phys_height(),
   m_fix_point_gnd(),
@@ -297,7 +297,7 @@ bool Physics::IsMoving() const
 bool Physics::IsSleeping() const
 {
   // return true if not moving since 1 sec.
-  int delta = Time::GetInstance()->Read() - m_last_move;
+  int delta = GameTime::GetInstance()->Read() - m_last_move;
   if (delta > 400) {
     MSG_DBG_RTTI("physic.sleep", "%s is sleeping since %d ms.",
                  typeid(*this).name(), delta);
@@ -309,7 +309,7 @@ bool Physics::IsSleeping() const
 
 void Physics::UpdateTimeOfLastMove()
 {
-  m_last_move = Time::GetInstance()->Read();
+  m_last_move = GameTime::GetInstance()->Read();
 }
 
 // Compute the next position of the object during a pendulum motion.
@@ -440,12 +440,12 @@ Point2d Physics::ComputeNextXY(Double delta_t){
 
 void Physics::ResetLastRunTime()
 {
-  m_last_physical_engine_run = Time::GetInstance()->Read();
+  m_last_physical_engine_run = GameTime::GetInstance()->Read();
 }
 
 void Physics::RunPhysicalEngine()
 {
-  uint now = Time::GetInstance()->Read();
+  uint now = GameTime::GetInstance()->Read();
   if (m_last_physical_engine_run < m_last_move) {
     ASSERT(now >= m_last_move);
     m_last_physical_engine_run = m_last_move;

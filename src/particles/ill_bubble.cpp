@@ -46,7 +46,7 @@ IllBubble::IllBubble() : ExplosionSmoke(20)
 void IllBubble::Refresh()
 {
   ExplosionSmoke::Refresh();
-  uint time = (Time::GetInstance()->Read() + vib_phi) % vib_period;
+  uint time = (GameTime::GetInstance()->Read() + vib_phi) % vib_period;
 
   Double scale_x, scale_y;
   image->GetScaleFactors(scale_x, scale_y);

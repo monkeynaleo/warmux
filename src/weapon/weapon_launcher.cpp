@@ -407,12 +407,12 @@ int WeaponProjectile::GetTotalTimeout() const
 
 void WeaponProjectile::StartTimeout()
 {
-  timeout_start = Time::GetInstance()->Read();
+  timeout_start = GameTime::GetInstance()->Read();
 }
 
 uint WeaponProjectile::GetMSSinceTimeoutStart() const
 {
-  uint now = Time::GetInstance()->Read();
+  uint now = GameTime::GetInstance()->Read();
   ASSERT (timeout_start  != INVALID_TIMEOUT_START);
   ASSERT(now >= timeout_start);
   return now - timeout_start;

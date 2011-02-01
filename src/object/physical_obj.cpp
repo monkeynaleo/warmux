@@ -136,7 +136,7 @@ void PhysicalObj::SetOverlappingObject(PhysicalObj* obj, int timeout)
     return;
   }
   if (timeout > 0)
-    m_minimum_overlapse_time = Time::GetInstance()->Read() + timeout;
+    m_minimum_overlapse_time = GameTime::GetInstance()->Read() + timeout;
 
   CheckOverlapping();
 }
@@ -148,10 +148,10 @@ void PhysicalObj::CheckOverlapping()
 
   // Check if we are still overlapping with this object
   if (!m_overlapping_object->GetTestRect().Intersect(GetTestRect()) &&
-      m_minimum_overlapse_time <= Time::GetInstance()->Read()) {
+      m_minimum_overlapse_time <= GameTime::GetInstance()->Read()) {
     MSG_DEBUG("physic.overlapping", "\"%s\" just stopped overlapping with \"%s\" (%d ms left)",
               GetName().c_str(), m_overlapping_object->GetName().c_str(),
-              (m_minimum_overlapse_time - Time::GetInstance()->Read()));
+              (m_minimum_overlapse_time - GameTime::GetInstance()->Read()));
     SetOverlappingObject(NULL);
   } else {
     MSG_DEBUG("physic.overlapping", "\"%s\" is overlapping with \"%s\"",

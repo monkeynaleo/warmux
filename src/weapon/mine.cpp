@@ -90,8 +90,8 @@ void ObjMine::StartTimeout()
 
     Camera::GetInstance()->FollowObject(this);
 
-    MSG_DEBUG("mine", "EnableDetection - CurrentTime : %d",Time::GetInstance()->ReadSec() );
-    attente = Time::GetInstance()->ReadSec() + cfg.timeout;
+    MSG_DEBUG("mine", "EnableDetection - CurrentTime : %d",GameTime::GetInstance()->ReadSec() );
+    attente = GameTime::GetInstance()->ReadSec() + cfg.timeout;
     MSG_DEBUG("mine", "EnableDetection : %d", attente);
 
     timeout_sound.Play("default", "weapon/mine_beep", -1);
@@ -100,7 +100,7 @@ void ObjMine::StartTimeout()
 
 void ObjMine::Detection()
 {
-  uint current_time = Time::GetInstance()->ReadSec();
+  uint current_time = GameTime::GetInstance()->ReadSec();
 
   if (escape_time == 0) {
     escape_time = current_time + static_cast<MineConfig&>(cfg).escape_time;
@@ -167,7 +167,7 @@ void ObjMine::Refresh()
     image->Update();
 
     // the timeout is finished !!
-    if (attente < Time::GetInstance()->ReadSec()) {
+    if (attente < GameTime::GetInstance()->ReadSec()) {
       is_active = false;
       timeout_sound.Stop();
       if (!fake)

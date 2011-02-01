@@ -85,7 +85,7 @@ bool GameBlitz::Run()
 
 void GameBlitz::RefreshClock()
 {
-  Time * global_time = Time::GetInstance();
+  GameTime * global_time = GameTime::GetInstance();
 
   if (1000 < global_time->Read() - last_clock_update) {
     last_clock_update = global_time->Read();
@@ -180,7 +180,7 @@ void GameBlitz::__SetState_PLAYING()
   // initialize counter
   Interface::GetInstance()->UpdateTimer(GetCurrentTeam()->second, false, true);
   Interface::GetInstance()->EnableDisplayTimer(true);
-  last_clock_update = Time::GetInstance()->Read();
+  last_clock_update = GameTime::GetInstance()->Read();
 
   give_objbox = true; //hack: make it so that no more than one objbox per turn
 }
@@ -188,7 +188,7 @@ void GameBlitz::__SetState_PLAYING()
 void GameBlitz::__SetState_HAS_PLAYED()
 {
   MSG_DEBUG("game.statechange", "Has played, now can move");
-  last_clock_update = Time::GetInstance()->Read();
+  last_clock_update = GameTime::GetInstance()->Read();
 
   CharacterCursor::GetInstance()->Hide();
 }
@@ -199,7 +199,7 @@ void GameBlitz::__SetState_END_TURN()
   ActiveTeam().AccessWeapon().SignalTurnEnd();
   ActiveTeam().AccessWeapon().Deselect();
   CharacterCursor::GetInstance()->Hide();
-  last_clock_update = Time::GetInstance()->Read();
+  last_clock_update = GameTime::GetInstance()->Read();
   // Ensure the clock sprite isn't NULL:
   Interface::GetInstance()->UpdateTimer(GameMode::GetInstance()->duration_exchange_player,
                                         false,

@@ -102,7 +102,7 @@ protected:
   Point2i hole_delta; // relative position of the hole of the weapon
   Point2i position;   // Position of the weapon
 
-  // Time when the weapon is selected for the animation
+  // GameTime when the weapon is selected for the animation
   uint m_time_anim_begin;
 
   // Actual strength of the weapon

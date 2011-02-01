@@ -140,7 +140,7 @@ void Water::Refresh()
   }
 
   height_mvt = 0;
-  uint now = Time::GetInstance()->Read();
+  uint now = GameTime::GetInstance()->Read();
 
   if (next_wave_shift <= now) {
     shift1 += 2*DEGREE;

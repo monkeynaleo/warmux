@@ -43,7 +43,7 @@ namespace {
   static gboolean display_off_loop(gpointer data) {
     remove_timer();
     SDL_QuitSubSystem(SDL_INIT_TIMER);
-    Time::GetInstance()->SetWaitingForUser(true);
+    GameTime::GetInstance()->SetWaitingForUser(true);
     JukeBox::GetInstance()->CloseDevice();
 
     while(display_off) {
@@ -54,7 +54,7 @@ namespace {
     if (Mouse::GetInstance()->HasFocus()) {
       JukeBox::GetInstance()->OpenDevice();
       JukeBox::GetInstance()->NextMusic();
-      Time::GetInstance()->SetWaitingForUser(false);
+      GameTime::GetInstance()->SetWaitingForUser(false);
     }
 
     SDL_InitSubSystem(SDL_INIT_TIMER);

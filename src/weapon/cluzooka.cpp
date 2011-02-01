@@ -152,7 +152,7 @@ void CluzookaCluster::Refresh()
 {
 #ifdef CLUSTERS_SPAWN_CLUSTERS
   if (m_recursion_depth > 1) {
-    uint time = Time::GetInstance()->Read();
+    uint time = GameTime::GetInstance()->Read();
     Double flying_time = ( Double )( time - begin_time );
 
     if ( flying_time >= m_time_before_spawn )

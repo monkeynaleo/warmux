@@ -54,7 +54,7 @@ void EnergyList::AddValue(uint value)
   if (value == m_last_value)
     return;
 
-  EnergyValue *eval = new EnergyValue(Time::GetInstance()->Read(), value);
+  EnergyValue *eval = new EnergyValue(GameTime::GetInstance()->Read(), value);
   if (value > m_max_value) m_max_value = value;
   m_last_value = value;
   EnergyList::push_back(eval);
@@ -184,7 +184,7 @@ void TeamEnergy::Move()
   }
 
   // teams ranking have changed
-  Time * global_time = Time::GetInstance();
+  GameTime * global_time = GameTime::GetInstance();
   if (rank != new_rank) {
     if (!move_start_time)
       move_start_time = global_time->Read();

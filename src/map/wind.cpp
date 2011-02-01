@@ -213,13 +213,13 @@ void Wind::DrawParticles()
 
 void Wind::Refresh()
 {
-  if (m_last_move + bar_speed < Time::GetInstance()->Read()) {
+  if (m_last_move + bar_speed < GameTime::GetInstance()->Read()) {
     if (m_val > m_nv_val) {
       --m_val;
     } else if (m_val < m_nv_val) {
       ++m_val;
     }
-    m_last_move = Time::GetInstance()->Read();
+    m_last_move = GameTime::GetInstance()->Read();
     Interface::GetInstance()->UpdateWindIndicator(m_val);
   }
 

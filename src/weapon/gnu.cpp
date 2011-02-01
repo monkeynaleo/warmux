@@ -89,11 +89,11 @@ void Gnu::Refresh()
   //When we hit the ground, jump !
   if (!IsMoving()&& !FootsInVacuum()) {
     // Limiting number of rebound to avoid desync
-    if (last_rebound_time + TIME_BETWEEN_REBOUND > Time::GetInstance()->Read()) {
+    if (last_rebound_time + TIME_BETWEEN_REBOUND > GameTime::GetInstance()->Read()) {
       image->SetRotation_rad(ZERO);
       return;
     }
-    last_rebound_time = Time::GetInstance()->Read();
+    last_rebound_time = GameTime::GetInstance()->Read();
     MSG_DEBUG("weapon.gnu", "Jump ! (time = %d)", last_rebound_time);
     //If the GNU is stuck in ground -> change direction
     int x = GetX();
@@ -180,7 +180,7 @@ void GnuLauncher::Refresh()
   if (current_gnu)
     return;
 
-  if (gnu_death_time && gnu_death_time + 2000 < Time::GetInstance()->Read()) {
+  if (gnu_death_time && gnu_death_time + 2000 < GameTime::GetInstance()->Read()) {
 
     UseAmmoUnit();
     gnu_death_time = 0;
@@ -225,7 +225,7 @@ void GnuLauncher::SignalEndOfProjectile()
     return;
 
   current_gnu = NULL;
-  gnu_death_time = Time::GetInstance()->Read();
+  gnu_death_time = GameTime::GetInstance()->Read();
 }
 
 WeaponProjectile * GnuLauncher::GetProjectileInstance()

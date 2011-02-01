@@ -29,7 +29,7 @@
 
 SpriteAnimation::SpriteAnimation(Sprite & p_sprite) :
   sprite(p_sprite),
-  last_update(Time::GetInstance()->Read()),
+  last_update(GameTime::GetInstance()->Read()),
   speed_factor(1<<SPEED_BITS),
   frame_delta(1),
   loop_wait(0),
@@ -58,7 +58,7 @@ SpriteAnimation::SpriteAnimation(const SpriteAnimation & other, Sprite & p_sprit
 void SpriteAnimation::Start()
 {
    finished = false;
-   last_update = Time::GetInstance()->Read();
+   last_update = GameTime::GetInstance()->Read();
 }
 
 void SpriteAnimation::Update()
@@ -67,7 +67,7 @@ void SpriteAnimation::Update()
     return;
   }
 
-  if (Time::GetInstance()->Read() < last_update + sprite.GetCurrentDelay()) {
+  if (GameTime::GetInstance()->Read() < last_update + sprite.GetCurrentDelay()) {
     return;
   }
 
@@ -76,7 +76,7 @@ void SpriteAnimation::Update()
 
   //Delta to next frame used to enable frameskip
   //if delay between 2 frame is < fps
-  int delta_to_next_f = (((Time::GetInstance()->Read() - last_update) / sprite.GetCurrentDelay()) * speed_factor)>>SPEED_BITS;
+  int delta_to_next_f = (((GameTime::GetInstance()->Read() - last_update) / sprite.GetCurrentDelay()) * speed_factor)>>SPEED_BITS;
   last_update += ((delta_to_next_f<<SPEED_BITS) * sprite.GetCurrentDelay()) / speed_factor;
 
   //Animation is finished, when last frame have been fully played

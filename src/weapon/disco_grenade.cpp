@@ -107,7 +107,7 @@ void DiscoGrenade::Refresh()
   }
   else
   {
-      smoke_engine.AddNow(GetPosition(), 1,particle_MAGIC_STAR, false,((Double)(Time::GetInstance()->Read()%500)-250.0) * PI / 250.0,3.0);
+      smoke_engine.AddNow(GetPosition(), 1,particle_MAGIC_STAR, false,((Double)(GameTime::GetInstance()->Read()%500)-250.0) * PI / 250.0,3.0);
   }
 #else //  :-P
   smoke_engine.AddPeriodic(GetPosition(), particle_MAGIC_STAR, false);

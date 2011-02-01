@@ -60,7 +60,7 @@ void GameClassic::EndOfGame()
 
 void GameClassic::RefreshClock()
 {
-  Time * global_time = Time::GetInstance();
+  GameTime * global_time = GameTime::GetInstance();
 
   if (1000 < global_time->Read() - last_clock_update) {
     last_clock_update = global_time->Read();
@@ -144,7 +144,7 @@ void GameClassic::__SetState_PLAYING()
   duration = GameMode::GetInstance()->duration_turn;
   Interface::GetInstance()->UpdateTimer(duration, false, true);
   Interface::GetInstance()->EnableDisplayTimer(true);
-  last_clock_update = Time::GetInstance()->Read();
+  last_clock_update = GameTime::GetInstance()->Read();
 
   Wind::GetRef().ChooseRandomVal();
 
@@ -165,7 +165,7 @@ void GameClassic::__SetState_HAS_PLAYED()
 {
   MSG_DEBUG("game.statechange", "Has played, now can move");
   duration = GameMode::GetInstance()->duration_move_player;
-  last_clock_update = Time::GetInstance()->Read();
+  last_clock_update = GameTime::GetInstance()->Read();
   Interface::GetInstance()->UpdateTimer(duration, false, true);
   CharacterCursor::GetInstance()->Hide();
 }
@@ -180,7 +180,7 @@ void GameClassic::__SetState_END_TURN()
   duration = GameMode::GetInstance()->duration_exchange_player;
   Interface::GetInstance()->UpdateTimer(duration, false, true);
   Interface::GetInstance()->EnableDisplayTimer(false);
-  last_clock_update = Time::GetInstance()->Read();
+  last_clock_update = GameTime::GetInstance()->Read();
 
   // Applying Disease damage and Death mode.
   ApplyDiseaseDamage();
@@ -192,7 +192,7 @@ void GameClassic::ApplyDeathMode () const
 {
   if (IsGameFinished()) return;
 
-  if (Time::GetInstance()->Read() > GameMode::GetInstance()->duration_before_death_mode * 1000) {
+  if (GameTime::GetInstance()->Read() > GameMode::GetInstance()->duration_before_death_mode * 1000) {
     GameMessages::GetInstance()->Add(_("Hurry up, you are too slow !!"), white_color);
     FOR_ALL_LIVING_CHARACTERS(team, character) {
       // If the character energy is lower than damage

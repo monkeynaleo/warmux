@@ -849,7 +849,7 @@ static void Action_Network_VerifyRandomSync(Action *a)
 
 static void Action_Time_VerifySync(Action *a)
 {
-  uint local_time = Time::GetInstance()->Read();
+  uint local_time = GameTime::GetInstance()->Read();
   uint remote_time = (uint)a->PopInt();
   MSG_DEBUG("time.verify","Verify time: %d (local) == %d (remote)", local_time, remote_time);
   ASSERT(local_time == remote_time);
@@ -1160,7 +1160,7 @@ bool ActionHandler::ExecActionsForOneFrame()
     if (!a->IsFrameLess()) {
       MSG_DEBUG("action_time", "-> Action %s (action time: %u, time: %u)",
                 GetActionName(a->GetType()).c_str(), a->GetTimestamp(),
-                Time::GetInstance()->Read());
+                GameTime::GetInstance()->Read());
     }
 
     Exec(a);
