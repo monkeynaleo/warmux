@@ -18,7 +18,7 @@
 #define LIBXML2_XMLMEMORY_H
 
 #include <stddef.h>
-#include <stdapis/libxml2/libxml2_xmlversion.h>
+#include <libxml2_xmlversion.h>
 
 
 /**

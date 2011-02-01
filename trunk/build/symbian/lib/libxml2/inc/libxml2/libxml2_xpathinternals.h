@@ -18,7 +18,7 @@
 #ifndef XML_XPATH_INTERNALS_H
 #define XML_XPATH_INTERNALS_H
 
-#include <stdapis/libxml2/libxml2_xpath.h>
+#include <libxml2_xpath.h>
 
 #ifdef __cplusplus
 extern "C" {

@@ -16,9 +16,9 @@
 #ifndef XML_VALID_H
 #define XML_VALID_H
 
-#include <stdapis/libxml2/libxml2_xmlerror.h>
-#include <stdapis/libxml2/libxml2_tree.h>
-#include <stdapis/libxml2/libxml2_list.h>
+#include <libxml2_xmlerror.h>
+#include <libxml2_tree.h>
+#include <libxml2_list.h>
 
 #ifdef LIBXML_AUTOMATA_ENABLED
 #include "libxml2_xmlautomata.h"

@@ -30,7 +30,7 @@
  *
  */
 
-#include <stdapis/libxml2/xmlengxeconfig.h>
+#include <xmlengxeconfig.h>
 
 #define XMLENGINE_EXCLUDE_UNUSED
 #define XMLENGINE_EXCLUDE_FILE_FUNC

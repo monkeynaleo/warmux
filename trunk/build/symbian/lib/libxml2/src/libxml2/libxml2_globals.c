@@ -18,10 +18,12 @@
 #include <errno.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
+#include <stdarg.h>
 
 #include "xmlenglibxml.h"
 
-#include <stdapis/libxml2/libxml2_globals.h>
+#include <libxml2_globals.h>
 #include "libxml2_xmlschemastypes.h"
 
 
@@ -385,7 +387,7 @@ int symbian_snprintf(char *str, size_t size, const char *format, ...)
     return ret;
 }
 
-#include <stdapis/libxml2/libxml2_sax.h>
+#include <libxml2_sax.h>
 
 /**
  * xmlTreeIndentString:

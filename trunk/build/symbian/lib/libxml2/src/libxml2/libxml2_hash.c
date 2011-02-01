@@ -22,7 +22,7 @@
 #include "xmlenglibxml.h"
 
 #include <string.h>
-#include <stdapis/libxml2/libxml2_globals.h>
+#include <libxml2_globals.h>
 
 #define MAX_HASH_LEN 8
 

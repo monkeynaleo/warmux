@@ -18,7 +18,7 @@
 #ifndef LIBXML2_GLOBALS_PRIVATE_H
 #define LIBXML2_GLOBALS_PRIVATE_H
 
-#include <stdapis/libxml2/libxml2_globals.h>
+#include <libxml2_globals.h>
 
 #ifdef __cplusplus
 extern "C" {

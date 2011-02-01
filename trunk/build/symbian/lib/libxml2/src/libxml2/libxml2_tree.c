@@ -31,9 +31,9 @@
 #include <zlib.h>
 #endif
 
-#include <stdapis/libxml2/libxml2_globals.h>
-#include <stdapis/libxml2/libxml2_uri.h>
-#include <stdapis/libxml2/libxml2_parserinternals.h>
+#include <libxml2_globals.h>
+#include <libxml2_uri.h>
+#include <libxml2_parserinternals.h>
 #include "libxml2_xmlerror2.h"
 
 #ifdef LIBXML_HTML_ENABLED

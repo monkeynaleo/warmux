@@ -24,7 +24,7 @@
 #ifndef LIBXML2_XPATHINTERNALS_PRIVATE_H
 #define LIBXML2_XPATHINTERNALS_PRIVATE_H
 
-#include <stdapis/libxml2/libxml2_xpathinternals.h>
+#include <libxml2_xpathinternals.h>
 
 #ifdef __cplusplus
 extern "C" {

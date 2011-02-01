@@ -14,17 +14,17 @@
 #if defined(LIBXML_SCHEMAS_ENABLED) || defined(XMLENGINE_XMLSCHEMA_DATATYPES)
 
 #include <string.h>
-#include <stdapis/libxml2/libxml2_globals.h>
-#include <stdapis/libxml2/libxml2_parser.h>
-#include <stdapis/libxml2/libxml2_parserinternals.h>
+#include <libxml2_globals.h>
+#include <libxml2_parser.h>
+#include <libxml2_parserinternals.h>
 #include "libxml2_xmlerror2.h"
-#include <stdapis/libxml2/libxml2_hash.h>
-#include <stdapis/libxml2/libxml2_valid.h>
-#include <stdapis/libxml2/libxml2_xpath.h>
-#include <stdapis/libxml2/libxml2_uri.h>
+#include <libxml2_hash.h>
+#include <libxml2_valid.h>
+#include <libxml2_xpath.h>
+#include <libxml2_uri.h>
 #include "libxml2_xmlschemas.h"
-#include <stdapis/libxml2/libxml2_schemasinternals.h>
-#include <stdapis/libxml2/libxml2_xmlschemasglobals.h>
+#include <libxml2_schemasinternals.h>
+#include <libxml2_xmlschemasglobals.h>
 #include "libxml2_xmlschemastypes.h"
 
 

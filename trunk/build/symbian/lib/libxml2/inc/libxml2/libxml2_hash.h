@@ -17,7 +17,7 @@
 #ifndef XML_HASH_H
 #define XML_HASH_H
 
-#include <stdapis/libxml2/libxml2_xmlstring.h>
+#include <libxml2_xmlstring.h>
 
 #ifdef __cplusplus
 extern "C" {

@@ -23,9 +23,9 @@
 #ifndef XML_XPTR_H
 #define XML_XPTR_H
 
-#include <stdapis/libxml2/libxml2_xmlversion.h>
-#include <stdapis/libxml2/libxml2_tree.h>
-#include <stdapis/libxml2/libxml2_xpath.h>
+#include <libxml2_xmlversion.h>
+#include <libxml2_tree.h>
+#include <libxml2_xpath.h>
 
 #ifdef __cplusplus
 extern "C" {

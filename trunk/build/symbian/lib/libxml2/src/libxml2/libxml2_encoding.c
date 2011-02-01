@@ -41,7 +41,7 @@
 #endif
 #endif
 
-#include <stdapis/libxml2/libxml2_globals.h>
+#include <libxml2_globals.h>
 
 #ifdef LIBXML_HTML_ENABLED
 #include "libxml2_htmlparser.h"

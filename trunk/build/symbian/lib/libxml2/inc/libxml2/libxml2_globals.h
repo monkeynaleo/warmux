@@ -100,10 +100,10 @@
 typedef struct _xmlGlobalState xmlGlobalState;
 typedef xmlGlobalState *xmlGlobalStatePtr;
 
-#include <stdapis/libxml2/libxml2_xmlmemory.h>
-#include <stdapis/libxml2/libxml2_sax.h>
-#include <stdapis/libxml2/libxml2_sax2.h>
-#include <stdapis/libxml2/libxml2_chvalid.h>
+#include <libxml2_xmlmemory.h>
+#include <libxml2_sax.h>
+#include <libxml2_sax2.h>
+#include <libxml2_chvalid.h>
 
 #ifdef XMLENGINE_XSLT
 #if defined(XSLT_WIN32_PERFORMANCE_COUNTER) || defined(HAVE_GETTIMEOFDAY)
@@ -135,7 +135,7 @@ XMLPUBFUN void* XMLCALL realloc_impl(void *ptr, size_t size);
 
 
 #ifdef XMLENGINE_XMLSCHEMA_DATATYPES
-#include <stdapis/libxml2/libxml2_xmlschemasglobals.h>
+#include <libxml2_xmlschemasglobals.h>
 #endif
 
 
@@ -410,7 +410,7 @@ typedef void (*MemSizeFunc)(void*, void*, void*);
 }
 #endif
 
-#include <stdapis/libxml2/libxml2_threads.h>
+#include <libxml2_threads.h>
 
 #ifdef __cplusplus
 extern "C" {

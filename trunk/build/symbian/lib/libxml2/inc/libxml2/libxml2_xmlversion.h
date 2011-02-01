@@ -23,8 +23,8 @@
  * All other defines in this files are not assumed to be changed anymore
  */
 
-#include <stdapis/libxml2/libxml2_modules.h>
-#include <stdapis/libxml2/libxml2_xmlexports.h>
+#include <libxml2_modules.h>
+#include <libxml2_xmlexports.h>
 
 
 #ifdef __cplusplus

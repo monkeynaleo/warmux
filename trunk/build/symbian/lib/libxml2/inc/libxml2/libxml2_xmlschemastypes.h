@@ -17,11 +17,11 @@
 #ifndef XML_SCHEMA_TYPES_H
 #define XML_SCHEMA_TYPES_H
 
-#include <stdapis/libxml2/libxml2_xmlversion.h>
+#include <libxml2_xmlversion.h>
 
 #if defined(LIBXML_SCHEMAS_ENABLED) || defined(XMLENGINE_XMLSCHEMA_DATATYPES)
 
-#include <stdapis/libxml2/libxml2_schemasinternals.h>
+#include <libxml2_schemasinternals.h>
 #include "libxml2_xmlschemas.h"
 
 #ifdef __cplusplus

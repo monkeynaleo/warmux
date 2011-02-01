@@ -17,7 +17,7 @@
 #define LIBXML2_MODULES_H
 
 // All new configuration directives are in:
-#include <stdapis/libxml2/xmlengconfig.h>
+#include <xmlengconfig.h>
 
 #ifdef XMLENGINE_EXCLUDE_EMBED_MSG
 extern const char * const __embedded_errtxt_replacement;

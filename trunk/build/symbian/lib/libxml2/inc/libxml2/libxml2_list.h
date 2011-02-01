@@ -17,7 +17,7 @@
 #ifndef XML_LIST_H
 #define XML_LIST_H
 
-#include <stdapis/libxml2/libxml2_xmlversion.h>
+#include <libxml2_xmlversion.h>
 
 #ifdef __cplusplus
 extern "C" {

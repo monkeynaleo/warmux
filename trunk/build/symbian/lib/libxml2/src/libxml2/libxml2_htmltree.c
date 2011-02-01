@@ -19,17 +19,17 @@
 #include <stdlib.h>
 #endif
 
-#include <stdapis/libxml2/libxml2_xmlmemory.h>
+#include <libxml2_xmlmemory.h>
 #include "libxml2_htmlparser.h"
 #include "libxml2_htmltree.h"
-#include <stdapis/libxml2/libxml2_entities.h>
-#include <stdapis/libxml2/libxml2_valid.h>
-#include <stdapis/libxml2/libxml2_xmlerror.h>
+#include <libxml2_entities.h>
+#include <libxml2_valid.h>
+#include <libxml2_xmlerror.h>
 #include "libxml2_xmlerror2.h"
-#include <stdapis/libxml2/libxml2_xmlsave.h>
-#include <stdapis/libxml2/libxml2_parserinternals.h>
-#include <stdapis/libxml2/libxml2_globals.h>
-#include <stdapis/libxml2/libxml2_uri.h>
+#include <libxml2_xmlsave.h>
+#include <libxml2_parserinternals.h>
+#include <libxml2_globals.h>
+#include <libxml2_uri.h>
 
 #ifdef LIBXML_HTML_ENABLED
 

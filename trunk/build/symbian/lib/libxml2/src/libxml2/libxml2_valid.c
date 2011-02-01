@@ -18,8 +18,8 @@
 #include <stdlib.h>
 #endif
 
-#include <stdapis/libxml2/libxml2_globals.h>
-#include <stdapis/libxml2/libxml2_parserinternals.h>
+#include <libxml2_globals.h>
+#include <libxml2_parserinternals.h>
 #include "libxml2_xmlerror2.h"
 
 static xmlElementPtr xmlGetDtdElementDesc2(xmlDtdPtr dtd, const xmlChar *name,

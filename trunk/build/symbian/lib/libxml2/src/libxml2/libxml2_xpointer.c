@@ -27,15 +27,15 @@
  */
 
 #include <string.h>
-#include <stdapis/libxml2/libxml2_xpointer.h>
-#include <stdapis/libxml2/libxml2_xmlmemory.h>
-#include <stdapis/libxml2/libxml2_parserinternals.h>
-#include <stdapis/libxml2/libxml2_uri.h>
-#include <stdapis/libxml2/libxml2_xpath.h>
-#include <stdapis/libxml2/libxml2_xpathinternals.h>
-#include <stdapis/libxml2/libxml2_xmlerror.h>
+#include <libxml2_xpointer.h>
+#include <libxml2_xmlmemory.h>
+#include <libxml2_parserinternals.h>
+#include <libxml2_uri.h>
+#include <libxml2_xpath.h>
+#include <libxml2_xpathinternals.h>
+#include <libxml2_xmlerror.h>
 #include "libxml2_xmlerror2.h"
-#include <stdapis/libxml2/libxml2_globals.h>
+#include <libxml2_globals.h>
 
 #ifdef LIBXML_XPTR_ENABLED
 

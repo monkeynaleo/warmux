@@ -19,7 +19,7 @@
 typedef struct _xmlParserInput xmlParserInput;
 typedef xmlParserInput *xmlParserInputPtr;
 
-#include <stdapis/libxml2/libxml2_tree.h>
+#include <libxml2_tree.h>
 
 #ifdef __cplusplus
 extern "C" {

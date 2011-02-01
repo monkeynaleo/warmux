@@ -16,16 +16,16 @@
 #ifndef XML_PARSER_H
 #define XML_PARSER_H
 
-#include <stdapis/libxml2/libxml2_dict.h>
-#include <stdapis/libxml2/libxml2_hash.h>
-#include <stdapis/libxml2/libxml2_valid.h>
-#include <stdapis/libxml2/libxml2_entities.h>
-#include <stdapis/libxml2/libxml2_encoding.h>
+#include <libxml2_dict.h>
+#include <libxml2_hash.h>
+#include <libxml2_valid.h>
+#include <libxml2_entities.h>
+#include <libxml2_encoding.h>
 
 //typedef struct _xmlParserInput xmlParserInput;
 //typedef xmlParserInput *xmlParserInputPtr;
 
-#include <stdapis/libxml2/libxml2_xmlio.h>
+#include <libxml2_xmlio.h>
 
 #ifdef __cplusplus
 extern "C" {

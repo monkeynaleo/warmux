@@ -15,15 +15,15 @@
 
 #ifdef LIBXML_XINCLUDE_ENABLED
 
-#include <stdapis/libxml2/libxml2_globals.h>
-#include <stdapis/libxml2/libxml2_tree.h>
-#include <stdapis/libxml2/libxml2_parser.h>
-#include <stdapis/libxml2/libxml2_uri.h>
-#include <stdapis/libxml2/libxml2_xpointer.h>
-#include <stdapis/libxml2/libxml2_parserinternals.h>
-#include <stdapis/libxml2/libxml2_xmlerror.h>
+#include <libxml2_globals.h>
+#include <libxml2_tree.h>
+#include <libxml2_parser.h>
+#include <libxml2_uri.h>
+#include <libxml2_xpointer.h>
+#include <libxml2_parserinternals.h>
+#include <libxml2_xmlerror.h>
 #include "libxml2_xmlerror2.h"
-#include <stdapis/libxml2/libxml2_encoding.h>
+#include <libxml2_encoding.h>
 #include "libxml2_xinclude.h"
 #include <string.h>
 

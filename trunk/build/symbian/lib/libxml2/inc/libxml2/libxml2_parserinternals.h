@@ -18,8 +18,8 @@
 #ifndef XML_PARSER_INTERNALS_H
 #define XML_PARSER_INTERNALS_H
 
-#include <stdapis/libxml2/libxml2_parser.h>
-#include <stdapis/libxml2/libxml2_chvalid.h>
+#include <libxml2_parser.h>
+#include <libxml2_chvalid.h>
 
 
 #ifdef __cplusplus

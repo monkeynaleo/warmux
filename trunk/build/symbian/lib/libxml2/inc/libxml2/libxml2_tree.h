@@ -18,7 +18,7 @@
 #ifndef XML_TREE_H
 #define XML_TREE_H
 
-#include <stdapis/libxml2/libxml2_xmlstring.h>
+#include <libxml2_xmlstring.h>
 
 #include <stdlib.h>
 #include <stdio.h>
