@@ -53,8 +53,11 @@ void Interface::LoadDataInternal(Profile *res)
 
   FreeDrawElements();
 
-  clock_normal    = LOAD_RES_SPRITE("interface/clock_normal");
-  clock_emergency = LOAD_RES_SPRITE("interface/clock_emergency");
+  // Clocks should be kept, as information difficult to retrieve is there
+  if (!clock_normal)
+    clock_normal    = LOAD_RES_SPRITE("interface/clock_normal");
+  if (!clock_emergency)
+    clock_emergency = LOAD_RES_SPRITE("interface/clock_emergency");
 
   last_width = AppWarmux::GetInstance()->video->window.GetWidth();
   if (last_width < tmp.GetWidth()+20) {
@@ -180,13 +183,14 @@ Interface::~Interface()
 
   if (energy_bar) delete energy_bar;
 
+  if (clock_normal) delete clock_normal;
+  if (clock_emergency) delete clock_emergency;
+
   delete help;
 }
 
 void Interface::FreeDrawElements()
 {
-  if (clock_normal) delete clock_normal;
-  if (clock_emergency) delete clock_emergency;
   if (global_timer) delete global_timer;
   if (timer) delete timer;
   if (t_character_name) delete t_character_name;
