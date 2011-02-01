@@ -39,7 +39,7 @@ static const std::string WARMUX_VERSION = PACKAGE_VERSION;
 
 void WakeUpDebugger()
 {
-#if !defined(WIN32) && !defined(GEKKO)
+#if !defined(WIN32) && !defined(GEKKO) && !defined(__SYMBIAN32__)
   kill(getpid(), SIGABRT);
 #endif
 }
