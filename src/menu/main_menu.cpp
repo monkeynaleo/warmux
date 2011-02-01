@@ -167,8 +167,10 @@ void MainMenu::SelectAction(const Widget * widget)
 void MainMenu::OnClickUp(const Point2i &mousePosition, int button)
 {
   Widget* b = widgets.ClickUp(mousePosition,button);
-  SelectAction(b);
-  JukeBox::GetInstance()->Play("default", "menu/clic");
+  if (b) {
+    SelectAction(b);
+    JukeBox::GetInstance()->Play("default", "menu/clic");
+  }
 }
 
 void MainMenu::OnClick(const Point2i &/*mousePosition*/, int /*button*/)
