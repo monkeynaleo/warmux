@@ -7,11 +7,9 @@ STDCPP
 
 MACRO __SYMBIAN_STDCPP_SUPPORT__
 
-SYSTEMINCLUDE   \epoc32\include
+SYSTEMINCLUDE   \epoc32\include\stlport
 SYSTEMINCLUDE   \epoc32\include\stdapis
-SYSTEMINCLUDE   \epoc32\include\stdapis\sys
-SYSTEMINCLUDE   \epoc32\include\stdapis\stlportv5
-SYSTEMINCLUDE   \epoc32\include\stdapis\stlportv5\stl
+SYSTEMINCLUDE   \epoc32\include
 SYSTEMINCLUDE   \epoc32\include\stdapis\libxml2
 SYSTEMINCLUDE   \epoc32\include\SDL
 SYSTEMINCLUDE   \epoc32\include\libpng-1.2
@@ -70,6 +68,7 @@ SOURCE joystick.cpp
 
 LIBRARY         libc.lib libm.lib
 LIBRARY         libz.lib
+LIBRARY         libpthread.lib
 
 LIBRARY         euser.lib fbscli.lib ws32.lib  gdi.lib
 LIBRARY         mediaclientaudiostream.lib
@@ -91,13 +90,7 @@ STATICLIBRARY   abiv2_libjpeg-6.lib
 STATICLIBRARY   freetype.lib
 STATICLIBRARY   tremor.lib
 STATICLIBRARY   wormux_xmlengine.lib
-
-#ifdef EPOC32
-LIBRARY         libstdcppv5.lib
-#else
-FIRSTLIB        ../udeb/libstdcppv5.lib
-STATICLIBRARY   eexe.lib
-#endif
+STATICLIBRARY   stlport_s.lib
 
 //This is required even if the wchar type is not used.
 OPTION CW -wchar_t on
