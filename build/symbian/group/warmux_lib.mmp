@@ -7,11 +7,9 @@ STDCPP
 
 MACRO __SYMBIAN_STDCPP_SUPPORT__
 
-SYSTEMINCLUDE   \epoc32\include
+SYSTEMINCLUDE   \epoc32\include\stlport
 SYSTEMINCLUDE   \epoc32\include\stdapis
-SYSTEMINCLUDE   \epoc32\include\stdapis\sys
-SYSTEMINCLUDE   \epoc32\include\stdapis\stlportv5
-SYSTEMINCLUDE   \epoc32\include\stdapis\stlportv5\stl
+SYSTEMINCLUDE   \epoc32\include
 SYSTEMINCLUDE   \epoc32\include\SDL
 SYSTEMINCLUDE   \epoc32\include\libpng-1.2
 SYSTEMINCLUDE   ..\..\..\lib\warmux\include
