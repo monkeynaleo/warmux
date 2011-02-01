@@ -57,9 +57,9 @@ int Joystick::GetNumberOfJoystick() const
   return 0;
 }
 
-void Joystick::HandleKeyEvent(const SDL_Event& evnt)
+bool Joystick::HandleKeyEvent(const SDL_Event& evnt)
 {
-  return;
+  return false;
 }
 
 void Joystick::Reset()
