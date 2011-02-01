@@ -35,8 +35,10 @@
 #define XML_SOCKLEN_T unsigned int
 #endif
 
+#ifndef __SYMBIAN32__
 #ifdef HAVE_SYS_TIMEB_H
 #include <sys/timeb.h>
+#endif
 #endif
 
 #ifdef HAVE_SYS_TYPES_H
