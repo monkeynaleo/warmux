@@ -473,4 +473,10 @@ int netware_init(void);
 #include "setup_once.h"
 #endif
 
+#ifdef __SYMBIAN32__
+#ifndef HAVE_BOOL
+typedef int bool;
+#endif
+#endif
+
 #endif /* __LIB_CURL_SETUP_H */
