@@ -31,7 +31,6 @@
 #include <sdlmain.h>
 #include <eikedwin.h>
 #include <eiklabel.h>
-#include <sdlexe.rsg>
 #include <aknglobalmsgquery.h>
 #include <apgwgnam.h> 
 
@@ -862,11 +861,15 @@ TBool CSDLAppUi::ProcessCommandParametersL(CApaCommandLine &aCommandLine)
  
  TBool CSDLAppUi::ParamEditorL(TDes& aCheat)
 	{
-	CAknTextQueryDialog* query = CAknTextQueryDialog::NewL(aCheat);
+#if 0
+	 CAknTextQueryDialog* query = CAknTextQueryDialog::NewL(aCheat);
 	CleanupStack::PushL(query);
 	query->SetPromptL(_L("Enter parameters"));
 	CleanupStack::Pop();
 	return query->ExecuteLD(R_PARAMEDITOR);
+#else
+	return false;
+#endif
 	}
  	
  void CSDLAppUi::StartL()	
