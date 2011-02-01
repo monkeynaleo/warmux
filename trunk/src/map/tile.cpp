@@ -290,7 +290,6 @@ void Tile::InitPreview()
   Quality qual = Config::GetInstance()->GetQuality();
   m_use_alpha = qual > QUALITY_16BPP;
   if (!m_use_alpha) {
-    printf("OK\n");
     m_preview = new Surface(world_size, SDL_SWSURFACE, false);
     m_preview->SetColorKey(SDL_SRCCOLORKEY|SDL_RLEACCEL, 0xF81F);
     m_preview->Fill(0xF81F);
