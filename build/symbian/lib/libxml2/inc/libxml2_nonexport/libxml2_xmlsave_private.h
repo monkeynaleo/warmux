@@ -17,7 +17,7 @@
 #ifndef LIBXML2_XMLSAVE_PRIVATE_H
 #define LIBXML2_XMLSAVE_PRIVATE_H
 
-#include <stdapis/libxml2/libxml2_xmlsave.h>
+#include <libxml2_xmlsave.h>
 
 #ifdef __cplusplus
 extern "C" {

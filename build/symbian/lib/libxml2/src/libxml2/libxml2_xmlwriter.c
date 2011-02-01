@@ -14,8 +14,8 @@
 #include <string.h>
 
 #include "xmlenglibxml.h"
-#include <stdapis/libxml2/libxml2_globals.h>
-#include <stdapis/libxml2/libxml2_uri.h>
+#include <libxml2_globals.h>
+#include <libxml2_uri.h>
 
 #ifdef LIBXML_HTML_ENABLED
 #include "libxml2_htmltree.h"

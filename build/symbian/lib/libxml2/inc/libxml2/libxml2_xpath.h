@@ -25,9 +25,9 @@
 #ifndef XML_XPATH_H
 #define XML_XPATH_H
 
-#include <stdapis/libxml2/libxml2_hash.h>
-#include <stdapis/libxml2/libxml2_dict.h>
-#include <stdapis/libxml2/libxml2_xmlerror.h>
+#include <libxml2_hash.h>
+#include <libxml2_dict.h>
+#include <libxml2_xmlerror.h>
 
 #ifdef __cplusplus
 extern "C" {

@@ -16,7 +16,7 @@
 #ifndef XML_XMLSAVE_H
 #define XML_XMLSAVE_H
 
-#include <stdapis/libxml2/libxml2_xmlio.h>
+#include <libxml2_xmlio.h>
 
 #ifdef LIBXML_OUTPUT_ENABLED
 #ifdef __cplusplus

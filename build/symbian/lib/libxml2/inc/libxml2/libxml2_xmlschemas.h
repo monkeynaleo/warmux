@@ -17,7 +17,7 @@
 #ifndef XML_SCHEMA_H
 #define XML_SCHEMA_H
 
-#include <stdapis/libxml2/libxml2_xmlversion.h>
+#include <libxml2_xmlversion.h>
 
 #ifdef LIBXML_SCHEMAS_ENABLED
 

@@ -21,7 +21,7 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include <stdapis/libxml2/libxml2_globals.h>
+#include <libxml2_globals.h>
 
 /*
  * Type definition are kept internal

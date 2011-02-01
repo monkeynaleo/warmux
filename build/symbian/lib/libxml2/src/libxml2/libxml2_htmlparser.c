@@ -31,20 +31,20 @@
 #endif
 
 
-#include <stdapis/libxml2/libxml2_globals.h>
-#include <stdapis/libxml2/libxml2_xmlmemory.h>
-#include <stdapis/libxml2/libxml2_tree.h>
-#include <stdapis/libxml2/libxml2_parser.h>
-#include <stdapis/libxml2/libxml2_parserinternals.h>
-#include <stdapis/libxml2/libxml2_xmlerror.h>
+#include <libxml2_globals.h>
+#include <libxml2_xmlmemory.h>
+#include <libxml2_tree.h>
+#include <libxml2_parser.h>
+#include <libxml2_parserinternals.h>
+#include <libxml2_xmlerror.h>
 #include "libxml2_xmlerror2.h"
 #include "libxml2_htmlparser.h"
 #include "libxml2_htmltree.h"
 #include "libxml2_entities.h"
-#include <stdapis/libxml2/libxml2_encoding.h>
-#include <stdapis/libxml2/libxml2_valid.h>
-#include <stdapis/libxml2/libxml2_xmlio.h>
-#include <stdapis/libxml2/libxml2_uri.h>
+#include <libxml2_encoding.h>
+#include <libxml2_valid.h>
+#include <libxml2_xmlio.h>
+#include <libxml2_uri.h>
 
 #define HTML_MAX_NAMELEN 1000
 #define HTML_PARSER_BIG_BUFFER_SIZE 1000

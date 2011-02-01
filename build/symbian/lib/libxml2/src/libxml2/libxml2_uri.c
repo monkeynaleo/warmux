@@ -14,8 +14,8 @@
 
 #include <string.h>
 
-#include <stdapis/libxml2/libxml2_uri.h>
-#include <stdapis/libxml2/libxml2_globals.h>
+#include <libxml2_uri.h>
+#include <libxml2_globals.h>
 
 /************************************************************************
  *                                                                      *

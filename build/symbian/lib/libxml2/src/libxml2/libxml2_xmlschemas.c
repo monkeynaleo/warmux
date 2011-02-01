@@ -21,14 +21,14 @@
 
 
 #include <string.h>
-#include <stdapis/libxml2/libxml2_globals.h>
-#include <stdapis/libxml2/libxml2_parser.h>
-#include <stdapis/libxml2/libxml2_parserinternals.h>
+#include <libxml2_globals.h>
+#include <libxml2_parser.h>
+#include <libxml2_parserinternals.h>
 #include "libxml2_xmlerror2.h"
-#include <stdapis/libxml2/libxml2_hash.h>
-#include <stdapis/libxml2/libxml2_uri.h>
+#include <libxml2_hash.h>
+#include <libxml2_uri.h>
 #include "libxml2_xmlschemas.h"
-#include <stdapis/libxml2/libxml2_schemasinternals.h>
+#include <libxml2_schemasinternals.h>
 #include "libxml2_xmlschemastypes.h"
 
 #ifdef LIBXML_AUTOMATA_ENABLED
@@ -39,7 +39,7 @@
 #include "libxml2_xmlregexp.h"
 #endif
 
-#include <stdapis/libxml2/libxml2_dict.h>
+#include <libxml2_dict.h>
 
 /* #define DEBUG 1 */
 

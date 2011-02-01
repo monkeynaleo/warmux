@@ -22,14 +22,14 @@
 #endif
 #include <string.h>
 
-#include <stdapis/libxml2/libxml2_globals.h>
-#include <stdapis/libxml2/libxml2_tree.h>
-#include <stdapis/libxml2/libxml2_parser.h>
-#include <stdapis/libxml2/libxml2_uri.h>
-#include <stdapis/libxml2/libxml2_xmlerror.h>
+#include <libxml2_globals.h>
+#include <libxml2_tree.h>
+#include <libxml2_parser.h>
+#include <libxml2_uri.h>
+#include <libxml2_xmlerror.h>
 #include "libxml2_xmlerror2.h"
-#include <stdapis/libxml2/libxml2_xpathinternals.h>
-#include <stdapis/libxml2/libxml2_c14n.h>
+#include <libxml2_xpathinternals.h>
+#include <libxml2_c14n.h>
 
 /************************************************************************
  *                                                                      *

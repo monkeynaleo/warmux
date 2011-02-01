@@ -12,7 +12,7 @@
 
 #include <string.h>
 
-#include <stdapis/libxml2/libxml2_globals.h>
+#include <libxml2_globals.h>
 
 #ifdef HAVE_SYS_TYPES_H
 #include <sys/types.h>

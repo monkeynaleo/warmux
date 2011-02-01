@@ -69,16 +69,16 @@
 #  endif
 #endif
 
-#include <stdapis/libxml2/libxml2_parserinternals.h>
+#include <libxml2_parserinternals.h>
 #include "libxml2_errencoding.h"
 #include "libxml2_xmlerror2.h"
-#include <stdapis/libxml2/libxml2_uri.h>
+#include <libxml2_uri.h>
 
 #ifdef LIBXML_CATALOG_ENABLED
 #include "libxml2_catalog.h"
 #endif
 
-#include <stdapis/libxml2/libxml2_globals.h>
+#include <libxml2_globals.h>
 
 /* #define VERBOSE_FAILURE */
 /* #define DEBUG_EXTERNAL_ENTITIES */

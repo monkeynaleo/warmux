@@ -17,10 +17,10 @@
 #ifndef XML_SAX_H
 #define XML_SAX_H
 
-#include <stdapis/libxml2/libxml2_parser.h>
+#include <libxml2_parser.h>
 
 #ifdef LIBXML_XPTR_ENABLED
-#include <stdapis/libxml2/libxml2_xlink.h>
+#include <libxml2_xlink.h>
 #endif
 
 #ifdef __cplusplus

@@ -34,10 +34,10 @@
 #include <stdlib.h>
 #endif
 
-#include <stdapis/libxml2/libxml2_globals.h>
+#include <libxml2_globals.h>
 #include "libxml2_xmlreader.h"
-#include <stdapis/libxml2/libxml2_parserinternals.h>
-#include <stdapis/libxml2/libxml2_uri.h>
+#include <libxml2_parserinternals.h>
+#include <libxml2_uri.h>
 
 /* #define DEBUG_CALLBACKS */
 /* #define DEBUG_READER */

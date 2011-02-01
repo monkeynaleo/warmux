@@ -19,7 +19,7 @@
 #ifndef HTML_PARSER_H
 #define HTML_PARSER_H
 
-#include <stdapis/libxml2/libxml2_parser.h>
+#include <libxml2_parser.h>
 
 #ifdef __cplusplus
 extern "C" {

@@ -13,7 +13,7 @@
 #include <string.h>
 #include <stdarg.h>
 
-#include <stdapis/libxml2/libxml2_globals.h>
+#include <libxml2_globals.h>
 #include "libxml2_xmlerror2.h"
 
 void xmlGenericErrorDefaultFunc (void *ctx ATTRIBUTE_UNUSED,
@@ -689,7 +689,7 @@ xmlParserError(void *ctx, const char *msg, ...)
         xmlParserPrintFileInfo(input);
     }
 
-    if(OOM_FLAG){
+	if(OOM_FLAG){
         xmlGenericError(xmlGenericErrorContext, "error: [in OOM!] %s", msg);
     } else {
         char* str;

@@ -18,7 +18,7 @@
 #ifndef XML_SCHEMA_INTERNALS_H
 #define XML_SCHEMA_INTERNALS_H
 
-#include <stdapis/libxml2/libxml2_xmlversion.h>
+#include <libxml2_xmlversion.h>
 
 #if defined(LIBXML_SCHEMAS_ENABLED) || defined(XMLENGINE_XMLSCHEMA_DATATYPES)
 
@@ -26,8 +26,8 @@
 #include "libxml2_xmlregexp.h"
 #endif
 
-#include <stdapis/libxml2/libxml2_hash.h>
-#include <stdapis/libxml2/libxml2_dict.h>
+#include <libxml2_hash.h>
+#include <libxml2_dict.h>
 
 #ifdef __cplusplus
 extern "C" {

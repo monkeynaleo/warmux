@@ -43,7 +43,7 @@
 #endif
 #endif
 
-#include <stdapis/libxml2/libxml2_globals.h>
+#include <libxml2_globals.h>
 
 void xmlMallocBreakpoint(void);
 

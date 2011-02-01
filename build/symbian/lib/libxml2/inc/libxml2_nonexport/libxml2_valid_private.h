@@ -17,7 +17,7 @@
 #ifndef LIBXML2_VALID_PRIVATE_H
 #define LIBXML2_VALID_PRIVATE_H
 
-#include <stdapis/libxml2/libxml2_valid.h>
+#include <libxml2_valid.h>
 
 #ifdef __cplusplus
 extern "C" {

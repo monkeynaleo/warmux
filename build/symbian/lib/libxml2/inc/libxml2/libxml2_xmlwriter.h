@@ -17,9 +17,9 @@
 #define XML_XMLWRITER_H
 
 #include <stdarg.h>
-#include <stdapis/libxml2/libxml2_xmlio.h>
-#include <stdapis/libxml2/libxml2_list.h>
-#include <stdapis/libxml2/libxml2_xmlstring.h>
+#include <libxml2_xmlio.h>
+#include <libxml2_list.h>
+#include <libxml2_xmlstring.h>
 
 #ifdef LIBXML_WRITER_ENABLED
 

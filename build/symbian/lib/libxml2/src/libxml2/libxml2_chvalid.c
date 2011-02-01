@@ -16,7 +16,7 @@
 #define IN_LIBXML
 #define UNDEF_IMPORT_C_IN_DATA
 #include "xmlenglibxml.h"
-#include <stdapis/libxml2/libxml2_chvalid.h>
+#include <libxml2_chvalid.h>
 
 /*
  =====================================================================================

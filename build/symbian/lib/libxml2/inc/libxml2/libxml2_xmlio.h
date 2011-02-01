@@ -16,7 +16,7 @@
 #ifndef XML_IO_H
 #define XML_IO_H
 
-#include <stdapis/libxml2/libxml2_encoding.h>
+#include <libxml2_encoding.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -119,7 +119,7 @@ typedef int (*xmlOutputCloseCallback) (void * context);
 }
 #endif
 
-#include <stdapis/libxml2/libxml2_parser.h>
+#include <libxml2_parser.h>
 
 #ifdef __cplusplus
 extern "C" {

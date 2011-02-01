@@ -17,7 +17,7 @@
 #ifndef XML_ENTITIES_H
 #define XML_ENTITIES_H
 
-#include <stdapis/libxml2/libxml2_tree.h>
+#include <libxml2_tree.h>
 
 #ifdef __cplusplus
 extern "C" {
