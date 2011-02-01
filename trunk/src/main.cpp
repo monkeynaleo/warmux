@@ -19,12 +19,12 @@
  *  Starting file. (the 'main' function is here.)
  *****************************************************************************/
 
+#include <WARMUX_singleton.h>
 #include <getopt.h>
 #ifndef WIN32
 # include <signal.h>
 #endif
 #include <SDL.h>
-#include <WARMUX_singleton.h>
 #include "game/config.h"
 #include "game/game.h"
 #include "game/game_time.h"
