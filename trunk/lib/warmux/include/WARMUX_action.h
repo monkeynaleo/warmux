@@ -132,7 +132,6 @@ private:
   DistantComputer* creator;
 
   void Init(Action_t type);
-  int  GetSize() const;
 
 public:
 
@@ -167,6 +166,11 @@ public:
   Point2d PopPoint2d();
   EulerVector PopEulerVector();
 
+  int  GetSize() const
+  {
+    return 4+4+4+4 // Sizes of: packet len, type, timestamp, number of vars
+         + var.size() * 4;
+  }
   void WriteToPacket(char* & packet, int & size) const;
 
   bool IsEmpty() const { return var.empty(); }

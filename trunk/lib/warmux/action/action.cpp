@@ -309,14 +309,3 @@ EulerVector Action::PopEulerVector()
   x2 = PopDouble();
   return EulerVector(x0, x1, x2);
 }
-
-//-----------------------------------------------------------------------------
-
-int Action::GetSize() const
-{
-  return sizeof(uint32_t)         // Size of packet len
-       + sizeof(uint32_t)         // Size of the type
-       + sizeof(uint32_t)         // Size of the timestamp
-       + sizeof(uint32_t)         // Size of the number of variable
-       + int(var.size()) * 4;
-}
