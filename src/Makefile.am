@@ -289,6 +289,11 @@ warmux_SOURCES = \
         particles/teleport_member.h \
         particles/water_drop.cpp \
         particles/water_drop.h \
+        replay/replay_info.cpp \
+        replay/replay_info.h \
+        replay/replay.cpp \
+        replay/replay.h \
+        replay/game_mode_info.h \
         sound/jukebox.cpp \
         sound/jukebox.h \
         sound/sample_cache.cpp \
