@@ -90,7 +90,7 @@ static void FAIL_IF_GAMEMASTER(Action *a)
 // #############################################################################
 // #############################################################################
 
-static void Action_Network_ClientChangeState (Action *a)
+static void Action_Network_ClientChangeState(Action *a)
 {
   if (!Network::GetInstance()->IsGameMaster())
     return;
@@ -128,7 +128,8 @@ static void Action_Network_ClientChangeState (Action *a)
   default:
     NET_ASSERT(false)
       {
-        if(a->GetCreator()) a->GetCreator()->ForceDisconnection();
+        if (a->GetCreator())
+          a->GetCreator()->ForceDisconnection();
         return;
       }
     break;
@@ -169,8 +170,9 @@ static void Action_Network_MasterChangeState(Action *a)
   default:
     NET_ASSERT(false)
     {
-      if(a->GetCreator()) a->GetCreator()->ForceDisconnection();
-        return;
+      if (a->GetCreator())
+        a->GetCreator()->ForceDisconnection();
+      return;
     }
   }
 }
@@ -271,7 +273,7 @@ static void DisconnectOnError(enum net_error error)
   ForceGlobalDisconnection();
 }
 
-static void Error_in_Network_Check_Phase2 (Action *a, enum net_error error)
+static void Error_in_Network_Check_Phase2(Action *a, enum net_error error)
 {
   std::string str = Format(_("Error initializing network: Client %s does not agree with you!! - %s"),
                            a->GetCreator()->GetAddress().c_str(),
@@ -281,7 +283,7 @@ static void Error_in_Network_Check_Phase2 (Action *a, enum net_error error)
   AppWarmux::DisplayError(str);
 }
 
-static void Action_Network_Check_Phase2 (Action *a)
+static void Action_Network_Check_Phase2(Action *a)
 {
   // Game master receives information from the client
   if (!Network::GetInstance()->IsGameMaster())
@@ -322,13 +324,13 @@ static void Action_Network_Check_Phase2 (Action *a)
 
 // ########################################################
 
-static void Action_Player_ChangeWeapon (Action *a)
+static void Action_Player_ChangeWeapon(Action *a)
 {
   JukeBox::GetInstance()->Play("default", "change_weapon");
   ActiveTeam().SetWeapon(static_cast<Weapon::Weapon_type>(a->PopInt()));
 }
 
-static void Action_Player_ChangeCharacter (Action *a)
+static void Action_Player_ChangeCharacter(Action *a)
 {
   JukeBox::GetInstance()->Play("default", "character/change_in_same_team");
   int char_no = a->PopInt();
@@ -337,14 +339,14 @@ static void Action_Player_ChangeCharacter (Action *a)
   Camera::GetInstance()->FollowObject(&ActiveCharacter(),true);
 }
 
-static void Action_Game_CalculateFrame (Action */*a*/)
+static void Action_Game_CalculateFrame(Action */*a*/)
 {
   // Nothing to do here:
   // It is just an indication for the action handler
   // that the frame is complete.
 }
 
-static void Action_DropBonusBox (Action */*a*/)
+static void Action_DropBonusBox(Action */*a*/)
 {
   ObjBox* current_box = Game::GetInstance()->GetCurrentBox();
   if (current_box != NULL) {
@@ -352,7 +354,7 @@ static void Action_DropBonusBox (Action */*a*/)
   }
 }
 
-static void Action_RequestBonusBoxDrop (Action */*a*/)
+static void Action_RequestBonusBoxDrop(Action */*a*/)
 {
   if (Network::GetInstance()->IsTurnMaster())
     Game::GetInstance()->RequestBonusBoxDrop();
@@ -360,7 +362,7 @@ static void Action_RequestBonusBoxDrop (Action */*a*/)
 
 // ########################################################
 
-static void Action_Rules_SetGameMode (Action *a)
+static void Action_Rules_SetGameMode(Action *a)
 {
   FAIL_IF_GAMEMASTER(a);
 
@@ -542,14 +544,14 @@ static void Action_Game_Info(Action *a)
   }
 }
 
-static void Action_Game_SetMap (Action *a)
+static void Action_Game_SetMap(Action *a)
 {
   FAIL_IF_GAMEMASTER(a);
 
   _Action_SelectMap(a);
 }
 
-static void Action_Game_AddTeam (Action *a)
+static void Action_Game_AddTeam(Action *a)
 {
   uint player_id = a->PopInt();
   ASSERT(Network::GetInstance()->network_menu->HasOpenTeamSlot());
@@ -561,7 +563,7 @@ static void Action_Game_AddTeam (Action *a)
   Network::GetInstance()->UnlockRemoteHosts();
 }
 
-static void Action_Game_UpdateTeam (Action *a)
+static void Action_Game_UpdateTeam(Action *a)
 {
   uint player_id = a->PopInt();
   std::string old_team_id = a->PopString();
@@ -600,7 +602,7 @@ static void _Action_DelTeam(Player *player, const std::string& team_id)
     Network::GetInstance()->network_menu->DelTeamCallback(team_id);
 }
 
-static void Action_Game_DelTeam (Action *a)
+static void Action_Game_DelTeam(Action *a)
 {
   uint player_id = a->PopInt();
   std::string team_id = a->PopString();
