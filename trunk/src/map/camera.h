@@ -32,7 +32,7 @@
 
 class PhysicalObj;
 
-class Camera : public Rectanglei, public Singleton<Camera>, public MovableByUser
+class Camera : public Singleton<Camera>, public Rectanglei, public MovableByUser
 {
 public :
   enum CameraControlMode {

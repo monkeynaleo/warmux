@@ -44,7 +44,7 @@
 
 //-----------------------------------------------------------------------------
 
-class ObjectsList : public std::list<PhysicalObj*>, public Singleton<ObjectsList>
+class ObjectsList : public Singleton<ObjectsList>, public std::list<PhysicalObj*>
 {
   ObjectsList();
   ~ObjectsList();

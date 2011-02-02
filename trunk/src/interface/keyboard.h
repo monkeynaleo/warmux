@@ -29,7 +29,7 @@
 #include "tool/xml_document.h"
 //-----------------------------------------------------------------------------
 
-class Keyboard : public ManMachineInterface, public Singleton<Keyboard>
+class Keyboard : public Singleton<Keyboard>, public ManMachineInterface
 {
 private:
   int modifier_bits;
