@@ -493,9 +493,10 @@ void Config::LoadXml(const xmlNode *xml)
     XmlReader::ReadBool(elem, "full_screen", video_fullscreen);
 
     uint qual;
-    XmlReader::ReadUint(elem, "quality", qual);
-    if (qual>QUALITY_32BPP) qual=QUALITY_32BPP;
-    quality = (Quality)qual;
+    if (XmlReader::ReadUint(elem, "quality", qual)) {
+	if (qual>QUALITY_32BPP) qual=QUALITY_32BPP;
+	quality = (Quality)qual;
+    }
   }
 
   //=== Sound ===
