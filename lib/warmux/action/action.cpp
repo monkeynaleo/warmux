@@ -310,3 +310,14 @@ EulerVector Action::PopEulerVector()
   x2 = PopDouble();
   return EulerVector(x0, x1, x2);
 }
+
+Action* Action::FromMem(Action_t type, Uint32* input, uint size)
+{
+  Action *a = new Action(type);
+
+  a->var.resize(size);
+  for (uint i=0; i<size; i++)
+    a->var.push_back(input[i]);
+
+  return a;
+}
