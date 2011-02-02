@@ -51,9 +51,10 @@
 #include "object/bonus_box.h"
 #include "object/medkit.h"
 #include "object/objbox.h"
+#include "replay/replay.h"
+#include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"
-#include "sound/jukebox.h"
 #include "weapon/construct.h"
 #include "weapon/explosion.h"
 #include "weapon/gnu.h"
@@ -1162,6 +1163,7 @@ bool ActionHandler::ExecActionsForOneFrame()
   Action * a;
   std::list<Action*>::iterator it;
   bool frame_complete = false;
+  Replay *replay = Replay::GetInstance();
   Lock();
   it = queue.begin();
   while (it != queue.end() && !frame_complete) {
@@ -1189,6 +1191,8 @@ bool ActionHandler::ExecActionsForOneFrame()
     }
 
     Exec(a);
+    if (replay->IsRecording())
+      replay->StoreAction(a);
 
     delete *it;
     it = queue.erase(it);
