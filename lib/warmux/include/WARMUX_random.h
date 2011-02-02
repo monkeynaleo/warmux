@@ -65,7 +65,7 @@ public:
 };
 
 
-class RandomLocalGen : public RandomGenerator, public Singleton<RandomLocalGen>
+class RandomLocalGen : public Singleton<RandomLocalGen>, public RandomGenerator
 {
 };
 

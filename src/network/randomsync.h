@@ -25,7 +25,7 @@
 #include <WARMUX_singleton.h>
 #include <WARMUX_random.h>
 
-class RandomSyncGen : public RandomGenerator, public Singleton<RandomSyncGen>
+class RandomSyncGen : public Singleton<RandomSyncGen>, public RandomGenerator
 {
 private:
 #ifdef DEBUG
