@@ -353,10 +353,11 @@ void DisplayWelcomeMessage()
 void PrintUsage(const char* cmd_name)
 {
   printf("usage: \n");
-  printf("%s -h|--help : show this help\n", cmd_name);
-  printf("%s -v|--version : show the version\n", cmd_name);
-  printf("%s -r|--reset-config : reset the configuration to default\n", cmd_name);
-  printf("%s -f|--force-refresh : force game to refresh, even very slowly. Useful to run with valgrind.", cmd_name);
+  printf("%s -h|--help : show this help and exit\n", cmd_name);
+  printf("%s -v|--version : show the version and exit\n", cmd_name);
+  printf("%s -r|--reset-config : reset the configuration to default and exit\n", cmd_name);
+  printf("%s -f|--force-refresh : force game to refresh, even very slowly. Useful to run with valgrind\n", cmd_name);
+  printf("%s --size <width>x<height> : set the display resolution\n", cmd_name);
   printf("%s [-p|--play] [-g|--game-mode <game_mode>]"
          " [-s|--server] [-c|--client [ip]]\n"
          " [-i|--index-server [ip/hostname of index server]]\n"
@@ -386,10 +387,11 @@ void ParseArgs(int argc, char * argv[])
     {"game-mode",  required_argument, NULL, 'g'},
     {"debug",      required_argument, NULL, 'd'},
     {"reset-config", no_argument,     NULL, 'r'},
+    {"size",       required_argument, NULL, 'S'},
     {NULL,         no_argument,       NULL,  0 }
   };
 
-  while ((c = getopt_long (argc, argv, "ufhvpc::i::sg:d:",
+  while ((c = getopt_long (argc, argv, "ufhvpc::si::g:d:rS:",
                            long_options, &option_index)) != -1) {
     switch (c) {
     case 'u':
@@ -458,7 +460,19 @@ void ParseArgs(int argc, char * argv[])
         exit(EXIT_SUCCESS);
       }
       break;
-
+    case 'S':
+      {
+	uint width, height;
+	int ret;
+	ret = sscanf(optarg, "%ux%u", &width, &height);
+	if (ret == 2) {
+	  Config::GetInstance()->SetVideoWidth(width);
+	  Config::GetInstance()->SetVideoHeight(height);
+	} else {
+	  fprintf(stderr, "Error: %s is not a valid resolution\n", optarg);
+	}
+      }
+      break;
     case '?': /* returns by getopt if option was invalid */
       PrintUsage(argv[0]);
       exit(EXIT_FAILURE);
