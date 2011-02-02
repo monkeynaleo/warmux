@@ -61,16 +61,22 @@ TeamScrollBox::~TeamScrollBox()
 
 void TeamScrollBox::SetNbTeams(uint nb)
 {
-  if (nb < count) {
-    count = 0;
-    vbox->Empty();
+  // Reset the list and readd the widget
+  count = 0;
+  vbox->Empty();
+
+  for (uint i = 0; count < nb; i++) {
+    ASSERT(i < teams.size());
+
+    // It is easy to have hole in the selection
+    // with network game
+    if (teams[i]->GetTeam()) {
+      AddWidget(teams[i]);
+      count++;
+    }
   }
+  ASSERT(count == nb);
 
-  for (uint i=count; i<nb; i++)
-    AddWidget(teams[i]);
-  count = nb;
-
-  //printf("Set nb=%u\n", nb);
   Pack();
   NeedRedrawing();
 }

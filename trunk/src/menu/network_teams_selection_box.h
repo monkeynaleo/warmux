@@ -55,6 +55,5 @@ public:
   Team * FindUnusedTeam(const std::string default_team_id);
   bool HasOpenTeamSlot();
   void RequestTeam();
-
 };
 #endif
