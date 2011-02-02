@@ -356,6 +356,7 @@ void PrintUsage(const char* cmd_name)
   printf("%s -h|--help : show this help\n", cmd_name);
   printf("%s -v|--version : show the version\n", cmd_name);
   printf("%s -r|--reset-config : reset the configuration to default\n", cmd_name);
+  printf("%s -f|--force-refresh : force game to refresh, even very slowly. Useful to run with valgrind.", cmd_name);
   printf("%s [-p|--play] [-g|--game-mode <game_mode>]"
          " [-s|--server] [-c|--client [ip]]\n"
          " [-i|--index-server [ip/hostname of index server]]\n"
@@ -377,7 +378,6 @@ void ParseArgs(int argc, char * argv[])
     {"unrandom",   no_argument,       NULL, 'u'},
     {"force-refresh", no_argument,    NULL, 'f'},
     {"help",       no_argument,       NULL, 'h'},
-    {"blitz",      no_argument,       NULL, 'b'},
     {"version",    no_argument,       NULL, 'v'},
     {"play",       no_argument,       NULL, 'p'},
     {"client",     optional_argument, NULL, 'c'},
@@ -389,7 +389,7 @@ void ParseArgs(int argc, char * argv[])
     {NULL,         no_argument,       NULL,  0 }
   };
 
-  while ((c = getopt_long (argc, argv, "ufhbvpc::i::sg:d:",
+  while ((c = getopt_long (argc, argv, "ufhvpc::i::sg:d:",
                            long_options, &option_index)) != -1) {
     switch (c) {
     case 'u':
@@ -397,6 +397,7 @@ void ParseArgs(int argc, char * argv[])
       RandomLocal().UnRandom();
       break;
     case 'f':
+      // This option is useful to run with valgrind
       extern bool force_refresh;
       force_refresh = true;
       break;
