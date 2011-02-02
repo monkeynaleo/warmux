@@ -35,7 +35,7 @@ struct SDL_mutex;
 class Player;
 class TeamConfig;
 
-class ActionHandler : public WActionHandler, public Singleton<ActionHandler>
+class ActionHandler : public Singleton<ActionHandler>, public WActionHandler
 {
 private:
   friend class Singleton<ActionHandler>;
