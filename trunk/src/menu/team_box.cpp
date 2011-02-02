@@ -127,11 +127,6 @@ void TeamBox::ClearTeam()
   NeedRedrawing();
 }
 
-Team* TeamBox::GetTeam() const
-{
-  return associated_team;
-}
-
 CustomTeam* TeamBox::GetCustomTeam() const
 {
   if (custom_team_list.empty()) {
