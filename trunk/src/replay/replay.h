@@ -84,9 +84,12 @@ public:
     return a;
   }
 
- public:
+protected:
+  friend class Singleton<Replay>;
   Replay();
   ~Replay();
+
+public:
   void Init(bool is_rec);
   void DeInit();
   Uint32 GetTotalTime() const { return total_time; }
