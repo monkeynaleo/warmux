@@ -34,7 +34,6 @@
 
 //#define REPLAY_TRACE
 
-Replay replay;
 static const uint max_packet_size = 100;
 
 Uint32 DoAction(Uint32 interval, void *param)
