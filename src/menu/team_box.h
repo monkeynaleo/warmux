@@ -36,12 +36,6 @@ class TextBox;
 
 class TeamBox : public HBox
 {
- private:
-  /* If you need this, implement it (correctly) */
-  TeamBox(const TeamBox&);
-  TeamBox operator=(const TeamBox&);
-  /**********************************************/
-
   std::string previous_player_name; // only for network
   std::string ai_name;
 
@@ -73,7 +67,7 @@ class TeamBox : public HBox
   void SetAIName(const std::string name);
   void UpdatePlayerType();
   void ClearTeam();
-  Team* GetTeam() const;
+  Team* GetTeam() const { return associated_team; }
 
   void ValidOptions() const;
 
