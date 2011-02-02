@@ -33,6 +33,7 @@
 #include "game/game.h"
 #include "game/game_time.h"
 #include "graphic/colors.h"
+#include "gui/question.h"
 #include "include/app.h"
 #include "include/constant.h"
 #include "interface/interface.h"
@@ -221,7 +222,8 @@ static void Action_Network_Check_Phase1(Action *a)
 enum net_error {
   WRONG_MAP_NAME,
   WRONG_MAP_CRC,
-  WRONG_TEAM
+  WRONG_TEAM,
+  WRONG_SYNC,
 };
 
 static std::string NetErrorId_2_String(enum net_error error)
@@ -233,6 +235,8 @@ static std::string NetErrorId_2_String(enum net_error error)
     return _("Wrong map CRC!");
   case WRONG_TEAM:
     return _("Wrong team!");
+  case WRONG_SYNC:
+    return _("Game out of sync!");
   default: return "";
   }
 }
@@ -841,10 +845,18 @@ static void Action_Network_VerifyRandomSync(Action *a)
   uint remote_seed = (uint)a->PopInt();
   MSG_DEBUG("random.verify","Verify seed: %d (local) == %d (remote)", local_seed, remote_seed);
 
-  ASSERT(remote_seed == local_seed);
+  if (local_seed != remote_seed) {
 
-  if (local_seed != remote_seed)
-    RandomSync().SetSeed(remote_seed);
+    Question question(Question::WARNING);
+    question.Set(_("Game is not synchronized anymore! This is BAD, the network game will be "
+                   "interrupted, sorry. Please, report the bug to the Warmux Team by mail or "
+                   "through the forum. Precise your computer configuration, the game version "
+                   "the map on which you were playing, and what was the very last events "
+                   "occuring in the game (last weapon used, ...)."),
+                   true, 0);
+    question.Ask();
+    DisconnectOnError(WRONG_SYNC);
+  }
 }
 
 static void Action_Time_VerifySync(Action *a)
