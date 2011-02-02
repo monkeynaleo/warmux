@@ -241,11 +241,26 @@ static std::string NetErrorId_2_String(enum net_error error)
   }
 }
 
+/*
+ * This function is useful to call in a context of Action execution
+ * while Network::Disconnect cannot be called because it will
+ * result in a deadlock.
+ */
+static void ForceGlobalDisconnection()
+{
+  std::list<DistantComputer*>& cpus = Network::GetInstance()->GetRemoteHosts();
+  for (std::list<DistantComputer*>::iterator itcpu = cpus.begin();
+       itcpu != cpus.end();
+       ++itcpu) {
+    (*itcpu)->ForceDisconnection();
+  }
+}
+
 static void Action_Network_Disconnect_On_Error(Action *a)
 {
   enum net_error error = (enum net_error)a->PopInt();
   AppWarmux::DisplayError(NetErrorId_2_String(error));
-  Network::Disconnect();
+  ForceGlobalDisconnection();
 }
 
 static void DisconnectOnError(enum net_error error)
@@ -253,7 +268,7 @@ static void DisconnectOnError(enum net_error error)
   Action a(Action::ACTION_NETWORK_DISCONNECT_ON_ERROR);
   a.Push(int(error));
   Network::GetInstance()->SendActionToAll(a);
-  Network::Disconnect();
+  ForceGlobalDisconnection();
 }
 
 static void Error_in_Network_Check_Phase2 (Action *a, enum net_error error)
