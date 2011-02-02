@@ -136,7 +136,7 @@ public:
   const std::string & GetMapName() const { return map_name; };
   void SetMapName(const std::string& new_name) { map_name = new_name; }
 
-  const std::string& GetTtfFilename();
+  const std::string& GetTtfFilename() const;
 
   std::string GetDataDir() const { return data_dir; };
 #ifdef ENABLE_NLS

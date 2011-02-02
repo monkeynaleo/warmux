@@ -80,7 +80,7 @@ Font::Font(int size):
   surface_text_table(),
   m_font(NULL)
 {
-  const std::string filename = Config::GetInstance()->GetTtfFilename();
+  const std::string filename = Config::GetConstInstance()->GetTtfFilename();
 
   if (DoesFileExist(filename)) {
     m_font = TTF_OpenFont(filename.c_str(), size);
