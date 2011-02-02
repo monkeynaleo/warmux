@@ -66,6 +66,7 @@ Replay::Replay()
   , ptr(NULL)
   , bufsize(0)
   , is_recorder(true)
+  , current_action(NULL)
 {
   DeInit();
   //Stores (4*96)*1024 bytes or around 32 minutes of gameplay

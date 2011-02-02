@@ -99,6 +99,7 @@ private:
   // Initialization
   void InitEverything();
   void InitGameData_NetGameMaster();
+  void InitGameData_RePlay();
   void EndInitGameData_NetGameMaster();
   void EndInitGameData_NetClient();
   void InitMap();
@@ -113,7 +114,7 @@ private:
 
   // Input management (keyboard/mouse)
   void RefreshInput();
-  void IgnorePendingInputEvents() const;
+  static void IgnorePendingInputEvents();
 
   void PingClient() const;
 
@@ -191,5 +192,7 @@ public:
   const std::vector< std::pair<float,float> >& GetBenchResults() const { return bench_res; }
 
   float GetLastFrameRate() const;
+
+  void PlayRecord(const std::string& name);
 };
 #endif // GAME_H

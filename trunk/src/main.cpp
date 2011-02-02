@@ -86,6 +86,8 @@ AppWarmux::~AppWarmux()
   singleton = NULL;
 }
 
+static std::string replay;
+
 int AppWarmux::Main(void)
 {
   bool quit = false;
@@ -100,6 +102,16 @@ int AppWarmux::Main(void)
 #endif
 
   Action_Handler_Init();
+
+  // Is a replay filename set so that we play it?
+  if (!replay.empty()) {
+    Game::GetInstance()->PlayRecord(replay);
+    replay.clear();
+
+    End();
+
+    return 0;
+  }
 
   do {
     if (choice == MainMenu::NONE) {
@@ -388,11 +400,12 @@ void ParseArgs(int argc, char * argv[])
     {"debug",      required_argument, NULL, 'd'},
     {"reset-config", no_argument,     NULL, 'r'},
     {"size",       required_argument, NULL, 'S'},
+    {"replay",     required_argument, NULL, 'R'},
     {NULL,         no_argument,       NULL,  0 }
   };
 
-  while ((c = getopt_long (argc, argv, "ufhvpc::si::g:d:rS:",
-                           long_options, &option_index)) != -1) {
+  while ((c = getopt_long(argc, argv, "ufhvpc::si::g:d:rS:",
+                          long_options, &option_index)) != -1) {
     switch (c) {
     case 'u':
       RandomSync().UnRandom();
@@ -432,6 +445,9 @@ void ParseArgs(int argc, char * argv[])
       fprintf(stderr, "Option -d is not available. Warmux has not been compiled with debug/logging option.\n");
 #endif
       break;
+    case 'R':
+      replay = optarg;
+      break;
     case 's':
       choice = MainMenu::NETWORK;
       net_action = NetworkConnectionMenu::NET_HOST;
@@ -463,8 +479,7 @@ void ParseArgs(int argc, char * argv[])
     case 'S':
       {
 	uint width, height;
-	int ret;
-	ret = sscanf(optarg, "%ux%u", &width, &height);
+	int ret = sscanf(optarg, "%ux%u", &width, &height);
 	if (ret == 2) {
 	  Config::GetInstance()->SetVideoWidth(width);
 	  Config::GetInstance()->SetVideoHeight(height);

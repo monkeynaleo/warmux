@@ -55,6 +55,7 @@
 #include "object/medkit.h"
 #include "object/objects_list.h"
 #include "particles/particle.h"
+#include "replay/replay.h"
 #include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"
@@ -123,7 +124,9 @@ void Game::InitEverything()
   GameTime::GetInstance()->Reset();
 
   // initialize gaming data
-  if (Network::GetInstance()->IsGameMaster())
+  if (Replay::GetInstance()->IsPlaying()) {
+    InitGameData_RePlay();
+  } else if (Network::GetInstance()->IsGameMaster())
     InitGameData_NetGameMaster();
   else if (benching) {
     RandomSync().SetSeed(0xABADCAFE);
@@ -187,6 +190,16 @@ void Game::InitEverything()
   std::cout << std::endl;
   std::cout << "[ " << _("Starting a new game") << " ]" << std::endl;
 }
+
+void Game::InitGameData_RePlay()
+{
+  AppWarmux * app = AppWarmux::GetInstance();
+  ActionHandler * action_handler = ActionHandler::GetInstance();
+  Replay *replay = Replay::GetInstance();
+
+  app->video->SetWindowCaption("Wormux - Replay mode");
+  replay->SetWaitState(Replay::WAIT_NOT);
+}  
 
 void Game::InitGameData_NetGameMaster()
 {
@@ -355,6 +368,14 @@ uint Game::Start(bool bench)
   Joystick::GetInstance()->Reset();
 
   bool game_finished = true;
+  Replay *replay = Replay::GetInstance();
+  // We always record, only stuff that matters is whether we discard recording
+  if (!replay->IsPlaying() && IsLOGGING("replay")) {
+    replay->Init(true);
+    if (!replay->StartRecording())
+      MSG_DEBUG("game", "Couldn't start recording game");
+  }
+
   InfoMapBasicAccessor *basic = ActiveMap()->LoadBasicInfo();
   if (basic) {
     InitEverything();
@@ -372,8 +393,28 @@ uint Game::Start(bool bench)
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_STANDARD);
   JukeBox::GetInstance()->PlayMusic("menu");
 
+  if (replay->IsRecording()) {
+    replay->StopRecording();
+    replay->SaveReplay("C:\\replay.dat", "dummy");
+    replay->DeInit();
+  }
+
   benching = false;
   return (ask_for_end) ? 0 : fps->GetTotalFrames();
+}
+
+void Game::PlayRecord(const std::string& name)
+{
+  Replay *replay = Replay::GetInstance();
+
+  replay->Init(false);
+  if (replay->LoadReplay(name.c_str())) {
+    if (replay->StartPlaying()) {
+      Start();
+      replay->StopPlaying();
+    }
+  }
+  replay->DeInit();
 }
 
 void Game::UnloadDatas(bool game_finished) const
@@ -459,17 +500,17 @@ Game::~Game()
 
 // ignore all pending events
 // useful after loading screen
-void Game::IgnorePendingInputEvents() const
+void Game::IgnorePendingInputEvents()
 {
   SDL_Event evnt;
-  while(SDL_PollEvent(&evnt)) { ; }
+  while (SDL_PollEvent(&evnt)) { ; }
 }
 
 void Game::RefreshInput()
 {
   // Poll and treat keyboard and mouse events
   SDL_Event evnt;
-  while(SDL_PollEvent(&evnt)) {
+  while (SDL_PollEvent(&evnt)) {
 
     // Emergency exit
     if (evnt.type == SDL_KEYDOWN && evnt.key.keysym.sym == SDLK_ESCAPE && (SDL_GetModState() & KMOD_CTRL))
