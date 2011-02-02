@@ -96,16 +96,9 @@ void Action::Init(Action_t type)
   creator = NULL;
 }
 
-// Convert the action to a packet
-void Action::WriteToPacket(char* &packet, int & size) const
+void Action::Write(char *buffer) const
 {
-  char *buffer;
-
-  size = GetSize();
-  buffer = (char*)malloc(size);
-  packet = buffer;
-
-  uint32_t len = size;
+  uint32_t len = GetSize();
   SDLNet_Write32(len, buffer);
   buffer += 4;
   SDLNet_Write32(m_type, buffer);
@@ -116,11 +109,19 @@ void Action::WriteToPacket(char* &packet, int & size) const
   SDLNet_Write32(param_size, buffer);
   buffer += 4;
 
-  for(std::list<uint32_t>::const_iterator val = var.begin(); val!=var.end(); val++)
-  {
+  for(std::list<uint32_t>::const_iterator val = var.begin(); val!=var.end(); val++) {
     SDLNet_Write32(*val, buffer);
     buffer += 4;
   }
+}
+
+// Convert the action to a packet
+void Action::WriteToPacket(char* &packet, int & size) const
+{
+  size = GetSize();
+  packet = (char*)malloc(size);
+
+  Write(packet);
 }
 
 //-------------  Add datas to the action  ----------------
