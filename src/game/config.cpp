@@ -726,13 +726,16 @@ uint Config::GetMaxVolume()
   return JukeBox::GetMaxVolume();
 }
 
-const std::string& Config::GetTtfFilename()
+const std::string& Config::GetTtfFilename() const
 {
 #ifdef ENABLE_NLS
   if (fonts.find(default_language) == fonts.end())
     return ttf_filename;
-  else
-    return fonts[default_language];
+  else {
+    std::map<std::string, std::string>::const_iterator it = fonts.find(default_language);
+    ASSERT(it != fonts.end());
+    return it->second;
+  }
 #else
   return ttf_filename;
 #endif
