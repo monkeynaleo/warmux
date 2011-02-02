@@ -171,6 +171,7 @@ public:
     return 4+4+4+4 // Sizes of: packet len, type, timestamp, number of vars
          + var.size() * 4;
   }
+  void Write(char *packet) const;
   void WriteToPacket(char* & packet, int & size) const;
 
   bool IsEmpty() const { return var.empty(); }
