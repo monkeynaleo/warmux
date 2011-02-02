@@ -358,7 +358,7 @@ void PrintUsage(const char* cmd_name)
   printf("%s -r|--reset-config : reset the configuration to default\n", cmd_name);
   printf("%s [-p|--play] [-g|--game-mode <game_mode>]"
          " [-s|--server] [-c|--client [ip]]\n"
-         " [-i|--index-server] [ip/hostname of index server]]\n"
+         " [-i|--index-server [ip/hostname of index server]]\n"
 #ifdef WMX_LOG
          " [-d|--debug <debug_masks>|all]\n"
 #endif
