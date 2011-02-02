@@ -27,6 +27,7 @@
 "$(EPOCROOT)Epoc32\data\z\private\10003a3f\apps\warmux_reg.rsc" - "!:\private\10003a3f\import\apps\warmux_reg.rsc"
 "$(EPOCROOT)Epoc32\data\z\resource\apps\warmux.rsc" - "!:\resource\apps\Warmux.rsc"
 "..\..\..\data\icon\warmux.mif" - "!:\resource\apps\Warmux.mif"
+"..\..\..\data\icon\warmux.mbm" - "!:\resource\apps\Warmux.mbm"
 "../res/sdl_param.txt" - "c:\private\ecf75e71\sdl_param.txt"
 "../res/sdl_flags.txt" - "c:\private\ecf75e71\sdl_flags.txt"
 "../../../data/authors.dtd" - "!:\private\ecf75e71\data/authors.dtd"
