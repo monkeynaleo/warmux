@@ -133,7 +133,7 @@ TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network, bool w_
     // through this mechanism, but with a manual one. This manual mechanism
     // requires we have a *real* copy of the vector for when it is destroyed.
     list_box = new TeamScrollBox(teams_selections, Point2i(box_w-20, _size.y-10));
-    list_box->SetNbTeams(GetTeamsList().playing_list.size());
+    list_box->SetNbTeams(0);
 
     AddWidget(list_box);
   } else {
@@ -183,6 +183,7 @@ LocalTeamsSelectionBox::LocalTeamsSelectionBox(const Point2i &size, bool border)
     local_teams_nb->SetValue(2);
     teams_selections.at(1)->SetAIName(DEFAULT_AI_NAME);
   } else {
+    SetNbTeams(j);
     local_teams_nb->SetValue(j);
   }
 }
