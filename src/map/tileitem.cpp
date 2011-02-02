@@ -17,17 +17,17 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  *****************************************************************************/
 
-#include "map/tileitem.h"
 #include <iostream>
 #include <SDL.h>
 #include <SDL_endian.h>
+#include <WARMUX_point.h>
+#include "map/camera.h"
 #include "map/tile.h"
+#include "map/tileitem.h"
 #include "game/config.h"
 #include "graphic/video.h"
 #include "include/app.h"
-#include "map/camera.h"
 #include "tool/math_tools.h"
-#include <WARMUX_point.h>
 
 // === Common to all TileItem_* except TileItem_Emtpy ==============================
 TileItem_NonEmpty::TileItem_NonEmpty(uint8_t alpha_threshold)
