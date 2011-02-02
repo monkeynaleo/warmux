@@ -19,11 +19,15 @@
  * Keyboard management.
  *****************************************************************************/
 
-#include "interface/keyboard.h"
-#include "game/game.h"
-#include "network/chat.h"
 #include <SDL_events.h>
 #include <libxml/tree.h>
+
+#include "game/game.h"
+#include "interface/keyboard.h"
+#include "network/chat.h"
+#ifdef DEBUG
+#include "network/randomsync.h"
+#endif
 
 #define MODIFIER_OFFSET (SDLK_LAST + 1)
 #define SHIFT_BIT 0x1
@@ -277,6 +281,16 @@ bool Keyboard::HandleKeyEvent(const SDL_Event& evnt)
   }
 
   SDLKey basic_key_code = evnt.key.keysym.sym;
+
+#ifdef DEBUG
+  if (IsLOGGING("killsynchro")
+      && basic_key_code == SDLK_k
+      && event_type == KEY_RELEASED) {
+    fprintf(stderr, "\n\nKILLING NETWORK SYNCHRONISATION!\n\n");
+    RandomSync().SetSeed(0);
+  }
+#endif
+
   // Also ignore real key code of a modifier, fix bug #15238
   if (IsModifier(basic_key_code))
     return false;
