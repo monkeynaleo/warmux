@@ -985,11 +985,7 @@ static void _Info_DisconnectHost(const std::string& hostname, const std::string&
 
   ChatLogger::LogMessageIfOpen(msg);
 
-  if (Game::IsRunning())
-    GameMessages::GetInstance()->Add(msg, primary_red_color);
-  else if (Network::GetInstance()->network_menu != NULL)
-    //Network Menu
-    AppWarmux::GetInstance()->ReceiveMsgCallback(msg, primary_red_color);
+  AppWarmux::GetInstance()->ReceiveMsgCallback(msg, primary_red_color);
 }
 
 // Used to notify clients that someone disconnected from the server
