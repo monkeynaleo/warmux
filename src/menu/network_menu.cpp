@@ -84,7 +84,7 @@ NetworkMenu::NetworkMenu() :
     team_box_height = mainBoxHeight - 60;
   }
 
-  MultiTabs * tabs = new MultiTabs(Point2i(mainBoxWidth, mainBoxHeight));
+  tabs = new MultiTabs(Point2i(mainBoxWidth, mainBoxHeight));
 
   // ################################################
   // ##  TEAM AND MAP SELECTION
@@ -107,31 +107,13 @@ NetworkMenu::NetworkMenu() :
     tabs->AddNewTab("TAB_Team_Map", tabs_title, box);
   }
 
-  // ################################################
-  // ##  GAME OPTIONS
-  // ################################################
-
-  if (Network::GetInstance()->IsGameMaster()) {
-    // Using the game mode editor but currently we are not able to send
-    // custom parameters to client
-
-    Box *box = new GridBox(4, 4, 0, false);
-
-    Point2i option_size(114, 114);
-    std::string selected_gamemode = Config::GetInstance()->GetGameMode();
-
-    opt_game_mode = new ComboBox(_("Game mode"), "menu/game_mode", option_size,
-				 GameMode::ListGameModes(), selected_gamemode);
-    box->AddWidget(opt_game_mode);
-
-    tabs->AddNewTab("TAB_Game", _("Game"), box);
-  }
-
   tabs->SetPosition(MARGIN_SIDE, MARGIN_TOP);
-
   widgets.AddWidget(tabs);
   widgets.Pack();
 
+  // ################################################
+  // ##  PLAYERS INFORMATION
+  // ################################################
 
   Box* bottom_box = new HBox(chat_box_height, false, false, true);
   bottom_box->SetNoBorder();
@@ -196,6 +178,22 @@ NetworkMenu::NetworkMenu() :
     // The first player to connect to a headless server asumes the game master role
     SetGameMasterCallback();
   }
+}
+
+void NetworkMenu::AddGameModeTab()
+{
+    Box *box = new GridBox(4, 4, 0, false);
+
+    Point2i option_size(114, 114);
+    std::string selected_gamemode = Config::GetInstance()->GetGameMode();
+
+    // Using the game mode editor but currently we are not able to send
+    // custom parameters to client
+    opt_game_mode = new ComboBox(_("Game mode"), "menu/game_mode", option_size,
+				 GameMode::ListGameModes(), selected_gamemode);
+    box->AddWidget(opt_game_mode);
+
+    tabs->AddNewTab("TAB_Game", _("Game"), box);
 }
 
 void NetworkMenu::signal_begin_run()
@@ -437,15 +435,20 @@ void NetworkMenu::SetGameMasterCallback()
   AppWarmux::GetInstance()->video->SetWindowCaption( std::string("Warmux ") +
                                                      Constants::WARMUX_VERSION + " - " +
                                                      _("Master mode"));
+  AddGameModeTab();
   mode_label->SetText(_("Master mode"));
   connected_players->SetVisible(true);
   initialized_players->SetVisible(true);
   map_box->AllowSelection();
   b_ok->SetVisible(true); // make sure OK button is available if we had already clicked it
+
+  widgets.Pack();
+  tabs->NeedRedrawing();
+  RedrawMenu();
+
   waiting_for_server = false;
   msg_box->NewMessage(_("You are the new turn master!"), c_red);
   msg_box->NewMessage(_("Wait until some opponent(s) connect!"), c_red);
-
 }
 
 void NetworkMenu::ReceiveMsgCallback(const std::string& msg, const Color& color)
