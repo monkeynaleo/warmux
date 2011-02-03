@@ -292,7 +292,7 @@ int  SDLNet_Init(void)
       SDLNet_SetError("Couldn't initialize Winsock 1.1\n");
       return(-1);
     }
-#else
+#elif !defined(__SYMBIAN32__)
     /* SIGPIPE is generated when a remote socket is closed */
     void (*handler)(int);
     handler = signal(SIGPIPE, SIG_IGN);
@@ -318,7 +318,7 @@ void SDLNet_Quit(void)
         WSACleanup();
       }
     }
-#else
+#elif !defined(__SYMBIAN32__)
     /* Restore the SIGPIPE handler */
     void (*handler)(int);
     handler = signal(SIGPIPE, SIG_DFL);
