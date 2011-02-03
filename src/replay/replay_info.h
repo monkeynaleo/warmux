@@ -77,7 +77,7 @@ public:
   const GameModeInfo* GetGameModeInfo() const { return &mode_info; }
 };
 
-inline void   Write32(std::ofstream& out, Uint32 val);
-inline Uint32 Read32(std::ifstream& in);
+void   Write32(std::ofstream& out, Uint32 val);
+Uint32 Read32(std::ifstream& in);
 
 #endif //REPLAY_INFO_H
