@@ -348,8 +348,8 @@ fi
 dnl === Add Werror flag for gcc/g++ if debug mode is enabled, ==============
 dnl === but allow RTTI (ie dynamic_cast, typeid/typeinfo unavailable) ======
 if test "x${debug}" = "xyes"; then
-  CFLAGS="$CFLAGS -Werror"
-  CXXFLAGS="$CXXFLAGS -Werror"
+  CFLAGS="$CFLAGS -Werror -Wno-unused"
+  CXXFLAGS="$CXXFLAGS -Werror -Wno-unused"
 else
   CXXFLAGS="$CXXFLAGS -fno-rtti"
 fi
