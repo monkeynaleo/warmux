@@ -34,12 +34,6 @@ struct SDL_mutex;
 
 class WActionHandler
 {
-private:
-  /* If you need this, you probably made an error in your code... */
-  WActionHandler(const WActionHandler&);
-  const WActionHandler& operator=(const WActionHandler&);
-  /****************************************************************/
-
   // Mutex needed to be thread safe for the network
   SDL_mutex* mutex;
 
