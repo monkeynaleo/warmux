@@ -101,7 +101,7 @@ ReplayInfo *ReplayInfo::ReplayInfoFromFile(std::ifstream &in)
 
   // Teams
   Uint32 num_teams = Read32(in);            // Number of teams
-  if (num_teams > 4) {
+  if (num_teams > 8) {
     info->last_error =
       Format(_("Suspicious number of teams 0x%08X"), num_teams);
     return info;
