@@ -197,13 +197,12 @@ void Game::InitEverything()
 void Game::InitGameData_RePlay()
 {
   AppWarmux * app = AppWarmux::GetInstance();
-  ActionHandler * action_handler = ActionHandler::GetInstance();
   Replay *replay = Replay::GetInstance();
 
   app->video->SetWindowCaption("Wormux - Replay mode");
   RandomSync().SetSeed(replay->GetSeed());
   replay->SetWaitState(Replay::WAIT_NOT);
-}  
+}
 
 void Game::InitGameData_NetGameMaster()
 {
