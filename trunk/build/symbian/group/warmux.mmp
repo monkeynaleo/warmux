@@ -76,6 +76,7 @@ LIBRARY         avkon.lib efsrv.lib bafl.lib apparc.lib
 LIBRARY         eikcore.lib cone.lib bitgdi.lib scdv.lib
 LIBRARY         hal.lib remconinterfacebase.lib remconcoreapi.lib
 LIBRARY         centralrepository.lib apgrfx.lib
+LIBRARY         platformver.lib
 
 STATICLIBRARY   SDL_mixer.lib
 STATICLIBRARY   sdl.lib
