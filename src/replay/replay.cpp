@@ -188,7 +188,6 @@ void Replay::StoreAction(Action* a)
   Action::Action_t type = a->GetType();
   if (type == Action::ACTION_NETWORK_VERIFY_RANDOM_SYNC ||
       type == Action::ACTION_TIME_VERIFY_SYNC ||
-      type == Action::ACTION_GAME_CALCULATE_FRAME ||
       type == Action::ACTION_NETWORK_PING)
     return;
 
@@ -211,9 +210,11 @@ void Replay::StoreAction(Action* a)
   else
     old_time = a->GetTimestamp();
 
-  ActionHandler *ah = ActionHandler::GetInstance();
-  MSG_DEBUG("replay", "Storing action %s: time=%u type=%i length=%i\n",
-          ah->GetActionName(type).c_str(), a->GetTimestamp(), type, size*4);
+  if (IsLOGGING("replay") && type != Action::ACTION_GAME_CALCULATE_FRAME) {
+    ActionHandler *ah = ActionHandler::GetInstance();
+    MSG_DEBUG("replay", "Storing action %s: time=%u type=%i length=%i\n",
+              ah->GetActionName(type).c_str(), a->GetTimestamp(), type, size*4);
+  }
 }
 
 
