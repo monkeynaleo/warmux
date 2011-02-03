@@ -55,8 +55,9 @@ static const uint MARGIN_TOP    = 5;
 static const uint MARGIN_SIDE   = 5;
 static const uint MARGIN_BOTTOM = 40;
 
-NetworkMenu::NetworkMenu() :
-  Menu("menu/bg_network")
+NetworkMenu::NetworkMenu()
+  : Menu("menu/bg_network")
+  , opt_game_mode(NULL)
 {
   waiting_for_server = false;
 
@@ -182,18 +183,18 @@ NetworkMenu::NetworkMenu() :
 
 void NetworkMenu::AddGameModeTab()
 {
-    Box *box = new GridBox(4, 4, 0, false);
+  Box *box = new GridBox(4, 4, 0, false);
 
-    Point2i option_size(114, 114);
-    std::string selected_gamemode = Config::GetInstance()->GetGameMode();
+  Point2i option_size(114, 114);
+  std::string selected_gamemode = Config::GetInstance()->GetGameMode();
 
-    // Using the game mode editor but currently we are not able to send
-    // custom parameters to client
-    opt_game_mode = new ComboBox(_("Game mode"), "menu/game_mode", option_size,
+  // Using the game mode editor but currently we are not able to send
+  // custom parameters to client
+  opt_game_mode = new ComboBox(_("Game mode"), "menu/game_mode", option_size,
 				 GameMode::ListGameModes(), selected_gamemode);
-    box->AddWidget(opt_game_mode);
+  box->AddWidget(opt_game_mode);
 
-    tabs->AddNewTab("TAB_Game", _("Game"), box);
+  tabs->AddNewTab("TAB_Game", _("Game"), box);
 }
 
 void NetworkMenu::signal_begin_run()
