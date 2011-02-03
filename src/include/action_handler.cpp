@@ -1191,8 +1191,6 @@ bool ActionHandler::ExecActionsForOneFrame()
     }
 
     Exec(a);
-    if (replay->IsRecording())
-      replay->StoreAction(a);
 
     delete *it;
     it = queue.erase(it);
