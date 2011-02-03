@@ -180,8 +180,6 @@ public:
   uint GetTimestamp() const { return m_timestamp; }
   Action_t GetType() const { return m_type; }
   bool IsFrameLess() const { return m_type <= LAST_FRAME_LESS_ACTION; }
-
-  static Action *FromMem(Uint32* input);
 };
 
 // to be defined outside of the library
