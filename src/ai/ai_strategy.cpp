@@ -21,7 +21,7 @@
 
 #include "ai/ai_strategy.h"
 
-const float RATING_EPSILON = 0.00001;
+const float RATING_EPSILON = 0.00001f;
 const uint WATCH_MISSILE_TIME_IN_MS = 2000;
 
 AIStrategy::AIStrategy(float rating):

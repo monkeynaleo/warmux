@@ -475,7 +475,7 @@ Point2i Camera::ComputeShake() const
 
   float func_val = 1.0f;
   if (t >= 0.001f) {
-    float k_scale_angle = 10 * M_PI;
+    float k_scale_angle = float(10 * M_PI);
     float arg = k_scale_angle * t;
     // denormalized sinc
     func_val = (1 - t) * sin(arg) / arg;

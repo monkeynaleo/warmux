@@ -282,8 +282,10 @@ void ParticleEngine::AddBigESmoke(const Point2i &position, const uint &radius)
   // Sin / cos  precomputed value, to avoid recomputing them and speed up.
   // see the commented value of 'angle' to see how it was generated
   const uint little_partic_nbr = 1;
-  static const float little_cos[] = { 1.000000, 0.809017, 0.309017, -0.309017, -0.809017, -1.000000, -0.809017, -0.309017, 0.309017, 0.809017 };
-  static const float little_sin[] = { 0.000000, 0.587785, 0.951057, 0.951056, 0.587785, -0.000000, -0.587785, -0.951056, -0.951056, -0.587785 };
+  static const float little_cos[] = { 1.000000f,  0.809017f,  0.309017f, -0.309017f, -0.809017f,
+                                     -1.000000f, -0.809017f, -0.309017f,  0.309017f,  0.809017f };
+  static const float little_sin[] = { 0.000000f,  0.587785f,  0.951057f,  0.951056f,  0.587785f,
+                                     -0.000000f, -0.587785f, -0.951056f, -0.951056f, -0.587785f };
 
   Particle *particle = NULL;
 

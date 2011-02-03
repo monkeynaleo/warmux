@@ -38,14 +38,14 @@
 // This constant defines how how much damage is worth killing one character?
 // e.g. Killing one Character with 20 health is about the same worth like doing a sum of 120 damage (60 each) to two characters without killing them. Both cases would get a rating of 120 when this constant is 100.
 const float BONUS_FOR_KILLING_CHARACTER = 100;
-const float MALUS_PER_UNUSED_DAMGE_POINT = 0.1;
-const float MIN_GROUND_BONUS = 0.1;
-const float MAX_GROUND_BONUS = 1.0;
-const float GROUND_BONUS_RANGE = 2000.0;
+const float MALUS_PER_UNUSED_DAMGE_POINT = 0.1f;
+const float MIN_GROUND_BONUS = 0.1f;
+const float MAX_GROUND_BONUS = 1.0f;
+const float GROUND_BONUS_RANGE = 2000.0f;
 // At the time this code has been written the
 // bazooka did about 30-60 additional damage at 2500 force
-const float MIN_DAMAGE_PER_FORCE_UNIT = 30.0/2500.0;
-const float MAX_DAMAGE_PER_FORCE_UNIT = 60.0/2500.0;
+const float MIN_DAMAGE_PER_FORCE_UNIT = 30.0f/2500.0f;
+const float MAX_DAMAGE_PER_FORCE_UNIT = 60.0f/2500.0f;
 
 bool AIIdea::CanUseWeapon(const Weapon * weapon)
 {

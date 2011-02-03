@@ -452,9 +452,9 @@ template<class T> class Vector2
           return (x>0) ? 0 : M_PI;
         }
       } else if (y>0) {
-        return 0.5f*M_PI;
+        return float(0.5f*M_PI);
       } else if (y<0) {
-        return -0.5f*M_PI;
+        return float(-0.5f*M_PI);
       }
       return 0;
     }

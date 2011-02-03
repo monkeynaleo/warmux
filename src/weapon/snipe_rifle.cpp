@@ -103,8 +103,8 @@ void BaseSnipeRifle::ComputeCrossPoint(bool force = false)
   uint distance = 0;
   targeting_something = false;
   // While test is not finished
-  float PI_3_div_4 = (3*M_PI)/4;
-  float PI_div_4 = M_PI/4;
+  float PI_3_div_4 = (float)(3*M_PI)/4;
+  float PI_div_4 = (float)M_PI/4;
   while (distance < SNIPE_RIFLE_MAX_BEAM_SIZE) {
     // going upwards ( -3pi/4 < angle <-pi/4 )
     if (angle < -PI_div_4 && angle > -PI_3_div_4) {

@@ -33,8 +33,8 @@ WeaponsWeighting::WeaponsWeighting()
     factor[type] = 1;
   }
   // AI is much to good with bazooka...
-  SetMinFactor(Weapon::WEAPON_BAZOOKA, 0.2);
-  SetMaxFactor(Weapon::WEAPON_BAZOOKA, 0.8);
+  SetMinFactor(Weapon::WEAPON_BAZOOKA, 0.2f);
+  SetMaxFactor(Weapon::WEAPON_BAZOOKA, 0.8f);
 }
 
 void WeaponsWeighting::RandomizeFactors()
