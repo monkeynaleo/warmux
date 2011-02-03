@@ -124,7 +124,8 @@ void Game::InitEverything()
   GameTime::GetInstance()->Reset();
 
   // initialize gaming data
-  if (Replay::GetInstance()->IsPlaying()) {
+  Replay *replay = Replay::GetInstance();
+  if (replay->IsPlaying()) {
     InitGameData_RePlay();
   } else if (Network::GetInstance()->IsGameMaster())
     InitGameData_NetGameMaster();
@@ -134,6 +135,8 @@ void Game::InitEverything()
     bench_res.clear();
   } else if (Network::GetInstance()->IsLocal()) {
     RandomSync().InitRandom();
+    if (replay->IsRecording())
+      replay->SetSeed(RandomSync().GetSeed());
   }
 
   // GameMode::GetInstance()->Load(); : done in the game menu to adjust some parameters for local games
@@ -198,6 +201,7 @@ void Game::InitGameData_RePlay()
   Replay *replay = Replay::GetInstance();
 
   app->video->SetWindowCaption("Wormux - Replay mode");
+  RandomSync().SetSeed(replay->GetSeed());
   replay->SetWaitState(Replay::WAIT_NOT);
 }  
 
@@ -401,20 +405,6 @@ uint Game::Start(bool bench)
 
   benching = false;
   return (ask_for_end) ? 0 : fps->GetTotalFrames();
-}
-
-void Game::PlayRecord(const std::string& name)
-{
-  Replay *replay = Replay::GetInstance();
-
-  replay->Init(false);
-  if (replay->LoadReplay(name.c_str())) {
-    if (replay->StartPlaying()) {
-      Start();
-      replay->StopPlaying();
-    }
-  }
-  replay->DeInit();
 }
 
 void Game::UnloadDatas(bool game_finished) const

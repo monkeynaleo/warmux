@@ -23,7 +23,11 @@
 
 #include <SDL_net.h>
 #include <assert.h>
+
+#include <WARMUX_debug.h>
+
 #include "replay_info.h"
+#include "game/game.h"
 #include "game/game_mode.h"
 #include "game/config.h"
 #include "map/maps_list.h"
@@ -32,9 +36,7 @@
 #include "game/game_time.h"
 #include "team/teams_list.h"
 
-//#define REPLAY_TRACE
-
-static const uint max_packet_size = 100;
+#define MAX_PACKET_SIZE 100
 
 Uint32 DoAction(Uint32 interval, void *param)
 {
@@ -52,9 +54,8 @@ Uint32 DoAction(Uint32 interval, void *param)
     // should be total_time. Difference must subtracted to avoid drift
     next -= (Sint32)GameTime::GetInstance()->Read()
           - rpl->GetStartTime() - rpl->GetTotalTime();
-#ifdef REPLAY_TRACE
-    printf("Corrected next playing time to %i\n", next);
-#endif
+    
+    MSG_DEBUG("replay", "Corrected next playing time to %i\n", next);
   } while (next <= 0);
 
   // Compute 
@@ -69,8 +70,6 @@ Replay::Replay()
   , current_action(NULL)
 {
   DeInit();
-  //Stores (4*96)*1024 bytes or around 32 minutes of gameplay
-  ChangeBufsize(96*1024);
 }
 
 Replay::~Replay()
@@ -96,8 +95,10 @@ void Replay::DeInit()
   duration = 0;
   config_loaded = false;
   wait_state = WAIT_NOT;
+  old_time = 0;
 
-  if (current_action) delete current_action;
+  if (current_action)
+    delete current_action;
   current_action = NULL;
 
   replay_state = NOTHING;
@@ -109,52 +110,66 @@ void Replay::ChangeBufsize(Uint32 n)
     return;
 
   // All data is supposed to be consumed
-  buf = (Uint32*)realloc(buf, n*sizeof(Uint32));
-  bufsize = n*sizeof(Uint32);
-  ptr = buf;
+  Uint32 offset = (bufsize) ? ptr-buf : 0;
+  buf = (Uint32*)realloc(buf, n*4);
+  bufsize = n*4;
+  ptr = buf + offset;
 }
 
 bool Replay::StartRecording()
 {
-#ifdef REPLAY_TRACE
-  printf("Asked to start recording\n");
-#endif
-  assert(is_recorder && replay_state == PAUSED_RECORD);
+  MSG_DEBUG("replay", "Asked to start recording\n");
+  ASSERT(is_recorder && replay_state == PAUSED_RECORD);
 
   replay_state = RECORDING;
   wait_state   = WAIT_NOT;
-  total_time   = 0;
-  start_time   = GameTime::GetInstance()->Read();
+  start_time   = 0;
   old_time     = 0;
+
+  // Write game mode rules at start of data
+  Action a(Action::ACTION_RULES_SET_GAME_MODE);
+  std::string game_mode_name = "replay";
+  a.Push(game_mode_name);
+  std::string game_mode;
+  std::string game_mode_objects;
+  GameMode::GetInstance()->ExportToString(game_mode, game_mode_objects);
+  a.Push(game_mode);
+  a.Push(game_mode_objects);
+  ChangeBufsize(a.GetSize()/2);
+  a.Write((char*)ptr);
+  ptr += a.GetSize()/4;
+  MSG_DEBUG("replay", "Wrote game mode on %u bytes\n", a.GetSize());
 
   return true;
 }
 
 bool Replay::SaveReplay(const std::string& name, const char *comment)
 {
-  assert (is_recorder);
+  ASSERT(is_recorder);
 
   std::ofstream out(name.c_str(), std::ofstream::binary);
-  if (!out)
-  {
+  if (!out) {
     Error(Format(_("Couldn't open %s\n"), name.c_str()));
     return false;
   }
 
   // Generate replay info and dump it to file
+  total_time = old_time - start_time;
   ReplayInfo *info = ReplayInfo::ReplayInfoFromCurrent(total_time, comment);
   info->DumpToFile(out);
   delete info;
 
+  // Save seed
+  Write32(out, seed);
+
   // Flush actions recorded
-#ifdef REPLAY_TRACE
   Uint32 pos = out.tellp();
-  printf("Actions stored at %u on %u bytes\n", pos, MemUsed());
-#endif
+  MSG_DEBUG("replay", "Actions stored at %u on %u bytes in %s, seed %08X\n",
+            pos, MemUsed(), name.c_str(), seed);
   out.write((char*)buf, MemUsed());
   out.close();
 
-  // @fixme Return length actually written
+  // should return length actually written
   return true;
 }
 
@@ -168,34 +183,37 @@ void Replay::StoreAction(Action* a)
 {
   uint          size;
 
-  assert(is_recorder && replay_state==RECORDING);
+  ASSERT(is_recorder && replay_state==RECORDING);
 
-  // Enlarge buffer if can't contain max packet size
-  if (ptr-buf > (int)(bufsize-max_packet_size-3)*4)
+  Action::Action_t type = a->GetType();
+  if (type == Action::ACTION_NETWORK_VERIFY_RANDOM_SYNC ||
+      type == Action::ACTION_TIME_VERIFY_SYNC ||
+      type == Action::ACTION_GAME_CALCULATE_FRAME ||
+      type == Action::ACTION_NETWORK_PING)
+    return;
+
+  // Enlarge buffer if it can't contain max packet size
+  if (MemUsed() > bufsize - MAX_PACKET_SIZE*4)
     ChangeBufsize(2*bufsize);
   
-  // Time - and try avoiding drift
-  total_time = GameTime::GetInstance()->Read() - start_time;
-  duration = (Sint32)total_time-old_time;
-  if (duration<0) duration=0; //Shouldn't happen but...
-  old_time = total_time;
-  SDLNet_Write32(duration, ptr); ptr++;
-
   // Packet body
   a->Write((char*)ptr);
-  size = 2+SDLNet_Read32(ptr+1); // type+size+sizeof(data)
-  if (size > max_packet_size) {
+  size = a->GetSize()/4;
+  if (size > MAX_PACKET_SIZE-4) {
     Error(Format("Bad packet, stream was: %l08X %l08X %l08X\n",
                  ptr[0], ptr[1], ptr[2]));
   }
   ptr += size;
 
-#ifdef REPLAY_TRACE
-  Action_t      type = a->GetType();
+  // Check time
+  if (start_time == 0)
+    start_time = a->GetTimestamp();
+  else
+    old_time = a->GetTimestamp();
+
   ActionHandler *ah = ActionHandler::GetInstance();
-  printf("Storing action %s: time=%u type=%i length=%i\n", 
-         ah->GetActionName(type).c_str(), duration, type, size*sizeof(Uint32));
-#endif
+  MSG_DEBUG("replay", "Storing action %s: time=%u type=%i length=%i\n", 
+          ah->GetActionName(type).c_str(), a->GetTimestamp(), type, size*4);
 }
 
 
@@ -216,20 +234,27 @@ bool Replay::LoadReplay(const std::string& name)
   std::ifstream in(name.c_str(), std::fstream::binary);
   if (!in) {
     Error(Format(_("Couldn't open %s\n"), name.c_str()));
-    goto err;
+    goto done;
   }
 
   info = ReplayInfo::ReplayInfoFromFile(in);
   if (!info->IsValid())
-    goto err;
+    goto done;
 
   if (info->GetVersion() != Constants::WARMUX_VERSION) {
     Error(Format(_("Bad version: %s != %s"),
                  info->GetVersion().c_str(),
                  Constants::WARMUX_VERSION.c_str()));
-    goto err;
+    goto done;
   }
+  goto ok;
 
+done:
+   in.close();
+   if (info) delete info;
+   return status;
+
+ok:
   // map ID
   map_id = MapsList::GetInstance()->FindMapById(info->GetMapId());
   if (map_id == -1) {
@@ -264,23 +289,21 @@ bool Replay::LoadReplay(const std::string& name)
   SWAP(mode_info.max_energy, game_mode->character.max_energy);
   SWAP(mode_info.gravity, game_mode->gravity);
 
-#ifdef REPLAY_TRACE
-  printf("Game mode: turn=%us move_player=%u max_energy=%u init_energy=%u\n",
-         game_mode->duration_turn, game_mode->duration_move_player,
-         game_mode->character.max_energy, game_mode->character.init_energy);
-#endif
+  MSG_DEBUG("replay", "Game mode: turn=%us move_player=%u max_energy=%u init_energy=%u\n",
+          game_mode->duration_turn, game_mode->duration_move_player,
+          game_mode->character.max_energy, game_mode->character.init_energy);
 
   // All of the above could be avoided through a GameMode::Load
   config_loaded = true;
+
+  seed = Read32(in);
 
   // Get remaining data
   pos = in.tellg();
   in.seekg(0, std::fstream::end);
   bufsize = in.tellg()-pos;
   in.seekg(pos);
-#ifdef REPLAY_TRACE
-  printf("Allocated %ib for actions found at %i\n", int(bufsize), int(pos));
-#endif
+  MSG_DEBUG("replay", "Allocated %ib for actions found at %i\n", int(bufsize), int(pos));
 
   if (bufsize%4) {
     // Make it fatal
@@ -291,69 +314,80 @@ bool Replay::LoadReplay(const std::string& name)
   ChangeBufsize(bufsize/4);
 
   in.read((char*)buf, bufsize);
-  if (!!in) status = true;
-
- err:
-  in.close();
-  if (info) delete info;
-  return status;
+  if (!in) {
+    Error(Format(_("Warning, malformed replay with data of size %u"), bufsize));
+    return false;
+  }
+  Action *a = Action::FromMem(buf);
+  if (!a || a->GetType() != Action::ACTION_RULES_SET_GAME_MODE ||
+      a->PopString() != "replay") {
+    Error(Format(_("Warning, malformed replay with data of size %u"), bufsize));
+    return false;
+  }
+  std::string mode = a->PopString();
+  std::string mode_objects = a->PopString();
+  game_mode->LoadFromString("replay", mode, mode_objects);
+  delete a;
+  goto done;
 }
 
 // Only use is internal, but let those parameters be available
 Action* Replay::GetAction(Sint32 *tick_time)
 {
   Action::Action_t   type;
-  Uint16             size;
   Action             *a;
 
   ASSERT(!is_recorder && replay_state == PLAYING);
   
-  // Does it contain the 3 elements needed to decode at least
+  // Does it contain the 4 elements needed to decode at least
   // action header?
   if (MemUsed() > bufsize-3*4) {
     StopPlaying();
     return NULL;
   }
 
-  *tick_time = SDLNet_Read32(ptr); ptr++;
-  type = (Action::Action_t)SDLNet_Read32(ptr);
+  // Read action
+  a = Action::FromMem(ptr);
+  type = a->GetType();
   if (type > Action::ACTION_TIME_VERIFY_SYNC) {
     Error(Format(_("Malformed replay: action with unknow type %08X"), type));
     StopPlaying();
     return NULL;
   }
 
-  // @fixme Is first element in data always size in Uint32 ?
-  size = SDLNet_Read32(ptr+1)+2;
-
-  if (size > max_packet_size || MemUsed() > bufsize-size*4) {
+  // Move pointer
+  Uint16 size = a->GetSize()/4;
+  if (size > MAX_PACKET_SIZE || MemUsed() > bufsize-size*4) {
     Error(Format(_("Malformed replay: action with datasize=%u"), size));
     StopPlaying();
     return NULL;
   }
-
-  // @fixme We may read beyond end of buffer if malformed replay
-  a = Action::FromMem(type, ptr+1, size);
   ptr += size;
 
-#ifdef REPLAY_TRACE
+  // Set duration
+  if (start_time == 0) {
+    start_time = a->GetTimestamp();
+    *tick_time = 0;
+  } else {
+    *tick_time = a->GetTimestamp() - start_time;
+  }
+
   ActionHandler *ah = ActionHandler::GetInstance();
-  printf("Read action %s: type=%i time=%i length=%i\n",
-         ah->GetActionName(type).c_str(), type, *tick_time, size*4);
-#endif
+  MSG_DEBUG("replay", "Read action %s: type=%i time=%i length=%i\n",
+          ah->GetActionName(type).c_str(), type, *tick_time, size*4);
 
   return a;
 }
 
 bool Replay::StartPlaying()
 {
-  assert(!is_recorder && replay_state == PAUSED_PLAY);
+  ASSERT(!is_recorder && replay_state == PAUSED_PLAY);
 
   // Check GameMode
   GameMode * game_mode = GameMode::GetInstance();
-  printf("Game mode: turn=%us move_player=%u max_nrg=%u init_nrg=%u\n",
-         game_mode->duration_turn, game_mode->duration_move_player,
-         game_mode->character.max_energy, game_mode->character.init_energy);
+  MSG_DEBUG("replay", "Game mode: turn=%us move_player=%u max_nrg=%u init_nrg=%u\n",
+          game_mode->duration_turn, game_mode->duration_move_player,
+          game_mode->character.max_energy, game_mode->character.init_energy);
 
   replay_state = PLAYING;
   wait_state   = WAIT_FOR_SOURCE;
@@ -367,7 +401,7 @@ bool Replay::StartPlaying()
         PlayOneAction(); // Refills current_action
       else {
         id = SDL_AddTimer(duration, DoAction, this);
-        printf("Started playing\n");
+        MSG_DEBUG("replay", "Started playing\n");
         return true;
       }
     } else {
@@ -384,7 +418,7 @@ Uint32 Replay::PlayOneAction()
 
   ASSERT(!is_recorder);
   if (current_action == NULL || replay_state != PLAYING) {
-    printf("Nothing to do\n");
+    MSG_DEBUG("replay", "Nothing to do\n");
     StopPlaying();
     return 0;
   }
@@ -392,9 +426,7 @@ Uint32 Replay::PlayOneAction()
   // Wait for Sink
   wait_time = GameTime::GetInstance()->Read();
   while (wait_state == WAIT_FOR_SINK) {
-#ifdef REPLAY_TRACE
-    printf("Waiting for sink...\n");
-#endif
+    MSG_DEBUG("replay", "Waiting for sink...\n");
     SDL_Delay(100);
   }
   start_time += GameTime::GetInstance()->Read() - wait_time;
@@ -432,11 +464,11 @@ void Replay::StopPlaying()
   replay_state = PAUSED_PLAY;
   wait_state = WAIT_NOT;
   SDL_Delay(200);
-  if (id) SDL_RemoveTimer(id);
+  if (id)
+    SDL_RemoveTimer(id);
   id = 0;
 
   // Only replay seems to use this, so we can quit it now
-  SDL_QuitSubSystem(SDL_INIT_TIMER);
   replay_state = NOTHING;
 
   // Restore game mode
@@ -452,4 +484,18 @@ void Replay::StopPlaying()
 
   // Restore playing list
   GetTeamsList().SetPlayingList(backup_list);
+}
+
+void StartPlaying(const std::string& name)
+{
+  Replay *replay = Replay::GetInstance();
+
+  replay->Init(false);
+  if (replay->LoadReplay(name.c_str())) {
+    if (replay->StartPlaying()) {
+      Game::GetInstance()->Start();
+      replay->StopPlaying();
+    }
+  }
+  replay->DeInit();
 }

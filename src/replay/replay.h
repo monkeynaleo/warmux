@@ -55,6 +55,7 @@ public:
   Uint32         bufsize;
   Uint32         total_time;
   Uint32         start_time;
+  uint           seed;
 
   // State
   wait_state_t   wait_state;
@@ -77,7 +78,7 @@ public:
   std::vector<Team*> backup_list;
 
   void ChangeBufsize(Uint32 n);
-  Uint32 MemUsed() { return ptr - buf; };
+  Uint32 MemUsed() { return 4*(ptr - buf); };
   static bool CheckReturn(const char*msg, bool a)
   {
     //std::cout << msg << ": replied state is: " << a << "\n";
@@ -94,6 +95,10 @@ public:
   void DeInit();
   Uint32 GetTotalTime() const { return total_time; }
   Uint32 GetStartTime() const { return start_time; }
+
+  // Seed access
+  void SetSeed(uint s) { seed = s; }
+  uint GetSeed() const { return seed; }
 
   // Recorder
   bool StartRecording();
@@ -114,5 +119,7 @@ public:
   void StopPlaying();
   bool IsPlaying() const { return CheckReturn("IsPlaying()", !is_recorder && replay_state==PLAYING); };
 };
+
+void StartPlaying(const std::string& name);
 
 #endif //REPLAY_H
