@@ -44,11 +44,11 @@ std::vector<std::string> debugModes;
 #ifdef WMX_LOG
 bool IsLOGGING(const char* mode)
 {
-  int mSize = strlen(mode);
+  unsigned int mSize = strlen(mode);
   unsigned int i = 0;
 
   for (i = 0; i < debugModes.size(); i++) {
-    int modeSize = debugModes[i].size();
+    unsigned int modeSize = debugModes[i].size();
     const char *strMode = debugModes[i].c_str();
 
     if (strncmp(strMode, mode, modeSize) == 0) {
