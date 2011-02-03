@@ -266,22 +266,20 @@ void NetworkMenu::PrepareForNewGame()
 
 bool NetworkMenu::signal_ok()
 {
-  if (!Network::GetInstance()->IsGameMaster())
-  {
+  if (!Network::GetInstance()->IsGameMaster()) {
     // Check the user have selected a team:
     bool found = false;
-    for(std::vector<Team*>::iterator team = GetTeamsList().playing_list.begin();
-                    team != GetTeamsList().playing_list.end();
-                    team++)
-    {
-      if((*team)->IsLocalHuman())
-      {
+
+    for (std::vector<Team*>::iterator team = GetTeamsList().playing_list.begin();
+         team != GetTeamsList().playing_list.end();
+         team++) {
+      if ((*team)->IsLocalHuman()) {
         found = true;
         break;
       }
     }
-    if(!found)
-    {
+
+    if (!found) {
       msg_box->NewMessage(_("You won't be able to play before selecting a team!"));
       goto error;
     }
@@ -293,24 +291,19 @@ bool NetworkMenu::signal_ok()
       goto error;
     }
 
-  }
-  else
-  {
-    if (GetTeamsList().playing_list.size() <= 1)
-    {
+  } else {
+    if (GetTeamsList().playing_list.size() <= 1) {
       msg_box->NewMessage(Format(ngettext("There is only %i team.",
                                           "There are only %i teams.",
                                           GetTeamsList().playing_list.size()),
                                  GetTeamsList().playing_list.size()), c_red);
       goto error;
     }
-    if (Network::GetInstance()->GetNbPlayersConnected() == 0)
-    {
+    if (Network::GetInstance()->GetNbPlayersConnected() == 0) {
       msg_box->NewMessage(_("You are alone. :-/"), c_red);
       goto error;
     }
-    if (Network::GetInstance()->GetNbPlayersConnected() != Network::GetInstance()->GetNbPlayersWithState(Player::STATE_INITIALIZED))
-    {
+    if (Network::GetInstance()->GetNbPlayersConnected() != Network::GetInstance()->GetNbPlayersWithState(Player::STATE_INITIALIZED)) {
       int nbr = Network::GetInstance()->GetNbPlayersConnected() - Network::GetInstance()->GetNbPlayersWithState(Player::STATE_INITIALIZED);
       std::string pl = Format(ngettext("Wait! %i player is not ready yet!", "Wait! %i players are not ready yet!", nbr), nbr);
       msg_box->NewMessage(pl, c_red);
@@ -358,8 +351,7 @@ bool NetworkMenu::signal_ok()
 void NetworkMenu::key_ok()
 {
   // return was pressed while chat texbox still had focus (player wants to send his msg)
-  if (msg_box->TextHasFocus())
-  {
+  if (msg_box->TextHasFocus()) {
     msg_box->SendChatMsg();
     return;
   }
@@ -377,8 +369,7 @@ bool NetworkMenu::signal_cancel()
 
 void NetworkMenu::Draw(const Point2i& /*mousePosition*/)
 {
-  if (Network::GetInstance()->IsConnected())
-  {
+  if (Network::GetInstance()->IsConnected()) {
     //Refresh the number of connected players:
     int nbr = Network::GetInstance()->GetNbPlayersConnected() + 1;
     std::string pl = Format(ngettext("%i player connected", "%i players connected", nbr), nbr);
@@ -415,7 +406,7 @@ void NetworkMenu::Draw(const Point2i& /*mousePosition*/)
 
 void NetworkMenu::DelTeamCallback(const std::string& team_id)
 {
-  if( close_menu )
+  if (close_menu)
     return;
 
   // Called from the action handler
@@ -424,7 +415,7 @@ void NetworkMenu::DelTeamCallback(const std::string& team_id)
 
 void NetworkMenu::AddTeamCallback(const std::string& team_id)
 {
-  if ( close_menu )
+  if (close_menu)
     return;
 
   team_box->AddTeamCallback(team_id);
@@ -432,7 +423,7 @@ void NetworkMenu::AddTeamCallback(const std::string& team_id)
 
 void NetworkMenu::UpdateTeamCallback(const std::string& old_team_id, const std::string& team_id)
 {
-  if ( close_menu )
+  if (close_menu)
     return;
 
   team_box->UpdateTeamCallback(old_team_id, team_id);
@@ -449,9 +440,9 @@ void NetworkMenu::ChangeMapCallback()
 void NetworkMenu::SetGameMasterCallback()
 {
   // We are becoming game master, updating the menu...
-  AppWarmux::GetInstance()->video->SetWindowCaption( std::string("Warmux ") +
-                                                     Constants::WARMUX_VERSION + " - " +
-                                                     _("Master mode"));
+  AppWarmux::GetInstance()->video->SetWindowCaption(std::string("Warmux ") +
+                                                    Constants::WARMUX_VERSION + " - " +
+                                                    _("Master mode"));
   AddGameModeTab();
   mode_label->SetText(_("Master mode"));
   connected_players->SetVisible(true);
