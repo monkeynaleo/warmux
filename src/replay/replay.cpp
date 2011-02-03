@@ -163,6 +163,7 @@ void Replay::StoreAction(const Action* a)
 
   Action::Action_t type = a->GetType();
   if (type == Action::ACTION_NETWORK_VERIFY_RANDOM_SYNC ||
+      type == Action::ACTION_TIME_VERIFY_SYNC ||
       type == Action::ACTION_NETWORK_PING)
     return;
 
@@ -357,16 +358,22 @@ bool Replay::RefillActions()
     current_action = GetAction();
     if (current_action) {
       ah->NewAction(current_action, false);
+#ifdef REPLAY_ON_DEMAND
       if (current_action->GetType() == Action::ACTION_GAME_CALCULATE_FRAME)
         count++;
       if (count == 50)
         break;
+#endif
     } else
       break;
   }
   ah->UnLock();
 
+#ifdef REPLAY_ON_DEMAND
   return current_action != NULL;
+#else
+  return true;
+#endif
 }
 
 bool Replay::StartPlaying()
