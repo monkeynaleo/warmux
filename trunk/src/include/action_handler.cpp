@@ -1196,6 +1196,12 @@ bool ActionHandler::ExecActionsForOneFrame()
     it = queue.erase(it);
   }
   UnLock();
+
+  // Refill actions
+  Replay *replay = Replay::GetInstance();
+  if (replay->IsPlaying())
+    replay->RefillActions();
+
   return frame_complete;
 }
 

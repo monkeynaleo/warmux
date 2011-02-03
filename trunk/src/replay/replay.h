@@ -67,7 +67,6 @@ public:
   Sint32         duration;
 
   // For replaying
-  SDL_TimerID    id;
   Action         *current_action;
 
   // For replaying: GameMode save
@@ -113,9 +112,9 @@ public:
 
   // Replayer
   bool  LoadReplay(const std::string& name);
-  Action* GetAction(Sint32* tick_time);
+  bool  RefillActions();
+  Action* GetAction();
   bool StartPlaying();
-  Uint32 PlayOneAction();
   void StopPlaying();
   bool IsPlaying() const { return CheckReturn("IsPlaying()", !is_recorder && replay_state==PLAYING); };
 };
