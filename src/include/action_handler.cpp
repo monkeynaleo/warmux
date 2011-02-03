@@ -1163,7 +1163,7 @@ bool ActionHandler::ExecActionsForOneFrame()
   Action * a;
   std::list<Action*>::iterator it;
   bool frame_complete = false;
-  Replay *replay = Replay::GetInstance();
+
   Lock();
   it = queue.begin();
   while (it != queue.end() && !frame_complete) {
