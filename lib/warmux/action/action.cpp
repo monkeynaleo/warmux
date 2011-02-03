@@ -29,6 +29,8 @@
 #include <WARMUX_error.h>
 //-----------------------------------------------------------------------------
 
+#define MAX_NUM_VARS 16384
+
 Action::Action(Action_t type)
 {
   Init(type);
@@ -72,16 +74,17 @@ Action::Action(const char *buffer, DistantComputer* _creator)
   creator = _creator;
 
   var.clear();
+  uint length = SDLNet_Read32(buffer);
   buffer += 4; // skip the buffer len
   m_type = (Action_t)SDLNet_Read32(buffer);
   buffer += 4;
   m_timestamp = (uint)SDLNet_Read32(buffer);
   buffer += 4;
-  int m_length = SDLNet_Read32(buffer);
-  buffer += 4;
+  ASSERT(!(length%4));
+  length = (length/4)-3;
+  ASSERT(length < MAX_NUM_VARS); // would be suspicious
 
-  for(int i=0; i < m_length; i++)
-  {
+  for (uint i=0; i < length; i++) {
     uint32_t val = SDLNet_Read32(buffer);
     var.push_back(val);
     buffer += 4;
@@ -105,14 +108,14 @@ void Action::Write(char *buffer) const
   buffer += 4;
   SDLNet_Write32(m_timestamp, buffer);
   buffer += 4;
-  uint32_t param_size = (uint32_t)var.size();
-  SDLNet_Write32(param_size, buffer);
-  buffer += 4;
 
+  uint count = 0;
   for(std::list<uint32_t>::const_iterator val = var.begin(); val!=var.end(); val++) {
     SDLNet_Write32(*val, buffer);
     buffer += 4;
+    count++;
   }
+  ASSERT(count < MAX_NUM_VARS);
 }
 
 // Convert the action to a packet
