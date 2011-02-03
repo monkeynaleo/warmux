@@ -392,16 +392,17 @@ uint Game::Start(bool bench)
   } else {
     fprintf(stderr, "Couldn't load map\n");
   }
-  UnloadDatas(game_finished);
-
-  Mouse::GetInstance()->SetPointer(Mouse::POINTER_STANDARD);
-  JukeBox::GetInstance()->PlayMusic("menu");
 
   if (replay->IsRecording()) {
     replay->StopRecording();
     replay->SaveReplay("C:\\replay.dat", "dummy");
     replay->DeInit();
   }
+
+  UnloadDatas(game_finished);
+
+  Mouse::GetInstance()->SetPointer(Mouse::POINTER_STANDARD);
+  JukeBox::GetInstance()->PlayMusic("menu");
 
   benching = false;
   return (ask_for_end) ? 0 : fps->GetTotalFrames();
