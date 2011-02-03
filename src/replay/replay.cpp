@@ -38,30 +38,6 @@
 
 #define MAX_PACKET_SIZE 100
 
-Uint32 DoAction(Uint32 /*interval*/, void *param)
-{
-  Sint32 next;
-  Replay *rpl = static_cast<Replay *>(param);
-
-  do {
-    next = rpl->PlayOneAction();
-
-    // Check playing status and abort if needed
-    if (!rpl->IsPlaying()) return 0;
-
-    // Compute actual next time so to match current total_time
-    // (Current time - start_time) is the current play time, which
-    // should be total_time. Difference must subtracted to avoid drift
-    next -= (Sint32)GameTime::GetInstance()->Read()
-          - rpl->GetStartTime() - rpl->GetTotalTime();
-
-    MSG_DEBUG("replay", "Corrected next playing time to %i\n", next);
-  } while (next <= 0);
-
-  // Compute
-  return next;
-}
-
 Replay::Replay()
   : buf(NULL)
   , ptr(NULL)
@@ -187,7 +163,6 @@ void Replay::StoreAction(const Action* a)
 
   Action::Action_t type = a->GetType();
   if (type == Action::ACTION_NETWORK_VERIFY_RANDOM_SYNC ||
-      type == Action::ACTION_TIME_VERIFY_SYNC ||
       type == Action::ACTION_NETWORK_PING)
     return;
 
@@ -336,11 +311,8 @@ ok:
 }
 
 // Only use is internal, but let those parameters be available
-Action* Replay::GetAction(Sint32 *tick_time)
+Action* Replay::GetAction()
 {
-  Action::Action_t   type;
-  Action             *a;
-
   ASSERT(!is_recorder && replay_state == PLAYING);
 
   // Does it contain the 4 elements needed to decode at least
@@ -350,8 +322,8 @@ Action* Replay::GetAction(Sint32 *tick_time)
   }
 
   // Read action
-  a = new Action((char*)ptr, NULL);
-  type = a->GetType();
+  Action *a = new Action((char*)ptr, NULL);
+  Action::Action_t type = a->GetType();
   if (type > Action::ACTION_TIME_VERIFY_SYNC) {
     Error(Format(_("Malformed replay: action with unknow type %08X"), type));
     StopPlaying();
@@ -367,19 +339,34 @@ Action* Replay::GetAction(Sint32 *tick_time)
   }
   ptr += size;
 
-  // Set duration
-  if (start_time == 0) {
-    start_time = a->GetTimestamp();
-    *tick_time = 0;
-  } else {
-    *tick_time = a->GetTimestamp() - start_time;
-  }
-
   ActionHandler *ah = ActionHandler::GetInstance();
-  MSG_DEBUG("replay", "Read action %s: type=%i time=%i length=%i\n",
-            ah->GetActionName(type).c_str(), type, *tick_time, size*4);
+  MSG_DEBUG("replay", "Read action %s: type=%u time=%u length=%i\n",
+            ah->GetActionName(type).c_str(), type, a->GetTimestamp(), size*4);
 
   return a;
+}
+
+bool Replay::RefillActions()
+{
+  ActionHandler *ah = ActionHandler::GetInstance();
+
+  uint count = 0;
+
+  ah->Lock();
+  while (1) {
+    current_action = GetAction();
+    if (current_action) {
+      ah->NewAction(current_action, false);
+      if (current_action->GetType() == Action::ACTION_GAME_CALCULATE_FRAME)
+        count++;
+      if (count == 50)
+        break;
+    } else
+      break;
+  }
+  ah->UnLock();
+
+  return current_action != NULL;
 }
 
 bool Replay::StartPlaying()
@@ -396,73 +383,7 @@ bool Replay::StartPlaying()
   wait_state   = WAIT_FOR_SOURCE;
   total_time   = 0;
 
-  current_action = GetAction(&duration);
-#if 0
-  start_time     = GameTime::GetInstance()->Read();
-  while (1) {
-    if (current_action) {
-      if (current_action->IsFrameLess())
-        PlayOneAction(); // Refills current_action
-      else {
-        id = SDL_AddTimer(duration, DoAction, this);
-        MSG_DEBUG("replay", "Started playing\n");
-        return true;
-      }
-    } else {
-      StopPlaying();
-      return false;
-    }
-  }
-#else
-  while (current_action) {
-    ActionHandler::GetInstance()->NewAction(current_action, false);
-    current_action = GetAction(&duration);
-  }
-  return true;
-#endif
-}
-
-// Returns time of next action
-Uint32 Replay::PlayOneAction()
-{
-  Uint32 wait_time;
-
-  ASSERT(!is_recorder);
-  if (current_action == NULL || replay_state != PLAYING) {
-    MSG_DEBUG("replay", "Nothing to do\n");
-    StopPlaying();
-    return 0;
-  }
-
-  // Wait for Sink
-  wait_time = GameTime::GetInstance()->Read();
-  while (wait_state == WAIT_FOR_SINK) {
-    MSG_DEBUG("replay", "Waiting for sink...\n");
-    SDL_Delay(100);
-  }
-  start_time += GameTime::GetInstance()->Read() - wait_time;
-
-  // Perform the action
-  total_time += duration;
-  ActionHandler::GetInstance()->NewAction(current_action, false);
-  // ActionHandler clears the action
-  current_action = NULL;
-
-  // Get new action
-  current_action = GetAction(&duration);
-
-  // Keep pushing and getting new action untill not in the same frame
-  while (current_action && current_action->IsFrameLess()) {
-    ActionHandler::GetInstance()->NewAction(current_action, false);
-    current_action = GetAction(&duration);
-  }
-
-  if (!current_action) {
-    StopPlaying();
-    return 0;
-  }
-
-  return duration;
+  return RefillActions();
 }
 
 void Replay::StopPlaying()
@@ -474,10 +395,6 @@ void Replay::StopPlaying()
 
   replay_state = PAUSED_PLAY;
   wait_state = WAIT_NOT;
-  SDL_Delay(200);
-  if (id)
-    SDL_RemoveTimer(id);
-  id = 0;
 
   // Only replay seems to use this, so we can quit it now
   replay_state = NOTHING;
