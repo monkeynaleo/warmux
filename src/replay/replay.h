@@ -79,7 +79,7 @@ public:
 
   void ChangeBufsize(Uint32 n);
   Uint32 MemUsed() { return 4*(ptr - buf); };
-  static bool CheckReturn(const char*msg, bool a)
+  static bool CheckReturn(const char* /*msg*/, bool a)
   {
     //std::cout << msg << ": replied state is: " << a << "\n";
     return a;

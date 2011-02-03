@@ -38,7 +38,7 @@
 
 #define MAX_PACKET_SIZE 100
 
-Uint32 DoAction(Uint32 interval, void *param)
+Uint32 DoAction(Uint32 /*interval*/, void *param)
 {
   Sint32 next;
   Replay *rpl = static_cast<Replay *>(param);
@@ -54,11 +54,11 @@ Uint32 DoAction(Uint32 interval, void *param)
     // should be total_time. Difference must subtracted to avoid drift
     next -= (Sint32)GameTime::GetInstance()->Read()
           - rpl->GetStartTime() - rpl->GetTotalTime();
-    
+
     MSG_DEBUG("replay", "Corrected next playing time to %i\n", next);
   } while (next <= 0);
 
-  // Compute 
+  // Compute
   return next;
 }
 
@@ -195,7 +195,7 @@ void Replay::StoreAction(Action* a)
   // Enlarge buffer if it can't contain max packet size
   if (MemUsed() > bufsize - MAX_PACKET_SIZE*4)
     ChangeBufsize(2*bufsize);
-  
+
   // Packet body
   a->Write((char*)ptr);
   size = a->GetSize()/4;
@@ -212,7 +212,7 @@ void Replay::StoreAction(Action* a)
     old_time = a->GetTimestamp();
 
   ActionHandler *ah = ActionHandler::GetInstance();
-  MSG_DEBUG("replay", "Storing action %s: time=%u type=%i length=%i\n", 
+  MSG_DEBUG("replay", "Storing action %s: time=%u type=%i length=%i\n",
           ah->GetActionName(type).c_str(), a->GetTimestamp(), type, size*4);
 }
 
@@ -340,7 +340,7 @@ Action* Replay::GetAction(Sint32 *tick_time)
   Action             *a;
 
   ASSERT(!is_recorder && replay_state == PLAYING);
-  
+
   // Does it contain the 4 elements needed to decode at least
   // action header?
   if (MemUsed() > bufsize-3*4) {
