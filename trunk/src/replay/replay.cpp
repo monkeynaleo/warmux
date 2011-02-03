@@ -249,10 +249,13 @@ bool Replay::LoadReplay(const std::string& name)
   }
   goto ok;
 
+err:
+  Error(Format(_("Warning, malformed replay with data of size %u"), bufsize));
+
 done:
-   in.close();
-   if (info) delete info;
-   return status;
+  in.close();
+  if (info) delete info;
+  return status;
 
 ok:
   // map ID
@@ -303,32 +306,30 @@ ok:
   in.seekg(0, std::fstream::end);
   uint size = in.tellg()-pos;
   in.seekg(pos);
-  MSG_DEBUG("replay", "Allocated %ib for actions found at %i\n", int(bufsize), int(pos));
+  MSG_DEBUG("replay", "Allocated %ub for actions found at %i\n", size, int(pos));
 
   if (size%4) {
     // Make it fatal
-    Error(Format(_("Warning, malformed replay with data of size %u"), bufsize));
-    return false;
+    goto err;
   }
 
   ChangeBufsize(size/4);
 
   in.read((char*)buf, size);
   if (!in) {
-    Error(Format(_("Warning, malformed replay with data of size %u"), bufsize));
-    return false;
+    goto err;
   }
   Action *a = new Action((char*)buf, NULL);
-  if (!a || a->GetType() != Action::ACTION_RULES_SET_GAME_MODE ||
-      a->PopString() != "replay") {
-    Error(Format(_("Warning, malformed replay with data of size %u"), bufsize));
-    return false;
-  }
+  if (!a || a->GetType() != Action::ACTION_RULES_SET_GAME_MODE)
+    goto err;
+  ptr += a->GetSize()/4;
+  if (a->PopString() != "replay")
+    goto err;
   std::string mode = a->PopString();
   std::string mode_objects = a->PopString();
   game_mode->LoadFromString("replay", mode, mode_objects);
-  ptr += a->GetSize()/4;
   delete a;
+  status = true;
 
   goto done;
 }
