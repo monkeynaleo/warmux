@@ -316,8 +316,8 @@ void ParticleEngine::AddLittleESmoke(const Point2i &position, const uint &radius
   const uint big_partic_nbr = 1;
   // Sin / cos  precomputed value, to avoid recomputing them and speed up.
   // see the commented value of 'angle' to see how it was generated
-  static const float big_cos[] = { 1.000000, -0.809017, 0.309017, 0.309017, -0.809017 };
-  static const float big_sin[] = { 0.000000, 0.587785, -0.951056, 0.951057, -0.587785 };
+  static const float big_cos[] = { 1.000000f, -0.809017f,  0.309017f, 0.309017f, -0.809017f };
+  static const float big_sin[] = { 0.000000f,  0.587785f, -0.951056f, 0.951057f, -0.587785f };
 
   Particle *particle = NULL;
   for (uint i=0; i<big_partic_nbr; i++) {
