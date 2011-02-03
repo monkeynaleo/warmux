@@ -310,19 +310,3 @@ EulerVector Action::PopEulerVector()
   x2 = PopDouble();
   return EulerVector(x0, x1, x2);
 }
-
-Action* Action::FromMem(Uint32* input)
-{
-  SDLNet_Read32(input+0); // what's the point?
-  Action_t  type = (Action::Action_t)SDLNet_Read32(input+1);
-  Action      *a = new Action(type);
-
-  a->m_timestamp = SDLNet_Read32(input+2);
-  uint size = SDLNet_Read32(input+3);
-
-  a->var.resize(size);
-  for (uint i=0; i<size; i++)
-    a->var.push_back(input[i+4]);
-
-  return a;
-}
