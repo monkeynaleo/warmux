@@ -31,6 +31,8 @@
 
 class Team;
 
+//#define REPLAY_ON_DEMAND
+
 class Replay : public Singleton<Replay>
 {
 public:
