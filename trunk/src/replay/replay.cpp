@@ -346,7 +346,6 @@ Action* Replay::GetAction(Sint32 *tick_time)
   // Does it contain the 4 elements needed to decode at least
   // action header?
   if (MemUsed() > bufsize-3*4) {
-    StopPlaying();
     return NULL;
   }
 
@@ -378,7 +377,7 @@ Action* Replay::GetAction(Sint32 *tick_time)
 
   ActionHandler *ah = ActionHandler::GetInstance();
   MSG_DEBUG("replay", "Read action %s: type=%i time=%i length=%i\n",
-          ah->GetActionName(type).c_str(), type, *tick_time, size*4);
+            ah->GetActionName(type).c_str(), type, *tick_time, size*4);
 
   return a;
 }
@@ -398,6 +397,7 @@ bool Replay::StartPlaying()
   total_time   = 0;
 
   current_action = GetAction(&duration);
+#if 0
   start_time     = GameTime::GetInstance()->Read();
   while (1) {
     if (current_action) {
@@ -413,6 +413,13 @@ bool Replay::StartPlaying()
       return false;
     }
   }
+#else
+  while (current_action) {
+    ActionHandler::GetInstance()->NewAction(current_action, false);
+    current_action = GetAction(&duration);
+  }
+  return true;
+#endif
 }
 
 // Returns time of next action
