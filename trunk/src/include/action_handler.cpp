@@ -1197,10 +1197,12 @@ bool ActionHandler::ExecActionsForOneFrame()
   }
   UnLock();
 
+#ifdef REPLAY_ON_DEMAND
   // Refill actions
   Replay *replay = Replay::GetInstance();
   if (replay->IsPlaying())
     replay->RefillActions();
+#endif
 
   return frame_complete;
 }
