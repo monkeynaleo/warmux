@@ -45,6 +45,7 @@
 #include "menu/options_menu.h"
 #include "network/randomsync.h"
 #include "particles/particle.h"
+#include "replay/replay.h"
 #include "sound/jukebox.h"
 #include "tool/stats.h"
 #ifdef MAEMO
@@ -105,11 +106,9 @@ int AppWarmux::Main(void)
 
   // Is a replay filename set so that we play it?
   if (!replay.empty()) {
-    Game::GetInstance()->PlayRecord(replay);
+    StartPlaying(replay);
     replay.clear();
-
     End();
-
     return 0;
   }
 
@@ -404,7 +403,7 @@ void ParseArgs(int argc, char * argv[])
     {NULL,         no_argument,       NULL,  0 }
   };
 
-  while ((c = getopt_long(argc, argv, "ufhvpc::si::g:d:rS:",
+  while ((c = getopt_long(argc, argv, "ufhvpc::si::g:d:rS:R:",
                           long_options, &option_index)) != -1) {
     switch (c) {
     case 'u':

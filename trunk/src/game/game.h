@@ -192,7 +192,5 @@ public:
   const std::vector< std::pair<float,float> >& GetBenchResults() const { return bench_res; }
 
   float GetLastFrameRate() const;
-
-  void PlayRecord(const std::string& name);
 };
 #endif // GAME_H

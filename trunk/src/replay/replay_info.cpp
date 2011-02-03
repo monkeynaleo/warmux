@@ -206,7 +206,7 @@ ReplayInfo::DumpToFile(std::ofstream &out)
   for (uint i=0; i<teams.size(); i++) {     // Team No.i
     out << teams[i].id << "\n";
     out << teams[i].player_name << "\n";
-    out << teams[i].nb_characters << "\n";
+    Write32(out, teams[i].nb_characters);
     out << teams[i].ai << "\n";
   }
   
