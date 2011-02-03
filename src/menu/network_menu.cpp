@@ -108,12 +108,6 @@ NetworkMenu::NetworkMenu()
     tabs->AddNewTab("TAB_Team_Map", tabs_title, box);
   }
 
-  // ################################################ 	 
-  // ##  GAME OPTIONS 	 
-  // ################################################
-  if (Network::GetInstance()->IsGameMaster())
-    AddGameModeTab(); // Place it immediately
-
   tabs->SetPosition(MARGIN_SIDE, MARGIN_TOP);
   widgets.AddWidget(tabs);
   widgets.Pack();
@@ -158,7 +152,6 @@ NetworkMenu::NetworkMenu()
   bottom_box->SetPosition(MARGIN_SIDE, tabs->GetPositionY() + tabs->GetSizeY() + MARGIN_SIDE);
 
   widgets.AddWidget(bottom_box);
-  widgets.Pack();
 
   GetResourceManager().UnLoadXMLProfile(res);
 
@@ -180,24 +173,18 @@ NetworkMenu::NetworkMenu()
 
   } else if (Network::GetInstance()->IsServer()) {
     // Server Mode
+    AddGameModeTab();
     mode_label->SetText(_("Server mode"));
-#if 0 // The code missing compared to SetGameMasterCallback()
-    connected_players->SetVisible(true);
-    initialized_players->SetVisible(true);
-    map_box->AllowSelection();
-    b_ok->SetVisible(true); // make sure OK button is available if we had already clicked it
-#endif
   } else {
     // The first player to connect to a headless server assumes the game master role
     SetGameMasterCallback();
   }
+  widgets.Pack();
 }
 
 void NetworkMenu::AddGameModeTab()
 {
-  // We are already game master from a previous opportunity
-  if (opt_game_mode)
-    return;
+  ASSERT(!opt_game_mode);
 
   Box *box = new GridBox(4, 4, 0, false);
 
