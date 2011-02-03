@@ -103,7 +103,7 @@ public:
   // Recorder
   bool StartRecording();
   void StopRecording() { replay_state = NOTHING; };
-  void StoreAction(Action* a);
+  void StoreAction(const Action* a);
   bool IsRecording() const { return CheckReturn("IsRecording()", is_recorder && replay_state==RECORDING); };
   bool SaveReplay(const std::string& name, const char *comment = NULL);
 
