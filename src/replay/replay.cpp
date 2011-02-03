@@ -179,7 +179,7 @@ bool Replay::SaveReplay(const std::string& name, const char *comment)
 //   . u32 => type
 //   . u32 => length
 //   . data
-void Replay::StoreAction(Action* a)
+void Replay::StoreAction(const Action* a)
 {
   uint          size;
 
@@ -390,8 +390,8 @@ bool Replay::StartPlaying()
   // Check GameMode
   GameMode * game_mode = GameMode::GetInstance();
   MSG_DEBUG("replay", "Game mode: turn=%us move_player=%u max_nrg=%u init_nrg=%u\n",
-          game_mode->duration_turn, game_mode->duration_move_player,
-          game_mode->character.max_energy, game_mode->character.init_energy);
+            game_mode->duration_turn, game_mode->duration_move_player,
+            game_mode->character.max_energy, game_mode->character.init_energy);
 
   replay_state = PLAYING;
   wait_state   = WAIT_FOR_SOURCE;

@@ -940,18 +940,13 @@ void Game::RequestBonusBoxDrop()
 {
   ObjBox* current_box = Game::GetInstance()->GetCurrentBox();
   if (current_box) {
-    Replay *replay = Replay::GetInstance();
     if (Network::GetInstance()->IsTurnMaster()) {
       Action a(Action::ACTION_DROP_BONUS_BOX);
-      if (replay->IsRecording())
-        replay->StoreAction(&a);
       Network::GetInstance()->SendActionToAll(a);
 
       current_box->DropBox();
     } else {
       Action a(Action::ACTION_REQUEST_BONUS_BOX_DROP);
-      if (replay->IsRecording())
-        replay->StoreAction(&a);
       Network::GetInstance()->SendActionToAll(a);
     }
   }

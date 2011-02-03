@@ -41,6 +41,7 @@
 #include "include/action_handler.h"
 #include "include/app.h"
 #include "include/constant.h"
+#include "replay/replay.h"
 
 #include <sys/types.h>
 #ifdef LOG_NETWORK
@@ -360,15 +361,19 @@ void Network::DisconnectNetwork()
 // Send Messages
 void Network::SendActionToAll(const Action& a) const
 {
-  MSG_DEBUG("network.traffic","Send action %s to all remote computers",
+  MSG_DEBUG("network.traffic", "Send action %s to all remote computers",
             ActionHandler::GetInstance()->GetActionName(a.GetType()).c_str());
+
+  Replay *replay = Replay::GetInstance();
+  if (replay->IsRecording())
+    replay->StoreAction(&a);
 
   SendAction(a, NULL, false);
 }
 
 void Network::SendActionToOne(const Action& a, DistantComputer* client) const
 {
-  MSG_DEBUG("network.traffic","Send action %s to %s",
+  MSG_DEBUG("network.traffic", "Send action %s to %s",
             ActionHandler::GetInstance()->GetActionName(a.GetType()).c_str(),
             client->ToString().c_str());
 
