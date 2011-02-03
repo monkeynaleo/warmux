@@ -75,14 +75,15 @@ Action::Action(const char *buffer, DistantComputer* _creator)
 
   var.clear();
   uint length = SDLNet_Read32(buffer);
-  buffer += 4; // skip the buffer len
-  m_type = (Action_t)SDLNet_Read32(buffer);
-  buffer += 4;
-  m_timestamp = (uint)SDLNet_Read32(buffer);
   buffer += 4;
   ASSERT(!(length%4));
   length = (length/4)-3;
   ASSERT(length < MAX_NUM_VARS); // would be suspicious
+
+  m_type = (Action_t)SDLNet_Read32(buffer);
+  buffer += 4;
+  m_timestamp = (uint)SDLNet_Read32(buffer);
+  buffer += 4;
 
   for (uint i=0; i < length; i++) {
     uint32_t val = SDLNet_Read32(buffer);
