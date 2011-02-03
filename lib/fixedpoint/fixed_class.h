@@ -119,7 +119,7 @@ struct fixed_point {
   operator int() const
   {
     fixuint_t sign = ((fixuint_t)intValue)>>(FIXINT_BITS-1);
-    return ((fixint_t)(intValue+(sign<<p)-sign))>>p;
+    return int(((fixint_t)(intValue+(sign<<p)-sign))>>p);
   }
 
   // Must be used explicily as we don't want to calculate with doubles!
@@ -212,7 +212,7 @@ inline int uround(const fixed_point<p>& r);
 template<>
 inline int uround(const fixed_point<16>& r)
 {
-  return (r.intValue + 32768)>>16;
+  return int((r.intValue + 32768)>>16);
 }
 
 namespace detail {

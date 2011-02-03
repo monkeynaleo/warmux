@@ -88,7 +88,7 @@ template <int p>
 inline int fixdiv(fixint_t a, fixint_t b)
 {
 #if 1
-  return ((a << p) / b);
+  return int((a << p) / b);
 #else
   // The following produces the same results as the above but gcc 4.0.3
   // generates fewer instructions (at least on the ARM processor).
@@ -194,6 +194,12 @@ inline float fix2float(fixint_t f)
 
 template <int p>
 inline fixint_t float2fix(float f)
+{
+  return (fixint_t)(f * (1 << p));
+}
+
+template <int p>
+inline fixint_t float2fix(double f)
 {
   return (fixint_t)(f * (1 << p));
 }
