@@ -181,6 +181,12 @@ NetworkMenu::NetworkMenu()
   } else if (Network::GetInstance()->IsServer()) {
     // Server Mode
     mode_label->SetText(_("Server mode"));
+#if 0 // The code missing compared to SetGameMasterCallback()
+    connected_players->SetVisible(true);
+    initialized_players->SetVisible(true);
+    map_box->AllowSelection();
+    b_ok->SetVisible(true); // make sure OK button is available if we had already clicked it
+#endif
   } else {
     // The first player to connect to a headless server assumes the game master role
     SetGameMasterCallback();
