@@ -108,6 +108,12 @@ NetworkMenu::NetworkMenu()
     tabs->AddNewTab("TAB_Team_Map", tabs_title, box);
   }
 
+  // ################################################ 	 
+  // ##  GAME OPTIONS 	 
+  // ################################################
+  if (Network::GetInstance()->IsGameMaster())
+    AddGameModeTab(); // Place it immediately
+
   tabs->SetPosition(MARGIN_SIDE, MARGIN_TOP);
   widgets.AddWidget(tabs);
   widgets.Pack();
@@ -176,13 +182,17 @@ NetworkMenu::NetworkMenu()
     // Server Mode
     mode_label->SetText(_("Server mode"));
   } else {
-    // The first player to connect to a headless server asumes the game master role
+    // The first player to connect to a headless server assumes the game master role
     SetGameMasterCallback();
   }
 }
 
 void NetworkMenu::AddGameModeTab()
 {
+  // We are already game master from a previous opportunity
+  if (opt_game_mode)
+    return;
+
   Box *box = new GridBox(4, 4, 0, false);
 
   Point2i option_size(114, 114);
