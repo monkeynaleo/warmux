@@ -168,7 +168,7 @@ public:
 
   int  GetSize() const
   {
-    return 4+4+4+4 // Sizes of: packet len, type, timestamp, number of vars
+    return 4+4+4 // Sizes of: packet len, type, timestamp
          + var.size() * 4;
   }
   void Write(char *packet) const;
