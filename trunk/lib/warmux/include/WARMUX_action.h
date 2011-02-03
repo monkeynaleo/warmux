@@ -181,7 +181,7 @@ public:
   Action_t GetType() const { return m_type; }
   bool IsFrameLess() const { return m_type <= LAST_FRAME_LESS_ACTION; }
 
-  static Action *FromMem(Action_t type, Uint32* input, uint size);
+  static Action *FromMem(Uint32* input);
 };
 
 // to be defined outside of the library
