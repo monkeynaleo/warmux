@@ -301,24 +301,24 @@ ok:
   // Get remaining data
   pos = in.tellg();
   in.seekg(0, std::fstream::end);
-  bufsize = in.tellg()-pos;
+  uint size = in.tellg()-pos;
   in.seekg(pos);
   MSG_DEBUG("replay", "Allocated %ib for actions found at %i\n", int(bufsize), int(pos));
 
-  if (bufsize%4) {
+  if (size%4) {
     // Make it fatal
     Error(Format(_("Warning, malformed replay with data of size %u"), bufsize));
     return false;
   }
 
-  ChangeBufsize(bufsize/4);
+  ChangeBufsize(size/4);
 
-  in.read((char*)buf, bufsize);
+  in.read((char*)buf, size);
   if (!in) {
     Error(Format(_("Warning, malformed replay with data of size %u"), bufsize));
     return false;
   }
-  Action *a = Action::FromMem(buf);
+  Action *a = new Action((char*)buf, NULL);
   if (!a || a->GetType() != Action::ACTION_RULES_SET_GAME_MODE ||
       a->PopString() != "replay") {
     Error(Format(_("Warning, malformed replay with data of size %u"), bufsize));
@@ -327,7 +327,9 @@ ok:
   std::string mode = a->PopString();
   std::string mode_objects = a->PopString();
   game_mode->LoadFromString("replay", mode, mode_objects);
+  ptr += a->GetSize()/4;
   delete a;
+
   goto done;
 }
 
@@ -347,7 +349,7 @@ Action* Replay::GetAction(Sint32 *tick_time)
   }
 
   // Read action
-  a = Action::FromMem(ptr);
+  a = new Action((char*)ptr, NULL);
   type = a->GetType();
   if (type > Action::ACTION_TIME_VERIFY_SYNC) {
     Error(Format(_("Malformed replay: action with unknow type %08X"), type));
