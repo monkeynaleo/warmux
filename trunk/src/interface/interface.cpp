@@ -89,7 +89,7 @@ void Interface::LoadDataInternal(Profile *res)
                              GameMode::GetInstance()->character.init_energy);
 
   // Labels
-  uint fsize = Font::FONT_SMALL*powf(zoom, 0.85)+0.5f;
+  uint fsize = Font::FONT_SMALL*powf(zoom, 0.85f)+0.5f;
   if (fsize < 10) fsize = 10;
   t_character_name = new Text("None", m_text_color, fsize, Font::FONT_BOLD, false);
   t_team_name = new Text("None", m_text_color, fsize, Font::FONT_BOLD, false);

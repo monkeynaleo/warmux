@@ -32,10 +32,10 @@
 
 const uint MAX_GAME_TIME_USED_THINKING_IN_MS = 10000;
 const uint REAL_THINK_TIME_PER_REFRESH_IN_MS = 1;
-#define  MAX_GUN_DISTANCE               600
-#define  MAX_SHOTGUN_DISTANCE           250
-#define  MAX_SNIPER_RIFILE_DISTANCE   46000 // squared to int at some point => overflow!
-#define  MAX_SUBMACHINE_GUN_DISTANCE    500
+#define  MAX_GUN_DISTANCE               600.0f
+#define  MAX_SHOTGUN_DISTANCE           250.0f
+#define  MAX_SNIPER_RIFILE_DISTANCE   46000.0f // squared to int at some point => overflow!
+#define  MAX_SUBMACHINE_GUN_DISTANCE    500.0f
 
 //#define DBG_AI_TIME
 
@@ -117,19 +117,19 @@ AIStupidPlayer::AIStupidPlayer(Team * team)
                                                                       Weapon::WEAPON_SNIPE_RIFLE, MAX_SNIPER_RIFILE_DISTANCE),
                                          &stats->ShootDirectly));
           items.push_back(std::make_pair(new FireMissileWithFixedDurationIdea(weapons_weighting, *character, *other_character,
-                                                                              Weapon::WEAPON_BAZOOKA, 0.9),
+                                                                              Weapon::WEAPON_BAZOOKA, 0.9f),
                                          &stats->WeaponLauncher));
           items.push_back(std::make_pair(new FireMissileWithFixedDurationIdea(weapons_weighting, *character, *other_character,
-                                                                              Weapon::WEAPON_BAZOOKA, 1.8),
+                                                                              Weapon::WEAPON_BAZOOKA, 1.8f),
                                          &stats->WeaponLauncher));
           items.push_back(std::make_pair(new FireMissileWithFixedDurationIdea(weapons_weighting, *character, *other_character,
-                                                                              Weapon::WEAPON_GRENADE, 2.01, 2),
+                                                                              Weapon::WEAPON_GRENADE, 2.01f, 2),
                                          &stats->WeaponLauncher));
           items.push_back(std::make_pair(new FireMissileWithFixedDurationIdea(weapons_weighting, *character, *other_character,
-                                                                              Weapon::WEAPON_DISCO_GRENADE, 2.01, 2),
+                                                                              Weapon::WEAPON_DISCO_GRENADE, 2.01f, 2),
                                          &stats->WeaponLauncher));
           items.push_back(std::make_pair(new FireMissileWithFixedDurationIdea(weapons_weighting, *character, *other_character,
-                                                                              Weapon::WEAPON_BAZOOKA, 3.0),
+                                                                              Weapon::WEAPON_BAZOOKA, 3.0f),
                                          &stats->WeaponLauncher));
         }
       }
