@@ -26,6 +26,7 @@
 
 class FileListBox : public ItemBox
 {
+  bool                     list_files;
   uint                     last_time;
   char                     old_path[1024];
   std::vector<const char*> extensions;
@@ -35,7 +36,7 @@ class FileListBox : public ItemBox
   bool MatchFilter(const char *name) const;
 
 public:
-  FileListBox(const Point2i &size);
+  FileListBox(const Point2i &size, bool list_files = true);
   ~FileListBox();
 
   void StartListing(const char* dirname = NULL);
