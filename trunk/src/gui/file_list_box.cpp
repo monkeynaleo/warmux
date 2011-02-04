@@ -19,13 +19,13 @@
  * List of files, class definition
  *****************************************************************************/
 
+#include <algorithm>
 #include <iostream>
+
 #include <WARMUX_file_tools.h>
 
-#include <sys/stat.h>
-
-#include "file_list_box.h"
 #include "game/config.h"
+#include "gui/file_list_box.h"
 
 #if !defined(WIN32) && !defined(_WIN32)
 # include <dirent.h>
@@ -122,12 +122,7 @@ bool FileListBox::MatchFilter(const char *name) const
     return true;
 
   std::string ext = FileExtension(name);
-  for (uint i=0; i<extensions.size(); i++) {
-    if (name == extensions[i])
-      return true;
-  }
-
-  return false;
+  return std::find(extensions.begin(), extensions.end(), ext) != extensions.end();
 }
 
 void FileListBox::PopulateFileList(const char *new_path)
