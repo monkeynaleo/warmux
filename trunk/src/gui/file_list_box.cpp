@@ -146,17 +146,19 @@ void FileListBox::PopulateFileList(const char *new_path)
     const char *name;
 
     while ((name = FolderSearchNext(f, is_file)) != NULL) {
-      std::string* filename = new std::string;
-      *filename = name;
       if (is_file) {
         // We have a file, check that it validates the list
         if (MatchFilter(name)) {
+          std::string* filename = new std::string;
+          *filename = name;
           MSG_DEBUG("file", "Adding file %s\n", name);
           AddLabelItem(false, name, filename);
         } else {
           MSG_DEBUG("file", "NOT adding file %s, invalid extension\n", name);
         }
       } else {
+        std::string* filename = new std::string;
+        *filename = name;
         MSG_DEBUG("file", "Adding directory %s\n", name);
         AddLabelItem(false, FolderString(name), filename,
                      Font::FONT_SMALL, Font::FONT_NORMAL, c_yellow);
