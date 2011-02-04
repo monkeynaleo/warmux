@@ -43,6 +43,7 @@ class ReplayMenu : public Menu
   Label      *comment_lbl;
   ScrollBox  *teams_lbox;
 
+  void ClearReplayInfo();
   void ChangeReplay();
   void OnClickUp(const Point2i &mousePosition, int button);
 
