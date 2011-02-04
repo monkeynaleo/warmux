@@ -70,7 +70,7 @@ MainMenu::MainMenu() :
   credits = new ButtonPic(_("Credits"), "menu/ico_credits", size);
   box->AddWidget(credits);
 
-  replay = new ButtonPic(_("Replay"), "menu/ico_play", size);
+  replay = new ButtonPic(_("Replay"), "menu/ico_replay", size);
   box->AddWidget(replay);
 
   quit =  new ButtonPic(_("Quit"), "menu/ico_quit", size);
