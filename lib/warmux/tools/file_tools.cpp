@@ -191,7 +191,7 @@ const char* FolderSearchNext(FolderSearch *f, bool& file)
 
     // We're not searching for folder, so exit with failure
     if (!file)
-      return NULL;
+      continue;
 
     // This is a file and we do search for files
     file = true;
