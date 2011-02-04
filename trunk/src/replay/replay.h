@@ -47,22 +47,19 @@ public:
   Uint32         *buf;
   Uint32         *ptr;
   Uint32         bufsize;
-  Uint32         total_time;
-  Uint32         start_time;
   uint           seed;
 
   // State
   replay_state_t replay_state;
   bool           is_recorder;
 
-  // For both
+  // For recording
+  Uint32         start_time;
   Uint32         old_time;
 
   // For replaying: GameMode save
   bool           config_loaded;
   GameModeInfo   mode_info;
-
-  // For replaying: save current team list
   std::vector<Team*> backup_list;
 
   void ChangeBufsize(Uint32 n);
@@ -76,8 +73,6 @@ protected:
 public:
   void Init(bool is_rec);
   void DeInit();
-  Uint32 GetTotalTime() const { return total_time; }
-  Uint32 GetStartTime() const { return start_time; }
 
   // Seed access
   void SetSeed(uint s) { seed = s; }
