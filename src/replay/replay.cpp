@@ -68,7 +68,6 @@ void Replay::DeInit()
 
   is_recorder = true;
   config_loaded = false;
-  wait_state = WAIT_NOT;
   old_time = 0;
 
   replay_state = NOTHING;
@@ -92,7 +91,6 @@ bool Replay::StartRecording()
   ASSERT(is_recorder && replay_state == PAUSED_RECORD);
 
   replay_state = RECORDING;
-  wait_state   = WAIT_NOT;
   start_time   = 0;
   old_time     = 0;
 
@@ -373,7 +371,6 @@ bool Replay::StartPlaying()
             game_mode->character.max_energy, game_mode->character.init_energy);
 
   replay_state = PLAYING;
-  wait_state   = WAIT_FOR_SOURCE;
   total_time   = 0;
 
   return RefillActions();
@@ -387,7 +384,6 @@ void Replay::StopPlaying()
     return;
 
   replay_state = PAUSED_PLAY;
-  wait_state = WAIT_NOT;
 
   // Only replay seems to use this, so we can quit it now
   replay_state = NOTHING;
