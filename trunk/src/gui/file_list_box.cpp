@@ -36,8 +36,8 @@
 # include <windows.h>
 #endif
 
-FileListBox::FileListBox(const Point2i &size, bool always)
-  : ItemBox(size, always)
+FileListBox::FileListBox(const Point2i &size)
+  : ItemBox(size, false)
 {
   // Store the initial folder to be able to restore it
   GetCurrentDirectory(1024, old_path);

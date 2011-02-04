@@ -35,7 +35,7 @@ class FileListBox : public ItemBox
   bool MatchFilter(const char *name) const;
 
 public:
-  FileListBox (const Point2i &size, bool always_one_selected = true);
+  FileListBox(const Point2i &size);
   ~FileListBox();
 
   void StartListing(const char* dirname = NULL);
