@@ -66,12 +66,7 @@ public:
   std::vector<Team*> backup_list;
 
   void ChangeBufsize(Uint32 n);
-  Uint32 MemUsed() { return 4*(ptr - buf); };
-  static bool CheckReturn(const char* /*msg*/, bool a)
-  {
-    //std::cout << msg << ": replied state is: " << a << "\n";
-    return a;
-  }
+  Uint32 MemUsed() { return 4*(ptr - buf); }
 
 protected:
   friend class Singleton<Replay>;
@@ -90,9 +85,9 @@ public:
 
   // Recorder
   bool StartRecording();
-  void StopRecording() { replay_state = NOTHING; };
+  void StopRecording() { replay_state = NOTHING; }
   void StoreAction(const Action* a);
-  bool IsRecording() const { return CheckReturn("IsRecording()", is_recorder && replay_state==RECORDING); };
+  bool IsRecording() const { return is_recorder && replay_state==RECORDING; }
   bool SaveReplay(const std::string& name, const char *comment = NULL);
 
   // Replayer
@@ -101,7 +96,7 @@ public:
   Action* GetAction();
   bool StartPlaying();
   void StopPlaying();
-  bool IsPlaying() const { return CheckReturn("IsPlaying()", !is_recorder && replay_state==PLAYING); };
+  bool IsPlaying() const { return !is_recorder && replay_state==PLAYING; }
 };
 
 void StartPlaying(const std::string& name);
