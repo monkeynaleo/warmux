@@ -302,7 +302,7 @@ const char* FolderSearchNext(FolderSearch *f, bool& file)
 
     // We're not searching for folder, exit with failure
     if (!file)
-      return NULL;
+      continue;
 
     // This is a file and we do search for file
     if (f->file->d_type == DT_REG) {
