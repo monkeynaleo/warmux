@@ -106,7 +106,6 @@ Game * Game::UpdateGameRules()
   return GetInstance();
 }
 
-
 void Game::InitEverything()
 {
   int icon_count = Network::GetInstance()->IsLocal() ? 4 : 5;
@@ -132,32 +131,17 @@ void Game::InitEverything()
     bench_res.reserve(600);
     bench_res.clear();
   } else {
+    replay->Init(true);
+
     if (Network::GetInstance()->IsGameMaster()) {
       InitGameData_NetGameMaster();
-
-      if (IsLOGGING("replay")) {
-        // Start recording now
-        replay->Init(true);
-        if (replay->StartRecording())
-          replay->SetSeed(RandomSync().GetSeed());
-        else
-          MSG_DEBUG("game", "Couldn't start recording game");
-      }
     } else if (Network::GetInstance()->IsLocal()) {
       RandomSync().InitRandom();
-
-      // Start recording now
-      replay->Init(true);
-      if (replay->StartRecording())
-        replay->SetSeed(RandomSync().GetSeed());
-      else
-        MSG_DEBUG("game", "Couldn't start recording game");
     }
   }
 
   // GameMode::GetInstance()->Load(); : done in the game menu to adjust some parameters for local games
   // done in action_handler for clients
-
 
   // Camera must not shake as the started shaking time could be from a previous game:
   Camera::GetInstance()->ResetShake();
@@ -190,6 +174,17 @@ void Game::InitEverything()
     loading_screen.StartLoading(5, "network_icon", _("Network"));
     WaitForOtherPlayers();
   }
+
+  if (!replay->IsPlaying()) {
+    std::string game_mode, game_mode_objects;
+    const GameMode *mode = GameMode::GetConstInstance();
+
+    mode->ExportToString(game_mode, game_mode_objects);
+
+    if (replay->StartRecording(mode->GetName(), game_mode, game_mode_objects))
+      replay->SetSeed(RandomSync().GetSeed());
+  }
+
   ActionHandler::GetInstance()->ExecFrameLessActions();
   ResetUniqueIds();
 
