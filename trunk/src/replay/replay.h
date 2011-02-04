@@ -36,12 +36,6 @@ class Replay : public Singleton<Replay>
 public:
   typedef enum
   {
-    WAIT_FOR_SOURCE,
-    WAIT_FOR_SINK,
-    WAIT_NOT
-  } wait_state_t;
-  typedef enum
-  {
     NOTHING,
     PLAYING,
     PAUSED_PLAY,
@@ -58,7 +52,6 @@ public:
   uint           seed;
 
   // State
-  wait_state_t   wait_state;
   replay_state_t replay_state;
   bool           is_recorder;
 
@@ -101,10 +94,6 @@ public:
   void StoreAction(const Action* a);
   bool IsRecording() const { return CheckReturn("IsRecording()", is_recorder && replay_state==RECORDING); };
   bool SaveReplay(const std::string& name, const char *comment = NULL);
-
-  // Synching - no much need to have mutex here
-  void SetWaitState(wait_state_t w) { wait_state = w; }
-  wait_state_t GetWaitState() const { return wait_state; }
 
   // Replayer
   bool  LoadReplay(const std::string& name);
