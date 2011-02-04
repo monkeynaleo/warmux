@@ -127,16 +127,22 @@ void Game::InitEverything()
   Replay *replay = Replay::GetInstance();
   if (replay->IsPlaying()) {
     InitGameData_RePlay();
-  } else if (Network::GetInstance()->IsGameMaster())
-    InitGameData_NetGameMaster();
-  else if (benching) {
+  } else if (benching) {
     RandomSync().SetSeed(0xABADCAFE);
     bench_res.reserve(600);
     bench_res.clear();
-  } else if (Network::GetInstance()->IsLocal()) {
-    RandomSync().InitRandom();
-    if (replay->IsRecording())
+  } else {
+    if (Network::GetInstance()->IsGameMaster())
+      InitGameData_NetGameMaster();
+    else if (Network::GetInstance()->IsLocal())
+      RandomSync().InitRandom();
+
+    // Start recording now
+    replay->Init(true);
+    if (replay->StartRecording())
       replay->SetSeed(RandomSync().GetSeed());
+    else
+      MSG_DEBUG("game", "Couldn't start recording game");
   }
 
   // GameMode::GetInstance()->Load(); : done in the game menu to adjust some parameters for local games
@@ -201,7 +207,6 @@ void Game::InitGameData_RePlay()
 
   app->video->SetWindowCaption("Wormux - Replay mode");
   RandomSync().SetSeed(replay->GetSeed());
-  replay->SetWaitState(Replay::WAIT_NOT);
 }
 
 void Game::InitGameData_NetGameMaster()
@@ -371,13 +376,6 @@ uint Game::Start(bool bench)
   Joystick::GetInstance()->Reset();
 
   bool game_finished = true;
-  Replay *replay = Replay::GetInstance();
-  // We always record, only stuff that matters is whether we discard recording
-  if (!replay->IsPlaying() /*&& IsLOGGING("replay")*/) {
-    replay->Init(true);
-    if (!replay->StartRecording())
-      MSG_DEBUG("game", "Couldn't start recording game");
-  }
 
   InfoMapBasicAccessor *basic = ActiveMap()->LoadBasicInfo();
   if (basic) {
@@ -774,9 +772,10 @@ void Game::MessageEndOfGame() const
   }
 
   Replay *replay = Replay::GetInstance();
-  if (replay->IsRecording())
+  if (replay->IsRecording()) {
     replay->StopRecording();
-  replay->DeInit();
+    replay->DeInit();
+  }
 }
 
 
