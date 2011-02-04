@@ -243,6 +243,7 @@ bool GameMode::ExportFileToString(const std::string& filename, std::string& cont
 bool GameMode::ExportToString(std::string& mode,
                               std::string& mode_objects) const
 {
+#if 0
   bool r;
 
   r = ExportFileToString(GetFilename(), mode);
@@ -251,6 +252,11 @@ bool GameMode::ExportToString(std::string& mode,
   }
 
   return r;
+#else
+  mode_objects = doc_objects->ExportToString();
+  mode = doc.ExportToString();
+  return !mode_objects.empty() && mode.empty();
+#endif
 }
 
 bool GameMode::AllowCharacterSelection() const
