@@ -41,56 +41,56 @@ ReplayMenu::ReplayMenu()
   , selected(NULL)
 {
   // Center the boxes!
-  Point2i size = GetMainWindow().GetSize()/10;
+  uint h      = GetMainWindow().GetHeight();
+  uint size_x = GetMainWindow().GetWidth()/20;
+  uint size_y = h-50;
+  Font::font_size_t fsize = (h<=480) ? Font::FONT_MEDIUM : Font::FONT_BIG;
+
 
   //Replay files
-  uint  w = 4*size.GetX();
+  uint  w = 8*size_x;
   file_box = new VBox(w);
-  file_box->SetPosition(size);
-  file_box->AddWidget(new Label(_("Select a replay:"), w, Font::FONT_BIG));
+  file_box->SetPosition(size_x, size_y/20);
+#define ARG_LIST  fsize, Font::FONT_BOLD, primary_red_color, Text::ALIGN_LEFT_TOP, true
+  file_box->AddWidget(new Label(_("Select a replay:"), w, ARG_LIST));
 
-  Box * tmp_box = new HBox(7*size.GetY(), false);
-  tmp_box->SetMargin(5);
-  tmp_box->SetBorder(0, 0);
-  replay_lbox = new FileListBox(Point2i(w-10, 6*size.GetY()));
+  replay_lbox = new FileListBox(Point2i(w-20, (9*size_y)/10 - fsize - 3*5));
+  replay_lbox->SetBorder(defaultOptionColorRect, 2);
   replay_lbox->AddExtensionFilter("dat");
   replay_lbox->StartListing();
-  tmp_box->AddWidget(replay_lbox);
-  file_box->AddWidget(tmp_box);
+  file_box->AddWidget(replay_lbox);
   widgets.AddWidget(file_box);
 
   //Info
-  w = 3*size.GetX();
   info_box = new VBox(w);
-  info_box->SetPosition(Point2i(6*size.GetX(), size.GetY()));
-  info_box->AddWidget(new Label(_("Replay info"), w, Font::FONT_BIG));
-  info_box->SetBorder(6, 6);
-  Box *panel = new VBox(w-12);
-  panel->SetMargin(4);
+  info_box->SetPosition(11*size_x, size_y/20);
+  info_box->AddWidget(new Label(_("Replay info"), w, ARG_LIST));
+  Box *panel = new VBox(w-10);
+  panel->SetMargin(0);
   
   // Version
-  panel->AddWidget(new Label(_("Version"), w-20, Font::FONT_BIG));
-  version_lbl = new Label(" ", w-20, Font::FONT_MEDIUM);
+  panel->AddWidget(new Label(_("Version"), w-10, ARG_LIST));
+  version_lbl = new Label(" ", w-10, Font::FONT_MEDIUM);
   panel->AddWidget(version_lbl);
 
   // Date
-  panel->AddWidget(new Label(_("Date"), w-20, Font::FONT_BIG));
-  date_lbl = new Label(" ", w-20, Font::FONT_MEDIUM);
+  panel->AddWidget(new Label(_("Date"), w-10, ARG_LIST));
+  date_lbl = new Label(" ", w-10, Font::FONT_MEDIUM);
   panel->AddWidget(date_lbl);
   
   // Duration
-  panel->AddWidget(new Label(_("Duration"), w-20, Font::FONT_BIG));
+  panel->AddWidget(new Label(_("Duration"), w-10, ARG_LIST));
   duration_lbl = new Label(" ", w-20, Font::FONT_MEDIUM);
   panel->AddWidget(duration_lbl);
 
   // Comment
-  panel->AddWidget(new Label(_("Comment"), w-20, Font::FONT_BIG));
-  comment_lbl = new Label(" ", w-20, Font::FONT_MEDIUM);
+  panel->AddWidget(new Label(_("Comment"), w-10, ARG_LIST));
+  comment_lbl = new Label(" ", w-10, Font::FONT_MEDIUM);
   panel->AddWidget(comment_lbl);
 
   // Teams
-  panel->AddWidget(new Label(_("Teams"), w-20, Font::FONT_BIG));
-  teams_lbox = new ScrollBox(Point2i(w-20, 4*size.GetY()));
+  panel->AddWidget(new Label(_("Teams"), w-10, ARG_LIST));
+  teams_lbox = new ScrollBox(Point2i(w-10, (9*size_y)/10 - 6*(fsize+Font::FONT_MEDIUM+5)));
   panel->AddWidget(teams_lbox);
   
   // Finish info box
