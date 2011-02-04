@@ -76,10 +76,12 @@ public:
 
 class ItemBox : public SelectBox
 {
+protected:
   std::vector<const void*> m_values;
+
 public:
   ItemBox(const Point2i& size, bool always = false, bool force = true)
-    : SelectBox(size, always, force) { };
+    : SelectBox(size, always, force, true) { };
   void AddItem(bool select, Widget* w, const void* value);
   void AddLabelItem(bool selected,
                     const std::string & label,
@@ -87,8 +89,9 @@ public:
                     Font::font_size_t fsize = Font::FONT_SMALL,
                     Font::font_style_t fstyle = Font::FONT_BOLD,
                     const Color & color = white_color);
-  void RemoveSelected();
-  void Empty() { m_values.clear(); SelectBox::Empty(); }
+  virtual void RemoveSelected();
+  virtual void Empty() { m_values.clear(); SelectBox::Empty(); }
+  virtual void Clear() { m_values.clear(); SelectBox::Clear(); }
 
   const void* GetSelectedValue() const;
 };
