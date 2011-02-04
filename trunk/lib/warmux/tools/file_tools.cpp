@@ -171,9 +171,9 @@ FolderSearch *OpenFolder(const std::string& dirname)
 
   f->file_search = FindFirstFile(pattern.c_str(), &f->file);
   if (f->file_search == INVALID_HANDLE_VALUE) {
-     FindClose(f->file_search);
-     delete f;
-         return NULL;
+    FindClose(f->file_search);
+    delete f;
+    return NULL;
   }
 
   return f;
@@ -192,7 +192,7 @@ void CloseFolder(FolderSearch *f)
 {
   if (f) {
     FindClose(f->file_search);
-      delete f;
+    delete f;
   }
 }
 
