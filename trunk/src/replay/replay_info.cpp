@@ -152,7 +152,6 @@ team_error:
     return info;
   }
 
-  fprintf(stderr, "Everything went OK\n");
   info->valid = true;
   return info;
 }
