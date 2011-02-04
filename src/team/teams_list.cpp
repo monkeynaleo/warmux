@@ -135,7 +135,8 @@ void TeamsList::LoadList()
   FolderSearch *f = OpenFolder(dirname);
   if (f) {
     const char *name;
-    while ((name = FolderSearchNext(f)) != NULL)
+    bool search_file = false;
+    while ((name = FolderSearchNext(f, search_file)) != NULL)
       LoadOneTeam(dirname, name);
     CloseFolder(f);
   } else {
@@ -146,8 +147,9 @@ void TeamsList::LoadList()
   dirname = config->GetPersonalDataDir() + "team" PATH_SEPARATOR;
   f = OpenFolder(dirname);
   if (f) {
+    bool search_files = false;
     const char *name;
-    while ((name = FolderSearchNext(f)) != NULL)
+    while ((name = FolderSearchNext(f, search_files)) != NULL)
       LoadOneTeam(dirname, name);
     CloseFolder(f);
   } else {
