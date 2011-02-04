@@ -36,8 +36,9 @@
 # include <windows.h>
 #endif
 
-FileListBox::FileListBox(const Point2i &size)
+FileListBox::FileListBox(const Point2i &size, bool list)
   : ItemBox(size, false)
+  , list_files(list)
 {
   // Store the initial folder to be able to restore it
   GetCurrentDirectory(1024, old_path);
@@ -84,9 +85,11 @@ void FileListBox::RemoveSelected()
 
 const std::string* FileListBox::GetSelectedFile() const
 {
-  const std::string* str = static_cast<const std::string*>(ItemBox::GetSelectedValue());
-  if (str && DoesFileExist(*str))
-    return str;
+  if (list_files) {
+    const std::string* str = static_cast<const std::string*>(ItemBox::GetSelectedValue());
+    if (str && DoesFileExist(*str))
+      return str;
+  }
   return NULL;
 }
 
@@ -137,7 +140,7 @@ void FileListBox::PopulateFileList(const char *new_path)
   Clear();
 
   if (f) {
-    bool is_file = true;
+    bool is_file = list_files;
     const char *name;
 
     while ((name = FolderSearchNext(f, is_file)) != NULL) {
@@ -160,7 +163,7 @@ void FileListBox::PopulateFileList(const char *new_path)
       }
 
       // Prepare again for searching files
-      is_file = true;
+      is_file = list_files;
     }
 
     CloseFolder(f);
