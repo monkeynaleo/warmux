@@ -179,7 +179,7 @@ void ItemBox::RemoveSelected()
 
 const void* ItemBox::GetSelectedValue() const
 {
-  return (selected_item==-1) ? "" : m_values[selected_item];
+  return (selected_item==-1) ? NULL : m_values[selected_item];
 }
 
 void ItemBox::AddLabelItem(bool selected,
