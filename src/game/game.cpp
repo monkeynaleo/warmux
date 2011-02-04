@@ -373,7 +373,7 @@ uint Game::Start(bool bench)
   bool game_finished = true;
   Replay *replay = Replay::GetInstance();
   // We always record, only stuff that matters is whether we discard recording
-  if (!replay->IsPlaying() && IsLOGGING("replay")) {
+  if (!replay->IsPlaying() /*&& IsLOGGING("replay")*/) {
     replay->Init(true);
     if (!replay->StartRecording())
       MSG_DEBUG("game", "Couldn't start recording game");
@@ -390,12 +390,6 @@ uint Game::Start(bool bench)
     JukeBox::GetInstance()->StopAll();
   } else {
     fprintf(stderr, "Couldn't load map\n");
-  }
-
-  if (replay->IsRecording()) {
-    replay->StopRecording();
-    replay->SaveReplay("C:\\replay.dat", "dummy");
-    replay->DeInit();
   }
 
   UnloadDatas(game_finished);
@@ -778,6 +772,11 @@ void Game::MessageEndOfGame() const
     menu.Run();
     TeamResults::deleteAllResults(results_list);
   }
+
+  Replay *replay = Replay::GetInstance();
+  if (replay->IsRecording())
+    replay->StopRecording();
+  replay->DeInit();
 }
 
 
