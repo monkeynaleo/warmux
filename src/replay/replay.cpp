@@ -190,6 +190,7 @@ void Replay::StoreAction(const Action* a)
 }
 
 
+/////////////////////////////////////////////////////////////////////////////
 
 
 bool Replay::LoadReplay(const std::string& name)
@@ -382,8 +383,6 @@ void Replay::StopPlaying()
 
   if (replay_state != PLAYING)
     return;
-
-  replay_state = PAUSED_PLAY;
 
   // Only replay seems to use this, so we can quit it now
   replay_state = NOTHING;
