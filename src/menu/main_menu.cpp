@@ -70,6 +70,9 @@ MainMenu::MainMenu() :
   credits = new ButtonPic(_("Credits"), "menu/ico_credits", size);
   box->AddWidget(credits);
 
+  replay = new ButtonPic(_("Replay"), "menu/ico_play", size);
+  box->AddWidget(replay);
+
   quit =  new ButtonPic(_("Quit"), "menu/ico_quit", size);
   box->AddWidget(quit);
 
@@ -130,6 +133,9 @@ void MainMenu::SelectAction(const Widget * widget)
     close_menu = true;
   } else if (widget == credits) {
     choice = CREDITS;
+    close_menu = true;
+  } else if (widget == replay) {
+    choice = REPLAY;
     close_menu = true;
   } else if (widget == quit) {
     choice = QUIT;

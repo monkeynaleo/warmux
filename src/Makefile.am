@@ -100,6 +100,8 @@ warmux_SOURCES = \
         gui/energy_bar.h \
         gui/figure_widget.cpp \
         gui/figure_widget.h \
+        gui/file_list_box.cpp \
+        gui/file_list_box.h \
         gui/graph_canvas.cpp \
         gui/graph_canvas.h \
         gui/label.cpp \
@@ -216,6 +218,8 @@ warmux_SOURCES = \
         menu/options_menu.h \
         menu/pause_menu.cpp \
         menu/pause_menu.h \
+        menu/replay_menu.cpp \
+        menu/replay_menu.h \
         menu/results_menu.cpp \
         menu/results_menu.h \
         menu/team_box.cpp \
