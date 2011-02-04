@@ -106,13 +106,23 @@ ReplayMenu::~ReplayMenu()
 {
 }
 
+void ReplayMenu::ClearReplayInfo()
+{
+  version_lbl->SetText("");
+  date_lbl->SetText("");
+  duration_lbl->SetText("");
+  comment_lbl->SetText("");
+  teams_lbox->Clear();
+}
+
 void ReplayMenu::ChangeReplay()
 {
   const std::string *name = replay_lbox->GetSelectedFile();
-  if (!name)
-    return;
-
   selected = NULL;
+  if (!name) {
+    ClearReplayInfo();
+    return;
+  }
 
   // Get info from Replay:: and fill in here
   std::ifstream in(name->c_str(), std::fstream::binary);
@@ -129,8 +139,25 @@ void ReplayMenu::ChangeReplay()
   ReplayInfo *info = ReplayInfo::ReplayInfoFromFile(in);
   in.close();
 
-  if (!info) return; /* Bad problem */
+  if (!info)
+    return; /* Bad problem */
   
+  // Below gets risky to analyze so error out
+  if (!info->IsValid()) {
+    const std::string& err = info->GetLastError();
+
+    // Clean current state
+    ClearReplayInfo();
+    
+    Question question;
+    std::cerr << "Error: " << err << "\n";
+    question.Set(err, true, 0);
+    question.Ask();
+
+    delete info;
+    return;
+  }
+
   // Version
   std::string text = info->GetVersion();
   version_lbl->SetText(text);
@@ -153,21 +180,7 @@ void ReplayMenu::ChangeReplay()
   text = info->GetComment();
   comment_lbl->SetText(text);
 
-  // Below gets risky to analyze so error out
-  if (!info->IsValid()) {
-    const std::string& err = info->GetLastError();
-    
-    Question question;
-    std::cerr << "Error: " << err << "\n";
-    question.Set(err, true, 0);
-    question.Ask();
-
-    delete info;
-    return;
-  }
-
   // Teams
-  teams_lbox->Clear();
   for (uint i=0; i<info->GetTeams().size(); i++)
     teams_lbox->AddWidget(new Label(info->GetTeams()[i].id, Font::FONT_MEDIUM));
 
