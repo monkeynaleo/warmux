@@ -132,17 +132,27 @@ void Game::InitEverything()
     bench_res.reserve(600);
     bench_res.clear();
   } else {
-    if (Network::GetInstance()->IsGameMaster())
+    if (Network::GetInstance()->IsGameMaster()) {
       InitGameData_NetGameMaster();
-    else if (Network::GetInstance()->IsLocal())
+
+      if (IsLOGGING("replay") {
+        // Start recording now
+        replay->Init(true);
+        if (replay->StartRecording())
+          replay->SetSeed(RandomSync().GetSeed());
+        else
+          MSG_DEBUG("game", "Couldn't start recording game");
+      }
+    } else if (Network::GetInstance()->IsLocal()) {
       RandomSync().InitRandom();
 
-    // Start recording now
-    replay->Init(true);
-    if (replay->StartRecording())
-      replay->SetSeed(RandomSync().GetSeed());
-    else
-      MSG_DEBUG("game", "Couldn't start recording game");
+      // Start recording now
+      replay->Init(true);
+      if (replay->StartRecording())
+        replay->SetSeed(RandomSync().GetSeed());
+      else
+        MSG_DEBUG("game", "Couldn't start recording game");
+    }
   }
 
   // GameMode::GetInstance()->Load(); : done in the game menu to adjust some parameters for local games
