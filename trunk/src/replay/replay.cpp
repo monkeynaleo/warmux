@@ -40,7 +40,6 @@
 
 Replay::Replay()
   : buf(NULL)
-  , ptr(NULL)
   , bufsize(0)
   , is_recorder(true)
 {
@@ -50,7 +49,8 @@ Replay::Replay()
 Replay::~Replay()
 {
   DeInit();
-  if (buf) free(buf);
+  if (buf)
+    free(buf);
 }
 
 void Replay::Init(bool rec)
@@ -63,10 +63,7 @@ void Replay::Init(bool rec)
 
 void Replay::DeInit()
 {
-  if (!is_recorder)
-    StopPlaying();
-
-  is_recorder = true;
+  ptr = buf;
   config_loaded = false;
   old_time = 0;
 
