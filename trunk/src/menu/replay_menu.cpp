@@ -49,10 +49,10 @@ ReplayMenu::ReplayMenu()
   file_box->SetPosition(size);
   file_box->AddWidget(new Label(_("Select a replay:"), w, Font::FONT_BIG));
 
-  Box * tmp_box = new HBox(160, false);
+  Box * tmp_box = new HBox(7*size.GetY(), false);
   tmp_box->SetMargin(5);
   tmp_box->SetBorder(0, 0);
-  replay_lbox = new FileListBox(Point2i(w-10, 8*size.GetY()));
+  replay_lbox = new FileListBox(Point2i(w-10, 6*size.GetY()));
   replay_lbox->AddExtensionFilter("dat");
   replay_lbox->StartListing();
   tmp_box->AddWidget(replay_lbox);
