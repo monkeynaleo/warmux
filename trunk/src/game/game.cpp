@@ -135,7 +135,7 @@ void Game::InitEverything()
     if (Network::GetInstance()->IsGameMaster()) {
       InitGameData_NetGameMaster();
 
-      if (IsLOGGING("replay") {
+      if (IsLOGGING("replay")) {
         // Start recording now
         replay->Init(true);
         if (replay->StartRecording())
