@@ -82,7 +82,11 @@
 
   <!-- For results menu -->
   <surface name="podium" file="menu/podium.png" />
-  <surface name="save" file="menu/save.png" />
+  <sprite name="save">
+    <image file="menu/save.png">
+      <grid size="24,24" array="1,1" />
+    </image>
+  </sprite>
 
   <!-- Random map -->
   <surface name="random_map" file="map/random_map.jpg" />
