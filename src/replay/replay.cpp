@@ -43,7 +43,6 @@ Replay::Replay()
   , ptr(NULL)
   , bufsize(0)
   , is_recorder(true)
-  , current_action(NULL)
 {
   DeInit();
 }
@@ -68,14 +67,9 @@ void Replay::DeInit()
     StopPlaying();
 
   is_recorder = true;
-  duration = 0;
   config_loaded = false;
   wait_state = WAIT_NOT;
   old_time = 0;
-
-  if (current_action)
-    delete current_action;
-  current_action = NULL;
 
   replay_state = NOTHING;
 }
@@ -355,29 +349,17 @@ bool Replay::RefillActions()
 {
   ActionHandler *ah = ActionHandler::GetInstance();
 
-  uint count = 0;
-
   ah->Lock();
   while (1) {
-    current_action = GetAction();
-    if (current_action) {
-      ah->NewAction(current_action, false);
-#ifdef REPLAY_ON_DEMAND
-      if (current_action->GetType() == Action::ACTION_GAME_CALCULATE_FRAME)
-        count++;
-      if (count == 50)
-        break;
-#endif
+    Action *a = GetAction();
+    if (a) {
+      ah->NewAction(a, false);
     } else
       break;
   }
   ah->UnLock();
 
-#ifdef REPLAY_ON_DEMAND
-  return current_action != NULL;
-#else
   return true;
-#endif
 }
 
 bool Replay::StartPlaying()
