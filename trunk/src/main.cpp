@@ -43,6 +43,7 @@
 #include "menu/main_menu.h"
 #include "menu/network_connection_menu.h"
 #include "menu/options_menu.h"
+#include "menu/replay_menu.h"
 #include "network/randomsync.h"
 #include "particles/particle.h"
 #include "replay/replay.h"
@@ -162,6 +163,13 @@ int AppWarmux::Main(void)
         CreditsMenu credits_menu;
         SetCurrentMenu(&credits_menu);
         credits_menu.Run();
+        break;
+      }
+      case MainMenu::REPLAY:
+      {
+        ReplayMenu replay_menu;
+        SetCurrentMenu(&replay_menu);
+        replay_menu.Run();
         break;
       }
       case MainMenu::QUIT:
