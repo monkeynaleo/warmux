@@ -355,7 +355,8 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
     hbox->AddWidget(save);
     vbox->AddWidget(hbox);
     folders = new FileListBox(Point2i(tab_size.x-2*BORDER,
-                              tab_size.y -tabs->GetHeaderHeight() -4*BORDER -hbox->GetSizeY()), false);
+                              tab_size.y -tabs->GetHeaderHeight() -4*BORDER -hbox->GetSizeY()));
+    folders->AddExtensionFilter("dat");
     folders->StartListing();
     vbox->AddWidget(folders);
     tabs->AddNewTab("TAB_replay", _("Save replay?"), vbox);
@@ -425,20 +426,30 @@ void ResultsMenu::ReceiveMsgCallback(const std::string& msg, const Color& color)
 void ResultsMenu::OnClickUp(const Point2i &mousePosition, int button)
 {
   Widget *w = widgets.ClickUp(mousePosition, button);
-  if (save && w == save) {
-    const std::string& filename = replay_name->GetText();
-    if (filename == "") {
-      Question question(Question::WARNING);
-      question.Set(_("Invalid filename"), true, 0);
-      question.Ask();
-      return;
-    }
 
-    if (!Replay::GetInstance()->SaveReplay(filename, comment->GetText().c_str())) {
-      Question question(Question::WARNING);
-      question.Set(_("Failed to save replay"), true, 0);
-      question.Ask();
-      return;
+  // Are we recording?
+  if (save) {
+    // Are we requested to save?
+    if (w == save) {
+      const std::string& filename = replay_name->GetText();
+      if (filename == "") {
+        Question question(Question::WARNING);
+        question.Set(_("Invalid filename"), true, 0);
+        question.Ask();
+        return;
+      }
+
+      if (!Replay::GetInstance()->SaveReplay(filename, comment->GetText().c_str())) {
+        Question question(Question::WARNING);
+        question.Set(_("Failed to save replay"), true, 0);
+        question.Ask();
+        return;
+      }
+    } else if (w == folders) {
+      const std::string* file = folders->GetSelectedFile();
+      // This is a file, use that filename
+      if (file)
+        replay_name->SetText(*file);
     }
   }
 }
