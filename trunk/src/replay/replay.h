@@ -31,8 +31,6 @@
 
 class Team;
 
-//#define REPLAY_ON_DEMAND
-
 class Replay : public Singleton<Replay>
 {
 public:
@@ -66,10 +64,6 @@ public:
 
   // For both
   Uint32         old_time;
-  Sint32         duration;
-
-  // For replaying
-  Action         *current_action;
 
   // For replaying: GameMode save
   bool           config_loaded;
