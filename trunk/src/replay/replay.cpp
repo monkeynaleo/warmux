@@ -165,9 +165,10 @@ void Replay::StoreAction(const Action* a)
   ASSERT(is_recorder && replay_state==RECORDING);
 
   Action::Action_t type = a->GetType();
-  if (type == Action::ACTION_NETWORK_VERIFY_RANDOM_SYNC ||
+  if (a->IsFrameLess() || type == Action::ACTION_NETWORK_PING ||
+      type == Action::ACTION_NETWORK_VERIFY_RANDOM_SYNC ||
       type == Action::ACTION_TIME_VERIFY_SYNC ||
-      type == Action::ACTION_NETWORK_PING)
+      type == Action::ACTION_RULES_SET_GAME_MODE)
     return;
 
   // Enlarge buffer if it can't contain max packet size
