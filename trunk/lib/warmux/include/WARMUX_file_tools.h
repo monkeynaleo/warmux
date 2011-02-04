@@ -64,6 +64,11 @@ std::string TranslateDirectory(const std::string &directory);
 typedef struct _FolderSearch FolderSearch;
 
 FolderSearch *OpenFolder(const std::string& dirname);
+/**
+ * Set file to true to have in it on return whether the returned
+ * string is a file
+ * @warning The string returned is a temporary!
+ */
 const char* FolderSearchNext(FolderSearch *f, bool& file);
 void CloseFolder(FolderSearch *f);
 
