@@ -350,18 +350,26 @@ std::vector<std::pair<std::string, std::string> > GameMode::ListGameModes()
 
   FolderSearch *f = OpenFolder(personal_dir);
   if (f) {
+    bool is_file = true;
     const char *name;
-    while ((name = FolderSearchNext(f)) != NULL) {
-      std::string filename(name);
+    while ((name = FolderSearchNext(f, is_file)) != NULL) {
 
-      if (filename.size() >= 5
-          && filename.compare(filename.size()-4, 4, ".xml") == 0
-          && (filename.size() < 12
-              || filename.compare(filename.size()-12, 12, "_objects.xml") != 0)) {
+      // Only check files
+      if (is_file) {
+        std::string filename(name);
 
-        std::string game_mode_name = filename.substr(0, filename.size()-4);
-        game_modes.push_back(std::pair<std::string, std::string>(game_mode_name, game_mode_name));
+        if (filename.size() >= 5
+            && filename.compare(filename.size()-4, 4, ".xml") == 0
+            && (filename.size() < 12
+                || filename.compare(filename.size()-12, 12, "_objects.xml") != 0)) {
+
+          std::string game_mode_name = filename.substr(0, filename.size()-4);
+          game_modes.push_back(std::pair<std::string, std::string>(game_mode_name, game_mode_name));
+        }
       }
+
+      // Prepare again for searching files
+      is_file = true;
     }
     CloseFolder(f);
   }

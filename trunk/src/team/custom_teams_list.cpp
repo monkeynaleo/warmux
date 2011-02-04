@@ -56,8 +56,10 @@ void CustomTeamsList::LoadList()
   FolderSearch *f = OpenFolder(dirname);
 
   if (f) {
+    bool search_files = false;
     const char *name;
-    while ((name = FolderSearchNext(f)) != NULL) LoadOneTeam(dirname, name);
+    while ((name = FolderSearchNext(f, search_files)) != NULL)
+      LoadOneTeam(dirname, name);
     CloseFolder(f);
   } else {
     std::cerr << std::endl

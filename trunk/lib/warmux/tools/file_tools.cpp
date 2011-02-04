@@ -179,11 +179,23 @@ FolderSearch *OpenFolder(const std::string& dirname)
   return f;
 }
 
-const char* FolderSearchNext(FolderSearch *f)
+const char* FolderSearchNext(FolderSearch *f, bool& file)
 {
   while (FindNextFile(f->file_search, &f->file)) {
-    if (f->file.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+    if (f->file.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
+      // If we are also looking for files, report it isn't one
+      if (file)
+        file = false;
       return f->file.cFileName;
+    }
+
+    // We're not searching for folder, so exit with failure
+    if (!file)
+      return NULL;
+
+    // This is a file and we do search for files
+    file = true;
+    return f->file.cFileName;
   }
   return NULL;
 }
@@ -275,10 +287,32 @@ FolderSearch* OpenFolder(const std::string& dirname)
   return f;
 }
 
-const char* FolderSearchNext(FolderSearch *f)
+const char* FolderSearchNext(FolderSearch *f, bool& file)
 {
+  struct stat s;
   f->file = readdir(f->dir);
-  return (f->file) ? f->file->d_name : NULL;
+
+  while (f->file) {
+    if (f->file->d_type == DT_DIR) {
+      // If we are also looking for files, report it isn't one
+      if (file)
+        file = false;
+      return f->file->d_name;
+    }
+
+    // We're not searching for folder, exit with failure
+    if (!file)
+      return NULL;
+
+    // This is a file and we do search for file
+    if (f->file->d_type == DT_REG) {
+      file = true;
+      return f->file->d_name;
+    }
+
+    // Not something we like, so skip it
+  }
+  return NULL;
 }
 
 void CloseFolder(FolderSearch *f)

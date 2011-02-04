@@ -282,7 +282,9 @@ MapsList::MapsList()
   FolderSearch *f = OpenFolder(dirname);
   if (f) {
     const char *name;
-    while ((name = FolderSearchNext(f)) != NULL) LoadOneMap(dirname, name);
+    bool search_files = false;
+    while ((name = FolderSearchNext(f, search_files)) != NULL)
+      LoadOneMap(dirname, name);
     CloseFolder(f);
   } else {
     Error (Format(_("Unable to open the maps directory (%s)!"), dirname.c_str()));
@@ -292,8 +294,10 @@ MapsList::MapsList()
   dirname = config->GetPersonalDataDir() + "map" PATH_SEPARATOR;
   f = OpenFolder(dirname);
   if (f) {
+    bool search_files = false;
     const char *name;
-    while ((name = FolderSearchNext(f)) != NULL) LoadOneMap(dirname, name);
+    while ((name = FolderSearchNext(f, search_files)) != NULL)
+      LoadOneMap(dirname, name);
     CloseFolder(f);
   } else {
         std::cerr << std::endl
