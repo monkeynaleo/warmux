@@ -95,7 +95,7 @@ private:
   std::string GetObjectsFilename() const;
 
 public:
-  const std::string& GetName() const;
+  const std::string& GetName() const { return m_current; }
 
   const xmlNode* GetWeaponsXml() { return weapons_xml; }
   int GetMaxTeamsPerNetworkPlayer() { return max_teams -1; }
@@ -111,7 +111,7 @@ public:
   bool ExportToString(std::string& mode,
                       std::string& mode_objects) const;
 
-  const XmlReader* GetXmlObjects() const; // for object_cfg
+  const XmlReader* GetXmlObjects() const { return doc_objects; }
 
   bool AllowCharacterSelection() const;
 
