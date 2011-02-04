@@ -95,9 +95,7 @@ ReplayMenu::ReplayMenu()
   
   // Finish info box
   info_box->AddWidget(panel);
-  //Hack
-  //teams_lbox->AddItem(false, "          ", "          ");
-
+ 
   widgets.AddWidget(info_box);
   widgets.Pack();
 }
@@ -181,8 +179,13 @@ void ReplayMenu::ChangeReplay()
   comment_lbl->SetText(text);
 
   // Teams
-  for (uint i=0; i<info->GetTeams().size(); i++)
-    teams_lbox->AddWidget(new Label(info->GetTeams()[i].id, Font::FONT_MEDIUM));
+  teams_lbox->Clear();
+  for (uint i=0; i<info->GetTeams().size(); i++) {
+    printf("Adding %s\n", info->GetTeams()[i].id.c_str());
+    teams_lbox->AddWidget(new Label(info->GetTeams()[i].id, 0, Font::FONT_MEDIUM));
+  }
+  teams_lbox->Pack();
+  teams_lbox->NeedRedrawing();
 
   delete info;
   selected = name;
