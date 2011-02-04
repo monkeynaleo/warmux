@@ -44,10 +44,10 @@
 // Test if a file exists
 bool DoesFileExist(const std::string &name)
 {
-  std::ifstream f(name.c_str());
-  bool exist = f.good();
-  f.close();
-  return exist;
+  struct stat stat_file;
+  if (stat(name.c_str(), &stat_file))
+    return false;
+  return (stat_file.st_mode & S_IFMT) == S_IFREG;
 }
 
 // Check if the folder exists
@@ -55,8 +55,8 @@ bool DoesFolderExist(const std::string &name)
 {
   // Is it a directory ?
   struct stat stat_file;
-  if (stat(name.c_str(), &stat_file) != 0)
-        return false;
+  if (stat(name.c_str(), &stat_file))
+    return false;
   return (stat_file.st_mode & S_IFMT) == S_IFDIR;
 }
 
@@ -170,8 +170,7 @@ FolderSearch *OpenFolder(const std::string& dirname)
   FolderSearch *f      = new FolderSearch;
 
   f->file_search = FindFirstFile(pattern.c_str(), &f->file);
-  if (f->file_search == INVALID_HANDLE_VALUE)
-  {
+  if (f->file_search == INVALID_HANDLE_VALUE) {
      FindClose(f->file_search);
      delete f;
          return NULL;
@@ -182,20 +181,18 @@ FolderSearch *OpenFolder(const std::string& dirname)
 
 const char* FolderSearchNext(FolderSearch *f)
 {
-  while (FindNextFile(f->file_search, &f->file))
-  {
-     if (f->file.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
-       return f->file.cFileName;
+  while (FindNextFile(f->file_search, &f->file)) {
+    if (f->file.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+      return f->file.cFileName;
   }
   return NULL;
 }
 
 void CloseFolder(FolderSearch *f)
 {
-  if (f)
-  {
+  if (f) {
     FindClose(f->file_search);
-        delete f;
+      delete f;
   }
 }
 
@@ -270,8 +267,7 @@ FolderSearch* OpenFolder(const std::string& dirname)
   FolderSearch *f = new FolderSearch;
   f->dir = opendir(dirname.c_str());
 
-  if (!f->dir)
-  {
+  if (!f->dir) {
     delete f;
     return NULL;
   }
@@ -287,9 +283,8 @@ const char* FolderSearchNext(FolderSearch *f)
 
 void CloseFolder(FolderSearch *f)
 {
-  if (f)
-  {
-        closedir(f->dir);
+  if (f) {
+    closedir(f->dir);
     delete f;
   }
 }
@@ -318,8 +313,7 @@ std::string TranslateDirectory(const std::string &directory)
 
   for (int pos = txt.length()-1;
        (pos = txt.rfind ('~', pos)) != -1;
-       --pos)
-  {
+       --pos) {
     txt.replace(pos,1,home);
   }
   return txt;
@@ -329,20 +323,20 @@ std::string FormatFileName(const std::string &name)
 {
  std::string formated_name = name;
 
-    for(unsigned i = 0;i<formated_name.size();i++)
-    {
-      if(formated_name[i] == ' '){
-          formated_name[i] = '_';
-      }
-      if(formated_name[i] == '.'){
-          formated_name[i] = '_';
-      }
-      if(formated_name[i] == '/'){
-          formated_name[i] = '_';
-      }
-      if(formated_name[i] == '\\'){
-          formated_name[i] = '_';
-      }
+  for (uint i=0; i<formated_name.size();i++) {
+    if (formated_name[i] == ' '){
+      formated_name[i] = '_';
     }
+    if (formated_name[i] == '.') {
+      formated_name[i] = '_';
+    }
+    if (formated_name[i] == '/') {
+      formated_name[i] = '_';
+    }
+    if (formated_name[i] == '\\') {
+      formated_name[i] = '_';
+    }
+  }
+
   return formated_name;
 }
