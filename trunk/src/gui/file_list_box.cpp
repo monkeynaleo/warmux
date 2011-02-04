@@ -147,7 +147,7 @@ void FileListBox::PopulateFileList(const char *new_path)
           std::string* filename = new std::string;
           *filename = name;
           MSG_DEBUG("file", "Adding file %s\n", name);
-          AddLabelItem(false, name, filename);
+          AddLabelItem(false, name, filename, Font::FONT_MEDIUM);
         } else {
           MSG_DEBUG("file", "NOT adding file %s, invalid extension\n", name);
         }
@@ -156,7 +156,7 @@ void FileListBox::PopulateFileList(const char *new_path)
         *filename = name;
         MSG_DEBUG("file", "Adding directory %s\n", name);
         AddLabelItem(false, FolderString(name), filename,
-                     Font::FONT_SMALL, Font::FONT_NORMAL, c_yellow);
+                     Font::FONT_MEDIUM, Font::FONT_NORMAL, c_yellow);
       }
 
       // Prepare again for searching files
