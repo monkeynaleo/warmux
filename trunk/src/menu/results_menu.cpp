@@ -32,15 +32,19 @@
 #include "gui/box.h"
 #include "gui/button.h"
 #include "gui/figure_widget.h"
+#include "gui/file_list_box.h"
 #include "gui/graph_canvas.h"
 #include "gui/label.h"
-#include "gui/scroll_box.h"
 #include "gui/null_widget.h"
+#include "gui/question.h"
+#include "gui/scroll_box.h"
 #include "gui/tabs.h"
 #include "gui/talk_box.h"
+#include "gui/text_box.h"
 #include "include/app.h"
 #include "include/action_handler.h"
 #include "network/network.h"
+#include "replay/replay.h"
 #include "sound/jukebox.h"
 #include "team/results.h"
 #include "team/team.h"
@@ -227,6 +231,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
   , third_team(NULL)
   , msg_box(NULL)
   , winner_box(NULL)
+  , save(NULL)
 {
   Profile *res  = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   Point2i wsize = GetMainWindow().GetSize();
@@ -241,7 +246,6 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
   // Load the podium img
   podium_img = GetResourceManager().LoadImage(res, "menu/podium");
   podium_img.SetAlpha(0, 0);
-  GetResourceManager().UnLoadXMLProfile(res);
 
   Point2i tab_size = wsize - Point2i(tab_x + x, y+actions_buttons->GetSizeY());
 
@@ -326,17 +330,45 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
   tabs->AddNewTab("TAB_canvas", _("Team graphs"),
                   new GraphCanvas(tab_size - 2*BorderSize, _("Time"), _("Energy"), team_results));
 
+  // Save replay tab
+  if (Replay::GetInstance()->IsRecording()) {
+    save = new Button(res, "menu/save", false);
+    VBox* vbox  = new VBox(tab_size.x, false, false, false);
+    HBox* hbox  = new HBox(2*Font::FONT_MEDIUM+2*5, false, false, false);
+    VBox* vbox2 = new VBox(tab_size.x - 2*5 - save->GetSizeX(), false, false, false);
+
+    HBox* hbox2 = new HBox(Font::FONT_MEDIUM, false, false, false);
+    hbox2->AddWidget(new Label(_("Filename:"), 80, Font::FONT_MEDIUM));
+    replay_name = new TextBox("record.dat", tab_size.x-4*5 - 50 - save->GetSizeX());
+    hbox2->AddWidget(replay_name);
+    vbox2->AddWidget(hbox2);
+
+    hbox2 = new HBox(2*Font::FONT_MEDIUM+3*4, false, false, false);
+    hbox2->AddWidget(new Label(_("Comment:"), 80, Font::FONT_MEDIUM));
+    comment = new TextBox(_("I like WarMUX :)"), tab_size.x-4*5 - 50 - save->GetSizeX());
+    hbox2->AddWidget(comment);
+    vbox2->AddWidget(hbox2);
+    hbox->AddWidget(vbox2);
+    hbox->AddWidget(save);
+    vbox->AddWidget(hbox);
+    folders = new FileListBox(Point2i(tab_size.x-2*5, tab_size.y - 2*Font::FONT_MEDIUM+4*5), false);
+    folders->StartListing();
+    vbox->AddWidget(folders);
+    tabs->AddNewTab("TAB_replay", _("Save replay?"), vbox);
+  }
+  GetResourceManager().UnLoadXMLProfile(res);
+
   // Final box
-  VBox* tmp_box = new VBox(tab_size.x, false, false, false);
-  tmp_box->SetNoBorder();
-  tmp_box->AddWidget(tabs);
+  VBox *vbox = new VBox(tab_size.x, false, false, false);
+  vbox->SetNoBorder();
+  vbox->AddWidget(tabs);
 
   if (msg_box) {
-    tmp_box->AddWidget(msg_box);
+    vbox->AddWidget(msg_box);
   }
-  tmp_box->SetPosition(tab_x, y);
+  vbox->SetPosition(tab_x, y);
 
-  widgets.AddWidget(tmp_box);
+  widgets.AddWidget(vbox);
   widgets.Pack();
 }
 
@@ -364,8 +396,7 @@ void ResultsMenu::DrawTeamOnPodium(const Team& team, const Point2i& relative_pos
 void ResultsMenu::key_ok()
 {
   // return was pressed while chat texbox still had focus (player wants to send his msg)
-  if (msg_box != NULL && msg_box->TextHasFocus())
-  {
+  if (msg_box != NULL && msg_box->TextHasFocus()) {
     msg_box->SendChatMsg();
     return;
   }
@@ -384,5 +415,26 @@ void ResultsMenu::ReceiveMsgCallback(const std::string& msg, const Color& color)
 {
   if (msg_box) {
     msg_box->NewMessage(msg, color);
+  }
+}
+
+void ResultsMenu::OnClickUp(const Point2i &mousePosition, int button)
+{
+  Widget *w = widgets.ClickUp(mousePosition, button);
+  if (save && w == save) {
+    const std::string& filename = replay_name->GetText();
+    if (filename == "") {
+      Question question(Question::WARNING);
+      question.Set(_("Invalid filename"), true, 0);
+      question.Ask();
+      return;
+    }
+
+    if (!Replay::GetInstance()->SaveReplay(filename, comment->GetText().c_str())) {
+      Question question(Question::WARNING);
+      question.Set(_("Failed to save replay"), true, 0);
+      question.Ask();
+      return;
+    }
   }
 }
