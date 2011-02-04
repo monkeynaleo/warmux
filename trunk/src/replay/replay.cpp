@@ -160,6 +160,14 @@ void Replay::StoreAction(const Action* a)
       type == Action::ACTION_RULES_SET_GAME_MODE)
     return;
 
+  // Special case to convert into local packet
+  if (type == Action::ACTION_REQUEST_BONUS_BOX_DROP) {
+    // The timer shouldn't have moved
+    Action a(Action::ACTION_DROP_BONUS_BOX);
+    StoreAction(&a);
+    return;
+  }
+
   // Enlarge buffer if it can't contain max packet size
   if (MemUsed() > bufsize - MAX_PACKET_SIZE*4)
     ChangeBufsize(2*bufsize);
