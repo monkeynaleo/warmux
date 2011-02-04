@@ -190,7 +190,8 @@ ReplayInfo *ReplayInfo::ReplayInfoFromCurrent(Uint32 duration, const char* comme
 bool
 ReplayInfo::DumpToFile(std::ofstream &out)
 {
-  if (!valid) return false;
+  if (!valid)
+    return false;
 
   Write32(out, HEADER_MAGIC);               // Header magic
   out << version << "\n";                   // Version
