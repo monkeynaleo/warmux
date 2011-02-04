@@ -95,8 +95,8 @@ public:
     }
   }
   virtual size_t WidgetCount() const { return vbox->WidgetCount(); }
-  virtual void Empty() { vbox->Empty(); }
-  virtual void Clear() { vbox->Clear(); }
+  virtual void Empty() { offset = 0; vbox->Empty(); }
+  virtual void Clear() { offset = 0; vbox->Clear(); }
 };
 
 #endif  //SCROLL_BOX_H
