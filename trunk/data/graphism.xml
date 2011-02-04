@@ -32,6 +32,7 @@
   <surface name="ico_benchmark_menu" file="menu/i_benchmark.png" />
   <surface name="ico_help" file="menu/i_help.png" />
   <surface name="ico_credits" file="menu/i_credits.png" />
+  <surface name="ico_replay" file="menu/i_replay.png" />
   <surface name="ico_quit" file="menu/i_quit.png" />
 
   <surface name="ico_update" file="menu/i_update.png" />
@@ -81,6 +82,7 @@
 
   <!-- For results menu -->
   <surface name="podium" file="menu/podium.png" />
+  <surface name="save" file="menu/save.png" />
 
   <!-- Random map -->
   <surface name="random_map" file="map/random_map.jpg" />
