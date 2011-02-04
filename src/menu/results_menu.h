@@ -32,7 +32,10 @@ class TeamResults;
 class Team;
 class MultiTabs;
 class TalkBox;
+class TextBox;
+class FileListBox;
 class PictureWidget;
+class Button;
 
 class ResultsMenu : public Menu
 {
@@ -50,12 +53,19 @@ class ResultsMenu : public Menu
   PictureWidget *podium;
   Surface podium_img;
 
+  /* Replay saving */
+  Button      *save;
+  FileListBox *folders;
+  TextBox     *replay_name;
+  TextBox     *comment;
+
   void key_ok();
 
   void ComputeTeamsOrder();
   void DrawPodium(const Point2i &position) const;
   void DrawTeamOnPodium(const Team& team, const Point2i& relative_position);
   void Draw(const Point2i &mousePosition);
+  void OnClickUp(const Point2i &mousePosition, int button);
 
 public:
   ResultsMenu(std::vector<TeamResults*>& v, bool disconnected = false);
