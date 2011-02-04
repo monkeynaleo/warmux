@@ -124,15 +124,16 @@ bool Replay::SaveReplay(const std::string& name, const char *comment)
   ASSERT(is_recorder);
 
   std::ofstream out(name.c_str(), std::ofstream::binary);
-  if (!out) {
-    Error(Format(_("Couldn't open %s\n"), name.c_str()));
+  if (!out)
     return false;
-  }
 
   // Generate replay info and dump it to file
   total_time = old_time - start_time;
   ReplayInfo *info = ReplayInfo::ReplayInfoFromCurrent(total_time, comment);
-  info->DumpToFile(out);
+  if (!info->DumpToFile(out)) {
+    delete info;
+    return false;
+  }
   delete info;
 
   // Save seed
@@ -143,10 +144,12 @@ bool Replay::SaveReplay(const std::string& name, const char *comment)
   MSG_DEBUG("replay", "Actions stored at %u on %u bytes in %s, seed %08X\n",
             pos, MemUsed(), name.c_str(), seed);
   out.write((char*)buf, MemUsed());
+
+  bool good = out.good();
   out.close();
 
-  // should return length actually written
-  return true;
+  // should maybe return length actually written
+  return good;
 }
 
 // The Replay packet header:
