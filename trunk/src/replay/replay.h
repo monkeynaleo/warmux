@@ -79,7 +79,9 @@ public:
   uint GetSeed() const { return seed; }
 
   // Recorder
-  bool StartRecording();
+  bool StartRecording(const std::string& game_mode_name,
+                      const std::string& game_mode,
+                      const std::string& game_mode_objects);
   void StopRecording() { replay_state = NOTHING; }
   void StoreAction(const Action* a);
   bool IsRecording() const { return is_recorder && replay_state==RECORDING; }

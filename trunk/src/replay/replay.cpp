@@ -82,7 +82,9 @@ void Replay::ChangeBufsize(Uint32 n)
   ptr = buf + offset;
 }
 
-bool Replay::StartRecording()
+bool Replay::StartRecording(const std::string& game_mode_name,
+                            const std::string& game_mode,
+                            const std::string& game_mode_objects)
 {
   MSG_DEBUG("replay", "Asked to start recording\n");
   ASSERT(is_recorder && replay_state == PAUSED_RECORD);
@@ -93,11 +95,7 @@ bool Replay::StartRecording()
 
   // Write game mode rules at start of data
   Action a(Action::ACTION_RULES_SET_GAME_MODE);
-  std::string game_mode_name = "replay";
   a.Push(game_mode_name);
-  std::string game_mode;
-  std::string game_mode_objects;
-  GameMode::GetInstance()->ExportToString(game_mode, game_mode_objects);
   a.Push(game_mode);
   a.Push(game_mode_objects);
   ChangeBufsize(a.GetSize()/2);
@@ -285,7 +283,7 @@ ok:
   in.seekg(0, std::fstream::end);
   uint size = in.tellg()-pos;
   in.seekg(pos);
-  MSG_DEBUG("replay", "Allocated %ub for actions found at %i\n", size, int(pos));
+  MSG_DEBUG("replay", "Actions found at %u on %uB, seed=%08X\n", (uint)pos, size, seed);
 
   if (size%4) {
     // Make it fatal
@@ -302,11 +300,10 @@ ok:
   if (!a || a->GetType() != Action::ACTION_RULES_SET_GAME_MODE)
     goto err;
   ptr += a->GetSize()/4;
-  if (a->PopString() != "replay")
-    goto err;
-  std::string mode = a->PopString();
-  std::string mode_objects = a->PopString();
-  game_mode->LoadFromString("replay", mode, mode_objects);
+  const std::string& mode_name = a->PopString();
+  const std::string& mode = a->PopString();
+  const std::string& mode_objects = a->PopString();
+  game_mode->LoadFromString(mode_name, mode, mode_objects);
   delete a;
   status = true;
 
