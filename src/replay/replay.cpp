@@ -117,7 +117,7 @@ bool Replay::SaveReplay(const std::string& name, const char *comment)
     return false;
 
   // Generate replay info and dump it to file
-  total_time = old_time - start_time;
+  Uint32 total_time = old_time - start_time;
   ReplayInfo *info = ReplayInfo::ReplayInfoFromCurrent(total_time, comment);
   if (!info->DumpToFile(out)) {
     delete info;
@@ -369,7 +369,6 @@ bool Replay::StartPlaying()
             game_mode->character.max_energy, game_mode->character.init_energy);
 
   replay_state = PLAYING;
-  total_time   = 0;
 
   return RefillActions();
 }
