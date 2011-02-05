@@ -144,7 +144,15 @@ void FileListBox::PopulateFileList(const std::string& path)
           MSG_DEBUG("file", "NOT adding file %s, invalid extension\n", name);
         }
       } else {
-        std::string* filename = new std::string(new_path);
+        std::string* filename;
+        if (name == "..") {
+          // Are we at the root?
+          if (name == PATH_SEPARATOR)
+            break;
+          size_t pos = new_path.find_last_of(PATH_SEPARATOR, new_path.size()-2, sizeof(PATH_SEPARATOR));
+          filename = new std::string(new_path.substr(0, pos));
+        } else
+          filename = new std::string(new_path);
 	*filename += name;
         MSG_DEBUG("file", "Adding directory %s\n", name);
         AddLabelItem(false, FolderString(name), filename,
