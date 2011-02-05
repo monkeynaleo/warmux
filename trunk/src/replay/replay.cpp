@@ -36,8 +36,6 @@
 #include "game/game_time.h"
 #include "team/teams_list.h"
 
-#define MAX_PACKET_SIZE 100
-
 Replay::Replay()
   : buf(NULL)
   , bufsize(0)
@@ -317,9 +315,9 @@ Action* Replay::GetAction()
 {
   ASSERT(!is_recorder && replay_state == PLAYING);
 
-  // Does it contain the 4 elements needed to decode at least
+  // Does it contain the 2 elements needed to decode at least
   // action header?
-  if (MemUsed() > bufsize-3*4) {
+  if (MemUsed() > bufsize-2*4) {
     return NULL;
   }
 
@@ -334,7 +332,7 @@ Action* Replay::GetAction()
 
   // Move pointer
   Uint16 size = a->GetSize()/4;
-  if (size > MAX_PACKET_SIZE || MemUsed() > bufsize-size*4) {
+  if (MemUsed() > bufsize-size*4-2*4) {
     Error(Format(_("Malformed replay: action with datasize=%u"), size));
     StopPlaying();
     return NULL;
