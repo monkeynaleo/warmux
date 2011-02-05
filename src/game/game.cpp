@@ -138,6 +138,14 @@ void Game::InitEverything()
     } else if (Network::GetInstance()->IsLocal()) {
       RandomSync().InitRandom();
     }
+
+    std::string game_mode, game_mode_objects;
+    const GameMode *mode = GameMode::GetConstInstance();
+
+    mode->ExportToString(game_mode, game_mode_objects);
+
+    if (replay->StartRecording(mode->GetName(), game_mode, game_mode_objects))
+      replay->SetSeed(RandomSync().GetSeed());
   }
 
   // GameMode::GetInstance()->Load(); : done in the game menu to adjust some parameters for local games
@@ -173,16 +181,6 @@ void Game::InitEverything()
     std::cout << "o " << _("Waiting for remote players") << std::endl;
     loading_screen.StartLoading(5, "network_icon", _("Network"));
     WaitForOtherPlayers();
-  }
-
-  if (!replay->IsPlaying()) {
-    std::string game_mode, game_mode_objects;
-    const GameMode *mode = GameMode::GetConstInstance();
-
-    mode->ExportToString(game_mode, game_mode_objects);
-
-    if (replay->StartRecording(mode->GetName(), game_mode, game_mode_objects))
-      replay->SetSeed(RandomSync().GetSeed());
   }
 
   ActionHandler::GetInstance()->ExecFrameLessActions();
@@ -943,14 +941,19 @@ void Game::RequestBonusBoxDrop()
 {
   ObjBox* current_box = Game::GetInstance()->GetCurrentBox();
   if (current_box) {
+    Action a(Action::ACTION_DROP_BONUS_BOX);
+    Replay *replay = Replay::GetInstance();
+
+    if (replay->IsRecording())
+      replay->StoreAction(&a);
+
     if (Network::GetInstance()->IsTurnMaster()) {
-      Action a(Action::ACTION_DROP_BONUS_BOX);
       Network::GetInstance()->SendActionToAll(a);
 
       current_box->DropBox();
     } else {
-      Action a(Action::ACTION_REQUEST_BONUS_BOX_DROP);
-      Network::GetInstance()->SendActionToAll(a);
+      Action b(Action::ACTION_REQUEST_BONUS_BOX_DROP);
+      Network::GetInstance()->SendActionToAll(b);
     }
   }
 }
