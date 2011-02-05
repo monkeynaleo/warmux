@@ -77,12 +77,10 @@ Action::Action(const char *buffer, DistantComputer* _creator)
   uint length = SDLNet_Read32(buffer);
   buffer += 4;
   ASSERT(!(length%4));
-  length = (length/4)-3;
+  length = (length/4)-2;
   ASSERT(length < MAX_NUM_VARS); // would be suspicious
 
   m_type = (Action_t)SDLNet_Read32(buffer);
-  buffer += 4;
-  m_timestamp = (uint)SDLNet_Read32(buffer);
   buffer += 4;
 
   for (uint i=0; i < length; i++) {
@@ -96,7 +94,6 @@ void Action::Init(Action_t type)
 {
   m_type = type;
   var.clear();
-  m_timestamp = Action_TimeStamp();
   creator = NULL;
 }
 
@@ -107,16 +104,12 @@ void Action::Write(char *buffer) const
   buffer += 4;
   SDLNet_Write32(m_type, buffer);
   buffer += 4;
-  SDLNet_Write32(m_timestamp, buffer);
-  buffer += 4;
 
-  uint count = 0;
   for(std::list<uint32_t>::const_iterator val = var.begin(); val!=var.end(); val++) {
     SDLNet_Write32(*val, buffer);
     buffer += 4;
-    count++;
   }
-  ASSERT(count < MAX_NUM_VARS);
+  ASSERT(var.size() < MAX_NUM_VARS);
 }
 
 // Convert the action to a packet

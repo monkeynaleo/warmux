@@ -1197,12 +1197,6 @@ bool ActionHandler::ExecActionsForOneFrame()
     if (a->GetType() == Action::ACTION_GAME_CALCULATE_FRAME)
       frame_complete = true;
 
-    if (!a->IsFrameLess()) {
-      MSG_DEBUG("action_time", "-> Action %s (action time: %u, time: %u)",
-                GetActionName(a->GetType()).c_str(), a->GetTimestamp(),
-                GameTime::GetInstance()->Read());
-    }
-
     // Do it first, else Exec will strip its content!
     if (replay->IsRecording())
       replay->StoreAction(a);

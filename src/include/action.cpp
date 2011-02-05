@@ -24,12 +24,3 @@
 #include "game/game.h"
 #include "game/game_time.h"
 //-----------------------------------------------------------------------------
-
-
-uint Action_TimeStamp()
-{
-  if (Game::IsRunning())
-    return GameTime::GetInstance()->Read();
-
-  return 0;
-}

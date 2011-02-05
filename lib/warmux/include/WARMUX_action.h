@@ -127,7 +127,6 @@ public:
 private:
   std::list<uint32_t> var;
   Action_t m_type;
-  uint m_timestamp;
 
   DistantComputer* creator;
 
@@ -168,7 +167,7 @@ public:
 
   int  GetSize() const
   {
-    return 4+4+4 // Sizes of: packet len, type, timestamp
+    return 4+4 // Sizes of: packet len, type
          + var.size() * 4;
   }
   void Write(char *packet) const;
@@ -177,12 +176,8 @@ public:
   bool IsEmpty() const { return var.empty(); }
 
   DistantComputer* GetCreator() const { return creator; }
-  uint GetTimestamp() const { return m_timestamp; }
   Action_t GetType() const { return m_type; }
   bool IsFrameLess() const { return m_type <= LAST_FRAME_LESS_ACTION; }
 };
-
-// to be defined outside of the library
-extern uint Action_TimeStamp();
 
 #endif
