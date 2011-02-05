@@ -289,9 +289,8 @@ FolderSearch* OpenFolder(const std::string& dirname)
 
 const char* FolderSearchNext(FolderSearch *f, bool& file)
 {
-  f->file = readdir(f->dir);
+  while ((f->file = readdir(f->dir)) != NULL) {
 
-  while (f->file) {
     if (f->file->d_type == DT_DIR) {
       // If we are also looking for files, report it isn't one
       if (file)

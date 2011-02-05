@@ -22,7 +22,7 @@ msgstr ""
 "X-Poedit-Country: Ukraine\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/map/maps_list.cpp:376
+#: src/map/maps_list.cpp:380
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Мапа %s не знайдена :-("
@@ -69,34 +69,34 @@ msgstr "Команда %s"
 msgid "%s Team - Remote"
 msgstr "Команда %s - Віддалено"
 
-#: src/game/game.cpp:1059
+#: src/game/game.cpp:1065
 #, c-format
 msgid "%s from %s team committed suicide!"
 msgstr "Гравець %s з команди %s закінчує життя самогубством !"
 
 #. Could be modified, but for now, save on translation
-#: src/game/game.cpp:1085 src/game/game.cpp:1104
+#: src/game/game.cpp:1091 src/game/game.cpp:1110
 #, c-format
 msgid "%s from %s team has died."
 msgstr "Гравець %s з команди %s загинув."
 
-#: src/game/game.cpp:1051
+#: src/game/game.cpp:1057
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "Гравець %s з команди %s впав у воду."
 
-#: src/game/game.cpp:1045
+#: src/game/game.cpp:1051
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "Гравець %s з команди %s випав з мапи!"
 
-#: src/game/game.cpp:1065
+#: src/game/game.cpp:1071
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "Гравець %s з команди %s дуже сильно вдарився об землю!"
 
 #. The playing character killed himself
-#: src/game/game.cpp:1072
+#: src/game/game.cpp:1078
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "Гравець %s з команди %s загинув, тому що він незграбний!"
@@ -119,7 +119,7 @@ msgstr ""
 msgid "%s has won %u points of energy!"
 msgstr "%s отримав %u одиницю енергії!"
 
-#: src/game/game.cpp:1096
+#: src/game/game.cpp:1102
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s - псих, він вбив члена команди %s!"
@@ -134,7 +134,7 @@ msgstr "%s поруч з міною!"
 msgid "%s kicked from game"
 msgstr ""
 
-#: src/include/action_handler.cpp:461
+#: src/include/action_handler.cpp:473
 #, c-format
 msgid "%s needs a pause."
 msgstr "%s потребує паузи."
@@ -473,7 +473,7 @@ msgstr[2] ""
 msgid "%s team was fragged down."
 msgstr "Команду %s було знищено"
 
-#: src/game/game.cpp:1080 src/game/game.cpp:1092
+#: src/game/game.cpp:1086 src/game/game.cpp:1098
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s потягнув члена команди %s за собою в могилу!"
@@ -551,7 +551,7 @@ msgstr "Повітряна атака"
 msgid "Airhammer"
 msgstr "Відбійний молоток"
 
-#: src/menu/results_menu.cpp:301
+#: src/menu/results_menu.cpp:305
 msgid "All teams"
 msgstr "Всі команди"
 
@@ -581,7 +581,7 @@ msgstr "Готовальня"
 msgid "Area currently displayed"
 msgstr ""
 
-#: src/main.cpp:338
+#: src/main.cpp:346
 msgid "Authors:"
 msgstr "Автори:"
 
@@ -617,7 +617,7 @@ msgstr "Телепортація"
 msgid "Benchmark"
 msgstr ""
 
-#: src/game/game_mode.cpp:343
+#: src/game/game_mode.cpp:336
 msgid "Blitz"
 msgstr "Наліт авіації"
 
@@ -633,24 +633,24 @@ msgstr "Стрибучий м'яч"
 msgid "Bye bye Tux..."
 msgstr "Прощавай tux..."
 
-#: src/team/teams_list.cpp:466 src/team/teams_list.cpp:501
-#: src/team/teams_list.cpp:510 src/team/teams_list.cpp:516
-#: src/team/teams_list.cpp:574
+#: src/team/teams_list.cpp:468 src/team/teams_list.cpp:503
+#: src/team/teams_list.cpp:512 src/team/teams_list.cpp:518
+#: src/team/teams_list.cpp:576
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Не виходить знайти команду %s!"
 
-#: src/team/teams_list.cpp:155
+#: src/team/teams_list.cpp:157
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Не виходить відкрити особистий каталог команд (%s)!"
 
-#: src/team/teams_list.cpp:142
+#: src/team/teams_list.cpp:143
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Не виходить відкрити каталог команд (%s)!"
 
-#: src/team/custom_teams_list.cpp:64
+#: src/team/custom_teams_list.cpp:66
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Не виходить відкрити особистий каталог команд (%s)!"
@@ -723,7 +723,7 @@ msgstr "Перевірити по мережі наявність оновлен
 msgid "Choose randomly between the different maps"
 msgstr "Вибрати мапу випадково"
 
-#: src/game/game_mode.cpp:341
+#: src/game/game_mode.cpp:334
 msgid "Classic"
 msgstr "Класичний"
 
@@ -763,7 +763,7 @@ msgstr ""
 msgid "Client mode"
 msgstr "Режим клієнта"
 
-#: src/menu/results_menu.cpp:172 src/menu/results_menu.cpp:174
+#: src/menu/results_menu.cpp:176 src/menu/results_menu.cpp:178
 msgid "Clumsiest"
 msgstr "Найбільш незграбний"
 
@@ -774,6 +774,10 @@ msgstr "Касетна бомба"
 #: src/weapon/cluzooka.cpp:373
 msgid "Cluzooka"
 msgstr "Осколкова базука"
+
+#: src/menu/results_menu.cpp:350
+msgid "Comment:"
+msgstr ""
 
 #: src/weapon/suicide.cpp:46
 msgid "Commit Suicide"
@@ -801,7 +805,7 @@ msgstr "Підключений !"
 msgid "Construct"
 msgstr "Будівництво"
 
-#: src/menu/results_menu.cpp:280
+#: src/menu/results_menu.cpp:284
 msgid "Controlled by: "
 msgstr "Провідник: "
 
@@ -885,7 +889,7 @@ msgstr "Тривалість ходу"
 msgid "Dynamite"
 msgstr "Динаміт"
 
-#: src/game/game.cpp:515
+#: src/game/game.cpp:510
 msgid "END OF GAME"
 msgstr "КІНЕЦЬ ГРИ"
 
@@ -893,7 +897,7 @@ msgstr "КІНЕЦЬ ГРИ"
 msgid "Effects volume"
 msgstr "Гучність ефектів"
 
-#: src/menu/results_menu.cpp:327
+#: src/menu/results_menu.cpp:331
 msgid "Energy"
 msgstr "Енергія"
 
@@ -907,7 +911,7 @@ msgstr "Помилка ініціалізації мережі: Клієнт %s 
 msgid "Error loading ground"
 msgstr "Помилка при завантаженні команди :"
 
-#: src/team/custom_teams_list.cpp:91 src/team/teams_list.cpp:118
+#: src/team/custom_teams_list.cpp:93 src/team/teams_list.cpp:118
 msgid "Error loading team :"
 msgstr "Помилка при завантаженні команди :"
 
@@ -1002,6 +1006,16 @@ msgstr ""
 msgid "Fail to open temporary file: %s"
 msgstr "Неможливо відкрити тимчасовий файл (%s)!"
 
+#: src/menu/results_menu.cpp:444
+msgid "Failed to save replay"
+msgstr ""
+
+#: src/menu/results_menu.cpp:344
+#, fuzzy
+#| msgid "Game name:"
+msgid "Filename:"
+msgstr "Ім'я гри:"
+
 #: src/weapon/flamethrower.cpp:134
 msgid "Flame Thrower"
 msgstr "Вогнемет"
@@ -1018,7 +1032,7 @@ msgstr "На весь екран?"
 msgid "Game"
 msgstr "Гра"
 
-#: src/include/action_handler.cpp:869
+#: src/include/action_handler.cpp:881
 msgid ""
 "Game is not synchronized anymore! This is BAD, the network game will be "
 "interrupted, sorry. Please, report the bug to the Warmux Team by mail or "
@@ -1110,7 +1124,11 @@ msgstr "Стати сервером"
 msgid "Hurry up, you are too slow !!"
 msgstr "Поспішайте, ви занадто повільні!!"
 
-#: src/main.cpp:272
+#: src/menu/results_menu.cpp:351
+msgid "I like WarMUX :)"
+msgstr ""
+
+#: src/main.cpp:280
 msgid ""
 "If you found a bug or have a feature request send us an email (in english, "
 "please):"
@@ -1173,20 +1191,20 @@ msgstr ""
 "Стрільба : Утримуйте пробіл до досягнення бажаної сили\n"
 "один патрон за хід"
 
-#: src/game/game.cpp:123
+#: src/game/game.cpp:122
 msgid "Initialisation"
 msgstr "Ініціалізація"
 
 #. Load the map
-#: src/game/game.cpp:150
+#: src/game/game.cpp:158
 msgid "Initialise map"
 msgstr "Ініціалізація мапи"
 
-#: src/game/game.cpp:161
+#: src/game/game.cpp:169
 msgid "Initialise sounds"
 msgstr "Ініціалізація звуків"
 
-#: src/game/game.cpp:157
+#: src/game/game.cpp:165
 msgid "Initialise teams"
 msgstr "Ініціалізація команд"
 
@@ -1200,7 +1218,11 @@ msgstr "Показати/заховати панель"
 msgid "Interface and touch controls, more details in other tabs"
 msgstr ""
 
-#: src/game/game.cpp:933
+#: src/menu/results_menu.cpp:437
+msgid "Invalid filename"
+msgstr ""
+
+#: src/game/game.cpp:934
 msgid "It's a present!"
 msgstr "Це подарунок!"
 
@@ -1298,7 +1320,7 @@ msgstr "Карту %s створив: "
 msgid "Map author information: name, email, nickname, country"
 msgstr ""
 
-#: src/game/game.cpp:151
+#: src/game/game.cpp:159
 msgid "Maps"
 msgstr "Мапи"
 
@@ -1346,23 +1368,23 @@ msgstr ""
 msgid "More energy, more shots needed"
 msgstr ""
 
-#: src/menu/results_menu.cpp:180 src/menu/results_menu.cpp:182
+#: src/menu/results_menu.cpp:184 src/menu/results_menu.cpp:186
 msgid "Most accurate"
 msgstr "Найточніший"
 
-#: src/menu/results_menu.cpp:164 src/menu/results_menu.cpp:166
+#: src/menu/results_menu.cpp:168 src/menu/results_menu.cpp:170
 msgid "Most sold-out"
 msgstr "Найбільш продажний"
 
-#: src/menu/results_menu.cpp:148 src/menu/results_menu.cpp:150
+#: src/menu/results_menu.cpp:152 src/menu/results_menu.cpp:154
 msgid "Most useful"
 msgstr "Найкорисніший"
 
-#: src/menu/results_menu.cpp:156 src/menu/results_menu.cpp:158
+#: src/menu/results_menu.cpp:160 src/menu/results_menu.cpp:162
 msgid "Most useless"
 msgstr "Найбільш даремний"
 
-#: src/menu/results_menu.cpp:140 src/menu/results_menu.cpp:142
+#: src/menu/results_menu.cpp:144 src/menu/results_menu.cpp:146
 msgid "Most violent"
 msgstr "Найжорстокіший"
 
@@ -1424,7 +1446,7 @@ msgstr "Гучність музики"
 msgid "Music?"
 msgstr "Музика?"
 
-#: src/game/game.cpp:174
+#: src/game/game.cpp:182
 msgid "Network"
 msgstr "Мережа"
 
@@ -1463,7 +1485,7 @@ msgstr "%i гравець приєднався"
 msgid "No pointer"
 msgstr ""
 
-#: src/menu/results_menu.cpp:79
+#: src/menu/results_menu.cpp:83
 msgid "Nobody!"
 msgstr "Ніхто!"
 
@@ -1551,7 +1573,7 @@ msgstr "Енергія гравця?"
 msgid "Player's name?"
 msgstr "Імена гравців?"
 
-#: src/menu/results_menu.cpp:293
+#: src/menu/results_menu.cpp:297
 msgid "Podium"
 msgstr ""
 
@@ -1640,11 +1662,11 @@ msgstr ""
 msgid "Quickly quit game with Ctrl"
 msgstr "Швидкий вихід з гри з Ctrl"
 
-#: src/interface/man_machine_interface.cpp:1144 src/menu/main_menu.cpp:73
+#: src/interface/man_machine_interface.cpp:1144 src/menu/main_menu.cpp:76
 msgid "Quit"
 msgstr "Вийти"
 
-#: src/main.cpp:261
+#: src/main.cpp:269
 msgid "Quit Warmux"
 msgstr "Вийти з Warmux"
 
@@ -1673,6 +1695,10 @@ msgstr "Зчитування налаштувань за замовчанням"
 msgid "Reading the personal config file"
 msgstr "Зчитування персональних налаштувань"
 
+#: src/menu/main_menu.cpp:73
+msgid "Replay"
+msgstr ""
+
 #: src/menu/options_menu.cpp:147
 msgid "Resolution"
 msgstr "Роздільна здатність"
@@ -1681,9 +1707,13 @@ msgstr "Роздільна здатність"
 msgid "Riot Bomb"
 msgstr "Пустотна бомба"
 
-#: src/main.cpp:78
+#: src/main.cpp:79
 msgid "Run game"
 msgstr "Почати гру"
+
+#: src/menu/results_menu.cpp:362
+msgid "Save replay?"
+msgstr ""
 
 #: src/network/chat.cpp:83
 msgid "Say: "
@@ -1813,11 +1843,11 @@ msgid "Sound frequency"
 msgstr "Частота звуку"
 
 #. Load teams' sound profiles
-#: src/game/game.cpp:163
+#: src/game/game.cpp:171
 msgid "Sounds"
 msgstr "Звуки"
 
-#: src/game/game.cpp:194
+#: src/game/game.cpp:203
 msgid "Starting a new game"
 msgstr "Починаємо нову гру"
 
@@ -1846,15 +1876,15 @@ msgstr ""
 msgid "Talk in network battles"
 msgstr "Розмова в мережній битві"
 
-#: src/menu/results_menu.cpp:326
+#: src/menu/results_menu.cpp:330
 msgid "Team graphs"
 msgstr "Графіки команди"
 
-#: src/menu/results_menu.cpp:304
+#: src/menu/results_menu.cpp:308
 msgid "Team stats"
 msgstr "Статистика команди"
 
-#: src/game/game.cpp:158 src/menu/game_menu.cpp:78 src/menu/game_menu.cpp:82
+#: src/game/game.cpp:166 src/menu/game_menu.cpp:78 src/menu/game_menu.cpp:82
 #: src/menu/network_menu.cpp:99 src/menu/network_menu.cpp:103
 msgid "Teams"
 msgstr "Команди"
@@ -1924,7 +1954,7 @@ msgstr "Перевищено час підключення. Перевірте, 
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "Диско-граната вилетіла з поля битви не встигнув вибухнути"
 
-#: src/game/game.cpp:767
+#: src/game/game.cpp:762
 msgid "The game was interrupted because you got disconnected."
 msgstr "Гру було завершено, тому що ви були відключені."
 
@@ -1974,7 +2004,7 @@ msgstr[2] "Всього %i команд"
 msgid "This key has already been attributed to '%s'"
 msgstr ""
 
-#: src/menu/benchmark_menu.cpp:115 src/menu/results_menu.cpp:327
+#: src/menu/benchmark_menu.cpp:115 src/menu/results_menu.cpp:331
 msgid "Time"
 msgstr "Час"
 
@@ -2061,12 +2091,12 @@ msgstr ""
 msgid "Unable to contact the host."
 msgstr "Не вийшло з'єднатись з хостом."
 
-#: src/map/maps_list.cpp:288
+#: src/map/maps_list.cpp:290
 #, c-format
 msgid "Unable to open the maps directory (%s)!"
 msgstr "Неможливо відкрити каталог з мапами (%s)!"
 
-#: src/map/maps_list.cpp:300
+#: src/map/maps_list.cpp:304
 #, c-format
 msgid "Unable to open the personal maps directory (%s)!"
 msgstr "Неможливо відкрити персональний каталог з мапами (%s)!"
@@ -2084,7 +2114,7 @@ msgstr "Невідома команда"
 msgid "Unknown command of type %i"
 msgstr "Невідома команда %i"
 
-#: src/game/game_mode.cpp:342
+#: src/game/game_mode.cpp:335
 msgid "Unlimited"
 msgstr "(Нескінченно)"
 
@@ -2124,7 +2154,7 @@ msgstr ""
 "Стрільба : утримуйте пробіл до досягнення бажаної сили\n"
 "один патрон за хід"
 
-#: src/main.cpp:190
+#: src/main.cpp:198
 msgid "Version"
 msgstr "Версія"
 
@@ -2145,12 +2175,12 @@ msgstr[0] "Зачекайте! %i-й гравець поки не готовий
 msgstr[1] "Зачекайте! %i гравця поки не готові!"
 msgstr[2] "Зачекайте! %i гравців поки не готові!"
 
-#: src/game/game.cpp:666
+#: src/game/game.cpp:661
 #, c-format
 msgid "Waiting for %s"
 msgstr "Очікування %s"
 
-#: src/game/game.cpp:173
+#: src/game/game.cpp:181
 msgid "Waiting for remote players"
 msgstr "Чекаємо віддалених гравців"
 
@@ -2160,11 +2190,11 @@ msgstr ""
 "Очікування сервера - все що ви можете зробити, це відмінити свою готовність "
 "чи потеревеніти!"
 
-#: src/main.cpp:201
+#: src/main.cpp:209
 msgid "Warmux launching..."
 msgstr "Запуск Warmux..."
 
-#: src/main.cpp:337
+#: src/main.cpp:345
 msgid "Warmux version "
 msgstr "Warmux версії "
 
@@ -2177,11 +2207,11 @@ msgstr "Змінити вид зброї"
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Зброя: Вогонь/Подарунки: падають швидше"
 
-#: src/game/game.cpp:154
+#: src/game/game.cpp:162
 msgid "Weapons"
 msgstr "Зброя"
 
-#: src/main.cpp:347
+#: src/main.cpp:355
 msgid "Website: "
 msgstr "Веб-сайт: "
 
@@ -2192,12 +2222,12 @@ msgstr "Веб-сайт: "
 msgid "Welcome to %s on %s!"
 msgstr "Ласкаво просимо до %s на %s"
 
-#: src/game/game.cpp:1038
+#: src/game/game.cpp:1044
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr "Яка красива втеча! %s з команди %s вже в іншому світі..."
 
-#: src/game/game.cpp:1101
+#: src/game/game.cpp:1107
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Яка ганьба для %s - його вбили з простого пістолета!"
@@ -2217,7 +2247,7 @@ msgid ""
 "Click here to switch to touch controls."
 msgstr ""
 
-#: src/menu/results_menu.cpp:272
+#: src/menu/results_menu.cpp:276
 msgid "Winner"
 msgstr "Переможець"
 
@@ -2252,11 +2282,11 @@ msgstr "Ви один :-/"
 msgid "You are the new turn master!"
 msgstr "Ви новий Провідник"
 
-#: src/map/maps_list.cpp:309
+#: src/map/maps_list.cpp:313
 msgid "You need at least one valid map!"
 msgstr "Вам потрібна хоча б одна карта !"
 
-#: src/game/game.cpp:296 src/team/teams_list.cpp:163
+#: src/game/game.cpp:304 src/team/teams_list.cpp:165
 msgid "You need at least two valid teams!"
 msgstr "Вам потрібні хоча б дві команди !"
 

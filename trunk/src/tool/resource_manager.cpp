@@ -180,6 +180,7 @@ Profile *ResourceManager::LoadXMLProfile(const std::string& xml_filename, bool i
 
   Profile *profile = new Profile(xml_filename);
   profile->doc = doc;
+  ASSERT(doc != NULL);
   profile->filename = xml_filename;
   profile->relative_path = path;
   return profile;
