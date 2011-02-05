@@ -27,27 +27,14 @@
 #include "game/config.h"
 #include "gui/file_list_box.h"
 
-#if !defined(WIN32) && !defined(_WIN32)
-# include <dirent.h>
-# include <unistd.h>
-# define  GetCurrentDirectory(a, b) getcwd(b, a)
-# define  SetCurrentDirectory(a)    chdir(a)
-#else
-# include <windows.h>
-#endif
-
 FileListBox::FileListBox(const Point2i &size, bool list)
   : ItemBox(size, false)
   , list_files(list)
 {
-  // Store the initial folder to be able to restore it
-  GetCurrentDirectory(1024, old_path);
 }
 
 FileListBox::~FileListBox()
 {
-  // Restore the path as we sometimes address files by relative path
-  SetCurrentDirectory(old_path);
 }
 
 void FileListBox::Empty()
@@ -128,12 +115,11 @@ bool FileListBox::MatchFilter(const char *name) const
   return std::find(extensions.begin(), extensions.end(), ext) != extensions.end();
 }
 
-void FileListBox::PopulateFileList(const char *new_path)
+void FileListBox::PopulateFileList(const std::string new_path)
 {
-  MSG_DEBUG("file", "Searching in %s\n", new_path);
-  SetCurrentDirectory(new_path);
-  
-  FolderSearch *f = OpenFolder("./");
+  MSG_DEBUG("file", "Searching in %s\n", new_path.c_str());
+
+  FolderSearch *f = OpenFolder(new_path);
 
   // Now that we have made use of new_path, it can be freed:
   // clearing the list is now possible
@@ -147,16 +133,16 @@ void FileListBox::PopulateFileList(const char *new_path)
       if (is_file) {
         // We have a file, check that it validates the list
         if (MatchFilter(name)) {
-          std::string* filename = new std::string;
-          *filename = name;
+          std::string* filename = new std::string(new_path);
+	  *filename += std::string(PATH_SEPARATOR) + std::string(name);
           MSG_DEBUG("file", "Adding file %s\n", name);
           AddLabelItem(false, name, filename, Font::FONT_MEDIUM);
         } else {
           MSG_DEBUG("file", "NOT adding file %s, invalid extension\n", name);
         }
       } else {
-        std::string* filename = new std::string;
-        *filename = name;
+        std::string* filename = new std::string(new_path);
+	*filename += std::string(PATH_SEPARATOR) + std::string(name);
         MSG_DEBUG("file", "Adding directory %s\n", name);
         AddLabelItem(false, FolderString(name), filename,
                      Font::FONT_MEDIUM, Font::FONT_NORMAL, c_yellow);
@@ -187,7 +173,7 @@ Widget* FileListBox::ClickUp(const Point2i & mousePosition, uint button)
   const std::string *name = (std::string*)GetSelectedValue();
   if (name && DoesFolderExist(*name)) {
     Uint32 now = SDL_GetTicks();
-    
+
     // Check we didn't click too fast
     if (now - last_time > 1000)
       PopulateFileList(name->c_str());

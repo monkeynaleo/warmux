@@ -28,11 +28,10 @@ class FileListBox : public ItemBox
 {
   bool                     list_files;
   uint                     last_time;
-  char                     old_path[1024];
   std::vector<const char*> extensions;
 
   std::string FolderString(const char* name);
-  void PopulateFileList(const char *new_path);
+  void PopulateFileList(const std::string path);
   bool MatchFilter(const char *name) const;
 
 public:
