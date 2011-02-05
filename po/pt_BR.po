@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/map/maps_list.cpp:376
+#: src/map/maps_list.cpp:380
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s não encontrado :-("
@@ -62,34 +62,34 @@ msgstr "Equipe %s"
 msgid "%s Team - Remote"
 msgstr "Equipe %s - Remoto"
 
-#: src/game/game.cpp:1059
+#: src/game/game.cpp:1065
 #, fuzzy, c-format
 msgid "%s from %s team committed suicide!"
 msgstr "%s (%s) cometeu suicídio!"
 
 #. Could be modified, but for now, save on translation
-#: src/game/game.cpp:1085 src/game/game.cpp:1104
+#: src/game/game.cpp:1091 src/game/game.cpp:1110
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s (%s) bateu as botas."
 
-#: src/game/game.cpp:1051
+#: src/game/game.cpp:1057
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s do time %s caiu na água."
 
-#: src/game/game.cpp:1045
+#: src/game/game.cpp:1051
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s do time %s caiu pra fora do mapa!"
 
-#: src/game/game.cpp:1065
+#: src/game/game.cpp:1071
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s do time %s atingiu o chão com muita força!"
 
 #. The playing character killed himself
-#: src/game/game.cpp:1072
+#: src/game/game.cpp:1078
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s do time %s está morto porque é um desajeitado!"
@@ -111,7 +111,7 @@ msgstr "%s fez algo pelo meio ambiente, ele não mandou a doninha soltar gases."
 msgid "%s has won %u points of energy!"
 msgstr "%s ganhou %u ponto de energia!"
 
-#: src/game/game.cpp:1096
+#: src/game/game.cpp:1102
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s é um psicopata, ele matou um jogador da equipe %s !"
@@ -126,7 +126,7 @@ msgstr "%s está perto de uma mina!"
 msgid "%s kicked from game"
 msgstr ""
 
-#: src/include/action_handler.cpp:461
+#: src/include/action_handler.cpp:473
 #, c-format
 msgid "%s needs a pause."
 msgstr "%s precisa de uma pausa."
@@ -428,7 +428,7 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "A equipe %s foi derrotada."
 
-#: src/game/game.cpp:1080 src/game/game.cpp:1092
+#: src/game/game.cpp:1086 src/game/game.cpp:1098
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s levou um integrante do time %s para a cova com ele!"
@@ -514,7 +514,7 @@ msgstr "Ataque aéreo"
 msgid "Airhammer"
 msgstr "Britadeira"
 
-#: src/menu/results_menu.cpp:301
+#: src/menu/results_menu.cpp:305
 msgid "All teams"
 msgstr "Todas as equipes"
 
@@ -545,7 +545,7 @@ msgstr "Bigorna"
 msgid "Area currently displayed"
 msgstr ""
 
-#: src/main.cpp:338
+#: src/main.cpp:346
 msgid "Authors:"
 msgstr "Autores:"
 
@@ -581,7 +581,7 @@ msgstr "Após a ação"
 msgid "Benchmark"
 msgstr ""
 
-#: src/game/game_mode.cpp:343
+#: src/game/game_mode.cpp:336
 msgid "Blitz"
 msgstr "Blitz"
 
@@ -597,24 +597,24 @@ msgstr "Bola pula pula"
 msgid "Bye bye Tux..."
 msgstr "Adeus Tux..."
 
-#: src/team/teams_list.cpp:466 src/team/teams_list.cpp:501
-#: src/team/teams_list.cpp:510 src/team/teams_list.cpp:516
-#: src/team/teams_list.cpp:574
+#: src/team/teams_list.cpp:468 src/team/teams_list.cpp:503
+#: src/team/teams_list.cpp:512 src/team/teams_list.cpp:518
+#: src/team/teams_list.cpp:576
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Não foi possível encontrar a equipe %s!"
 
-#: src/team/teams_list.cpp:155
+#: src/team/teams_list.cpp:157
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Não foi possível abrir diretório (%s) das equipes!"
 
-#: src/team/teams_list.cpp:142
+#: src/team/teams_list.cpp:143
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Não foi possível abrir diretório (%s) das equipes!"
 
-#: src/team/custom_teams_list.cpp:64
+#: src/team/custom_teams_list.cpp:66
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Não foi possível abrir diretório (%s) das equipes!"
@@ -693,7 +693,7 @@ msgstr "Verificar atualizações online?"
 msgid "Choose randomly between the different maps"
 msgstr "Escolher de format aleatória entre os mapas"
 
-#: src/game/game_mode.cpp:341
+#: src/game/game_mode.cpp:334
 msgid "Classic"
 msgstr "Classico"
 
@@ -733,7 +733,7 @@ msgstr ""
 msgid "Client mode"
 msgstr "Modo de cliente"
 
-#: src/menu/results_menu.cpp:172 src/menu/results_menu.cpp:174
+#: src/menu/results_menu.cpp:176 src/menu/results_menu.cpp:178
 msgid "Clumsiest"
 msgstr "Mais desajeitado"
 
@@ -744,6 +744,10 @@ msgstr "Bomba de agrupamentos"
 #: src/weapon/cluzooka.cpp:373
 msgid "Cluzooka"
 msgstr "Cluzooka"
+
+#: src/menu/results_menu.cpp:350
+msgid "Comment:"
+msgstr ""
 
 #: src/weapon/suicide.cpp:46
 msgid "Commit Suicide"
@@ -770,7 +774,7 @@ msgstr "Jogadores conectados:"
 msgid "Construct"
 msgstr "Construir"
 
-#: src/menu/results_menu.cpp:280
+#: src/menu/results_menu.cpp:284
 msgid "Controlled by: "
 msgstr "Controlado por: "
 
@@ -854,7 +858,7 @@ msgstr "Duração de uma rodada:"
 msgid "Dynamite"
 msgstr "Dinamite"
 
-#: src/game/game.cpp:515
+#: src/game/game.cpp:510
 msgid "END OF GAME"
 msgstr "FIM DO JOGO"
 
@@ -862,7 +866,7 @@ msgstr "FIM DO JOGO"
 msgid "Effects volume"
 msgstr "Volume de efeitos"
 
-#: src/menu/results_menu.cpp:327
+#: src/menu/results_menu.cpp:331
 msgid "Energy"
 msgstr "Energia"
 
@@ -876,7 +880,7 @@ msgstr "Erro inicialisando conexão: Cliente %s não aceita você!! - %s"
 msgid "Error loading ground"
 msgstr "Erro ao carregar a equipe :"
 
-#: src/team/custom_teams_list.cpp:91 src/team/teams_list.cpp:118
+#: src/team/custom_teams_list.cpp:93 src/team/teams_list.cpp:118
 msgid "Error loading team :"
 msgstr "Erro ao carregar a equipe :"
 
@@ -976,6 +980,16 @@ msgstr ""
 msgid "Fail to open temporary file: %s"
 msgstr "Não foi possível abrir diretório dos mapas (%s)!"
 
+#: src/menu/results_menu.cpp:444
+msgid "Failed to save replay"
+msgstr ""
+
+#: src/menu/results_menu.cpp:344
+#, fuzzy
+#| msgid "Game name:"
+msgid "Filename:"
+msgstr "Nome do jogo:"
+
 #: src/weapon/flamethrower.cpp:134
 msgid "Flame Thrower"
 msgstr "Lança Chamas"
@@ -992,7 +1006,7 @@ msgstr "Tela cheia?"
 msgid "Game"
 msgstr "Jogo"
 
-#: src/include/action_handler.cpp:869
+#: src/include/action_handler.cpp:881
 msgid ""
 "Game is not synchronized anymore! This is BAD, the network game will be "
 "interrupted, sorry. Please, report the bug to the Warmux Team by mail or "
@@ -1085,7 +1099,11 @@ msgstr "Sediar um jogo"
 msgid "Hurry up, you are too slow !!"
 msgstr "Corra, você está muito devagar !!"
 
-#: src/main.cpp:272
+#: src/menu/results_menu.cpp:351
+msgid "I like WarMUX :)"
+msgstr ""
+
+#: src/main.cpp:280
 msgid ""
 "If you found a bug or have a feature request send us an email (in english, "
 "please):"
@@ -1151,20 +1169,20 @@ msgstr ""
 "desejada\n"
 "uma munição por rodada"
 
-#: src/game/game.cpp:123
+#: src/game/game.cpp:122
 msgid "Initialisation"
 msgstr "Inicialização"
 
 #. Load the map
-#: src/game/game.cpp:150
+#: src/game/game.cpp:158
 msgid "Initialise map"
 msgstr "Inicializar mapa"
 
-#: src/game/game.cpp:161
+#: src/game/game.cpp:169
 msgid "Initialise sounds"
 msgstr "Inicializar sons"
 
-#: src/game/game.cpp:157
+#: src/game/game.cpp:165
 msgid "Initialise teams"
 msgstr "Inicializar equipes"
 
@@ -1179,7 +1197,11 @@ msgstr "Mostrar interface?"
 msgid "Interface and touch controls, more details in other tabs"
 msgstr ""
 
-#: src/game/game.cpp:933
+#: src/menu/results_menu.cpp:437
+msgid "Invalid filename"
+msgstr ""
+
+#: src/game/game.cpp:934
 msgid "It's a present!"
 msgstr "É um presente!"
 
@@ -1280,7 +1302,7 @@ msgstr "Mapa %s, uma criação de :"
 msgid "Map author information: name, email, nickname, country"
 msgstr ""
 
-#: src/game/game.cpp:151
+#: src/game/game.cpp:159
 msgid "Maps"
 msgstr "Mapas"
 
@@ -1328,23 +1350,23 @@ msgstr ""
 msgid "More energy, more shots needed"
 msgstr ""
 
-#: src/menu/results_menu.cpp:180 src/menu/results_menu.cpp:182
+#: src/menu/results_menu.cpp:184 src/menu/results_menu.cpp:186
 msgid "Most accurate"
 msgstr "Mais preciso"
 
-#: src/menu/results_menu.cpp:164 src/menu/results_menu.cpp:166
+#: src/menu/results_menu.cpp:168 src/menu/results_menu.cpp:170
 msgid "Most sold-out"
 msgstr "Mais interessante"
 
-#: src/menu/results_menu.cpp:148 src/menu/results_menu.cpp:150
+#: src/menu/results_menu.cpp:152 src/menu/results_menu.cpp:154
 msgid "Most useful"
 msgstr "Mais útil"
 
-#: src/menu/results_menu.cpp:156 src/menu/results_menu.cpp:158
+#: src/menu/results_menu.cpp:160 src/menu/results_menu.cpp:162
 msgid "Most useless"
 msgstr "Mais inútil"
 
-#: src/menu/results_menu.cpp:140 src/menu/results_menu.cpp:142
+#: src/menu/results_menu.cpp:144 src/menu/results_menu.cpp:146
 msgid "Most violent"
 msgstr "Mais violento"
 
@@ -1408,7 +1430,7 @@ msgstr "Volume da música"
 msgid "Music?"
 msgstr "Música?"
 
-#: src/game/game.cpp:174
+#: src/game/game.cpp:182
 msgid "Network"
 msgstr "Jogo em Rede"
 
@@ -1447,7 +1469,7 @@ msgstr "Nenhum jogador conectado"
 msgid "No pointer"
 msgstr ""
 
-#: src/menu/results_menu.cpp:79
+#: src/menu/results_menu.cpp:83
 msgid "Nobody!"
 msgstr "Ninguém"
 
@@ -1539,7 +1561,7 @@ msgstr "Mostrar a energia dos jogadores?"
 msgid "Player's name?"
 msgstr "Mostrar o nome dos jogadores?"
 
-#: src/menu/results_menu.cpp:293
+#: src/menu/results_menu.cpp:297
 msgid "Podium"
 msgstr ""
 
@@ -1630,11 +1652,11 @@ msgstr ""
 msgid "Quickly quit game with Ctrl"
 msgstr "Sair rapidamente do jogo com Ctrl"
 
-#: src/interface/man_machine_interface.cpp:1144 src/menu/main_menu.cpp:73
+#: src/interface/man_machine_interface.cpp:1144 src/menu/main_menu.cpp:76
 msgid "Quit"
 msgstr "Sair"
 
-#: src/main.cpp:261
+#: src/main.cpp:269
 #, fuzzy
 msgid "Quit Warmux"
 msgstr "Sair do Warmux"
@@ -1664,6 +1686,10 @@ msgstr "Lendo arquivo de configuração padrão"
 msgid "Reading the personal config file"
 msgstr "Lendo arquivo de configuração pessoal"
 
+#: src/menu/main_menu.cpp:73
+msgid "Replay"
+msgstr ""
+
 #: src/menu/options_menu.cpp:147
 msgid "Resolution"
 msgstr "Resolução"
@@ -1672,9 +1698,13 @@ msgstr "Resolução"
 msgid "Riot Bomb"
 msgstr "Bomba Motim"
 
-#: src/main.cpp:78
+#: src/main.cpp:79
 msgid "Run game"
 msgstr "Iniciar jogo"
+
+#: src/menu/results_menu.cpp:362
+msgid "Save replay?"
+msgstr ""
 
 #: src/network/chat.cpp:83
 msgid "Say: "
@@ -1806,11 +1836,11 @@ msgid "Sound frequency"
 msgstr "Frequência do som"
 
 #. Load teams' sound profiles
-#: src/game/game.cpp:163
+#: src/game/game.cpp:171
 msgid "Sounds"
 msgstr "Sons"
 
-#: src/game/game.cpp:194
+#: src/game/game.cpp:203
 msgid "Starting a new game"
 msgstr "Iniciando um novo jogo"
 
@@ -1839,15 +1869,15 @@ msgstr ""
 msgid "Talk in network battles"
 msgstr "Falar em batalha multiplayer"
 
-#: src/menu/results_menu.cpp:326
+#: src/menu/results_menu.cpp:330
 msgid "Team graphs"
 msgstr "Gráfico das equipes"
 
-#: src/menu/results_menu.cpp:304
+#: src/menu/results_menu.cpp:308
 msgid "Team stats"
 msgstr "Estatísticas das equipes"
 
-#: src/game/game.cpp:158 src/menu/game_menu.cpp:78 src/menu/game_menu.cpp:82
+#: src/game/game.cpp:166 src/menu/game_menu.cpp:78 src/menu/game_menu.cpp:82
 #: src/menu/network_menu.cpp:99 src/menu/network_menu.cpp:103
 msgid "Teams"
 msgstr "Equipes"
@@ -1917,7 +1947,7 @@ msgstr "A conexão expirou. Verifique se não existe um firewall no caminho!"
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "A granada festiva deixou a pista de dança antes de explodir!"
 
-#: src/game/game.cpp:767
+#: src/game/game.cpp:762
 msgid "The game was interrupted because you got disconnected."
 msgstr "O jogo foi interrompido porque você foi desconectado."
 
@@ -1966,7 +1996,7 @@ msgstr[1] "Existe apenas %i equipes"
 msgid "This key has already been attributed to '%s'"
 msgstr ""
 
-#: src/menu/benchmark_menu.cpp:115 src/menu/results_menu.cpp:327
+#: src/menu/benchmark_menu.cpp:115 src/menu/results_menu.cpp:331
 msgid "Time"
 msgstr "Time"
 
@@ -2060,12 +2090,12 @@ msgstr ""
 msgid "Unable to contact the host."
 msgstr "Não foi possível conectar ao servidor!"
 
-#: src/map/maps_list.cpp:288
+#: src/map/maps_list.cpp:290
 #, c-format
 msgid "Unable to open the maps directory (%s)!"
 msgstr "Não foi possível abrir diretório dos mapas (%s)!"
 
-#: src/map/maps_list.cpp:300
+#: src/map/maps_list.cpp:304
 #, c-format
 msgid "Unable to open the personal maps directory (%s)!"
 msgstr "Não foi possível abrir diretório dos mapas (%s)!"
@@ -2083,7 +2113,7 @@ msgstr "Comando desconhecido"
 msgid "Unknown command of type %i"
 msgstr "Comando desconhecido"
 
-#: src/game/game_mode.cpp:342
+#: src/game/game_mode.cpp:335
 msgid "Unlimited"
 msgstr "Ilimitado"
 
@@ -2126,7 +2156,7 @@ msgstr ""
 "necessária\n"
 "uma munição por rodada"
 
-#: src/main.cpp:190
+#: src/main.cpp:198
 msgid "Version"
 msgstr "Versão"
 
@@ -2146,12 +2176,12 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Espere! %i jogador ainda não está pronto!"
 msgstr[1] "Espere! %i jogaderes ainda não estão prontos!"
 
-#: src/game/game.cpp:666
+#: src/game/game.cpp:661
 #, c-format
 msgid "Waiting for %s"
 msgstr "Aguardando %s"
 
-#: src/game/game.cpp:173
+#: src/game/game.cpp:181
 msgid "Waiting for remote players"
 msgstr "Aguardando jogadores remotos"
 
@@ -2160,12 +2190,12 @@ msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr ""
 "Esperando pelo servidor, tudo que você pode fazer é conversar ou cancelar!"
 
-#: src/main.cpp:201
+#: src/main.cpp:209
 #, fuzzy
 msgid "Warmux launching..."
 msgstr "Iniciando warmux..."
 
-#: src/main.cpp:337
+#: src/main.cpp:345
 #, fuzzy
 msgid "Warmux version "
 msgstr "Warmux versão "
@@ -2181,11 +2211,11 @@ msgstr "Mudar categoria da arma"
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Arma: Fogo / Caixa bônus: cai rápido"
 
-#: src/game/game.cpp:154
+#: src/game/game.cpp:162
 msgid "Weapons"
 msgstr "Armas:"
 
-#: src/main.cpp:347
+#: src/main.cpp:355
 msgid "Website: "
 msgstr "Site: "
 
@@ -2196,12 +2226,12 @@ msgstr "Site: "
 msgid "Welcome to %s on %s!"
 msgstr "Bem-vindo à %s em %s!"
 
-#: src/game/game.cpp:1038
+#: src/game/game.cpp:1044
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr "Que belo homerun! %s da equipe %s está em outro mundo..."
 
-#: src/game/game.cpp:1101
+#: src/game/game.cpp:1107
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Que vergonha para o %s - ele foi morto por uma simples arma!"
@@ -2222,7 +2252,7 @@ msgid ""
 "Click here to switch to touch controls."
 msgstr ""
 
-#: src/menu/results_menu.cpp:272
+#: src/menu/results_menu.cpp:276
 msgid "Winner"
 msgstr "Vencedor"
 
@@ -2257,11 +2287,11 @@ msgstr "Você está sozinho :-/"
 msgid "You are the new turn master!"
 msgstr "Você é o novo jogador mestre da rodada!"
 
-#: src/map/maps_list.cpp:309
+#: src/map/maps_list.cpp:313
 msgid "You need at least one valid map!"
 msgstr "Você precisa de pelo menos um mapa válido!"
 
-#: src/game/game.cpp:296 src/team/teams_list.cpp:163
+#: src/game/game.cpp:304 src/team/teams_list.cpp:165
 msgid "You need at least two valid teams!"
 msgstr "Você precisa de pelo menos duas equipes válidas!"
 

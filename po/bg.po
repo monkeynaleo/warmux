@@ -20,7 +20,7 @@ msgstr ""
 "X-Poedit-Language: Bulgarian\n"
 "X-Poedit-Country: BULGARIA\n"
 
-#: src/map/maps_list.cpp:376
+#: src/map/maps_list.cpp:380
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Не мога да намеря картата %s :-("
@@ -65,34 +65,34 @@ msgstr "%s Отбор"
 msgid "%s Team - Remote"
 msgstr "Отбор  %s - Отдалечен"
 
-#: src/game/game.cpp:1059
+#: src/game/game.cpp:1065
 #, fuzzy, c-format
 msgid "%s from %s team committed suicide!"
 msgstr "%s от %s се самоуби!"
 
 #. Could be modified, but for now, save on translation
-#: src/game/game.cpp:1085 src/game/game.cpp:1104
+#: src/game/game.cpp:1091 src/game/game.cpp:1110
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s от отбора %s умря."
 
-#: src/game/game.cpp:1051
+#: src/game/game.cpp:1057
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s от отбора %s реши да си вземе баня!"
 
-#: src/game/game.cpp:1045
+#: src/game/game.cpp:1051
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s от отбора %s излетя извън картата!"
 
-#: src/game/game.cpp:1065
+#: src/game/game.cpp:1071
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s от отбора %s падна от прекалено високо!"
 
 #. The playing character killed himself
-#: src/game/game.cpp:1072
+#: src/game/game.cpp:1078
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s от отбора %s умря заради несръчността си!"
@@ -114,7 +114,7 @@ msgstr "%s е природозащитник - той не нареди на с�
 msgid "%s has won %u points of energy!"
 msgstr "%s спечели %u точка здраве!"
 
-#: src/game/game.cpp:1096
+#: src/game/game.cpp:1102
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s е опасен, избива хора от отбора на %s!!!"
@@ -129,7 +129,7 @@ msgstr "%s е близко до мина!"
 msgid "%s kicked from game"
 msgstr ""
 
-#: src/include/action_handler.cpp:461
+#: src/include/action_handler.cpp:473
 #, c-format
 msgid "%s needs a pause."
 msgstr "%s има нужда от пауза."
@@ -425,7 +425,7 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "Всички от отбора %s са убити."
 
-#: src/game/game.cpp:1080 src/game/game.cpp:1092
+#: src/game/game.cpp:1086 src/game/game.cpp:1098
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s завлече с него в гроба войник от %s!"
@@ -511,7 +511,7 @@ msgstr "Бомбен набег"
 msgid "Airhammer"
 msgstr "Пневматичен чук"
 
-#: src/menu/results_menu.cpp:301
+#: src/menu/results_menu.cpp:305
 msgid "All teams"
 msgstr "Всички отбори"
 
@@ -542,7 +542,7 @@ msgstr "Наковалня"
 msgid "Area currently displayed"
 msgstr ""
 
-#: src/main.cpp:338
+#: src/main.cpp:346
 msgid "Authors:"
 msgstr "Автори:"
 
@@ -578,7 +578,7 @@ msgstr "Преди действие"
 msgid "Benchmark"
 msgstr ""
 
-#: src/game/game_mode.cpp:343
+#: src/game/game_mode.cpp:336
 msgid "Blitz"
 msgstr "Светкавичен"
 
@@ -594,24 +594,24 @@ msgstr "Супер-топче"
 msgid "Bye bye Tux..."
 msgstr "Tux e свободен !!!"
 
-#: src/team/teams_list.cpp:466 src/team/teams_list.cpp:501
-#: src/team/teams_list.cpp:510 src/team/teams_list.cpp:516
-#: src/team/teams_list.cpp:574
+#: src/team/teams_list.cpp:468 src/team/teams_list.cpp:503
+#: src/team/teams_list.cpp:512 src/team/teams_list.cpp:518
+#: src/team/teams_list.cpp:576
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Не мога да намеря отборът на %s!"
 
-#: src/team/teams_list.cpp:155
+#: src/team/teams_list.cpp:157
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Не мога да отворя личната директория на отборите (%s)!"
 
-#: src/team/teams_list.cpp:142
+#: src/team/teams_list.cpp:143
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Не мога да отворя директорията на отбора (%s)!"
 
-#: src/team/custom_teams_list.cpp:64
+#: src/team/custom_teams_list.cpp:66
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Не мога да отворя личната директорията на отбора (%s)!"
@@ -690,7 +690,7 @@ msgstr "Да проверявам за нови версии онлайн?"
 msgid "Choose randomly between the different maps"
 msgstr "Избери случайно измежду картите"
 
-#: src/game/game_mode.cpp:341
+#: src/game/game_mode.cpp:334
 msgid "Classic"
 msgstr "Класически"
 
@@ -730,7 +730,7 @@ msgstr ""
 msgid "Client mode"
 msgstr "Клиентски режим"
 
-#: src/menu/results_menu.cpp:172 src/menu/results_menu.cpp:174
+#: src/menu/results_menu.cpp:176 src/menu/results_menu.cpp:178
 msgid "Clumsiest"
 msgstr "Най-Несръчен"
 
@@ -741,6 +741,10 @@ msgstr "Шрапнелна граната"
 #: src/weapon/cluzooka.cpp:373
 msgid "Cluzooka"
 msgstr "Шрапнел РПГ"
+
+#: src/menu/results_menu.cpp:350
+msgid "Comment:"
+msgstr ""
 
 #: src/weapon/suicide.cpp:46
 msgid "Commit Suicide"
@@ -767,7 +771,7 @@ msgstr "Свързани играчи:"
 msgid "Construct"
 msgstr "Конструкция"
 
-#: src/menu/results_menu.cpp:280
+#: src/menu/results_menu.cpp:284
 msgid "Controlled by: "
 msgstr "Контролиран от:"
 
@@ -851,7 +855,7 @@ msgstr "Продължение на хода"
 msgid "Dynamite"
 msgstr "Шашка динамит"
 
-#: src/game/game.cpp:515
+#: src/game/game.cpp:510
 msgid "END OF GAME"
 msgstr "КРАЙ НА ИГРАТА"
 
@@ -859,7 +863,7 @@ msgstr "КРАЙ НА ИГРАТА"
 msgid "Effects volume"
 msgstr "Сила на звуковите ефекти"
 
-#: src/menu/results_menu.cpp:327
+#: src/menu/results_menu.cpp:331
 msgid "Energy"
 msgstr "Здраве:"
 
@@ -874,7 +878,7 @@ msgstr ""
 msgid "Error loading ground"
 msgstr "Грешка при зареждането на отбор %s:"
 
-#: src/team/custom_teams_list.cpp:91 src/team/teams_list.cpp:118
+#: src/team/custom_teams_list.cpp:93 src/team/teams_list.cpp:118
 msgid "Error loading team :"
 msgstr "Грешка при зареждането на отбор %s:"
 
@@ -968,6 +972,16 @@ msgstr ""
 msgid "Fail to open temporary file: %s"
 msgstr "Не мога да отворя директорията за карти! (%s)"
 
+#: src/menu/results_menu.cpp:444
+msgid "Failed to save replay"
+msgstr ""
+
+#: src/menu/results_menu.cpp:344
+#, fuzzy
+#| msgid "Game name:"
+msgid "Filename:"
+msgstr "Име на играта:"
+
 #: src/weapon/flamethrower.cpp:134
 msgid "Flame Thrower"
 msgstr "Огнехвъргачка"
@@ -984,7 +998,7 @@ msgstr "Цял екран?"
 msgid "Game"
 msgstr "Игра"
 
-#: src/include/action_handler.cpp:869
+#: src/include/action_handler.cpp:881
 msgid ""
 "Game is not synchronized anymore! This is BAD, the network game will be "
 "interrupted, sorry. Please, report the bug to the Warmux Team by mail or "
@@ -1077,7 +1091,11 @@ msgstr "Направи игра"
 msgid "Hurry up, you are too slow !!"
 msgstr "Хабиш време за убиване за други неща!!!"
 
-#: src/main.cpp:272
+#: src/menu/results_menu.cpp:351
+msgid "I like WarMUX :)"
+msgstr ""
+
+#: src/main.cpp:280
 msgid ""
 "If you found a bug or have a feature request send us an email (in english, "
 "please):"
@@ -1142,20 +1160,20 @@ msgstr ""
 "Огън : дръж space натиснат до достигане на желаната сила\n"
 "муниция на ход"
 
-#: src/game/game.cpp:123
+#: src/game/game.cpp:122
 msgid "Initialisation"
 msgstr "Инициализация..."
 
 #. Load the map
-#: src/game/game.cpp:150
+#: src/game/game.cpp:158
 msgid "Initialise map"
 msgstr "Инициализирам карта..."
 
-#: src/game/game.cpp:161
+#: src/game/game.cpp:169
 msgid "Initialise sounds"
 msgstr "Инициализирам звук..."
 
-#: src/game/game.cpp:157
+#: src/game/game.cpp:165
 msgid "Initialise teams"
 msgstr "Инициализирам отборите..."
 
@@ -1170,7 +1188,11 @@ msgstr "Покажи/Скрий интерфейса"
 msgid "Interface and touch controls, more details in other tabs"
 msgstr ""
 
-#: src/game/game.cpp:933
+#: src/menu/results_menu.cpp:437
+msgid "Invalid filename"
+msgstr ""
+
+#: src/game/game.cpp:934
 msgid "It's a present!"
 msgstr "Подаръче..."
 
@@ -1271,7 +1293,7 @@ msgstr "Картата %s е творение на: "
 msgid "Map author information: name, email, nickname, country"
 msgstr ""
 
-#: src/game/game.cpp:151
+#: src/game/game.cpp:159
 msgid "Maps"
 msgstr "Карти"
 
@@ -1319,23 +1341,23 @@ msgstr ""
 msgid "More energy, more shots needed"
 msgstr ""
 
-#: src/menu/results_menu.cpp:180 src/menu/results_menu.cpp:182
+#: src/menu/results_menu.cpp:184 src/menu/results_menu.cpp:186
 msgid "Most accurate"
 msgstr "Най-Точен"
 
-#: src/menu/results_menu.cpp:164 src/menu/results_menu.cpp:166
+#: src/menu/results_menu.cpp:168 src/menu/results_menu.cpp:170
 msgid "Most sold-out"
 msgstr "Най-Предаден"
 
-#: src/menu/results_menu.cpp:148 src/menu/results_menu.cpp:150
+#: src/menu/results_menu.cpp:152 src/menu/results_menu.cpp:154
 msgid "Most useful"
 msgstr "Най-Полезен"
 
-#: src/menu/results_menu.cpp:156 src/menu/results_menu.cpp:158
+#: src/menu/results_menu.cpp:160 src/menu/results_menu.cpp:162
 msgid "Most useless"
 msgstr "Най-Безполезен"
 
-#: src/menu/results_menu.cpp:140 src/menu/results_menu.cpp:142
+#: src/menu/results_menu.cpp:144 src/menu/results_menu.cpp:146
 msgid "Most violent"
 msgstr "Най-Буен"
 
@@ -1399,7 +1421,7 @@ msgstr "Сила на музиката"
 msgid "Music?"
 msgstr "Музика?"
 
-#: src/game/game.cpp:174
+#: src/game/game.cpp:182
 msgid "Network"
 msgstr "Мрежова игрa"
 
@@ -1438,7 +1460,7 @@ msgstr "Няма свързан играч"
 msgid "No pointer"
 msgstr ""
 
-#: src/menu/results_menu.cpp:79
+#: src/menu/results_menu.cpp:83
 msgid "Nobody!"
 msgstr "Никой!"
 
@@ -1530,7 +1552,7 @@ msgstr "Здраве?"
 msgid "Player's name?"
 msgstr "Името на играча?"
 
-#: src/menu/results_menu.cpp:293
+#: src/menu/results_menu.cpp:297
 msgid "Podium"
 msgstr ""
 
@@ -1621,11 +1643,11 @@ msgstr ""
 msgid "Quickly quit game with Ctrl"
 msgstr "Излез бързо от играта с Ctrl"
 
-#: src/interface/man_machine_interface.cpp:1144 src/menu/main_menu.cpp:73
+#: src/interface/man_machine_interface.cpp:1144 src/menu/main_menu.cpp:76
 msgid "Quit"
 msgstr "Излез!"
 
-#: src/main.cpp:261
+#: src/main.cpp:269
 #, fuzzy
 msgid "Quit Warmux"
 msgstr "Излизане от Warmux"
@@ -1655,6 +1677,10 @@ msgstr "Чета първоначалния конфигурационен фа�
 msgid "Reading the personal config file"
 msgstr "Чета персоналния конфигурационен фаил"
 
+#: src/menu/main_menu.cpp:73
+msgid "Replay"
+msgstr ""
+
 #: src/menu/options_menu.cpp:147
 msgid "Resolution"
 msgstr "Разделителна способност"
@@ -1663,9 +1689,13 @@ msgstr "Разделителна способност"
 msgid "Riot Bomb"
 msgstr "Звуков заряд"
 
-#: src/main.cpp:78
+#: src/main.cpp:79
 msgid "Run game"
 msgstr "Пусни играта"
+
+#: src/menu/results_menu.cpp:362
+msgid "Save replay?"
+msgstr ""
 
 #: src/network/chat.cpp:83
 msgid "Say: "
@@ -1797,11 +1827,11 @@ msgid "Sound frequency"
 msgstr "Честота на семплиране"
 
 #. Load teams' sound profiles
-#: src/game/game.cpp:163
+#: src/game/game.cpp:171
 msgid "Sounds"
 msgstr "Звуци"
 
-#: src/game/game.cpp:194
+#: src/game/game.cpp:203
 msgid "Starting a new game"
 msgstr "Стартирам нова игра"
 
@@ -1830,15 +1860,15 @@ msgstr ""
 msgid "Talk in network battles"
 msgstr "Говори в мрежова битка"
 
-#: src/menu/results_menu.cpp:326
+#: src/menu/results_menu.cpp:330
 msgid "Team graphs"
 msgstr "Графика на Отборите"
 
-#: src/menu/results_menu.cpp:304
+#: src/menu/results_menu.cpp:308
 msgid "Team stats"
 msgstr "Статистика"
 
-#: src/game/game.cpp:158 src/menu/game_menu.cpp:78 src/menu/game_menu.cpp:82
+#: src/game/game.cpp:166 src/menu/game_menu.cpp:78 src/menu/game_menu.cpp:82
 #: src/menu/network_menu.cpp:99 src/menu/network_menu.cpp:103
 msgid "Teams"
 msgstr "Отбори"
@@ -1908,7 +1938,7 @@ msgstr "Връзката прекъсна. Виж дали има пречеща
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "Диско гранатата си тръгна от партито..."
 
-#: src/game/game.cpp:767
+#: src/game/game.cpp:762
 msgid "The game was interrupted because you got disconnected."
 msgstr "Играта беше прекъсната, защото ти излезе."
 
@@ -1957,7 +1987,7 @@ msgstr[1] "Има само %i отбора."
 msgid "This key has already been attributed to '%s'"
 msgstr ""
 
-#: src/menu/benchmark_menu.cpp:115 src/menu/results_menu.cpp:327
+#: src/menu/benchmark_menu.cpp:115 src/menu/results_menu.cpp:331
 msgid "Time"
 msgstr "Време"
 
@@ -2050,12 +2080,12 @@ msgstr ""
 msgid "Unable to contact the host."
 msgstr "Не може да се свърже с хоста!"
 
-#: src/map/maps_list.cpp:288
+#: src/map/maps_list.cpp:290
 #, c-format
 msgid "Unable to open the maps directory (%s)!"
 msgstr "Не мога да отворя директорията за карти! (%s)"
 
-#: src/map/maps_list.cpp:300
+#: src/map/maps_list.cpp:304
 #, c-format
 msgid "Unable to open the personal maps directory (%s)!"
 msgstr "Не мога да отворя личната директорията за карти (%s) !"
@@ -2073,7 +2103,7 @@ msgstr "Непозната команда"
 msgid "Unknown command of type %i"
 msgstr "Непозната команда"
 
-#: src/game/game_mode.cpp:342
+#: src/game/game_mode.cpp:335
 msgid "Unlimited"
 msgstr "Безкраен"
 
@@ -2115,7 +2145,7 @@ msgstr ""
 "Огън : дръж space до постигане на желаната сила\n"
 "муниция на ход"
 
-#: src/main.cpp:190
+#: src/main.cpp:198
 msgid "Version"
 msgstr "Версия"
 
@@ -2135,12 +2165,12 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Чакай! %i играч не е готов!"
 msgstr[1] "Чакай! %i играчи не са готови!"
 
-#: src/game/game.cpp:666
+#: src/game/game.cpp:661
 #, c-format
 msgid "Waiting for %s"
 msgstr "Чакам за %s"
 
-#: src/game/game.cpp:173
+#: src/game/game.cpp:181
 msgid "Waiting for remote players"
 msgstr "Чакам за отдалечени играчи"
 
@@ -2149,12 +2179,12 @@ msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr ""
 "Изчаквам за сървър, всичко което може да правиш е да откажеш или да си чатиш!"
 
-#: src/main.cpp:201
+#: src/main.cpp:209
 #, fuzzy
 msgid "Warmux launching..."
 msgstr "Warmux се зарежда..."
 
-#: src/main.cpp:337
+#: src/main.cpp:345
 #, fuzzy
 msgid "Warmux version "
 msgstr "Версия на Warmux"
@@ -2170,11 +2200,11 @@ msgstr "Смени категорията на оъжието"
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Оръжие: Огън / Бонус кутия: пада бързо"
 
-#: src/game/game.cpp:154
+#: src/game/game.cpp:162
 msgid "Weapons"
 msgstr "Оръжия"
 
-#: src/main.cpp:347
+#: src/main.cpp:355
 msgid "Website: "
 msgstr "Страница: "
 
@@ -2185,12 +2215,12 @@ msgstr "Страница: "
 msgid "Welcome to %s on %s!"
 msgstr "Добре Дошъл %s във %s!"
 
-#: src/game/game.cpp:1038
+#: src/game/game.cpp:1044
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr "Какъв страхотен удар! %s от отбора %s е вече на едно по-добро място..."
 
-#: src/game/game.cpp:1101
+#: src/game/game.cpp:1107
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr ""
@@ -2212,7 +2242,7 @@ msgid ""
 "Click here to switch to touch controls."
 msgstr ""
 
-#: src/menu/results_menu.cpp:272
+#: src/menu/results_menu.cpp:276
 msgid "Winner"
 msgstr "Победител"
 
@@ -2247,11 +2277,11 @@ msgstr "Ти си сам :-/"
 msgid "You are the new turn master!"
 msgstr "Ти си новия господар на хода!"
 
-#: src/map/maps_list.cpp:309
+#: src/map/maps_list.cpp:313
 msgid "You need at least one valid map!"
 msgstr "Трябва ми поне една валидна карта!"
 
-#: src/game/game.cpp:296 src/team/teams_list.cpp:163
+#: src/game/game.cpp:304 src/team/teams_list.cpp:165
 msgid "You need at least two valid teams!"
 msgstr "Трябват ми поне два валидни отбора!"
 

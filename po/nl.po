@@ -19,7 +19,7 @@ msgstr ""
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/map/maps_list.cpp:376
+#: src/map/maps_list.cpp:380
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Kaart %s niet gevonden :-("
@@ -64,34 +64,34 @@ msgstr "Team %s"
 msgid "%s Team - Remote"
 msgstr "Team %s - Op afstand"
 
-#: src/game/game.cpp:1059
+#: src/game/game.cpp:1065
 #, fuzzy, c-format
 msgid "%s from %s team committed suicide!"
 msgstr "%s van team %s pleegde zelfmoord!"
 
 #. Could be modified, but for now, save on translation
-#: src/game/game.cpp:1085 src/game/game.cpp:1104
+#: src/game/game.cpp:1091 src/game/game.cpp:1110
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s van team %s is overleden."
 
-#: src/game/game.cpp:1051
+#: src/game/game.cpp:1057
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s van team %s is in het water gevallen."
 
-#: src/game/game.cpp:1045
+#: src/game/game.cpp:1051
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s van team %s is van de kaart gevallen!"
 
-#: src/game/game.cpp:1065
+#: src/game/game.cpp:1071
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s van team %s heeft de grond te hard geraakt!"
 
 #. The playing character killed himself
-#: src/game/game.cpp:1072
+#: src/game/game.cpp:1078
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s van team %s is dood door zijn onhandigheid!"
@@ -115,7 +115,7 @@ msgstr ""
 msgid "%s has won %u points of energy!"
 msgstr "%s heeft %u punt energie gekregen!"
 
-#: src/game/game.cpp:1096
+#: src/game/game.cpp:1102
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s is een psychopaat, hij vermoorde een lid van team %s!"
@@ -130,7 +130,7 @@ msgstr "%s staat naast een mijn!"
 msgid "%s kicked from game"
 msgstr ""
 
-#: src/include/action_handler.cpp:461
+#: src/include/action_handler.cpp:473
 #, c-format
 msgid "%s needs a pause."
 msgstr "%s heeft een momentje rust nodig."
@@ -440,7 +440,7 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "Team %s is afgeslacht."
 
-#: src/game/game.cpp:1080 src/game/game.cpp:1092
+#: src/game/game.cpp:1086 src/game/game.cpp:1098
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s nam een lid van team %s met zich mee in het graf!"
@@ -526,7 +526,7 @@ msgstr "Luchtaanval"
 msgid "Airhammer"
 msgstr "Drilboor"
 
-#: src/menu/results_menu.cpp:301
+#: src/menu/results_menu.cpp:305
 msgid "All teams"
 msgstr "Alle teams"
 
@@ -557,7 +557,7 @@ msgstr "Aambeeld"
 msgid "Area currently displayed"
 msgstr ""
 
-#: src/main.cpp:338
+#: src/main.cpp:346
 msgid "Authors:"
 msgstr "Auteurs:"
 
@@ -593,7 +593,7 @@ msgstr "Alvorens actie"
 msgid "Benchmark"
 msgstr ""
 
-#: src/game/game_mode.cpp:343
+#: src/game/game_mode.cpp:336
 msgid "Blitz"
 msgstr "Blitz"
 
@@ -609,24 +609,24 @@ msgstr "Stuiterbal"
 msgid "Bye bye Tux..."
 msgstr "Dag dag tux..."
 
-#: src/team/teams_list.cpp:466 src/team/teams_list.cpp:501
-#: src/team/teams_list.cpp:510 src/team/teams_list.cpp:516
-#: src/team/teams_list.cpp:574
+#: src/team/teams_list.cpp:468 src/team/teams_list.cpp:503
+#: src/team/teams_list.cpp:512 src/team/teams_list.cpp:518
+#: src/team/teams_list.cpp:576
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Kan team %s niet vinden!"
 
-#: src/team/teams_list.cpp:155
+#: src/team/teams_list.cpp:157
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Kan persoonlijke-teamsdirectory niet openen (%s)!"
 
-#: src/team/teams_list.cpp:142
+#: src/team/teams_list.cpp:143
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Kan teams directory niet openen (%s)!"
 
-#: src/team/custom_teams_list.cpp:64
+#: src/team/custom_teams_list.cpp:66
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Kan aangepaste teamsdirectory niet openen (%s)!"
@@ -705,7 +705,7 @@ msgstr "Online op updates controleren?"
 msgid "Choose randomly between the different maps"
 msgstr "Kies een willekeurige kaart"
 
-#: src/game/game_mode.cpp:341
+#: src/game/game_mode.cpp:334
 msgid "Classic"
 msgstr "Klassiek"
 
@@ -745,7 +745,7 @@ msgstr ""
 msgid "Client mode"
 msgstr "Client modus"
 
-#: src/menu/results_menu.cpp:172 src/menu/results_menu.cpp:174
+#: src/menu/results_menu.cpp:176 src/menu/results_menu.cpp:178
 msgid "Clumsiest"
 msgstr "Onhandigste"
 
@@ -756,6 +756,10 @@ msgstr "Clusterbom"
 #: src/weapon/cluzooka.cpp:373
 msgid "Cluzooka"
 msgstr "Clusterbazooka"
+
+#: src/menu/results_menu.cpp:350
+msgid "Comment:"
+msgstr ""
 
 #: src/weapon/suicide.cpp:46
 msgid "Commit Suicide"
@@ -782,7 +786,7 @@ msgstr "Verbonden spelers: "
 msgid "Construct"
 msgstr "Bouw"
 
-#: src/menu/results_menu.cpp:280
+#: src/menu/results_menu.cpp:284
 msgid "Controlled by: "
 msgstr "Bestuurd door: "
 
@@ -866,7 +870,7 @@ msgstr "Duur van een beurt"
 msgid "Dynamite"
 msgstr "Dynamiet"
 
-#: src/game/game.cpp:515
+#: src/game/game.cpp:510
 msgid "END OF GAME"
 msgstr "EINDE VAN HET SPEL"
 
@@ -874,7 +878,7 @@ msgstr "EINDE VAN HET SPEL"
 msgid "Effects volume"
 msgstr "Effecten volume"
 
-#: src/menu/results_menu.cpp:327
+#: src/menu/results_menu.cpp:331
 msgid "Energy"
 msgstr "Energie"
 
@@ -890,7 +894,7 @@ msgstr ""
 msgid "Error loading ground"
 msgstr "Fout bij het laden van team :"
 
-#: src/team/custom_teams_list.cpp:91 src/team/teams_list.cpp:118
+#: src/team/custom_teams_list.cpp:93 src/team/teams_list.cpp:118
 msgid "Error loading team :"
 msgstr "Fout bij het laden van team :"
 
@@ -987,6 +991,16 @@ msgstr ""
 msgid "Fail to open temporary file: %s"
 msgstr "Kon de kaartendirectory (%s) niet openen!"
 
+#: src/menu/results_menu.cpp:444
+msgid "Failed to save replay"
+msgstr ""
+
+#: src/menu/results_menu.cpp:344
+#, fuzzy
+#| msgid "Game name:"
+msgid "Filename:"
+msgstr "Spelnaam:"
+
 #: src/weapon/flamethrower.cpp:134
 msgid "Flame Thrower"
 msgstr "Vlammenwerper"
@@ -1003,7 +1017,7 @@ msgstr "Volledig scherm?"
 msgid "Game"
 msgstr "Spel"
 
-#: src/include/action_handler.cpp:869
+#: src/include/action_handler.cpp:881
 msgid ""
 "Game is not synchronized anymore! This is BAD, the network game will be "
 "interrupted, sorry. Please, report the bug to the Warmux Team by mail or "
@@ -1096,7 +1110,11 @@ msgstr "Host een spel"
 msgid "Hurry up, you are too slow !!"
 msgstr "Snel, u bent te langzaam !!"
 
-#: src/main.cpp:272
+#: src/menu/results_menu.cpp:351
+msgid "I like WarMUX :)"
+msgstr ""
+
+#: src/main.cpp:280
 msgid ""
 "If you found a bug or have a feature request send us an email (in english, "
 "please):"
@@ -1161,20 +1179,20 @@ msgstr ""
 "Vuur : houd de spatiebalk ingedrukt tot de gewenste sterkte\n"
 "slechts een per beurt"
 
-#: src/game/game.cpp:123
+#: src/game/game.cpp:122
 msgid "Initialisation"
 msgstr "Initialisatie"
 
 #. Load the map
-#: src/game/game.cpp:150
+#: src/game/game.cpp:158
 msgid "Initialise map"
 msgstr "Initialiseer kaart"
 
-#: src/game/game.cpp:161
+#: src/game/game.cpp:169
 msgid "Initialise sounds"
 msgstr "Initialiseer geluiden"
 
-#: src/game/game.cpp:157
+#: src/game/game.cpp:165
 msgid "Initialise teams"
 msgstr "Initialiseer teams"
 
@@ -1189,7 +1207,11 @@ msgstr "Interface verbergen/tonen"
 msgid "Interface and touch controls, more details in other tabs"
 msgstr ""
 
-#: src/game/game.cpp:933
+#: src/menu/results_menu.cpp:437
+msgid "Invalid filename"
+msgstr ""
+
+#: src/game/game.cpp:934
 msgid "It's a present!"
 msgstr "Het is een cadeau!"
 
@@ -1290,7 +1312,7 @@ msgstr "Kaart %s, gemaakt door:"
 msgid "Map author information: name, email, nickname, country"
 msgstr ""
 
-#: src/game/game.cpp:151
+#: src/game/game.cpp:159
 msgid "Maps"
 msgstr "Kaarten"
 
@@ -1338,23 +1360,23 @@ msgstr ""
 msgid "More energy, more shots needed"
 msgstr ""
 
-#: src/menu/results_menu.cpp:180 src/menu/results_menu.cpp:182
+#: src/menu/results_menu.cpp:184 src/menu/results_menu.cpp:186
 msgid "Most accurate"
 msgstr "Nauwkeurigste"
 
-#: src/menu/results_menu.cpp:164 src/menu/results_menu.cpp:166
+#: src/menu/results_menu.cpp:168 src/menu/results_menu.cpp:170
 msgid "Most sold-out"
 msgstr "Grootste verrader"
 
-#: src/menu/results_menu.cpp:148 src/menu/results_menu.cpp:150
+#: src/menu/results_menu.cpp:152 src/menu/results_menu.cpp:154
 msgid "Most useful"
 msgstr "Meest zinvol"
 
-#: src/menu/results_menu.cpp:156 src/menu/results_menu.cpp:158
+#: src/menu/results_menu.cpp:160 src/menu/results_menu.cpp:162
 msgid "Most useless"
 msgstr "Meest zinloos"
 
-#: src/menu/results_menu.cpp:140 src/menu/results_menu.cpp:142
+#: src/menu/results_menu.cpp:144 src/menu/results_menu.cpp:146
 msgid "Most violent"
 msgstr "Meest gewelddadig"
 
@@ -1418,7 +1440,7 @@ msgstr "Muziek volume"
 msgid "Music?"
 msgstr "Muziek?"
 
-#: src/game/game.cpp:174
+#: src/game/game.cpp:182
 msgid "Network"
 msgstr "Netwerk"
 
@@ -1457,7 +1479,7 @@ msgstr "Geen spelers verbonden"
 msgid "No pointer"
 msgstr ""
 
-#: src/menu/results_menu.cpp:79
+#: src/menu/results_menu.cpp:83
 msgid "Nobody!"
 msgstr "Niemand!"
 
@@ -1549,7 +1571,7 @@ msgstr "Energie van speler?"
 msgid "Player's name?"
 msgstr "Naam van speler?"
 
-#: src/menu/results_menu.cpp:293
+#: src/menu/results_menu.cpp:297
 msgid "Podium"
 msgstr ""
 
@@ -1640,11 +1662,11 @@ msgstr ""
 msgid "Quickly quit game with Ctrl"
 msgstr "Spel snel afsluiten met Ctrl"
 
-#: src/interface/man_machine_interface.cpp:1144 src/menu/main_menu.cpp:73
+#: src/interface/man_machine_interface.cpp:1144 src/menu/main_menu.cpp:76
 msgid "Quit"
 msgstr "Afsluiten"
 
-#: src/main.cpp:261
+#: src/main.cpp:269
 #, fuzzy
 msgid "Quit Warmux"
 msgstr "Warmux afsluiten"
@@ -1674,6 +1696,10 @@ msgstr "Standaard configbestand wordt gelezen"
 msgid "Reading the personal config file"
 msgstr "Persoonlijk configbestand wordt gelezen"
 
+#: src/menu/main_menu.cpp:73
+msgid "Replay"
+msgstr ""
+
 #: src/menu/options_menu.cpp:147
 msgid "Resolution"
 msgstr "Resolutie"
@@ -1682,9 +1708,13 @@ msgstr "Resolutie"
 msgid "Riot Bomb"
 msgstr "Rellenbom"
 
-#: src/main.cpp:78
+#: src/main.cpp:79
 msgid "Run game"
 msgstr "Spel wordt gestart"
+
+#: src/menu/results_menu.cpp:362
+msgid "Save replay?"
+msgstr ""
 
 #: src/network/chat.cpp:83
 msgid "Say: "
@@ -1817,11 +1847,11 @@ msgid "Sound frequency"
 msgstr "Geluids- frequentie"
 
 #. Load teams' sound profiles
-#: src/game/game.cpp:163
+#: src/game/game.cpp:171
 msgid "Sounds"
 msgstr "Geluiden"
 
-#: src/game/game.cpp:194
+#: src/game/game.cpp:203
 msgid "Starting a new game"
 msgstr "Starten van een nieuw spel"
 
@@ -1850,15 +1880,15 @@ msgstr ""
 msgid "Talk in network battles"
 msgstr "Chatten tijdens netwerkstrijd"
 
-#: src/menu/results_menu.cpp:326
+#: src/menu/results_menu.cpp:330
 msgid "Team graphs"
 msgstr "Team grafieken"
 
-#: src/menu/results_menu.cpp:304
+#: src/menu/results_menu.cpp:308
 msgid "Team stats"
 msgstr "Team statistieken"
 
-#: src/game/game.cpp:158 src/menu/game_menu.cpp:78 src/menu/game_menu.cpp:82
+#: src/game/game.cpp:166 src/menu/game_menu.cpp:78 src/menu/game_menu.cpp:82
 #: src/menu/network_menu.cpp:99 src/menu/network_menu.cpp:103
 msgid "Teams"
 msgstr "Teams"
@@ -1929,7 +1959,7 @@ msgstr ""
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "De disco granaat heeft de dansvloer verlaten alvorens te ontploffen!"
 
-#: src/game/game.cpp:767
+#: src/game/game.cpp:762
 msgid "The game was interrupted because you got disconnected."
 msgstr "Het spel is onderbroken omdat uw verbinding verbroken is."
 
@@ -1978,7 +2008,7 @@ msgstr[1] "Er zijn maar %i teams."
 msgid "This key has already been attributed to '%s'"
 msgstr ""
 
-#: src/menu/benchmark_menu.cpp:115 src/menu/results_menu.cpp:327
+#: src/menu/benchmark_menu.cpp:115 src/menu/results_menu.cpp:331
 msgid "Time"
 msgstr "Tijd"
 
@@ -2071,12 +2101,12 @@ msgstr ""
 msgid "Unable to contact the host."
 msgstr "Kon geen verbinding maken met host."
 
-#: src/map/maps_list.cpp:288
+#: src/map/maps_list.cpp:290
 #, c-format
 msgid "Unable to open the maps directory (%s)!"
 msgstr "Kon de kaartendirectory (%s) niet openen!"
 
-#: src/map/maps_list.cpp:300
+#: src/map/maps_list.cpp:304
 #, c-format
 msgid "Unable to open the personal maps directory (%s)!"
 msgstr "Kon de persoonlijke kaartendirectory (%s) niet openen!"
@@ -2094,7 +2124,7 @@ msgstr "Onbekend commando"
 msgid "Unknown command of type %i"
 msgstr "Onbekend commando"
 
-#: src/game/game_mode.cpp:342
+#: src/game/game_mode.cpp:335
 msgid "Unlimited"
 msgstr "Onbegrensd"
 
@@ -2136,7 +2166,7 @@ msgstr ""
 "Vuur : houd de spatiebalk ingedrukt tot de gewenste sterkte\n"
 "een schot per beurt"
 
-#: src/main.cpp:190
+#: src/main.cpp:198
 msgid "Version"
 msgstr "Versie"
 
@@ -2156,12 +2186,12 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Wacht! %i speler is nog niet klaar!"
 msgstr[1] "Wacht! %i spelers zijn nog niet klaar!"
 
-#: src/game/game.cpp:666
+#: src/game/game.cpp:661
 #, c-format
 msgid "Waiting for %s"
 msgstr "Wacht op %s"
 
-#: src/game/game.cpp:173
+#: src/game/game.cpp:181
 msgid "Waiting for remote players"
 msgstr "Wacht op spelers op afstand"
 
@@ -2170,12 +2200,12 @@ msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr ""
 "Wachten op de server, het enige wat u nu kunt doen is annuleren of chatten!"
 
-#: src/main.cpp:201
+#: src/main.cpp:209
 #, fuzzy
 msgid "Warmux launching..."
 msgstr "Warmux wordt gestart..."
 
-#: src/main.cpp:337
+#: src/main.cpp:345
 #, fuzzy
 msgid "Warmux version "
 msgstr "Warmux versie "
@@ -2191,11 +2221,11 @@ msgstr "Wapencategorie veranderen"
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Wapen: Vuren / Bonuskist: snel laten vallen"
 
-#: src/game/game.cpp:154
+#: src/game/game.cpp:162
 msgid "Weapons"
 msgstr "Wapens"
 
-#: src/main.cpp:347
+#: src/main.cpp:355
 msgid "Website: "
 msgstr "Website: "
 
@@ -2206,12 +2236,12 @@ msgstr "Website: "
 msgid "Welcome to %s on %s!"
 msgstr "Welkom bij %s op %s!"
 
-#: src/game/game.cpp:1038
+#: src/game/game.cpp:1044
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr "Wat een prachtige homerun! %s van team %s is in een andere wereld..."
 
-#: src/game/game.cpp:1101
+#: src/game/game.cpp:1107
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Wat een schande voor %s - hij is gedood door een simpel geweer!"
@@ -2232,7 +2262,7 @@ msgid ""
 "Click here to switch to touch controls."
 msgstr ""
 
-#: src/menu/results_menu.cpp:272
+#: src/menu/results_menu.cpp:276
 msgid "Winner"
 msgstr "Winnaar"
 
@@ -2267,11 +2297,11 @@ msgstr "U bent alleen. :-/"
 msgid "You are the new turn master!"
 msgstr "Jij bent de nieuwe Beurtmeester!"
 
-#: src/map/maps_list.cpp:309
+#: src/map/maps_list.cpp:313
 msgid "You need at least one valid map!"
 msgstr "U heeft minimaal één geldige kaart nodig!"
 
-#: src/game/game.cpp:296 src/team/teams_list.cpp:163
+#: src/game/game.cpp:304 src/team/teams_list.cpp:165
 msgid "You need at least two valid teams!"
 msgstr "U heeft minimaal twee geldige teams nodig!"
 
