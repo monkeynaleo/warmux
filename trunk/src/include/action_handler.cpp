@@ -1179,6 +1179,7 @@ bool ActionHandler::ExecActionsForOneFrame()
 
   frame_complete = false;
   it = queue.begin();
+  Replay *replay = Replay::GetInstance();
   while (it != queue.end() && !frame_complete) {
     a = (*it);
     if (a->GetType() == Action::ACTION_GAME_CALCULATE_FRAME)
@@ -1190,19 +1191,15 @@ bool ActionHandler::ExecActionsForOneFrame()
                 GameTime::GetInstance()->Read());
     }
 
+    // Do it first, else Exec will strip its content!
+    if (replay->IsRecording())
+      replay->StoreAction(a);
     Exec(a);
 
     delete *it;
     it = queue.erase(it);
   }
   UnLock();
-
-#ifdef REPLAY_ON_DEMAND
-  // Refill actions
-  Replay *replay = Replay::GetInstance();
-  if (replay->IsPlaying())
-    replay->RefillActions();
-#endif
 
   return frame_complete;
 }
