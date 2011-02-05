@@ -289,7 +289,6 @@ FolderSearch* OpenFolder(const std::string& dirname)
 
 const char* FolderSearchNext(FolderSearch *f, bool& file)
 {
-  struct stat s;
   f->file = readdir(f->dir);
 
   while (f->file) {
