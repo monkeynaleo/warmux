@@ -425,30 +425,42 @@ static const Color& DefaultCPUColor(const DistantComputer *cpu)
 // ########################################################
 static void Action_ChatMessage(Action *a)
 {
+  // Store this specific frameless action
+  Replay *replay = Replay::GetInstance();
+  if (replay->IsRecording()) {
+    replay->StoreAction(a);
+  }
+
   uint player_id = a->PopInt();
   std::string message = a->PopString();
   DistantComputer *cpu = a->GetCreator();
-  const Player* player = cpu ? cpu->GetPlayer(player_id)
-                             : &Network::GetInstance()->GetPlayer();
+  const Team *team = NULL;
+  std::string nickname = "?";
 
-  // Search first active team
-  Team *team = NULL;
-  if (player) {
-    const std::list<ConfigTeam>& teams = player->GetTeams();
-    std::list<ConfigTeam>::const_iterator it = teams.begin(), found = it;
-    for (; it != teams.end(); ++it) {
-      if (it->ai == NO_AI_NAME) {
-        found = it;
-        break;
+  if (cpu) {
+    const Player* player = cpu->GetPlayer(player_id);
+
+    // Search first active team
+    if (player) {
+      const std::list<ConfigTeam>& teams = player->GetTeams();
+      std::list<ConfigTeam>::const_iterator it = teams.begin(), found = it;
+      for (; it != teams.end(); ++it) {
+        if (it->ai == NO_AI_NAME) {
+          found = it;
+          break;
+        }
       }
-    }
 
-    int unused_buffer;
-    team = GetTeamsList().FindById(found->id, unused_buffer);
+      int unused_buffer;
+      team = GetTeamsList().FindById(found->id, unused_buffer);
+    }
+  } else {
+    // Hack for local replay
+    team = GetTeamsList().GetPlayingList()[player_id];
+    nickname = team->GetPlayerName();
   }
   const Color& color = (team) ? team->GetColor()
                               : DefaultCPUColor(cpu);
-  const std::string& nickname = (player) ? player->GetNickname() : "?";
 
   ChatLogger::GetInstance()->LogMessage(nickname+"> "+message);
   AppWarmux::GetInstance()->ReceiveMsgCallback(nickname+"> "+message, color);
