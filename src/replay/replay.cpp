@@ -166,30 +166,26 @@ void Replay::StoreAction(const Action* a)
     return;
   }
 
+  size = a->GetSize();
+  if (type != Action::ACTION_GAME_CALCULATE_FRAME) {
+    ActionHandler *ah = ActionHandler::GetInstance();
+    MSG_DEBUG("replay", "Storing action %s: time=%u type=%i length=%i\n",
+              ah->GetActionName(type).c_str(), a->GetTimestamp(), type, size);
+  }
+
   // Enlarge buffer if it can't contain max packet size
-  if (MemUsed() > bufsize - MAX_PACKET_SIZE*4)
+  if (MemUsed() > bufsize - size*4)
     ChangeBufsize(2*bufsize);
 
   // Packet body
   a->Write((char*)ptr);
-  size = a->GetSize()/4;
-  if (size > MAX_PACKET_SIZE-4) {
-    Error(Format("Bad packet, stream was: %l08X %l08X %l08X\n",
-                 ptr[0], ptr[1], ptr[2]));
-  }
-  ptr += size;
+  ptr += size/4;
 
   // Check time
   if (start_time == 0)
     start_time = a->GetTimestamp();
   else
     old_time = a->GetTimestamp();
-
-  if (IsLOGGING("replay") && type != Action::ACTION_GAME_CALCULATE_FRAME) {
-    ActionHandler *ah = ActionHandler::GetInstance();
-    MSG_DEBUG("replay", "Storing action %s: time=%u type=%i length=%i\n",
-              ah->GetActionName(type).c_str(), a->GetTimestamp(), type, size*4);
-  }
 }
 
 
@@ -290,7 +286,12 @@ ok:
     goto err;
   }
 
-  ChangeBufsize(size/4);
+  // Explicit buffer change to avoid garbage
+  if (buf)
+    free(buf);
+  buf = (Uint32*)malloc(size);
+  ptr = buf;
+  bufsize = size;
 
   in.read((char*)buf, size);
   if (!in) {
