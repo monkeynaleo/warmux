@@ -115,8 +115,11 @@ bool FileListBox::MatchFilter(const char *name) const
   return std::find(extensions.begin(), extensions.end(), ext) != extensions.end();
 }
 
-void FileListBox::PopulateFileList(const std::string new_path)
+void FileListBox::PopulateFileList(const std::string& path)
 {
+  std::string new_path = path;
+  if (path.compare(path.size()-1, sizeof(PATH_SEPARATOR), PATH_SEPARATOR))
+    new_path += PATH_SEPARATOR;
   MSG_DEBUG("file", "Searching in %s\n", new_path.c_str());
 
   FolderSearch *f = OpenFolder(new_path);
@@ -134,7 +137,7 @@ void FileListBox::PopulateFileList(const std::string new_path)
         // We have a file, check that it validates the list
         if (MatchFilter(name)) {
           std::string* filename = new std::string(new_path);
-	  *filename += std::string(PATH_SEPARATOR) + std::string(name);
+	  *filename += name;
           MSG_DEBUG("file", "Adding file %s\n", name);
           AddLabelItem(false, name, filename, Font::FONT_MEDIUM);
         } else {
@@ -142,7 +145,7 @@ void FileListBox::PopulateFileList(const std::string new_path)
         }
       } else {
         std::string* filename = new std::string(new_path);
-	*filename += std::string(PATH_SEPARATOR) + std::string(name);
+	*filename += name;
         MSG_DEBUG("file", "Adding directory %s\n", name);
         AddLabelItem(false, FolderString(name), filename,
                      Font::FONT_MEDIUM, Font::FONT_NORMAL, c_yellow);

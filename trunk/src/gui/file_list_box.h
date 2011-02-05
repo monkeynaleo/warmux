@@ -31,7 +31,7 @@ class FileListBox : public ItemBox
   std::vector<const char*> extensions;
 
   std::string FolderString(const char* name);
-  void PopulateFileList(const std::string path);
+  void PopulateFileList(const std::string& path);
   bool MatchFilter(const char *name) const;
 
 public:
