@@ -145,9 +145,9 @@ void FileListBox::PopulateFileList(const std::string& path)
         }
       } else {
         std::string* filename;
-        if (name == "..") {
+        if (!strcmp(name, "..")) {
           // Are we at the root?
-          if (name == PATH_SEPARATOR)
+          if (!strcmp(name, PATH_SEPARATOR))
             break;
           size_t pos = new_path.find_last_of(PATH_SEPARATOR, new_path.size()-2, sizeof(PATH_SEPARATOR));
           filename = new std::string(new_path.substr(0, pos));
