@@ -170,8 +170,8 @@ void Replay::StoreAction(const Action* a)
   size = a->GetSize();
   if (type != Action::ACTION_GAME_CALCULATE_FRAME) {
     ActionHandler *ah = ActionHandler::GetInstance();
-    MSG_DEBUG("replay", "Storing action %s: time=%u type=%i length=%i\n",
-              ah->GetActionName(type).c_str(), a->GetTimestamp(), type, size);
+    MSG_DEBUG("replay", "Storing action %s: type=%i length=%i\n",
+              ah->GetActionName(type).c_str(), type, size);
   }
 
   // Enlarge buffer if it can't contain max packet size
@@ -184,9 +184,9 @@ void Replay::StoreAction(const Action* a)
 
   // Check time
   if (start_time == 0)
-    start_time = a->GetTimestamp();
+    start_time = GameTime::GetInstance()->Read();
   else
-    old_time = a->GetTimestamp();
+    old_time = GameTime::GetInstance()->Read();
 }
 
 
@@ -342,8 +342,8 @@ Action* Replay::GetAction()
   ptr += size;
 
   ActionHandler *ah = ActionHandler::GetInstance();
-  MSG_DEBUG("replay", "Read action %s: type=%u time=%u length=%i\n",
-            ah->GetActionName(type).c_str(), type, a->GetTimestamp(), size*4);
+  MSG_DEBUG("replay", "Read action %s: type=%u length=%i\n",
+            ah->GetActionName(type).c_str(), type, size*4);
 
   return a;
 }
