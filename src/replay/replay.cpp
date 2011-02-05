@@ -317,7 +317,7 @@ Action* Replay::GetAction()
 
   // Does it contain the 2 elements needed to decode at least
   // action header?
-  if (MemUsed() > bufsize-2*4) {
+  if (MemUsed() > bufsize-sizeof(Action::Header)) {
     return NULL;
   }
 
@@ -331,8 +331,8 @@ Action* Replay::GetAction()
   }
 
   // Move pointer
-  Uint16 size = a->GetSize()/4;
-  if (MemUsed() > bufsize-size*4-2*4) {
+  uint size = a->GetSize()/4;
+  if (MemUsed() > bufsize-size*4) {
     Error(Format(_("Malformed replay: action with datasize=%u"), size));
     StopPlaying();
     return NULL;

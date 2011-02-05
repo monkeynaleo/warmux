@@ -124,9 +124,18 @@ public:
     // ########################################################
   } Action_t;
 
+#pragma pack(push)  /* push current alignment to stack */
+#pragma pack(1)     /* set alignment to 1 byte boundary */
+  typedef struct
+  {
+    uint32_t len;
+    Action_t type : 32;
+  } Header;
+#pragma pack(pop)   /* restore original alignment from stack */
+
 private:
   std::list<uint32_t> var;
-  Action_t m_type;
+  Header m_header;
 
   DistantComputer* creator;
 
@@ -167,8 +176,7 @@ public:
 
   int  GetSize() const
   {
-    return 4+4 // Sizes of: packet len, type
-         + var.size() * 4;
+    return sizeof(Header) + var.size() * 4;
   }
   void Write(char *packet) const;
   void WriteToPacket(char* & packet, int & size) const;
@@ -176,8 +184,8 @@ public:
   bool IsEmpty() const { return var.empty(); }
 
   DistantComputer* GetCreator() const { return creator; }
-  Action_t GetType() const { return m_type; }
-  bool IsFrameLess() const { return m_type <= LAST_FRAME_LESS_ACTION; }
+  Action_t GetType() const { return m_header.type; }
+  bool IsFrameLess() const { return m_header.type <= LAST_FRAME_LESS_ACTION; }
 };
 
 #endif

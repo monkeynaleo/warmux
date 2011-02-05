@@ -74,16 +74,16 @@ Action::Action(const char *buffer, DistantComputer* _creator)
   creator = _creator;
 
   var.clear();
-  uint length = SDLNet_Read32(buffer);
+  m_header.len = SDLNet_Read32(buffer);
   buffer += 4;
-  ASSERT(!(length%4));
-  length = (length/4)-2;
-  ASSERT(length < MAX_NUM_VARS); // would be suspicious
+  ASSERT(!(m_header.len%4));
+  uint num = (m_header.len-sizeof(Header))/4;
+  ASSERT(num < MAX_NUM_VARS); // would be suspicious
 
-  m_type = (Action_t)SDLNet_Read32(buffer);
+  m_header.type = (Action_t)SDLNet_Read32(buffer);
   buffer += 4;
 
-  for (uint i=0; i < length; i++) {
+  for (uint i=0; i < num; i++) {
     uint32_t val = SDLNet_Read32(buffer);
     var.push_back(val);
     buffer += 4;
@@ -92,7 +92,7 @@ Action::Action(const char *buffer, DistantComputer* _creator)
 
 void Action::Init(Action_t type)
 {
-  m_type = type;
+  m_header.type = type;
   var.clear();
   creator = NULL;
 }
@@ -102,7 +102,7 @@ void Action::Write(char *buffer) const
   uint32_t len = GetSize();
   SDLNet_Write32(len, buffer);
   buffer += 4;
-  SDLNet_Write32(m_type, buffer);
+  SDLNet_Write32(m_header.type, buffer);
   buffer += 4;
 
   for(std::list<uint32_t>::const_iterator val = var.begin(); val!=var.end(); val++) {
