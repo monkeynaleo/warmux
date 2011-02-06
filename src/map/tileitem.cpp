@@ -40,7 +40,7 @@ TileItem_NonEmpty::TileItem_NonEmpty(uint8_t alpha_threshold)
 
 void TileItem_NonEmpty::Draw(const Point2i &pos)
 {
-  GetMainWindow().Blit(GetSurface(),
+  GetMainWindow().Blit(m_surface,
                        pos * CELL_SIZE - Camera::GetInstance()->GetPosition());
 }
 
