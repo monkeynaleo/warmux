@@ -31,7 +31,7 @@
 #include "map/camera.h"
 
 // We need only one empty tile
-TileItem_Empty EmptyTile;
+static TileItem_Empty EmptyTile;
 
 Tile::Tile()
   : m_use_alpha(true)
