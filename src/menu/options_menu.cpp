@@ -123,7 +123,7 @@ OptionMenu::OptionMenu() :
   graphic_options->AddWidget(opt_max_fps);
   opt_quality =
     new SpinButtonWithPicture(_("Quality"), "menu/fps",
-                              option_size, config->GetQuality(), 1, QUALITY_16BPP, QUALITY_32BPP);
+                              option_size, config->GetQuality(), 1, 0, QUALITY_MAX-1);
   graphic_options->AddWidget(opt_quality);
 
 #ifndef HAVE_TOUCHSCREEN

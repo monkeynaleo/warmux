@@ -494,7 +494,7 @@ void Config::LoadXml(const xmlNode *xml)
 
     uint qual;
     if (XmlReader::ReadUint(elem, "quality", qual)) {
-	if (qual>QUALITY_32BPP) qual=QUALITY_32BPP;
+	if (qual>QUALITY_MAX-1) qual=QUALITY_MAX-1;
 	quality = (Quality)qual;
     }
   }
