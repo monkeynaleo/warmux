@@ -62,9 +62,9 @@ void Sky::Draw(bool redraw_all)
   RedrawParticleList(*GetWorld().to_redraw_particles_now);
 }
 
-void Sky::RedrawParticleList(std::list<Rectanglei> & list) const
+void Sky::RedrawParticleList(const std::list<Rectanglei>& list) const
 {
-  for (std::list<Rectanglei>::iterator it = list.begin() ; it != list.end(); ++it)
+  for (std::list<Rectanglei>::const_iterator it = list.begin() ; it != list.end(); ++it)
     RedrawParticle(*it);
 }
 

@@ -35,7 +35,7 @@ class Sky
   std::vector<const Surface*> images;
   Point2i last_pos;
 
-  void RedrawParticleList(std::list<Rectanglei> &list) const;
+  void RedrawParticleList(const std::list<Rectanglei>& list) const;
   void RedrawParticle(const Rectanglei &particle) const;
   Point2i GetSkyPos(uint layer) const;
 
