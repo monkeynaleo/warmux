@@ -143,7 +143,7 @@ void FileListBox::PopulateFileList(const std::string& path)
         } else {
           MSG_DEBUG("file", "NOT adding file %s, invalid extension\n", name);
         }
-      } else if (!strcmp(name, ".")) {
+      } else if (strcmp(name, ".")) {
         std::string* filename;
         if (!strcmp(name, "..")) {
           // Are we at the root?
@@ -157,7 +157,8 @@ void FileListBox::PopulateFileList(const std::string& path)
         MSG_DEBUG("file", "Adding directory %s\n", name);
         AddLabelItem(false, FolderString(name), filename,
                      Font::FONT_MEDIUM, Font::FONT_NORMAL, c_yellow);
-      }
+      } else
+        MSG_DEBUG("file", "Rejecting %s\n", name);
 
       // Prepare again for searching files
       is_file = list_files;
