@@ -432,15 +432,16 @@ void ResultsMenu::OnClickUp(const Point2i &mousePosition, int button)
   if (save) {
     // Are we requested to save?
     if (w == save) {
-      const std::string& filename = replay_name->GetText();
-      if (filename == "") {
+      std::string filename = replay_name->GetText();
+      if (filename.empty() || filename == "") {
         Question question(Question::WARNING);
         question.Set(_("Invalid filename"), true, 0);
         question.Ask();
         return;
       }
 
-      if (!Replay::GetInstance()->SaveReplay(filename, comment->GetText().c_str())) {
+      if (!Replay::GetInstance()->SaveReplay(folders->GetCurrentFolder() + filename,
+                                             comment->GetText().c_str())) {
         Question question(Question::WARNING);
         question.Set(_("Failed to save replay"), true, 0);
         question.Ask();
@@ -450,9 +451,7 @@ void ResultsMenu::OnClickUp(const Point2i &mousePosition, int button)
       const std::string* file = folders->GetSelectedFile();
       // This is a file, use that filename
       if (file) {
-        std::string name = folders->GetCurrentFolder() + *file;
-        printf("Saving %s\n", name.c_str());
-        replay_name->SetText(name);
+        replay_name->SetText(*file);
       }
     }
   }
