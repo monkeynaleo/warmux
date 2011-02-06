@@ -332,27 +332,28 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
 
   // Save replay tab
   if (Replay::GetInstance()->IsRecording()) {
-    save = new Button(res, "menu/save", false);
 #define BOX_HEIGHT 24
 #define LABEL_SIZE 88
 #define BORDER      5
     VBox* vbox  = new VBox(tab_size.x-2*BORDER, false, false); // Keep the 5,5 border
-    HBox* hbox  = new HBox(2*BOX_HEIGHT, false, false); hbox->SetBorder(0, 0);
+    save = new Button(res, "menu/save", false); save->SetBorder(defaultOptionColorRect, 2);
+    HBox* hbox  = new HBox(save->GetSizeY(), false, false); hbox->SetBorder(0, 0);
+    hbox->AddWidget(save);
+
     VBox* vbox2 = new VBox(tab_size.x - 3*BORDER - save->GetSizeX(), false, false); vbox2->SetBorder(0, 0);
 
     HBox* hbox2 = new HBox(BOX_HEIGHT, false, false); hbox2->SetBorder(0, 0);
     hbox2->AddWidget(new Label(_("Filename:"), LABEL_SIZE, Font::FONT_MEDIUM));
-    replay_name = new TextBox("record.dat", tab_size.x -4*BORDER -LABEL_SIZE -save->GetSizeX());
+    replay_name = new TextBox("record.dat", tab_size.x -6*BORDER -LABEL_SIZE -save->GetSizeX());
     hbox2->AddWidget(replay_name);
     vbox2->AddWidget(hbox2);
 
     hbox2 = new HBox(BOX_HEIGHT, false, false); hbox2->SetBorder(0, 0);
     hbox2->AddWidget(new Label(_("Comment:"), LABEL_SIZE, Font::FONT_MEDIUM));
-    comment = new TextBox(_("I like WarMUX :)"), tab_size.x -4*BORDER -LABEL_SIZE -save->GetSizeX());
+    comment = new TextBox(_("I like WarMUX :)"), tab_size.x -6*BORDER -LABEL_SIZE -save->GetSizeX());
     hbox2->AddWidget(comment);
     vbox2->AddWidget(hbox2);
     hbox->AddWidget(vbox2);
-    hbox->AddWidget(save);
     vbox->AddWidget(hbox);
     folders = new FileListBox(Point2i(tab_size.x-2*BORDER,
                               tab_size.y -tabs->GetHeaderHeight() -4*BORDER -hbox->GetSizeY()));
