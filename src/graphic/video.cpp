@@ -160,7 +160,11 @@ void Video::ComputeAvailableConfigs()
 bool Video::__SetConfig(const int width, const int height, const bool _fullscreen)
 {
   int flags = SDL_SWSURFACE;
+#ifdef HAVE_HANDHELD
+  int bpp   = 16;
+#else
   int bpp   = Config::GetInstance()->GetQuality()==QUALITY_32BPP ? 32 : 16;
+#endif
 
 #ifdef HAVE_TOUCHSCREEN
   bool __fullscreen = true;
