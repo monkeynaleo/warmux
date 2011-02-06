@@ -527,7 +527,8 @@ void TileItem_ColorKey24::ScalePreview(uint8_t* out, int x, uint opitch, uint sh
 TileItem_AlphaSoftware::TileItem_AlphaSoftware(uint8_t alpha_threshold)
   : TileItem_NonEmpty(alpha_threshold)
 {
-  m_surface = Surface(CELL_SIZE, SDL_SWSURFACE|SDL_SRCALPHA, true).DisplayFormatAlpha();
+  // Calls NewSurface, which properly sets to display format alpha
+  m_surface = Surface(CELL_SIZE, SDL_SWSURFACE|SDL_SRCALPHA, true);
 }
 
 void TileItem_AlphaSoftware::ForceEmpty()
