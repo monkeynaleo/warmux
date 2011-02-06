@@ -55,7 +55,10 @@ typedef enum
 {
   QUALITY_16BPP = 0,
   QUALITY_MIX   = 1,
-  QUALITY_32BPP = 2
+#ifndef HAVE_HANDHELD
+  QUALITY_32BPP = 2,
+#endif
+  QUALITY_MAX
 } Quality;
 
 class Config : public Singleton<Config>
