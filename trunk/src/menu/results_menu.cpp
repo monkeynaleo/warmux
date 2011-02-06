@@ -449,8 +449,11 @@ void ResultsMenu::OnClickUp(const Point2i &mousePosition, int button)
     } else if (w == folders) {
       const std::string* file = folders->GetSelectedFile();
       // This is a file, use that filename
-      if (file)
-        replay_name->SetText(*file);
+      if (file) {
+        std::string name = folders->GetCurrentFolder() + *file;
+        printf("Saving %s\n", name.c_str());
+        replay_name->SetText(name);
+      }
     }
   }
 }

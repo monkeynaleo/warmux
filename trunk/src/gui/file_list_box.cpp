@@ -117,7 +117,7 @@ bool FileListBox::MatchFilter(const char *name) const
 
 void FileListBox::PopulateFileList(const std::string& path)
 {
-  std::string new_path = path;
+  new_path = path;
   if (path.compare(path.size()-1, sizeof(PATH_SEPARATOR), PATH_SEPARATOR))
     new_path += PATH_SEPARATOR;
   MSG_DEBUG("file", "Searching in %s\n", new_path.c_str());
