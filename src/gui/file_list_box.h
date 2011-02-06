@@ -22,6 +22,8 @@
 #ifndef FILE_LIST_BOX_H
 #define FILE_LIST_BOX_H
 
+#include <string>
+
 #include "select_box.h"
 
 class FileListBox : public ItemBox
@@ -29,6 +31,7 @@ class FileListBox : public ItemBox
   bool                     list_files;
   uint                     last_time;
   std::vector<const char*> extensions;
+  std::string              new_path;
 
   std::string FolderString(const char* name);
   void PopulateFileList(const std::string& path);
@@ -41,7 +44,9 @@ public:
   void StartListing(const char* dirname = NULL);
   virtual const std::string* GetSelectedFile() const;
   virtual const std::string* GetSelectedFolder() const;
+  const std::string& GetCurrentFolder() const { return new_path; }
   void AddExtensionFilter(const char* ext) { extensions.push_back(ext); }
+
   Widget* ClickUp(const Point2i & mousePosition, uint button);
 
   // This must be defined to properly handle the release of elements
