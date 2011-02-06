@@ -235,7 +235,7 @@ void Member::Draw(const Point2i & _pos,
 void Member::ApplySqueleton(Member * parent_member)
 {
   // Place the member to shape the skeleton
-  assert(parent_member);
+  ASSERT(parent_member);
 
   if (!parent_member) {
     std::cerr << "Member " << name << " have no parent member!" << std::endl;
@@ -243,7 +243,7 @@ void Member::ApplySqueleton(Member * parent_member)
   }
   parent = parent_member;
 
-  assert(parent->name != "weapon");
+  ASSERT(parent->name != "weapon");
 
   // Set the position
   pos = parent->pos - anchor;
