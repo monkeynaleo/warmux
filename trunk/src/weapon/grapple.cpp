@@ -100,7 +100,7 @@ bool find_first_contact_point (Point2i from, Double angle, uint length,
              for ( int j = -search_radius; j <= search_radius; j ++ )
              {
                cur = contact_point + Point2i( i, j );
-               if ( GetWorld().IsInVacuum( cur ) )
+               if (!GetWorld().IsOutsideWorld(cur) && GetWorld().IsInVacuum( cur ) )
                {
                  // check for new closest
                  int distance = i * i + j * j;
