@@ -53,6 +53,15 @@ public:
     CLICK_TYPE_DOWN,
     CLICK_TYPE_UP
   } ClickType;
+
+  typedef enum
+  {
+    MODE_NORMAL,
+    MODE_CONTROL,
+    MODE_SMALL,
+    MODE_REPLAY
+  } Mode;
+
   Character *character_under_cursor;
   Weapon *weapon_under_cursor;
   WeaponsMenu weapons_menu;
@@ -71,7 +80,6 @@ private:
   ProgressBar wind_bar;
 
   // This part is for normal interface mode
-  Surface default_toolbar;
   EnergyBar * energy_bar;
 
   // Character information
@@ -84,19 +92,20 @@ private:
   Text * t_weapon_name;
   Text * t_weapon_stock;
 
-  // this part is for control interface mode
+  // Related to interface mode
+  Mode mode;
+  Surface default_toolbar;
   Surface control_toolbar;
+  Surface replay_toolbar;
+  Surface small_interface;
 
   // Other stuff
-  bool is_control;
-  bool display;
   int start_hide_display;
   int start_show_display;
   bool display_timer;
   bool display_minimap;
   WeaponStrengthBar weapon_strength_bar;
 
-  Surface small_interface;
   Sprite *clock, *clock_normal, *clock_emergency;
   Point2i bottom_bar_pos;
   int last_width;
@@ -131,6 +140,7 @@ private:
   Point2i GetSize() const { return Point2i(GetWidth(), GetHeight()); }
 
   // Handle clicks for various states of the interface
+  bool ReplayClick(const Point2i &mouse_pos, ClickType type, Point2i old_mouse_pos = Point2i());
   bool ControlClick(const Point2i &mouse_pos, ClickType type, Point2i old_mouse_pos = Point2i());
   bool DefaultClick(const Point2i &mouse_pos, ClickType type, Point2i old_mouse_pos = Point2i());
   // -1 means nothing clicked, 0 means return false, 1 means return true
@@ -149,10 +159,10 @@ public:
   void LoadData();
 
   Point2i GetMenuPosition() const { return bottom_bar_pos; }
-  bool IsDisplayed () const { return display; }
-  bool IsControl() const { return is_control; }
-  void DisableControl() { is_control = false; Hide(); }
-  void EnableDisplay(bool _display) { display = _display; }
+  bool IsDisplayed () const { return mode != MODE_SMALL; }
+  Mode GetMode() const { return mode; }
+  void DisableControl() { mode = MODE_NORMAL; Hide(); }
+  void EnableDisplay(bool display) { mode = (display) ? MODE_NORMAL : MODE_SMALL; }
   void Show();
   void Hide();
 
