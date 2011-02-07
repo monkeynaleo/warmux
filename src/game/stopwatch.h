@@ -39,8 +39,10 @@ public:
   Stopwatch();
   void Reset(Double speed = 1);
   void SetPause(bool value);
-  uint GetValue();
-  bool IsPaused();
+  Double GetSpeed() const { return speed; }
+  void SetSpeed(const Double& sp) { speed = sp; } 
+  uint GetValue() const;
+  bool IsPaused() const { return paused; }
 };
 
 #endif

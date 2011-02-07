@@ -61,15 +61,10 @@ void Stopwatch::SetPause(bool value)
   }
 }
 
-uint Stopwatch::GetValue()
+uint Stopwatch::GetValue() const
 {
   if (paused)
     return static_cast<long>(speed * (pause_begin - start_time - paused_time));
   else
     return static_cast<long>(speed * (SDL_GetTicks() - start_time - paused_time));
-}
-
-bool Stopwatch::IsPaused()
-{
-  return paused;
 }
