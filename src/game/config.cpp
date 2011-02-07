@@ -21,8 +21,6 @@
  * the configuration file.
  *****************************************************************************/
 
-#include "game/config.h"
-
 #include <cstdlib>
 #include <sstream>
 #include <string>
@@ -34,6 +32,15 @@
 #  include <CoreFoundation/CoreFoundation.h>
 #endif
 
+#ifdef WIN32
+#  include <windows.h>
+#  include <direct.h>
+#endif
+
+#include <WARMUX_file_tools.h>
+#include <WARMUX_team_config.h>
+
+#include "game/config.h"
 #include "game/game.h"
 #include "graphic/font.h"
 #include "graphic/video.h"
@@ -45,17 +52,12 @@
 #include "sound/jukebox.h"
 #include "team/team.h"
 #include "team/teams_list.h"
-#include <WARMUX_team_config.h>
 #include "tool/resource_manager.h"
-#include <WARMUX_file_tools.h>
 #include "tool/string_tools.h"
 #include "tool/xml_document.h"
 #include "weapon/weapons_list.h"
 
 #ifdef _WIN32
-#  include <windows.h>
-#  include <direct.h>
-
 // Under Windows, binary may be relocated
 static std::string GetWarmuxPath()
 {
