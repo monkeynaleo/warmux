@@ -451,7 +451,8 @@ void ResultsMenu::OnClickUp(const Point2i &mousePosition, int button)
       const std::string* file = folders->GetSelectedFile();
       // This is a file, use that filename
       if (file) {
-        replay_name->SetText(*file);
+        size_t pos = file->find_last_of(PATH_SEPARATOR);
+        replay_name->SetText(file->c_str() + pos+1);
       }
     }
   }
