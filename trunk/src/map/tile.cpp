@@ -106,7 +106,8 @@ void Tile::Dig(const Point2i &position, const Surface& dig)
 
         tin->GetSurface().Lock();
         tin->Dig(position - (c<<CELL_BITS), dig);
-        tin->ScalePreview(dst, c.x-startCell.x, pitch, m_shift);
+        if (c >= startCell && c < endCell) // don't write outside minimap!
+          tin->ScalePreview(dst, c.x-startCell.x, pitch, m_shift);
         tin->GetSurface().Unlock();
       }
     }
@@ -146,7 +147,8 @@ void Tile::Dig(const Point2i &center, const uint radius)
 
         tin->GetSurface().Lock();
         tin->Dig(center - (c<<CELL_BITS), radius);
-        tin->ScalePreview(dst, c.x-startCell.x, pitch, m_shift);
+        if (c >= startCell && c < endCell) // don't write outside minimap!
+          tin->ScalePreview(dst, c.x-startCell.x, pitch, m_shift);
         tin->GetSurface().Unlock();
       }
     }
@@ -196,10 +198,10 @@ TileItem_NonEmpty* Tile::CreateNonEmpty(uint8_t *ptr, int stride)
 
 void Tile::PutSprite(const Point2i& pos, Sprite* spr)
 {
-  Rectanglei rec(pos, spr->GetSizeMax());
   Point2i    firstCell = Clamp(pos/CELL_SIZE);
-  Point2i    lastCell  = Clamp((pos + spr->GetSizeMax())/CELL_SIZE);
-  Surface    s         = spr->GetSurface();
+  Surface&   s         = spr->GetSurface();
+  Point2i    lastCell  = Clamp((pos + s.GetSize())/CELL_SIZE);
+  Rectanglei rec(pos, s.GetSize());
 
   m_preview->Lock();
 
@@ -237,7 +239,8 @@ void Tile::PutSprite(const Point2i& pos, Sprite* spr)
       TileItem_NonEmpty *tin = GetNonEmpty(c.x, c.y);
       tin->GetSurface().Blit(s, dst, src.GetPosition());
       tin->GetSurface().Lock();
-      tin->ScalePreview(pdst, c.x-startCell.x, pitch, m_shift);
+      if (c >= startCell && c < endCell) // don't write outside minimap!
+        tin->ScalePreview(pdst, c.x-startCell.x, pitch, m_shift);
       tin->GetSurface().Unlock();
     }
     pdst += pitch<<(CELL_BITS-m_shift);
@@ -270,7 +273,8 @@ void Tile::MergeSprite(const Point2i &position, Surface& surf)
 
       tin->GetSurface().Lock();
       tin->MergeSprite(offset, surf);
-      tin->ScalePreview(dst, c.x-startCell.x, pitch, m_shift);
+      if (c >= startCell && c < endCell) // don't write outside minimap!
+        tin->ScalePreview(dst, c.x-startCell.x, pitch, m_shift);
       tin->GetSurface().Unlock();
     }
     dst += pitch<<(CELL_BITS-m_shift);
