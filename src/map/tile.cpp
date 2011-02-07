@@ -108,6 +108,8 @@ void Tile::Dig(const Point2i &position, const Surface& dig)
         tin->Dig(position - (c<<CELL_BITS), dig);
         if (c >= startCell && c < endCell) // don't write outside minimap!
           tin->ScalePreview(dst, c.x-startCell.x, pitch, m_shift);
+        else
+          tin->CheckEmpty();
         tin->GetSurface().Unlock();
       }
     }
@@ -149,6 +151,8 @@ void Tile::Dig(const Point2i &center, const uint radius)
         tin->Dig(center - (c<<CELL_BITS), radius);
         if (c >= startCell && c < endCell) // don't write outside minimap!
           tin->ScalePreview(dst, c.x-startCell.x, pitch, m_shift);
+        else
+          tin->CheckEmpty();
         tin->GetSurface().Unlock();
       }
     }
@@ -214,33 +218,14 @@ void Tile::PutSprite(const Point2i& pos, Sprite* spr)
 
   for (c.y = firstCell.y; c.y <= lastCell.y; c.y++) {
     for (c.x = firstCell.x; c.x <= lastCell.x; c.x++) {
-      Point2i cell_pos = (c<<CELL_BITS);
-      Rectanglei src;
-      Rectanglei dst;
-      src.SetPosition(rec.GetPosition() - cell_pos);
-      if (src.GetPositionX() < 0)
-        src.SetPositionX(0);
-      if (src.GetPositionY() < 0)
-        src.SetPositionY(0);
-
-      src.SetSize(rec.GetPosition() + rec.GetSize() - cell_pos - src.GetPosition());
-      if (src.GetSizeX() + src.GetPositionX() > CELL_SIZE.x)
-        src.SetSizeX(CELL_SIZE.x - src.GetPositionX());
-      if (src.GetSizeY() + src.GetPositionY() > CELL_SIZE.y)
-        src.SetSizeY(CELL_SIZE.y - src.GetPositionY());
-
-      dst.SetPosition(cell_pos - rec.GetPosition());
-      if (dst.GetPositionX() < 0)
-        dst.SetPositionX(0);
-      if (dst.GetPositionY() < 0)
-        dst.SetPositionY(0);
-      dst.SetSize(src.GetSize());
-
       TileItem_NonEmpty *tin = GetNonEmpty(c.x, c.y);
-      tin->GetSurface().Blit(s, dst, src.GetPosition());
+      tin->GetSurface().Blit(s, pos-(c<<CELL_BITS));
+
       tin->GetSurface().Lock();
       if (c >= startCell && c < endCell) // don't write outside minimap!
         tin->ScalePreview(pdst, c.x-startCell.x, pitch, m_shift);
+      else
+        tin->CheckEmpty();
       tin->GetSurface().Unlock();
     }
     pdst += pitch<<(CELL_BITS-m_shift);
@@ -275,6 +260,8 @@ void Tile::MergeSprite(const Point2i &position, Surface& surf)
       tin->MergeSprite(offset, surf);
       if (c >= startCell && c < endCell) // don't write outside minimap!
         tin->ScalePreview(dst, c.x-startCell.x, pitch, m_shift);
+      else
+        tin->CheckEmpty();
       tin->GetSurface().Unlock();
     }
     dst += pitch<<(CELL_BITS-m_shift);
@@ -563,6 +550,7 @@ void Tile::DrawTile_Clipped(const Rectanglei & worldClip) const
         continue;
       TileItem_NonEmpty *tin = static_cast<TileItem_NonEmpty*>(item[c.y*nbCells.x + c.x]);
 
+#if 0
       // For all selected items, clip source and destination blitting rectangles
       Rectanglei destRect(c<<CELL_BITS, CELL_SIZE);
 
@@ -576,6 +564,9 @@ void Tile::DrawTile_Clipped(const Rectanglei & worldClip) const
                              Rectanglei(ptSrc, destRect.GetSize()),
                              ptDest);
       }
+#else
+      GetMainWindow().Blit(tin->GetSurface(), (c<<CELL_BITS) - Camera::GetInstance()->GetPosition());
+#endif
     }
   }
 }
