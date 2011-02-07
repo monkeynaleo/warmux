@@ -19,26 +19,27 @@
  * Mouse management
  *****************************************************************************/
 
-#include "interface/mouse.h"
+#include <WARMUX_point.h>
 
-#include "interface/cursor.h"
-#include "interface/interface.h"
-#include "interface/mouse_cursor.h"
 #include "character/character.h"
 #include "game/config.h"
-#include "game/game_mode.h"
 #include "game/game.h"
+#include "game/game_mode.h"
+#include "game/game_time.h"
 #include "graphic/video.h"
 #include "include/app.h"
 #include "include/action_handler.h"
+#include "interface/cursor.h"
+#include "interface/interface.h"
+#include "interface/mouse.h"
+#include "interface/mouse_cursor.h"
 #include "map/camera.h"
 #include "map/map.h"
+#include "replay/replay.h"
 #include "team/macro.h"
 #include "team/team.h"
-#include <WARMUX_point.h>
 #include "tool/resource_manager.h"
 #include "weapon/weapon.h"
-#include "game/game_time.h"
 
 #define MOUSE_CLICK_SQUARE_DISTANCE 5*5
 #define LONG_CLICK_DURATION 600
@@ -242,10 +243,9 @@ bool Mouse::HandleEvent(const SDL_Event& evnt)
     }
   }
 
-  if (Game::GetInstance()->ReadState() != Game::PLAYING)
-    return true;
-
-  if (!ActiveTeam().IsLocalHuman())
+  if (Game::GetInstance()->ReadState() != Game::PLAYING ||
+      Replay::GetConstInstance()->IsPlaying() ||
+      !ActiveTeam().IsLocalHuman())
     return true;
 
   bool shift = !!(SDL_GetModState() & KMOD_SHIFT);
