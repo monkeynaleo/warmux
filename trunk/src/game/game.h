@@ -46,6 +46,12 @@ public:
     END_TURN = 2
   } game_loop_state_t;
 
+  typedef enum {
+    NO_PAUSE,
+    START_PAUSE,
+    END_PAUSE
+  } PauseRequest;
+
 protected:
   virtual bool Run();         // Main loop
 
@@ -77,6 +83,7 @@ private:
   bool                ask_for_menu;
   bool                ask_for_help_menu;
   bool                ask_for_end;
+  PauseRequest        request_pause;
 
   FramePerSecond      *fps;
 
@@ -173,8 +180,10 @@ public:
   game_loop_state_t ReadState() const { return state; }
   void SetState(game_loop_state_t new_state, bool begin_game=false);
 
-  void UserAsksForMenu() { ask_for_menu = true; };
-  void UserAsksForHelpMenu() { ask_for_help_menu = true; };
+  void UserAsksForEnd() { ask_for_end = true; }
+  void UserAsksForMenu() { ask_for_menu = true; }
+  void UserAsksForHelpMenu() { ask_for_help_menu = true; }
+  void RequestPause(bool pause) { request_pause = pause ? START_PAUSE : END_PAUSE; }
 
   // Signal death of a player
   void SignalCharacterDeath(const Character *character, const Character* killer = NULL);

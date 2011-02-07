@@ -37,6 +37,7 @@
 #include "object/objects_list.h"
 #include "object/objbox.h"
 #include "replay/replay.h"
+#include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"
 #include "tool/resource_manager.h"
@@ -831,19 +832,64 @@ bool Interface::ControlClick(const Point2i &mouse_pos, ClickType type, Point2i o
   return (type == CLICK_TYPE_DOWN) ? false : true;
 }
 
-bool Interface::ReplayClick(const Point2i &mouse_pos, ClickType /*type*/, Point2i old_mouse_pos)
+bool Interface::ReplayClick(const Point2i &mouse_pos, ClickType type, Point2i old_mouse_pos)
 {
+  if (type==CLICK_TYPE_LONG || type==CLICK_TYPE_UP)
+    return true;
   GameTime *time = GameTime::GetInstance();
+  Game     *game = Game::GetInstance();
   Point2i mouse_rel_pos = mouse_pos-bottom_bar_pos;
   Point2i size(64*zoom, replay_toolbar.GetHeight());
 
   old_mouse_pos -= bottom_bar_pos;
 
-  Rectanglei pause_button(Point2i(13, 0), size);
-  Rectanglei play_button(Point2i(77, 0), size);
-  if (pause_button.Contains(mouse_rel_pos) ||
-      play_button.Contains(mouse_rel_pos)) {
-    time->SetWaitingForUser(!time->IsWaitingForUser());
+  Rectanglei pause_button(Point2i(13*zoom, 0), size);
+  if (pause_button.Contains(mouse_rel_pos)) {
+    // We have to go through the game loop to pause
+    game->RequestPause(true);
+    return true;
+  }
+
+  Rectanglei play_button(Point2i(77*zoom, 0), size);
+  if (play_button.Contains(mouse_rel_pos)) {
+    // We have to go through the game loop to pause
+    game->RequestPause(false);
+    return true;
+  }
+
+  Rectanglei stop_button(Point2i(141*zoom, 0), size);
+  if (stop_button.Contains(mouse_rel_pos)) {
+    game->UserAsksForEnd();
+    return true;
+  }
+
+  Rectanglei slow_button(Point2i(452*zoom, 0), size);
+  if (slow_button.Contains(mouse_rel_pos)) {
+    Double speed = time->GetSpeed()/2;
+    // If speed too different, would sound strange
+#if 0
+    JukeBox *jb = JukeBox::GetInstance();
+    if (speed < ONE_HALF || speed > TWO)
+      jb->Pause(true);
+    else
+      jb->Resume(true);
+#endif
+    time->SetSpeed(speed);
+    return true;
+  }
+
+  Rectanglei fast_button(Point2i(516*zoom, 0), size);
+  if (fast_button.Contains(mouse_rel_pos)) {
+    Double speed = time->GetSpeed()*2;
+    // If speed too different, would sound strange
+#if 0
+    JukeBox *jb = JukeBox::GetInstance();
+    if (speed < ONE_HALF || speed > TWO)
+      jb->Pause(true);
+    else
+      jb->Resume(true);
+#endif
+    time->SetSpeed(speed);
     return true;
   }
 
@@ -883,9 +929,7 @@ bool Interface::DefaultClick(const Point2i &mouse_pos, ClickType type, Point2i o
 
 int Interface::AnyClick(const Point2i &mouse_pos, ClickType type, Point2i old_mouse_pos)
 {
-  if (mode!=MODE_NORMAL && mode!=MODE_CONTROL)
-    return 0;
-  Point2i mouse_rel_pos = mouse_pos-bottom_bar_pos;
+  Point2i mouse_rel_pos = mouse_pos - bottom_bar_pos;
   const Team& ateam = ActiveTeam();
 
   old_mouse_pos -= bottom_bar_pos;
@@ -922,7 +966,8 @@ int Interface::AnyClick(const Point2i &mouse_pos, ClickType type, Point2i old_mo
       case CLICK_TYPE_DOWN: return 0; // Needed to allow long clicks
       case CLICK_TYPE_UP:
         if (!ateam.IsLocalHuman() || ActiveCharacter().IsDead() ||
-            Game::GetInstance()->ReadState() != Game::PLAYING)
+            Game::GetInstance()->ReadState() != Game::PLAYING ||
+            Replay::GetConstInstance()->IsPlaying())
           return 1;
         if (weapon_button.Contains(old_mouse_pos))
           weapons_menu.SwitchDisplay();
@@ -936,10 +981,12 @@ int Interface::AnyClick(const Point2i &mouse_pos, ClickType type, Point2i old_mo
       case CLICK_TYPE_LONG:
       case CLICK_TYPE_DOWN: return 1;
       case CLICK_TYPE_UP:
-        if (ateam.IsLocalHuman() && !ActiveCharacter().IsDead() &&
-            Game::GetInstance()->ReadState() == Game::PLAYING &&
-            wind_button.Contains(old_mouse_pos)) {
-              mode = (mode==MODE_CONTROL) ? MODE_NORMAL : MODE_CONTROL;
+        if (Replay::GetConstInstance()->IsPlaying()) {
+          mode = (mode==MODE_REPLAY) ? MODE_NORMAL : MODE_REPLAY;
+        } else if (ateam.IsLocalHuman() && !ActiveCharacter().IsDead() &&
+                   Game::GetInstance()->ReadState() == Game::PLAYING &&
+                   wind_button.Contains(old_mouse_pos)) {
+          mode = (mode==MODE_CONTROL) ? MODE_NORMAL : MODE_CONTROL;
         }
         return 1;
     }
@@ -953,22 +1000,19 @@ bool Interface::ActionClickDown(const Point2i &mouse_pos)
   Surface& window = GetMainWindow();
 
   if (IsDisplayed()) {
-    if (mode == MODE_REPLAY) {
-      return ReplayClick(mouse_pos, CLICK_TYPE_DOWN);
-    } else {
-      Rectanglei menu_button(Point2i(), default_toolbar.GetSize());
-      if (menu_button.Contains(mouse_pos-bottom_bar_pos)) {
-        switch (AnyClick(mouse_pos, CLICK_TYPE_DOWN)) {
-          case -1: break;
-          case 0: return false;
-          default: return true;
-        }
+    Rectanglei menu_button(Point2i(), default_toolbar.GetSize());
+    if (menu_button.Contains(mouse_pos-bottom_bar_pos)) {
+      switch (AnyClick(mouse_pos, CLICK_TYPE_DOWN)) {
+        case -1: break;
+        case 0: return false;
+        default: return true;
+      }
 
-        if (mode == MODE_CONTROL) {
-          return ControlClick(mouse_pos, CLICK_TYPE_DOWN);
-        } else {
-          return DefaultClick(mouse_pos, CLICK_TYPE_DOWN);
-        }
+      switch (mode) {
+        case MODE_CONTROL: return ControlClick(mouse_pos, CLICK_TYPE_DOWN);
+        case MODE_NORMAL: return DefaultClick(mouse_pos, CLICK_TYPE_DOWN);
+        case MODE_REPLAY: return ReplayClick(mouse_pos, CLICK_TYPE_DOWN);
+        default: exit(1);
       }
     }
   } else {
@@ -990,20 +1034,17 @@ bool Interface::ActionClickDown(const Point2i &mouse_pos)
 bool Interface::ActionLongClick(const Point2i &mouse_pos, const Point2i& old_mouse_pos)
 {
   if (IsDisplayed()) {
-    if (mode == MODE_REPLAY) {
-      return ReplayClick(mouse_pos, CLICK_TYPE_LONG, old_mouse_pos);
-    } else {
-      switch (AnyClick(mouse_pos, CLICK_TYPE_LONG, old_mouse_pos)) {
-        case -1: break;
-        case 0: return false;
-        default: return true;
-      }
+    switch (AnyClick(mouse_pos, CLICK_TYPE_LONG, old_mouse_pos)) {
+      case -1: break;
+      case 0: return false;
+      default: return true;
+    }
 
-      if (mode == MODE_CONTROL) {
-        return ControlClick(mouse_pos, CLICK_TYPE_LONG, old_mouse_pos);
-      } else {
-        return DefaultClick(mouse_pos, CLICK_TYPE_LONG, old_mouse_pos);
-      }
+    switch (mode) {
+      case MODE_CONTROL: return ControlClick(mouse_pos, CLICK_TYPE_LONG);
+      case MODE_NORMAL: return DefaultClick(mouse_pos, CLICK_TYPE_LONG);
+      case MODE_REPLAY: return ReplayClick(mouse_pos, CLICK_TYPE_LONG);
+      default: exit(1);
     }
   }
 
@@ -1022,27 +1063,24 @@ bool Interface::ActionClickUp(const Point2i &mouse_pos, const Point2i &old_click
       ActiveCharacter().HandleKeyReleased_Down(false);
     }
 
-    if (mode == MODE_REPLAY) {
-      return ReplayClick(mouse_pos, CLICK_TYPE_UP, old_click_pos);
-    } else {
-      Rectanglei menu_button(Point2i(), default_toolbar.GetSize());
-      if (menu_button.Contains(mouse_pos-bottom_bar_pos)) {
-        switch (AnyClick(mouse_pos, CLICK_TYPE_UP, old_click_pos)) {
-          case -1: break;
-          case 0: return false;
-          default: return true;
-        }
-
-        if (mode == MODE_CONTROL) {
-          return ControlClick(mouse_pos, CLICK_TYPE_UP);
-        } else {
-          return DefaultClick(mouse_pos, CLICK_TYPE_UP);
-        }
-      } else if (ActiveTeam().IsLocalHuman() && weapons_menu.ActionClic(mouse_pos)) {
-        // Process click on weapon menu before minimap as it should be
-        // overlayed on top of it.
-        return true;
+    Rectanglei menu_button(Point2i(), default_toolbar.GetSize());
+    if (menu_button.Contains(mouse_pos-bottom_bar_pos)) {
+      switch (AnyClick(mouse_pos, CLICK_TYPE_UP, old_click_pos)) {
+        case -1: break;
+        case 0: return false;
+        default: return true;
       }
+
+      switch (mode) {
+        case MODE_CONTROL: return ControlClick(mouse_pos, CLICK_TYPE_UP);
+        case MODE_NORMAL: return DefaultClick(mouse_pos, CLICK_TYPE_UP);
+        case MODE_REPLAY: return ReplayClick(mouse_pos, CLICK_TYPE_UP);
+        default: exit(1);
+      }
+    } else if (ActiveTeam().IsLocalHuman() && weapons_menu.ActionClic(mouse_pos)) {
+      // Process click on weapon menu before minimap as it should be
+      // overlayed on top of it.
+      return true;
     }
     // No button clicked, continue
   } else {

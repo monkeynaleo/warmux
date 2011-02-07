@@ -50,6 +50,7 @@ void GameTime::Reset()
 
 void GameTime::Increase()
 {
+  //if (paused) return;
   ASSERT(!IsWaiting());
   ASSERT(CanBeIncreased());
   current_time += delta_t;
@@ -58,6 +59,7 @@ void GameTime::Increase()
 
 void GameTime::LetRealTimePassUntilFrameEnd()
 {
+  //if (paused) return;
   ASSERT(!IsWaiting());
   int64_t delay;
   do {

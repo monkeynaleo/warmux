@@ -45,16 +45,20 @@ protected:
 public:
 
   void Reset();
-  uint Read() const { return current_time; };
-  uint ReadSec() const { return Read() / 1000; };
-  uint ReadMin() const { return ReadSec() / 60; };
+  uint Read() const { return current_time; }
+  uint ReadSec() const { return Read() / 1000; }
+  uint ReadMin() const { return ReadSec() / 60; }
+
+  void SetPause(bool pause) { stopwatch.SetPause(pause); }
+  bool IsPaused() const { return stopwatch.IsPaused(); }
+  void SetSpeed(const Double& speed) { stopwatch.SetSpeed(speed); }
+  const Double& GetSpeed() const { return stopwatch.GetSpeed(); }
 
   void Increase();
   bool CanBeIncreased() const { return stopwatch.GetValue() >= current_time; }
   void LetRealTimePassUntilFrameEnd();
 
   bool IsWaiting() const { return waiting_for_user || waiting_for_network; }
-
   bool IsWaitingForUser() const { return waiting_for_user; }
   void SetWaitingForUser(bool value);
 

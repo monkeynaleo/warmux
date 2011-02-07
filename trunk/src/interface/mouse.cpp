@@ -392,10 +392,13 @@ void Mouse::Show()
 
 void Mouse::Hide()
 {
+  // If doing a pause or the like, we do want to see it
+  if (Replay::GetConstInstance()->IsPlaying())
+    return;
+
   if (visible == MOUSE_VISIBLE)
-  {
     last_hide_time = GameTime::GetConstInstance()->Read();
-  }
+
   visible = MOUSE_HIDDEN;
   SDL_ShowCursor(false); // be sure cursor is invisible
 
