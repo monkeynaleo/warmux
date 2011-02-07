@@ -36,6 +36,7 @@
 #include "map/map.h"
 #include "object/objects_list.h"
 #include "object/objbox.h"
+#include "replay/replay.h"
 #include "team/macro.h"
 #include "team/team.h"
 #include "tool/resource_manager.h"
@@ -65,6 +66,7 @@ void Interface::LoadDataInternal(Profile *res)
     default_toolbar = tmp.RotoZoom(0.0, zoom, zoom);
     control_toolbar = LOAD_RES_IMAGE("interface/background_control_interface").RotoZoom(0.0, zoom, zoom);
     small_interface = LOAD_RES_IMAGE("interface/small_background_interface").RotoZoom(0.0, zoom, zoom);
+    replay_toolbar = LOAD_RES_IMAGE("interface/background_replay").RotoZoom(0.0, zoom, zoom);
     clock_normal->Scale(zoom, zoom);
     clock_emergency->Scale(zoom, zoom);
   }
@@ -73,6 +75,7 @@ void Interface::LoadDataInternal(Profile *res)
     default_toolbar = tmp;
     control_toolbar = LOAD_RES_IMAGE("interface/background_control_interface");
     small_interface = LOAD_RES_IMAGE("interface/small_background_interface");
+    replay_toolbar = LOAD_RES_IMAGE("interface/background_replay");
   }
   clock_width = 70*zoom+0.5f;
 #if defined(ANDROID) || defined (__SYMBIAN32__)
@@ -122,8 +125,7 @@ Interface::Interface()
   , t_character_energy(NULL)
   , t_weapon_name(NULL)
   , t_weapon_stock(NULL)
-  , is_control(false)
-  , display(true)
+  , mode(MODE_NORMAL)
   , start_hide_display(0)
   , start_show_display(0)
   , display_minimap(true)
@@ -279,7 +281,7 @@ void Interface::DrawWeaponInfo() const
 
   int offset = ((default_toolbar.GetWidth() - clock_width)>>1) - icon.GetWidth();
   // The control interface doesn't look good with texts overlayed on it
-  if (!is_control) {
+  if (mode == MODE_NORMAL) {
     // Draw weapon name
     t_weapon_name->SetText(weapon->GetName());
     t_weapon_name->DrawRightCenter(bottom_bar_pos + Point2i(offset, 70*zoom));
@@ -343,7 +345,7 @@ void Interface::DrawWindInfo() const
 // draw mini info when hidding interface
 void Interface::DrawSmallInterface() const
 {
-  if (display)
+  if (mode != MODE_SMALL)
     return;
   Surface& window = GetMainWindow();
   int height = ((int)GameTime::GetInstance()->Read() - start_hide_display - 1000) / 3 - 30;
@@ -366,7 +368,7 @@ void Interface::DrawTeamEnergy() const
   Point2i team_bar_offset(430*zoom, 0);
   FOR_EACH_TEAM(tmp_team) {
     Team* team = *tmp_team;
-    if (!display) // Fix bug #7753 (Team energy bar visible when the interface is hidden)
+    if (!IsDisplayed()) // Fix bug #7753 (Team energy bar visible when the interface is hidden)
       team->GetEnergyBar().FinalizeMove();
     team->DrawEnergy(bottom_bar_pos + team_bar_offset);
   }
@@ -544,19 +546,23 @@ void Interface::Draw()
   weapons_menu.Draw();
 
   // Display the background
-  if (display) {
+  if (IsDisplayed()) {
     Rectanglei dr(bottom_bar_pos, default_toolbar.GetSize());
-    if (is_control) {
-      window.Blit(control_toolbar, bottom_bar_pos);
-    } else {
-      window.Blit(default_toolbar, bottom_bar_pos);
-      // And both Character info and weapon info
-      DrawCharacterInfo();
-      DrawTeamEnergy();
-    }
+    if (mode==MODE_CONTROL || mode==MODE_NORMAL) {
+      if (mode==MODE_CONTROL) {
+        window.Blit(control_toolbar, bottom_bar_pos);
+      } else {
+        window.Blit(default_toolbar, bottom_bar_pos);
+        // And both Character info and weapon info
+        DrawCharacterInfo();
+        DrawTeamEnergy();
+      }
 
-    // Now display wind and time info
-    DrawWeaponInfo();
+      // Now display wind and time info
+      DrawWeaponInfo();
+    } else {
+      window.Blit(replay_toolbar, bottom_bar_pos);
+    }
     DrawWindInfo();
     DrawTimeInfo();
     GetWorld().ToRedrawOnScreen(dr);
@@ -570,7 +576,7 @@ void Interface::Draw()
 
 int Interface::GetHeight() const
 {
-  if (!display) {
+  if (!IsDisplayed()) {
     int height = GetMenuHeight() - ((int)GameTime::GetInstance()->Read() - start_hide_display)/3;
     height = (height > 0 ? height : 0);
     return (height < GetMenuHeight() ? height : GetMenuHeight());
@@ -589,8 +595,9 @@ int Interface::GetMenuHeight() const
 
 void Interface::Show()
 {
-  if (display) return;
-  display = true;
+  if (IsDisplayed())
+    return;
+  mode = MODE_NORMAL;
   uint now = GameTime::GetInstance()->Read();
   if (start_show_display + 1000 < (int)now)
     start_show_display = now;
@@ -600,8 +607,9 @@ void Interface::Show()
 
 void Interface::Hide()
 {
-  if (!display) return;
-  display = false;
+  if (!IsDisplayed())
+    return;
+  mode = MODE_SMALL;
   uint now = GameTime::GetInstance()->Read();
   if (start_hide_display + 1000 < (int)now)
     start_hide_display = now;
@@ -823,6 +831,25 @@ bool Interface::ControlClick(const Point2i &mouse_pos, ClickType type, Point2i o
   return (type == CLICK_TYPE_DOWN) ? false : true;
 }
 
+bool Interface::ReplayClick(const Point2i &mouse_pos, ClickType /*type*/, Point2i old_mouse_pos)
+{
+  GameTime *time = GameTime::GetInstance();
+  Point2i mouse_rel_pos = mouse_pos-bottom_bar_pos;
+  Point2i size(64*zoom, replay_toolbar.GetHeight());
+
+  old_mouse_pos -= bottom_bar_pos;
+
+  Rectanglei pause_button(Point2i(13, 0), size);
+  Rectanglei play_button(Point2i(77, 0), size);
+  if (pause_button.Contains(mouse_rel_pos) ||
+      play_button.Contains(mouse_rel_pos)) {
+    time->SetWaitingForUser(!time->IsWaitingForUser());
+    return true;
+  }
+
+  return false;
+}
+
 bool Interface::DefaultClick(const Point2i &mouse_pos, ClickType type, Point2i old_mouse_pos)
 {
   Point2i mouse_rel_pos = mouse_pos-bottom_bar_pos;
@@ -856,6 +883,8 @@ bool Interface::DefaultClick(const Point2i &mouse_pos, ClickType type, Point2i o
 
 int Interface::AnyClick(const Point2i &mouse_pos, ClickType type, Point2i old_mouse_pos)
 {
+  if (mode!=MODE_NORMAL && mode!=MODE_CONTROL)
+    return 0;
   Point2i mouse_rel_pos = mouse_pos-bottom_bar_pos;
   const Team& ateam = ActiveTeam();
 
@@ -909,8 +938,9 @@ int Interface::AnyClick(const Point2i &mouse_pos, ClickType type, Point2i old_mo
       case CLICK_TYPE_UP:
         if (ateam.IsLocalHuman() && !ActiveCharacter().IsDead() &&
             Game::GetInstance()->ReadState() == Game::PLAYING &&
-            wind_button.Contains(old_mouse_pos))
-          is_control = !is_control;
+            wind_button.Contains(old_mouse_pos)) {
+              mode = (mode==MODE_CONTROL) ? MODE_NORMAL : MODE_CONTROL;
+        }
         return 1;
     }
   }
@@ -922,17 +952,24 @@ bool Interface::ActionClickDown(const Point2i &mouse_pos)
 {
   Surface& window = GetMainWindow();
 
-  if (display) {
-    Rectanglei menu_button(Point2i(), default_toolbar.GetSize());
-    if (menu_button.Contains(mouse_pos-bottom_bar_pos)) {
-      switch (AnyClick(mouse_pos, CLICK_TYPE_DOWN)) {
-        case -1: break;
-        case 0: return false;
-        default: return true;
-      }
+  if (IsDisplayed()) {
+    if (mode == MODE_REPLAY) {
+      return ReplayClick(mouse_pos, CLICK_TYPE_DOWN);
+    } else {
+      Rectanglei menu_button(Point2i(), default_toolbar.GetSize());
+      if (menu_button.Contains(mouse_pos-bottom_bar_pos)) {
+        switch (AnyClick(mouse_pos, CLICK_TYPE_DOWN)) {
+          case -1: break;
+          case 0: return false;
+          default: return true;
+        }
 
-      return is_control ? ControlClick(mouse_pos, CLICK_TYPE_DOWN)
-                        : DefaultClick(mouse_pos, CLICK_TYPE_DOWN);
+        if (mode == MODE_CONTROL) {
+          return ControlClick(mouse_pos, CLICK_TYPE_DOWN);
+        } else {
+          return DefaultClick(mouse_pos, CLICK_TYPE_DOWN);
+        }
+      }
     }
   } else {
     // Mini-interface drawn, check if we clicked on it
@@ -952,15 +989,22 @@ bool Interface::ActionClickDown(const Point2i &mouse_pos)
 
 bool Interface::ActionLongClick(const Point2i &mouse_pos, const Point2i& old_mouse_pos)
 {
-  if (display) {
-    switch (AnyClick(mouse_pos, CLICK_TYPE_LONG, old_mouse_pos)) {
-      case -1: break;
-      case 0: return false;
-      default: return true;
-    }
+  if (IsDisplayed()) {
+    if (mode == MODE_REPLAY) {
+      return ReplayClick(mouse_pos, CLICK_TYPE_LONG, old_mouse_pos);
+    } else {
+      switch (AnyClick(mouse_pos, CLICK_TYPE_LONG, old_mouse_pos)) {
+        case -1: break;
+        case 0: return false;
+        default: return true;
+      }
 
-    return is_control ? ControlClick(mouse_pos, CLICK_TYPE_LONG, old_mouse_pos)
-                      : DefaultClick(mouse_pos, CLICK_TYPE_LONG, old_mouse_pos);
+      if (mode == MODE_CONTROL) {
+        return ControlClick(mouse_pos, CLICK_TYPE_LONG, old_mouse_pos);
+      } else {
+        return DefaultClick(mouse_pos, CLICK_TYPE_LONG, old_mouse_pos);
+      }
+    }
   }
 
   return false;
@@ -970,28 +1014,35 @@ bool Interface::ActionClickUp(const Point2i &mouse_pos, const Point2i &old_click
 {
   Surface &  window  = GetMainWindow();
 
-  if (display) {
-    if (is_control) {
+  if (IsDisplayed()) {
+    if (mode == MODE_CONTROL) {
       ActiveCharacter().HandleKeyReleased_MoveLeft(false);
       ActiveCharacter().HandleKeyReleased_MoveRight(false);
       ActiveCharacter().HandleKeyReleased_Up(false);
       ActiveCharacter().HandleKeyReleased_Down(false);
     }
 
-    Rectanglei menu_button(Point2i(), default_toolbar.GetSize());
-    if (menu_button.Contains(mouse_pos-bottom_bar_pos)) {
-      switch (AnyClick(mouse_pos, CLICK_TYPE_UP, old_click_pos)) {
-        case -1: break;
-        case 0: return false;
-        default: return true;
-      }
+    if (mode == MODE_REPLAY) {
+      return ReplayClick(mouse_pos, CLICK_TYPE_UP, old_click_pos);
+    } else {
+      Rectanglei menu_button(Point2i(), default_toolbar.GetSize());
+      if (menu_button.Contains(mouse_pos-bottom_bar_pos)) {
+        switch (AnyClick(mouse_pos, CLICK_TYPE_UP, old_click_pos)) {
+          case -1: break;
+          case 0: return false;
+          default: return true;
+        }
 
-      return is_control ? ControlClick(mouse_pos, CLICK_TYPE_UP)
-                        : DefaultClick(mouse_pos, CLICK_TYPE_UP);
-    } else if (ActiveTeam().IsLocalHuman() && weapons_menu.ActionClic(mouse_pos)) {
-      // Process click on weapon menu before minimap as it should be
-      // overlayed on top of it.
-      return true;
+        if (mode == MODE_CONTROL) {
+          return ControlClick(mouse_pos, CLICK_TYPE_UP);
+        } else {
+          return DefaultClick(mouse_pos, CLICK_TYPE_UP);
+        }
+      } else if (ActiveTeam().IsLocalHuman() && weapons_menu.ActionClic(mouse_pos)) {
+        // Process click on weapon menu before minimap as it should be
+        // overlayed on top of it.
+        return true;
+      }
     }
     // No button clicked, continue
   } else {
@@ -1040,7 +1091,9 @@ void Interface::MinimapSizeDelta(int delta)
 void HideGameInterface()
 {
   Interface *interf = Interface::GetInstance();
-  if (interf->GetWeaponsMenu().IsDisplayed() || interf->IsControl())
+  if (interf->GetWeaponsMenu().IsDisplayed() ||
+      interf->GetMode()==Interface::MODE_CONTROL ||
+      interf->GetMode()==Interface::MODE_REPLAY)
     return;
   Mouse::GetInstance()->Hide();
   interf->Hide();
