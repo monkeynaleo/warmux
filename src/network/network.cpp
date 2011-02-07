@@ -19,41 +19,8 @@
  * Network layer for Warmux.
  *****************************************************************************/
 
-#ifdef _WIN32
-#  define NOMINMAX // Avoid Windows headers to define max()
-#endif
-#include <WARMUX_debug.h>
-#include <SDL_thread.h>
-#include <SDL_timer.h>
-#include <WARMUX_distant_cpu.h>
-#include <WARMUX_player.h>
-#include <WARMUX_index_server.h>
-#include "network/network.h"
-#include "network/network_local.h"
-#include "network/network_client.h"
-#include "network/network_server.h"
-#include "network/chatlogger.h"
-//-----------------------------------------------------------------------------
-#include "game/game_mode.h"
-#include "game/game.h"
-#include "graphic/video.h"
-#include "include/action.h"
-#include "include/action_handler.h"
-#include "include/app.h"
-#include "include/constant.h"
-
-#include <sys/types.h>
-#ifdef LOG_NETWORK
-#  include <sys/stat.h>
-#  include <fcntl.h>
-#  ifdef WIN32
-#    include <io.h>
-#  endif
-#endif
-//-----------------------------------------------------------------------------
-
-// Standard header, only needed for the following method
 #ifdef WIN32
+#  define NOMINMAX // Avoid Windows headers to define max()
 #  include <winsock2.h>
 #else
 #  ifdef GEKKO
@@ -73,6 +40,38 @@
 #  include <errno.h>
 #  include <unistd.h>
 #endif
+
+#ifdef LOG_NETWORK
+#  include <sys/stat.h>
+#  include <fcntl.h>
+#  ifdef WIN32
+#    include <io.h>
+#  endif
+#endif
+
+#include <sys/types.h>
+#include <SDL_thread.h>
+#include <SDL_timer.h>
+
+#include <WARMUX_debug.h>
+#include <WARMUX_distant_cpu.h>
+#include <WARMUX_player.h>
+#include <WARMUX_index_server.h>
+#include "network/network.h"
+#include "network/network_local.h"
+#include "network/network_client.h"
+#include "network/network_server.h"
+#include "network/chatlogger.h"
+//-----------------------------------------------------------------------------
+#include "game/game_mode.h"
+#include "game/game.h"
+#include "graphic/video.h"
+#include "include/action.h"
+#include "include/action_handler.h"
+#include "include/app.h"
+#include "include/constant.h"
+
+//-----------------------------------------------------------------------------
 
 #include "team/team.h"
 #include "team/teams_list.h"
