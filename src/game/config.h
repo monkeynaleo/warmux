@@ -43,13 +43,6 @@ class ObjectConfig;
 typedef struct _xmlNode xmlNode;
 
 //-----------------------------------------------------------------------------
-#ifdef WIN32
-#  define PATH_SEPARATOR "\\"
-#else
-#  define PATH_SEPARATOR "/"
-#endif
-
-//-----------------------------------------------------------------------------
 
 typedef enum
 {
