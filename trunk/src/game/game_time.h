@@ -50,15 +50,15 @@ public:
   uint ReadMin() const { return ReadSec() / 60; };
 
   void Increase();
-  bool CanBeIncreased();
+  bool CanBeIncreased() const { return stopwatch.GetValue() >= current_time; }
   void LetRealTimePassUntilFrameEnd();
 
-  bool IsWaiting();
+  bool IsWaiting() const { return waiting_for_user || waiting_for_network; }
 
-  bool IsWaitingForUser();
+  bool IsWaitingForUser() const { return waiting_for_user; }
   void SetWaitingForUser(bool value);
 
-  bool IsWaitingForNetwork();
+  bool IsWaitingForNetwork() const { return waiting_for_network; }
   void SetWaitingForNetwork(bool value);
   uint GetMSWaitingForNetwork();
 

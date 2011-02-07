@@ -56,11 +56,6 @@ void GameTime::Increase()
   MSG_DEBUG("time.increase","Real time without pause: %d; Game time: %d", stopwatch.GetValue(), current_time);
 }
 
-bool GameTime::CanBeIncreased()
-{
-  return stopwatch.GetValue() >= current_time;
-}
-
 void GameTime::LetRealTimePassUntilFrameEnd()
 {
   ASSERT(!IsWaiting());
@@ -74,27 +69,12 @@ void GameTime::LetRealTimePassUntilFrameEnd()
   } while (delay > 0);
 }
 
-bool GameTime::IsWaiting()
-{
-  return waiting_for_user || waiting_for_network;
-}
-
-bool GameTime::IsWaitingForUser()
-{
-  return waiting_for_user;
-}
-
 void GameTime::SetWaitingForUser(bool value)
 {
   if (waiting_for_user == value)
     return;
   waiting_for_user = value;
   stopwatch.SetPause(IsWaiting());
-}
-
-bool GameTime::IsWaitingForNetwork()
-{
-  return waiting_for_network;
 }
 
 void GameTime::SetWaitingForNetwork(bool value)
