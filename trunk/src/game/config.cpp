@@ -84,7 +84,7 @@ static std::string GetWarmuxPath() { return "sd:/apps/Warmux"; }
 #  include <unistd.h> // not needed by mingw
 #endif
 
-const std::string FILENAME="config.xml";
+static const std::string FILENAME="config.xml";
 
 Config::Config()
   : default_language("")
