@@ -18,6 +18,12 @@
 
 ="..\..\..\data\icon\warmux.mif", "image/x-mif", ""
 
+;Supports S60 5th Edition
+[0x1028315F], 0, 0, 0, {"Series60ProductID"}
+
+;Supports Symbian^3
+[0x20022E6D], 0, 0, 0, {"Series60ProductID"}
+
 ;*"\certificates\selfsigned.key", "\certificates\selfsigned.cer"
 
 ;Files to install
