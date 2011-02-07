@@ -462,6 +462,7 @@ Game::Game()
   , ask_for_menu(false)
   , ask_for_help_menu(false)
   , ask_for_end(false)
+  , request_pause(NO_PAUSE)
   , fps(new FramePerSecond())
   , delay(0)
   , time_of_next_frame(0)
@@ -767,7 +768,7 @@ void Game::MessageEndOfGame() const
 
   JukeBox::GetInstance()->StopAll();
 
-  if (!benching) {
+  if (!benching && !ask_for_end) {
     std::vector<TeamResults*>* results_list = TeamResults::createAllResults();
     ResultsMenu menu(*results_list, disconnected);
     menu.Run();
@@ -785,11 +786,42 @@ void Game::MessageEndOfGame() const
 void Game::MainLoop()
 {
   static bool draw = true;
+  GameTime *time = GameTime::GetInstance();
 
-  if (!GameTime::GetInstance()->IsWaitingForUser()) {
+  // One time honouring of the pause request - check GameTime::IsPaused to get the state
+  if (request_pause == START_PAUSE) {
+    time->SetPause(true);
+    request_pause = NO_PAUSE;
+  } else if (request_pause == END_PAUSE) {
+    time->SetPause(false);
+    request_pause = NO_PAUSE;
+  }
+
+  // Generally linked to replay: do minimal refresh
+  if (time->IsPaused()) {
+    RefreshInput();
+    if (time_of_next_frame < SDL_GetTicks()) {
+      //printf("Drawing as %u < %u\n", time_of_next_frame, SDL_GetTicks());
+      CallDraw();
+      // How many frame by seconds ?
+      fps->Refresh();
+      uint frame_length =  AppWarmux::GetInstance()->video->GetMaxDelay();
+      time_of_next_frame = time_of_next_frame + frame_length;
+
+      // The rate at which frames are calculated may differ over time.
+      // This if statement assures that time_of_next_frame does not get to far behind
+      // as else it would increase the game speed later.
+      if (time_of_next_frame < SDL_GetTicks())
+        time_of_next_frame = SDL_GetTicks();
+    }
+
+    return;
+  }
+
+  if (!time->IsWaitingForUser()) {
     // If we are waiting for the network then we have already done those steps.
-    if (!GameTime::GetInstance()->IsWaitingForNetwork()) {
-      GameTime::GetInstance()->Increase();
+    if (!time->IsWaitingForNetwork()) {
+      time->Increase();
 
       // Refresh clock value
       RefreshClock();
@@ -813,12 +845,12 @@ void Game::MainLoop()
 
 #ifdef DEBUG
         Action* action = new Action(Action::ACTION_TIME_VERIFY_SYNC);
-        action->Push((int)GameTime::GetInstance()->Read());
+        action->Push((int)time->Read());
         ActionHandler::GetInstance()->NewAction(action);
 #endif
       }
 
-      if (GameTime::GetInstance()->Read() % 1000 == 20 && Network::GetInstance()->IsGameMaster())
+      if (time->Read() % 1000 == 20 && Network::GetInstance()->IsGameMaster())
         PingClient();
     }
     StatStart("Game:RefreshInput()");
@@ -830,13 +862,13 @@ void Game::MainLoop()
 
     bool is_turn_master = Network::GetInstance()->IsTurnMaster();
     if (is_turn_master) {
-      GameTime::GetInstance()->SetWaitingForNetwork(false);
+      time->SetWaitingForNetwork(false);
       Action *a = new Action(Action::ACTION_GAME_CALCULATE_FRAME);
       ActionHandler::GetInstance()->NewAction(a);
     }
     bool actions_executed = ActionHandler::GetInstance()->ExecActionsForOneFrame();
     ASSERT(actions_executed || !is_turn_master);
-    GameTime::GetInstance()->SetWaitingForNetwork(!actions_executed);
+    time->SetWaitingForNetwork(!actions_executed);
 
     if (actions_executed) {
       StatStart("Game:RefreshObject()");
@@ -869,7 +901,7 @@ void Game::MainLoop()
     // try to adjust to max Frame by seconds
     draw = time_of_next_frame < SDL_GetTicks();
     // Only display if the physic engine isn't late
-    draw = draw && !(GameTime::GetInstance()->CanBeIncreased() && !GameTime::GetInstance()->IsWaiting());
+    draw = draw && !(time->CanBeIncreased() && !time->IsWaiting());
   }
 
   if (draw) {
@@ -887,8 +919,8 @@ void Game::MainLoop()
     if (time_of_next_frame < SDL_GetTicks())
       time_of_next_frame = SDL_GetTicks();
   }
-  if (!GameTime::GetInstance()->IsWaiting())
-    GameTime::GetInstance()->LetRealTimePassUntilFrameEnd();
+  if (!time->IsWaiting())
+    time->LetRealTimePassUntilFrameEnd();
 }
 
 bool Game::NewBox()
