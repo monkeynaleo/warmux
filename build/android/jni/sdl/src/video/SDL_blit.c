@@ -26,20 +26,8 @@
 #include "SDL_blit.h"
 #include "SDL_RLEaccel_c.h"
 #include "SDL_pixels_c.h"
-#ifndef __SYMBIAN32__
+#ifdef ANDROID
 #include <android/log.h>
-#endif
-
-#if defined(__GNUC__) && (defined(__i386__) || defined(__x86_64__)) && SDL_ASSEMBLY_ROUTINES
-#define MMX_ASMBLIT
-#if (__GNUC__ > 2)  /* SSE instructions aren't in GCC 2. */
-#define SSE_ASMBLIT
-#endif
-#endif
-
-#if defined(MMX_ASMBLIT)
-#include "SDL_cpuinfo.h"
-#include "mmx.h"
 #endif
 
 /* The general purpose software blit routine */
@@ -111,50 +99,6 @@ static int SDL_SoftBlit(SDL_Surface *src, SDL_Rect *srcrect,
  return(okay ? 0 : -1);
 }
 
-#ifdef MMX_ASMBLIT
-static __inline__ void SDL_memcpyMMX(Uint8 *to, const Uint8 *from, int len)
-{
- int i;
-
- for(i=0; i<len/8; i++) {
-   __asm__ __volatile__ (
-   " movq (%0), %%mm0\n"
-   " movq %%mm0, (%1)\n"
-   : : "r" (from), "r" (to) : "memory");
-   from+=8;
-   to+=8;
- }
- if (len&7)
-   SDL_memcpy(to, from, len&7);
-}
-
-#ifdef SSE_ASMBLIT
-static __inline__ void SDL_memcpySSE(Uint8 *to, const Uint8 *from, int len)
-{
- int i;
-
- __asm__ __volatile__ (
- " prefetchnta (%0)\n"
- " prefetchnta 64(%0)\n"
- " prefetchnta 128(%0)\n"
- " prefetchnta 192(%0)\n"
- : : "r" (from) );
-
- for(i=0; i<len/8; i++) {
-   __asm__ __volatile__ (
-   " prefetchnta 256(%0)\n"
-   " movq (%0), %%mm0\n"
-   " movntq %%mm0, (%1)\n"
-   : : "r" (from), "r" (to) : "memory");
-   from+=8;
-   to+=8;
- }
- if (len&7)
-   SDL_memcpy(to, from, len&7);
-}
-#endif
-#endif
-
 static void SDL_BlitCopy(SDL_BlitInfo *info)
 {
  Uint8 *src, *dst;
@@ -168,34 +112,6 @@ static void SDL_BlitCopy(SDL_BlitInfo *info)
  srcskip = w+info->s_skip;
  dstskip = w+info->d_skip;
 
-#ifdef SSE_ASMBLIT
- if(SDL_HasSSE())
- {
-   while ( h-- ) {
-     SDL_memcpySSE(dst, src, w);
-     src += srcskip;
-     dst += dstskip;
-   }
-   __asm__ __volatile__ (
-   " emms\n"
-   ::);
- }
- else
-#endif
-#ifdef MMX_ASMBLIT
- if(SDL_HasMMX())
- {
-   while ( h-- ) {
-     SDL_memcpyMMX(dst, src, w);
-     src += srcskip;
-     dst += dstskip;
-   }
-   __asm__ __volatile__ (
-   " emms\n"
-   ::);
- }
- else
-#endif
  while ( h-- ) {
    SDL_memcpy(dst, src, w);
    src += srcskip;
@@ -361,4 +277,3 @@ int SDL_CalculateBlit(SDL_Surface *surface)
  }
  return(0);
 }
-
