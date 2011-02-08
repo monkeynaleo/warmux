@@ -366,9 +366,10 @@ void Grapple::Draw()
     Double dy = cos(angle) * m_node_sprite->GetHeight();
     Double dx2 = dx*dx;
     Double dy2 = dy*dy;
-    int step = 0;
-    int size = (quad.x1-quad.x4) * (quad.x1-quad.x4)
-              +(quad.y1-quad.y4) * (quad.y1-quad.y4);
+    int step = quad.y1-quad.y4;
+    int size = quad.x1-quad.x4;
+    size *= size;
+    size += step*step; step = 0;
     size -= m_node_sprite->GetHeight();
     while ((dx2+dy2)*(step*step) < size) {
       m_node_sprite->Draw(Point2i(quad.x4 + (int)(step * dx),
