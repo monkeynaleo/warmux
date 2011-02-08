@@ -117,7 +117,7 @@ void JetPack::p_Select()
 void JetPack::p_Deselect()
 {
   active = false;
-  ActiveCharacter().SetExternForce(0,0);
+  ActiveCharacter().SetExternForceXY(Point2d());
   StopFlying();
   ActiveCharacter().SetClothe("normal");
   ActiveCharacter().SetMovement("breathe");

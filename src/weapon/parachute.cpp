@@ -39,12 +39,12 @@
 
 class ParachuteConfig : public WeaponConfig
 {
-  public:
-     Double wind_factor;
-     Double air_resist_factor;
-     Double force_side_displacement;
-     ParachuteConfig();
-     void LoadXml(const xmlNode* elem);
+public:
+  Double wind_factor;
+  Double air_resist_factor;
+  Double force_side_displacement;
+  ParachuteConfig();
+  void LoadXml(const xmlNode* elem);
 };
 
 
@@ -80,8 +80,11 @@ void Parachute::p_Select()
 
 void Parachute::p_Deselect()
 {
-  ActiveCharacter().ResetConstants();
-  ActiveCharacter().SetMovement("breathe");
+  Character &a = ActiveCharacter();
+  // Fix for excessive damage being applied, as done for jetpack
+  a.SetExternForceXY(Point2d());
+  a.ResetConstants();
+  a.SetMovement("breathe");
 }
 
 bool Parachute::p_Shoot()
@@ -104,7 +107,7 @@ void Parachute::Draw()
 
 void Parachute::Refresh()
 {
-  if (Game::GetInstance()->GetRemainingTime() <= 0)
+  if (Game::GetInstance()->GetRemainingTime() == 0)
     return;
   if (Game::GetInstance()->ReadState() != Game::PLAYING)
     return;
