@@ -567,6 +567,7 @@ void Tile::DrawTile_Clipped(const Rectanglei & worldClip) const
   // Revision 3095:
   // Sorry, I don't understand that comment. Moreover the +1 produces a bug when the ground of
   // a map have an alpha value != 255 and != 0
+  Point2i cam_pos   = Camera::GetInstance()->GetPosition();
   Point2i firstCell = Clamp(worldClip.GetPosition()>> CELL_BITS);
   Point2i lastCell  = Clamp((worldClip.GetBottomRightPoint())>> CELL_BITS);
   Point2i c;
@@ -582,17 +583,23 @@ void Tile::DrawTile_Clipped(const Rectanglei & worldClip) const
       Rectanglei destRect(c<<CELL_BITS, CELL_SIZE);
 
       destRect.Clip(worldClip);
-      Point2i ptDest = destRect.GetPosition() - Camera::GetInstance()->GetPosition();
+      Point2i ptDest = destRect.GetPosition() - cam_pos;
       Point2i ptSrc = destRect.GetPosition() - (c<<CELL_BITS);
 
       GetMainWindow().Blit(tin->GetSurface(),
                            Rectanglei(ptSrc, destRect.GetSize()),
                            ptDest);
 #else
-      GetMainWindow().Blit(tin->GetSurface(), (c<<CELL_BITS) - Camera::GetInstance()->GetPosition());
+      GetMainWindow().Blit(tin->GetSurface(), (c<<CELL_BITS) - cam_pos);
 #endif
     }
   }
+
+#if 0
+  GetMainWindow().RectangleColor(Rectanglei(worldClip.GetPosition() - cam_pos,
+                                            worldClip.GetSize()),
+                                 primary_red_color);
+#endif
 }
 
 Surface Tile::GetPart(const Rectanglei& rec)
