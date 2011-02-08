@@ -270,7 +270,10 @@ void Ground::RedrawParticleList(const std::list<Rectanglei>& list) const
   std::list<Rectanglei>::const_iterator it;
   const Camera& cam = Camera::GetConstRef();
 
-  for (it = list.begin(); it != list.end(); ++it)
-    if (it->Intersect(cam))
-      DrawTile_Clipped(*it);
+  for (it = list.begin(); it != list.end(); ++it) {
+    Rectanglei rect = *it;
+    rect.Clip(cam);
+    if (!rect.IsSizeZero())
+      DrawTile_Clipped(rect);
+  }
 }
