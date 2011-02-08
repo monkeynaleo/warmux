@@ -44,8 +44,8 @@ const uint DT_MVT = 15; //delta_t between 2 up/down/left/right mvt
 const uint DST_MIN = 4;  //dst_minimal between 2 nodes
 const int SKIP_DST = 8;
 
-bool find_first_contact_point (Point2i from, Double angle, uint length,
-                               int skip, Point2i &contact_point)
+static bool find_first_contact_point(Point2i from, Double angle, uint length,
+                                     int skip, Point2i &contact_point)
 {
   Point2d posd;
   Double x_step, y_step;
@@ -109,19 +109,19 @@ bool find_first_contact_point (Point2i from, Double angle, uint length,
          if (found)
            contact_point = closest_point;
       }
-      return true ;
+      return true;
     }
 
     contact_point = new_contact_point;
     contact_point_uncertain = false; //now we know that it's in vacuum
-    posd.x += x_step ;
-    posd.y += y_step ;
-    new_contact_point.x = (int)round(posd.x) ;
-    new_contact_point.y = (int)round(posd.y) ;
+    posd.x += x_step;
+    posd.y += y_step;
+    new_contact_point.x = (int)round(posd.x);
+    new_contact_point.y = (int)round(posd.y);
     length--;
   }
 
-  return false ;
+  return false;
 }
 
 class GrappleConfig : public EmptyWeaponConfig
@@ -229,7 +229,7 @@ bool Grapple::TryAddNode()
   // Check if the rope collide something
 
   if (find_first_contact_point(m_fixation_point, angle, lg, SKIP_DST, contact_point)) {
-    rope_angle = ActiveCharacter().GetRopeAngle() ;
+    rope_angle = ActiveCharacter().GetRopeAngle();
 
     // if contact point is the same as position of the last node
     // (can happen because of jitter applied in find_first_contact_point),
@@ -310,7 +310,7 @@ void Grapple::NotifyMove(bool collision)
 void Grapple::Refresh()
 {
   if (!attached)
-    return ;
+    return;
 
   if (move_left_pressed && !move_right_pressed) {
     GoLeft();
@@ -368,22 +368,22 @@ void Grapple::Draw()
     int size = (quad.x1-quad.x4) * (quad.x1-quad.x4)
               +(quad.y1-quad.y4) * (quad.y1-quad.y4);
     size -= m_node_sprite->GetHeight();
-    while ( (step*dx*step*dx)+(step*dy*step*dy) < size ) {
+    while ((step*dx*step*dx)+(step*dy*step*dy) < size) {
       m_node_sprite->Draw(Point2i(quad.x4 + (int)(step * dx),
                                   quad.y4 + (int)(step * dy)));
       step++;
     }
 
-    quad.x1 = quad.x4 ;
-    quad.y1 = quad.y4 ;
-    quad.x2 = quad.x3 ;
-    quad.y2 = quad.y3 ;
+    quad.x1 = quad.x4;
+    quad.y1 = quad.y4;
+    quad.x2 = quad.x3;
+    quad.y2 = quad.y3;
     prev_angle = angle;
-    angle = it->angle ;
+    angle = it->angle;
   }
 
   m_hook_sprite->SetRotation_rad(-prev_angle);
-  m_hook_sprite->Draw( rope_nodes.front().pos - m_hook_sprite->GetSize()/2);
+  m_hook_sprite->Draw(rope_nodes.front().pos - m_hook_sprite->GetSize()/2);
 }
 
 void Grapple::AttachRope(const Point2i& contact_point)
@@ -471,7 +471,7 @@ void Grapple::DetachNode()
   // remove last node
   rope_nodes.pop_back();
 
-  m_fixation_point = rope_nodes.back().pos ;
+  m_fixation_point = rope_nodes.back().pos;
 
   Point2i pos;
   ActiveCharacter().GetRelativeHandPosition(pos);
@@ -516,10 +516,10 @@ void Grapple::GoDown()
   if (ActiveCharacter().GetRopeLength()*PIXEL_PER_METER >= (int)cfg().max_rope_length)
     return;
 
-  delta_len = 0.1 ;
-  ActiveCharacter().ChangePhysRopeSize(delta_len) ;
-  ActiveCharacter().UpdatePosition() ;
-  delta_len = 0 ;
+  delta_len = 0.1;
+  ActiveCharacter().ChangePhysRopeSize(delta_len);
+  ActiveCharacter().UpdatePosition();
+  delta_len = 0;
 }
 
 void Grapple::StopDown()
@@ -532,18 +532,18 @@ void Grapple::GoRight()
   if (!go_right) {
     cable_sound.Play("default", "weapon/grapple_cable");
   }
-  go_right = true ;
+  go_right = true;
   ActiveCharacter().SetExternForce(cfg().push_force,0);
   ActiveCharacter().SetDirection(DIRECTION_RIGHT);
-  ActiveCharacter().UpdatePosition() ;
+  ActiveCharacter().UpdatePosition();
 }
 
 void Grapple::StopRight()
 {
-  go_right = false ;
+  go_right = false;
 
   if (go_left || go_right)
-    return ;
+    return;
 
   ActiveCharacter().SetExternForce(0,0);
 }
@@ -553,18 +553,18 @@ void Grapple::GoLeft()
   if (!go_left) {
     cable_sound.Play("default", "weapon/grapple_cable");
   }
-  go_left = true ;
+  go_left = true;
   ActiveCharacter().SetExternForce(-cfg().push_force,0);
   ActiveCharacter().SetDirection(DIRECTION_LEFT);
-  ActiveCharacter().UpdatePosition() ;
+  ActiveCharacter().UpdatePosition();
 }
 
 void Grapple::StopLeft()
 {
-  go_left = false ;
+  go_left = false;
 
   if (go_left || go_right)
-    return ;
+    return;
 
   ActiveCharacter().SetExternForce(0,0);
 }
@@ -700,7 +700,7 @@ void Grapple::PrintDebugRope()
   }
 }
 
-std::string Grapple::GetWeaponWinString(const char *TeamName, uint items_count ) const
+std::string Grapple::GetWeaponWinString(const char *TeamName, uint items_count) const
 {
   return Format(ngettext("%s team has won %u grapple!",
                          "%s team has won %u grapples!",
