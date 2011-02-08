@@ -27,9 +27,6 @@
 #include "SDL_timer.h"
 #include "SDL_audio.h"
 #include "SDL_sysaudio.h"
-#include "SDL_mixer_MMX.h"
-#include "SDL_mixer_MMX_VC.h"
-#include "SDL_mixer_m68k.h"
 
 /* This table is used to add two sound values together and pin
  * the value to avoid overflow.  (used with permission from ARDI)
@@ -111,9 +108,6 @@ void SDL_MixAudio (Uint8 *dst, const Uint8 *src, Uint32 len, int volume)
  switch (format) {
 
    case AUDIO_U8: {
-#if defined(__GNUC__) && defined(__M68000__) && !defined(__mcoldfire__) && defined(SDL_ASSEMBLY_ROUTINES)
-     SDL_MixAudio_m68k_U8((char*)dst,(char*)src,(unsigned long)len,(long)volume,(char *)mix8);
-#else
      Uint8 src_sample;
 
      while ( len-- ) {
@@ -123,30 +117,10 @@ void SDL_MixAudio (Uint8 *dst, const Uint8 *src, Uint32 len, int volume)
        ++dst;
        ++src;
      }
-#endif
    }
    break;
 
    case AUDIO_S8: {
-#if defined(SDL_BUGGY_MMX_MIXERS) /* buggy, so we're disabling them. --ryan. */
-#if defined(__GNUC__) && defined(__i386__) && defined(SDL_ASSEMBLY_ROUTINES)
-     if (SDL_HasMMX())
-     {
-       SDL_MixAudio_MMX_S8((char*)dst,(char*)src,(unsigned int)len,(int)volume);
-     }
-     else
-#elif ((defined(_MSC_VER) && defined(_M_IX86)) || defined(__WATCOMC__)) && defined(SDL_ASSEMBLY_ROUTINES)
-     if (SDL_HasMMX())
-     {
-       SDL_MixAudio_MMX_S8_VC((char*)dst,(char*)src,(unsigned int)len,(int)volume);
-     }
-     else
-#endif
-#endif
-
-#if defined(__GNUC__) && defined(__M68000__) && !defined(__mcoldfire__) && defined(SDL_ASSEMBLY_ROUTINES)
-     SDL_MixAudio_m68k_S8((char*)dst,(char*)src,(unsigned long)len,(long)volume);
-#else
      {
      Sint8 *dst8, *src8;
      Sint8 src_sample;
@@ -172,30 +146,10 @@ void SDL_MixAudio (Uint8 *dst, const Uint8 *src, Uint32 len, int volume)
        ++src8;
      }
      }
-#endif
    }
    break;
 
    case AUDIO_S16LSB: {
-#if defined(SDL_BUGGY_MMX_MIXERS) /* buggy, so we're disabling them. --ryan. */
-#if defined(__GNUC__) && defined(__i386__) && defined(SDL_ASSEMBLY_ROUTINES)
-     if (SDL_HasMMX())
-     {
-       SDL_MixAudio_MMX_S16((char*)dst,(char*)src,(unsigned int)len,(int)volume);
-     }
-                        else
-#elif ((defined(_MSC_VER) && defined(_M_IX86)) || defined(__WATCOMC__)) && defined(SDL_ASSEMBLY_ROUTINES)
-     if (SDL_HasMMX())
-     {
-       SDL_MixAudio_MMX_S16_VC((char*)dst,(char*)src,(unsigned int)len,(int)volume);
-     }
-     else
-#endif
-#endif
-
-#if defined(__GNUC__) && defined(__M68000__) && !defined(__mcoldfire__) && defined(SDL_ASSEMBLY_ROUTINES)
-     SDL_MixAudio_m68k_S16LSB((short*)dst,(short*)src,(unsigned long)len,(long)volume);
-#else
      {
      Sint16 src1, src2;
      int dst_sample;
@@ -221,14 +175,10 @@ void SDL_MixAudio (Uint8 *dst, const Uint8 *src, Uint32 len, int volume)
        dst += 2;
      }
      }
-#endif
    }
    break;
 
    case AUDIO_S16MSB: {
-#if defined(__GNUC__) && defined(__M68000__) && !defined(__mcoldfire__) && defined(SDL_ASSEMBLY_ROUTINES)
-     SDL_MixAudio_m68k_S16MSB((short*)dst,(short*)src,(unsigned long)len,(long)volume);
-#else
      Sint16 src1, src2;
      int dst_sample;
      const int max_audioval = ((1<<(16-1))-1);
@@ -252,7 +202,6 @@ void SDL_MixAudio (Uint8 *dst, const Uint8 *src, Uint32 len, int volume)
        dst[0] = dst_sample&0xFF;
        dst += 2;
      }
-#endif
    }
    break;
 
@@ -261,4 +210,3 @@ void SDL_MixAudio (Uint8 *dst, const Uint8 *src, Uint32 len, int volume)
      return;
  }
 }
-
