@@ -157,7 +157,7 @@
 				FloatingPointModel="0"
 				FloatingPointExceptions="true"
 				RuntimeTypeInfo="true"
-				UsePrecompiledHeader="0"
+				UsePrecompiledHeader="1"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="true"
 				DebugInformationFormat="3"
@@ -248,7 +248,7 @@
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				FloatingPointExceptions="true"
-				UsePrecompiledHeader="0"
+				UsePrecompiledHeader="1"
 				PrecompiledHeaderThrough=""
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="true"
@@ -500,6 +500,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\src\game\game_time.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\src\game\stopwatch.cpp"
 					>
 				</File>
@@ -509,10 +513,6 @@
 				</File>
 				<File
 					RelativePath="..\..\src\game\time.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\game\time.h"
 					>
 				</File>
 			</Filter>
@@ -709,6 +709,14 @@
 				</File>
 				<File
 					RelativePath="..\..\src\gui\figure_widget.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\gui\file_list_box.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\gui\file_list_box.h"
 					>
 				</File>
 				<File
@@ -1221,6 +1229,14 @@
 				</File>
 				<File
 					RelativePath="..\..\src\menu\pause_menu.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\menu\replay_menu.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\menu\replay_menu.h"
 					>
 				</File>
 				<File
