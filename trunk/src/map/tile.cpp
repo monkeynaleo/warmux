@@ -86,8 +86,8 @@ void Tile::InitTile(const Point2i &pSize, const Point2i & upper_left_offset, con
 
 void Tile::Dig(const Point2i &position, const Surface& dig)
 {
-  Point2i  firstCell = Clamp(position / CELL_SIZE);
-  Point2i  lastCell  = Clamp((position + dig.GetSize()) / CELL_SIZE);
+  Point2i  firstCell = Clamp(position>> CELL_BITS);
+  Point2i  lastCell  = Clamp((position + dig.GetSize())>> CELL_BITS);
   uint     index     = firstCell.y*nbCells.x;
 
   m_preview->Lock();
@@ -550,8 +550,8 @@ bool Tile::IsEmpty(const Point2i & pos) const
 
 void Tile::DrawTile()
 {
-  Point2i firstCell = Clamp(Camera::GetInstance()->GetPosition() / CELL_SIZE);
-  Point2i lastCell = Clamp((Camera::GetInstance()->GetPosition() + Camera::GetInstance()->GetSize()) / CELL_SIZE);
+  Point2i firstCell = Clamp(Camera::GetInstance()->GetPosition()>> CELL_BITS);
+  Point2i lastCell = Clamp((Camera::GetInstance()->GetPosition() + Camera::GetInstance()->GetSize())>> CELL_BITS);
   Point2i i;
   for (i.y = firstCell.y; i.y <= lastCell.y; i.y++)
     for (i.x = firstCell.x; i.x <= lastCell.x; i.x++)
@@ -567,8 +567,8 @@ void Tile::DrawTile_Clipped(const Rectanglei & worldClip) const
   // Revision 3095:
   // Sorry, I don't understand that comment. Moreover the +1 produces a bug when the ground of
   // a map have an alpha value != 255 and != 0
-  Point2i firstCell = Clamp(worldClip.GetPosition() / CELL_SIZE);
-  Point2i lastCell  = Clamp((worldClip.GetBottomRightPoint()) / CELL_SIZE);
+  Point2i firstCell = Clamp(worldClip.GetPosition()>> CELL_BITS);
+  Point2i lastCell  = Clamp((worldClip.GetBottomRightPoint())>> CELL_BITS);
   Point2i c;
 
   for (c.y = firstCell.y; c.y <= lastCell.y; c.y++) {
@@ -584,7 +584,6 @@ void Tile::DrawTile_Clipped(const Rectanglei & worldClip) const
       destRect.Clip(worldClip);
       Point2i ptDest = destRect.GetPosition() - Camera::GetInstance()->GetPosition();
       Point2i ptSrc = destRect.GetPosition() - (c<<CELL_BITS);
-
 
       GetMainWindow().Blit(tin->GetSurface(),
                            Rectanglei(ptSrc, destRect.GetSize()),
@@ -603,8 +602,8 @@ Surface Tile::GetPart(const Rectanglei& rec)
   part.Fill(0x00000000);
   part.SetAlpha(SDL_SRCALPHA, 0);
 
-  Point2i firstCell = Clamp(rec.GetPosition() / CELL_SIZE);
-  Point2i lastCell = Clamp((rec.GetPosition() + rec.GetSize()) / CELL_SIZE);
+  Point2i firstCell = Clamp(rec.GetPosition()>> CELL_BITS);
+  Point2i lastCell = Clamp((rec.GetPosition() + rec.GetSize())>> CELL_BITS);
   Point2i i = nbCells - 1;
   bool    force_copy = SDL_GetVideoInfo()->vfmt->BytesPerPixel>2;
 
