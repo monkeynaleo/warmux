@@ -145,7 +145,7 @@ NONSHARABLE_CLASS(EpocSdlEnv)
     static void AppendThread(TInt aThreadId);
     static TBool IsSuspend();
     static void ScreenSizeChanged();
-    //static const CFbsBitmap** BitGdiCanvas();
+    static void UpdateHwSurface();
    //  static CSDL::TAppOrientation AppOrientation();
    // static TInt SetVolume(TInt aVolume);
    // static TInt Volume();

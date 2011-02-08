@@ -125,10 +125,10 @@ class CSDL : public CBase
     	EEnableFocusStop   = 0x1, //let SDL thread to be stopped if not on top
     	EDrawModeDSB	   = 0x2, //Depricated, Default drawmode is DSA, but if you request a antitearing this flag may help 
     	EAllowImageResize  = 0x4, //image is resized if requested image does not fit to screen
-    	EDrawModeDSBDoubleBuffer 		= 0xA,      //Depricated
-    	EDrawModeDSBIncrementalUpdate 	= 0x12,     //Depricated
+    	EDrawModeDSBDoubleBuffer 		= 0xA,  //Depricated
+    	EDrawModeDSBIncrementalUpdate 	= 0x12, //Depricated
     	EAllowImageResizeKeepRatio		= 0x24,	
-     	EDrawModeGdi					= 0x40,	  //Depricated, use BITGDI surface instead of Direct Screen Access
+    	EDrawModeGdi					= 0x40,	  //Depricated, use BITGDI surface instead of Direct Screen Access
     	EDrawModeDSBAsync				= 0x82,   //Depricated, set DSB to drawn asynchrounsuly, all frames may not be viewed
      	EOwnThread						= 0x1000, //always put SDL running its own thread. Has issues, plz avoid if possible :-)
      	EMainThread						= 0x2000, //always put SDL in application thread. Default
@@ -228,13 +228,9 @@ inline TInt CSDL::BuildDate(TDes& aDes) const
     TAny* null = NULL;
     return const_cast<CSDL*>(this)->Extension_(KSDLExtensionBuildDate, null, static_cast<TAny*>(&aDes));
     }
-/*
-inline TInt CSDL::BitGdiCanvas() const
-    {
-    TAny* null = NULL;
-    return  const_cast<CSDL*>(this)->Extension_(KSDLExtensionBitGdiCanvas, null, NULL);
-    }
-*/
+
+
+
 
 #endif
 

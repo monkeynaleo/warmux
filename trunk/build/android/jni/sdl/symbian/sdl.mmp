@@ -4,6 +4,7 @@ TARGETTYPE	lib
 STDCPP
 MACRO		OPENC
 MACRO		SYMBIAN3
+MACRO		OPENVGSUPPORT
 MACRO		NO_SIGNAL_H
 MACRO		ENABLE_EPOC
 MACRO		DISABLE_JOYSTICK
@@ -54,7 +55,6 @@ SOURCE		video/SDL_stretch.c
 SOURCE		video/SDL_surface.c
 SOURCE		video/SDL_video.c
 SOURCE		video/SDL_yuv.c
-SOURCE		video/SDL_yuv_mmx.c
 SOURCE		video/SDL_yuv_sw.c
 SOURCE		video/symbian/SDL_epocevents.cpp 
 SOURCE		video/symbian/SDL_epocvideo.cpp
@@ -62,6 +62,7 @@ SOURCE		video/symbian/SDL_epocvideo.cpp
 SOURCEPATH	.
 SOURCE		src/drawbitmapfilter.cpp
 SOURCE		src/dsa.cpp
+SOURCE		src/hwablitter.cpp
 SOURCE		src/sdlappsrv.cpp
 SOURCE		src/sdlenv.cpp
 SOURCE		src/sdlenvutils.cpp
@@ -69,6 +70,7 @@ SOURCE		src/sdlexe.cpp
 SOURCE		src/sdllib.cpp
 SOURCE		src/streamplayer.cpp
 SOURCE		src/vectorbuffer.cpp
+
 
 SYSTEMINCLUDE	\epoc32\include
 SYSTEMINCLUDE	\epoc32\include\mw
