@@ -7,8 +7,8 @@ LOCAL_MODULE := application
 
 SRC_SRCS := *.cpp ai/*.cpp character/*.cpp game/*.cpp graphic/*.cpp gui/*.cpp \
             gui/big/*.cpp include/*.cpp interface/*.cpp map/*.cpp menu/*.cpp \
-            network/*.cpp object/*.cpp particles/*.cpp sound/*.cpp team/*.cpp \
-            tool/*.cpp weapon/*.cpp
+            network/*.cpp object/*.cpp particles/*.cpp replay/*.cpp \
+            sound/*.cpp team/*.cpp tool/*.cpp weapon/*.cpp
 
 WMX_SRCS := action/*.cpp base/*.cpp maths/*.cpp net/*.cpp tools/*.cpp
 
