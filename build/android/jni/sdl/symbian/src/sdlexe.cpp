@@ -35,9 +35,37 @@
 #include <apgwgnam.h> 
 #include <versioninfo.h>  // VersionInfo
 
+#include "hwablitter.h"
+
 #include "drawbitmapfilter.h"
 
+_LIT(KGlobalPath, "\\data\\sdl\\");
 
+
+
+void OSPrint(CFbsBitmap& aCanvas, const TRect& aRect, const TDesC& aText)
+    {
+    CFbsBitmapDevice* bd = CFbsBitmapDevice::NewL(&aCanvas);
+    CleanupStack::PushL(bd);
+    CFbsBitGc* gc;
+    User::LeaveIfError(bd->CreateContext(gc));
+    CleanupStack::PushL(gc);
+    gc->SetDrawMode(CGraphicsContext::EDrawModeWriteAlpha);
+    gc->Activate(bd);
+   
+    gc->SetPenStyle(CGraphicsContext::ESolidPen);
+    gc->SetBrushStyle(CGraphicsContext::ESolidBrush);
+    gc->SetPenColor(KRgbBlack);
+    gc->SetBrushColor(KRgbYellow);
+    gc->DrawRect(aRect);
+    const CFont* font = AknLayoutUtils::FontFromId(EAknLogicalFontPrimarySmallFont);
+    gc->UseFont(font);
+    const TInt h = font->BaselineOffsetInPixels();
+    DrawUtils::DrawText(*gc, aText, aRect, (aRect.Height() / 2) + h, CGraphicsContext::ECenter, 0, font);
+    gc->DiscardFont();
+   
+    CleanupStack::PopAndDestroy(2);
+    }
 
 
 //  FORWARD DECLARATIONS
@@ -114,7 +142,7 @@ void GetPrivatePath(RFs& aFs, TDes& aName)
     }
 
 
-NONSHARABLE_CLASS(CZoomer) : public CBase, public MBlitter
+NONSHARABLE_CLASS(CZoomer) : public CBlitter
 	{
 public:
 	static CZoomer* NewL();
@@ -151,7 +179,6 @@ TBool CZoomer::BitBlt(CBitmapContext& aGc,
  	const TRect& aTargetRect,
  	const TSize& aSize)
 	{
-	
 	if(aSize.iHeight == aTargetRect.Size().iHeight && aSize.iWidth == aTargetRect.Size().iWidth)
 	    return EFalse;
 	
@@ -480,7 +507,7 @@ NONSHARABLE_CLASS(CSDLAppUi) : public CAknAppUi, public MExitWait, public MSDLOb
     	static void ParseFlags(const TDesC8& aString, TInt& aSdlFlags, TInt& aExeFlags);
     	static void FlagsFromFileL(const TDesC& aFile, TInt& aSdlFlags, TInt& aExeFlags);
     	static void MakeCCmdLineL(const TDesC8& Cmd, CDesC8Array& aArray);
-    	static TBool FindFileL(const TDesC& aFile, TDes& aName);
+    	static TBool FindFileL(const TDesC& aFile, TDes& aName, const TDesC& aSearchPath = KNullDesC);
 	private:
 		CExitWait* iWait;
 		CSDLWin* iSDLWin;
@@ -495,7 +522,7 @@ NONSHARABLE_CLASS(CSDLAppUi) : public CAknAppUi, public MExitWait, public MSDLOb
 		CFbsBitmap*	iCBmp;
 		CFbsBitmap*	iAlpha;
 		CFbsBitmap* iCBmpMove;
-		CZoomer* iZoomer;
+		CBlitter* iZoomer;
 	//	TTime iLastPress;
 	//	CSDL::TOrientationMode iOrientation;
 	};
@@ -645,6 +672,9 @@ CSDLAppUi::~CSDLAppUi()
 	delete iIdle;
 	if(iStarter != NULL)
 		iStarter->Cancel();
+	if(iSdl != NULL)
+	    iSdl->SetBlitter(NULL);
+	delete iZoomer;
 	delete iStarter;
 	delete iWait;
 	delete iSdl;
@@ -653,7 +683,6 @@ CSDLAppUi::~CSDLAppUi()
 	delete iCBmp;
 	delete iAlpha;
 	delete iCBmpMove;
-	delete iZoomer;
 	}
 
 
@@ -693,17 +722,20 @@ void CSDLAppUi::ParseFlags(const TDesC8& aString, TInt& aSdlFlags, TInt& aExeFla
             {_L8("MainThread"), CSDL::EMainThread},                   
             {_L8("ImageResizeZoomOut"), CSDL::EImageResizeZoomOut},            
             {_L8("AutoOrientation"), CSDL::EAutoOrientation},             
-            {_L8("DisableVolumeKeys"), CSDL::EDisableVolumeKeys}                     
+            {_L8("DisableVolumeKeys"), CSDL::EDisableVolumeKeys}
     };
     
     
     const SFlag exeFlags[] = {
-            {_L8("ParamQuery"),SDLEnv::EParamQuery}, 
-            {_L8("AllowConsoleView"),SDLEnv::EAllowConsoleView}, 
-            {_L8("VirtualMouse"),SDLEnv::EVirtualMouse}, 
-            {_L8("ParamQueryDialog"),SDLEnv::EParamQueryDialog},
-            {_L8("FastZoomBlitter"),SDLEnv::EFastZoomBlitter},
-            {_L8("EnableVirtualMouseMoveEvents"),SDLEnv::EEnableVirtualMouseMoveEvents},
+            {_L8("ParamQuery"), SDLEnv::EParamQuery}, 
+            {_L8("AllowConsoleView"), SDLEnv::EAllowConsoleView}, 
+            {_L8("VirtualMouse"), SDLEnv::EVirtualMouse}, 
+            {_L8("ParamQueryDialog"), SDLEnv::EParamQueryDialog},
+            {_L8("FastZoomBlitter"), SDLEnv::EFastZoomBlitter},
+            {_L8("EnableVirtualMouseMoveEvents"), SDLEnv::EEnableVirtualMouseMoveEvents},
+            {_L8("HWABlitter"),SDLEnv::EHWABlitter},
+            {_L8("HWABlitterNoScale"), SDLEnv::EHWABlitterNoScale},
+            {_L8("HWABlitterRatioScale"), SDLEnv::EHWABlitterRatioScale},
     };
 
     
@@ -756,16 +788,24 @@ void CSDLAppUi::ParseFlags(const TDesC8& aString, TInt& aSdlFlags, TInt& aExeFla
 	
 void CSDLAppUi::FlagsFromFileL(TInt& aSdlFlags, TInt& aExeFlags) 
      {
-     _LIT(flagsfile, "sdl_flags.txt" );
+     _LIT(flagsfile, "sdl_flags.txt");
      TFileName name;
-     if(FindFileL(flagsfile, name))
+     if(FindFileL(flagsfile, name) || FindFileL(flagsfile, name, KGlobalPath))
          FlagsFromFileL(name, aSdlFlags, aExeFlags);
      }
 
-TBool CSDLAppUi::FindFileL(const TDesC& aFile, TDes& aName)
+TBool CSDLAppUi::FindFileL(const TDesC& aFile, TDes& aName, const TDesC& aSearchPath)
      {
      RFs& fs = CEikonEnv::Static()->FsSession();
-     GetPrivatePath(fs, aName);
+     if(aSearchPath.Length() == 0)
+         {
+         GetPrivatePath(fs, aName);
+         }
+     else
+         {
+         aName.Insert(0, aSearchPath);
+         aName.Insert(0, _L("C:"));
+         }
      aName.Append(aFile);
      TEntry entry;
      TBool found = ETrue;
@@ -944,7 +984,20 @@ TBool CSDLAppUi::ProcessCommandParametersL(CApaCommandLine &aCommandLine)
                     *iEikonEnv->ScreenDevice());
     iSdl->AppendOverlay(iCursor, 0);
     
-    if(gSDLClass.AppFlags() & SDLEnv::EFastZoomBlitter)
+    if(gSDLClass.AppFlags() & SDLEnv::EHWABlitter)
+        {
+        RWindow& win = iSDLWin->GetWindow();
+        TInt flags = 0;
+        if((gSDLClass.AppFlags() & SDLEnv::EHWABlitterNoScale) == SDLEnv::EHWABlitterNoScale)
+            flags = CHWABlitter::EPreventScale;
+        if((gSDLClass.AppFlags() & SDLEnv::EHWABlitterRatioScale) == SDLEnv::EHWABlitterRatioScale)
+            flags = CHWABlitter::EPreserveRatio;
+        iZoomer = CHWABlitter::NewL(win, flags);
+        iSdl->SetBlitter(iZoomer);
+       // ASSERT(!gSDLClass.AppFlags() & SDLEnv::EFastZoomBlitter);
+        }
+    
+    if(iZoomer == NULL && gSDLClass.AppFlags() & SDLEnv::EFastZoomBlitter)
         {
         iZoomer = CZoomer::NewL();
         iSdl->SetBlitter(iZoomer);
@@ -1028,7 +1081,7 @@ TBool CSDLAppUi::HandleKeyL(const TWsEvent& aEvent)
 					                   
 					iCursor.MakeEvent(type, event, iSDLWin->Position());
 					iSdl->AppendWsEvent(event);
-					if(gSDLClass.AppFlags() & SDLEnv::EEnableVirtualMouseMoveEvents)
+					if((gSDLClass.AppFlags() & SDLEnv::EEnableVirtualMouseMoveEvents) == SDLEnv::EEnableVirtualMouseMoveEvents)
 					    {
 					    iCursor.ToggleMove();
 					    CFbsBitmap* bmp = iCursor.IsMove()? iCBmpMove : iCBmp;
@@ -1098,8 +1151,11 @@ TInt CSDLAppUi::SdlEvent(TInt aEvent, TInt /*aParam*/)
 	switch(aEvent)
 		{
 		case MSDLObserver::EEventResume:
+		    iSdl->RedrawRequest();
 			break;
 		case MSDLObserver::EEventSuspend:
+		    if(iZoomer != NULL)
+		        iZoomer->Release();
 			//if(iExitRequest)
 			//	return MSDLObserver::ESuspendNoSuspend;
 			break;

@@ -257,9 +257,15 @@ TUint8* EpocSdlEnv::LockHwSurface()
 
 void EpocSdlEnv::UpdateSwSurface()
 	{
-	gEpocEnv->iDsa->UpdateSwSurface();
+	gEpocEnv->iDsa->UpdateSurface();
 	}
-	
+
+void EpocSdlEnv::UpdateHwSurface()
+    {
+    if(gEpocEnv->iDsa->IsHwScreenSurface())
+        gEpocEnv->iDsa->UpdateSurface();
+    }
+
 TBool EpocSdlEnv::AddUpdateRect(TUint8* aAddress, const TRect& aUpdateRect, const TRect& aRect)
 	{
 	return gEpocEnv->iDsa->AddUpdateRect(aAddress, aUpdateRect, aRect);
@@ -369,6 +375,10 @@ void EpocSdlEnv::FreeSurface()
 	Request(CSdlAppServ::EAppSrvDsaStatus);
 	if(gEpocEnv->iDsa != NULL)
 	    {
+	    if(gEpocEnv->iDsa->IsHwScreenSurface())
+	        {
+	        gEpocEnv->iDsa->SetUpdating(EFalse);
+	        }
 	    gEpocEnv->iDsa->ASSERT_Update(__LINE__);
 	    gEpocEnv->iDsa->Free();
 	    }
@@ -563,7 +573,7 @@ void EpocSdlEnvData::Free()
     	return;
     	}
     	
-   	__ASSERT_ALWAYS(iArgv == NULL || CheckSdl(), PANIC(KErrNotReady));
+   	__ASSERT_ALWAYS(iArgv == NULL || CheckSdl(), PANIC(KErrInUse));
     }
  
  void EpocSdlEnvData::Delete()

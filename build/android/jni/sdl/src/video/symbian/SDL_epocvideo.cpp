@@ -330,11 +330,13 @@ int VideoInit(_THIS, SDL_PixelFormat *vformat)
 
 SDL_Rect **ListModes(_THIS, SDL_PixelFormat *format, Uint32 flags)
 	{
+    /*
 	if(flags & SDL_HWSURFACE)
 		{
 		if(format->BytesPerPixel != 4) //in HW only full color is supported
 			return NULL;
 		}
+	*/
 	if(flags & SDL_FULLSCREEN)
 		{
 		return &Private->iRectPtr;
@@ -733,7 +735,9 @@ SDL_Surface *SetVideoMode(_THIS, SDL_Surface *current,
    	
    	if(flags & SDL_HWSURFACE)
    	    {
+   	    const TInt err = EpocSdlEnv::AllocHwSurface(TSize(width, height), GetDisplayMode(current->format->BitsPerPixel));
    	    current->flags |= SDL_HWSURFACE;
+   	    current->pixels = NULL;
    	    }
    	else
    	    {
@@ -874,19 +878,20 @@ static void RequestVideoUpdate(_THIS, int numrects, SDL_Rect* rects)
 
 static void DirectUpdate(_THIS, int numrects, SDL_Rect *rects)
 	{
-	//gLastError = _L("in du");
+       
 	if(!EpocSdlEnv::IsVideoThread())
 	    {
         RequestVideoUpdate(_this, numrects, rects);
 	    return;
 	    } 
-
+	
+	
 	if(EpocSdlEnv::IsDsaAvailable())
 		{
 		const TSize screenSize = EpocSdlEnv::WindowSize();
 		if(screenSize.iWidth < SDL_VideoSurface->w || screenSize.iHeight <  SDL_VideoSurface->h)
-	    return; // video surface dimenstions do not match 
-	    
+		    return; // video surface dimenstions do not match 
+	    	
 		if(Private->iSwSurface /*&& 0 == (current_video->hidden->iFlags & EContainerChange)*/)
 		    {
 		    const TRect target(Private->iScreenPos, Private->iSwSurfaceSize);
@@ -895,14 +900,20 @@ static void DirectUpdate(_THIS, int numrects, SDL_Rect *rects)
 		    	const TRect rect(TPoint(rects[i].x, rects[i].y),
 		    		TSize(rects[i].w, rects[i].h));
 		    	if(!EpocSdlEnv::AddUpdateRect(Private->iSwSurface, rect, target))
+		    	    {
 		    		return; //not succesful
+		    	    }
 		    	}
-		    EpocSdlEnv::UpdateSwSurface();
+	        EpocSdlEnv::UpdateSwSurface();
+		    }
+		else
+		    {
+		    EpocSdlEnv::UpdateHwSurface();
 		    }
 		EpocSdlEnv::PostUpdate();
 		}
    else
-    	{      
+    	{  
     	EpocSdlEnv::WaitDsaAvailable();              
     	}
 	if(0 == (Private->iFlags & EFocusedWindow))

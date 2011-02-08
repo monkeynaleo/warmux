@@ -61,7 +61,6 @@ public:
     CSDL::TAppOrientation   		iAppOrientation;   
     TInt iStackSize;
     TUint32                         iColor;
- //   const CFbsBitmap**              iBitGdiCanvas;
     CArrayFix<TInt>*                iChildThreads;                      
     };
   

@@ -51,6 +51,7 @@ NONSHARABLE_CLASS(CDsa) : public CBase
 		
 		
 		inline TBool IsDsaAvailable() const;
+		inline TBool IsHwScreenSurface() const;
         inline const TRect& ScreenRect() const;
         
         inline void ASSERT_Update(int line) const;
@@ -68,7 +69,7 @@ NONSHARABLE_CLASS(CDsa) : public CBase
    		TInt SetPalette(TInt aFirst, TInt aCount, TUint32* aPalette);
    		void LockPalette(TBool aLock);
    		TBool AddUpdateRect(const TUint8* aBits, const TRect& aUpdateRect, const TRect& aRect);
-   		void UpdateSwSurface();
+   		void UpdateSurface();
    		void SetOrientation(CSDL::TOrientationMode aMode);
    		
    		TSize WindowSize() const;
@@ -112,6 +113,7 @@ NONSHARABLE_CLASS(CDsa) : public CBase
 		virtual TUint8* LockSurface() = 0;
 		virtual void UnlockHWSurfaceRequestComplete() = 0;
 		virtual void UnlockHwSurface() = 0;
+		virtual void Update() = 0;
 	//	virtual void Resume() = 0;
 		
 		virtual void Stop();
@@ -148,9 +150,9 @@ NONSHARABLE_CLASS(CDsa) : public CBase
 		inline const TRect& HwRect() const;
 		inline TBool IsDrawDisabled() const;
 		inline MBlitter* Blitter() const;
-		virtual CBitmapContext* Gc() = 0;
+	//	virtual CBitmapContext* Gc() = 0;
 		
-		void DrawOverlays();	
+		void DrawOverlays(CBitmapContext& aGc) const;	
 		CDsa(RWsSession& aSession);
 		void SetTargetRect();
 		void Start();
@@ -181,6 +183,7 @@ NONSHARABLE_CLASS(CDsa) : public CBase
 			EUseBlit                = 0x800,
 			ENoZoomOut              = 0x1000,
 			EDisableDraw            = 0x2000,
+			EHwSurface              = 0x4000,
 //			EStarted                = 0x2000
 			};
 	
@@ -257,6 +260,12 @@ inline TBool CDsa::IsDrawDisabled() const
     {
     return iStateFlags & EDisableDraw;
     }
+
+inline TBool CDsa::IsHwScreenSurface() const
+    {
+    return iStateFlags & EHwSurface;
+    }
+
 
 #define _ASSERT_Update CDsa::ASSERT_Update(__LINE__)
 

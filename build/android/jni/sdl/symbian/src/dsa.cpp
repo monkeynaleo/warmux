@@ -57,7 +57,7 @@ NONSHARABLE_CLASS(TDsa)
 
 inline TDsa::TDsa(const CDsa& aDsa) : iDsa(aDsa)
    {
-   __ASSERT_ALWAYS(&iDsa, PANIC(KErrNotReady));
+   __ASSERT_ALWAYS(&iDsa, PANIC(KErrNotReady + 1000));
    }
 
 inline TBool TDsa::IsTurn() const
@@ -100,6 +100,7 @@ protected:
 	void CreateSurfaceL();
 	void Free();
 	~CBitmapSurface();
+	virtual CBitmapContext* Gc() = 0;
 private:
 	TUint8* LockSurface();
 	void UnlockHwSurface();
@@ -108,11 +109,14 @@ private:
 	void CompleteUpdate();
 	void UnlockHWSurfaceRequestComplete();
 
-	void DoBlt();
+	TBool DoBlt();
     TBool BlitterBlt(CBitmapContext& aGc, CFbsBitmap& aBmp);
 private:
 	CFbsBitmap* iBmp;
 	TBool iUpdateWait;
+	
+	CFbsBitmapDevice* iOverlayDevice;
+	CFbsBitGc* iOverlayGc;
 	};
 	
 	
@@ -130,7 +134,7 @@ TBool CBitmapSurface::BlitterBlt(CBitmapContext& aGc, CFbsBitmap& aBmp)
     return Blitter() && Blitter()->BitBlt(aGc, aBmp, HwRect(), SwSize()); 
     }
 
-void CBitmapSurface::DoBlt()
+TBool CBitmapSurface::DoBlt()
     {
     if(!BlitterBlt(*Gc(), Bmp()))
         {
@@ -147,13 +151,25 @@ void CBitmapSurface::DoBlt()
             }
         else
             Gc()->DrawBitmap(HwRect(), &Bmp());
+        return ETrue;
         }
+    return EFalse;
     }
 
 void CBitmapSurface::Free()
     {
+    if(iBmp != NULL)
+        {
+        SetUpdating(EFalse);
+        UnlockHwSurface();
+        }
     delete iBmp;
     iBmp = NULL;
+    
+    delete iOverlayDevice;
+    iOverlayDevice = NULL;
+    delete iOverlayGc;
+    iOverlayGc = NULL;
     }
 
 CBitmapSurface::~CBitmapSurface()
@@ -173,16 +189,18 @@ void CBitmapSurface::UnlockHwSurface()
 	{
 	__ASSERT_ALWAYS(iBmp, PANIC(KErrNotReady));
 	iBmp->UnlockHeap();
-	SetUpdating(EFalse);
-	Update();
 	}
 
 		
 void CBitmapSurface::Update()
 	{
-	DoBlt();
-	DrawOverlays();
+    DrawOverlays(*iOverlayGc);
+	//const TBool completeNeed = 
+    DoBlt();
+//	if(completeNeed)
+//	    { 
 	CompleteUpdate();	
+//	    }
 	}
 		
 void CBitmapSurface::CreateSurfaceL()
@@ -195,6 +213,16 @@ void CBitmapSurface::CreateSurfaceL()
 	    iBmp = NULL;
 	    iBmp  = new (ELeave) CFbsBitmap();
 	    User::LeaveIfError(iBmp->Create(SwSize(), DisplayMode()));
+	    
+	    delete iOverlayDevice;
+	    iOverlayDevice = NULL;
+	    delete iOverlayGc;
+	    iOverlayGc = NULL;
+	    
+	    iOverlayDevice = CFbsBitmapDevice::NewL(iBmp);    
+	    User::LeaveIfError(iOverlayDevice->CreateContext(iOverlayGc));
+	    iOverlayGc->SetDrawMode(CGraphicsContext::EDrawModeWriteAlpha);
+
 	    }
 	}
 
@@ -295,10 +323,11 @@ private:
     TUint8* LockSurface();	
     void UnlockHWSurfaceRequestComplete();
     void UnlockHwSurface();
+    void Update();
   //  void Resume();
     void CreateSurfaceL();
     void Wipe();
-    CBitmapContext* Gc();
+  //  CBitmapContext* Gc();
 	};
 
 CDsaGles::CDsaGles(RWsSession& aSession) : CDsa(aSession)
@@ -317,6 +346,10 @@ void CDsaGles::UnlockHWSurfaceRequestComplete()
 void CDsaGles::UnlockHwSurface()
 	{
 	}
+
+void CDsaGles::Update()
+    {
+    }
 	
 /*
 void CDsaGles::Resume()
@@ -330,12 +363,13 @@ void CDsaGles::CreateSurfaceL()
 void CDsaGles::Wipe()
 	{
 	}
-	
+
+/*
 CBitmapContext* CDsaGles::Gc()
 	{
 	return NULL;
 	}
-
+*/
 
 //////////////////////////////////////////////////////////////////////
 
@@ -504,7 +538,7 @@ private:
 	void ConstructL(RWindow& aWindow, CWsScreenDevice& aDevice);
 	void Stop();
 	CBitmapContext* Gc();
-    void DoBlt();
+//    TBool DoBlt();
     void UpdateRequestCompleted();
     void DisableDraw(TBool aDisable);
 private:
@@ -888,11 +922,11 @@ void CDsa::DsaLockOff()
     }
 #endif
 
-void CDsa::DrawOverlays()
+void CDsa::DrawOverlays(CBitmapContext& aContext) const
 	{
 	const TInt last = iOverlays.Count() - 1;
 	for(TInt i = last; i >= 0 ; i--)
-		iOverlays[i].iOverlay->Draw(*Gc(), HwRect(), SwSize());
+		iOverlays[i].iOverlay->Draw(aContext, HwRect(), SwSize());
 	}
 
 TInt CDsa::AppendOverlay(MOverlay& aOverlay, TInt aPriority)
@@ -988,10 +1022,18 @@ TInt CDsa::AllocSurface(TBool aHwSurface, const TSize& aSize, TDisplayMode aMode
 	{
 	DsaLockOn();
 	_ASSERT_Update;
-	if(aHwSurface && aMode != DisplayMode())
+	/*
+	 * if(aHwSurface && aMode != DisplayMode())
 	    {
 	    DsaLockOff();
 	    return KErrArgument;
+	    }
+	*/
+	
+	
+	if(aHwSurface)
+	    {
+	    iStateFlags |= EHwSurface;
 	    }
 	
 	iSourceMode = aMode;
@@ -1012,7 +1054,8 @@ TInt CDsa::AllocSurface(TBool aHwSurface, const TSize& aSize, TDisplayMode aMode
 		return err;
 	    }
 	
-	SetCopyFunction();
+	if(!aHwSurface)
+	    SetCopyFunction();
 	
 	iOwnerThread = RThread().Id();
 	
@@ -1169,16 +1212,19 @@ void CDsa::DisableDraw(TBool aDisable)
 
 TBool CDsa::AddUpdateRect(const TUint8* aBits, const TRect& aUpdateRect, const TRect& aRect)
 	{
-	
 	DsaLockOn();
 	
 	if(iStateFlags & EOrientationChanged)
 		{
 		iStateFlags &= ~EOrientationFlags;
 		iStateFlags |= iNewFlags;
-		SetCopyFunction();
+		
+		if(!(iStateFlags & EHwSurface))
+		    SetCopyFunction();
+		
 		if(IsDsaAvailable())
 		    Wipe();
+		
 		iStateFlags &= ~EOrientationChanged;
 		
 		DsaLockOff();
@@ -1186,6 +1232,8 @@ TBool CDsa::AddUpdateRect(const TUint8* aBits, const TRect& aUpdateRect, const T
 	    //EpocSdlEnv::WaitDeviceChange();
 	    return EFalse; //skip this frame as data is may be changed
 		}
+	
+	__ASSERT_ALWAYS(!(iStateFlags & EHwSurface), PANIC(KErrGeneral));
 
 	if(iStateFlags & EDisableDraw)
 	    {
@@ -1276,11 +1324,13 @@ TBool CDsa::AddUpdateRect(const TUint8* aBits, const TRect& aUpdateRect, const T
 	}
 	
 		
-void CDsa::UpdateSwSurface()
+void CDsa::UpdateSurface()
 	{
 	DsaLockOn();
 	iTargetAddr = NULL;
 	UnlockHwSurface();	//could be faster if does not use AO, but only check status before redraw, then no context switch needed
+	SetUpdating(EFalse);
+	Update();
 	DsaLockOff();
 	}
 	
@@ -1325,14 +1375,14 @@ TPoint CDsa::WindowCoordinates(const TPoint& aPoint) const
 		}
 	if(!(iStateFlags & EUseBlit))
 	    {
-	pos.iX <<= 16;
-	pos.iY <<= 16;
-	pos.iX /= asz.iWidth; 
-	pos.iY /= asz.iHeight;
-	pos.iX *= iSwSize.iWidth;
-	pos.iY *= iSwSize.iHeight;
-	pos.iX >>= 16;
-	pos.iY >>= 16;
+        pos.iX <<= 16;
+        pos.iY <<= 16;
+        pos.iX /= asz.iWidth; 
+        pos.iY /= asz.iHeight;
+        pos.iX *= iSwSize.iWidth;
+        pos.iY *= iSwSize.iHeight;
+        pos.iX >>= 16;
+        pos.iY >>= 16;
 	    }
 	return pos; 	
 	}

@@ -366,29 +366,10 @@ LOCAL_C TInt ModifiersChangedEvent(const TWsEvent& aWsEvent)
     }
 
 
-LOCAL_C TInt PointerBufferReadyEvent(_THIS/*, const TTime& aEventTime*/)
+LOCAL_C TInt PointerBufferReadyEvent(_THIS)
     {
     // Own threaded is not supported - it is fair easy to do, but needs some work so I would implemented
     // it only upon request :-) 
-    
-    /*
-    TTime time;
-    time.UniversalTime();
-    TTimeIntervalMicroSeconds d = time.MicroSecondsFrom(aEventTime);
-    
-    TInt skipcount  = 1;
-    
-    if(d < TTimeIntervalMicroSeconds(5000))
-        skipcount = -1;
-    else if (d < TTimeIntervalMicroSeconds(50000))
-        {
-        skipcount = (50000 - d.Int64()) / 5000;
-        }
-    
-    RDebug::Print(_L("skipCount %d"), skipcount);
-    
-    TInt skip = skipcount;
-    */
     RWindow* win = EnvUtils::IsOwnThreaded() ? NULL : EpocSdlEnv::Window();
     TInt posted = 0;
     if(win != NULL)
@@ -398,23 +379,14 @@ LOCAL_C TInt PointerBufferReadyEvent(_THIS/*, const TTime& aEventTime*/)
         User::LeaveIfError(win->RetrievePointerMoveBuffer(buf));
         const TInt count = buf.Length() / sizeof(TPoint);
         
-        
         for(TInt i = 0; i < count; i++)
             {
-      /*      --skip;
-            if(!skip)
+            const TPoint point = points[i] - Private->iScreenPos; 
+            const TPoint mousePos = EpocSdlEnv::WindowCoordinates(point);
+            if(mousePos.iX >= 0 && mousePos.iY >= 0 && mousePos.iX < _this->screen->w && mousePos.iY < _this->screen->h)
                 {
-                skip = skipcount;
+                posted += SDL_PrivateMouseMotion(0, 0, mousePos.iX, mousePos.iY); /* Absolute position on screen */
                 }
-            else
-                {*/
-                const TPoint point = points[i] - Private->iScreenPos; 
-                const TPoint mousePos = EpocSdlEnv::WindowCoordinates(point);
-                if(mousePos.iX >= 0 && mousePos.iY >= 0 && mousePos.iX < _this->screen->w && mousePos.iY < _this->screen->h)
-                    {
-                    posted += SDL_PrivateMouseMotion(0, 0, mousePos.iX, mousePos.iY); /* Absolute position on screen */
-                    }
-                //}
             }
         }
     return posted;
@@ -450,7 +422,7 @@ int HandleWsEvent(_THIS, const TWsEvent& aWsEvent)
 			SDL_PrivateQuit();
 			return 0;
     	case EEventPointerBufferReady:
-    	    return PointerBufferReadyEvent(_this/*, aWsEvent.Time()*/);
+    	    return PointerBufferReadyEvent(_this);
         case EEventPointer: /* Mouse pointer events */
             return PointerEvent(_this, aWsEvent);
         case EEventKeyDown: /* Key events */
