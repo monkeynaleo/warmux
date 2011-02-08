@@ -582,15 +582,13 @@ void Tile::DrawTile_Clipped(const Rectanglei & worldClip) const
       Rectanglei destRect(c<<CELL_BITS, CELL_SIZE);
 
       destRect.Clip(worldClip);
-      if (destRect.Intersect(*Camera::GetInstance())) {
-        Point2i ptDest = destRect.GetPosition() - Camera::GetInstance()->GetPosition();
-        Point2i ptSrc = destRect.GetPosition() - (c<<CELL_BITS);
+      Point2i ptDest = destRect.GetPosition() - Camera::GetInstance()->GetPosition();
+      Point2i ptSrc = destRect.GetPosition() - (c<<CELL_BITS);
 
 
-        GetMainWindow().Blit(tin->GetSurface(),
-                             Rectanglei(ptSrc, destRect.GetSize()),
-                             ptDest);
-      }
+      GetMainWindow().Blit(tin->GetSurface(),
+                           Rectanglei(ptSrc, destRect.GetSize()),
+                           ptDest);
 #else
       GetMainWindow().Blit(tin->GetSurface(), (c<<CELL_BITS) - Camera::GetInstance()->GetPosition());
 #endif
