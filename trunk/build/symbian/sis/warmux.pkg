@@ -16,8 +16,6 @@
 ;Unique Vendor name
 :"www.warmux.org"
 
-="..\..\..\data\icon\warmux.mif", "image/x-mif", ""
-
 ;Supports S60 5th Edition
 [0x1028315F], 0, 0, 0, {"Series60ProductID"}
 
@@ -29,14 +27,24 @@
 ;Files to install
 ;You should change the source paths to match that of your environment
 ;<source> <destination>
+
+IF EXISTS("z:\system\install\Series60v5.2.sis")
+; install Symbian^3 specific files
+"../res/sdl_param_s3.txt" - "c:\private\ecf75e71\sdl_param.txt"
+"../res/sdl_flags_s3.txt" - "c:\private\ecf75e71\sdl_flags.txt"
+"warmux_sdl_s3.dll" - "!:\sys\bin\warmux_sdl.dll"
+ELSE
+"../res/sdl_param_s1.txt" - "c:\private\ecf75e71\sdl_param.txt"
+"../res/sdl_flags_s1.txt" - "c:\private\ecf75e71\sdl_flags.txt"
+"warmux_sdl_s1.dll" - "!:\sys\bin\warmux_sdl.dll"
+ENDIF
+
 "$(EPOCROOT)epoc32\release\$(PLATFORM)\$(TARGET)\warmux.exe" - "!:\sys\bin\Warmux.exe"
-"$(EPOCROOT)epoc32\release\$(PLATFORM)\$(TARGET)\warmux_sdl.dll" - "!:\sys\bin\warmux_sdl.dll"
+;"$(EPOCROOT)epoc32\release\$(PLATFORM)\$(TARGET)\warmux_sdl.dll" - "!:\sys\bin\warmux_sdl.dll"
 "$(EPOCROOT)Epoc32\data\z\private\10003a3f\apps\warmux_reg.rsc" - "!:\private\10003a3f\import\apps\warmux_reg.rsc"
 "$(EPOCROOT)Epoc32\data\z\resource\apps\warmux.rsc" - "!:\resource\apps\Warmux.rsc"
 "..\..\..\data\icon\warmux.mif" - "!:\resource\apps\Warmux.mif"
 "..\..\..\data\icon\warmux.mbm" - "!:\resource\apps\Warmux.mbm"
-"../res/sdl_param.txt" - "c:\private\ecf75e71\sdl_param.txt"
-"../res/sdl_flags.txt" - "c:\private\ecf75e71\sdl_flags.txt"
 "../../../data/authors.dtd" - "!:\private\ecf75e71\data/authors.dtd"
 "../../../data/authors.xml" - "!:\private\ecf75e71\data/authors.xml"
 "../../../data/body/aliases.xml" - "!:\private\ecf75e71\data/body/aliases.xml"
