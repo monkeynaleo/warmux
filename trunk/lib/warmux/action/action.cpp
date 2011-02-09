@@ -79,7 +79,7 @@ Action::Action(const char *buffer, DistantComputer* _creator)
   var.clear();
   m_header.len = SDLNet_Read32(buffer);
   buffer += 4;
-  ASSERT(!(m_header.len%4));
+  ASSERT(!((m_header.len-sizeof(Header))%4));
   uint num = (m_header.len-sizeof(Header))/4;
   ASSERT(num < MAX_NUM_VARS); // would be suspicious
 
