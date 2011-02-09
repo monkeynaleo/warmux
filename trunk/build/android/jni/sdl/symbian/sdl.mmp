@@ -1,10 +1,12 @@
-TARGET		sdl.lib
-TARGETTYPE	lib
+TARGET		warmux_sdl.dll
+TARGETTYPE	dll
+UID         0x1000008d 0xE5A8B053
+CAPABILITY  WriteUserData ReadUserData NetworkServices LocalServices
 
-STDCPP
+#define SYMBIAN3 SYMBIAN3
+
+EPOCALLOWDLLDATA
 MACRO		OPENC
-MACRO		SYMBIAN3
-MACRO		OPENVGSUPPORT
 MACRO		NO_SIGNAL_H
 MACRO		ENABLE_EPOC
 MACRO		DISABLE_JOYSTICK
@@ -67,7 +69,6 @@ SOURCE		src/sdlappsrv.cpp
 SOURCE		src/sdlenv.cpp
 SOURCE		src/sdlenvutils.cpp
 SOURCE		src/sdlexe.cpp
-SOURCE		src/sdllib.cpp
 SOURCE		src/streamplayer.cpp
 SOURCE		src/vectorbuffer.cpp
 
@@ -96,5 +97,31 @@ USERINCLUDE	..\src\thread\symbian
 USERINCLUDE	..\src\timer
 USERINCLUDE	..\src\joystick
 USERINCLUDE	inc\internal
+
+LIBRARY        libc.lib
+LIBRARY        libm.lib
+
+LIBRARY        cone.lib eikcoctl.lib eikdlg.lib eikctl.lib
+LIBRARY        eikcore.lib aknnotify.lib apgrfx.lib
+LIBRARY        avkon.lib efsrv.lib bafl.lib apparc.lib
+LIBRARY        scdv.lib
+
+LIBRARY        euser.lib fbscli.lib ws32.lib
+LIBRARY        mediaclientaudiostream.lib
+
+LIBRARY        hal.lib remconinterfacebase.lib remconcoreapi.lib
+LIBRARY        platformver.lib
+
+LIBRARY        gdi.lib
+LIBRARY        bitgdi.lib
+LIBRARY        egul.lib
+
+#ifdef SYMBIAN3
+MACRO          SYMBIAN3
+MACRO		   OPENVGSUPPORT
+LIBRARY        libgles_cm.lib
+LIBRARY        libopenvg.lib
+LIBRARY        libegl.lib
+#endif
 
 ALWAYS_BUILD_AS_ARM

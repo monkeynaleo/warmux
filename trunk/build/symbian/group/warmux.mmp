@@ -69,17 +69,11 @@ SOURCE joystick.cpp
 LIBRARY         libc.lib libm.lib
 LIBRARY         libz.lib
 LIBRARY         libpthread.lib
+LIBRARY         euser.lib
+LIBRARY         warmux_sdl.lib
 
-LIBRARY         euser.lib fbscli.lib ws32.lib  gdi.lib
-LIBRARY         mediaclientaudiostream.lib
-LIBRARY         avkon.lib efsrv.lib bafl.lib apparc.lib
-LIBRARY         eikcore.lib cone.lib bitgdi.lib scdv.lib
-LIBRARY         hal.lib remconinterfacebase.lib remconcoreapi.lib
-LIBRARY         centralrepository.lib apgrfx.lib
-LIBRARY         platformver.lib
-
+STATICLIBRARY   sdlmain.lib
 STATICLIBRARY   SDL_mixer.lib
-STATICLIBRARY   sdl.lib
 STATICLIBRARY   warmux_lib.lib
 STATICLIBRARY   libcurl.lib
 STATICLIBRARY   SDL_net.lib
