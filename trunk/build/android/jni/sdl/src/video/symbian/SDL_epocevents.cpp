@@ -83,6 +83,7 @@ void ResetKeyMap()
 		keymap['A' + i] = (SDLKey)(SDLK_a+i);
 	}
 
+	keymap[EStdKeySpace]        = SDLK_SPACE;
 	keymap[EStdKeyBackspace]    = SDLK_BACKSPACE;
 	keymap[EStdKeyTab]          = SDLK_TAB;
 	keymap[EStdKeyEnter]        = SDLK_RETURN;
@@ -108,7 +109,7 @@ void ResetKeyMap()
 	keymap[EStdKeyLeftFunc]     = SDLK_LMETA;
 	keymap[EStdKeyRightFunc]    = SDLK_RMETA;
 	keymap[EStdKeyInsert]       = SDLK_INSERT;
-	keymap[EStdKeyComma]        = SDLK_COMMA;
+	keymap[EStdKeyComma]        = SDLK_PERIOD;//SDLK_COMMA;
 	keymap[EStdKeyFullStop]     = SDLK_PERIOD;
 	keymap[EStdKeyForwardSlash] = SDLK_SLASH;
 	keymap[EStdKeyBackSlash]    = SDLK_BACKSLASH;
@@ -523,13 +524,17 @@ static SDL_keysym* TranslateKey(_THIS, int scancode, SDL_keysym* keysym)
 	/* If UNICODE is on, get the UNICODE value for the key */
 	keysym->unicode = 0;
 
-#if 0 // !!TODO:unicode
+#if 1 // !!TODO:unicode
 
-	if ( SDL_TranslateUNICODE ) 
-    {
-		/* Populate the unicode field with the ASCII value */
-		keysym->unicode = scancode;
-	}
+	if ( SDL_TranslateUNICODE )
+		{
+		if (scancode < 0x80)
+			{
+			/* Populate the unicode field with the ASCII value */
+			keysym->unicode = keymap[scancode];
+			}
+		}
+
 #endif
 
     //!!
