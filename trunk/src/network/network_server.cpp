@@ -19,12 +19,7 @@
  * Network server layer for Warmux.
  *****************************************************************************/
 
-#include <WARMUX_socket.h>
 #include <SDL_thread.h>
-#include "include/action_handler.h"
-#include "network/network_server.h"
-#include "tool/string_tools.h"
-
 #include <sys/types.h>
 #ifdef LOG_NETWORK
 #  include <sys/stat.h>
@@ -33,6 +28,13 @@
 #    include <io.h>
 #  endif
 #endif
+
+#include <WARMUX_socket.h>
+#include <WARMUX_distant_cpu.h>
+
+#include "include/action_handler.h"
+#include "network/network_server.h"
+#include "tool/string_tools.h"
 
 //-----------------------------------------------------------------------------
 

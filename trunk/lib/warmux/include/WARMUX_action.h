@@ -25,10 +25,14 @@
 #include <string>
 #include <iostream>
 #include <list>
-#include <WARMUX_distant_cpu.h>
-#include <WARMUX_euler_vector.h>
-#include <WARMUX_point.h>
+
 #include <WARMUX_types.h>
+#include <WARMUX_point.h>
+
+//-----------------------------------------------------------------------------
+// Forward declaration
+class DistantComputer;
+class EulerVector;
 
 //-----------------------------------------------------------------------------
 

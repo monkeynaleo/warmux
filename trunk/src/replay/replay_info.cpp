@@ -34,24 +34,24 @@
 
 #include "replay_info.h"
 
-const Uint32 HEADER_MAGIC = 0x57524D58; /* WRMX */
-const Uint32 DATA_MAGIC   = 0xDEADBEEF;
+const uint32_t HEADER_MAGIC = 0x57524D58; /* WRMX */
+const uint32_t DATA_MAGIC   = 0xDEADBEEF;
 
-void Write32(std::ofstream& out, Uint32 val)
+void Write32(std::ofstream& out, uint32_t val)
 {
   char  render[4];
   SDLNet_Write32(val, render);
   out.write(render, sizeof(Sint32));
 }
 
-Uint32 Read32(std::ifstream& in)
+uint32_t Read32(std::ifstream& in)
 {
   char  render[4];
   in.read(render, 4);
   return SDLNet_Read32(render);
 }
 
-ReplayInfo::ReplayInfo(time_t d, Uint32 dms)
+ReplayInfo::ReplayInfo(time_t d, uint32_t dms)
   : valid(false)
   , date(d)
   , duration_ms(dms)
@@ -66,7 +66,7 @@ ReplayInfo *ReplayInfo::ReplayInfoFromFile(std::ifstream &in)
 #define TEMP_SIZE 256
   char       temp[TEMP_SIZE];
   ReplayInfo *info = new ReplayInfo(0, 0);
-  Uint32     marker;
+  uint32_t     marker;
 
   info->last_error = _("Unspecified error or end of file");
   info->valid = false;
@@ -100,7 +100,7 @@ ReplayInfo *ReplayInfo::ReplayInfoFromFile(std::ifstream &in)
   info->map_id = temp;
 
   // Teams
-  Uint32 num_teams = Read32(in);            // Number of teams
+  uint32_t num_teams = Read32(in);            // Number of teams
   if (num_teams > 8) {
     info->last_error =
       Format(_("Suspicious number of teams 0x%08X"), num_teams);
@@ -156,7 +156,7 @@ team_error:
   return info;
 }
 
-ReplayInfo *ReplayInfo::ReplayInfoFromCurrent(Uint32 duration, const char* comment)
+ReplayInfo *ReplayInfo::ReplayInfoFromCurrent(uint32_t duration, const char* comment)
 {
   ReplayInfo *info    = new ReplayInfo(time(NULL), duration);
   

@@ -25,15 +25,15 @@
 #include <map>
 #include <list>
 #include <WARMUX_action_handler.h>
-#include "include/action.h"
-#include <WARMUX_base.h>
+//#include <WARMUX_base.h>
 
 //-----------------------------------------------------------------------------
 
 // Forward declarations
 struct SDL_mutex;
 class Player;
-class TeamConfig;
+class ConfigTeam;
+class Action;
 
 class ActionHandler : public Singleton<ActionHandler>, public WActionHandler
 {
