@@ -172,7 +172,8 @@ Character::Character(Team& my_team, const std::string &name, Body *char_body) :
 
   SetEnergy(GameMode::GetInstance()->character.init_energy, NULL);
 
-  MSG_DEBUG("character", "Load character %s", character_name.c_str());
+  MSG_DEBUG("character", "Load character %s at %p",
+            character_name.c_str(), this);
 }
 
 Character::Character(const Character& acharacter) :
@@ -224,11 +225,14 @@ Character::Character(const Character& acharacter) :
   if (acharacter.name_text) {
     name_text = new Text(*acharacter.name_text);
   }
+  MSG_DEBUG("character", "Copying character %s from %p to %p",
+            character_name.c_str(), &acharacter, this);
 }
 
 Character::~Character()
 {
-  MSG_DEBUG("character", "Unload character %s", character_name.c_str());
+  MSG_DEBUG("character", "Unload character %s at %p",
+            character_name.c_str(), this);
   if (body) {
     delete body;
   }
