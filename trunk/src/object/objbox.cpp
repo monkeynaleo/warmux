@@ -19,16 +19,18 @@
  * Generic Box that falls from they sky.
  *****************************************************************************/
 
-#include "object/objbox.h"
 #include <sstream>
 #include <iostream>
+
+#include <WARMUX_debug.h>
+
+#include "object/objbox.h"
 #include "character/character.h"
 #include "game/game_mode.h"
 #include "game/game.h"
 #include "game/game_time.h"
 #include "graphic/sprite.h"
 #include "include/app.h"
-#include "include/action.h"
 #include "interface/game_msg.h"
 #include "map/camera.h"
 #include "map/map.h"
@@ -37,7 +39,6 @@
 #include "sound/jukebox.h"
 #include "team/macro.h"
 #include "team/team.h"
-#include <WARMUX_debug.h>
 #include "tool/resource_manager.h"
 #include "weapon/explosion.h"
 

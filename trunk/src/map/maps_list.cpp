@@ -19,21 +19,23 @@
  * Maps list
  *****************************************************************************/
 
-
 #include <algorithm>
-#include "include/action.h"
+#include <sstream>
+#include <iostream>
+
+#include <WARMUX_action.h>
+#include <WARMUX_debug.h>
+#include <WARMUX_file_tools.h>
+#include <WARMUX_random.h>
+
 #include "map/maps_list.h"
 #include "map/water.h"
 #include "game/config.h"
 #include "graphic/surface.h"
 #include "gui/question.h"
 #include "tool/resource_manager.h"
-#include <WARMUX_debug.h>
-#include <WARMUX_file_tools.h>
-#include <WARMUX_random.h>
 #include "tool/string_tools.h"
 #include "tool/xml_document.h"
-#include <sstream>
 
 extern const uint MAX_WIND_OBJECTS;
 

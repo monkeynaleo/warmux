@@ -137,8 +137,6 @@ warmux_SOURCES = \
         gui/widget.h \
         gui/widget_list.cpp \
         gui/widget_list.h \
-        include/action.cpp \
-        include/action.h \
         include/action_handler.cpp \
         include/action_handler.h \
         include/app.h \
