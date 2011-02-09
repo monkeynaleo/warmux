@@ -1293,12 +1293,8 @@ TBool CDsa::AddUpdateRect(const TUint8* aBits, const TRect& aUpdateRect, const T
 				do
 					{
 					*dst = (*src & 0xF800)<< 8;
-					*dst |= (*src & 0xE01F) << 3; 
-
 					*dst |= (*src & 0x07E0) << 5;
-					*dst |= (*src & 0x600) >> 1;
-
-					*dst |= (*src & 0x1C) >> 2;
+					*dst |= (*src & 0x01F) << 3; 
 					dst++;
 					src++;
 					}
