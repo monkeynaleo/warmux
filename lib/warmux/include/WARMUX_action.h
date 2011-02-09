@@ -133,7 +133,7 @@ public:
   typedef struct
   {
     uint32_t len;
-    Action_t type : 32;
+    Action_t type : 8;
   } Header;
 #pragma pack(pop)   /* restore original alignment from stack */
 

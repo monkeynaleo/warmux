@@ -24,18 +24,19 @@
  * If the object go outside of the world, it become a ghost.
  *****************************************************************************/
 
-#include "object/physics.h"
 #include <stdlib.h>
 #include <iostream>
+
+#include <WARMUX_debug.h>
+
+#include "object/physics.h"
 #include "game/config.h"
 #include "game/game_mode.h"
 #include "game/game_time.h"
 #include "map/wind.h"
-#include <WARMUX_debug.h>
 #include "tool/isnan.h"
 #include "tool/math_tools.h"
 #include "tool/string_tools.h"
-#include "include/action.h"
 
 // Physical constants
 static const Double STOP_REBOUND_LIMIT = 0.5;

@@ -20,17 +20,18 @@
  *****************************************************************************/
 #include <algorithm>
 #include <iostream>
+
+#include <WARMUX_file_tools.h>
 #include <WARMUX_team_config.h>
+
 #include "character/character.h"
 #include "character/body_list.h"
-#include "include/action.h"
 #include "game/config.h"
 #include "network/network.h"
 #include "network/randomsync.h"
 #include "team/team.h"
 #include "team/team_energy.h"
 #include "team/teams_list.h"
-#include <WARMUX_file_tools.h>
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

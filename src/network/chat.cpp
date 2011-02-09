@@ -20,12 +20,12 @@
  * nefertum - Jon de Andres
  *****************************************************************************/
 
-#include "game/game_time.h"
 #include <SDL_events.h>
+
+#include "game/game_time.h"
 #include "graphic/text.h"
 #include "graphic/text_list.h"
 #include "graphic/video.h"
-#include "include/action.h"
 #include "include/action_handler.h"
 #include "include/app.h"
 #include "network/chat.h"

@@ -25,8 +25,13 @@
  *****************************************************************************/
 
 #include <iostream>
+
+#include <WARMUX_debug.h>
+#include <WARMUX_point.h>
+#include <WARMUX_random.h>
+#include <WARMUX_rectangle.h>
+
 #include "character/character.h"
-#include "include/action.h"
 #include "game/config.h"
 #include "game/game_time.h"
 #include "map/map.h"
@@ -38,16 +43,12 @@
 #include "team/macro.h"
 #include "team/team.h"
 #include "team/teams_list.h"
-#include <WARMUX_debug.h>
 #include "tool/isnan.h"
 #include "tool/math_tools.h"
 #include "tool/string_tools.h"
-#include <WARMUX_point.h>
-#include <WARMUX_random.h>
-#include <WARMUX_rectangle.h>
 #include "weapon/weapon_launcher.h"
 
-const int Y_OBJET_MIN = -10000;
+#define Y_OBJET_MIN  -10000
 
 PhysicalObj::PhysicalObj(const std::string &name, const std::string &xml_config) :
   m_collides_with_ground(true),
