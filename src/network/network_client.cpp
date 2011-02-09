@@ -18,9 +18,20 @@
  ******************************************************************************
  * Network client layer for Warmux.
  *****************************************************************************/
-#include <WARMUX_socket.h>
+
 #include <SDL_thread.h>
+#include <sys/types.h>
+#ifdef LOG_NETWORK
+#  include <sys/stat.h>
+#  include <fcntl.h>
+#  ifdef WIN32
+#    include <io.h>
+#  endif
+#endif
+
+#include <WARMUX_socket.h>
 #include <WARMUX_debug.h>
+#include <WARMUX_distant_cpu.h>
 
 //-----------------------------------------------------------------------------
 #include "include/action_handler.h"
@@ -30,14 +41,6 @@
 #include "network/net_error_msg.h"
 #include "tool/string_tools.h"
 
-#include <sys/types.h>
-#ifdef LOG_NETWORK
-#  include <sys/stat.h>
-#  include <fcntl.h>
-#  ifdef WIN32
-#    include <io.h>
-#  endif
-#endif
 //-----------------------------------------------------------------------------
 
 NetworkClient::NetworkClient(const std::string& password) : Network("-", password)

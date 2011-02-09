@@ -24,11 +24,13 @@
 #define REPLAY_H
 
 #include <vector>
-#include <WARMUX_action.h>
+
+#include <WARMUX_base.h>
 #include <WARMUX_singleton.h>
 
 #include "game_mode_info.h"
 
+class Action;
 class Team;
 
 class Replay : public Singleton<Replay>
@@ -44,9 +46,9 @@ public:
   } replay_state_t;
 
  private:
-  Uint32         *buf;
-  Uint32         *ptr;
-  Uint32         bufsize;
+  uint32_t         *buf;
+  uint32_t         *ptr;
+  uint32_t         bufsize;
   uint           seed;
 
   // State
@@ -54,16 +56,16 @@ public:
   bool           is_recorder;
 
   // For recording
-  Uint32         start_time;
-  Uint32         old_time;
+  uint32_t         start_time;
+  uint32_t         old_time;
 
   // For replaying: GameMode save
   bool           config_loaded;
   GameModeInfo   mode_info;
   std::vector<Team*> backup_list;
 
-  void ChangeBufsize(Uint32 n);
-  Uint32 MemUsed() { return 4*(ptr - buf); }
+  void ChangeBufsize(uint32_t n);
+  uint32_t MemUsed() { return 4*(ptr - buf); }
 
 protected:
   friend class Singleton<Replay>;

@@ -68,14 +68,14 @@ void Replay::DeInit()
   replay_state = NOTHING;
 }
 
-void Replay::ChangeBufsize(Uint32 n)
+void Replay::ChangeBufsize(uint32_t n)
 {
   if (n <= bufsize)
     return;
 
   // All data is supposed to be consumed
-  Uint32 offset = (bufsize) ? ptr-buf : 0;
-  buf = (Uint32*)realloc(buf, n*4);
+  uint32_t offset = (bufsize) ? ptr-buf : 0;
+  buf = (uint32_t*)realloc(buf, n*4);
   bufsize = n*4;
   ptr = buf + offset;
 }
@@ -113,7 +113,7 @@ bool Replay::SaveReplay(const std::string& name, const char *comment)
     return false;
 
   // Generate replay info and dump it to file
-  Uint32 total_time = old_time - start_time;
+  uint32_t total_time = old_time - start_time;
   ReplayInfo *info = ReplayInfo::ReplayInfoFromCurrent(total_time, comment);
   if (!info->DumpToFile(out)) {
     delete info;
@@ -125,7 +125,7 @@ bool Replay::SaveReplay(const std::string& name, const char *comment)
   Write32(out, seed);
 
   // Flush actions recorded
-  Uint32 pos = out.tellp();
+  uint32_t pos = out.tellp();
   MSG_DEBUG("replay", "Actions stored at %u on %u bytes in %s, seed %08X\n",
             pos, MemUsed(), name.c_str(), seed);
   out.write((char*)buf, MemUsed());
@@ -288,7 +288,7 @@ ok:
   // Explicit buffer change to avoid garbage
   if (buf)
     free(buf);
-  buf = (Uint32*)malloc(size);
+  buf = (uint32_t*)malloc(size);
   ptr = buf;
   bufsize = size;
 

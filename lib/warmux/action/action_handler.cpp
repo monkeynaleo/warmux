@@ -21,7 +21,9 @@
 
 #include <iostream>
 #include <SDL_mutex.h>
+
 #include <WARMUX_action_handler.h>
+#include <WARMUX_distant_cpu.h>
 #include <WARMUX_debug.h>
 #include <WARMUX_error.h>
 

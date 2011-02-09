@@ -39,7 +39,7 @@ class ReplayInfo
 
   std::string version;
   time_t      date;
-  Uint32      duration_ms;
+  uint32_t    duration_ms;
   std::string comment;
   std::string map_id;
 
@@ -51,7 +51,7 @@ class ReplayInfo
   GameModeInfo mode_info;
 
   // Initialization as unvalid info
-  ReplayInfo(time_t d = 0, Uint32 dms = 0);
+  ReplayInfo(time_t d = 0, uint32_t dms = 0);
   // std::string and std::vector make the destruction job for us
 
   void DisplayError(const char* err);
@@ -60,14 +60,14 @@ public:
   // Get all info from file
   static ReplayInfo  *ReplayInfoFromFile(std::ifstream &in);
   // Get all info from current game
-  static ReplayInfo  *ReplayInfoFromCurrent(Uint32 duration, const char* comment = NULL);
+  static ReplayInfo  *ReplayInfoFromCurrent(uint32_t duration, const char* comment = NULL);
   // Dump to file
   bool               DumpToFile(std::ofstream &out);
 
   bool               IsValid() const { return valid; }
   const std::string& GetVersion() const { return version; }
   time_t             GetDate() const { return date; }
-  Uint32             GetMillisecondsDuration() const { return duration_ms; }
+  uint32_t           GetMillisecondsDuration() const { return duration_ms; }
   const std::string& GetComment() const { return comment; }
   const std::string& GetMapId() const { return map_id; }
   const std::vector<ConfigTeam>& GetTeams() const { return teams; }
@@ -77,7 +77,7 @@ public:
   const GameModeInfo* GetGameModeInfo() const { return &mode_info; }
 };
 
-void   Write32(std::ofstream& out, Uint32 val);
-Uint32 Read32(std::ifstream& in);
+void     Write32(std::ofstream& out, uint32_t val);
+uint32_t Read32(std::ifstream& in);
 
 #endif //REPLAY_INFO_H

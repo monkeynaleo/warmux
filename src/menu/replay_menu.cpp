@@ -148,7 +148,7 @@ void ReplayMenu::ChangeReplay()
     ClearReplayInfo();
     
     Question question;
-    std::cerr << "Error: " << err << "\n";
+    fprintf(stderr, "Error: %s\n", err.c_str());
     question.Set(err, true, 0);
     question.Ask();
 
