@@ -46,22 +46,22 @@ public:
   } replay_state_t;
 
  private:
-  uint32_t         *buf;
-  uint32_t         *ptr;
-  uint32_t         bufsize;
-  uint           seed;
+  uint32_t          *buf;
+  uint32_t          *ptr;
+  uint32_t           bufsize;
+  uint               seed;
 
   // State
-  replay_state_t replay_state;
-  bool           is_recorder;
+  replay_state_t     replay_state;
+  bool               is_recorder;
 
   // For recording
-  uint32_t         start_time;
-  uint32_t         old_time;
+  uint32_t           start_time;
+  uint32_t           old_time;
 
   // For replaying: GameMode save
-  bool           config_loaded;
-  GameModeInfo   mode_info;
+  bool               config_loaded;
+  GameModeInfo       mode_info;
   std::vector<Team*> backup_list;
 
   void ChangeBufsize(uint32_t n);
