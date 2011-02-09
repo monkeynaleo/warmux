@@ -910,7 +910,7 @@ SDL_loblit SDL_CalculateAlphaBlit(SDL_Surface *surface, int blit_index)
 	    /* Per-surface alpha blits */
 	    switch(df->BytesPerPixel) {
 	    case 1:
-		return BlitNto1SurfaceAlpha;
+		exit(1);
 
 	    case 2:
 		return Blit565to565SurfaceAlpha;
@@ -920,14 +920,14 @@ SDL_loblit SDL_CalculateAlphaBlit(SDL_Surface *surface, int blit_index)
 
 	    case 3:
 	    default:
-		return BlitNtoNSurfaceAlpha;
+		exit(1);
 	    }
 	}
     } else {
 	/* Per-pixel alpha blits */
 	switch(df->BytesPerPixel) {
 	case 1:
-	    return BlitNto1PixelAlpha;
+	    exit(1);
 
 	case 2:
             // hardcoding it
@@ -939,7 +939,7 @@ SDL_loblit SDL_CalculateAlphaBlit(SDL_Surface *surface, int blit_index)
 
         case 3:
 	default:
-	    return BlitNtoNPixelAlpha;
+	    exit(1);
 	}
     }
 }
