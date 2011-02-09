@@ -905,14 +905,7 @@ SDL_loblit SDL_CalculateAlphaBlit(SDL_Surface *surface, int blit_index)
 
     if(sf->Amask == 0) {
 	if((surface->flags & SDL_SRCCOLORKEY) == SDL_SRCCOLORKEY) {
-	    if(df->BytesPerPixel == 1)
-		return BlitNto1SurfaceAlphaKey;
-	    else
-          if (sf->BytesPerPixel == 2 && df->BytesPerPixel == 2 &&
-	    !(surface->map->dst->flags & SDL_HWSURFACE))
-            return Blit565to565SurfaceAlphaKey;
-          else
-            return BlitNtoNSurfaceAlphaKey;
+          return Blit565to565SurfaceAlphaKey;
 	} else {
 	    /* Per-surface alpha blits */
 	    switch(df->BytesPerPixel) {
@@ -920,30 +913,10 @@ SDL_loblit SDL_CalculateAlphaBlit(SDL_Surface *surface, int blit_index)
 		return BlitNto1SurfaceAlpha;
 
 	    case 2:
-		if(surface->map->identity) {
-		    if(df->Gmask == 0x7e0)
-		    {
-			return Blit565to565SurfaceAlpha;
-		    }
-		    else if(df->Gmask == 0x3e0)
-		    {
-			return Blit555to555SurfaceAlpha;
-		    }
-		}
-		return BlitNtoNSurfaceAlpha;
+		return Blit565to565SurfaceAlpha;
 
 	    case 4:
-		if(sf->Rmask == df->Rmask
-		   && sf->Gmask == df->Gmask
-		   && sf->Bmask == df->Bmask
-		   && sf->BytesPerPixel == 4)
-		{
-			if((sf->Rmask | sf->Gmask | sf->Bmask) == 0xffffff)
-			{
-				return BlitRGBtoRGBSurfaceAlpha;
-			}
-		}
-			return BlitNtoNSurfaceAlpha;
+		return BlitRGBtoRGBSurfaceAlpha;
 
 	    case 3:
 	    default:
@@ -957,31 +930,14 @@ SDL_loblit SDL_CalculateAlphaBlit(SDL_Surface *surface, int blit_index)
 	    return BlitNto1PixelAlpha;
 
 	case 2:
-	    if(sf->BytesPerPixel == 4 && sf->Amask == 0xff000000
-	       && sf->Gmask == 0xff00
-	       && ((sf->Rmask == 0xff && df->Rmask == 0x1f)
-		   || (sf->Bmask == 0xff && df->Bmask == 0x1f))) {
-		if(df->Gmask == 0x7e0)
-		    return BlitARGBto565PixelAlpha;
-		else if(df->Gmask == 0x3e0)
-		    return BlitARGBto555PixelAlpha;
-	    }
-	    return BlitNtoNPixelAlpha;
+            // hardcoding it
+	    return BlitARGBto565PixelAlpha;
 
 	case 4:
-	    if(sf->Rmask == df->Rmask
-	       && sf->Gmask == df->Gmask
-	       && sf->Bmask == df->Bmask
-	       && sf->BytesPerPixel == 4)
-	    {
-		if(sf->Amask == 0xff000000)
-		{
-			return BlitRGBtoRGBPixelAlpha;
-		}
-	    }
-		return BlitNtoNPixelAlpha;
+            // hardcoding it
+            return BlitRGBtoRGBPixelAlpha;
 
-	case 3:
+        case 3:
 	default:
 	    return BlitNtoNPixelAlpha;
 	}
