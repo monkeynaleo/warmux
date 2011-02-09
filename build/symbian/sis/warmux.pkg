@@ -30,6 +30,7 @@
 ;You should change the source paths to match that of your environment
 ;<source> <destination>
 "$(EPOCROOT)epoc32\release\$(PLATFORM)\$(TARGET)\warmux.exe" - "!:\sys\bin\Warmux.exe"
+"$(EPOCROOT)epoc32\release\$(PLATFORM)\$(TARGET)\warmux_sdl.dll" - "!:\sys\bin\warmux_sdl.dll"
 "$(EPOCROOT)Epoc32\data\z\private\10003a3f\apps\warmux_reg.rsc" - "!:\private\10003a3f\import\apps\warmux_reg.rsc"
 "$(EPOCROOT)Epoc32\data\z\resource\apps\warmux.rsc" - "!:\resource\apps\Warmux.rsc"
 "..\..\..\data\icon\warmux.mif" - "!:\resource\apps\Warmux.mif"

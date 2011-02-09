@@ -1,5 +1,6 @@
 PRJ_MMPFILES
 sdl.mmp
+sdlmain.mmp
 
 PRJ_EXPORTS
 inc/sdlepocapi.h
