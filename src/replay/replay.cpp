@@ -167,7 +167,7 @@ void Replay::StoreAction(const Action* a)
 
   size = a->GetSize();
   if (type != Action::ACTION_GAME_CALCULATE_FRAME) {
-    ActionHandler *ah = ActionHandler::GetInstance();
+    const ActionHandler *ah = ActionHandler::GetConstInstance();
     MSG_DEBUG("replay", "Storing action %s: type=%i length=%i\n",
               ah->GetActionName(type).c_str(), type, size);
   }
@@ -339,7 +339,7 @@ Action* Replay::GetAction()
   }
   ptr += size;
 
-  ActionHandler *ah = ActionHandler::GetInstance();
+  const ActionHandler *ah = ActionHandler::GetConstInstance();
   MSG_DEBUG("replay", "Read action %s: type=%u length=%i\n",
             ah->GetActionName(type).c_str(), type, size*4);
 
@@ -368,7 +368,7 @@ bool Replay::StartPlaying()
   ASSERT(!is_recorder && replay_state == PAUSED_PLAY);
 
   // Check GameMode
-  GameMode * game_mode = GameMode::GetInstance();
+  const GameMode * game_mode = GameMode::GetConstInstance();
   MSG_DEBUG("replay", "Game mode: turn=%us move_player=%u max_nrg=%u init_nrg=%u\n",
             game_mode->duration_turn, game_mode->duration_move_player,
             game_mode->character.max_energy, game_mode->character.init_energy);
