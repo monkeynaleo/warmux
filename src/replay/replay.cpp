@@ -109,6 +109,7 @@ bool Replay::StartRecording(const std::string& game_mode_name,
   memcpy(ptr, game_mode_objects.c_str(), size); ptr += size;
 
   MSG_DEBUG("replay", "Wrote game mode on %u bytes\n", total_size);
+  count = 0;
 
   return true;
 }
@@ -138,6 +139,11 @@ bool Replay::SaveReplay(const std::string& name, const char *comment)
   MSG_DEBUG("replay", "Actions stored at %u on %u bytes in %s, seed %08X\n",
             pos, MemUsed(), name.c_str(), seed);
   out.write((char*)buf, MemUsed());
+  if (count) {
+    count--;
+    MSG_DEBUG("replay", "Storing final calculate frames: %u\n", count);
+    Write32(out, count);
+  }
 
   bool good = out.good();
   out.close();
@@ -175,19 +181,30 @@ void Replay::StoreAction(const Action* a)
   }
 
   size = a->GetSize();
+  // Enlarge buffer if it can't contain max packet size
+  if (MemUsed() > bufsize - size + 2)
+    ChangeBufsize(bufsize+30000);
+
   if (type != Action::ACTION_GAME_CALCULATE_FRAME) {
+    if (count) {
+      count--;
+      MSG_DEBUG("replay", "Calculate frame repeated %u\n", count);
+      SDLNet_Write32(count, ptr); ptr += 4;
+    }
     const ActionHandler *ah = ActionHandler::GetConstInstance();
     MSG_DEBUG("replay", "Storing action %s: type=%i length=%i\n",
               ah->GetActionName(type).c_str(), type, size);
+    a->Write((char*)ptr);
+    ptr += size;
+    count = 0;
+  } else {
+    if (!count) {
+      // Packet body
+      a->Write((char*)ptr);
+      ptr += size;
+    }
+    count++;
   }
-
-  // Enlarge buffer if it can't contain max packet size
-  if (MemUsed() > bufsize - size)
-    ChangeBufsize(bufsize+30000);
-
-  // Packet body
-  a->Write((char*)ptr);
-  ptr += size;
 
   // Check time
   if (start_time == 0)
@@ -361,6 +378,15 @@ bool Replay::RefillActions()
     Action *a = GetAction();
     if (a) {
       ah->NewAction(a, false);
+      if (a->GetType() == Action::ACTION_GAME_CALCULATE_FRAME) {
+        // We write the number of calculate frame actions
+        count = SDLNet_Read32(ptr); ptr += 4;
+        MSG_DEBUG("replay", "Repeating %u\n", count);
+        for (uint i=0; i<count; i++) {
+          Action *a = new Action(Action::ACTION_GAME_CALCULATE_FRAME);
+          ah->NewAction(a, false);
+        }
+      }
     } else
       break;
   }
