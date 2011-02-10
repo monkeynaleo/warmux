@@ -45,7 +45,8 @@ Surface SpriteSubframeCache::GetSurfaceForAngle(Double angle)
 
   // On demand-cache
   if (rotated[index].IsNull()) {
-    angle = min + (max-min)*(1-index/(Double)rotated.size());
+    // Some compilers (old gccs?) need the explicit size_t->uint cast here
+    angle = min + (max-min)*(1-index/(Double)uint(rotated.size()));
     rotated[index] = surface.RotoZoomC(angle, ONE, ONE);
   }
   return rotated[index];
