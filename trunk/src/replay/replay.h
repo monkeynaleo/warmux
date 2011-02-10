@@ -50,6 +50,8 @@ public:
   uint8_t           *ptr;
   uint               bufsize;
   uint               seed;
+  // Number of calculate frame actions seen so far
+  uint               count;
 
   // State
   replay_state_t     replay_state;
