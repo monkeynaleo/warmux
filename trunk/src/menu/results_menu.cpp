@@ -447,6 +447,8 @@ void ResultsMenu::OnClickUp(const Point2i &mousePosition, int button)
         question.Ask();
         return;
       }
+
+      folders->StartListing(folders->GetCurrentFolder().c_str());
     } else if (w == folders) {
       const std::string* file = folders->GetSelectedFile();
       // This is a file, use that filename
