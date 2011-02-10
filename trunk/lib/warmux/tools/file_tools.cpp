@@ -272,12 +272,18 @@ struct _FolderSearch
 {
   DIR           *dir;
   struct dirent *file;
+#ifdef __SYMBIAN32__
+  std::string    dname;
+#endif
 };
 
 FolderSearch* OpenFolder(const std::string& dirname)
 {
   FolderSearch *f = new FolderSearch;
   f->dir = opendir(dirname.c_str());
+#ifdef __SYMBIAN32__
+  f->dname = dirname;
+#endif
 
   if (!f->dir) {
     delete f;
@@ -291,7 +297,11 @@ const char* FolderSearchNext(FolderSearch *f, bool& file)
 {
   while ((f->file = readdir(f->dir)) != NULL) {
 
+#ifdef __SYMBIAN32__
+    if (f->file->d_namlen && DoesFolderExist(f->dname+"/"+std::string(f->file->d_name))) {
+#else
     if (f->file->d_type == DT_DIR) {
+#endif
       // If we are also looking for files, report it isn't one
       if (file)
         file = false;
@@ -303,7 +313,11 @@ const char* FolderSearchNext(FolderSearch *f, bool& file)
       continue;
 
     // This is a file and we do search for file
+#ifdef __SYMBIAN32__
+    if (f->file->d_namlen && DoesFolderExist(f->dname+"/"+std::string(f->file->d_name))) {
+#else
     if (f->file->d_type == DT_REG) {
+#endif
       file = true;
       return f->file->d_name;
     }
