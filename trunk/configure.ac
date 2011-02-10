@@ -45,9 +45,9 @@ fi
 
 AX_CFLAGS_WARN_ALL([CXXFLAGS])
 
-# ========================================================================
-# == Set flags for various environments                                  =
-# ========================================================================
+# ==========================================================================
+# == Set flags for various environments                                    =
+# ==========================================================================
 WIN32="no"
 GEKKO="no"
 OSX="no"
@@ -70,9 +70,9 @@ case "${host}" in
 esac
 AM_CONDITIONAL([WIN32], test "${WIN32}" = "yes")
 
-dnl =========================================================================
-dnl === Options for users                                                   =
-dnl =========================================================================
+dnl ========================================================================
+dnl === Options for users                                                  =
+dnl ========================================================================
 
 dnl === Non-windows options
 AC_ARG_ENABLE([servers],
@@ -222,7 +222,7 @@ CFLAGS="$CFLAGS $SDL_CFLAGS"
 CPPFLAGS="$CPPFLAGS $SDL_CFLAGS"
 LIBS="$LIBS $SDL_LIBS"
 
-dnl === Check for X11 =====================================================
+dnl === Check for X11 ======================================================
 dnl Deactivated on purpose under OSX (in case X11 SDK is installed)
 if test "x$OSX" != "xyes" ; then
   AC_CHECK_HEADER(X11/Xlib.h, check_x11="yes",check_x11="no")
@@ -240,7 +240,7 @@ if test "x$OSX" != "xyes" ; then
   fi
 fi
 
-dnl === Check for libxml2 and libpng using pkg-confg =============
+dnl === Check for libxml2 and libpng using pkg-confg =======================
 PKG_PROG_PKG_CONFIG()
 PKG_CHECK_MODULES(LIBXML2, libxml-2.0, [], [AC_MSG_FAILURE([libxml2 not found])])
 PKG_CHECK_MODULES(LIBPNG, libpng, [], [AC_MSG_FAILURE([libpng not found])])
@@ -248,7 +248,7 @@ CFLAGS="$CFLAGS $LIBPNG_CFLAGS $LIBXML2_CFLAGS"
 CXXFLAGS="$CXXFLAGS $LIBPNG_CFLAGS $LIBXML2_CFLAGS"
 LIBS="$LIBS $LIBPNG_LIBS $LIBXML2_LIBS"
 
-dnl === Check for FriBidi =================================================
+dnl === Check for FriBidi ==================================================
 AC_ARG_ENABLE(fribidi, AC_HELP_STRING([--enable-fribidi], [enable bi-directional unicode support]) )
 if test "${enable_fribidi}" = "yes"; then
    if test "x$USE_NLS" != "xyes"; then
@@ -270,7 +270,7 @@ else
   fi
 fi
 
-dnl === Check for SDL_gfx ===========================================================
+dnl === Check for SDL_gfx ==================================================
 
 AC_ARG_WITH(sdl-gfx-prefix,
             [  --with-sdl-gfx-prefix=DIR       specify where SDL_gfx library is installed],
@@ -287,11 +287,11 @@ fi
 AC_CHECK_LIB(SDL_gfx, rotozoomSurfaceXY,,check_sdl_gfx="no")
 AC_CHECK_HEADER(SDL_rotozoom.h,,check_sdl_gfx="no")
 
-dnl === Check for curl ==============================================================
+dnl === Check for curl =====================================================
 
 LIBCURL_CHECK_CONFIG([yes],[7.0],[check_curl=yes],[check_curl=no])
 
-dnl === Check for libosso ==============================================================
+dnl === Check for libosso ==================================================
 
 AC_ARG_ENABLE(maemo, AC_HELP_STRING([--enable-maemo], [enable Maemo support]) )
 if test "${enable_maemo}" = "yes"; then
@@ -305,7 +305,7 @@ fi
 
 AM_CONDITIONAL(MAEMO, test "x${enable_maemo}" = "xyes")
 
-dnl === Check for SDL image, mixer, etc. ==============
+dnl === Check for SDL image, mixer, etc. ===================================
 
 AC_CHECK_LIB(SDL_image, IMG_Load,,check_sdl_image="no")
 AC_CHECK_LIB(SDL_mixer, Mix_OpenAudio,,check_sdl_mixer="no")
@@ -316,7 +316,12 @@ if test "${WIN32}" = "yes"; then
   CXXFLAGS="$CXXFLAGS -D_WIN32_WINNT=0x501"
 fi
 
-dnl === Display error if SDL image, mixer, etc. is missing ==================
+dnl === OSX uses a specific detection method for file locations ============
+if test "${OSX}" = "yes"; then
+  CXXFLAGS="$CXXFLAGS -DOSX_BUNDLE"
+fi
+
+dnl === Display error if SDL image, mixer, etc. is missing =================
 
 if test \
      x${check_sdl_image} = xno \
@@ -358,7 +363,7 @@ dnl === Forbid exceptions (Android platform requirement) ===================
 CXXFLAGS="$CXXFLAGS -fno-exceptions"
 
 dnl ========================================================================
-dnl == Check for header files                                              =
+dnl === Check for header files                                           ===
 dnl ========================================================================
 
 dnl TODO: remove them when we don't need them any more ;)
