@@ -19,15 +19,15 @@
  * Keyboard management.
  *****************************************************************************/
 
-#include <SDL_events.h>
-#include <libxml/tree.h>
-
 #include "game/game.h"
 #include "interface/keyboard.h"
 #include "network/chat.h"
 #ifdef DEBUG
 #include "network/randomsync.h"
 #endif
+
+#include <SDL_events.h>
+#include <libxml/tree.h>
 
 #define MODIFIER_OFFSET (SDLK_LAST + 1)
 #define SHIFT_BIT 0x1

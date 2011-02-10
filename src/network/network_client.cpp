@@ -19,7 +19,6 @@
  * Network client layer for Warmux.
  *****************************************************************************/
 
-#include <SDL_thread.h>
 #include <sys/types.h>
 #ifdef LOG_NETWORK
 #  include <sys/stat.h>
@@ -32,6 +31,7 @@
 #include <WARMUX_socket.h>
 #include <WARMUX_debug.h>
 #include <WARMUX_distant_cpu.h>
+#include <SDL_thread.h>
 
 //-----------------------------------------------------------------------------
 #include "include/action_handler.h"
