@@ -74,9 +74,9 @@ void Replay::ChangeBufsize(uint32_t n)
     return;
 
   // All data is supposed to be consumed
-  uint32_t offset = (bufsize) ? ptr-buf : 0;
-  buf = (uint32_t*)realloc(buf, n*4);
-  bufsize = n*4;
+  uint32_t offset = (bufsize) ? MemUsed() : 0;
+  buf = (uint8_t*)realloc(buf, n);
+  bufsize = n;
   ptr = buf + offset;
 }
 
@@ -92,14 +92,23 @@ bool Replay::StartRecording(const std::string& game_mode_name,
   old_time     = 0;
 
   // Write game mode rules at start of data
-  Action a(Action::ACTION_RULES_SET_GAME_MODE);
-  a.Push(game_mode_name);
-  a.Push(game_mode);
-  a.Push(game_mode_objects);
-  ChangeBufsize(a.GetSize()/2);
-  a.Write((char*)ptr);
-  ptr += a.GetSize()/4;
-  MSG_DEBUG("replay", "Wrote game mode on %u bytes\n", a.GetSize());
+  uint total_size = game_mode_name.size() + game_mode.size()
+                  + game_mode_objects.size() + 3*2;
+  ChangeBufsize(total_size+30000); // twice the needed size
+
+  Uint16 size = game_mode_name.size();
+  SDLNet_Write16(size, ptr); ptr += 2;
+  memcpy(ptr, game_mode_name.c_str(), size); ptr += size;
+
+  size = game_mode.size();
+  SDLNet_Write16(size, ptr); ptr += 2;
+  memcpy(ptr, game_mode.c_str(), size); ptr += size;
+
+  size = game_mode_objects.size();
+  SDLNet_Write16(size, ptr); ptr += 2;
+  memcpy(ptr, game_mode_objects.c_str(), size); ptr += size;
+
+  MSG_DEBUG("replay", "Wrote game mode on %u bytes\n", total_size);
 
   return true;
 }
@@ -159,7 +168,7 @@ void Replay::StoreAction(const Action* a)
 
   // Special case to convert into local packet
   if (type == Action::ACTION_REQUEST_BONUS_BOX_DROP) {
-    // The timer shouldn't have moved
+    // The timestamp shouldn't have moved
     Action a(Action::ACTION_DROP_BONUS_BOX);
     StoreAction(&a);
     return;
@@ -173,12 +182,12 @@ void Replay::StoreAction(const Action* a)
   }
 
   // Enlarge buffer if it can't contain max packet size
-  if (MemUsed() > bufsize - size*4)
-    ChangeBufsize(2*bufsize);
+  if (MemUsed() > bufsize - size)
+    ChangeBufsize(bufsize+30000);
 
   // Packet body
   a->Write((char*)ptr);
-  ptr += size/4;
+  ptr += size;
 
   // Check time
   if (start_time == 0)
@@ -280,15 +289,10 @@ ok:
   in.seekg(pos);
   MSG_DEBUG("replay", "Actions found at %u on %uB, seed=%08X\n", (uint)pos, size, seed);
 
-  if (size%4) {
-    // Make it fatal
-    goto err;
-  }
-
   // Explicit buffer change to avoid garbage
   if (buf)
     free(buf);
-  buf = (uint32_t*)malloc(size);
+  buf = (uint8_t*)malloc(size);
   ptr = buf;
   bufsize = size;
 
@@ -296,15 +300,17 @@ ok:
   if (!in) {
     goto err;
   }
-  Action *a = new Action((char*)buf, NULL);
-  if (!a || a->GetType() != Action::ACTION_RULES_SET_GAME_MODE)
-    goto err;
-  ptr += a->GetSize()/4;
-  const std::string& mode_name = a->PopString();
-  const std::string& mode = a->PopString();
-  const std::string& mode_objects = a->PopString();
+
+  size = SDLNet_Read16(ptr); ptr += 2;
+  std::string mode_name((char*)ptr, size); ptr += size;
+
+  size = SDLNet_Read16(ptr); ptr += 2;
+  std::string mode((char*)ptr, size); ptr += size;
+
+  size = SDLNet_Read16(ptr); ptr += 2;
+  std::string mode_objects((char*)ptr, size); ptr += size;
+
   game_mode->LoadFromString(mode_name, mode, mode_objects);
-  delete a;
   status = true;
 
   goto done;
@@ -331,8 +337,8 @@ Action* Replay::GetAction()
   }
 
   // Move pointer
-  uint size = a->GetSize()/4;
-  if (MemUsed() > bufsize-size*4) {
+  uint size = a->GetSize();
+  if (MemUsed() > bufsize-size) {
     Error(Format(_("Malformed replay: action with datasize=%u"), size));
     StopPlaying();
     return NULL;
@@ -341,7 +347,7 @@ Action* Replay::GetAction()
 
   const ActionHandler *ah = ActionHandler::GetConstInstance();
   MSG_DEBUG("replay", "Read action %s: type=%u length=%i\n",
-            ah->GetActionName(type).c_str(), type, size*4);
+            ah->GetActionName(type).c_str(), type, size);
 
   return a;
 }

@@ -46,9 +46,9 @@ public:
   } replay_state_t;
 
  private:
-  uint32_t          *buf;
-  uint32_t          *ptr;
-  uint32_t           bufsize;
+  uint8_t           *buf;
+  uint8_t           *ptr;
+  uint               bufsize;
   uint               seed;
 
   // State
@@ -65,7 +65,7 @@ public:
   std::vector<Team*> backup_list;
 
   void ChangeBufsize(uint32_t n);
-  uint32_t MemUsed() { return 4*(ptr - buf); }
+  uint32_t MemUsed() { return ptr - buf; }
 
 protected:
   friend class Singleton<Replay>;
