@@ -449,6 +449,9 @@ void ResultsMenu::OnClickUp(const Point2i &mousePosition, int button)
       }
 
       folders->StartListing(folders->GetCurrentFolder().c_str());
+      Question question(Question::NO_TYPE);
+      question.Set(_("Replay saved"), true, 0);
+      question.Ask();
     } else if (w == folders) {
       const std::string* file = folders->GetSelectedFile();
       // This is a file, use that filename
