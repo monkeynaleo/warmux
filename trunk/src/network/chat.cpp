@@ -20,8 +20,6 @@
  * nefertum - Jon de Andres
  *****************************************************************************/
 
-#include <SDL_events.h>
-
 #include "game/game_time.h"
 #include "graphic/text.h"
 #include "graphic/text_list.h"
@@ -32,6 +30,8 @@
 #include "network/admin_commands.h"
 #include "network/network.h"
 #include "tool/text_handling.h"
+
+#include <SDL_events.h>
 
 #define HEIGHT       15
 #define XPOS         25

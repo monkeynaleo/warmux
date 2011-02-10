@@ -23,12 +23,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <SDL_net.h>
-
 #include <WARMUX_action.h>
 #include <WARMUX_distant_cpu.h>
 #include <WARMUX_error.h>
 #include <WARMUX_euler_vector.h>
+
+#include <SDL_net.h>
 
 //-----------------------------------------------------------------------------
 
