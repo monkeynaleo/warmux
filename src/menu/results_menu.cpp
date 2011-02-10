@@ -19,8 +19,10 @@
  * Results menu
  *****************************************************************************/
 
-#include "menu/results_menu.h"
 #include <algorithm>  //std::sort
+#include <time.h>
+
+#include "menu/results_menu.h"
 
 #include "character/character.h"
 #include "character/damage_stats.h"
@@ -344,7 +346,13 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
 
     HBox* hbox2 = new HBox(BOX_HEIGHT, false, false); hbox2->SetBorder(0, 0);
     hbox2->AddWidget(new Label(_("Filename:"), LABEL_SIZE, Font::FONT_MEDIUM));
-    replay_name = new TextBox("record.dat", tab_size.x -6*BORDER -LABEL_SIZE -save->GetSizeX());
+    char buffer[32];
+    time_t rawtime;
+    struct tm * timeinfo;
+    time(&rawtime);
+    timeinfo = localtime (&rawtime);
+    strftime(buffer, sizeof(buffer), "Record %Y-%m-%d %HH%Mm%S.dat", timeinfo);
+    replay_name = new TextBox(buffer, tab_size.x -6*BORDER -LABEL_SIZE -save->GetSizeX());
     hbox2->AddWidget(replay_name);
     vbox2->AddWidget(hbox2);
 
