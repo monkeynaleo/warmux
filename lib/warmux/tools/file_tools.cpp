@@ -314,7 +314,7 @@ const char* FolderSearchNext(FolderSearch *f, bool& file)
 
     // This is a file and we do search for file
 #ifdef __SYMBIAN32__
-    if (f->file->d_namlen && DoesFolderExist(f->dname+"/"+std::string(f->file->d_name))) {
+    if (f->file->d_namlen && DoesFileExist(f->dname+"/"+std::string(f->file->d_name))) {
 #else
     if (f->file->d_type == DT_REG) {
 #endif
