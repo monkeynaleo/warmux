@@ -61,7 +61,6 @@ POTFILES = \
         src/gui/text_box.cpp \
         src/gui/widget.cpp \
         src/gui/widget_list.cpp \
-        src/include/action.cpp \
         src/include/action_handler.cpp \
         src/include/constant.cpp \
         src/interface/cursor.cpp \
