@@ -135,9 +135,12 @@ bool Replay::SaveReplay(const std::string& name, const char *comment)
   Write32(out, seed);
 
   // Flush actions recorded
+#ifdef WMX_LOG
   uint32_t pos = out.tellp();
   MSG_DEBUG("replay", "Actions stored at %u on %u bytes in %s, seed %08X\n",
             pos, MemUsed(), name.c_str(), seed);
+#endif
+
   out.write((char*)buf, MemUsed());
   if (count) {
     count--;
@@ -191,9 +194,11 @@ void Replay::StoreAction(const Action* a)
       MSG_DEBUG("replay", "Calculate frame repeated %u\n", count);
       SDLNet_Write32(count, ptr); ptr += 4;
     }
+#ifdef WMX_LOG
     const ActionHandler *ah = ActionHandler::GetConstInstance();
     MSG_DEBUG("replay", "Storing action %s: type=%i length=%i\n",
               ah->GetActionName(type).c_str(), type, size);
+#endif
     a->Write((char*)ptr);
     ptr += size;
     count = 0;
@@ -362,9 +367,11 @@ Action* Replay::GetAction()
   }
   ptr += size;
 
+#ifdef WMX_LOG
   const ActionHandler *ah = ActionHandler::GetConstInstance();
   MSG_DEBUG("replay", "Read action %s: type=%u length=%i\n",
             ah->GetActionName(type).c_str(), type, size);
+#endif
 
   return a;
 }
@@ -398,12 +405,6 @@ bool Replay::RefillActions()
 bool Replay::StartPlaying()
 {
   ASSERT(!is_recorder && replay_state == PAUSED_PLAY);
-
-  // Check GameMode
-  const GameMode * game_mode = GameMode::GetConstInstance();
-  MSG_DEBUG("replay", "Game mode: turn=%us move_player=%u max_nrg=%u init_nrg=%u\n",
-            game_mode->duration_turn, game_mode->duration_move_player,
-            game_mode->character.max_energy, game_mode->character.init_energy);
 
   replay_state = PLAYING;
 
