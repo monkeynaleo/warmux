@@ -25,7 +25,6 @@
 #include <map>
 #include <list>
 #include <WARMUX_action.h>
-#include <WARMUX_singleton.h>
 #include <WARMUX_types.h>
 //-----------------------------------------------------------------------------
 
