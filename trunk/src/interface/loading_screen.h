@@ -32,13 +32,12 @@ class Text;
 
 class LoadingScreen
 {
- private:
   Profile * res;
   Sprite * loading_bg;
   Text * loading_text;
   int icon_count;
 
- public:
+public:
   LoadingScreen(int icon_count);
   ~LoadingScreen();
 
