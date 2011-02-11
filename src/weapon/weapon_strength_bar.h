@@ -24,6 +24,7 @@
 
 class Sprite;
 class PolygonItem;
+class DecoratedBox;
 
 class WeaponStrengthBar : public ProgressBar
 {

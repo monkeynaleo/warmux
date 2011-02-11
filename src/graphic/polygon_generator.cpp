@@ -20,6 +20,7 @@
  *****************************************************************************/
 
 #include <stdlib.h>
+#include "graphic/polygon.h"
 #include "graphic/polygon_generator.h"
 #include "network/randomsync.h"
 #include "tool/affine_transform.h"

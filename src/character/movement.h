@@ -26,7 +26,7 @@
 #include <WARMUX_point.h>
 #include <WARMUX_types.h>
 
-#include "character/member.h"
+#include "character/member_type.h"
 #include "tool/math_tools.h"
 
 typedef struct _xmlNode xmlNode;

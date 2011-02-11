@@ -19,18 +19,21 @@
  * Random map generator
  *****************************************************************************/
 
+#include <sstream>
+
+#include <WARMUX_debug.h>
+
 #include "map/random_map.h"
 #include "game/config.h"
+#include "graphic/polygon.h"
 #include "graphic/polygon_generator.h"
 #include "graphic/sprite.h"
 #include "map/maps_list.h"
 #include "network/randomsync.h"
 #include "tool/affine_transform.h"
 #include "tool/resource_manager.h"
-#include <WARMUX_debug.h>
 #include "tool/xml_document.h"
 #include "tool/string_tools.h"
-#include <sstream>
 
 Surface * RandomElementList::GetRandomElement()
 {

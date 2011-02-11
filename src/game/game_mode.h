@@ -31,7 +31,6 @@
 #include "tool/xml_document.h"
 
 typedef struct _xmlNode xmlNode;
-class XmlReader;
 
 class GameMode : public Singleton<GameMode>
 {

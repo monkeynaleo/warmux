@@ -32,6 +32,7 @@
 #include "team/teams_list.h"
 #include "character/character.h"
 #include "graphic/colors.h"
+#include "graphic/polygon.h"
 #include "game/game.h"
 
 
