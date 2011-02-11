@@ -33,19 +33,17 @@
 class Weapon;
 class WeaponsMenu;
 
-class WeaponMenuItem : public PolygonItem {
-  WeaponMenuItem(const WeaponMenuItem&);
-  const WeaponMenuItem& operator=(const WeaponMenuItem&);
+class WeaponMenuItem : public PolygonItem
+{
   bool zoom;
-private:
   WeaponsMenu *m_parent;
 
- public:
+public:
   Weapon* weapon;
   int zoom_start_time;
   uint zoom_time;
 
- public:
+public:
   WeaponMenuItem(Weapon * weapon, const Point2d & position);
   bool IsMouseOver();
   void SetZoom(bool value);
@@ -58,11 +56,11 @@ private:
 
 class WeaponsMenu
 {
- public:
+public:
   static const int MAX_NUMBER_OF_WEAPON;
   Sprite * m_not_yet_available;
 
- private:
+private:
   Polygon * weapons_menu;
   Polygon * tools_menu;
   WeaponMenuItem * current_overfly_item;
@@ -83,7 +81,7 @@ class WeaponsMenu
   Mouse::pointer_t old_pointer;
   Point2i click_pos;
 
- public:
+public:
   WeaponsMenu();
   ~WeaponsMenu();
   void RefreshWeaponList();
