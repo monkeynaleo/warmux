@@ -21,5 +21,9 @@
 
 #include <string>
 
+#ifndef COPY_N_PASTE_H
+#define COPY_N_PASTE_H
+
 bool RetrieveBuffer(std::string& text, std::string::size_type& pos);
 
+#endif //COPY_N_PASTE_H
