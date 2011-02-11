@@ -24,6 +24,7 @@
 #include "include/constant.h"
 #include "interface/interface.h"
 #include "map/map.h"
+#include "tool/xml_document.h"
 
 Text::Text(const std::string & text,
            const Color & fontColor,

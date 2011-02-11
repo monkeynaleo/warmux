@@ -23,13 +23,14 @@
 #define MOUSE_H
 
 #include <map>
-#include "graphic/surface.h"
+
 #include <WARMUX_base.h>
 #include <WARMUX_singleton.h>
 #include <WARMUX_point.h>
 
 // Forward declarations
-struct SDL_event;
+union SDL_Event;
+typedef struct _SDL_TimerID *SDL_TimerID;
 class MouseCursor;
 
 class Mouse : public Singleton<Mouse>
@@ -91,8 +92,8 @@ public:
 
   // to compare with SDL_Event.button.button
   // and manage left-handed mouse option "transparently"
-  static Uint8 BUTTON_RIGHT();
-  static Uint8 BUTTON_LEFT();
+  static uint8_t BUTTON_RIGHT();
+  static uint8_t BUTTON_LEFT();
   static bool  IS_CLICK_BUTTON(uint button);
 
   bool HandleEvent(const SDL_Event& evnt);

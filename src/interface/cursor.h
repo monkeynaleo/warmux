@@ -30,12 +30,6 @@ class Sprite;
 
 class CharacterCursor : public Singleton<CharacterCursor>
 {
-private:
-  /* If you need this, implement it (correctly)*/
-  CharacterCursor(const CharacterCursor&);
-  const CharacterCursor& operator=(const CharacterCursor&);
-  /*********************************************/
-
   Sprite *arrow_jump;
   Sprite *arrow_change;
 

@@ -24,10 +24,7 @@
 #include <vector>
 #include <WARMUX_base.h>
 #include <WARMUX_singleton.h>
-#include "weapon_menu.h"
-#include "graphic/colors.h"
-#include "gui/energy_bar.h"
-#include "gui/energy_bar.h"
+#include "interface/weapon_menu.h"
 #include "gui/progress_bar.h"
 #include "weapon/weapon_strength_bar.h"
 
@@ -39,6 +36,7 @@ class Polygon;
 class Weapon;
 class WeaponHelp;
 class Profile;
+class EnergyBar;
 
 #ifdef WIN32
 #undef interface

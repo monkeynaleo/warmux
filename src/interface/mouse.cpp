@@ -101,7 +101,7 @@ void Mouse::EndLongClickTimer()
 
 bool Mouse::HasFocus() const
 {
-  Uint8 state = SDL_GetAppState();
+  uint8_t state = SDL_GetAppState();
 
   if ((state & SDL_APPMOUSEFOCUS) &&
       (state & SDL_APPINPUTFOCUS) &&
@@ -178,12 +178,12 @@ bool Mouse::IS_CLICK_BUTTON(uint button)
   return (button==SDL_BUTTON_LEFT || button==SDL_BUTTON_RIGHT || button==SDL_BUTTON_MIDDLE);
 }
 
-Uint8 Mouse::BUTTON_RIGHT() // static method
+uint8_t Mouse::BUTTON_RIGHT() // static method
 {
   return Config::GetConstRef().GetLeftHandedMouse() ? SDL_BUTTON_LEFT : SDL_BUTTON_RIGHT;
 }
 
-Uint8 Mouse::BUTTON_LEFT() // static method
+uint8_t Mouse::BUTTON_LEFT() // static method
 {
   return Config::GetConstRef().GetLeftHandedMouse() ? SDL_BUTTON_RIGHT : SDL_BUTTON_LEFT;
 }
