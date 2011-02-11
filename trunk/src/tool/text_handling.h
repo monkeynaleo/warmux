@@ -19,7 +19,12 @@
  * Text typing, deleting, editing, ...
  *****************************************************************************/
 
+#ifndef TEXT_HANDLING_H
+#define TEXT_HANDLING_H
+
 #include <string>
 #include <SDL_keyboard.h>
 
 bool TextHandle(std::string& text, std::string::size_type& pos, const SDL_keysym& key);
+
+#endif //TEXT_HANDLING_H
