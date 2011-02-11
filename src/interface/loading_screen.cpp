@@ -85,7 +85,3 @@ void LoadingScreen::StartLoading(uint nb, const std::string& resource,
 
   AppWarmux::GetInstance()->video->Flip();
 }
-
-
-
-
