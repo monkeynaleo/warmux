@@ -110,7 +110,6 @@ LIBRARY        euser.lib fbscli.lib ws32.lib
 LIBRARY        mediaclientaudiostream.lib
 
 LIBRARY        hal.lib remconinterfacebase.lib remconcoreapi.lib
-LIBRARY        platformver.lib
 
 LIBRARY        gdi.lib
 LIBRARY        bitgdi.lib
