@@ -34,10 +34,6 @@
 #include "include/constant.h"
 #include "tool/isnan.h"
 
-Ground::Ground()
-{ //FIXME (to erase)
-}
-
 void Ground::Init()
 {
   std::cout << "o " << _("Ground initialization...") << ' ';
@@ -94,10 +90,10 @@ Double Ground::Tangent(int x,int y) const
    * p2 =  point on the right
    */
   Point2i p1,p2;
-  if (!PointContigu(x,y, p1.x,p1.y, -1,-1))
+  if (!AdjacentPoint(x,y, p1.x,p1.y, -1,-1))
     return getNaN();
 
-  if (!PointContigu(x,y, p2.x,p2.y, p1.x,p1.y)) {
+  if (!AdjacentPoint(x,y, p2.x,p2.y, p1.x,p1.y)) {
     p2.x = x;
     p2.y = y;
   }
@@ -132,7 +128,7 @@ Double Ground::Tangent(int x,int y) const
   return table[(p2.y-p1.y)+2][(p2.x-p1.x)+2];
 }
 
-bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
+bool Ground::AdjacentPoint(int x,int y,  int & p_x,int & p_y,
                            int bad_x,int bad_y) const
 {
   //Look for a pixel around (x,y) that is at the edge of the ground

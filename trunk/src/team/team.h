@@ -25,10 +25,8 @@
 #include <list>
 #include <vector>
 #include <string>
-#include "ai/ai_player.h"
 #include "character/character.h"
 #include "team/team_energy.h"
-#include "graphic/colors.h"
 #include "graphic/surface.h"
 #include "weapon/crosshair.h"
 #include "weapon/weapon.h"
@@ -36,6 +34,7 @@
 const std::string NO_AI_NAME = "none";
 const std::string DEFAULT_AI_NAME = "default";
 
+class AIPlayer;
 class Body;
 class WeaponsList;
 class XmlReader;
@@ -106,11 +105,7 @@ public:
   bool IsSameAs(const Team& other) const { return m_id == other.m_id; }
 
   // Manage number of characters
-  void SetNbCharacters(uint howmany)
-  {
-    assert(howmany >= 1 && howmany <= 10);
-    nb_characters = howmany;
-  }
+  void SetNbCharacters(uint howmany) { nb_characters = howmany; }
   uint GetNbCharacters() const { return nb_characters; }
 
   // Switch to next worm.

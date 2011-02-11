@@ -29,27 +29,27 @@
 
 #include <WARMUX_base.h>
 #include <WARMUX_singleton.h>
-#include <SDL.h>
-#include <SDL_mixer.h>
 
 #include "sample_cache.h"
+
+typedef struct _Mix_Music Mix_Music;
 
 //-----------------------------------------------------------------------------
 
 /* Informations about music...
  *
  * Now, there is a playlist in JukeBox class.
- * A profil is openned in $DATA$/music/profile.xml, where there is a list of
+ * A profil is opened in $DATA$/music/profile.xml, where there is a list of
  * "music" sections like this :
  *   <music type="menu" playlist="menu/menu.m3u" />
  *
- * Your must create a m3u file, where there are listed (one per line) all music
- * files with a relative or an absolute path.
+ * You must create a m3u file, where all music files are listed (one per line)
+ * with a relative or an absolute path.
  *
- * A comment is a line begined with a '#' char.
+ * A comment is a line begining with a '#' char.
  *
  * When warmux is launched, there is a menu playlist and a ingame playlist.
- * At startup of a playlist, a random music is selected, after that, at the end
+ * At start of a playlist, a random music is selected, after that, at the end
  * of the current music, we play the next music in list. If this is the last
  * music, we go back to the first music...
  *
@@ -114,8 +114,8 @@ protected:
   friend class Singleton<JukeBox>;
 
 public:
-  static uint GetMaxVolume() { return MIX_MAX_VOLUME; }
-  static void SetMusicVolume(uint vol) { Mix_VolumeMusic(vol); }
+  static uint GetMaxVolume();
+  static void SetMusicVolume(uint vol);
 
   void Init();
   void End();

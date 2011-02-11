@@ -23,13 +23,15 @@
 
 #include <iostream>
 #include <fstream>
+#include <SDL.h>
+#include <SDL_mixer.h>
+
+#include <WARMUX_debug.h>
+#include <WARMUX_random.h>
+#include <WARMUX_file_tools.h>
 
 #include "game/config.h"
 #include "sound/sound_sample.h"
-#include <WARMUX_debug.h>
-
-#include <WARMUX_random.h>
-#include <WARMUX_file_tools.h>
 #include "tool/xml_document.h"
 #include "tool/string_tools.h"
 
@@ -65,6 +67,9 @@ void JukeBox::Resume(bool all) const
   if (all)
     Mix_ResumeMusic();
 }
+
+uint JukeBox::GetMaxVolume() { return MIX_MAX_VOLUME; }
+void JukeBox::SetMusicVolume(uint vol) { Mix_VolumeMusic(vol); }
 
 void JukeBox::Init()
 {

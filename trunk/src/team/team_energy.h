@@ -23,11 +23,14 @@
 #define TEAM_ENERGY_H
 
 #include <vector>
-#include "gui/energy_bar.h"
+#include <WARMUX_base.h>
+#include <WARMUX_point.h>
 
+class Surface;
 class Team;
 class Sprite;
 class Text;
+class EnergyBar;
 
 typedef enum
 {

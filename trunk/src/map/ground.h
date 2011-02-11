@@ -27,18 +27,14 @@
 
 class Ground : public Tile
 {
-private:
   bool open;
-  bool PointContigu(int x,int y, int & p_x,int & p_y,
-                    int pas_bon_x,int pas_bon_y) const;
+  bool AdjacentPoint(int x,int y, int & p_x,int & p_y,
+                     int pas_bon_x,int pas_bon_y) const;
   Point2i lastPos;
 
   uint alpha_threshold; //Keep redundant to rise performance
 
-  static Double table[5][5];
-
 public:
-  Ground();
   void Init();
   void Draw(bool redraw_all);
   void Reset();

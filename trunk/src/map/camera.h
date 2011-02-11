@@ -23,12 +23,12 @@
 #define SCROLLING_H
 
 #include <WARMUX_base.h>
-#include "interface/mouse.h"
-#include "interface/movable_by_user.h"
 #include <WARMUX_point.h>
 #include <WARMUX_rectangle.h>
-#include "game/stopwatch.h"
 
+#include "game/stopwatch.h"
+#include "interface/mouse.h"
+#include "interface/movable_by_user.h"
 
 class PhysicalObj;
 

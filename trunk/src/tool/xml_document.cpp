@@ -20,6 +20,7 @@
  *****************************************************************************/
 
 #include <iostream>
+#include "graphic/color.h"
 #include "tool/xml_document.h"
 #include "tool/string_tools.h"
 #include <WARMUX_file_tools.h>

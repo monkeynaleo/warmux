@@ -19,18 +19,19 @@
  * energy bar of each team
  *****************************************************************************/
 
-#include "team/team_energy.h"
 #include <sstream>
 #include <WARMUX_types.h>
-#include "map/camera.h"
-#include "map/map.h"
 #include "game/game_time.h"
 #include "graphic/text.h"
 #include "graphic/sprite.h"
+#include "gui/energy_bar.h"
+#include "include/app.h"
+#include "map/camera.h"
+#include "map/map.h"
 #include "sound/jukebox.h"
 #include "team/team.h"
+#include "team/team_energy.h"
 #include "team/teams_list.h"
-#include "include/app.h"
 
 #define   BAR_WIDTH       13
 

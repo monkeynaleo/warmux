@@ -37,9 +37,6 @@ void SoundSample::ChannelFinished(int channel)
   }
 }
 
-SoundSample::SoundSample() : channel(-1)
-{}
-
 SoundSample::~SoundSample()
 {
   if (channel == -1)
@@ -81,4 +78,3 @@ bool SoundSample::IsPlaying()
 
   return Mix_Playing(channel)>0;
 }
-

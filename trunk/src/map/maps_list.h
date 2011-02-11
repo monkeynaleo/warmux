@@ -27,7 +27,6 @@
 #include <WARMUX_base.h>
 #include <WARMUX_singleton.h>
 #include "graphic/surface.h"
-#include "map/water.h"
 #include "tool/xml_document.h"
 
 // Forward declarations
@@ -36,7 +35,6 @@ class Profile;
 class Water;
 class InfoMapBasicAccessor;
 class InfoMapAccessor;
-typedef struct _xmlNode xmlNode;
 
 class InfoMap {
  public:

@@ -21,8 +21,10 @@
 
 #include <iostream>
 #include <fstream>
-
 #include <assert.h>
+
+#include <SDL_mixer.h>
+
 #include <WARMUX_debug.h>
 
 #include "sample_cache.h"
