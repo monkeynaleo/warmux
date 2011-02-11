@@ -463,7 +463,9 @@ static void Action_ChatMessage(Action *a)
   const Color& color = (team) ? team->GetColor()
                               : DefaultCPUColor(cpu);
 
-  ChatLogger::GetInstance()->LogMessage(nickname+"> "+message);
+  // cpu is NULL on replay, so only log if !=NULL
+  if (cpu)
+    ChatLogger::GetInstance()->LogMessage(nickname+"> "+message);
   AppWarmux::GetInstance()->ReceiveMsgCallback(nickname+"> "+message, color);
 }
 
