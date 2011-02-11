@@ -23,12 +23,12 @@
 #define BONUS_BOX_H
 //-----------------------------------------------------------------------------
 #include <WARMUX_base.h>
-#include "weapon/weapon.h"
 #include "objbox.h"
 
 // Forward declarations
 class Character;
 class Action;
+class Weapon;
 //-----------------------------------------------------------------------------
 
 class BonusBox : public ObjBox

@@ -29,12 +29,11 @@
 
 class SoundSample
 {
- private:
   static std::map<int, SoundSample*> sound_samples_channel;
   int channel;
 
- public:
-  SoundSample();
+public:
+  SoundSample() : channel(-1) {}
   ~SoundSample();
 
   // return false if sound can't be played because it is already playing
@@ -44,7 +43,6 @@ class SoundSample
   void Stop();
 
   bool IsPlaying();
-
 
   static void ChannelFinished(int channel);
 };

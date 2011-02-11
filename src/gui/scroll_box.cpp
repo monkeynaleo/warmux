@@ -20,6 +20,7 @@
  *****************************************************************************/
 
 #include "graphic/video.h"
+#include "graphic/colors.h"
 #include <SDL.h>
 #include "gui/button.h"
 #include "gui/vertical_box.h"

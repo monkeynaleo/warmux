@@ -8,12 +8,12 @@
 #include <WARMUX_base.h>
 #include <string>
 #include <vector>
-#include "graphic/colors.h"
 
 // Forward declaration
 typedef struct _xmlNode xmlNode;
 typedef struct _xmlDoc xmlDoc;
 typedef std::vector<const xmlNode*> xmlNodeArray;
+class Color;
 
 class XmlReader
 {

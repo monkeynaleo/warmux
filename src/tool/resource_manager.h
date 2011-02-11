@@ -35,6 +35,7 @@
 #include "graphic/surface.h"
 #include "interface/mouse.h"
 #include "map/maps_list.h"
+
 #ifdef WIN32
    // Protects against macro definition of LoadImage when this header is included last.
 #  undef LoadImage

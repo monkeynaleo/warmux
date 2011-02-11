@@ -27,7 +27,8 @@
 #include <WARMUX_base.h>
 #include <WARMUX_point.h>
 #include <WARMUX_rectangle.h>
-#include "graphic/surface.h"
+
+class Surface;
 
 class Sky
 {

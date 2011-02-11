@@ -26,8 +26,7 @@
 #include <map>
 #include <WARMUX_base.h>
 
-#include <SDL.h>
-#include <SDL_mixer.h>
+typedef struct Mix_Chunk Mix_Chunk;
 
 class SampleCache
 {
