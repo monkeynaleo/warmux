@@ -26,7 +26,6 @@
 #include <vector>
 #include <WARMUX_base.h>
 #include <WARMUX_point.h>
-#include "tool/xml_document.h"
 
 // Forward declarations
 class Character;
@@ -38,6 +37,7 @@ class Clothe;
 class Profile;
 class junction;
 typedef struct _xmlNode xmlNode;
+typedef std::vector<const xmlNode*> xmlNodeArray;
 
 class Body
 {

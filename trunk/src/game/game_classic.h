@@ -28,11 +28,6 @@ class GameClassic : public Game
 {
   uint duration;
 
-  /* If you need this, implement it (correctly)*/
-  GameClassic(const GameClassic&);
-  GameClassic operator=(const GameClassic&);
-  /**********************************************/
-
   void RefreshClock();
   void __SetState_PLAYING();
   void __SetState_HAS_PLAYED();

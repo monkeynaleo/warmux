@@ -22,7 +22,12 @@
 #ifndef POLYGON_GENERATOR_H
 #define POLYGON_GENERATOR_H
 
-#include "polygon.h"
+#include <WARMUX_types.h>
+#include <WARMUX_point.h>
+#include <WARMUX_rectangle.h>
+
+class Polygon;
+class DecoratedBox;
 
 class PolygonGenerator {
  public:

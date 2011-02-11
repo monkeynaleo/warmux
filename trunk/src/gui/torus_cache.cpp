@@ -19,6 +19,7 @@
  * Cache rendering of a partial torus
  *****************************************************************************/
 
+#include "graphic/polygon.h"
 #include "graphic/polygon_generator.h"
 #include "graphic/sprite.h"
 #include "graphic/video.h"

@@ -27,8 +27,6 @@
 #include "graphic/color.h"
 #include "graphic/surface.h"
 
-class DecoratedBox;
-
 class ProgressBar
 {
 public:

@@ -22,18 +22,19 @@
 
 #include <WARMUX_types.h>
 
-class EulerVector{
-  public:
-    Double x0, x1, x2;
+class EulerVector
+{
+public:
+  Double x0, x1, x2;
 
-    EulerVector() :
-                  x0(0.0), x1(0.0), x2(0.0)
-                { };
-    EulerVector(Double v0, Double v1, Double v2) :
-                  x0(v0), x1(v1), x2(v2)
-                { };
-    void Clear();
-    void ComputeOneEulerStep(Double a, Double b, Double c, Double d, Double dt);
+  EulerVector() :
+                x0(0.0), x1(0.0), x2(0.0)
+              { };
+  EulerVector(Double v0, Double v1, Double v2) :
+                x0(v0), x1(v1), x2(v2)
+              { };
+  void Clear();
+  void ComputeOneEulerStep(Double a, Double b, Double c, Double d, Double dt);
 };
 
 #endif
