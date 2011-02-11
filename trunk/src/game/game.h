@@ -49,7 +49,7 @@ public:
   } game_loop_state_t;
 
   typedef enum {
-    NO_PAUSE,
+    NO_REQUEST,
     START_PAUSE,
     END_PAUSE
   } PauseRequest;
