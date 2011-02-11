@@ -25,6 +25,7 @@
 #ifdef DEBUG
 #include "network/randomsync.h"
 #endif
+#include "tool/xml_document.h"
 
 #include <SDL_events.h>
 #include <libxml/tree.h>

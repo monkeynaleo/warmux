@@ -24,7 +24,10 @@
 #include "colors.h"
 #include "font.h"
 #include "surface.h"
-#include "tool/xml_document.h"
+
+// Forward declaration
+class XmlReader;
+typedef struct _xmlNode xmlNode;
 
 class Text
 {

@@ -22,15 +22,15 @@
 #include "interface/move_intention.h"
 #include <WARMUX_error.h>
 
-LRMoveIntention LEFT_SLOWLY_OBJECT(DIRECTION_LEFT, true);
-LRMoveIntention LEFT_OBJECT(DIRECTION_LEFT, false);
-LRMoveIntention RIGHT_SLOWLY_OBJECT(DIRECTION_RIGHT, true);
-LRMoveIntention RIGHT_OBJECT(DIRECTION_RIGHT, false);
+static const LRMoveIntention LEFT_SLOWLY_OBJECT(DIRECTION_LEFT, true);
+static const LRMoveIntention LEFT_OBJECT(DIRECTION_LEFT, false);
+static const LRMoveIntention RIGHT_SLOWLY_OBJECT(DIRECTION_RIGHT, true);
+static const LRMoveIntention RIGHT_OBJECT(DIRECTION_RIGHT, false);
 
-UDMoveIntention UP_SLOWLY_OBJECT(DIRECTION_UP, true);
-UDMoveIntention UP_OBJECT(DIRECTION_UP, false);
-UDMoveIntention DOWN_SLOWLY_OBJECT(DIRECTION_DOWN, true);
-UDMoveIntention DOWN_OBJECT(DIRECTION_DOWN, false);
+static const UDMoveIntention UP_SLOWLY_OBJECT(DIRECTION_UP, true);
+static const UDMoveIntention UP_OBJECT(DIRECTION_UP, false);
+static const UDMoveIntention DOWN_SLOWLY_OBJECT(DIRECTION_DOWN, true);
+static const UDMoveIntention DOWN_OBJECT(DIRECTION_DOWN, false);
 
 
 const LRMoveIntention * const INTENTION_MOVE_LEFT_SLOWLY = &LEFT_SLOWLY_OBJECT;

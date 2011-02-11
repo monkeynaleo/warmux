@@ -31,6 +31,7 @@
 #include "graphic/text.h"
 #include "graphic/sprite.h"
 #include "graphic/video.h"
+#include "gui/energy_bar.h"
 #include "include/app.h"
 #include "map/camera.h"
 #include "map/map.h"

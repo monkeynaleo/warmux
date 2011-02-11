@@ -22,12 +22,15 @@
 #ifndef KEYBOARD_H
 #define KEYBOARD_H
 //-----------------------------------------------------------------------------
-#include "interface/man_machine_interface.h"
-#include <WARMUX_singleton.h>
 #include <set>
-#include "SDL_keyboard.h"
-#include "tool/xml_document.h"
+#include "SDL_keysym.h"
+
+#include <WARMUX_singleton.h>
+
+#include "interface/man_machine_interface.h"
 //-----------------------------------------------------------------------------
+
+typedef struct _xmlNode xmlNode;
 
 class Keyboard : public Singleton<Keyboard>, public ManMachineInterface
 {

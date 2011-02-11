@@ -23,6 +23,8 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <vector>
+
 #include <WARMUX_base.h>
 #include <WARMUX_singleton.h>
 #include "network/chat.h"
