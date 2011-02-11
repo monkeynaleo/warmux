@@ -33,7 +33,6 @@
 #include <eiklabel.h>
 #include <aknglobalmsgquery.h>
 #include <apgwgnam.h> 
-#include <versioninfo.h>  // VersionInfo
 
 #include "hwablitter.h"
 
@@ -692,19 +691,6 @@ NONSHARABLE_STRUCT(SFlag)
     TInt iValue;
     };
 
-// On return, aMajor and aMinor contain the version information
-TInt GetS60PlatformVersionL(RFs& aFs, TUint& aMajor, TUint& aMinor)
-    {
-    VersionInfo::TPlatformVersion platformVersion;
-    TInt ret = VersionInfo::GetVersion(platformVersion, aFs);
-    if (ret == KErrNone)
-        {
-        aMajor = platformVersion.iMajorVersion;
-        aMinor = platformVersion.iMinorVersion;
-        }
-    return ret;
-    }
-
 void CSDLAppUi::ParseFlags(const TDesC8& aString, TInt& aSdlFlags, TInt& aExeFlags)
     {
     
@@ -768,22 +754,6 @@ void CSDLAppUi::ParseFlags(const TDesC8& aString, TInt& aSdlFlags, TInt& aExeFla
                 }            
             }
         }
-
-    // Connect to the file server session
-    RFs fsSession;
-    User::LeaveIfError(fsSession.Connect());
-    CleanupClosePushL(fsSession);
- 
-    // Obtain the version number
-    TUint major;
-    TUint minor;
-    User::LeaveIfError(GetS60PlatformVersionL(fsSession, major, minor));
-    CleanupStack::PopAndDestroy();  // fsSession
-
-    if (major < 5 && minor < 2)
-    	{
-    	aSdlFlags &= ~CSDL::EDrawModeGdi;
-    	}
     }
 	
 void CSDLAppUi::FlagsFromFileL(TInt& aSdlFlags, TInt& aExeFlags) 
