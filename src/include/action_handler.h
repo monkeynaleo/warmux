@@ -25,6 +25,7 @@
 #include <map>
 #include <list>
 #include <WARMUX_action_handler.h>
+#include <WARMUX_singleton.h>
 
 //-----------------------------------------------------------------------------
 
@@ -36,7 +37,6 @@ class Action;
 
 class ActionHandler : public Singleton<ActionHandler>, public WActionHandler
 {
-private:
   friend class Singleton<ActionHandler>;
   ActionHandler();
   ~ActionHandler();
