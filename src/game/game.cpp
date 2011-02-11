@@ -462,7 +462,7 @@ Game::Game()
   , ask_for_menu(false)
   , ask_for_help_menu(false)
   , ask_for_end(false)
-  , request_pause(NO_PAUSE)
+  , request_pause(NO_REQUEST)
   , fps(new FramePerSecond())
   , delay(0)
   , time_of_next_frame(0)
@@ -791,14 +791,14 @@ void Game::MainLoop()
   // One time honouring of the pause request - check GameTime::IsPaused to get the state
   if (request_pause == START_PAUSE) {
     time->SetPause(true);
-    request_pause = NO_PAUSE;
+    request_pause = NO_REQUEST;
   } else if (request_pause == END_PAUSE) {
     time->SetPause(false);
-    request_pause = NO_PAUSE;
+    request_pause = NO_REQUEST;
   }
 
   // Generally linked to replay: do minimal refresh
-  if (time->IsPaused()) {
+  if (Replay::GetConstInstance()->IsPlaying() && time->IsPaused()) {
     RefreshInput();
     if (time_of_next_frame < SDL_GetTicks()) {
       //printf("Drawing as %u < %u\n", time_of_next_frame, SDL_GetTicks());
