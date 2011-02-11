@@ -453,6 +453,7 @@ static void Action_ChatMessage(Action *a)
 
       int unused_buffer;
       team = GetTeamsList().FindById(found->id, unused_buffer);
+      nickname = team->GetPlayerName();
     }
   } else {
     // Hack for local replay
