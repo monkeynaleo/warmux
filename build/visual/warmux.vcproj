@@ -900,14 +900,6 @@
 				Name="include"
 				>
 				<File
-					RelativePath="..\..\src\include\action.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\include\action.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\src\include\action_handler.cpp"
 					>
 				</File>
