@@ -50,7 +50,7 @@ public:
   void SetCurrentMenu(Menu *_menu) { menu = _menu; }
   void RefreshDisplay();
   static void DisplayError(const std::string &msg);
-  void ReceiveMsgCallback(const std::string& msg, const Color& color);
+  void ReceiveMsgCallback(const std::string& msg, const Color& color, bool in_game = false);
   static AppWarmux * GetInstance();
   ~AppWarmux();
   static void EmergencyExit();

@@ -56,6 +56,7 @@ public:
     ACTION_ANNOUNCE_PAUSE,
 
     // Initial information about the game: map, teams already selected, ...
+    ACTION_CHAT_MENU_MESSAGE,
     ACTION_GAME_INFO,
 
     // Map selection in network menu
@@ -78,12 +79,12 @@ public:
     // All action below must be executed within their physics frame.
     // ########################################################
     // ########################################################
+    ACTION_GAME_CALCULATE_FRAME,
     ACTION_PLAYER_CHANGE_WEAPON,
     ACTION_PLAYER_CHANGE_CHARACTER,
-    ACTION_GAME_CALCULATE_FRAME,
 
     // Chat message
-    ACTION_CHAT_MESSAGE,
+    ACTION_CHAT_INGAME_MESSAGE,
 
     // ########################################################
     // Character's move

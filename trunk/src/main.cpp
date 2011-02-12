@@ -250,12 +250,12 @@ void AppWarmux::DisplayError(const std::string &msg)
   }
 }
 
-void AppWarmux::ReceiveMsgCallback(const std::string& msg, const Color& color)
+void AppWarmux::ReceiveMsgCallback(const std::string& msg, const Color& color, bool in_game)
 {
-  if (Replay::GetConstInstance()->IsPlaying()) {
+  if (Replay::GetConstInstance()->IsPlaying() && in_game) {
     Game::GetInstance()->chatsession.NewMessage(msg, color);
   } else if (Game::IsRunning()) {
-    if (Game::GetCurrentMenu()) {
+    if (Game::GetCurrentMenu() && !in_game) {
       // Drop message, we should be paused anyway
     } else {
       // Add message to chat session in Game
