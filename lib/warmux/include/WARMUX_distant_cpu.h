@@ -23,6 +23,7 @@
 #define DISTANT_CPU_H
 //-----------------------------------------------------------------------------
 #include <list>
+#include <vector>
 #include <string>
 #include <WARMUX_player.h>
 #include <WARMUX_types.h>
@@ -54,7 +55,7 @@ public:
   bool SendData(const char* data, size_t len);
 
   std::string GetAddress() const;
-  std::string GetNicknames() const;
+  std::vector<std::string> GetNicknames() const;
 
   void AddPlayer(uint player_id);
   void DelPlayer(uint player_id);

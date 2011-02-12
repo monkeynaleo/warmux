@@ -24,6 +24,7 @@
 #include <WARMUX_debug.h>
 #include <WARMUX_distant_cpu.h>
 #include <WARMUX_team_config.h>
+#include <WARMUX_I18N.h>
 
 #include "action_handler.h"
 #include "character/character.h"
@@ -902,10 +903,10 @@ static void Action_Network_Ping(Action */*a*/)
 
 // ########################################################
 
-static void _Info_ConnectHost(const std::string& hostname, const std::string& nicknames)
+static void _Info_ConnectHost(const std::string& host_info)
 {
   // For translators: extended in "<nickname> (<host>) just connected
-  std::string msg = Format("%s (%s) just connected", nicknames.c_str(), hostname.c_str());
+  std::string msg = Format(_("%s just connected"), host_info.c_str());
   std::cerr << msg.c_str() << std::endl;
 
   ChatLogger::LogMessageIfOpen(msg);
@@ -984,14 +985,13 @@ void SendInitialGameInfo(DistantComputer* client, int added_player_id)
 static void Action_Info_ClientConnect(Action *a)
 {
   int player_id = a->PopInt();
-  std::string hostname = a->PopString();
-  std::string nicknames = a->PopString();
+  std::string host_info = a->PopString();
 
   ASSERT(a->GetCreator() && a->GetCreator()->GetPlayer(player_id) == NULL);
   a->GetCreator()->AddPlayer(player_id);
 
 
-  _Info_ConnectHost(hostname, nicknames);
+  _Info_ConnectHost(host_info);
 
   if (Network::GetInstance()->IsGameMaster()) {
     SendInitialGameInfo(a->GetCreator(), player_id);
@@ -1000,27 +1000,25 @@ static void Action_Info_ClientConnect(Action *a)
 
 void WARMUX_ConnectHost(DistantComputer& host)
 {
-  std::string hostname = host.GetAddress();
-  std::string nicknames = host.GetNicknames();
+  std::string host_info = host.ToString();
 
-  _Info_ConnectHost(hostname, nicknames);
+  _Info_ConnectHost(host_info);
 
   if (Network::GetInstance()->IsServer()) {
     Action a(Action::ACTION_INFO_CLIENT_CONNECT);
     ASSERT(host.GetPlayers().size() == 1);
     int player_id = host.GetPlayers().back().GetId();
     a.Push(player_id);
-    a.Push(hostname);
-    a.Push(nicknames);
+    a.Push(host_info);
 
     Network::GetInstance()->SendActionToAllExceptOne(a, &host);
   }
 }
 
-static void _Info_DisconnectHost(const std::string& hostname, const std::string& nicknames)
+static void _Info_DisconnectHost(const std::string& host)
 {
   // For translators: extended in "<nickname> (<host>) just disconnected
-  std::string msg = Format("%s (%s) just disconnected", nicknames.c_str(), hostname.c_str());
+  std::string msg = Format(_("%s just disconnected"), host.c_str());
   fprintf(stderr, "%s\n", msg.c_str());
 
   ChatLogger::LogMessageIfOpen(msg);
@@ -1031,10 +1029,9 @@ static void _Info_DisconnectHost(const std::string& hostname, const std::string&
 // Used to notify clients that someone disconnected from the server
 static void Action_Info_ClientDisconnect(Action *a)
 {
-  std::string hostname = a->PopString();
-  std::string nicknames = a->PopString();
+  std::string host = a->PopString();
 
-  _Info_DisconnectHost(hostname, nicknames);
+  _Info_DisconnectHost(host);
 
   int nb_players = a->PopInt();
   for (int i = 0; i < nb_players; i++) {
@@ -1045,15 +1042,13 @@ static void Action_Info_ClientDisconnect(Action *a)
 
 void WARMUX_DisconnectHost(DistantComputer& host)
 {
-  std::string hostname = host.GetAddress();
-  std::string nicknames = host.GetNicknames();
+  std::string host_info = host.ToString();
 
-  _Info_DisconnectHost(hostname, nicknames);
+  _Info_DisconnectHost(host_info);
 
   if (Network::GetInstance()->IsServer()) {
     Action a(Action::ACTION_INFO_CLIENT_DISCONNECT);
-    a.Push(hostname);
-    a.Push(nicknames);
+    a.Push(host_info);
     a.Push(int(host.GetPlayers().size()));
 
     std::list<Player>::const_iterator player_it;
