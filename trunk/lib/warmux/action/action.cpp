@@ -39,65 +39,90 @@ Action::Action(Action_t type)
   Init(type);
 }
 
-Action::Action(Action_t type, int value)
+Action::Action(Action_t type, int32_t m_value)
 {
   Init(type);
-  Push(value);
+  Push(m_value);
 }
 
-Action::Action(Action_t type, Double value)
+Action::Action(Action_t type, Double m_value)
 {
   Init(type);
-  Push(value);
+  Push(m_value);
 }
 
-Action::Action(Action_t type, const std::string& value)
+Action::Action(Action_t type, const std::string& m_value)
 {
   Init(type);
-  Push(value);
+  Push(m_value);
 }
 
-Action::Action(Action_t type, Double value1, Double value2)
+Action::Action(Action_t type, Double m_value1, Double m_value2)
 {
   Init(type);
-  Push(value1);
-  Push(value2);
+  Push(m_value1);
+  Push(m_value2);
 }
 
-Action::Action(Action_t type, Double value1, int value2)
+Action::Action(Action_t type, Double m_value1, int32_t m_value2)
 {
   Init(type);
-  Push(value1);
-  Push(value2);
+  Push(m_value1);
+  Push(m_value2);
+}
+
+Action::~Action()
+{
+  if (m_var)
+    free(m_var);
+  m_write = m_read = m_var = NULL;
+  m_header.len = 0;
+  m_bufsize = 0;
 }
 
 // Build an action from a network packet
 Action::Action(const char *buffer, DistantComputer* _creator)
 {
-  creator = _creator;
+  m_creator = _creator;
 
-  var.clear();
   m_header.len = SDLNet_Read32(buffer);
+  ASSERT(m_header.len >= sizeof(Header));
   buffer += 4;
-  ASSERT(!((m_header.len-sizeof(Header))%4));
-  uint num = (m_header.len-sizeof(Header))/4;
-  ASSERT(num < MAX_NUM_VARS); // would be suspicious
-
   m_header.type = (Action_t)SDLNet_Read32(buffer);
   buffer += 4;
 
-  for (uint i=0; i < num; i++) {
-    uint32_t val = SDLNet_Read32(buffer);
-    var.push_back(val);
-    buffer += 4;
+  m_header.len -= sizeof(Header);
+  m_bufsize = m_header.len;
+  if (m_header.len) {
+    m_read = m_write = m_var = (uint8_t*)malloc(m_bufsize);
+    memcpy(m_var, buffer, m_bufsize);
+  } else {
+    m_read = m_write = m_var = NULL;
   }
 }
 
 void Action::Init(Action_t type)
 {
   m_header.type = type;
-  var.clear();
-  creator = NULL;
+  m_header.len = 0;
+  m_bufsize = 0;
+  m_write = m_read = m_var = NULL;
+  m_creator = NULL;
+}
+
+void Action::Resize(uint n)
+{
+  if (n < m_bufsize)
+    return;
+  if (m_write) {
+    uint offset = m_write - m_var;
+    m_var = (uint8_t*)realloc(m_var, n);
+    m_write = m_var + offset;
+  } else {
+    m_write = m_var = (uint8_t*)malloc(n);
+  }
+  m_read = m_var;
+  m_bufsize = n;
 }
 
 void Action::Write(char *buffer) const
@@ -108,11 +133,9 @@ void Action::Write(char *buffer) const
   SDLNet_Write32(m_header.type, buffer);
   buffer += 4;
 
-  for(std::list<uint32_t>::const_iterator val = var.begin(); val!=var.end(); val++) {
-    SDLNet_Write32(*val, buffer);
-    buffer += 4;
+  if (m_header.len) {
+    memcpy(buffer, m_var, m_header.len);
   }
-  ASSERT(var.size() < MAX_NUM_VARS);
 }
 
 // Convert the action to a packet
@@ -125,164 +148,131 @@ void Action::WriteToPacket(char* &packet, int & size) const
 }
 
 //-------------  Add datas to the action  ----------------
-void Action::Push(int val)
+void Action::Push(int32_t m_val)
 {
-  uint32_t tmp;
-  memcpy(&tmp, &val, 4);
-  var.push_back(tmp);
+  if (MemWriteLeft() < 4)
+    Increase();
+  SDLNet_Write32(m_val, m_write); m_write += 4; m_header.len += 4;
 }
 
-void Action::Push(Double val)
+void Action::Push(Double m_val)
 {
 #if FIXINT_BITS == 32
-  uint32_t tmp = *((uint32_t*)&val);
-  var.push_back(tmp);
+  uint32_t tmp = *((uint32_t*)&m_val.intValue);
+  if (MemWriteLeft() < 4)
+    Increase();
+  SDLNet_Write32(m_val, m_write); m_write += 4;
 #else
   uint32_t tmp[2];
-  memcpy(tmp, &val, 8);
+
+  if (MemWriteLeft() < 8)
+    Increase();
+  memcpy(tmp, &m_val.intValue, 8);
 #  if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
-  var.push_back(tmp[0]);
-  var.push_back(tmp[1]);
+  SDLNet_Write32(tmp[0], m_write); m_write+= 4;
+  SDLNet_Write32(tmp[1], m_write); m_write+= 4;
 #  else
-  var.push_back(tmp[1]);
-  var.push_back(tmp[0]);
+  SDLNet_Write32(tmp[1], m_write); m_write+= 4;
+  SDLNet_Write32(tmp[0], m_write); m_write+= 4;
 #  endif
 #endif
+  m_header.len += sizeof(fixedpoint::fixint_t);
 }
 
-void Action::Push(const Point2i& val)
+void Action::Push(const Point2i& m_val)
 {
-  Push(val.x);
-  Push(val.y);
+  Push(m_val.x);
+  Push(m_val.y);
 }
 
-void Action::Push(const Point2d& val)
+void Action::Push(const Point2d& m_val)
 {
-  Push(val.x);
-  Push(val.y);
+  Push(m_val.x);
+  Push(m_val.y);
 }
 
-void Action::Push(const EulerVector &val)
+void Action::Push(const EulerVector &m_val)
 {
-  Push(val.x0);
-  Push(val.x1);
-  Push(val.x2);
+  Push(m_val.x0);
+  Push(m_val.x1);
+  Push(m_val.x2);
 }
 
-void Action::Push(const std::string& val)
+void Action::Push(const std::string& m_val)
 {
-  //Cut the string into 32bit values
-  //But first, we write the size of the string:
-  Push((int)val.size());
-  char* ch = (char*)val.c_str();
+  // First, write the size of the string (assume len<65536):
+  uint16_t size = m_val.size();
+  if (MemWriteLeft() < uint(size+2))
+    Increase(size+2);
+  SDLNet_Write16(size, m_write); m_write += 2;
 
-  int count = val.size();
-  while(count > 0) {
-    uint32_t tmp = 0;
-    // Fix-me : We are reading out of the c_str() buffer there :
-#if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
-    strncpy((char*)&tmp, ch, 4);
-    ch += 4;
-#else
-    char* c_tmp = (char*)&tmp;
-    c_tmp +=3;
-    for(int i=0; i < 4; i++)
-      *(c_tmp--) = *(ch++);
-#endif
-    var.push_back(tmp);
-    count -= 4;
+  // Then write the actual string
+  if (size) {
+    memcpy(m_write, m_val.c_str(), size);
+    m_write += size;
   }
+  m_header.len += size+2;
 }
 
 //-------------  Retrieve datas from the action  ----------------
 int Action::PopInt()
 {
-  NET_ASSERT(var.size() > 0)
+  NET_ASSERT(MemReadLeft() >= 4)
   {
-    if(creator) creator->ForceDisconnection();
+    if (m_creator) m_creator->ForceDisconnection();
     return 0;
   }
 
-  int val;
-  uint32_t tmp = var.front();
-  memcpy(&val, &tmp, 4);
-  var.pop_front();
+  uint32_t tmp = SDLNet_Read32(m_read); m_read += 4;
 
-  return val;
+  return *((int32_t*)&tmp);
 }
 
 Double Action::PopDouble()
 {
-  NET_ASSERT(var.size() > 0)
+  NET_ASSERT(MemReadLeft() >= sizeof(fixedpoint::fixint_t))
   {
-    if(creator) creator->ForceDisconnection();
+    if (m_creator) m_creator->ForceDisconnection();
     return 0.0;
   }
 
-  Double val;
+  Double m_val;
 
 #if FIXINT_BITS == 32
-  uint32_t tmp = var.front();
-  var.pop_front();
-  val = *((Double*)&tmp);
+  uint32_t tmp = SDLNet_Read32(m_read); m_read += 4;
 #else
   uint32_t tmp[2];
-#  if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
-  tmp[0] = var.front();
-  var.pop_front();
-  tmp[1] = var.front();
+#  if SDL_BYTEORDER == SDL_LIL_ENDIAN
+  tmp[0] = SDLNet_Read32(m_read); m_read += 4;
+  tmp[1] = SDLNet_Read32(m_read); m_read += 4;
 #  else
-  tmp[1] = var.front();
-  var.pop_front();
-  tmp[0] = var.front();
+  tmp[1] = SDLNet_Read32(m_read); m_read += 4;
+  tmp[0] = SDLNet_Read32(m_read); m_read += 4;
 #  endif
-  var.pop_front();
-  memcpy(&val, tmp, 8);
 #endif
 
-  return val;
+  m_val.intValue = *((fixedpoint::fixint_t*)&tmp);
+
+  return m_val;
 }
 
 std::string Action::PopString()
 {
-  NET_ASSERT(var.size() >= 1)
+  NET_ASSERT(MemReadLeft() >= 2)
   {
-    if(creator) creator->ForceDisconnection();
+    if (m_creator) m_creator->ForceDisconnection();
     return "";
   }
 
-  int length = PopInt();
-
-  std::string str="";
-
-  NET_ASSERT((int)var.size() >= length/4)
+  uint16_t length = SDLNet_Read16(m_read); m_read += 2;
+  NET_ASSERT(MemReadLeft() >= length)
   {
-    if(creator) creator->ForceDisconnection();
+    if (m_creator) m_creator->ForceDisconnection();
     return "";
   }
 
-  while(length > 0) {
-    NET_ASSERT(var.size() > 0)
-    {
-      if(creator) creator->ForceDisconnection();
-      return "";
-    }
-
-    uint32_t tmp = var.front();
-    var.pop_front();
-    char tmp_str[5] = {0, 0, 0, 0, 0};
-#if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
-    memcpy(tmp_str, &tmp, 4);
-#else
-    char* c_tmp_str = (char*)(&tmp_str) + 3;
-    char* c_tmp = (char*)&tmp;
-    for(int i=0; i < 4; i++)
-      *(c_tmp_str--) = *(c_tmp++);
-#endif
-    str += tmp_str;
-    length -= 4;
-  }
-
+  std::string str((char*)m_read, length);
+  m_read += length;
   return str;
 }
 
