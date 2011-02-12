@@ -28,14 +28,15 @@
 
 static void PrintHelp()
 {
+  AppWarmux *app = AppWarmux::GetInstance();
   std::string msg = "help: " + std::string(_("Displays this message"));
-  AppWarmux::GetInstance()->ReceiveMsgCallback(msg, light_gray_color);
+  app->ReceiveMsgCallback(msg, light_gray_color);
   msg = "kick <nickname>: " + std::string(_("Kicks the player designated by <nickname> out of the game"));
-  AppWarmux::GetInstance()->ReceiveMsgCallback(msg, light_gray_color);
+  app->ReceiveMsgCallback(msg, light_gray_color);
   msg = "list: " + std::string(_("Lists the connected players"));
-  AppWarmux::GetInstance()->ReceiveMsgCallback(msg, light_gray_color);
+  app->ReceiveMsgCallback(msg, light_gray_color);
   msg = "address: " + std::string(_("Shows the designated player address"));
-  AppWarmux::GetInstance()->ReceiveMsgCallback(msg, light_gray_color);
+  app->ReceiveMsgCallback(msg, light_gray_color);
 }
 
 typedef enum
@@ -121,4 +122,3 @@ void ProcessCommand(const std::string & cmd)
     PrintHelp();
   }
 }
-

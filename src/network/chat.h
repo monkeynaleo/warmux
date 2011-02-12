@@ -57,7 +57,7 @@ public:
   void HandleKeyPressed(const SDL_Event& evnt);
   void HandleKeyReleased(const SDL_Event& evnt);
 
-  static void SendMessage(const std::string& msg);
+  static void SendMessage(const std::string& msg, bool in_game = true);
 };
 
 #endif

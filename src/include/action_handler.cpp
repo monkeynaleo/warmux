@@ -460,7 +460,8 @@ static void Action_ChatMessage(Action *a)
   // cpu is NULL on replay, so only log if !=NULL
   if (cpu)
     ChatLogger::GetInstance()->LogMessage(nickname+"> "+message);
-  AppWarmux::GetInstance()->ReceiveMsgCallback(nickname+"> "+message, color);
+  AppWarmux::GetInstance()->ReceiveMsgCallback(nickname+"> "+message, color,
+                                               a->GetType() == Action::ACTION_CHAT_INGAME_MESSAGE);
 }
 
 static void Action_AnnouncePause(Action *a)
@@ -1077,11 +1078,12 @@ void Action_Handler_Init()
   ActionHandler::GetInstance()->Register(Action::ACTION_NETWORK_CHECK_PHASE2, "NETWORK_check2", &Action_Network_Check_Phase2);
   ActionHandler::GetInstance()->Register(Action::ACTION_NETWORK_DISCONNECT_ON_ERROR, "NETWORK_disconnect_on_error", &Action_Network_Disconnect_On_Error);
   ActionHandler::GetInstance()->Register(Action::ACTION_NETWORK_SET_GAME_MASTER, "NETWORK_set_game_master", &Action_Network_Set_GameMaster);
+  ActionHandler::GetInstance()->Register(Action::ACTION_CHAT_MENU_MESSAGE, "menu_chat_message", Action_ChatMessage);
 
   // ########################################################
+  ActionHandler::GetInstance()->Register(Action::ACTION_GAME_CALCULATE_FRAME, "GAME_calculate_frame", &Action_Game_CalculateFrame);
   ActionHandler::GetInstance()->Register(Action::ACTION_PLAYER_CHANGE_WEAPON, "PLAYER_change_weapon", &Action_Player_ChangeWeapon);
   ActionHandler::GetInstance()->Register(Action::ACTION_PLAYER_CHANGE_CHARACTER, "PLAYER_change_character", &Action_Player_ChangeCharacter);
-  ActionHandler::GetInstance()->Register(Action::ACTION_GAME_CALCULATE_FRAME, "GAME_calculate_frame", &Action_Game_CalculateFrame);
 
   // ########################################################
   // To be sure that rules will be the same on each computer
@@ -1089,7 +1091,7 @@ void Action_Handler_Init()
 
   // ########################################################
   // Chat message
-  ActionHandler::GetInstance()->Register(Action::ACTION_CHAT_MESSAGE, "chat_message", Action_ChatMessage);
+  ActionHandler::GetInstance()->Register(Action::ACTION_CHAT_INGAME_MESSAGE, "ingame_chat_message", Action_ChatMessage);
   ActionHandler::GetInstance()->Register(Action::ACTION_ANNOUNCE_PAUSE, "chat_announce_pause", Action_AnnouncePause);
 
   // Initial information about the game: map, teams already selected, ...

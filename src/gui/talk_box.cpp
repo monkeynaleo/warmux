@@ -67,7 +67,7 @@ void TalkBox::SendChatMsg()
   if (txt[0] == '/')
     ProcessCommand(txt);
   else if (txt != "")
-    Chat::SendMessage(txt);
+    Chat::SendMessage(txt, false);
 
   line_to_send_tbox->SetText(empty);
 }
