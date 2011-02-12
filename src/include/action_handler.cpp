@@ -24,7 +24,7 @@
 #include <WARMUX_debug.h>
 #include <WARMUX_distant_cpu.h>
 #include <WARMUX_team_config.h>
-#include <WARMUX_I18N.h>
+#include <WARMUX_i18n.h>
 
 #include "action_handler.h"
 #include "character/character.h"
