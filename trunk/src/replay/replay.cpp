@@ -192,7 +192,8 @@ void Replay::StoreAction(const Action* a)
     if (count) {
       count--;
       MSG_DEBUG("replay", "Calculate frame repeated %u\n", count);
-      SDLNet_Write32(count, ptr); ptr += 4;
+      // 16 bits is sufficient, around 22 minutes without other actions
+      SDLNet_Write16(count, ptr); ptr += 2;
     }
 #ifdef WMX_LOG
     const ActionHandler *ah = ActionHandler::GetConstInstance();
@@ -387,7 +388,7 @@ bool Replay::RefillActions()
       ah->NewAction(a, false);
       if (a->GetType() == Action::ACTION_GAME_CALCULATE_FRAME) {
         // We write the number of calculate frame actions
-        count = SDLNet_Read32(ptr); ptr += 4;
+        count = SDLNet_Read16(ptr); ptr += 2;
         MSG_DEBUG("replay", "Repeating %u\n", count);
         for (uint i=0; i<count; i++) {
           Action *a = new Action(Action::ACTION_GAME_CALCULATE_FRAME);
