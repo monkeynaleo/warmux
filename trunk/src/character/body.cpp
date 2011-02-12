@@ -689,7 +689,7 @@ void Body::SetMovement(const std::string & name)
   }
 
   // Dirty trick to get the "black" movement to be played fully
-  if (current_clothe && current_clothe->GetName() == "black") {
+  if (current_clothe && current_clothe->GetName() == "black" && GetMovement() == "black") {
     return;
   }
   std::map<std::string, Movement *>::iterator itMvt = mvt_lst.find(name);
