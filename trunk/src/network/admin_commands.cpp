@@ -20,6 +20,7 @@
  *****************************************************************************/
 
 #include <string>
+#include <algorithm>
 #include <WARMUX_distant_cpu.h>
 #include "graphic/colors.h"
 #include "include/app.h"
@@ -55,7 +56,8 @@ static void UserCommand(const std::string& nick, UserCommandType type)
        cpu != hosts.end();
        ++cpu) {
 
-    if ((*cpu)->GetNicknames() == nick) {
+    const std::vector<std::string>& nicks = (*cpu)->GetNicknames();
+    if (std::find(nicks.begin(), nicks.end(), nick) != nicks.end()) {
       found = true;
 
       switch (type) {
@@ -98,8 +100,7 @@ static void ListPlayers()
   for (std::list<DistantComputer*>::iterator cpu = hosts.begin();
       cpu != hosts.end();
       ++cpu) {
-    std::string msg = std::string(Format("%s (%s)", (*cpu)->GetNicknames().c_str(), (*cpu)->GetAddress().c_str()));
-    AppWarmux::GetInstance()->ReceiveMsgCallback(msg, primary_red_color);
+    AppWarmux::GetInstance()->ReceiveMsgCallback((*cpu)->ToString(), primary_red_color);
   }
 
   Network::GetInstance()->UnlockRemoteHosts();

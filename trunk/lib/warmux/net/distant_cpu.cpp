@@ -120,20 +120,17 @@ std::string DistantComputer::GetAddress() const
   return sock->GetAddress();
 }
 
-std::string DistantComputer::GetNicknames() const
+std::vector<std::string> DistantComputer::GetNicknames() const
 {
-  std::string nicknames;
+  std::vector<std::string> nicknames;
   std::list<Player>::const_iterator player;
 
   for (player = players.begin(); player != players.end(); player++) {
-    if (nicknames != "")
-      nicknames += ", ";
-
-    nicknames += player->GetNickname();
+    nicknames.push_back(player->GetNickname());
   }
 
-  if (nicknames == "")
-    nicknames = _("Unnamed");
+  if (nicknames.empty())
+    nicknames.push_back(_("Unnamed"));
 
   return nicknames;
 }
@@ -151,6 +148,10 @@ int DistantComputer::GetNumberOfPlayersWithState(Player::State state)
 
 const std::string DistantComputer::ToString() const
 {
-  std::string str = GetAddress() + std::string(" (") + GetNicknames() + std::string(" )");
+  const std::vector<std::string>& nicknames = GetNicknames();
+  std::string str = nicknames[0];
+  for (uint i=1; i<nicknames.size(); i++)
+    str += ", " + nicknames[i];
+  str += " (" + GetAddress() + ")";
   return str;
 }
