@@ -168,7 +168,7 @@ void Replay::StoreAction(const Action* a)
   ASSERT(is_recorder && replay_state==RECORDING);
 
   Action::Action_t type = a->GetType();
-  if ((a->IsFrameLess() && type!=Action::ACTION_CHAT_MESSAGE) ||
+  if (a->IsFrameLess() ||
       type == Action::ACTION_NETWORK_PING ||
       type == Action::ACTION_NETWORK_VERIFY_RANDOM_SYNC ||
       type == Action::ACTION_TIME_VERIFY_SYNC ||
@@ -296,8 +296,8 @@ ok:
   SWAP(mode_info.gravity, game_mode->gravity);
 
   MSG_DEBUG("replay", "Game mode: turn=%us move_player=%u max_energy=%u init_energy=%u\n",
-          game_mode->duration_turn, game_mode->duration_move_player,
-          game_mode->character.max_energy, game_mode->character.init_energy);
+            game_mode->duration_turn, game_mode->duration_move_player,
+            game_mode->character.max_energy, game_mode->character.init_energy);
 
   // All of the above could be avoided through a GameMode::Load
   config_loaded = true;
@@ -369,8 +369,8 @@ Action* Replay::GetAction()
 
 #ifdef WMX_LOG
   const ActionHandler *ah = ActionHandler::GetConstInstance();
-  MSG_DEBUG("replay", "Read action %s: type=%u length=%i\n",
-            ah->GetActionName(type).c_str(), type, size);
+  MSG_DEBUG("replay", "Read action %s: type=%u length=%i frameless=%i\n",
+            ah->GetActionName(type).c_str(), type, size, a->IsFrameLess());
 #endif
 
   return a;
