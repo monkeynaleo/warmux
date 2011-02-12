@@ -252,7 +252,7 @@ void AppWarmux::DisplayError(const std::string &msg)
 
 void AppWarmux::ReceiveMsgCallback(const std::string& msg, const Color& color)
 {
-  if (Game::IsRunning()) {
+  if (Game::IsRunning() || Replay::GetConstInstance()->IsPlaying()) {
     if (Game::GetCurrentMenu()) {
       // Drop message, we should be paused anyway
     } else {
