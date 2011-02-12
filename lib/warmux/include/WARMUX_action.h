@@ -53,8 +53,6 @@ public:
     ACTION_RULES_SET_GAME_MODE,
 
     // ########################################################
-    // Chat message
-    ACTION_CHAT_MESSAGE,
     ACTION_ANNOUNCE_PAUSE,
 
     // Initial information about the game: map, teams already selected, ...
@@ -83,6 +81,9 @@ public:
     ACTION_PLAYER_CHANGE_WEAPON,
     ACTION_PLAYER_CHANGE_CHARACTER,
     ACTION_GAME_CALCULATE_FRAME,
+
+    // Chat message
+    ACTION_CHAT_MESSAGE,
 
     // ########################################################
     // Character's move

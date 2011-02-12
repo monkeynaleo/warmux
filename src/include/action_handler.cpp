@@ -425,12 +425,6 @@ static const Color& DefaultCPUColor(const DistantComputer *cpu)
 // ########################################################
 static void Action_ChatMessage(Action *a)
 {
-  // Store this specific frameless action
-  Replay *replay = Replay::GetInstance();
-  if (replay->IsRecording()) {
-    replay->StoreAction(a);
-  }
-
   uint player_id = a->PopInt();
   std::string message = a->PopString();
   DistantComputer *cpu = a->GetCreator();

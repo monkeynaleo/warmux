@@ -651,7 +651,7 @@ void Game::Draw()
   }
 
   // Draw MsgBox for chat network
-  if (Network::GetInstance()->IsConnected()) {
+  if (Network::GetInstance()->IsConnected() || Replay::GetConstInstance()->IsPlaying()) {
     StatStart("GameDraw:chatsession");
     chatsession.Show();
     StatStop("GameDraw:chatsession");
