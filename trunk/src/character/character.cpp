@@ -834,8 +834,8 @@ void Character::SignalExplosion()
 {
   if (IsDead()) return;
 
-  Double n, a;
-  GetSpeed(n, a);
+  // Motion can't be Pendulum, so it's fine using this here
+  Double n = GetSpeed().Norm();
   SetRebounding(true);
 
   SetClotheOnce("black");
