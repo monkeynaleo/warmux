@@ -36,6 +36,7 @@ class Keyboard : public Singleton<Keyboard>, public ManMachineInterface
 {
 private:
   int modifier_bits;
+  int modifier_only_bits;
   std::set<SDLKey> pressed_keys;
   void HandleKeyComboEvent(int key_code, Key_Event_t event_type);
 protected:

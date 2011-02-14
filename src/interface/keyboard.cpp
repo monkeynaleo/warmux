@@ -92,6 +92,7 @@ bool Keyboard::SaveKeyEvent(Key_t at, int raw_key_code,
 Keyboard::Keyboard()
   : ManMachineInterface()
   , modifier_bits(0)
+  , modifier_only_bits(0)
 {
   //Disable repeated events when a key is kept down
   SDL_EnableKeyRepeat(0,0);
@@ -293,8 +294,22 @@ bool Keyboard::HandleKeyEvent(const SDL_Event& evnt)
 #endif
 
   // Also ignore real key code of a modifier, fix bug #15238
-  if (IsModifier(basic_key_code))
+  if (IsModifier(basic_key_code)) {
+    int modifier_changed = modifier_only_bits ^ GetModifierBitsFromSDL();
+    if (event_type == KEY_RELEASED) {
+      for (std::set<SDLKey>::const_iterator it = pressed_keys.begin(); it != pressed_keys.end(); it++ ) {
+        int key_code = *it + MODIFIER_OFFSET * modifier_changed;
+        HandleKeyComboEvent(key_code, KEY_RELEASED);
+      }
+    } else if (modifier_only_bits && event_type == KEY_PRESSED) {
+      for (std::set<SDLKey>::const_iterator it = pressed_keys.begin(); it != pressed_keys.end(); it++ ) {
+        int key_code = *it + MODIFIER_OFFSET * modifier_only_bits;
+        HandleKeyComboEvent(key_code, KEY_RELEASED);
+      }
+    }
+    modifier_only_bits = GetModifierBitsFromSDL();
     return false;
+  }
 #ifdef MAEMO
   if (SDL_GetModState() & KMOD_MODE) {
     if (basic_key_code == SDLK_LEFT) basic_key_code = SDLK_UP;
@@ -311,8 +326,13 @@ bool Keyboard::HandleKeyEvent(const SDL_Event& evnt)
     if (it !=  pressed_keys.end()) {
       key_code = basic_key_code + MODIFIER_OFFSET * previous_modifier_bits;
       HandleKeyComboEvent(key_code, KEY_RELEASED);
-      key_code = basic_key_code + MODIFIER_OFFSET * modifier_bits;
-      HandleKeyComboEvent(key_code, KEY_PRESSED);
+      HandleKeyComboEvent(basic_key_code, KEY_RELEASED);
+      pressed_keys.erase(basic_key_code);
+      if (event_type == KEY_PRESSED) {
+        key_code = basic_key_code + MODIFIER_OFFSET * modifier_bits;
+        HandleKeyComboEvent(key_code, KEY_PRESSED);
+        pressed_keys.insert(basic_key_code);
+      }
       return true;
     }
   }
@@ -320,11 +340,16 @@ bool Keyboard::HandleKeyEvent(const SDL_Event& evnt)
   if (event_type == KEY_PRESSED) {
     key_code = basic_key_code + (MODIFIER_OFFSET * modifier_bits);
     HandleKeyComboEvent(key_code, KEY_PRESSED);
+    if (previous_modifier_bits ^ modifier_bits) {
+      key_code = basic_key_code + (MODIFIER_OFFSET * previous_modifier_bits);
+      HandleKeyComboEvent(key_code, KEY_RELEASED);
+    }
     pressed_keys.insert(basic_key_code);
   } else {
     ASSERT(event_type == KEY_RELEASED);
     key_code = basic_key_code + (MODIFIER_OFFSET * previous_modifier_bits);
     HandleKeyComboEvent(key_code, KEY_RELEASED);
+    HandleKeyComboEvent(basic_key_code, KEY_RELEASED);
     pressed_keys.erase(basic_key_code);
   }
   return true;
