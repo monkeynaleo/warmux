@@ -713,12 +713,10 @@ void Character::Refresh()
     SetMovement("breathe");
   }
 
-  // Stop flying if we don't go fast enough
   Double n, a;
   GetSpeed(n, a);
-  if (body->GetMovement() == "fly" && n < MIN_SPEED_TO_FLY)
-    SetMovement("breathe");
-
+  if (n > MIN_SPEED_TO_FLY && body->GetMovement() != "fly-black" && body->GetMovement() != "fall" && body->GetMovement() != "jump" && body->GetMovement() != "fly")
+    SetMovement("fly");
 
   // Refresh the body (needed to determine if "weapon-*-begin-shoot" is finnished)
   body->Build();
