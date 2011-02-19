@@ -422,7 +422,7 @@ void Camera::Refresh(bool ignore_user)
 
     if (auto_crop && followed_object)
       AutoCrop();
-    refresh_stopwatch.Reset(1.0);
+    refresh_stopwatch.Reset();
   }
 }
 
