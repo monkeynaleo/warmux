@@ -864,37 +864,37 @@ bool Interface::ReplayClick(const Point2i &mouse_pos, ClickType type, Point2i ol
     return true;
   Game     *game = Game::GetInstance();
   Point2i mouse_rel_pos = mouse_pos-bottom_bar_pos;
-  Point2i size(64*zoom, replay_toolbar.GetHeight());
+  Point2i size(62*zoom, replay_toolbar.GetHeight());
 
   old_mouse_pos -= bottom_bar_pos;
 
-  Rectanglei pause_button(Point2i(13*zoom, 0), size);
+  Rectanglei pause_button(Point2i(10*zoom, 0), size);
   if (pause_button.Contains(mouse_rel_pos)) {
     // We have to go through the game loop to pause
     game->RequestPause(true);
     return true;
   }
 
-  Rectanglei play_button(Point2i(77*zoom, 0), size);
+  Rectanglei play_button(Point2i(72*zoom, 0), size);
   if (play_button.Contains(mouse_rel_pos)) {
     // We have to go through the game loop to pause
     game->RequestPause(false);
     return true;
   }
 
-  Rectanglei stop_button(Point2i(141*zoom, 0), size);
+  Rectanglei stop_button(Point2i(134*zoom, 0), size);
   if (stop_button.Contains(mouse_rel_pos)) {
     game->UserAsksForEnd();
     return true;
   }
 
-  Rectanglei slow_button(Point2i(433*zoom, 0), Point2i(58*zoom, replay_toolbar.GetHeight()));
+  Rectanglei slow_button(Point2i(433*zoom, 0), Point2i(49*zoom, replay_toolbar.GetHeight()));
   if (slow_button.Contains(mouse_rel_pos)) {
     SetSpeed(GameTime::GetConstInstance()->GetSpeed()>>1);
     return true;
   }
 
-  Rectanglei fast_button(Point2i(481*zoom, 0), size);
+  Rectanglei fast_button(Point2i(482*zoom, 0), size);
   if (fast_button.Contains(mouse_rel_pos)) {
     SetSpeed(GameTime::GetConstInstance()->GetSpeed()<<1);
     return true;
