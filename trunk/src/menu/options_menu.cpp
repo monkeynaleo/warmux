@@ -493,7 +493,7 @@ void OptionMenu::SaveOptions()
   config->Save();
 
   //Team editor
-  if (!Game::IsRunning()) {
+  if (!Game::IsRunning() && TeamInfoValid()) {
     if (!lbox_teams->IsItemSelected()) {
       AddTeam();
     }
