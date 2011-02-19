@@ -847,18 +847,14 @@ bool Interface::ControlClick(const Point2i &mouse_pos, ClickType type, Point2i o
 
 void Interface::SetSpeed(const Double& speed)
 {
-  // If speed too different, would sound strange
-  JukeBox *jb = JukeBox::GetInstance();
   if (speed<ONE || speed>8)
     return;
-  if (speed==ONE)
-    jb->SetMusicVolume(Config::GetInstance()->GetVolumeMusic());
-  else
-    jb->SetMusicVolume(0);
+
   // Set text only once
   char tmp[] = { 'x', '1', 0 };
   tmp[1] = 48+(uint)speed;
   t_speed->SetText(tmp);
+
   Game::GetInstance()->RequestSpeed(speed);
 }
 
