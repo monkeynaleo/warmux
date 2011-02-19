@@ -1,4 +1,17 @@
-> 2011/01/xx - 11.01 release
+> 2011/03/xx - 11.03 release
+  - Replay functionality! Still unstable and version-specific
+  - Fixed various bugs with grapple and construct in far edges of the world
+  - Reduced max memory usage for the Symbian and Android ports
+  - Introduce a quality setting: old setting for Symbian and Android was
+    0 but it you have the memory for it, 1 provides smoother ground
+  - Readd fading to laser beams
+  - Fix key binding edition menu
+  - Fix keys getting stuck when modifiers (control/alt/shift) were changed
+  - Clean and update command line parameters; --size sets display size
+  - Big rewrite of internal network protocol; should reduce a bit traffic
+  - Various fixes with network menu (incorrect team updates, crashes)
+
+> 2011/01/21 - 11.01 release
   - Name and numbering change!
   - Android port
   - Symbian^3 port (number of characters/teams subject to memory constraint)
