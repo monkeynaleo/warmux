@@ -573,13 +573,21 @@ void OptionMenu::AddTeam()
   if (Game::IsRunning())
     return;
 
-  if (!TeamInfoValid())
+  if (!TeamInfoValid()) {
+    Question question(Question::NO_TYPE);
+    question.Set(_("You must fill Head Commander and all player names"), true, 0);
+    question.Ask();
     return;
+  }
 
   CustomTeam *new_team = new CustomTeam(tbox_team_name->GetText());
 
   selected_team = new_team;
   SaveTeam();
+
+  Question question(Question::NO_TYPE);
+  question.Set(_("Team saved"), true, 0);
+  question.Ask();
 
   ReloadTeamList();
   lbox_teams->NeedRedrawing();
@@ -596,6 +604,9 @@ void OptionMenu::DeleteTeam()
     if (lbox_teams->IsItemSelected()) {
       lbox_teams->Deselect();
     }
+    Question question(Question::NO_TYPE);
+    question.Set(_("Team deleted"), true, 0);
+    question.Ask();
     ReloadTeamList();
     LoadTeam();
     lbox_teams->NeedRedrawing();
