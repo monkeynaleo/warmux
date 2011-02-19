@@ -463,6 +463,7 @@ Game::Game()
   , ask_for_help_menu(false)
   , ask_for_end(false)
   , request_pause(NO_REQUEST)
+  , request_speed(ZERO)
   , fps(new FramePerSecond())
   , delay(0)
   , time_of_next_frame(0)
@@ -795,6 +796,10 @@ void Game::MainLoop()
   } else if (request_pause == END_PAUSE) {
     time->SetPause(false);
     request_pause = NO_REQUEST;
+  }
+  if (request_speed.IsNotZero()) {
+    time->SetSpeed(request_speed);
+    request_speed = ZERO;
   }
 
   // Generally linked to replay: do minimal refresh

@@ -90,6 +90,10 @@ private:
   Text * t_weapon_name;
   Text * t_weapon_stock;
 
+  // Replay info
+  Text * t_speed;
+  void SetSpeed(const Double& speed);
+
   // Related to interface mode
   Mode mode;
   Surface default_toolbar;
