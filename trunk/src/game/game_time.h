@@ -51,7 +51,7 @@ public:
 
   void SetPause(bool pause) { stopwatch.SetPause(pause); }
   bool IsPaused() const { return stopwatch.IsPaused(); }
-  void SetSpeed(const Double& speed) { stopwatch.SetSpeed(speed); }
+  void SetSpeed(const Double& speed);
   const Double& GetSpeed() const { return stopwatch.GetSpeed(); }
 
   void Increase();
