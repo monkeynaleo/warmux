@@ -54,16 +54,21 @@ void GameTime::Increase()
   ASSERT(!IsWaiting());
   ASSERT(CanBeIncreased());
   current_time += delta_t;
-  MSG_DEBUG("time.increase","Real time without pause: %d; Game time: %d", stopwatch.GetValue(), current_time);
+  MSG_DEBUG("time.increase", "Real time without pause: %d; Game time: %d", stopwatch.GetValue(), current_time);
 }
 
 void GameTime::LetRealTimePassUntilFrameEnd()
 {
   //if (paused) return;
   ASSERT(!IsWaiting());
-  int64_t delay;
+  int delay;
   do {
+#if 1
+    Double t = current_time - (int64_t)stopwatch.GetValue();
+    delay = int(t/stopwatch.GetSpeed());
+#else
     delay = current_time - (int64_t)stopwatch.GetValue();
+#endif
     if (delay > 0) {
       SDL_Delay((uint)delay);
       MSG_DEBUG("time.skip","Do nothing for: %d", delay);
@@ -109,3 +114,9 @@ std::string GameTime::GetString() const
   ss << ClockMin() << ":" << std::setfill('0') << std::setw(2) << ClockSec();
   return ss.str();
 }
+
+ void GameTime::SetSpeed(const Double& speed)
+ {
+   MSG_DEBUG("time", ">>> Speed from %.1f to %.1f", stopwatch.GetSpeed().tofloat(), speed.tofloat());
+   stopwatch.SetSpeed(speed);
+ }
