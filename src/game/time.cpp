@@ -64,14 +64,17 @@ void GameTime::LetRealTimePassUntilFrameEnd()
   int delay;
   do {
 #if 1
-    Double t = current_time - (int64_t)stopwatch.GetValue();
-    delay = int(t/stopwatch.GetSpeed());
+    delay = current_time - (int64_t)stopwatch.GetValue();
+    if (delay > 0) {
+      // Make sure it still is > 0 after rounding
+      delay = int(delay/stopwatch.GetSpeed())+1;
+    }
 #else
     delay = current_time - (int64_t)stopwatch.GetValue();
 #endif
     if (delay > 0) {
       SDL_Delay((uint)delay);
-      MSG_DEBUG("time.skip","Do nothing for: %d", delay);
+      MSG_DEBUG("time.skip", "Do nothing for: %d", delay);
     }
   } while (delay > 0);
 }
