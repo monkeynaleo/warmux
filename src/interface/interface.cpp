@@ -353,6 +353,10 @@ void Interface::DrawWindInfo() const
 void Interface::DrawReplayInfo() const
 {
   t_speed->DrawCenter(bottom_bar_pos + Point2i(576*zoom+0.5f,default_toolbar.GetHeight()>>1));
+  float len = (GameTime::GetConstInstance()->Read() * 60.0f) / Replay::GetConstInstance()->GetDuration();
+  GetMainWindow().BoxColor(Rectanglei(bottom_bar_pos + Point2i(214*zoom, 35*zoom),
+                                      Point2i(len*zoom+0.5f, 11*zoom+0.5f)),
+                           primary_red_color);
 }
 
 // draw mini info when hidding interface

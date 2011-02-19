@@ -235,6 +235,7 @@ bool Replay::LoadReplay(const std::string& name)
   int            map_id, val;
 
   ASSERT(!is_recorder);
+  old_time = 0;
 
   std::ifstream in(name.c_str(), std::fstream::binary);
   if (!in) {
@@ -263,6 +264,9 @@ done:
   return status;
 
 ok:
+  // duration
+  old_time = info->GetMillisecondsDuration();
+
   // map ID
   map_id = MapsList::GetInstance()->FindMapById(info->GetMapId());
   if (map_id == -1) {
