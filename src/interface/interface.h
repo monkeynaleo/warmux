@@ -134,6 +134,7 @@ private:
   void DrawClock(const Point2i &time_pos) const;
   void DrawTimeInfo() const;
   void DrawMapPreview();
+  void DrawReplayInfo() const;
   void DrawSmallInterface() const;
 
   void LoadDataInternal(Profile *res);

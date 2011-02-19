@@ -349,6 +349,12 @@ void Interface::DrawWindInfo() const
   DrawWindIndicator(bottom_bar_pos + wind_pos_offset);
 }
 
+// display replay info
+void Interface::DrawReplayInfo() const
+{
+  t_speed->DrawCenter(bottom_bar_pos + Point2i(576*zoom+0.5f,default_toolbar.GetHeight()>>1));
+}
+
 // draw mini info when hidding interface
 void Interface::DrawSmallInterface() const
 {
@@ -569,7 +575,7 @@ void Interface::Draw()
       DrawWeaponInfo();
     } else {
       window.Blit(replay_toolbar, bottom_bar_pos);
-      t_speed->DrawCenter(bottom_bar_pos + Point2i(576*zoom+0.5f,default_toolbar.GetHeight()>>1));
+      DrawReplayInfo();
     }
     DrawWindInfo();
     DrawTimeInfo();
@@ -849,6 +855,7 @@ void Interface::SetSpeed(const Double& speed)
     jb->SetMusicVolume(Config::GetInstance()->GetVolumeMusic());
   else
     jb->SetMusicVolume(0);
+  // Set text only once
   char tmp[] = { 'x', '1', 0 };
   tmp[1] = 48+(uint)speed;
   t_speed->SetText(tmp);
