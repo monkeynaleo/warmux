@@ -82,6 +82,8 @@ public:
   void SetSeed(uint s) { seed = s; }
   uint GetSeed() const { return seed; }
 
+  uint GetDuration() const { return old_time; }
+
   // Recorder
   bool StartRecording(const std::string& game_mode_name,
                       const std::string& game_mode,
