@@ -103,6 +103,9 @@ void Interface::LoadDataInternal(Profile *res)
   t_weapon_stock = new Text("0", m_text_color, fsize, Font::FONT_BOLD, false);
   t_character_energy = new Text("Dead", m_energy_text_color, fsize, Font::FONT_BOLD);
 
+  // Replay labels
+  t_speed = new Text("x1", primary_red_color, Font::FONT_HUGE*zoom+0.5f, Font::FONT_BOLD, true);
+
   // Timer
   global_timer = new Text("0", gray_color, Font::FONT_BIG*zoom+0.5f, Font::FONT_BOLD, false);
   timer = new Text("0", black_color, Font::FONT_MEDIUM*zoom+0.5f, Font::FONT_BOLD, false);
@@ -127,6 +130,7 @@ Interface::Interface()
   , t_character_energy(NULL)
   , t_weapon_name(NULL)
   , t_weapon_stock(NULL)
+  , t_speed(NULL)
   , mode(MODE_NORMAL)
   , start_hide_display(0)
   , start_show_display(0)
@@ -203,6 +207,7 @@ void Interface::FreeDrawElements()
   if (t_character_energy) delete t_character_energy;
   if (t_weapon_name) delete t_weapon_name;
   if (t_weapon_stock) delete t_weapon_stock;
+  if (t_speed) delete t_speed;
 }
 
 void Interface::Reset()
@@ -564,6 +569,7 @@ void Interface::Draw()
       DrawWeaponInfo();
     } else {
       window.Blit(replay_toolbar, bottom_bar_pos);
+      t_speed->DrawCenter(bottom_bar_pos + Point2i(576*zoom+0.5f,default_toolbar.GetHeight()>>1));
     }
     DrawWindInfo();
     DrawTimeInfo();
@@ -833,11 +839,26 @@ bool Interface::ControlClick(const Point2i &mouse_pos, ClickType type, Point2i o
   return (type == CLICK_TYPE_DOWN) ? false : true;
 }
 
+void Interface::SetSpeed(const Double& speed)
+{
+  // If speed too different, would sound strange
+  JukeBox *jb = JukeBox::GetInstance();
+  if (speed<ONE || speed>8)
+    return;
+  if (speed==ONE)
+    jb->SetMusicVolume(Config::GetInstance()->GetVolumeMusic());
+  else
+    jb->SetMusicVolume(0);
+  char tmp[] = { 'x', '1', 0 };
+  tmp[1] = 48+(uint)speed;
+  t_speed->SetText(tmp);
+  Game::GetInstance()->RequestSpeed(speed);
+}
+
 bool Interface::ReplayClick(const Point2i &mouse_pos, ClickType type, Point2i old_mouse_pos)
 {
   if (type==CLICK_TYPE_LONG || type==CLICK_TYPE_UP)
     return true;
-  GameTime *time = GameTime::GetInstance();
   Game     *game = Game::GetInstance();
   Point2i mouse_rel_pos = mouse_pos-bottom_bar_pos;
   Point2i size(64*zoom, replay_toolbar.GetHeight());
@@ -864,33 +885,15 @@ bool Interface::ReplayClick(const Point2i &mouse_pos, ClickType type, Point2i ol
     return true;
   }
 
-  Rectanglei slow_button(Point2i(452*zoom, 0), size);
+  Rectanglei slow_button(Point2i(433*zoom, 0), Point2i(58*zoom, replay_toolbar.GetHeight()));
   if (slow_button.Contains(mouse_rel_pos)) {
-    Double speed = time->GetSpeed()/2;
-    // If speed too different, would sound strange
-#if 0
-    JukeBox *jb = JukeBox::GetInstance();
-    if (speed < ONE_HALF || speed > TWO)
-      jb->Pause(true);
-    else
-      jb->Resume(true);
-#endif
-    time->SetSpeed(speed);
+    SetSpeed(GameTime::GetConstInstance()->GetSpeed()>>1);
     return true;
   }
 
-  Rectanglei fast_button(Point2i(516*zoom, 0), size);
+  Rectanglei fast_button(Point2i(481*zoom, 0), size);
   if (fast_button.Contains(mouse_rel_pos)) {
-    Double speed = time->GetSpeed()*2;
-    // If speed too different, would sound strange
-#if 0
-    JukeBox *jb = JukeBox::GetInstance();
-    if (speed < ONE_HALF || speed > TWO)
-      jb->Pause(true);
-    else
-      jb->Resume(true);
-#endif
-    time->SetSpeed(speed);
+    SetSpeed(GameTime::GetConstInstance()->GetSpeed()<<1);
     return true;
   }
 

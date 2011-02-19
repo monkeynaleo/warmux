@@ -34,6 +34,7 @@
 #include "include/action_handler.h"
 #include "include/constant.h"
 #include "game/game_time.h"
+#include "sound/jukebox.h"
 #include "team/teams_list.h"
 
 Replay::Replay()
@@ -432,6 +433,9 @@ void Replay::StopPlaying()
   game_mode->character.init_energy = mode_info.init_energy;
   game_mode->character.max_energy = mode_info.max_energy;
   game_mode->gravity = mode_info.gravity;
+
+  // Restore also volume
+  JukeBox::GetInstance()->SetMusicVolume(Config::GetInstance()->GetVolumeMusic());
 
   // Restore playing list
   GetTeamsList().SetPlayingList(backup_list);
