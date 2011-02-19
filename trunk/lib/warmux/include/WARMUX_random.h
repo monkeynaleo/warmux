@@ -48,20 +48,20 @@ public:
 
   bool GetBool();
   Double GetDouble();
-  Double GetDouble(Double max);
-  Double GetDouble(Double min, Double max);
+  Double GetDouble(Double max) { return max * GetDouble(); }
+  Double GetDouble(Double min, Double max) { return min + GetDouble(max - min); }
 
   float  Getfloat();
-  float  Getfloat(float max);
-  float  Getfloat(float min, float max);
+  float  Getfloat(float max) { return max * Getfloat(); }
+  float  Getfloat(float min, float max) { return min + Getfloat(max - min); }
 
-  int32_t GetInt(int32_t min, int32_t max);
-  uint GetUint(uint32_t min, uint32_t max);
+  int32_t GetInt(int32_t min, int32_t max) { return min + (int32_t)GetDouble(max - min + 1); }
+  uint GetUint(uint32_t min, uint32_t max) { return (uint)GetInt(min, max); }
 
   Point2i GetPoint(const Rectanglei &rect);
   Point2i GetPoint(const Point2i &pt);
 
-  int GetSign();
+  int GetSign() { return GetBool() ? 1 : -1; }
 };
 
 

@@ -104,41 +104,10 @@ Double RandomGenerator::GetDouble()
   return GetRand()/(WARMUX_RAND_MAX + ONE);
 }
 
-Double RandomGenerator::GetDouble(Double max)
-{
-  return max * GetDouble();
-}
-
-Double RandomGenerator::GetDouble(Double min, Double max)
-{
-  return min + GetDouble(max - min);
-}
-
 //==========================================================================
 float RandomGenerator::Getfloat()
 {
   return GetRand()/(WARMUX_RAND_MAX + 1.0f);
-}
-
-float RandomGenerator::Getfloat(float max)
-{
-  return max * Getfloat();
-}
-
-float RandomGenerator::Getfloat(float min, float max)
-{
-  return min + Getfloat(max - min);
-}
-
-//==========================================================================
-int32_t RandomGenerator::GetInt(int32_t min, int32_t max)
-{
-  return min + (int32_t)GetDouble(max - min + 1);
-}
-
-uint RandomGenerator::GetUint(uint min, uint max)
-{
-  return (uint)GetInt(min, max);
 }
 
 /**
@@ -160,11 +129,5 @@ Point2i RandomGenerator::GetPoint(const Point2i &pt)
 {
   int32_t x = GetInt(0, pt.x - 1);
   int32_t y = GetInt(0, pt.y - 1);
-  return Point2i( x, y );
-}
-
-int RandomGenerator::GetSign()
-{
-  if (GetBool()) return 1;
-  else return -1;
+  return Point2i(x, y);
 }
