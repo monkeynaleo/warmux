@@ -126,6 +126,8 @@ public:
   Point2d GetSpeed() const { return GetSpeedXY(); };
   Double GetAngularSpeed() const { return m_rope_angle.x1; };
   Double GetSpeedAngle() const { return GetSpeedXY().ComputeAngle(); };
+  bool IsGoingUp() const;
+  bool IsGoingDown() const;
 
   // Add new strength
   void SetExternForceXY(const Point2d& vector);

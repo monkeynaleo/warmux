@@ -44,6 +44,8 @@ static const Double AIR_RESISTANCE_FACTOR = 40.0;
 #define PHYS_DELTA_T_MS  20
 static const Double PHYS_DELTA_T = PHYS_DELTA_T_MS / 1000.0;         // Physical simulation time step
 static const Double PENDULUM_REBOUND_FACTOR = 0.8;
+static const Double HALF_PI_PLUS    = HALF_PI+(Double)0.3;
+static const Double HALF_PI_MINUS   = HALF_PI-(Double)0.3 ;
 
 Physics::Physics ():
   m_motion_type(NoMotion),
@@ -150,6 +152,24 @@ void Physics::GetSpeed(Double &norm, Double &angle) const
       ASSERT(false);
       break;
   }
+}
+
+bool Physics::IsGoingUp() const
+{
+  Double angle = GetSpeedAngle();
+  if (angle > -HALF_PI_PLUS && angle < -HALF_PI_MINUS)
+    return true;
+
+  return false;
+}
+
+bool Physics::IsGoingDown() const
+{
+  Double angle = GetSpeedAngle();
+  if (angle < HALF_PI_PLUS && angle > HALF_PI_MINUS)
+    return true;
+
+  return false;
 }
 
 void Physics::SetExternForceXY (const Point2d& vector)
@@ -462,7 +482,7 @@ void Physics::RunPhysicalEngine()
   // Compute object move for each physical engine time step.
   while (delta_t_ms >= PHYS_DELTA_T_MS) {
     oldPos = GetPos();
-    newPos = ComputeNextXY(PHYS_DELTA_T); // causes 11µs error per iteration
+    newPos = ComputeNextXY(PHYS_DELTA_T); // causes 11ï¿½s error per iteration
 
     if (newPos != oldPos) {
       // The object has moved. Notify the son class.
