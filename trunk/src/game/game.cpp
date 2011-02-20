@@ -905,9 +905,8 @@ void Game::MainLoop()
   if (!force_refresh) {
     // try to adjust to max Frame by seconds
     draw = time_of_next_frame < SDL_GetTicks();
-    // Only display if the physic engine isn't late
-    if (Replay::GetConstInstance()->IsPlaying() && time->GetSpeed()>ONE)
-      draw = draw && !(time->CanBeIncreased() && !time->IsWaiting());
+    // Only display if the physic engine isn't much too late
+    draw = draw && time->CanDraw();
   }
 
   if (draw) {
