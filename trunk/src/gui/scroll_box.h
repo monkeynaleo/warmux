@@ -70,7 +70,7 @@ protected:
 
 public:
   ScrollBox(const Point2i & size, bool force = true, bool alternate = false);
-  ~ScrollBox();
+  virtual ~ScrollBox() { };
 
   // No need for a Draw method: the additional stuff drawn is made by Update
   virtual void Update(const Point2i &mousePosition,

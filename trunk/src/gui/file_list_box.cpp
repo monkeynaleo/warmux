@@ -35,6 +35,7 @@ FileListBox::FileListBox(const Point2i &size, bool list)
 
 FileListBox::~FileListBox()
 {
+  Clear();
 }
 
 void FileListBox::Empty()
