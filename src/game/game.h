@@ -87,6 +87,7 @@ private:
   bool                ask_for_end;
   PauseRequest        request_pause;
   Double              request_speed;
+  uint                request_time;
 
   FramePerSecond      *fps;
 
@@ -188,6 +189,7 @@ public:
   void UserAsksForHelpMenu() { ask_for_help_menu = true; }
   void RequestPause(bool pause) { request_pause = pause ? START_PAUSE : END_PAUSE; }
   void RequestSpeed(const Double& speed) { request_speed = speed; }
+  void RequestTime(uint time) { request_time = time; }
 
   // Signal death of a player
   void SignalCharacterDeath(const Character *character, const Character* killer = NULL);

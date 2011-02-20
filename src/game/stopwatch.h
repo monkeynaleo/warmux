@@ -42,6 +42,7 @@ public:
   void SetSpeed(const Double& speed);
   uint GetValue() const;
   bool IsPaused() const { return paused; }
+  void Resynch(uint time);
 };
 
 #endif

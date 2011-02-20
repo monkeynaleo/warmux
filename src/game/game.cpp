@@ -464,6 +464,7 @@ Game::Game()
   , ask_for_end(false)
   , request_pause(NO_REQUEST)
   , request_speed(ZERO)
+  , request_time(0)
   , fps(new FramePerSecond())
   , delay(0)
   , time_of_next_frame(0)
@@ -801,6 +802,70 @@ void Game::MainLoop()
     time->SetSpeed(request_speed);
     request_speed = ZERO;
   }
+  if (request_time) {
+    uint start_skip = SDL_GetTicks();
+    JukeBox::GetInstance()->End();
+
+    while (time->Read() < request_time && !IsGameFinished()) {
+      uint now     = SDL_GetTicks();
+      bool refresh = false;
+
+      // If more than 1s has passed, then refresh
+      if (now - start_skip > 1000) {
+        refresh    = true;
+        start_skip = now;
+      }
+
+      time->Increase();
+
+      // Refresh clock value
+      RefreshClock();
+
+      if (refresh)
+        RefreshInput();
+
+      // For example the switch of characters can make it necessary to rebuild the body.
+      // If no cacluate frame action is scheduled the frame calculation will be skipped
+      // and the bodies don't get build.
+      // As the draw method needs builded characters we need to build here
+      FOR_ALL_CHARACTERS(team,character) {
+        character->GetBody()->Build();
+        character->GetBody()->RefreshSprites();
+      }
+
+      ActionHandler::GetInstance()->ExecFrameLessActions();
+
+      bool actions_executed = ActionHandler::GetInstance()->ExecActionsForOneFrame();
+      ASSERT(actions_executed);
+
+      if (actions_executed) {
+        RefreshObject();
+
+        // Refresh the map
+        GetWorld().Refresh();
+
+        // Build the characters if necessary so that it does not need to happen while drawing.
+        // The build can become necessary again when for example weapons change the movement.
+        FOR_ALL_CHARACTERS(team,character) {
+          character->GetBody()->Build();
+          character->GetBody()->RefreshSprites();
+        }
+      }
+
+      // Avoid freeze
+      if (refresh) {
+        CallDraw();
+        // How many frame by seconds ?
+        fps->Refresh();
+      }
+    }
+    JukeBox::GetInstance()->Init();
+
+    // There has been a drift between the actual time and simulated one
+    time->Resynch();
+    request_time = 0;
+    return;
+  }
 
   // Generally linked to replay: do minimal refresh
   if (Replay::GetConstInstance()->IsPlaying() && time->IsPaused()) {
@@ -832,7 +897,8 @@ void Game::MainLoop()
       RefreshClock();
 
       // For example the switch of characters can make it necessary to rebuild the body.
-      // If no cacluate frame action is sheduled the frame calculation will be skipped and the bodies don't get build.
+      // If no cacluate frame action is sheduled the frame calculation will be skipped
+      // and the bodies don't get build.
       // As the draw method needs builded characters we need to build here
       FOR_ALL_CHARACTERS(team,character) {
         character->GetBody()->Build();
