@@ -194,11 +194,9 @@ if test "x$GCC" = "xyes"; then
     GCC_FLAGS="$GCC_FLAGS -DWMX_LOG"
   fi
 
-  dnl Ignore default options set by autoconf
-  dnl CFLAGS="$CFLAGS $GCC_FLAGS"
-  CFLAGS="$GCC_FLAGS"
-  dnl CXXFLAGS="$CXXFLAGS $GCC_FLAGS"
-  CXXFLAGS="$GCC_FLAGS"
+  dnl Let's *not* ignore flags set from outside world
+  CFLAGS="$GCC_FLAGS $CFLAGS"
+  CXXFLAGS="$GCC_FLAGS $CFLAGS"
 
 else
   if test "x${debug}" = "xyes"; then
@@ -208,7 +206,7 @@ else
 
   if test "x${logging}" = "xyes"; then
     CFLAGS="$CFLAGS -DWMX_LOG"
-    GCC_FLAGS="$CXXFLAGS -DWMX_LOG"
+    CXX_FLAGS="$CXXFLAGS -DWMX_LOG"
   fi
 fi
 
