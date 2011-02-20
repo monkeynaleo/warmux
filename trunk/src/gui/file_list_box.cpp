@@ -137,7 +137,7 @@ void FileListBox::PopulateFileList(const std::string& path)
         // We have a file, check that it validates the list
         if (MatchFilter(name)) {
           std::string* filename = new std::string(new_path);
-	  *filename += name;
+          *filename += name;
           MSG_DEBUG("file", "Adding file %s\n", name);
           AddLabelItem(false, name, filename, Font::FONT_MEDIUM);
         } else {
@@ -153,7 +153,7 @@ void FileListBox::PopulateFileList(const std::string& path)
           filename = new std::string(new_path.substr(0, pos+1));
         } else
           filename = new std::string(new_path);
-	*filename += name;
+        *filename += name;
         MSG_DEBUG("file", "Adding directory %s\n", name);
         AddLabelItem(false, FolderString(name), filename,
                      Font::FONT_MEDIUM, Font::FONT_NORMAL, c_yellow);
