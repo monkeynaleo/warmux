@@ -236,24 +236,25 @@ Double Action::PopDouble()
     return 0.0;
   }
 
-  Double m_val;
-
-#if FIXINT_BITS == 32
-  uint32_t tmp = SDLNet_Read32(m_read); m_read += 4;
-#else
-  uint32_t tmp[2];
+  union
+  {
+	uint32_t u32[sizeof(fixedpoint::fixint_t)/4];
+	fixedpoint::fixint_t f;
+  } tmp;
+  
+  static const uint len = sizeof(fixedpoint::fixint_t)/4;
+  for (uint i=0; i<len; i++) {
 #  if SDL_BYTEORDER == SDL_LIL_ENDIAN
-  tmp[0] = SDLNet_Read32(m_read); m_read += 4;
-  tmp[1] = SDLNet_Read32(m_read); m_read += 4;
+    tmp.u32[i] = SDLNet_Read32(m_read);
 #  else
-  tmp[1] = SDLNet_Read32(m_read); m_read += 4;
-  tmp[0] = SDLNet_Read32(m_read); m_read += 4;
+    tmp.u32[len-1-i] = SDLNet_Read32(m_read);
 #  endif
-#endif
+    m_read += 4;
+  }
 
-  m_val.intValue = *((fixedpoint::fixint_t*)&tmp);
-
-  return m_val;
+  Double val;
+  val.intValue = tmp.f;
+  return val;
 }
 
 std::string Action::PopString()
