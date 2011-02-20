@@ -91,8 +91,6 @@ private:
 
   FramePerSecond      *fps;
 
-  // Time to wait between 2 loops
-  int                 delay;
   // Time to display the next frame
   uint                time_of_next_frame;
   // Time to compute the next physic engine frame

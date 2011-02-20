@@ -466,7 +466,6 @@ Game::Game()
   , request_speed(ZERO)
   , request_time(0)
   , fps(new FramePerSecond())
-  , delay(0)
   , time_of_next_frame(0)
   , time_of_next_phy_frame(0)
   , character_already_chosen(false)
@@ -697,12 +696,13 @@ bool Game::Run()
   bool game_finished = false;
   isGameLaunched = true;
 
-  // Time to wait between 2 loops
-  delay = 0;
   // Time to display the next frame
   time_of_next_frame = 0;
   // Time to display the compute next physic engine frame
   time_of_next_phy_frame = 0;
+  // Reset some requests
+  request_time = 0;
+  request_speed = ZERO;
 
   // loop until game is finished
   do {
