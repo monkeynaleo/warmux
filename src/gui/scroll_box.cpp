@@ -64,10 +64,6 @@ ScrollBox::ScrollBox(const Point2i & _size, bool force_widget_size, bool alterna
   WidgetList::AddWidget(m_down);
 }
 
-ScrollBox::~ScrollBox()
-{
-}
-
 Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
 {
   ScrollMode old_mode = scroll_mode;
