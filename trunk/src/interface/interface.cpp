@@ -864,8 +864,6 @@ void Interface::SetSpeed(const Double& speed)
 
 bool Interface::ReplayClick(const Point2i &mouse_pos, ClickType type, Point2i old_mouse_pos)
 {
-  if (type==CLICK_TYPE_LONG || type==CLICK_TYPE_UP)
-    return true;
   Game     *game = Game::GetInstance();
   Point2i mouse_rel_pos = mouse_pos-bottom_bar_pos;
   Point2i size(62*zoom, replay_toolbar.GetHeight());
@@ -889,6 +887,19 @@ bool Interface::ReplayClick(const Point2i &mouse_pos, ClickType type, Point2i ol
   Rectanglei stop_button(Point2i(134*zoom, 0), size);
   if (stop_button.Contains(mouse_rel_pos)) {
     game->UserAsksForEnd();
+    return true;
+  }
+
+  Rectanglei skip_button(Point2i(214*zoom, 0), size);
+  if (skip_button.Contains(mouse_rel_pos)) {
+    uint time;
+    switch (type) {
+      case CLICK_TYPE_LONG: time = GameTime::GetConstInstance()->Read() + 60000; break;
+      case CLICK_TYPE_DOWN: return false; // Needed to allow long clicks
+      case CLICK_TYPE_UP: time = GameTime::GetConstInstance()->Read() + 30000; break;
+      default: return false;
+    }
+    game->RequestTime(time);
     return true;
   }
 
@@ -967,6 +978,7 @@ int Interface::AnyClick(const Point2i &mouse_pos, ClickType type, Point2i old_mo
   Rectanglei weapon_button(TL, BR-TL);
   // Check if we clicked the weapon icon: toggle weapon menu
   if (weapon_button.Contains(mouse_rel_pos)) {
+    if (mode == MODE_REPLAY)return -1; // This button isn't active in replay
     switch (type) {
       case CLICK_TYPE_LONG:
         if (weapon_button.Contains(old_mouse_pos)) {

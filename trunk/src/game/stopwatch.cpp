@@ -79,3 +79,9 @@ void Stopwatch::SetSpeed(const Double& sp)
   start_time  = SDL_GetTicks();
   speed       = sp;
 }
+
+void Stopwatch::Resynch(uint value)
+{
+  offset_time = value;
+  start_time  = SDL_GetTicks();
+}
