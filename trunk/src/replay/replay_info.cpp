@@ -40,7 +40,7 @@ const uint32_t DATA_MAGIC   = 0xDEADBEEF;
 void Write32(std::ofstream& out, uint32_t val)
 {
   char  render[4];
-  SDLNet_Write32(val, render);
+  SDLNet_Write32(val, (void*)render);
   out.write(render, sizeof(Sint32));
 }
 
@@ -48,7 +48,7 @@ uint32_t Read32(std::ifstream& in)
 {
   char  render[4];
   in.read(render, 4);
-  return SDLNet_Read32(render);
+  return SDLNet_Read32((void*)render);
 }
 
 ReplayInfo::ReplayInfo(time_t d, uint32_t dms)
