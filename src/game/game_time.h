@@ -56,6 +56,7 @@ public:
 
   void Increase();
   bool CanBeIncreased() const { return stopwatch.GetValue() >= current_time; }
+  bool CanDraw() const { return stopwatch.GetValue()+40 >= current_time || IsWaiting(); }
   void LetRealTimePassUntilFrameEnd();
 
   bool IsWaiting() const { return waiting_for_user || waiting_for_network; }
