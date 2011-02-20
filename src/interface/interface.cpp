@@ -915,7 +915,7 @@ bool Interface::ReplayClick(const Point2i &mouse_pos, ClickType type, Point2i ol
 
   Rectanglei fast_button(Point2i(482*zoom, 0), size);
   if (fast_button.Contains(mouse_rel_pos)) {
-    if (type == CLICK_TYPE_DOWN)
+    if (type == CLICK_TYPE_DOWN && Game::GetInstance()->GetLastFrameRate()>10)
       SetSpeed(GameTime::GetConstInstance()->GetSpeed()+ONE);
     return true;
   }
