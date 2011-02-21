@@ -591,6 +591,7 @@ void OptionMenu::AddTeam()
 
   ReloadTeamList();
   lbox_teams->NeedRedrawing();
+  widgets.Pack();
 }
 
 void OptionMenu::DeleteTeam()
@@ -610,6 +611,7 @@ void OptionMenu::DeleteTeam()
     ReloadTeamList();
     LoadTeam();
     lbox_teams->NeedRedrawing();
+    widgets.Pack();
   }
 }
 
