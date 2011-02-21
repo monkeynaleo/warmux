@@ -22,8 +22,6 @@ LIBXML_SOURCE_FILES := \
         valid.c \
         xlink.c \
         threads.c \
-        HTMLparser.c \
-        HTMLtree.c \
         xpath.c \
         xpointer.c \
         xinclude.c \
@@ -33,9 +31,7 @@ LIBXML_SOURCE_FILES := \
         relaxng.c \
         dict.c \
         SAX2.c \
-        legacy.c \
         chvalid.c \
-        pattern.c \
         xmlsave.c \
         xmlmodule.c \
         xmlwriter.c
