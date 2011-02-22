@@ -1637,6 +1637,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\src\tool\ansi_convert.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\tool\ansi_convert.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\src\tool\copynpaste.cpp"
 					>
 				</File>
