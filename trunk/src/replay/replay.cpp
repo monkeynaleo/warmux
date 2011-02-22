@@ -115,11 +115,15 @@ bool Replay::StartRecording(const std::string& game_mode_name,
   return true;
 }
 
-bool Replay::SaveReplay(const std::string& name, const char *comment)
+bool Replay::SaveReplay(const std::string& name, const char *comment, bool is_wide)
 {
   ASSERT(is_recorder);
 
-  std::ofstream out(name.c_str(), std::ofstream::binary);
+  std::ofstream out;
+  if (is_wide)
+    out.open((wchar_t*)name.c_str(), std::ofstream::binary);
+  else
+    out.open(name.c_str(), std::ofstream::binary);
   if (!out)
     return false;
 

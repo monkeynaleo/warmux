@@ -22,6 +22,8 @@
 #include <algorithm>  //std::sort
 #include <time.h>
 
+#include <WARMUX_debug.h>
+
 #include "menu/results_menu.h"
 
 #include "character/character.h"
@@ -50,7 +52,7 @@
 #include "sound/jukebox.h"
 #include "team/results.h"
 #include "team/team.h"
-#include <WARMUX_debug.h>
+#include "tool/ansi_convert.h"
 #include "tool/math_tools.h"
 #include "tool/resource_manager.h"
 #include "tool/string_tools.h"
@@ -453,8 +455,14 @@ void ResultsMenu::OnClickUp(const Point2i &mousePosition, int button)
         return;
       }
 
-      if (!Replay::GetInstance()->SaveReplay(folders->GetCurrentFolder() + filename,
-                                             comment->GetText().c_str())) {
+#  ifdef _WIN32
+      std::string name = UTF8ToANSI(folders->GetCurrentFolder(), filename);
+      bool wide = true;
+#  else
+      std::string name = folders->GetCurrentFolder() + filename;
+      bool wide = false;
+#endif
+      if (!Replay::GetInstance()->SaveReplay(name, comment->GetText().c_str(), wide)) {
         Question question(Question::WARNING);
         question.Set(_("Failed to save replay"), true, 0);
         question.Ask();
