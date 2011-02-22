@@ -23,6 +23,19 @@
 #  include <windows.h>
 #  include "ansi_convert.h"
 
+std::string UTF8ToANSI(std::string path, const std::string& name)
+{
+  path += name;
+  int    len = MultiByteToWideChar(CP_UTF8, 0, path.c_str(), -1, NULL, 0);
+  if (len) {
+    std::string tmp;
+    tmp.resize(len*2);
+    MultiByteToWideChar(CP_UTF8, 0, path.c_str(), -1, (LPWSTR)tmp.c_str(), len*2);
+    return tmp;
+  }
+  return path;
+}
+
 std::string ANSIToUTF8(std::string path, const std::string& name)
 {
   path += name;
