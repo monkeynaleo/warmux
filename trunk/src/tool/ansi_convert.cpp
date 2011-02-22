@@ -23,28 +23,32 @@
 #  include <windows.h>
 #  include "ansi_convert.h"
 
-std::string ANSIToUTF8(const char* str)
+std::string ANSIToUTF8(std::string path, const std::string& name)
 {
-  int len = strlen(str);
-  LPWSTR buf = (LPWSTR)malloc(2*len+2);
+  path += name;
+  int    len = MultiByteToWideChar(CP_ACP, 0, path.c_str(), -1, NULL, 0);
+  LPWSTR buf = (LPWSTR)malloc(2*len);
 
   if (buf) {
-    int wlen = MultiByteToWideChar(CP_ACP, 0, str, len, buf, 2*len+2);
-    if (wlen) {
-      int utf_len = WideCharToMultiByte(CP_UTF8, 0, buf, wlen, NULL, 0, NULL, NULL);
-      if (utf_len > 0) {
-        // Convert from UTF-16 to UTF-8
+    MultiByteToWideChar(CP_ACP, 0, path.c_str(), -1, buf, len);
+    int plen = GetLongPathNameW(buf, NULL, 0);
+    LPWSTR buf2 = (LPWSTR)malloc(plen*2+2);
+    if (buf2) {
+      GetLongPathNameW(buf, buf2, plen);
+      LPWSTR buf3 = wcsrchr((wchar_t*)buf2, L'\\')+1;
+      int ulen = WideCharToMultiByte(CP_UTF8, 0, buf3, -1, NULL, 0, NULL, NULL);
+      if (ulen) {
         std::string tmp;
-        tmp.resize(utf_len);
-        if (WideCharToMultiByte(CP_UTF8, 0, buf, wlen, (LPSTR)tmp.c_str(), utf_len, NULL, NULL)) {
-          free(buf);
-          return tmp;
-        }
+        tmp.resize(ulen-1);
+        WideCharToMultiByte(CP_UTF8, 0, buf3, -1, (LPSTR)tmp.c_str(), ulen-1, NULL, NULL);
+        free(buf2);
+        free(buf);
+        return tmp;
       }
-      free(buf);
+      free(buf2);
     }
+    free(buf);
   }
-
   return "";
 }
 #endif

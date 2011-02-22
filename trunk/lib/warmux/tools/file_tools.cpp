@@ -181,12 +181,15 @@ FolderSearch *OpenFolder(const std::string& dirname)
 
 const char* FolderSearchNext(FolderSearch *f, bool& file)
 {
-  while (FindNextFile(f->file_search, &f->file)) {
-    if (f->file.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
+  WIN32_FIND_DATA *find = &f->file;
+  while (FindNextFile(f->file_search, find)) {
+    const char *name = (find->cAlternateFileName && find->cAlternateFileName[0])
+                     ? find->cAlternateFileName : find->cFileName;
+    if (find->dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
       // If we are also looking for files, report it isn't one
       if (file)
         file = false;
-      return f->file.cFileName;
+      return name;
     }
 
     // We're not searching for folder, so exit with failure
@@ -195,7 +198,7 @@ const char* FolderSearchNext(FolderSearch *f, bool& file)
 
     // This is a file and we do search for files
     file = true;
-    return f->file.cFileName;
+    return name;
   }
   return NULL;
 }
