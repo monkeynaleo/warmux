@@ -25,9 +25,9 @@
 #ifdef _WIN32
 #  include <string>
 
-std::string ANSIToUTF8(const char* str);
+std::string ANSIToUTF8(std::string path, const std::string& name);
 #else
-#  define ANSIToUTF8(a) (a)
+#  define ANSIToUTF8(path, name) (name)
 #endif
 
 #endif // ANSI_CONVERT_H

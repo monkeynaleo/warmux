@@ -141,7 +141,7 @@ void FileListBox::PopulateFileList(const std::string& path)
           std::string* filename = new std::string(new_path);
           *filename += name;
           MSG_DEBUG("file", "Adding file %s\n", name);
-          AddLabelItem(false, ANSIToUTF8(name), filename, Font::FONT_MEDIUM);
+          AddLabelItem(false, ANSIToUTF8(new_path, name), filename, Font::FONT_MEDIUM);
         } else {
           MSG_DEBUG("file", "NOT adding file %s, invalid extension\n", name);
         }
@@ -157,7 +157,7 @@ void FileListBox::PopulateFileList(const std::string& path)
           filename = new std::string(new_path);
         *filename += name;
         MSG_DEBUG("file", "Adding directory %s\n", name);
-        AddLabelItem(false, "[" + ANSIToUTF8(name) + "]", filename,
+        AddLabelItem(false, "[" + ANSIToUTF8(new_path, name) + "]", filename,
                      Font::FONT_MEDIUM, Font::FONT_NORMAL, c_yellow);
       } else
         MSG_DEBUG("file", "Rejecting %s\n", name);

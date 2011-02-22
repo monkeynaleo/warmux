@@ -42,9 +42,13 @@ public:
   ~FileListBox();
 
   void StartListing(const char* dirname = NULL);
+
+  /* Beware: all those strings are UTF-8, so you must convert them to WCHAR under Windows */
   virtual const std::string* GetSelectedFile() const;
   virtual const std::string* GetSelectedFolder() const;
   const std::string& GetCurrentFolder() const { return new_path; }
+
+  /* Beware that under Windows we are using shortnames, hence the extension is uppercase! */
   void AddExtensionFilter(const char* ext) { extensions.push_back(ext); }
 
   Widget* ClickUp(const Point2i & mousePosition, uint button);
