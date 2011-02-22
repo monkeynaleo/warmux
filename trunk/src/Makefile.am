@@ -317,6 +317,8 @@ warmux_SOURCES = \
         team/teams_list.h \
         tool/affine_transform.cpp \
         tool/affine_transform.h \
+        tool/ansi_convert.cpp \
+        tool/ansi_convert.h \
         tool/copynpaste.cpp \
         tool/copynpaste.h \
         tool/isnan.h \

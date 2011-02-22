@@ -26,6 +26,7 @@
 
 #include "game/config.h"
 #include "gui/file_list_box.h"
+#include "tool/ansi_convert.h"
 
 FileListBox::FileListBox(const Point2i &size, bool list)
   : ItemBox(size, false)
@@ -140,7 +141,7 @@ void FileListBox::PopulateFileList(const std::string& path)
           std::string* filename = new std::string(new_path);
           *filename += name;
           MSG_DEBUG("file", "Adding file %s\n", name);
-          AddLabelItem(false, name, filename, Font::FONT_MEDIUM);
+          AddLabelItem(false, ANSIToUTF8(name), filename, Font::FONT_MEDIUM);
         } else {
           MSG_DEBUG("file", "NOT adding file %s, invalid extension\n", name);
         }
@@ -156,7 +157,7 @@ void FileListBox::PopulateFileList(const std::string& path)
           filename = new std::string(new_path);
         *filename += name;
         MSG_DEBUG("file", "Adding directory %s\n", name);
-        AddLabelItem(false, FolderString(name), filename,
+        AddLabelItem(false, "[" + ANSIToUTF8(name) + "]", filename,
                      Font::FONT_MEDIUM, Font::FONT_NORMAL, c_yellow);
       } else
         MSG_DEBUG("file", "Rejecting %s\n", name);
