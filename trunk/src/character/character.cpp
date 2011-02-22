@@ -717,9 +717,12 @@ void Character::Refresh()
   GetSpeed(n, a);
   if (n > MIN_SPEED_TO_FLY && body->GetMovement() != "fly-black"
       && body->GetMovement() != "fall" && body->GetMovement() != "jump"
-      && body->GetMovement() != "fly"
-      && !IsGoingUp() && !IsGoingDown())
-    SetMovement("fly");
+      && body->GetMovement() != "fly") {
+    if (IsGoingUp() || IsGoingDown())
+      SetMovement("fall");
+    else
+      SetMovement("fly");
+  }
 
   // Refresh the body (needed to determine if "weapon-*-begin-shoot" is finnished)
   body->Build();
@@ -841,8 +844,11 @@ void Character::SignalExplosion()
 
   SetClotheOnce("black");
 
-  if (n > MIN_SPEED_TO_FLY && !IsGoingUp() && !IsGoingDown()) {
-    SetMovement("fly-black");
+  if (n > MIN_SPEED_TO_FLY) {
+    if (IsGoingUp() || IsGoingDown())
+      SetMovement("fall");
+    else
+      SetMovement("fly-black");
   } else {
     SetMovementOnce("black");
     if (body->GetClothe() == "black" && body->GetMovement() != "black")
