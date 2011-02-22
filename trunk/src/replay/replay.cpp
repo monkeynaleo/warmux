@@ -120,9 +120,11 @@ bool Replay::SaveReplay(const std::string& name, const char *comment, bool is_wi
   ASSERT(is_recorder);
 
   std::ofstream out;
+#ifdef _WIN32 // Only case where is_wide is true
   if (is_wide)
     out.open((wchar_t*)name.c_str(), std::ofstream::binary);
   else
+#endif
     out.open(name.c_str(), std::ofstream::binary);
   if (!out)
     return false;
