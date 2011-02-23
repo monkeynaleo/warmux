@@ -23,6 +23,9 @@
 
 #include <SDL_net.h>
 #include <assert.h>
+#ifdef _WIN32
+#  include <wchar.h>
+#endif
 
 #include <WARMUX_debug.h>
 
@@ -119,13 +122,13 @@ bool Replay::SaveReplay(const std::string& name, const char *comment, bool is_wi
 {
   ASSERT(is_recorder);
 
-  std::ofstream out;
+  FILE *out;
 #ifdef _WIN32 // Only case where is_wide is true
   if (is_wide)
-    out.open((wchar_t*)name.c_str(), std::ofstream::binary);
+    out = _wfopen((wchar_t*)name.c_str(), L"wb");
   else
 #endif
-    out.open(name.c_str(), std::ofstream::binary);
+    out = fopen(name.c_str(), "wb");
   if (!out)
     return false;
 
@@ -143,20 +146,20 @@ bool Replay::SaveReplay(const std::string& name, const char *comment, bool is_wi
 
   // Flush actions recorded
 #ifdef WMX_LOG
-  uint32_t pos = out.tellp();
+  uint32_t pos = ftell(out);
   MSG_DEBUG("replay", "Actions stored at %u on %u bytes in %s, seed %08X\n",
             pos, MemUsed(), name.c_str(), seed);
 #endif
 
-  out.write((char*)buf, MemUsed());
+  fwrite(buf, 1, MemUsed(), out);
   if (count) {
     count--;
     MSG_DEBUG("replay", "Storing final calculate frames: %u\n", count);
     Write32(out, count);
   }
 
-  bool good = out.good();
-  out.close();
+  bool good = ferror(out);
+  fclose(out);
 
   // should maybe return length actually written
   return good;
@@ -243,7 +246,7 @@ bool Replay::LoadReplay(const std::string& name)
   ASSERT(!is_recorder);
   old_time = 0;
 
-  std::ifstream in(name.c_str(), std::fstream::binary);
+  FILE *in = fopen(name.c_str(), "rb");
   if (!in) {
     Error(Format(_("Couldn't open %s\n"), name.c_str()));
     goto done;
@@ -265,7 +268,7 @@ err:
   Error(Format(_("Warning, malformed replay with data of size %u"), bufsize));
 
 done:
-  in.close();
+  fclose(in);
   if (info) delete info;
   return status;
 
@@ -317,10 +320,10 @@ ok:
   seed = Read32(in);
 
   // Get remaining data
-  pos = in.tellg();
-  in.seekg(0, std::fstream::end);
-  uint size = in.tellg()-pos;
-  in.seekg(pos);
+  pos = ftell(in);
+  fseek(in, 0, SEEK_END);
+  uint size = ftell(in)-pos;
+  fseek(in, pos, SEEK_SET);
   MSG_DEBUG("replay", "Actions found at %u on %uB, seed=%08X\n", (uint)pos, size, seed);
 
   // Explicit buffer change to avoid garbage
@@ -330,8 +333,8 @@ ok:
   ptr = buf;
   bufsize = size;
 
-  in.read((char*)buf, size);
-  if (!in) {
+  fread(buf, 1, size, in);
+  if (ferror(in)) {
     goto err;
   }
 

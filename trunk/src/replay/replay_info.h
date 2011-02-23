@@ -24,7 +24,6 @@
 #define REPLAY_INFO_H
 
 #include <SDL.h>
-#include <fstream>
 #include <vector>
 #include <string>
 
@@ -58,11 +57,11 @@ class ReplayInfo
 
 public:
   // Get all info from file
-  static ReplayInfo  *ReplayInfoFromFile(std::ifstream &in);
+  static ReplayInfo  *ReplayInfoFromFile(FILE *in);
   // Get all info from current game
   static ReplayInfo  *ReplayInfoFromCurrent(uint32_t duration, const char* comment = NULL);
   // Dump to file
-  bool               DumpToFile(std::ofstream &out);
+  bool               DumpToFile(FILE *out);
 
   bool               IsValid() const { return valid; }
   const std::string& GetVersion() const { return version; }
@@ -77,7 +76,7 @@ public:
   const GameModeInfo* GetGameModeInfo() const { return &mode_info; }
 };
 
-void     Write32(std::ofstream& out, uint32_t val);
-uint32_t Read32(std::ifstream& in);
+void     Write32(FILE *out, uint32_t val);
+uint32_t Read32(FILE *in);
 
 #endif //REPLAY_INFO_H

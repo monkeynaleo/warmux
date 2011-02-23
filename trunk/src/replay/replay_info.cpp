@@ -37,17 +37,17 @@
 const uint32_t HEADER_MAGIC = 0x57524D58; /* WRMX */
 const uint32_t DATA_MAGIC   = 0xDEADBEEF;
 
-void Write32(std::ofstream& out, uint32_t val)
+void Write32(FILE *out, uint32_t val)
 {
   char  render[4];
   SDLNet_Write32(val, (void*)render);
-  out.write(render, sizeof(Sint32));
+  fwrite(render, 1, 4, out);
 }
 
-uint32_t Read32(std::ifstream& in)
+uint32_t Read32(FILE *in)
 {
   char  render[4];
-  in.read(render, 4);
+  fread(render, 1, 4, in);
   return SDLNet_Read32((void*)render);
 }
 
@@ -61,12 +61,12 @@ ReplayInfo::ReplayInfo(time_t d, uint32_t dms)
   comment.clear(); comment = _("No comment.");
 };
 
-ReplayInfo *ReplayInfo::ReplayInfoFromFile(std::ifstream &in)
+ReplayInfo *ReplayInfo::ReplayInfoFromFile(FILE *in)
 {
 #define TEMP_SIZE 256
-  char       temp[TEMP_SIZE];
+  char        temp[TEMP_SIZE];
   ReplayInfo *info = new ReplayInfo(0, 0);
-  uint32_t     marker;
+  uint32_t    marker;
 
   info->last_error = _("Unspecified error or end of file");
   info->valid = false;
@@ -80,51 +80,48 @@ ReplayInfo *ReplayInfo::ReplayInfoFromFile(std::ifstream &in)
   }
 
   // Version
-  in.getline(temp, TEMP_SIZE-1);            // Version
+  fscanf(in, "%[^\n]\n", temp);
   info->version = temp;
-  if (!in) return info;
+  if (ferror(in)) return info;
   
   // Time
   info->duration_ms = Read32(in);           // Duration
   info->date        = Read32(in);           // Return of time(NULL)
-  if (!in) return info;
+  if (ferror(in)) return info;
 
   // Comment
-  in.getline(temp, TEMP_SIZE-1);            // Comment
-  if (!in) return info;
+  if (!fscanf(in, "%[^\n]\n", temp) || ferror(in)) return info;
   info->comment = temp;
 
   // map ID
-  in.getline(temp, TEMP_SIZE-1);            // Map ID
-  if (!in) return info;
+  if (!fscanf(in, "%[^\n]\n", temp) || ferror(in)) return info;
   info->map_id = temp;
 
   // Teams
-  uint32_t num_teams = Read32(in);            // Number of teams
+  uint32_t num_teams = Read32(in);          // Number of teams
   if (num_teams > 8) {
-    info->last_error =
-      Format(_("Suspicious number of teams 0x%08X"), num_teams);
+    info->last_error = Format(_("Suspicious number of teams 0x%08X"), num_teams);
     return info;
   }
   while (num_teams) {
     ConfigTeam team_cfg;
 
-    in.getline(temp, TEMP_SIZE-1);          // Team No.i name
-    if (!in)
+    // Team No.i name
+    if (!fscanf(in, "%[^\n]\n", temp) || ferror(in))
       goto team_error;
     team_cfg.id = std::string(temp);
 
-    in.getline(temp, TEMP_SIZE-1);          // Player name for team No.i 
-    if (!in)
+    // Player name for team No.i 
+    if (!fscanf(in, "%[^\n]\n", temp) || ferror(in))
       goto team_error;
     team_cfg.player_name = std::string(temp);
 
     team_cfg.nb_characters = Read32(in);
-    if (!in)
+    if (ferror(in))
       goto team_error;
 
-    in.getline(temp, TEMP_SIZE-1);          // Nb characters for team ID No.i
-    if (!in)
+    // Nb characters for team ID No.i
+    if (!fscanf(in, "%[^\n]\n", temp) || ferror(in))
       goto team_error;
     team_cfg.ai = std::string(temp);
 
@@ -147,8 +144,7 @@ team_error:
   info->mode_info.gravity = Read32(in);
 
   if (Read32(in) != DATA_MAGIC) {           // Data magic
-    info->last_error =
-      Format(_("Bad data marker 0x%08X instead of 0x%08X"), marker, DATA_MAGIC);
+    info->last_error = Format(_("Bad data marker 0x%08X instead of 0x%08X"), marker, DATA_MAGIC);
     return info;
   }
 
@@ -188,26 +184,26 @@ ReplayInfo *ReplayInfo::ReplayInfoFromCurrent(uint32_t duration, const char* com
 }
 
 bool
-ReplayInfo::DumpToFile(std::ofstream &out)
+ReplayInfo::DumpToFile(FILE *out)
 {
   if (!valid)
     return false;
 
   Write32(out, HEADER_MAGIC);               // Header magic
-  out << version << "\n";                   // Version
+  fprintf(out, "%s\n", version.c_str());    // Version
 
   Write32(out, duration_ms);                // Duration
   Write32(out, date);                       // Date
-  out << comment << "\n";                   // Comment
+  fprintf(out, "%s\n", comment.c_str());    // Comment
 
-  out << map_id << "\n";                    // Mad ID
+  fprintf(out, "%s\n", map_id.c_str());     // Mad ID
 
   Write32(out, teams.size());
   for (uint i=0; i<teams.size(); i++) {     // Team No.i
-    out << teams[i].id << "\n";
-    out << teams[i].player_name << "\n";
+    fprintf(out, "%s\n", teams[i].id.c_str());
+    fprintf(out, "%s\n", teams[i].player_name.c_str());
     Write32(out, teams[i].nb_characters);
-    out << teams[i].ai << "\n";
+    fprintf(out, "%s\n", teams[i].ai.c_str());
   }
   
   //Game mode
@@ -220,5 +216,5 @@ ReplayInfo::DumpToFile(std::ofstream &out)
   Write32(out, mode_info.gravity);
 
   Write32(out, DATA_MAGIC);                 // Data magic
-  return (!!out);
+  return !ferror(out);
 }
