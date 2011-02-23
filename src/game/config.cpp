@@ -61,19 +61,29 @@
 // Under Windows, binary may be relocated
 static std::string GetWarmuxPath()
 {
-  char  buffer[MAX_PATH];
-  DWORD size = GetModuleFileName(NULL, buffer, MAX_PATH);
+  WCHAR  buffer[4*MAX_PATH];
+  DWORD size = GetModuleFileNameW(NULL, buffer, 4*MAX_PATH);
 
   if (size<1)
     return std::string("");
 
-  char *ptr = strrchr(buffer, '\\');
-  if (!ptr)
-    return "";
+  // Now get shortname
+  size = GetShortPathNameW(buffer, NULL, 0);
+  ASSERT(size);
+  WCHAR *buf = new WCHAR[size];
+  GetShortPathNameW(buffer, buf, size);
 
-  // Mask name
-  ptr[0] = 0;
-  return std::string(buffer);
+  // Retrieve the path and convert it to ANSI
+  size = wcsrchr((wchar_t*)buf, L'\\')+1 - buf;
+  ASSERT(size < MAX_PATH);
+  int ulen = WideCharToMultiByte(CP_UTF8, 0, buf, size, NULL, 0, NULL, NULL);
+
+  std::string ret;
+  ret.resize(ulen-1);
+  WideCharToMultiByte(CP_UTF8, 0, buf, size, (LPSTR)ret.c_str(), ulen-1, NULL, NULL);
+  delete[] buf;
+
+  return ret;
 }
 #else
 #  if defined(ANDROID)
