@@ -354,6 +354,7 @@ std::string CreateTmpFile(const std::string& prefix, int* fd)
   return path;
 }
 
+#ifndef _WIN32
 // Replace ~ by its true name
 std::string TranslateDirectory(const std::string &directory)
 {
@@ -367,6 +368,7 @@ std::string TranslateDirectory(const std::string &directory)
   }
   return txt;
 }
+#endif
 
 std::string FormatFileName(const std::string &name)
 {
