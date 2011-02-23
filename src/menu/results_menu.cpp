@@ -457,12 +457,10 @@ void ResultsMenu::OnClickUp(const Point2i &mousePosition, int button)
 
 #  ifdef _WIN32
       std::string name = UTF8ToUTF16(folders->GetCurrentFolder(), filename);
-      bool wide = true;
 #  else
       std::string name = folders->GetCurrentFolder() + filename;
-      bool wide = false;
 #endif
-      if (!Replay::GetInstance()->SaveReplay(name, comment->GetText().c_str(), wide)) {
+      if (!Replay::GetInstance()->SaveReplay(name, comment->GetText().c_str())) {
         Question question(Question::WARNING);
         question.Set(_("Failed to save replay"), true, 0);
         question.Ask();
