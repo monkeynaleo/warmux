@@ -25,7 +25,7 @@
 #ifdef _WIN32
 #  include <string>
 
-std::string UTF8ToANSI(std::string path, const std::string& name);
+std::string UTF8ToUTF16(std::string path, const std::string& name);
 std::string ANSIToUTF8(std::string path, const std::string& name);
 #else
 #  define ANSIToUTF8(path, name) (name)
