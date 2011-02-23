@@ -531,6 +531,8 @@ extern "C" int main(int argc, char *argv[])
   freopen("warmux_stderr.txt", "w", stderr);
 #endif
 
+  std::ios_base::sync_with_stdio(true);
+
   /* FIXME calling Config::GetInstance here means that there is no need of
    * singleton for Config but simply a global variable. This may look stange
    * but the whole system (directories, translation etc...) is needed, even for
