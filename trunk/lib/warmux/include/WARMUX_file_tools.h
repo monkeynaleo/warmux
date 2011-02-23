@@ -58,8 +58,12 @@ std::string CreateTmpFile(const std::string& prefix, int *fd);
 // Move a file or folder
 bool Rename(const std::string& old_name, const std::string& new_name);
 
+#ifdef _WIN32
+#  define TranslateDirectory(a) (a)
+#else
 // Replace ~ by its true name
 std::string TranslateDirectory(const std::string &directory);
+#endif
 
 typedef struct _FolderSearch FolderSearch;
 
