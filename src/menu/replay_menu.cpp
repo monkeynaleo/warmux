@@ -128,7 +128,7 @@ void ReplayMenu::ChangeReplay()
   }
 
   // Get info from Replay:: and fill in here
-  std::ifstream in(name->c_str(), std::fstream::binary);
+  FILE *in = fopen(name->c_str(), "rb");
   if (!in) {
     Question question;
     std::string err = "Error: file ";
@@ -140,7 +140,7 @@ void ReplayMenu::ChangeReplay()
   }
 
   ReplayInfo *info = ReplayInfo::ReplayInfoFromFile(in);
-  in.close();
+  fclose(in);
 
   if (!info)
     return; /* Bad problem */
