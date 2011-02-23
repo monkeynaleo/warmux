@@ -63,8 +63,7 @@ ReplayInfo::ReplayInfo(time_t d, uint32_t dms)
 
 ReplayInfo *ReplayInfo::ReplayInfoFromFile(FILE *in)
 {
-#define TEMP_SIZE 256
-  char        temp[TEMP_SIZE];
+  char        temp[256+1];
   ReplayInfo *info = new ReplayInfo(0, 0);
   uint32_t    marker;
 
@@ -80,7 +79,7 @@ ReplayInfo *ReplayInfo::ReplayInfoFromFile(FILE *in)
   }
 
   // Version
-  fscanf(in, "%[^\n]\n", temp, TEMP_SIZE-1);
+  fscanf(in, "%256[^\n]\n", temp);
   info->version = temp;
   if (ferror(in)) return info;
   
@@ -90,11 +89,11 @@ ReplayInfo *ReplayInfo::ReplayInfoFromFile(FILE *in)
   if (ferror(in)) return info;
 
   // Comment
-  if (!fscanf(in, "%[^\n]\n", temp, TEMP_SIZE-1) || ferror(in)) return info;
+  if (!fscanf(in, "%256[^\n]\n", temp) || ferror(in)) return info;
   info->comment = temp;
 
   // map ID
-  if (!fscanf(in, "%[^\n]\n", temp, TEMP_SIZE-1) || ferror(in)) return info;
+  if (!fscanf(in, "%256[^\n]\n", temp) || ferror(in)) return info;
   info->map_id = temp;
 
   // Teams
@@ -107,12 +106,12 @@ ReplayInfo *ReplayInfo::ReplayInfoFromFile(FILE *in)
     ConfigTeam team_cfg;
 
     // Team No.i name
-    if (!fscanf(in, "%[^\n]\n", temp, TEMP_SIZE-1) || ferror(in))
+    if (!fscanf(in, "%256[^\n]\n", temp) || ferror(in))
       goto team_error;
     team_cfg.id = std::string(temp);
 
     // Player name for team No.i 
-    if (!fscanf(in, "%[^\n]\n", temp, TEMP_SIZE-1) || ferror(in))
+    if (!fscanf(in, "%256[^\n]\n", temp) || ferror(in))
       goto team_error;
     team_cfg.player_name = std::string(temp);
 
@@ -121,7 +120,7 @@ ReplayInfo *ReplayInfo::ReplayInfoFromFile(FILE *in)
       goto team_error;
 
     // Nb characters for team ID No.i
-    if (!fscanf(in, "%[^\n]\n", temp, TEMP_SIZE-1) || ferror(in))
+    if (!fscanf(in, "%256[^\n]\n", temp) || ferror(in))
       goto team_error;
     team_cfg.ai = std::string(temp);
 
