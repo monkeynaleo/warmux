@@ -456,7 +456,7 @@ void ResultsMenu::OnClickUp(const Point2i &mousePosition, int button)
       }
 
 #  ifdef _WIN32
-      std::string name = UTF8ToANSI(folders->GetCurrentFolder(), filename);
+      std::string name = UTF8ToUTF16(folders->GetCurrentFolder(), filename);
       bool wide = true;
 #  else
       std::string name = folders->GetCurrentFolder() + filename;

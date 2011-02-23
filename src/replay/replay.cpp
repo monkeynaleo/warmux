@@ -118,17 +118,16 @@ bool Replay::StartRecording(const std::string& game_mode_name,
   return true;
 }
 
-bool Replay::SaveReplay(const std::string& name, const char *comment, bool is_wide)
+bool Replay::SaveReplay(const std::string& name, const char *comment)
 {
   ASSERT(is_recorder);
 
   FILE *out;
 #ifdef _WIN32 // Only case where is_wide is true
-  if (is_wide)
-    out = _wfopen((wchar_t*)name.c_str(), L"wb");
-  else
+  out = _wfopen((wchar_t*)name.c_str(), L"wb");
+#else
+  out = fopen(name.c_str(), "wb");
 #endif
-    out = fopen(name.c_str(), "wb");
   if (!out)
     return false;
 
