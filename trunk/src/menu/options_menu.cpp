@@ -350,7 +350,7 @@ OptionMenu::OptionMenu() :
     AddLanguageItem("עברית (Hebrew)",      "he");
     AddLanguageItem("Magyar",              "hu");
     AddLanguageItem("Italiano",            "it");
-    AddLanguageItem("日本語 (japanese)",    "ja_JP");
+    AddLanguageItem("日本語 (japanese)",   "ja_JP");
     AddLanguageItem("Kernewek",            "kw");
     AddLanguageItem("latviešu valoda",     "lv");
     AddLanguageItem("Norsk (bokmål)",      "nb");
@@ -366,7 +366,7 @@ OptionMenu::OptionMenu() :
     AddLanguageItem("Suomi",               "fi");
     AddLanguageItem("Svenska",             "sv");
     AddLanguageItem("Türkçe",              "tr");
-    AddLanguageItem("украї́нська мо́ва",     "ua");
+    AddLanguageItem("украї́нська мо́ва",   "uk");
     AddLanguageItem("中文（简体）Simplified Chinese",  "zh_CN");
     AddLanguageItem("中文（正體）Traditional Chinese", "zh_TW");
 #endif
