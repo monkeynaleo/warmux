@@ -28,7 +28,6 @@ LIBXML_SOURCE_FILES := \
         globals.c \
         xmlstring.c \
         xmlreader.c \
-        relaxng.c \
         dict.c \
         SAX2.c \
         chvalid.c \
