@@ -162,13 +162,13 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   // #############################
   /* client connection related widgets */
   Box * cl_connection_box = new VBox(W_UNDEF, false, false, false);
-  cl_connection_box->SetBorder(Point2i(0,0));
+  cl_connection_box->SetNoBorder();
   tabs->AddNewTab(TAB_CLIENT_ID, _("Connect to game"), cl_connection_box);
 
   // Public battles
   Box * cl_tmp_box = new HBox(W_UNDEF, false, false, false);
   cl_tmp_box->SetMargin(0);
-  cl_tmp_box->SetBorder(Point2i(0,0));
+  cl_tmp_box->SetNoBorder();
 
   cl_refresh_net_games = new Button(res, "menu/refresh_small", false);
   cl_tmp_box->AddWidget(cl_refresh_net_games);
@@ -184,7 +184,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   // Server password
   cl_tmp_box = new HBox(W_UNDEF, false, false, false);
   cl_tmp_box->SetMargin(0);
-  cl_tmp_box->SetBorder(Point2i(0,0));
+  cl_tmp_box->SetNoBorder();
 
   cl_tmp_box->AddWidget(new Label(_("Password:"), width/4));
   cl_net_server_pwd = new PasswordBox("", (3*width)/4);
@@ -197,7 +197,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   Box *manual_connection_box;
   if (GetMainWindow().GetHeight() < 480) {
     manual_connection_box = new VBox(W_UNDEF, false, false, false);
-    manual_connection_box->SetBorder(Point2i(0,0));
+    manual_connection_box->SetNoBorder();
     tabs->AddNewTab(TAB_MANUAL_ID, _("Manual connection"), manual_connection_box);
   } else {
     cl_connection_box->AddWidget(new Label(_("Manual connection"), width,
@@ -209,7 +209,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   // Server address
   cl_tmp_box = new HBox(W_UNDEF, false, false, false);
   cl_tmp_box->SetMargin(0);
-  cl_tmp_box->SetBorder(Point2i(0,0));
+  cl_tmp_box->SetNoBorder();
 
   cl_tmp_box->AddWidget(new Label(_("Server address:"), width/4));
   cl_server_address = new TextBox(Config::GetInstance()->GetNetworkClientHost(), (3*width)/4);
@@ -220,7 +220,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   // Server port
   cl_tmp_box = new HBox(W_UNDEF, false, false, false);
   cl_tmp_box->SetMargin(0);
-  cl_tmp_box->SetBorder(Point2i(0,0));
+  cl_tmp_box->SetNoBorder();
 
   cl_tmp_box->AddWidget(new Label(_("Port:"), width/4));
   cl_port_number = new TextBox(Config::GetInstance()->GetNetworkClientPort(), (3*width)/4);
@@ -231,7 +231,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   // Server password
   cl_tmp_box = new HBox(W_UNDEF, false, false, false);
   cl_tmp_box->SetMargin(0);
-  cl_tmp_box->SetBorder(Point2i(0,0));
+  cl_tmp_box->SetNoBorder();
 
   cl_tmp_box->AddWidget(new Label(_("Password:"), width/4));
   cl_server_pwd = new PasswordBox("", (3*width)/4);
@@ -242,12 +242,12 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   // #############################
   /* server connection related widgets */
   Box * srv_connection_box = new VBox(W_UNDEF, false, false, false);
-  srv_connection_box->SetBorder(Point2i(0,0));
+  srv_connection_box->SetNoBorder();
 
   // Server port
   Box * srv_tmp_box = new HBox(W_UNDEF, false, false, false);
   srv_tmp_box->SetMargin(0);
-  srv_tmp_box->SetBorder(Point2i(0,0));
+  srv_tmp_box->SetNoBorder();
 
   srv_tmp_box->AddWidget(new Label(_("Port:"), width/4));
   srv_port_number = new TextBox(Config::GetInstance()->GetNetworkServerPort(), (3*width)/4);
@@ -258,7 +258,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   // Game name
   srv_tmp_box = new HBox(W_UNDEF, false, false, false);
   srv_tmp_box->SetMargin(0);
-  srv_tmp_box->SetBorder(Point2i(0,0));
+  srv_tmp_box->SetNoBorder();
 
   srv_tmp_box->AddWidget(new Label(_("Game name:"), width/4));
   srv_game_name = new TextBox(Config::GetInstance()->GetNetworkServerGameName(), (3*width)/4);
@@ -270,7 +270,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   // Server password
   srv_tmp_box = new HBox(W_UNDEF, false, false, false);
   srv_tmp_box->SetMargin(0);
-  srv_tmp_box->SetBorder(Point2i(0,0));
+  srv_tmp_box->SetNoBorder();
 
   srv_tmp_box->AddWidget(new Label(_("Password:"), width/4));
   srv_game_pwd = new PasswordBox("", (3*width)/4);

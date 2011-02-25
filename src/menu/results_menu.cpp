@@ -64,7 +64,6 @@
 #define GRAPH_BORDER        20
 #define GRAPH_START_Y       400
 
-static const Point2i BorderSize(DEF_BORDER, DEF_BORDER);
 static const Point2i DefSize(DEF_SIZE, DEF_SIZE);
 
 class ResultBox : public HBox
@@ -78,7 +77,7 @@ class ResultBox : public HBox
   void SetWidgets(const std::string& type, const char* buffer, const Character* player)
   {
     margin = DEF_BORDER;
-    border = BorderSize;
+    border_size = DEF_BORDER;
 
     Font::font_size_t font = Font::FONT_SMALL;
 
@@ -302,12 +301,12 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
   }
 
   // Create tabs for each team result
-  stats = new MultiTabs(tab_size - 2*BorderSize);
+  stats = new MultiTabs(tab_size - 2*DEF_BORDER);
   stats->SetMaxVisibleTabs(1);
   for (uint i=0; i<v.size(); i++) {
     const Team* team = v[i]->getTeam();
     const std::string name = (team) ? team->GetName() : _("All teams");
-    stats->AddNewTab(name, name, new ResultListBox(v[i], tab_size - 4*BorderSize));
+    stats->AddNewTab(name, name, new ResultListBox(v[i], tab_size - 4*DEF_BORDER));
   }
   tabs->AddNewTab("TAB_team", _("Team stats"), stats);
 
@@ -332,7 +331,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
     }
   }
   tabs->AddNewTab("TAB_canvas", _("Team graphs"),
-                  new GraphCanvas(tab_size - 2*BorderSize, _("Time"), _("Energy"), team_results));
+                  new GraphCanvas(tab_size - 2*DEF_BORDER, _("Time"), _("Energy"), team_results));
 
   // Save replay tab
   if (Replay::GetInstance()->IsRecording()) {
@@ -341,12 +340,12 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
 #define BORDER      5
     VBox* vbox  = new VBox(tab_size.x-2*BORDER, false, false); // Keep the 5,5 border
     save = new Button(res, "menu/save", false); save->SetBorder(defaultOptionColorRect, 2);
-    HBox* hbox  = new HBox(save->GetSizeY(), false, false); hbox->SetBorder(0, 0);
+    HBox* hbox  = new HBox(save->GetSizeY(), false, false); hbox->SetNoBorder();
     hbox->AddWidget(save);
 
-    VBox* vbox2 = new VBox(tab_size.x - 3*BORDER - save->GetSizeX(), false, false); vbox2->SetBorder(0, 0);
+    VBox* vbox2 = new VBox(tab_size.x - 3*BORDER - save->GetSizeX(), false, false); vbox2->SetNoBorder();
 
-    HBox* hbox2 = new HBox(BOX_HEIGHT, false, false); hbox2->SetBorder(0, 0);
+    HBox* hbox2 = new HBox(BOX_HEIGHT, false, false); hbox2->SetNoBorder();
     hbox2->AddWidget(new Label(_("Filename:"), LABEL_SIZE, Font::FONT_MEDIUM));
     char buffer[32];
     time_t rawtime;
@@ -358,7 +357,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
     hbox2->AddWidget(replay_name);
     vbox2->AddWidget(hbox2);
 
-    hbox2 = new HBox(BOX_HEIGHT, false, false); hbox2->SetBorder(0, 0);
+    hbox2 = new HBox(BOX_HEIGHT, false, false); hbox2->SetNoBorder();
     hbox2->AddWidget(new Label(_("Comment:"), LABEL_SIZE, Font::FONT_MEDIUM));
     comment = new TextBox(_("I like WarMUX :)"), tab_size.x -6*BORDER -LABEL_SIZE -save->GetSizeX());
     hbox2->AddWidget(comment);

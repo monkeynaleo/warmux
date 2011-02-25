@@ -24,17 +24,16 @@
 #include "graphic/colors.h"
 #include "graphic/video.h"
 
-Box::Box(void):
-  margin(0),
-  border()
+Box::Box(void)
+  : margin(0)
 {
 }
 
-Box::Box(const Point2i & size, bool _draw_border, bool shadowed) :
-  WidgetList(size),
-  margin(5)
+Box::Box(const Point2i & size, bool _draw_border, bool shadowed)
+  : WidgetList(size)
+  , margin(5)
 {
-  border.SetValues(5, 5);
+  border_size = 5;
 
   if (_draw_border) {
     Widget::SetBorder(defaultOptionColorRect, 2);

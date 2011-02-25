@@ -87,7 +87,7 @@ public:
     int width  = size.x - run->GetSizeX() - 2*5 -2*5;
     int height = run->GetSizeY();
 
-    size.y = height + 2*border.y;
+    size.y = height + 2*border_size;
     bench->SetSizeX(width/2);
     score->SetSizeX(width/2);
     //run->SetPositionX(position.x + width);

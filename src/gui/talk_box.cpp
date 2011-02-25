@@ -43,7 +43,7 @@ TalkBox::TalkBox(const Point2i& size, Font::font_size_t fsize, Font::font_style_
 
   HBox* tmp2_box = new HBox(16, false, false);
   tmp2_box->SetMargin(4);
-  tmp2_box->SetBorder(Point2i(0,0));
+  tmp2_box->SetNoBorder();
   line_to_send_tbox = new TextBox("", size.x-20, fsize, fstyle);
   tmp2_box->AddWidget(line_to_send_tbox);
 

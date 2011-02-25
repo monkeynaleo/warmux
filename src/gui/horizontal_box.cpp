@@ -21,10 +21,9 @@
 
 #include "gui/horizontal_box.h"
 
-HBox::HBox(uint height, bool draw_border, bool shadowed,
-           bool _force_widget_size) :
-  Box(Point2i(100, height), draw_border, shadowed),
-  force_widget_size(_force_widget_size)
+HBox::HBox(uint height, bool draw_border, bool shadowed, bool _force_widget_size)
+  : Box(Point2i(100, height), draw_border, shadowed)
+  , force_widget_size(_force_widget_size)
 {
 }
 
@@ -41,18 +40,16 @@ void HBox::Pack()
   uint max_size_y = 0;
 
   std::list<Widget *>::iterator it;
-  for (it = widget_list.begin();
-       it != widget_list.end();
-       ++it) {
+  for (it = widget_list.begin(); it != widget_list.end(); ++it) {
     Widget *w = *it;
 
     if (it == widget_list.begin())
-      _x += border.x - margin;
+      _x += border_size - margin;
 
-    w->SetPosition(_x + margin, position.y + border.y);
+    w->SetPosition(_x + margin, position.y + border_size);
 
     if (force_widget_size) {
-      w->SetSize(w->GetSizeX(), size.y - 2*border.y);
+      w->SetSize(w->GetSizeX(), size.y - 2*border_size);
     } else {
       max_size_y = std::max(max_size_y, uint(w->GetSizeY()));
     }
@@ -60,10 +57,10 @@ void HBox::Pack()
 
     _x = w->GetPositionX()+ w->GetSizeX();
   }
-  size.x = _x - position.x + border.x;
+  size.x = _x - position.x + border_size;
 
   if (!force_widget_size) {
-    size.y = max_size_y + 2*border.y;
+    size.y = max_size_y + 2*border_size;
   }
 }
 

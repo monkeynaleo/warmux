@@ -62,15 +62,15 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool show_border, bool _d
   uint margin = 0;
 
   if (uint(size.x) > uint(total_width_previews + bt_map_plus->GetSizeX()
-                          + bt_map_minus->GetSizeX() + border.x)) {
+                          + bt_map_minus->GetSizeX() + border_size)) {
     margin = ( size.x - (total_width_previews + bt_map_plus->GetSizeX() +
-                         bt_map_minus->GetSizeX() + border.x) ) / 6;
+                         bt_map_minus->GetSizeX() + border_size) ) / 6;
   }
 
   if (margin < 5) {
     margin = 5;
     uint total_size_wo_margin = size.x - 6*margin - bt_map_plus->GetSizeX()
-                              - bt_map_minus->GetSizeX() - border.x;
+                              - bt_map_minus->GetSizeX() - border_size;
     map_preview_width = (total_size_wo_margin)/4; // <= total = w + 4*(3/4)w
     map_preview_height = 3/4 * map_preview_width;
   }

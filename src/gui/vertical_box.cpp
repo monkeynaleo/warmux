@@ -21,10 +21,9 @@
 
 #include "gui/vertical_box.h"
 
-VBox::VBox(uint width, bool draw_border, bool shadowed,
-	   bool _force_widget_size) :
-  Box(Point2i(width, 100), draw_border, shadowed),
-  force_widget_size(_force_widget_size)
+VBox::VBox(uint width, bool draw_border, bool shadowed, bool _force_widget_size)
+  : Box(Point2i(width, 100), draw_border, shadowed)
+  , force_widget_size(_force_widget_size)
 {
 }
 
@@ -41,18 +40,16 @@ void VBox::Pack()
   uint max_size_x = 0;
 
   std::list<Widget *>::iterator it;
-  for (it = widget_list.begin();
-       it != widget_list.end();
-       ++it) {
+  for (it = widget_list.begin(); it != widget_list.end(); ++it) {
     Widget *w = *it;
 
     if (it == widget_list.begin())
-      _y += border.y - margin;
+      _y += border_size - margin;
 
-    w->SetPosition(position.x + border.x, _y + margin);
+    w->SetPosition(position.x + border_size, _y + margin);
 
     if (force_widget_size) {
-      w->SetSize(size.x - 2*border.x, w->GetSizeY());
+      w->SetSize(size.x - 2*border_size, w->GetSizeY());
     } else {
       max_size_x = std::max(max_size_x, uint(w->GetSizeX()));
     }
@@ -62,10 +59,10 @@ void VBox::Pack()
     _y = w->GetPositionY() + w->GetSizeY();
   }
 
-  size.y = _y - position.y + border.y;
+  size.y = _y - position.y + border_size;
 
   if (!force_widget_size) {
-    size.x = max_size_x + 2*border.x;
+    size.x = max_size_x + 2*border_size;
   }
 }
 
