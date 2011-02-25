@@ -52,10 +52,12 @@ void MsgBox::NewMessage(const std::string &msg, const Color& color)
 
   AddWidget(lbl);
   if (!del) {
-    max += lbl->GetSizeY();
+    max += lbl->GetSizeY() + 2;
   }
-  if (max > 0)
+  if (max > 0) {
     offset = max;
+    NeedRedrawing();
+  }
 
   Pack();
 }
