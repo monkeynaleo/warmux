@@ -46,6 +46,7 @@ Body::Body(const xmlNode *     xml,
   current_frame(0),
   previous_clothe(NULL),
   previous_mvt(NULL),
+  mvt_locked(false),
   weapon_member(new WeaponMember()),
   last_refresh(0),
   walking(false),
@@ -67,6 +68,7 @@ Body::Body(const Body & _body):
   current_frame(0),
   previous_clothe(NULL),
   previous_mvt(NULL),
+  mvt_locked(false),
   weapon_member(new WeaponMember()),
   last_refresh(0),
   walking(false),
@@ -465,6 +467,8 @@ void Body::Build()
         current_frame = 0;
         current_loop++;
 
+        mvt_locked = false;
+
         // Number of loops
         if (current_mvt->GetNbLoops() && current_loop >= current_mvt->GetNbLoops()) {
 
@@ -474,9 +478,11 @@ void Body::Build()
 
           if (previous_clothe) {
             SetClothe(previous_clothe->GetName());
+            previous_clothe = NULL;
           }
           if (previous_mvt) {
             SetMovement(previous_mvt->GetType());
+            previous_mvt = NULL;
           }
         }
       }
@@ -684,7 +690,7 @@ void Body::SetClothe(const std::string & name)
 void Body::SetMovement(const std::string & name)
 {
   MSG_DEBUG("body", " %s use movement %s", owner->GetName().c_str(), name.c_str());
-  if (current_mvt && current_mvt->GetType() == name) {
+  if (mvt_locked || (current_mvt && current_mvt->GetType() == name)) {
     return;
   }
 
@@ -746,7 +752,7 @@ void Body::SetClotheOnce(const std::string & name)
 void Body::SetMovementOnce(const std::string & name)
 {
   MSG_DEBUG("body", " %s use movement %s once", owner->GetName().c_str(), name.c_str());
-  if (current_mvt && current_mvt->GetType() == name) {
+  if (mvt_locked || (current_mvt && current_mvt->GetType() == name)) {
     return;
   }
 
@@ -767,6 +773,8 @@ void Body::SetMovementOnce(const std::string & name)
     last_refresh = GameTime::GetInstance()->Read();
     main_rotation_rad = 0;
     need_rebuild = true;
+    if (name.substr(0,9) != "animation")
+      mvt_locked = true;
   } else {
     MSG_DEBUG("body", "Movement not found");
   }

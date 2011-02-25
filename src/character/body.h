@@ -54,6 +54,7 @@ class Body
   // When a movement/clothe is played once, those variables save the previous state
   const Clothe *                    previous_clothe;
   Movement *                        previous_mvt;
+  bool                              mvt_locked;
 
   // For weapon position handling
   Member *                          weapon_member;
