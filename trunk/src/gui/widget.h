@@ -100,13 +100,13 @@ public:
   // widget may be hidden
   void SetVisible(bool _visible);
   bool IsVisible() const { return visible; }
-  virtual bool Contains(const Point2i & point) const; // always false if !visible
+  virtual bool Contains(const Point2i & point) const { return (Rectanglei::Contains(point) && visible); }
 
   // manage mouse/keyboard focus
   bool HasFocus() const { return has_focus; };
   void SetFocus(bool focus);
 
-  bool IsHighlighted() const;
+  bool IsHighlighted() const { return (is_highlighted || HasFocus()); }
   virtual void SetHighlighted(bool focus);
 
   // border, background color
