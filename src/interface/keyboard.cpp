@@ -326,7 +326,8 @@ bool Keyboard::HandleKeyEvent(const SDL_Event& evnt)
     if (it !=  pressed_keys.end()) {
       key_code = basic_key_code + MODIFIER_OFFSET * previous_modifier_bits;
       HandleKeyComboEvent(key_code, KEY_RELEASED);
-      HandleKeyComboEvent(basic_key_code, KEY_RELEASED);
+      if (key_code != basic_key_code)
+        HandleKeyComboEvent(basic_key_code, KEY_RELEASED);
       pressed_keys.erase(basic_key_code);
       if (event_type == KEY_PRESSED) {
         key_code = basic_key_code + MODIFIER_OFFSET * modifier_bits;
@@ -349,7 +350,8 @@ bool Keyboard::HandleKeyEvent(const SDL_Event& evnt)
     ASSERT(event_type == KEY_RELEASED);
     key_code = basic_key_code + (MODIFIER_OFFSET * previous_modifier_bits);
     HandleKeyComboEvent(key_code, KEY_RELEASED);
-    HandleKeyComboEvent(basic_key_code, KEY_RELEASED);
+    if (key_code != basic_key_code)
+      HandleKeyComboEvent(basic_key_code, KEY_RELEASED);
     pressed_keys.erase(basic_key_code);
   }
   return true;
