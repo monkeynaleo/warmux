@@ -604,7 +604,7 @@ void Character::DoShoot()
   }
 
   MSG_DEBUG("weapon.shoot", "-> begin at time %u", GameTime::GetInstance()->Read());
-  SetMovementOnce("weapon-" + ActiveTeam().GetWeapon().GetID() + "-end-shoot");
+  SetMovement("weapon-" + ActiveTeam().GetWeapon().GetID() + "-end-shoot");
   body->Build(); // Refresh the body
   damage_stats->OneMoreShot();
   ActiveTeam().AccessWeapon().Shoot();
@@ -781,8 +781,6 @@ void Character::Collision(const Point2d& speed_vector)
   else
     SetMovement("breathe");
 
-  SetMovementOnce("soft-land");
-
   body->SetRotation(0.0);
   back_jumping = false;
 
@@ -799,12 +797,9 @@ void Character::Collision(const Point2d& speed_vector)
     Game::GetInstance()->SignalCharacterDamage(this);
     SetClothe("normal");
 
-    if (body->IsWalking())
-      SetMovement("walk");
-    else
-      SetMovement("breathe");
-
     SetMovementOnce("hard-land");
+  } else {
+    SetMovementOnce("soft-land");
   }
 }
 
