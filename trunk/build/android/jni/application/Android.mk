@@ -36,8 +36,8 @@ LOCAL_C_INCLUDES += $(OTHER_PATH)/../sdl/include $(OTHER_PATH)/../sdl_mixer \
                     $(OTHER_PATH)/../sdl_net $(OTHER_PATH)/../xml2/include \
                     $(OTHER_PATH)/../intl $(LOCAL_PATH)/lib/warmux/include
 
-LOCAL_STATIC_LIBRARIES := sdl_ttf xml2 png freetype intl
-LOCAL_SHARED_LIBRARIES := sdl sdl_net sdl_mixer sdl_gfx sdl_net sdl_image
+LOCAL_STATIC_LIBRARIES := sdl_net sdl_gfx sdl_ttf xml2 freetype intl png
+LOCAL_SHARED_LIBRARIES := sdl sdl_mixer sdl_image
 
 LOCAL_LDLIBS := -lGLESv1_CM -ldl -llog -lz -lGLESv1_CM
 

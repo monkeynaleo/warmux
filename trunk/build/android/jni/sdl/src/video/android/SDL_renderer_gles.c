@@ -40,6 +40,8 @@
 #endif
 #ifdef ANDROID
 #include <android/log.h>
+#else
+#define __android_log_print(...)
 #endif
 
 #if defined(__QNXNTO__)
@@ -124,19 +126,14 @@ SDL_RenderDriver GL_ES_RenderDriver = {
       SDL_TEXTUREMODULATE_ALPHA),
      (SDL_BLENDMODE_NONE | SDL_BLENDMODE_MASK |
       SDL_BLENDMODE_BLEND | SDL_BLENDMODE_ADD | SDL_BLENDMODE_MOD),
-     (SDL_TEXTURESCALEMODE_NONE | SDL_TEXTURESCALEMODE_FAST |
-      SDL_TEXTURESCALEMODE_SLOW), 5,
+     (SDL_SCALEMODE_NONE | SDL_SCALEMODE_FAST | SDL_SCALEMODE_SLOW), 6,
      {
       /* OpenGL ES 1.x supported formats list */
-      SDL_PIXELFORMAT_ABGR4444,
-      SDL_PIXELFORMAT_ABGR1555,
-      SDL_PIXELFORMAT_BGR565,
-#ifdef ANDROID
-      SDL_PIXELFORMAT_RGB565, // Android is special, GL pixelformat has R and B channels not swapped
-      SDL_PIXELFORMAT_RGBA5551,
       SDL_PIXELFORMAT_RGBA4444,
-#endif
-      SDL_PIXELFORMAT_BGR24,
+      SDL_PIXELFORMAT_RGBA5551,
+      SDL_PIXELFORMAT_RGB565,
+      SDL_PIXELFORMAT_RGB24,
+      SDL_PIXELFORMAT_BGR888,
       SDL_PIXELFORMAT_ABGR8888},
      0,
      0}
@@ -382,7 +379,7 @@ GLES_ActivateRenderer(SDL_Renderer * renderer)
                        0.0, 0.0, 1.0);
 #else
         data->glViewport(0, 0, window->w, window->h);
-        data->glOrthof(0.0, (GLfloat) window->w, (GLfloat) window->h,
+        data->glOrthof(0.0, (GLfloat) window->w, (GLfloat) window->h, 
                        0.0, 0.0, 1.0);
 #endif
         data->updateSize = SDL_FALSE;
@@ -421,32 +418,17 @@ GLES_CreateTexture(SDL_Renderer * renderer, SDL_Texture * texture)
     GLenum result;
 
     switch (texture->format) {
-    case SDL_PIXELFORMAT_BGR24:
+    case SDL_PIXELFORMAT_RGB24:
         internalFormat = GL_RGB;
         format = GL_RGB;
         type = GL_UNSIGNED_BYTE;
         break;
+    case SDL_PIXELFORMAT_BGR888:
     case SDL_PIXELFORMAT_ABGR8888:
         internalFormat = GL_RGBA;
         format = GL_RGBA;
         type = GL_UNSIGNED_BYTE;
         break;
-    case SDL_PIXELFORMAT_BGR565:
-        internalFormat = GL_RGB;
-        format = GL_RGB;
-        type = GL_UNSIGNED_SHORT_5_6_5;
-        break;
-    case SDL_PIXELFORMAT_ABGR1555:
-        internalFormat = GL_RGBA;
-        format = GL_RGBA;
-        type = GL_UNSIGNED_SHORT_5_5_5_1;
-        break;
-    case SDL_PIXELFORMAT_ABGR4444:
-        internalFormat = GL_RGBA;
-        format = GL_RGBA;
-        type = GL_UNSIGNED_SHORT_4_4_4_4;
-        break;
-#ifdef ANDROID
     case SDL_PIXELFORMAT_RGB565:
         internalFormat = GL_RGB;
         format = GL_RGB;
@@ -462,9 +444,9 @@ GLES_CreateTexture(SDL_Renderer * renderer, SDL_Texture * texture)
         format = GL_RGBA;
         type = GL_UNSIGNED_SHORT_4_4_4_4;
         break;
-#endif
     default:
-        SDL_SetError("Unsupported by OpenGL ES texture format");
+        SDL_SetError("Texture format %s not supported by OpenGL ES",
+                     SDL_GetPixelFormatName(texture->format));
         return -1;
     }
 
@@ -474,7 +456,8 @@ GLES_CreateTexture(SDL_Renderer * renderer, SDL_Texture * texture)
         return -1;
     }
 
-    if (texture->access == SDL_TEXTUREACCESS_STREAMING) {
+    if (texture->access == SDL_TEXTUREACCESS_STREAMING) 
+    {
         data->pitch = texture->w * SDL_BYTESPERPIXEL(texture->format);
         data->pixels = SDL_malloc(texture->h * data->pitch);
         if (!data->pixels) {
@@ -496,6 +479,11 @@ GLES_CreateTexture(SDL_Renderer * renderer, SDL_Texture * texture)
     texture_h = power_of_2(texture->h);
     data->texw = (GLfloat) texture->w / texture_w;
     data->texh = (GLfloat) texture->h / texture_h;
+    if( renderer->info.max_texture_width < texture_w || renderer->info.max_texture_height < texture_h )
+        __android_log_print(ANDROID_LOG_WARN, "libSDL", "GLES: Allocated texture of size %dx%d which is bigger than largest possible device texture %dx%d",
+                            texture_w, texture_h, renderer->info.max_texture_width, renderer->info.max_texture_height );
+    else if( texture_w > 1024 || texture_h > 1024 )
+        __android_log_print(ANDROID_LOG_WARN, "libSDL", "GLES: Allocated texture of size %dx%d which is bigger than 1024x1024 - this code will not work on HTC G1", texture_w, texture_h );
 
     data->format = format;
     data->formattype = type;
@@ -590,17 +578,17 @@ static int
 GLES_SetTextureScaleMode(SDL_Renderer * renderer, SDL_Texture * texture)
 {
     switch (texture->scaleMode) {
-    case SDL_TEXTURESCALEMODE_NONE:
-    case SDL_TEXTURESCALEMODE_FAST:
-    case SDL_TEXTURESCALEMODE_SLOW:
+    case SDL_SCALEMODE_NONE:
+    case SDL_SCALEMODE_FAST:
+    case SDL_SCALEMODE_SLOW:
         return 0;
-    case SDL_TEXTURESCALEMODE_BEST:
+    case SDL_SCALEMODE_BEST:
         SDL_Unsupported();
-        texture->scaleMode = SDL_TEXTURESCALEMODE_SLOW;
+        texture->scaleMode = SDL_SCALEMODE_SLOW;
         return -1;
     default:
         SDL_Unsupported();
-        texture->scaleMode = SDL_TEXTURESCALEMODE_NONE;
+        texture->scaleMode = SDL_SCALEMODE_NONE;
         return -1;
     }
 }
@@ -775,7 +763,7 @@ GLES_RenderDrawLines(SDL_Renderer * renderer, const SDL_Point * points,
     }
     data->glVertexPointer(2, GL_SHORT, 0, vertices);
     data->glEnableClientState(GL_VERTEX_ARRAY);
-    if (count > 2 &&
+    if (count > 2 && 
         points[0].x == points[count-1].x && points[0].y == points[count-1].y) {
         /* GL_LINE_LOOP takes care of the final segment */
         --count;
@@ -896,7 +884,7 @@ GLES_RenderCopy(SDL_Renderer * renderer, SDL_Texture * texture,
             pixels =
                 (void *) ((Uint8 *) texturedata->pixels + rect->y * pitch +
                           rect->x * bpp);
-            /*      There is no GL_UNPACK_ROW_LENGTH in OpenGLES
+            /*      There is no GL_UNPACK_ROW_LENGTH in OpenGLES 
                we must do this reformatting ourselves(!)
 
                maybe it'd be a good idea to keep a temp buffer around
@@ -939,15 +927,15 @@ GLES_RenderCopy(SDL_Renderer * renderer, SDL_Texture * texture,
     GLES_SetBlendMode(data, texture->blendMode, 0);
 
     switch (texture->scaleMode) {
-    case SDL_TEXTURESCALEMODE_NONE:
-    case SDL_TEXTURESCALEMODE_FAST:
+    case SDL_SCALEMODE_NONE:
+    case SDL_SCALEMODE_FAST:
         data->glTexParameteri(texturedata->type, GL_TEXTURE_MIN_FILTER,
                               GL_NEAREST);
         data->glTexParameteri(texturedata->type, GL_TEXTURE_MAG_FILTER,
                               GL_NEAREST);
         break;
-    case SDL_TEXTURESCALEMODE_SLOW:
-    case SDL_TEXTURESCALEMODE_BEST:
+    case SDL_SCALEMODE_SLOW:
+    case SDL_SCALEMODE_BEST:
         data->glTexParameteri(texturedata->type, GL_TEXTURE_MIN_FILTER,
                               GL_LINEAR);
         data->glTexParameteri(texturedata->type, GL_TEXTURE_MAG_FILTER,

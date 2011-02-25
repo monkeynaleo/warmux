@@ -22,7 +22,7 @@
 
 /**
  *  \file SDL_pixels.h
- *
+ *  
  *  Header for the enumerated pixel format definitions.
  */
 
@@ -31,9 +31,7 @@
 
 #include "SDL_version.h"
 
-#if SDL_VERSION_ATLEAST(1,3,0)
-#include "SDL_video.h"
-#else
+#if !SDL_VERSION_ATLEAST(1,3,0)
 #include "SDL_video-1.3.h"
 #endif
 
@@ -47,7 +45,7 @@ extern "C" {
 
 /**
  *  \name Transparency definitions
- *
+ *  
  *  These define alpha as the opacity of a surface.
  */
 /*@{*/
@@ -126,11 +124,11 @@ enum
     ((1 << 31) | ((type) << 24) | ((order) << 20) | ((layout) << 16) | \
      ((bits) << 8) | ((bytes) << 0))
 
-#define SDL_PIXELTYPE(X) (((X) >> 24) & 0x0F)
-#define SDL_PIXELORDER(X)  (((X) >> 20) & 0x0F)
-#define SDL_PIXELLAYOUT(X) (((X) >> 16) & 0x0F)
-#define SDL_BITSPERPIXEL(X)  (((X) >> 8) & 0xFF)
-#define SDL_BYTESPERPIXEL(X) (((X) >> 0) & 0xFF)
+#define SDL_PIXELTYPE(X)	(((X) >> 24) & 0x0F)
+#define SDL_PIXELORDER(X)	(((X) >> 20) & 0x0F)
+#define SDL_PIXELLAYOUT(X)	(((X) >> 16) & 0x0F)
+#define SDL_BITSPERPIXEL(X)	(((X) >> 8) & 0xFF)
+#define SDL_BYTESPERPIXEL(X)	(((X) >> 0) & 0xFF)
 
 #define SDL_ISPIXELFORMAT_INDEXED(format)   \
     ((SDL_PIXELTYPE(format) == SDL_PIXELTYPE_INDEX1) || \
@@ -146,6 +144,7 @@ enum
 #define SDL_ISPIXELFORMAT_FOURCC(format)    \
     ((format) && !((format) & 0x80000000))
 
+/* Note: If you modify this list, update SDL_GetPixelFormatName() */
 enum
 {
     SDL_PIXELFORMAT_UNKNOWN,
@@ -178,20 +177,26 @@ enum
     SDL_PIXELFORMAT_ARGB4444 =
         SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_ARGB,
                                SDL_PACKEDLAYOUT_4444, 16, 2),
+    SDL_PIXELFORMAT_RGBA4444 =
+        SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_RGBA,
+                               SDL_PACKEDLAYOUT_4444, 16, 2),
     SDL_PIXELFORMAT_ABGR4444 =
         SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_ABGR,
                                SDL_PACKEDLAYOUT_4444, 16, 2),
-    SDL_PIXELFORMAT_RGBA4444 = /* Android-specific */
-        SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_RGBA,
+    SDL_PIXELFORMAT_BGRA4444 =
+        SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_BGRA,
                                SDL_PACKEDLAYOUT_4444, 16, 2),
     SDL_PIXELFORMAT_ARGB1555 =
         SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_ARGB,
                                SDL_PACKEDLAYOUT_1555, 16, 2),
+    SDL_PIXELFORMAT_RGBA5551 =
+        SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_RGBA,
+                               SDL_PACKEDLAYOUT_5551, 16, 2),
     SDL_PIXELFORMAT_ABGR1555 =
         SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_ABGR,
                                SDL_PACKEDLAYOUT_1555, 16, 2),
-    SDL_PIXELFORMAT_RGBA5551 = /* Android-specific */
-        SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_RGBA,
+    SDL_PIXELFORMAT_BGRA5551 =
+        SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_BGRA,
                                SDL_PACKEDLAYOUT_5551, 16, 2),
     SDL_PIXELFORMAT_RGB565 =
         SDL_DEFINE_PIXELFORMAT(SDL_PIXELTYPE_PACKED16, SDL_PACKEDORDER_XRGB,
@@ -288,10 +293,15 @@ typedef struct SDL_PixelFormat
 #endif
 
 /**
+ * \brief Get the human readable name of a pixel format
+ */
+extern DECLSPEC const char* SDLCALL SDL_GetPixelFormatName(Uint32 format);
+
+/**
  *  \brief Convert one of the enumerated pixel formats to a bpp and RGBA masks.
- *
+ *  
  *  \return SDL_TRUE, or SDL_FALSE if the conversion wasn't possible.
- *
+ *  
  *  \sa SDL_MasksToPixelFormatEnum()
  */
 extern DECLSPEC SDL_bool SDLCALL SDL_PixelFormatEnumToMasks(Uint32 format,
@@ -303,10 +313,10 @@ extern DECLSPEC SDL_bool SDLCALL SDL_PixelFormatEnumToMasks(Uint32 format,
 
 /**
  *  \brief Convert a bpp and RGBA masks to an enumerated pixel format.
- *
- *  \return The pixel format, or ::SDL_PIXELFORMAT_UNKNOWN if the conversion
+ *  
+ *  \return The pixel format, or ::SDL_PIXELFORMAT_UNKNOWN if the conversion 
  *          wasn't possible.
- *
+ *  
  *  \sa SDL_PixelFormatEnumToMasks()
  */
 extern DECLSPEC Uint32 SDLCALL SDL_MasksToPixelFormatEnum(int bpp,
@@ -316,45 +326,46 @@ extern DECLSPEC Uint32 SDLCALL SDL_MasksToPixelFormatEnum(int bpp,
                                                           Uint32 Amask);
 
 /**
- *  \brief Create a palette structure with the specified number of color
+ *  \brief Create a palette structure with the specified number of color 
  *         entries.
- *
+ *  
  *  \return A new palette, or NULL if there wasn't enough memory.
- *
+ *  
  *  \note The palette entries are initialized to white.
- *
+ *  
  *  \sa SDL_FreePalette()
  */
 extern DECLSPEC SDL_Palette *SDLCALL SDL_AllocPalette(int ncolors);
 
+#if SDL_VERSION_ATLEAST(1,3,0)
 /**
  *  \brief Add a callback function which is called when the palette changes.
- *
+ *  
  *  \sa SDL_DelPaletteWatch()
  */
-#if SDL_VERSION_ATLEAST(1,3,0)
 extern DECLSPEC int SDLCALL SDL_AddPaletteWatch(SDL_Palette * palette,
                                                 SDL_PaletteChangedFunc
                                                 callback, void *userdata);
 
 /**
- *  \brief Remove a callback function previously added with
+ *  \brief Remove a callback function previously added with 
  *         SDL_AddPaletteWatch().
- *
+ *  
  *  \sa SDL_AddPaletteWatch()
  */
 extern DECLSPEC void SDLCALL SDL_DelPaletteWatch(SDL_Palette * palette,
                                                  SDL_PaletteChangedFunc
                                                  callback, void *userdata);
 #endif
+
 /**
  *  \brief Set a range of colors in a palette.
- *
+ *  
  *  \param palette    The palette to modify.
  *  \param colors     An array of colors to copy into the palette.
  *  \param firstcolor The index of the first palette entry to modify.
  *  \param ncolors    The number of entries to modify.
- *
+ *  
  *  \return 0 on success, or -1 if not all of the colors could be set.
  */
 extern DECLSPEC int SDLCALL SDL_SetPaletteColors(SDL_Palette * palette,
@@ -363,14 +374,14 @@ extern DECLSPEC int SDLCALL SDL_SetPaletteColors(SDL_Palette * palette,
 
 /**
  *  \brief Free a palette created with SDL_AllocPalette().
- *
+ *  
  *  \sa SDL_AllocPalette()
  */
 extern DECLSPEC void SDLCALL SDL_FreePalette(SDL_Palette * palette);
 
 /**
  *  \brief Maps an RGB triple to an opaque pixel value for a given pixel format.
- *
+ *  
  *  \sa SDL_MapRGBA
  */
 extern DECLSPEC Uint32 SDLCALL SDL_MapRGB(const SDL_PixelFormat * format,
@@ -378,7 +389,7 @@ extern DECLSPEC Uint32 SDLCALL SDL_MapRGB(const SDL_PixelFormat * format,
 
 /**
  *  \brief Maps an RGBA quadruple to a pixel value for a given pixel format.
- *
+ *  
  *  \sa SDL_MapRGB
  */
 extern DECLSPEC Uint32 SDLCALL SDL_MapRGBA(const SDL_PixelFormat * format,
@@ -387,7 +398,7 @@ extern DECLSPEC Uint32 SDLCALL SDL_MapRGBA(const SDL_PixelFormat * format,
 
 /**
  *  \brief Get the RGB components from a pixel of the specified format.
- *
+ *  
  *  \sa SDL_GetRGBA
  */
 extern DECLSPEC void SDLCALL SDL_GetRGB(Uint32 pixel,
@@ -396,7 +407,7 @@ extern DECLSPEC void SDLCALL SDL_GetRGB(Uint32 pixel,
 
 /**
  *  \brief Get the RGBA components from a pixel of the specified format.
- *
+ *  
  *  \sa SDL_GetRGB
  */
 extern DECLSPEC void SDLCALL SDL_GetRGBA(Uint32 pixel,

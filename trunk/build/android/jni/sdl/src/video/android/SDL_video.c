@@ -107,7 +107,7 @@ static VideoBootStrap *bootstrap[] = {
     &UIKIT_bootstrap,
 #endif
 #if SDL_VIDEO_DRIVER_ANDROID
- &ANDROID_bootstrap,
+	&ANDROID_bootstrap,
 #endif
 #if SDL_VIDEO_DRIVER_DUMMY
     &DUMMY_bootstrap,
@@ -343,7 +343,7 @@ SDL_AddBasicVideoDisplay(const SDL_DisplayMode * desktop_mode)
 {
     SDL_VideoDisplay display;
 
-    SDL_zero(display);
+    SDL_memset(&display, 0, sizeof(display));
     if (desktop_mode) {
         display.desktop_mode = *desktop_mode;
     }
@@ -756,7 +756,7 @@ SDL_SetWindowDisplayMode(SDL_Window * window, const SDL_DisplayMode * mode)
     if (mode) {
         window->fullscreen_mode = *mode;
     } else {
-        SDL_zero(window->fullscreen_mode);
+        SDL_memset(&(window->fullscreen_mode), 0, sizeof(window->fullscreen_mode));
     }
     return 0;
 }
@@ -3543,7 +3543,7 @@ CreateMaskFromColorKeyOrAlpha(SDL_Surface * icon, Uint8 * mask, int flags)
     int x, y;
     Uint32 colorkey;
 #define SET_MASKBIT(icon, x, y, mask) \
- mask[(y*((icon->w+7)/8))+(x/8)] &= ~(0x01<<(7-(x%8)))
+	mask[(y*((icon->w+7)/8))+(x/8)] &= ~(0x01<<(7-(x%8)))
 
     colorkey = icon->format->colorkey;
     switch (icon->format->BytesPerPixel) {
