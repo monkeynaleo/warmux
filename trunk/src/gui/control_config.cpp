@@ -69,7 +69,7 @@ public:
     , read_only(ro)
   {
     SetMargin(0);
-    SetBorder(0, 0);
+    SetNoBorder();
 
     // Action name
     const Keyboard *kbd = Keyboard::GetConstInstance();
@@ -250,7 +250,7 @@ public:
     HBox::Pack();
 
     // Set proper height now
-    int height = size.y-2*border.y;
+    int height = size.y-2*border_size;
     for (wit it = widget_list.begin(); it != widget_list.end(); ++it)
       (*it)->SetSizeY(height);
   }
@@ -286,7 +286,7 @@ public:
     : HBox(height, false, false, true)
   {
     SetMargin(0);
-    SetBorder(0, 0);
+    SetNoBorder();
 
     // Action name
     label_action = new Label(_("Action"), MIN_ACTION_WIDTH,
@@ -319,7 +319,7 @@ public:
     HBox::Pack();
 
     // Set proper height now
-    int height = size.y-2*border.y;
+    int height = size.y-2*border_size;
     for (wit it = widget_list.begin(); it != widget_list.end(); ++it)
       (*it)->SetSizeY(height);
   }

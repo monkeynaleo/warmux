@@ -29,7 +29,6 @@ class Box : public WidgetList
 {
 protected:
   uint    margin;
-  Point2i border;
 
 public:
   Box(void);
@@ -44,9 +43,8 @@ public:
 
   void SetMargin(uint _margin) { margin = _margin; };
 
-  void SetBorder(const Point2i & newBorder) { border = newBorder; };
-  void SetBorder(uint x, uint y) { border.SetValues(x, y); };
-  void SetNoBorder() { border.SetValues(0, 0); };
+  void SetBorder(uint b) { border_size = b; };
+  void SetNoBorder() { border_size = 0; };
 
   virtual void Pack() = 0;
 };
