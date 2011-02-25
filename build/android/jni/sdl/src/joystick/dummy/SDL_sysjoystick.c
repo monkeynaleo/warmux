@@ -36,15 +36,15 @@
  */
 int SDL_SYS_JoystickInit(void)
 {
- SDL_numjoysticks = 0;
- return(0);
+	SDL_numjoysticks = 0;
+	return(0);
 }
 
 /* Function to get the device-dependent name of a joystick */
 const char *SDL_SYS_JoystickName(int index)
 {
- SDL_SetError("Logic error: No joysticks available");
- return(NULL);
+	SDL_SetError("Logic error: No joysticks available");
+	return(NULL);
 }
 
 /* Function to open a joystick for use.
@@ -54,8 +54,8 @@ const char *SDL_SYS_JoystickName(int index)
  */
 int SDL_SYS_JoystickOpen(SDL_Joystick *joystick)
 {
- SDL_SetError("Logic error: No joysticks available");
- return(-1);
+	SDL_SetError("Logic error: No joysticks available");
+	return(-1);
 }
 
 /* Function to update the state of a joystick - called as a device poll.
@@ -65,19 +65,19 @@ int SDL_SYS_JoystickOpen(SDL_Joystick *joystick)
  */
 void SDL_SYS_JoystickUpdate(SDL_Joystick *joystick)
 {
- return;
+	return;
 }
 
 /* Function to close a joystick after use */
 void SDL_SYS_JoystickClose(SDL_Joystick *joystick)
 {
- return;
+	return;
 }
 
 /* Function to perform any system-specific joystick related cleanup */
 void SDL_SYS_JoystickQuit(void)
 {
- return;
+	return;
 }
 
 #endif /* SDL_JOYSTICK_DUMMY || SDL_JOYSTICK_DISABLED */

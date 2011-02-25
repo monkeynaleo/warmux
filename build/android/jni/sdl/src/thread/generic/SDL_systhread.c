@@ -28,27 +28,27 @@
 
 int SDL_SYS_CreateThread(SDL_Thread *thread, void *args)
 {
- SDL_SetError("Threads are not supported on this platform");
- return(-1);
+	SDL_SetError("Threads are not supported on this platform");
+	return(-1);
 }
 
 void SDL_SYS_SetupThread(void)
 {
- return;
+	return;
 }
 
 Uint32 SDL_ThreadID(void)
 {
- return(0);
+	return(0);
 }
 
 void SDL_SYS_WaitThread(SDL_Thread *thread)
 {
- return;
+	return;
 }
 
 void SDL_SYS_KillThread(SDL_Thread *thread)
 {
- return;
+	return;
 }
 

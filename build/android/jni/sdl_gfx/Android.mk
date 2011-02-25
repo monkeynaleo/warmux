@@ -13,5 +13,5 @@ LOCAL_SRC_FILES := $(notdir $(wildcard $(LOCAL_PATH)/*.c))
 LOCAL_C_INCLUDES += $(LOCAL_PATH) $(LOCAL_PATH)/../sdl/include
 LOCAL_SHARED_LIBRARIES := sdl
 
-include $(BUILD_SHARED_LIBRARY)
+include $(BUILD_STATIC_LIBRARY)
 

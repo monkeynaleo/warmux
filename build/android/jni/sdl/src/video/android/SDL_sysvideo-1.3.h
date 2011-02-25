@@ -196,7 +196,7 @@ struct SDL_VideoDisplay
 };
 
 /* Define the SDL video driver structure */
-#define _THIS  SDL_VideoDevice *_this
+#define _THIS	SDL_VideoDevice *_this
 
 struct SDL_VideoDevice
 {
@@ -427,8 +427,8 @@ extern VideoBootStrap NDS_bootstrap;
 extern VideoBootStrap PND_bootstrap;
 #endif
 
-#define SDL_CurrentDisplay (&_this->displays[_this->current_display])
-#define SDL_CurrentRenderer  (SDL_CurrentDisplay->current_renderer)
+#define SDL_CurrentDisplay	(&_this->displays[_this->current_display])
+#define SDL_CurrentRenderer	(SDL_CurrentDisplay->current_renderer)
 
 extern SDL_VideoDevice *SDL_GetVideoDevice(void);
 extern int SDL_AddBasicVideoDisplay(const SDL_DisplayMode * desktop_mode);

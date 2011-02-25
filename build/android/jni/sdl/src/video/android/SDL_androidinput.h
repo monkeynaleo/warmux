@@ -50,8 +50,6 @@
 #include "SDL_androidvideo.h"
 #include "javakeycodes.h"
 
-extern SDLKey SDL_android_keymap[KEYCODE_LAST+1];
-
 /* JNI-C++ wrapper stuff */
 
 #if SDL_VERSION_ATLEAST(1,3,0)
@@ -59,26 +57,10 @@ extern SDLKey SDL_android_keymap[KEYCODE_LAST+1];
 #define SDL_KEY2(X) SDL_SCANCODE_ ## X
 #define SDL_KEY(X) SDL_KEY2(X)
 
-static inline SDL_scancode TranslateKey(int scancode, SDL_keysym *keysym)
-{
-	if ( scancode >= SDL_arraysize(SDL_android_keymap) )
-		scancode = KEYCODE_UNKNOWN;
-	return SDL_android_keymap[scancode];
-}
-
-static inline SDL_scancode GetKeysym(SDL_scancode scancode, SDL_keysym *keysym)
-{
-	return scancode;
-}
-
-#define SDL_SendKeyboardKey(X, Y) SDL_SendKeyboardKey(X, Y, SDL_FALSE)
-
 #else
 
 #define SDL_KEY2(X) SDLK_ ## X
 #define SDL_KEY(X) SDL_KEY2(X)
-
-#define SDL_SendKeyboardKey SDL_PrivateKeyboard
 
 // Randomly redefining SDL 1.3 scancodes to SDL 1.2 keycodes
 #define KP_0 KP0
@@ -123,54 +105,14 @@ static inline SDL_scancode GetKeysym(SDL_scancode scancode, SDL_keysym *keysym)
 #define Y y
 #define Z z
 
-#define SDL_scancode SDLKey
+typedef SDLKey SDL_scancode;
 #define SDL_GetKeyboardState SDL_GetKeyState
-
-static inline SDL_keysym *TranslateKey(int scancode, SDL_keysym *keysym)
-{
-	/* Sanity check */
-	if ( scancode >= SDL_arraysize(SDL_android_keymap) )
-		scancode = KEYCODE_UNKNOWN;
-
-	/* Set the keysym information */
-	keysym->scancode = scancode;
-	keysym->sym = SDL_android_keymap[scancode];
-	keysym->mod = KMOD_NONE;
-
-	/* If UNICODE is on, get the UNICODE value for the key */
-	keysym->unicode = 0;
-	if ( SDL_TranslateUNICODE ) {
-		/* Populate the unicode field with the ASCII value */
-		keysym->unicode = scancode;
-	}
-	return(keysym);
-}
-
-static inline SDL_keysym *GetKeysym(SDLKey scancode, SDL_keysym *keysym)
-{
-	/* Sanity check */
-
-	/* Set the keysym information */
-	keysym->scancode = scancode;
-	keysym->sym = scancode;
-	keysym->mod = KMOD_NONE;
-
-	/* If UNICODE is on, get the UNICODE value for the key */
-	keysym->unicode = 0;
-	if ( SDL_TranslateUNICODE ) {
-		/* Populate the unicode field with the ASCII value */
-		keysym->unicode = scancode;
-	}
-	return(keysym);
-}
 
 #endif
 
 #define SDL_KEY_VAL(X) X
 
 enum MOUSE_ACTION { MOUSE_DOWN = 0, MOUSE_UP=1, MOUSE_MOVE=2 };
-
-enum { MAX_MULTITOUCH_POINTERS = 5 };
 
 extern int SDL_ANDROID_processTouchscreenKeyboard(int x, int y, int action, int pointerId);
 extern int SDL_ANDROID_isTouchscreenKeyboardUsed;
@@ -202,5 +144,53 @@ extern int SDL_ANDROID_isTouchscreenKeyboardUsed;
 #ifndef SDL_ANDROID_KEYCODE_8
 #define SDL_ANDROID_KEYCODE_8 DELETE
 #endif
+#ifndef SDL_ANDROID_KEYCODE_9
+#define SDL_ANDROID_KEYCODE_9 SDL_ANDROID_KEYCODE_1
+#endif
+#ifndef SDL_ANDROID_KEYCODE_10
+#define SDL_ANDROID_KEYCODE_10 SDL_ANDROID_KEYCODE_1
+#endif
+
+// Touchscreen keyboard keys + zoom and rotate keycodes
+#ifndef SDL_ANDROID_SCREENKB_KEYCODE_0
+#define SDL_ANDROID_SCREENKB_KEYCODE_0 SDL_ANDROID_KEYCODE_0
+#endif
+#ifndef SDL_ANDROID_SCREENKB_KEYCODE_1
+#define SDL_ANDROID_SCREENKB_KEYCODE_1 SDL_ANDROID_KEYCODE_1
+#endif
+#ifndef SDL_ANDROID_SCREENKB_KEYCODE_2
+#define SDL_ANDROID_SCREENKB_KEYCODE_2 SDL_ANDROID_KEYCODE_2
+#endif
+#ifndef SDL_ANDROID_SCREENKB_KEYCODE_3
+#define SDL_ANDROID_SCREENKB_KEYCODE_3 SDL_ANDROID_KEYCODE_3
+#endif
+#ifndef SDL_ANDROID_SCREENKB_KEYCODE_4
+#define SDL_ANDROID_SCREENKB_KEYCODE_4 SDL_ANDROID_KEYCODE_6
+#endif
+#ifndef SDL_ANDROID_SCREENKB_KEYCODE_5
+#define SDL_ANDROID_SCREENKB_KEYCODE_5 SDL_ANDROID_KEYCODE_7
+#endif
+#ifndef SDL_ANDROID_SCREENKB_KEYCODE_6
+#define SDL_ANDROID_SCREENKB_KEYCODE_6 SDL_ANDROID_KEYCODE_4
+#endif
+#ifndef SDL_ANDROID_SCREENKB_KEYCODE_7
+#define SDL_ANDROID_SCREENKB_KEYCODE_7 SDL_ANDROID_KEYCODE_5
+#endif
+#ifndef SDL_ANDROID_SCREENKB_KEYCODE_8
+#define SDL_ANDROID_SCREENKB_KEYCODE_8 SDL_ANDROID_KEYCODE_8
+#endif
+#ifndef SDL_ANDROID_SCREENKB_KEYCODE_9
+#define SDL_ANDROID_SCREENKB_KEYCODE_9 SDL_ANDROID_KEYCODE_9
+#endif
+
+// Queue events to main thread
+extern void SDL_ANDROID_MainThreadPushMouseMotion(int x, int y);
+extern void SDL_ANDROID_MainThreadPushMouseButton(int pressed, int button);
+extern void SDL_ANDROID_MainThreadPushKeyboardKey(int pressed, SDL_scancode key);
+extern void SDL_ANDROID_MainThreadPushMultitouchButton(int id, int pressed, int x, int y, int force);
+extern void SDL_ANDROID_MainThreadPushMultitouchMotion(int id, int x, int y, int force);
+extern void SDL_ANDROID_MainThreadPushJoystickAxis(int joy, int axis, int value);
+extern void SDL_ANDROID_MainThreadPushJoystickButton(int joy, int button, int pressed);
+extern void SDL_ANDROID_MainThreadPushText( int ascii, int unicode );
 
 #endif

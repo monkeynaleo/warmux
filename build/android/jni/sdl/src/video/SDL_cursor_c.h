@@ -42,18 +42,18 @@ extern void SDL_CursorQuit(void);
 
 extern SDL_mutex *SDL_cursorlock;
 
-#define SDL_LockCursor()           \
- do {                \
-   if ( SDL_cursorlock ) {         \
-     SDL_mutexP(SDL_cursorlock);     \
-   }             \
- } while ( 0 )
-#define SDL_UnlockCursor()           \
- do {                \
-   if ( SDL_cursorlock ) {         \
-     SDL_mutexV(SDL_cursorlock);     \
-   }             \
- } while ( 0 )
+#define SDL_LockCursor()						\
+	do {								\
+		if ( SDL_cursorlock ) {					\
+			SDL_mutexP(SDL_cursorlock);			\
+		}							\
+	} while ( 0 )
+#define SDL_UnlockCursor()						\
+	do {								\
+		if ( SDL_cursorlock ) {					\
+			SDL_mutexV(SDL_cursorlock);			\
+		}							\
+	} while ( 0 )
 #else
 extern void SDL_LockCursor(void);
 extern void SDL_UnlockCursor(void);
@@ -64,10 +64,10 @@ extern SDL_Cursor *SDL_cursor;
 extern void SDL_MouseRect(SDL_Rect *area);
 
 /* State definitions for the SDL cursor */
-#define CURSOR_VISIBLE 0x01
-#define CURSOR_USINGSW 0x10
-#define SHOULD_DRAWCURSOR(X)             \
-     (((X)&(CURSOR_VISIBLE|CURSOR_USINGSW)) ==   \
-         (CURSOR_VISIBLE|CURSOR_USINGSW))
+#define CURSOR_VISIBLE	0x01
+#define CURSOR_USINGSW	0x10
+#define SHOULD_DRAWCURSOR(X) 						\
+			(((X)&(CURSOR_VISIBLE|CURSOR_USINGSW)) ==  	\
+					(CURSOR_VISIBLE|CURSOR_USINGSW))
 
 extern volatile int SDL_cursorstate;

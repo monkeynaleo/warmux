@@ -40,60 +40,60 @@
 #endif
 #endif
 #ifndef _PATH_DEV_DSP24
-#define _PATH_DEV_DSP24  "/dev/sound/dsp"
+#define _PATH_DEV_DSP24	"/dev/sound/dsp"
 #endif
 #ifndef _PATH_DEV_AUDIO
-#define _PATH_DEV_AUDIO  "/dev/audio"
+#define _PATH_DEV_AUDIO	"/dev/audio"
 #endif
 
 
 int SDL_OpenAudioPath(char *path, int maxlen, int flags, int classic)
 {
- const char *audiodev;
- int audio_fd;
- char audiopath[1024];
+	const char *audiodev;
+	int audio_fd;
+	char audiopath[1024];
 
- /* Figure out what our audio device is */
- if ( ((audiodev=SDL_getenv("SDL_PATH_DSP")) == NULL) &&
-      ((audiodev=SDL_getenv("AUDIODEV")) == NULL) ) {
-   if ( classic ) {
-     audiodev = _PATH_DEV_AUDIO;
-   } else {
-     struct stat sb;
+	/* Figure out what our audio device is */
+	if ( ((audiodev=SDL_getenv("SDL_PATH_DSP")) == NULL) &&
+	     ((audiodev=SDL_getenv("AUDIODEV")) == NULL) ) {
+		if ( classic ) {
+			audiodev = _PATH_DEV_AUDIO;
+		} else {
+			struct stat sb;
 
-     /* Added support for /dev/sound/\* in Linux 2.4 */
-     if ( ((stat("/dev/sound", &sb) == 0) && S_ISDIR(sb.st_mode)) &&
-        ((stat(_PATH_DEV_DSP24, &sb) == 0) && S_ISCHR(sb.st_mode)) ) {
-       audiodev = _PATH_DEV_DSP24;
-     } else {
-       audiodev = _PATH_DEV_DSP;
-     }
-   }
- }
- audio_fd = open(audiodev, flags, 0);
+			/* Added support for /dev/sound/\* in Linux 2.4 */
+			if ( ((stat("/dev/sound", &sb) == 0) && S_ISDIR(sb.st_mode)) &&
+				 ((stat(_PATH_DEV_DSP24, &sb) == 0) && S_ISCHR(sb.st_mode)) ) {
+				audiodev = _PATH_DEV_DSP24;
+			} else {
+				audiodev = _PATH_DEV_DSP;
+			}
+		}
+	}
+	audio_fd = open(audiodev, flags, 0);
 
- /* If the first open fails, look for other devices */
- if ( (audio_fd < 0) && (SDL_strlen(audiodev) < (sizeof(audiopath)-3)) ) {
-   int exists, instance;
-   struct stat sb;
+	/* If the first open fails, look for other devices */
+	if ( (audio_fd < 0) && (SDL_strlen(audiodev) < (sizeof(audiopath)-3)) ) {
+		int exists, instance;
+		struct stat sb;
 
-   instance = 1;
-   do { /* Don't use errno ENOENT - it may not be thread-safe */
-     SDL_snprintf(audiopath, SDL_arraysize(audiopath),
-                  "%s%d", audiodev, instance++);
-     exists = 0;
-     if ( stat(audiopath, &sb) == 0 ) {
-       exists = 1;
-       audio_fd = open(audiopath, flags, 0);
-     }
-   } while ( exists && (audio_fd < 0) );
-   audiodev = audiopath;
- }
- if ( path != NULL ) {
-   SDL_strlcpy(path, audiodev, maxlen);
-   path[maxlen-1] = '\0';
- }
- return(audio_fd);
+		instance = 1;
+		do { /* Don't use errno ENOENT - it may not be thread-safe */
+			SDL_snprintf(audiopath, SDL_arraysize(audiopath),
+			             "%s%d", audiodev, instance++);
+			exists = 0;
+			if ( stat(audiopath, &sb) == 0 ) {
+				exists = 1;
+				audio_fd = open(audiopath, flags, 0); 
+			}
+		} while ( exists && (audio_fd < 0) );
+		audiodev = audiopath;
+	}
+	if ( path != NULL ) {
+		SDL_strlcpy(path, audiodev, maxlen);
+		path[maxlen-1] = '\0';
+	}
+	return(audio_fd);
 }
 
 #elif SDL_AUDIO_DRIVER_PAUD
@@ -107,7 +107,7 @@ int SDL_OpenAudioPath(char *path, int maxlen, int flags, int classic)
 #include "SDL_audiodev_c.h"
 
 #ifndef _PATH_DEV_DSP
-#define _PATH_DEV_DSP  "/dev/%caud%c/%c"
+#define _PATH_DEV_DSP	"/dev/%caud%c/%c"
 #endif
 
 char devsettings[][3] =
@@ -125,22 +125,22 @@ char devsettings[][3] =
 
 static int OpenUserDefinedDevice(char *path, int maxlen, int flags)
 {
- const char *audiodev;
- int  audio_fd;
+	const char *audiodev;
+	int  audio_fd;
 
- /* Figure out what our audio device is */
- if ((audiodev=SDL_getenv("SDL_PATH_DSP")) == NULL) {
-     audiodev=SDL_getenv("AUDIODEV");
- }
- if ( audiodev == NULL ) {
-     return -1;
- }
- audio_fd = open(audiodev, flags, 0);
- if ( path != NULL ) {
-   SDL_strlcpy(path, audiodev, maxlen);
-   path[maxlen-1] = '\0';
- }
- return audio_fd;
+	/* Figure out what our audio device is */
+	if ((audiodev=SDL_getenv("SDL_PATH_DSP")) == NULL) {
+	    audiodev=SDL_getenv("AUDIODEV");
+	}
+	if ( audiodev == NULL ) {
+	    return -1;
+	}
+	audio_fd = open(audiodev, flags, 0);
+	if ( path != NULL ) {
+		SDL_strlcpy(path, audiodev, maxlen);
+		path[maxlen-1] = '\0';
+	}
+	return audio_fd;
 }
 
 int SDL_OpenAudioPath(char *path, int maxlen, int flags, int classic)
@@ -163,15 +163,15 @@ int SDL_OpenAudioPath(char *path, int maxlen, int flags, int classic)
                  devsettings[cycle][1],
                  devsettings[cycle][2]);
 
- if ( stat(audiopath, &sb) == 0 ) {
-     audio_fd = open(audiopath, flags, 0);
-     if ( audio_fd > 0 ) {
-   if ( path != NULL ) {
-       SDL_strlcpy( path, audiopath, maxlen );
-   }
-         return audio_fd;
-     }
- }
+	if ( stat(audiopath, &sb) == 0 ) {
+	    audio_fd = open(audiopath, flags, 0);
+	    if ( audio_fd > 0 ) {
+		if ( path != NULL ) {
+		    SDL_strlcpy( path, audiopath, maxlen );
+		}
+	        return audio_fd;
+	    }
+	}
     }
     return -1;
 }

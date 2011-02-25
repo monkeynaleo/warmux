@@ -56,7 +56,7 @@ extern Uint8 SDL_ProcessEvents[SDL_NUMEVENTS];
  */
 extern int SDL_PrivateAppActive(Uint8 gain, Uint8 state);
 extern int SDL_PrivateMouseMotion(Uint8 buttonstate, int relative,
-           Sint16 x, Sint16 y);
+						Sint16 x, Sint16 y);
 extern int SDL_PrivateMouseButton(Uint8 state, Uint8 button,Sint16 x,Sint16 y);
 extern int SDL_PrivateKeyboard(Uint8 state, SDL_keysym *key);
 extern int SDL_PrivateResize(int w, int h);
@@ -78,6 +78,6 @@ extern void SDL_CheckKeyRepeat(void);
 
 /* Used by the OS keyboard code to detect whether or not to do UNICODE */
 #ifndef DEFAULT_UNICODE_TRANSLATION
-#define DEFAULT_UNICODE_TRANSLATION 0  /* Default off because of overhead */
+#define DEFAULT_UNICODE_TRANSLATION 0	/* Default off because of overhead */
 #endif
 extern int SDL_TranslateUNICODE;

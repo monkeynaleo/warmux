@@ -20,13 +20,13 @@
     slouken@libsdl.org
 */
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
  * Default cursor - it happens to be the Mac cursor, but could be anything   */
 
-#define DEFAULT_CWIDTH 16
-#define DEFAULT_CHEIGHT  16
-#define DEFAULT_CHOTX  0
-#define DEFAULT_CHOTY  0
+#define DEFAULT_CWIDTH	16
+#define DEFAULT_CHEIGHT	16
+#define DEFAULT_CHOTX	0
+#define DEFAULT_CHOTY	0
 
 /* Added a real MacOS cursor, at the request of Luc-Olivier de Charrière */
 #define USE_MACOS_CURSOR

@@ -1,27 +1,29 @@
 /*
     SDL - Simple DirectMedia Layer
+    Copyright (C) 1997-2009 Sam Lantinga
 
     This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Lesser General Public
+    modify it under the terms of the GNU Library General Public
     License as published by the Free Software Foundation; either
-    version 2.1 of the License, or (at your option) any later version.
+    version 2 of the License, or (at your option) any later version.
 
     This library is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Lesser General Public License for more details.
+    Library General Public License for more details.
 
-    You should have received a copy of the GNU Lesser General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+    You should have received a copy of the GNU Library General Public
+    License along with this library; if not, write to the Free
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-
+    Sam Lantinga
+    slouken@devolution.com
 */
 
 /*
     SDL_sysmutex.cpp
 
-    Epoc version by Markus Mertama 
+    Epoc version by Markus Mertama (w@iki.fi)
 */
 
 
@@ -43,12 +45,24 @@ static char rcsid =
 #include "SDL_mutex.h"
 
 
+#ifdef EKA2 //???
 struct SDL_mutex
     {
     TInt handle;
     };
+#else
+struct _SDL_mutex
+    {
+    TInt handle;
+    };
+#endif
 
-#define NULLCHECK(s) if(s == NULL){SDL_SetError("Object is NULL"); return -1;}
+extern TInt CreateUnique(TInt (*aFunc)(const TDesC& aName, TAny*, TAny*), TAny*, TAny*);
+
+TInt NewMutex(const TDesC& aName, TAny* aPtr1, TAny*)
+    {
+    return ((RMutex*)aPtr1)->CreateGlobal(aName);
+    }
     
 void DeleteMutex(TAny* aMutex)
     {
@@ -56,66 +70,61 @@ void DeleteMutex(TAny* aMutex)
     }
 
 /* Create a mutex */
-SDL_mutex *SDL_CreateMutex()
-    {
-    SDL_mutex* mutex = (SDL_mutex*) User::Alloc(sizeof(SDL_mutex));
-    
-    if(mutex == NULL)
-        {
-        SDL_SetError("Couldn't create mutex");
-        return NULL;
-        }
-    
+SDL_mutex *SDL_CreateMutex(void)
+{
     RMutex rmutex;
-    const TInt err = rmutex.CreateLocal();
-   
-	if(err != KErrNone)
+
+    TInt status = CreateUnique(NewMutex, &rmutex, NULL);
+	if(status != KErrNone)
 	    {
-		SDL_SetError("Couldn't create mutex");
-		User::Free(mutex);
-		return NULL;
+			SDL_SetError("Couldn't create mutex");
 		}
-    
+    SDL_mutex* mutex = new /*(ELeave)*/ SDL_mutex;
     mutex->handle = rmutex.Handle();
-    /*audio or something does not clean their mutexes properly*/
-    EpocSdlEnv::AppendCleanupItem(TSdlCleanupItem(DeleteMutex, mutex, EFalse));
+    EpocSdlEnv::AppendCleanupItem(TSdlCleanupItem(DeleteMutex, mutex));
 	return(mutex);
 }
 
 /* Free the mutex */
 void SDL_DestroyMutex(SDL_mutex *mutex)
-    {
-	if ( mutex != NULL) 
-	    {
-	    RMutex rmutex;
-	    rmutex.SetHandle(mutex->handle);
-	    if(rmutex.IsHeld())
-	        {
-	        rmutex.Signal();
-	        }
-	    rmutex.Close();
-	    EpocSdlEnv::RemoveCleanupItem(mutex);
-	    User::Free(mutex);
-	    }
-    }
+{
+	if ( mutex ) 
+	{
+    RMutex rmutex;
+    rmutex.SetHandle(mutex->handle);
+    if(rmutex.IsHeld())
+        {
+	    rmutex.Signal();
+        }
+	rmutex.Close();
+	EpocSdlEnv::RemoveCleanupItem(mutex);
+	delete(mutex);
+    mutex = NULL;
+	}
+}
 
 /* Lock the mutex */
-int SDL_mutexP(SDL_mutex* mutex)
-    {
-    NULLCHECK(mutex)
+int SDL_mutexP(SDL_mutex *mutex)
+{
+	if ( mutex == NULL ) {
+		SDL_SetError("Passed a NULL mutex");
+		return -1;
+	}
     RMutex rmutex;
     rmutex.SetHandle(mutex->handle);
 	rmutex.Wait(); 
 	return(0);
-    }
+}
 
 /* Unlock the mutex */
 int SDL_mutexV(SDL_mutex *mutex)
-    {
-    NULLCHECK(mutex)
+{
+	if ( mutex == NULL ) {
+		SDL_SetError("Passed a NULL mutex");
+		return -1;
+	}
 	RMutex rmutex;
     rmutex.SetHandle(mutex->handle);
 	rmutex.Signal();
 	return(0);
-    }
-
+}
