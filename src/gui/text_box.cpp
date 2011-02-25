@@ -19,9 +19,13 @@
  * Text box widget
  *****************************************************************************/
 
-#include "gui/text_box.h"
 #include <SDL_keyboard.h>
+#ifdef ANDROID
+#  include <SDL_screenkeyboard.h>
+#endif
+
 #include "graphic/text.h"
+#include "gui/text_box.h"
 #include "tool/text_handling.h"
 #include "tool/copynpaste.h"
 
@@ -118,11 +122,16 @@ void TextBox::Draw(const Point2i & mousePosition)
   UnsetClip(clip);
 }
 
-Widget * TextBox::ClickUp(const Point2i & mousePosition,
-                          uint button)
+Widget * TextBox::ClickUp(const Point2i & mousePosition, uint button)
 {
   NeedRedrawing();
 
+#ifdef ANDROID
+  char text[256];
+  if (SDL_ANDROID_GetScreenKeyboardTextInput(text, sizeof(text))) {
+    SetText(text);
+  }
+#else
   if (button == SDL_BUTTON_MIDDLE) {
     std::string new_txt = GetText();
     bool        used    = RetrieveBuffer(new_txt, cursor_pos);
@@ -150,6 +159,7 @@ Widget * TextBox::ClickUp(const Point2i & mousePosition,
 
     return this;
   }
+#endif
 
   // Om nom nom
   return this;

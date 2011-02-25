@@ -51,8 +51,7 @@ public:
   // From widget
   virtual bool SendKey(const SDL_keysym & key);
   virtual void Draw(const Point2i & mousePosition);
-  virtual Widget *ClickUp(const Point2i &,
-                          uint);
+  virtual Widget *ClickUp(const Point2i &, uint);
 };
 
 class PasswordBox : public TextBox
