@@ -10,7 +10,7 @@ import android.view.KeyEvent;
 class Globals {
 	public static String ApplicationName = "Warmux";
 
-	public static String AppLibraries[] = { "sdl", "sdl_mixer", "sdl_image" };
+	public static String AppLibraries[] = { "sdl", "sdl_mixer", "png", "sdl_image" };
 
 	public static final boolean Using_SDL_1_3 = false;
 

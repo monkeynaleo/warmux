@@ -12,8 +12,8 @@ LOCAL_CPP_EXTENSION := .cpp
 LOCAL_SRC_FILES := $(notdir $(wildcard $(LOCAL_PATH)/*.c))
 LOCAL_C_INCLUDES += $(LOCAL_PATH) $(LOCAL_PATH)/../jpeg \
                     $(LOCAL_PATH)/../png $(LOCAL_PATH)/../sdl/include
-LOCAL_STATIC_LIBRARIES := png jpeg
-LOCAL_SHARED_LIBRARIES := sdl
+LOCAL_STATIC_LIBRARIES := jpeg
+LOCAL_SHARED_LIBRARIES := png sdl
 
 LOCAL_LDLIBS := -lz
 
