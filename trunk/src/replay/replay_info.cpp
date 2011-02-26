@@ -47,7 +47,8 @@ void Write32(FILE *out, uint32_t val)
 uint32_t Read32(FILE *in)
 {
   char  render[4];
-  (void)fread(render, 1, 4, in);
+  int i_dont_care = fread(render, 1, 4, in);
+  i_dont_care = 0;
   return SDLNet_Read32((void*)render);
 }
 
