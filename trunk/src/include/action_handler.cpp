@@ -19,6 +19,7 @@
  * Warmux action handler.
  *****************************************************************************/
 
+#include <algorithm>
 #include <iostream>
 #include <SDL_mutex.h>
 #include <WARMUX_debug.h>
@@ -1163,33 +1164,27 @@ ActionHandler::~ActionHandler()
 {
 }
 
+static bool IsFrameAction(const Action* a)
+{
+  return a->GetType() == Action::ACTION_GAME_CALCULATE_FRAME;
+}
+
 bool ActionHandler::ExecActionsForOneFrame()
 {
   ASSERT(Game::GetInstance()->IsRunning());
-  Action * a;
-  std::list<Action*>::iterator it;
-  bool frame_complete = false;
 
   Lock();
-  it = queue.begin();
-  while (it != queue.end() && !frame_complete) {
-    a = *it;
-    if (a->GetType() == Action::ACTION_GAME_CALCULATE_FRAME)
-      frame_complete = true;
-    it++;
-  }
-  if (!frame_complete) {
+  if (std::find_if(queue.begin(), queue.end(), IsFrameAction) == queue.end()) {
     UnLock();
     return false;
   }
 
-  frame_complete = false;
-  it = queue.begin();
+  // Frame is obviously complete from now on
+  std::list<Action*>::iterator it = queue.begin();
   Replay *replay = Replay::GetInstance();
-  while (it != queue.end() && !frame_complete) {
-    a = (*it);
-    if (a->GetType() == Action::ACTION_GAME_CALCULATE_FRAME)
-      frame_complete = true;
+  while (it != queue.end()) {
+    Action * a = (*it);
+    bool complete = IsFrameAction(a);
 
     // Do it first, else Exec will strip its content!
     if (replay->IsRecording())
@@ -1198,10 +1193,12 @@ bool ActionHandler::ExecActionsForOneFrame()
 
     delete *it;
     it = queue.erase(it);
+    if (complete)
+      break;
   }
   UnLock();
 
-  return frame_complete;
+  return true;
 }
 
 void ActionHandler::ExecFrameLessActions()
