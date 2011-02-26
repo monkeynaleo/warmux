@@ -120,7 +120,8 @@ int oldMouseButtons = 0;
 static int UnicodeToUtf8(int src, char * dest)
 {
 	int len = 0;
-    if ( src <= 0x007f) {
+    if (src<32) {
+    } else if ( src <= 0x007f) {
         *dest++ = (char)src;
         len = 1;
     } else if (src <= 0x07ff) {
@@ -679,6 +680,7 @@ void SDL_ANDROID_TextInputInit(char * buffer, int len)
 {
 	textInputBuffer = buffer;
 	textInputBufferLen = len;
+    textInputBufferPos = 0;
 }
 
 JNIEXPORT void JNICALL
