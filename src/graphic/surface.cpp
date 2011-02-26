@@ -651,7 +651,7 @@ end:
 
 #if SDL_GFXPRIMITIVES_MICRO > 20
 template<typename pixel>
-void
+static void
 mirror(void *d, uint dpitch,
        const void* s, uint spitch,
        int w, int h)
@@ -726,7 +726,7 @@ Surface Surface::Mirror()
 
   return Surface(surf);
 #else
-  return Surface(zoomSurface(surface, -1, 1, 0));
+  return Surface(zoomSurface(surface, -1, 1, 1)).DisplayFormatAlpha();
 #endif
 }
 
