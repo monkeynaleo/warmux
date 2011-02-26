@@ -467,11 +467,10 @@ void ResultsMenu::OnClickUp(const Point2i &mousePosition, int button)
       question.Set(_("Replay saved"), true, 0);
       question.Ask();
     } else if (w == folders) {
-      const std::string* file = folders->GetSelectedFile();
+      const char* file = folders->GetSelectedName();
       // This is a file, use that filename
       if (file) {
-        size_t pos = file->find_last_of(PATH_SEPARATOR);
-        replay_name->SetText(file->c_str() + pos+1);
+        replay_name->SetText(file);
       }
     }
   }

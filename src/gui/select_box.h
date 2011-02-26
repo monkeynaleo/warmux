@@ -82,6 +82,8 @@ protected:
 public:
   ItemBox(const Point2i& size, bool always = false, bool force = true)
     : SelectBox(size, always, force, true) { };
+  // Should not be used and thus prevents its use!
+  void AddItem(bool select, Widget* w);
   void AddItem(bool select, Widget* w, const void* value);
   void AddLabelItem(bool selected,
                     const std::string & label,
@@ -93,7 +95,8 @@ public:
   virtual void Empty() { m_values.clear(); SelectBox::Empty(); }
   virtual void Clear() { m_values.clear(); SelectBox::Clear(); }
 
-  const void* GetSelectedValue() const;
+  const void* GetSelectedValue() const { return (selected_item==-1) ? NULL : m_values[selected_item]; }
+  const char* GetSelectedName() const;
 };
 
 #endif //SELECT_BOX
