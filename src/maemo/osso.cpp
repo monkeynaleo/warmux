@@ -23,7 +23,7 @@
 #include <glib.h>
 #include <glib-object.h>
 #include <libosso.h>
-#include <SDL/SDL_timer.h>
+#include <SDL/SDL.h>
 #include "sound/jukebox.h"
 #include "game/game_time.h"
 #include "interface/mouse.h"
