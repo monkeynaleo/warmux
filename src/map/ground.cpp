@@ -227,7 +227,6 @@ bool Ground::AdjacentPoint(int x,int y,  int & p_x,int & p_y,
 
 void Ground::Draw(bool redraw_all)
 {
-  CheckEmptyTiles();
   Surface& window = GetMainWindow();
 
   Point2i cPos = Camera::GetInstance()->GetPosition();

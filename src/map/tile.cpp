@@ -108,9 +108,14 @@ void Tile::Dig(const Point2i &position, const Surface& dig)
         tin->Dig(position - (c<<CELL_BITS), dig);
         if (c >= startCell && c < endCell) // don't write outside minimap!
           tin->ScalePreview(dst, c.x-startCell.x, pitch, m_shift);
-        else
-          tin->CheckEmpty();
         tin->GetSurface().Unlock();
+
+        if (tin->NeedDelete()) {
+          // no need to display this tile as it can be deleted!
+          delete item[index + c.x];
+          // Don't instanciate a new empty tile but use the already existing one
+          item[index + c.x] = &EmptyTile;
+        }
       }
     }
     dst   += pitch<<(CELL_BITS-m_shift);
@@ -151,9 +156,14 @@ void Tile::Dig(const Point2i &center, const uint radius)
         tin->Dig(center - (c<<CELL_BITS), radius);
         if (c >= startCell && c < endCell) // don't write outside minimap!
           tin->ScalePreview(dst, c.x-startCell.x, pitch, m_shift);
-        else
-          tin->CheckEmpty();
         tin->GetSurface().Unlock();
+ 
+        if (tin->NeedDelete()) {
+          // no need to display this tile as it can be deleted!
+          delete item[index + c.x];
+          // Don't instanciate a new empty tile but use the already existing one
+          item[index + c.x] = &EmptyTile;
+        }
       }
     }
     dst   += pitch<<(CELL_BITS-m_shift);
@@ -251,9 +261,15 @@ void Tile::PutSprite(const Point2i& pos, Sprite* spr)
       tin->GetSurface().Lock();
       if (c >= startCell && c < endCell) // don't write outside minimap!
         tin->ScalePreview(pdst, c.x-startCell.x, pitch, m_shift);
-      else
-        tin->CheckEmpty();
       tin->GetSurface().Unlock();
+
+      if (tin->NeedDelete()) {
+        int index = c.y*nbCells.x + c.x;
+        // no need to display this tile as it can be deleted!
+        delete item[index];
+        // Don't instanciate a new empty tile but use the already existing one
+        item[index] = &EmptyTile;
+      }
     }
     pdst += pitch<<(CELL_BITS-m_shift);
   }
@@ -287,9 +303,15 @@ void Tile::MergeSprite(const Point2i &position, Surface& surf)
       tin->MergeSprite(offset, surf);
       if (c >= startCell && c < endCell) // don't write outside minimap!
         tin->ScalePreview(dst, c.x-startCell.x, pitch, m_shift);
-      else
-        tin->CheckEmpty();
       tin->GetSurface().Unlock();
+
+      if (tin->NeedDelete()) {
+        int index = c.y*nbCells.x + c.x;
+        // no need to display this tile as it can be deleted!
+        delete item[index];
+        // Don't instanciate a new empty tile but use the already existing one
+        item[index] = &EmptyTile;
+      }
     }
     dst += pitch<<(CELL_BITS-m_shift);
   }
@@ -578,7 +600,6 @@ void Tile::DrawTile_Clipped(const Rectanglei & worldClip) const
         continue;
       TileItem_NonEmpty *tin = static_cast<TileItem_NonEmpty*>(item[c.y*nbCells.x + c.x]);
 
-#if 1
       // For all selected items, clip source and destination blitting rectangles
       Rectanglei destRect(c<<CELL_BITS, CELL_SIZE);
 
@@ -589,9 +610,6 @@ void Tile::DrawTile_Clipped(const Rectanglei & worldClip) const
       GetMainWindow().Blit(tin->GetSurface(),
                            Rectanglei(ptSrc, destRect.GetSize()),
                            ptDest);
-#else
-      GetMainWindow().Blit(tin->GetSurface(), (c<<CELL_BITS) - cam_pos);
-#endif
     }
   }
 
@@ -644,24 +662,6 @@ Surface Tile::GetPart(const Rectanglei& rec)
     }
   }
   return part;
-}
-
-void Tile::CheckEmptyTiles()
-{
-  uint cellsCount = nbCells.x * nbCells.y;
-
-  for (uint i = 0; i < cellsCount; i++) {
-    if (item[i]->IsTotallyEmpty())
-      continue;
-    TileItem_NonEmpty *t = static_cast<TileItem_NonEmpty*>(item[i]);
-
-    if (t->NeedDelete()) {
-      // no need to display this tile as it can be deleted!
-      delete item[i];
-      // Don't instanciate a new empty tile but use the already existing one
-      item[i] = &EmptyTile;
-    }
-  }
 }
 
 Tile::SynchTileList Tile::GetTilesToSynch()
