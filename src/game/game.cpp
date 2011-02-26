@@ -1087,7 +1087,6 @@ void Game::SetState(game_loop_state_t new_state, bool begin_game)
   // Little pause at the end of the turn
   case END_TURN:
     __SetState_END_TURN();
-    interf->DisableControl();
     m_current_turn++;
     break;
   }
