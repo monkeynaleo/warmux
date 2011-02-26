@@ -199,5 +199,6 @@ const char* ItemBox::GetSelectedName() const
 {
   if (selected_item==-1)
     return NULL;
+  // Our accessors somewhat ensures that this is a label, but beware
   return static_cast<Label*>(m_items[selected_item])->GetText().c_str();
 }
