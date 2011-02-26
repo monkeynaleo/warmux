@@ -157,7 +157,7 @@ bool Replay::SaveReplay(const std::string& name, const char *comment)
     Write32(out, count);
   }
 
-  bool good = ferror(out);
+  bool good = !ferror(out);
   fclose(out);
 
   // should maybe return length actually written
