@@ -36,6 +36,7 @@ Joystick::Joystick()
     // Don't crash for this, just ignore further request
     return;
   }
+  init = true;
 
   SetDefaultConfig();
 
@@ -51,6 +52,7 @@ Joystick::~Joystick()
 {
   if (init)
     SDL_QuitSubSystem(SDL_INIT_JOYSTICK);
+  init = false;
 }
 
 void Joystick::SetDefaultConfig()
