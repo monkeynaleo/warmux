@@ -88,8 +88,10 @@ Action::Action(const char *buffer, DistantComputer* _creator)
   m_header.len = SDLNet_Read32(buffer);
   ASSERT(m_header.len >= sizeof(Header));
   buffer += 4;
-  m_header.type = (Action_t)SDLNet_Read32(buffer);
-  buffer += 4;
+  // All of the following could be skipped for the actions we now,
+  // for instance ACTION_GAME_CALCULATE_FRAME_PACKED
+  m_header.type = buffer[0];
+  buffer++;
 
   m_header.len -= sizeof(Header);
   m_bufsize = m_header.len;
@@ -103,7 +105,7 @@ Action::Action(const char *buffer, DistantComputer* _creator)
 
 void Action::Init(Action_t type)
 {
-  m_header.type = type;
+  m_header.type = (uint8_t)type;
   m_header.len = 0;
   m_bufsize = 0;
   m_write = m_read = m_var = NULL;
@@ -130,8 +132,8 @@ void Action::Write(char *buffer) const
   uint32_t len = GetSize();
   SDLNet_Write32(len, buffer);
   buffer += 4;
-  SDLNet_Write32(m_header.type, buffer);
-  buffer += 4;
+  buffer[0] = m_header.type;
+  buffer++;
 
   if (m_header.len) {
     memcpy(buffer, m_var, m_header.len);
