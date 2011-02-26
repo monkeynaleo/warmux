@@ -366,12 +366,8 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
     vbox->AddWidget(hbox);
     folders = new FileListBox(Point2i(tab_size.x-2*BORDER,
                               tab_size.y -tabs->GetHeaderHeight() -4*BORDER -hbox->GetSizeY()));
-#ifdef _WIN32
-  // SFN => uppercase extensions
+    // Windows may use SFN => uppercase extensions
     folders->AddExtensionFilter("DAT");
-#else
-    folders->AddExtensionFilter("dat");
-#endif
     folders->StartListing();
     vbox->AddWidget(folders);
     tabs->AddNewTab("TAB_replay", _("Save replay?"), vbox);
