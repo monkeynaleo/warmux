@@ -77,9 +77,7 @@ struct fixed_point {
   /*explicit*/ fixed_point(float f) : intValue(float2fix<p>(f)) {}
   /*explicit*/ fixed_point(double d) : intValue(float2fix<p>((float)d)) {}
   /*explicit*/ fixed_point(unsigned int u) : intValue(((fixint_t)u) << p) {}
-#if LONG_MAX != INT_MAX
-  /*explicit*/ fixed_point(size_t i) : intValue(((fixint_t)i) << p) {}
-#endif
+  /*explicit*/ fixed_point(unsigned long int u) : intValue(((fixint_t)u) << p) {}
 
   fixed_point& operator += (const fixed_point& r) { intValue += r.intValue; return *this; }
   fixed_point& operator -= (const fixed_point& r) { intValue -= r.intValue; return *this; }
