@@ -127,9 +127,12 @@ Widget * TextBox::ClickUp(const Point2i & mousePosition, uint button)
   NeedRedrawing();
 
 #ifdef ANDROID
-  char text[256];
-  if (SDL_ANDROID_GetScreenKeyboardTextInput(text, sizeof(text))) {
-    SetText(text);
+  static char buffer[256];
+  const std::string& txt = GetText();
+  int len = (255<txt.size()) ? 255 : txt.size();
+  memcpy(buffer, txt.c_str(), len); buffer[len] = 0;
+  if (SDL_ANDROID_GetScreenKeyboardTextInput(buffer, 256)) {
+    SetText(buffer);
   }
 #else
   if (button == SDL_BUTTON_MIDDLE) {
