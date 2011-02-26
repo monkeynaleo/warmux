@@ -94,9 +94,6 @@ public:
   Point2i PreviewCoordinates(const Point2i& pos) { return (pos-m_upper_left_offset)>>m_shift; };
   Point2i FromPreviewCoordinates(const Point2i& pos) { return (pos<<m_shift) + m_upper_left_offset; };
 
-  // Check if a title is empty, so we can delete it
-  void CheckEmptyTiles();
-
   // Refresh the list of tiles to resynch
   SynchTileList GetTilesToSynch();
 
