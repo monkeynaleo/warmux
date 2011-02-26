@@ -352,7 +352,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
     struct tm * timeinfo;
     time(&rawtime);
     timeinfo = localtime (&rawtime);
-    strftime(buffer, sizeof(buffer), "Record %Y-%m-%d %HH%Mm%S.dat", timeinfo);
+    strftime(buffer, sizeof(buffer), "Record %Y-%m-%d %HH%Mm%S.wrf", timeinfo);
     replay_name = new TextBox(buffer, tab_size.x -6*BORDER -LABEL_SIZE -save->GetSizeX());
     hbox2->AddWidget(replay_name);
     vbox2->AddWidget(hbox2);
@@ -367,7 +367,8 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
     folders = new FileListBox(Point2i(tab_size.x-2*BORDER,
                               tab_size.y -tabs->GetHeaderHeight() -4*BORDER -hbox->GetSizeY()));
     // Windows may use SFN => uppercase extensions
-    folders->AddExtensionFilter("DAT");
+    folders->AddExtensionFilter("WRF");
+    folders->AddExtensionFilter("wrf");
     folders->StartListing();
     vbox->AddWidget(folders);
     tabs->AddNewTab("TAB_replay", _("Save replay?"), vbox);

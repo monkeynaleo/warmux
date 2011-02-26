@@ -57,8 +57,8 @@ ReplayMenu::ReplayMenu()
   replay_lbox = new FileListBox(Point2i(w-20, (9*size_y)/10 - fsize - 3*5));
   replay_lbox->SetBorder(defaultOptionColorRect, 2);
   // Windows may SFN => uppercase extensions
-  replay_lbox->AddExtensionFilter("DAT");
-  replay_lbox->AddExtensionFilter("dat");
+  replay_lbox->AddExtensionFilter("WRF");
+  replay_lbox->AddExtensionFilter("wrf");
   replay_lbox->StartListing();
   file_box->AddWidget(replay_lbox);
   widgets.AddWidget(file_box);
