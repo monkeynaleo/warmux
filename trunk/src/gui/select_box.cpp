@@ -161,7 +161,7 @@ int SelectBox::MouseIsOnWhichItem(const Point2i & mousePosition) const
 }
 
 //--------------------------------------------------------------------------
-void ItemBox::AddItem(bool select, Widget* w)
+void ItemBox::AddItem(bool, Widget*)
 {
   fprintf(stderr, "You must not use that accessor directly!\n");
   exit(1);
