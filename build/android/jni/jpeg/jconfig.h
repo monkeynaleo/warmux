@@ -27,7 +27,7 @@
 /* Does your compiler support function prototypes?
  * (If not, you also need to use ansi2knr, see install.doc)
  */
-#define HAVE_PROTOTYPES
+#define HAVE_PROTOTYPES 1
 
 /* Does your compiler support the declaration "unsigned char" ?
  * How about "unsigned short" ?
@@ -53,11 +53,11 @@
 
 /* Define this if your system has an ANSI-conforming <stddef.h> file.
  */
-#define HAVE_STDDEF_H
+#define HAVE_STDDEF_H 1
 
 /* Define this if your system has an ANSI-conforming <stdlib.h> file.
  */
-#define HAVE_STDLIB_H
+#define HAVE_STDLIB_H 1
 
 /* Define this if your system does not have an ANSI/SysV <string.h>,
  * but does have a BSD-style <strings.h>.
