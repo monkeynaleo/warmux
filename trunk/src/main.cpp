@@ -554,6 +554,7 @@ extern "C" int main(int argc, char *argv[])
 
   AppWarmux::GetInstance()->Main();
   delete AppWarmux::GetInstance();
+  SDL_QuitSubSystem(SDL_INIT_TIMER);
   SDL_Quit();
   exit(EXIT_SUCCESS);
 }
