@@ -55,6 +55,7 @@ protected:
   Color shadowColor;
   Font::font_size_t font_size;
   Font::font_style_t font_style;
+  int offset;
 
   virtual void Render();
   static int GetLineHeight(const Font *f) { return (7*f->GetHeight())>>3; }
@@ -87,15 +88,14 @@ public:
   void DrawCenterBottom(const Point2i & position) const { DrawLeftTop(position - surf.GetSize()); }
 
   //Draw text cursor only (text_pos = position for DrawTopLeft)
-  void DrawCursor(const Point2i & text_pos,
-                  std::string::size_type cursor_pos) const;
+  void DrawCursor(const Point2i & text_pos, std::string::size_type cursor_pos, int real_width);
 
   //Draw method using map coordinates
   void DrawCenterTopOnMap(const Point2i & position) const;
 
   void SetText(const std::string & new_txt)
   {
-    if(txt == new_txt)
+    if (txt == new_txt)
       return;
 
     txt = new_txt;
@@ -105,7 +105,7 @@ public:
   const std::string & GetText() const { return txt; }
   void SetColor(const Color & new_color)
   {
-    if(color == new_color)
+    if (color == new_color)
       return;
 
     color = new_color;

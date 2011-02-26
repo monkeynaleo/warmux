@@ -43,7 +43,8 @@ Text::Text(const std::string & text,
   max_width(0),
   shadowColor(_shadowColor),
   font_size((Font::font_size_t)fontSize),
-  font_style(fontStyle)
+  font_style(fontStyle),
+  offset(0)
 {
   Init();
 }
@@ -59,7 +60,8 @@ Text::Text() :
   max_width(0),
   shadowColor(),
   font_size(Font::FONT_SMALL),
-  font_style(Font::FONT_NORMAL)
+  font_style(Font::FONT_NORMAL),
+  offset(0)
 {
 }
 
@@ -314,7 +316,7 @@ void Text::DrawLeftTop(const Point2i &position) const
 {
   if(txt == "" && !dummy) return;
 
-  Rectanglei dst_rect(position, surf.GetSize());
+  Rectanglei dst_rect(position + Point2i(offset, 0), surf.GetSize());
   Surface& window = GetMainWindow();
 
   if(shadowed){
@@ -335,7 +337,7 @@ void Text::DrawLeftTop(const Point2i &position) const
 }
 
 
-void Text::DrawCenterTopOnMap (const Point2i &pos) const
+void Text::DrawCenterTopOnMap(const Point2i &pos) const
 {
   if(shadowed)
     AbsoluteDraw(background, Point2i(bg_offset + pos.x - surf.GetWidth() / 2,
@@ -343,18 +345,22 @@ void Text::DrawCenterTopOnMap (const Point2i &pos) const
   AbsoluteDraw(surf, Point2i(pos.x - surf.GetWidth() / 2, pos.y) );
 }
 
-void Text::DrawCursor(const Point2i &text_pos, std::string::size_type cursor_pos) const
+void Text::DrawCursor(const Point2i &text_pos, std::string::size_type cursor_pos, int real_width)
 {
   // the cursor position is expressed in number of bytes, taking care of UTF8 character
 
   //sort of a hacky way to get the cursor pos, but I couldn't find anything better...
-  uint txt_width = 1;
+  int txt_width = 1;
   if (GetText() != "") {
     Text txt_before_cursor(*this);
     txt_before_cursor.SetText(GetText().substr(0, cursor_pos));
     txt_width = txt_before_cursor.GetWidth();
+    if (txt_width > real_width)
+      offset = real_width - 2 - txt_width;
+    if (txt_width+offset < 0)
+      offset = -txt_width;
   }
-  GetMainWindow().VlineColor(text_pos.GetX()+txt_width,
+  GetMainWindow().VlineColor(text_pos.GetX()+txt_width+offset,
                              text_pos.GetY(),
                              text_pos.GetY()+GetHeight()-2, c_white);
 }
