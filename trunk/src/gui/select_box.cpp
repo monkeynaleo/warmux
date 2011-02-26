@@ -161,6 +161,11 @@ int SelectBox::MouseIsOnWhichItem(const Point2i & mousePosition) const
 }
 
 //--------------------------------------------------------------------------
+void ItemBox::AddItem(bool select, Widget* w)
+{
+  fprintf(stderr, "You must not use that accessor directly!\n");
+  exit(1);
+}
 
 void ItemBox::AddItem(bool select, Widget* w, const void* value)
 {
@@ -177,11 +182,6 @@ void ItemBox::RemoveSelected()
   }
 }
 
-const void* ItemBox::GetSelectedValue() const
-{
-  return (selected_item==-1) ? NULL : m_values[selected_item];
-}
-
 void ItemBox::AddLabelItem(bool selected,
                            const std::string & label,
                            const void* value,
@@ -193,4 +193,11 @@ void ItemBox::AddLabelItem(bool selected,
           new Label(label, 200, fsize, fstyle,
                     color, Text::ALIGN_LEFT_CENTER, true),
           value);
+}
+
+const char* ItemBox::GetSelectedName() const
+{
+  if (selected_item==-1)
+    return NULL;
+  return static_cast<Label*>(m_items[selected_item])->GetText().c_str();
 }
