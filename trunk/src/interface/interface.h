@@ -164,8 +164,11 @@ public:
   Point2i GetMenuPosition() const { return bottom_bar_pos; }
   bool IsDisplayed () const { return mode != MODE_SMALL; }
   Mode GetMode() const { return mode; }
-  void DisableControl() { mode = MODE_NORMAL; Hide(); }
-  void EnableDisplay(bool display) { mode = (display) ? MODE_NORMAL : MODE_SMALL; }
+  void EnableDisplay(bool display)
+  {
+    if (mode==MODE_REPLAY) return;
+    mode = (display) ? MODE_NORMAL : MODE_SMALL;
+  }
   void Show();
   void Hide();
 

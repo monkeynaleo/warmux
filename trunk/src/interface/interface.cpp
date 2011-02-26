@@ -625,7 +625,7 @@ void Interface::Show()
 
 void Interface::Hide()
 {
-  if (!IsDisplayed())
+  if (mode==MODE_SMALL || mode==MODE_REPLAY)
     return;
   mode = MODE_SMALL;
   uint now = GameTime::GetInstance()->Read();
