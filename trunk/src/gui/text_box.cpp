@@ -113,7 +113,7 @@ void TextBox::Draw(const Point2i & mousePosition)
   Rectanglei clip;
   Rectanglei wlr = GetClip(clip);
   if (!wlr.GetSizeX() || !wlr.GetSizeY())
-      return;
+    return;
 
   Label::Draw(mousePosition);
   DrawCursor(position, cursor_pos);
@@ -157,8 +157,7 @@ Widget * TextBox::ClickUp(const Point2i & mousePosition, uint button)
       txt = cur_txt.substr(0, pos);
     }
 
-    Label::Draw(mousePosition);
-    DrawCursor(position, cursor_pos);
+    TextBox::Draw(mousePosition);
 
     return this;
   }
