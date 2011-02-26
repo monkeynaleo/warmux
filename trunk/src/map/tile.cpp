@@ -112,7 +112,7 @@ void Tile::Dig(const Point2i &position, const Surface& dig)
 
         if (tin->NeedDelete()) {
           // no need to display this tile as it can be deleted!
-          delete item[index + c.x];
+          delete tin;
           // Don't instanciate a new empty tile but use the already existing one
           item[index + c.x] = &EmptyTile;
         }
@@ -160,7 +160,7 @@ void Tile::Dig(const Point2i &center, const uint radius)
  
         if (tin->NeedDelete()) {
           // no need to display this tile as it can be deleted!
-          delete item[index + c.x];
+          delete tin;
           // Don't instanciate a new empty tile but use the already existing one
           item[index + c.x] = &EmptyTile;
         }
@@ -264,11 +264,10 @@ void Tile::PutSprite(const Point2i& pos, Sprite* spr)
       tin->GetSurface().Unlock();
 
       if (tin->NeedDelete()) {
-        int index = c.y*nbCells.x + c.x;
         // no need to display this tile as it can be deleted!
-        delete item[index];
+        delete tin;
         // Don't instanciate a new empty tile but use the already existing one
-        item[index] = &EmptyTile;
+        item[c.y*nbCells.x + c.x] = &EmptyTile;
       }
     }
     pdst += pitch<<(CELL_BITS-m_shift);
@@ -306,11 +305,10 @@ void Tile::MergeSprite(const Point2i &position, Surface& surf)
       tin->GetSurface().Unlock();
 
       if (tin->NeedDelete()) {
-        int index = c.y*nbCells.x + c.x;
         // no need to display this tile as it can be deleted!
-        delete item[index];
+        delete tin;
         // Don't instanciate a new empty tile but use the already existing one
-        item[index] = &EmptyTile;
+        item[c.y*nbCells.x + c.x] = &EmptyTile;
       }
     }
     dst += pitch<<(CELL_BITS-m_shift);
