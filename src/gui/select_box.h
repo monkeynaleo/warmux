@@ -96,6 +96,7 @@ public:
   virtual void Clear() { m_values.clear(); SelectBox::Clear(); }
 
   const void* GetSelectedValue() const { return (selected_item==-1) ? NULL : m_values[selected_item]; }
+  // Our accessors somewhat ensures that this is a label, but beware
   const char* GetSelectedName() const;
 };
 
