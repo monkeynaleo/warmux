@@ -332,10 +332,8 @@ ok:
   ptr = buf;
   bufsize = size;
 
-  fread(buf, 1, size, in);
-  if (ferror(in)) {
+  if (fread(buf, size, 1, in)!=1 || ferror(in))
     goto err;
-  }
 
   size = SDLNet_Read16(ptr); ptr += 2;
   std::string mode_name((char*)ptr, size); ptr += size;
