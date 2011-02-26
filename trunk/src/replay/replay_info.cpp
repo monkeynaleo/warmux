@@ -47,7 +47,7 @@ void Write32(FILE *out, uint32_t val)
 uint32_t Read32(FILE *in)
 {
   char  render[4];
-  fread(render, 1, 4, in);
+  (void)fread(render, 1, 4, in);
   return SDLNet_Read32((void*)render);
 }
 
@@ -79,7 +79,7 @@ ReplayInfo *ReplayInfo::ReplayInfoFromFile(FILE *in)
   }
 
   // Version
-  fscanf(in, "%256[^\n]\n", temp);
+  if (!fscanf(in, "%256[^\n]\n", temp)) return info;
   info->version = temp;
   if (ferror(in)) return info;
   
