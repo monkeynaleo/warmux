@@ -115,8 +115,8 @@ void TextBox::Draw(const Point2i & mousePosition)
   if (!wlr.GetSizeX() || !wlr.GetSizeY())
     return;
 
+  DrawCursor(position, cursor_pos, wlr.GetSizeX());
   Label::Draw(mousePosition);
-  DrawCursor(position, cursor_pos);
 
   // Restore initial clip rectangle
   UnsetClip(clip);

@@ -87,8 +87,9 @@ void Chat::ShowInput()
   int ypos = GetMainWindow().GetHeight() - 100;
   msg->DrawLeftTop(Point2i(25, ypos));
   if (input->GetText() != "") {
-    input->DrawLeftTop(Point2i(25 + msg->GetWidth() + 5, ypos));
-    input->DrawCursor(Point2i(25 + msg->GetWidth() + 5, ypos), cursor_pos);
+    int x = 25 + msg->GetWidth() + 5;
+    input->DrawCursor(Point2i(x, ypos), cursor_pos, input->GetWidth());
+    input->DrawLeftTop(Point2i(x, ypos));
   }
 }
 
