@@ -40,7 +40,7 @@ class Action
 public:
   typedef enum
   {
-    ACTION_NETWORK_CLIENT_CHANGE_STATE,
+    ACTION_NETWORK_CLIENT_CHANGE_STATE = 0,
     ACTION_NETWORK_MASTER_CHANGE_STATE,
     ACTION_NETWORK_CHECK_PHASE1,
     ACTION_NETWORK_CHECK_PHASE2,
@@ -135,7 +135,7 @@ public:
   {
     // Write: length of the actual data
     uint32_t len;
-    Action_t type : 32;
+    uint8_t  type;
   } Header;
 #pragma pack(pop)   /* restore original alignment from stack */
 
@@ -193,7 +193,7 @@ public:
   void WriteToPacket(char* & packet, int & size) const;
 
   DistantComputer* GetCreator() const { return m_creator; }
-  Action_t GetType() const { return m_header.type; }
+  Action_t GetType() const { return (Action_t)m_header.type; }
   bool IsFrameLess() const { return m_header.type <= LAST_FRAME_LESS_ACTION; }
 };
 
