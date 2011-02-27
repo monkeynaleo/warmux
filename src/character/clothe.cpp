@@ -26,9 +26,7 @@
 #include <iostream>
 
 Clothe::Clothe(const xmlNode *                  xml,
-               std::map<std::string, Member*> & members_lst):
-  name(),
-  layers()
+               std::map<std::string, Member*> & members_lst)
 {
   XmlReader::ReadStringAttr(xml, "name", name);
 
@@ -53,8 +51,11 @@ Clothe::Clothe(const xmlNode *                  xml,
       Member *member = itMember->second;
       layers.push_back(member);
       // Weapon member doesn't have a sprite, don't check it
-      if (member->GetType()!="weapon" && member->MustRefresh())
-        must_refresh.push_back(itMember->second);
+      if (member->GetType()!="weapon") {
+        non_weapon_layers.push_back(member);
+        if (member->MustRefresh())
+          must_refresh.push_back(itMember->second);
+      }
     } else {
       std::cerr << "Undefined clothe member \"" << att << "\"" << std::endl;
     }
@@ -63,8 +64,7 @@ Clothe::Clothe(const xmlNode *                  xml,
 
 Clothe::Clothe(Clothe *                         c,
                std::map<std::string, Member*> & members_lst):
-  name(c->name),
-  layers()
+  name(c->name)
 {
   for (std::vector<Member*>::iterator it = c->layers.begin();
       it != c->layers.end();
@@ -72,7 +72,10 @@ Clothe::Clothe(Clothe *                         c,
     Member *member = members_lst.find((*it)->GetName())->second;
     layers.push_back(member);
     // Weapon member doesn't have a sprite, don't check it
-    if (member->GetType()!="weapon" && member->MustRefresh())
-      must_refresh.push_back(member);
+    if (member->GetType()!="weapon") {
+      non_weapon_layers.push_back(member);
+      if (member->MustRefresh())
+        must_refresh.push_back(member);
+    }
   }
 }

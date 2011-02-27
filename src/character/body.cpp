@@ -499,12 +499,9 @@ void Body::Build()
   ApplyMovement(current_mvt, current_frame);
 
   Double y_max = ZERO;
-  const std::vector<Member*>& layers = current_clothe->GetLayers();
+  const std::vector<Member*>& layers = current_clothe->GetNonWeaponLayers();
   for (uint lay=0; lay < layers.size(); lay++) {
     Member *member = layers[lay];
-    if (member == weapon_member) {
-      continue;
-    }
 
     // Rotate sprite, because the next part need to know the height
     // of the sprite once it is rotated
@@ -531,10 +528,9 @@ void Body::Build()
 void Body::RefreshSprites()
 {
   if (need_refreshsprites) {
-    const std::vector<Member*>& layers = current_clothe->GetLayers();
+    const std::vector<Member*>& layers = current_clothe->GetNonWeaponLayers();
     for (uint layer=0; layer < layers.size(); layer++)
-      if (layers[layer] != weapon_member)
-        layers[layer]->RefreshSprite(direction);
+      layers[layer]->RefreshSprite(direction);
 
     need_refreshsprites = false;
   } else {
@@ -848,10 +844,10 @@ void Body::MakeParticles(const Point2i & pos)
 {
   Build();
 
-  for (int layer=0;layer < (int)current_clothe->GetLayers().size() ;layer++) {
-    Member* member = current_clothe->GetLayers()[layer];
-    if (member != weapon_member)
-      ParticleEngine::AddNow(new BodyMemberParticle(member->GetSprite(), member->GetPos()+pos));
+  const std::vector<Member*>& layers = current_clothe->GetNonWeaponLayers();
+  for (uint layer=0; layer < layers.size() ;layer++) {
+    Member* member = layers[layer];
+    ParticleEngine::AddNow(new BodyMemberParticle(member->GetSprite(), member->GetPos()+pos));
   }
 }
 
@@ -859,11 +855,11 @@ void Body::MakeTeleportParticles(const Point2i& pos, const Point2i& dst)
 {
   Build();
 
-  for (int layer=0;layer < (int)current_clothe->GetLayers().size() ;layer++) {
-    Member *member = current_clothe->GetLayers()[layer];
-    if (member != weapon_member)
-      ParticleEngine::AddNow(new TeleportMemberParticle(member->GetSprite(),
-                                                        member->GetPos()+pos, member->GetPos()+dst));
+  const std::vector<Member*>& layers = current_clothe->GetNonWeaponLayers();
+  for (uint layer=0;layer < layers.size() ;layer++) {
+    Member *member = layers[layer];
+    ParticleEngine::AddNow(new TeleportMemberParticle(member->GetSprite(),
+                                                      member->GetPos()+pos, member->GetPos()+dst));
   }
 }
 
