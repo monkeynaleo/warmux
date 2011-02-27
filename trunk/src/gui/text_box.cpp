@@ -19,6 +19,10 @@
  * Text box widget
  *****************************************************************************/
 
+#ifdef __SYMBIAN32__
+#include <string>
+#endif
+
 #include <SDL_keyboard.h>
 #ifdef ANDROID
 #  include <SDL_screenkeyboard.h>
