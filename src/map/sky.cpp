@@ -54,7 +54,9 @@ void Sky::Draw(bool redraw_all)
   Point2i cur_pos = Camera::GetInstance()->GetPosition();
   if (last_pos != cur_pos || redraw_all) {
     last_pos = cur_pos;
-    RedrawParticle(Rectanglei(cur_pos, GetMainWindow().GetSize()));
+    std::list<Rectanglei> screen;
+    screen.push_back(Rectanglei(cur_pos, GetMainWindow().GetSize()));
+    RedrawParticleList(screen);
     return;
   }
 
@@ -64,18 +66,23 @@ void Sky::Draw(bool redraw_all)
 
 void Sky::RedrawParticleList(const std::list<Rectanglei>& list) const
 {
+  std::vector<Point2i> sky_pos;
+
+  for (uint layer = 0; layer < images.size(); ++layer)
+    sky_pos.push_back(GetSkyPos(layer));
+
   for (std::list<Rectanglei>::const_iterator it = list.begin() ; it != list.end(); ++it)
-    RedrawParticle(*it);
+    RedrawParticle(*it, sky_pos);
 }
 
-void Sky::RedrawParticle(const Rectanglei & particle) const
+void Sky::RedrawParticle(const Rectanglei& particle, const std::vector<Point2i>& sky_pos) const
 {
   Point2i tmpPos =  particle.GetPosition() - Camera::GetInstance()->GetPosition();
   Rectanglei ds;
   ds.SetSize(particle.GetSize());
 
   for (uint layer = 0; layer < images.size(); ++layer) {
-    ds.SetPosition(GetSkyPos(layer) + tmpPos);
+    ds.SetPosition(tmpPos + sky_pos[layer]);
     GetMainWindow().Blit(*(images[layer]), ds, tmpPos);
   }
 }

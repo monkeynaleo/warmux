@@ -37,7 +37,7 @@ class Sky
   Point2i last_pos;
 
   void RedrawParticleList(const std::list<Rectanglei>& list) const;
-  void RedrawParticle(const Rectanglei &particle) const;
+  void RedrawParticle(const Rectanglei &particle, const std::vector<Point2i>& sky_pos) const;
   Point2i GetSkyPos(uint layer) const;
 
 public:
