@@ -96,7 +96,7 @@ CommandList::~CommandList() {
 
 bool CommandList::Execute()
 {
-  while (commands.size() > 0) {
+  while (!commands.empty()) {
     AICommand * command = commands.front();
     if (command->Execute()) {
       commands.pop();
