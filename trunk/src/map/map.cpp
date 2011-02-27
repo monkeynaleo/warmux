@@ -98,11 +98,112 @@ void Map::FreeMem()
   to_redraw_particles_now->clear();
 }
 
+//  0: nothing
+//  1: usual optimize cache
+//  2: immediately tries to remove strictly included rectangles
+//  4: try to perform a split; must add flag 2
+//  8: try to perform another split; must add flag 2
+// 16: erase rectangles from the particle list if they are contained by
+//     rectangles of the other list
+#define ADD_CHECK_LEVEL 1
+
+#if ADD_CHECK_LEVEL & ~1
+void Map::AddRectangle(std::list<Rectanglei>::iterator it, const Rectanglei& rect)
+#else
+void Map::AddRectangle(std::list<Rectanglei>::iterator /*it*/, const Rectanglei& rect)
+#endif
+{
+  MSG_DEBUG("map.redraw", "Checking %ix%i at (%i,%i)\n",
+            rect.GetSizeX(), rect.GetSizeY(), rect.GetPositionX(), rect.GetPositionY());
+
+  if (rect.GetSizeX()<1 || rect.GetSizeY()<1)
+    return;
+
+#if ADD_CHECK_LEVEL&2
+  Point2i TL = rect.GetTopLeftPoint();
+  Point2i BR = rect.GetBottomRightPoint();
+
+  while (it != to_redraw->end()) {
+    Point2i iTL = it->GetTopLeftPoint();
+    Point2i iBR = it->GetBottomRightPoint();
+
+    // Is TL inside?
+    if (iTL<=TL && TL<=iBR) {
+      // TL inside, is BR?
+      if (TL<=BR && BR<=iBR) {
+        // BR also in
+        MSG_DEBUG("map.redraw", "Inside %ix%i at (%i,%i)\n",
+                  it->GetSizeX(), it->GetSizeY(), it->GetPositionX(), it->GetPositionY());
+        return;
+      }
+#if ADD_CHECK_LEVEL&4
+      else {
+        Rectanglei n(iTL, Point2i(BR-iTL+1));
+        if (n.GetSizeX()*n.GetSizeY() - rect.GetSizeX()*rect.GetSizeY() < 20)
+          *it = n;
+        else {
+          // iTL outside, ie higher or more to the left
+          // iTL
+          //  +-----+
+          //  |TL   |
+          //  | +---+-+
+          //  | |iBR| |
+          //  +-+---+-+
+          //    +-----+BR
+          MSG_DEBUG("map.redraw", "Overlap with %ix%i at (%i,%i)\n",
+                    it->GetSizeX(), it->GetSizeY(), it->GetPositionX(), it->GetPositionY());
+          AddRectangle(it, Rectanglei(Point2i(iBR.GetX()+1, TL.GetY()), Point2i(BR.GetX()-iBR.GetX(), iBR.GetY()-TL.GetY()+1)));
+          AddRectangle(it, Rectanglei(Point2i(TL.GetX(), iBR.GetY()+1), Point2i(rect.GetSizeX(), BR.GetY()-iBR.GetY())));
+          return;
+        }
+      }
+#endif
+    }
+
+    // Is BR inside?
+#if ADD_CHECK_LEVEL&8
+    if (iTL<=BR && BR<=iBR) {
+      Rectanglei n(TL, Point2i(iBR-TL+1));
+      if (n.GetSizeX()*n.GetSizeY() - rect.GetSizeX()*rect.GetSizeY() < 20)
+        *it = n;
+      else {
+        // BR inside, we know from above that TL isn't
+
+        // Swap previous image
+        MSG_DEBUG("map.redraw", "Overlap with %ix%i at (%i,%i)\n",
+                  it->GetSizeX(), it->GetSizeY(), it->GetPositionX(), it->GetPositionY());
+        AddRectangle(it, Rectanglei(TL, Point2i(rect.GetSizeX(), iTL.GetY()-TL.GetY())));
+        AddRectangle(it, Rectanglei(Point2i(TL.GetX(), iTL.GetY()), Point2i(iTL.GetX()-TL.GetX(), BR.GetY()-iTL.GetY())));
+        return;
+      }
+    }
+#endif
+
+    // Is "it" inside?
+    if (TL<=iTL && iTL<=BR) {
+      // iTL inside, is iBR?
+      if (TL<=iBR && iBR<=BR) {
+        // iBR is, remove
+        MSG_DEBUG("map.redraw", "Removing %ix%i at (%i,%i)\n",
+                  it->GetSizeX(), it->GetSizeY(), it->GetPositionX(), it->GetPositionY());
+        it = to_redraw->erase(it);
+        continue;
+      }
+    }
+
+    ++it;
+  }
+  MSG_DEBUG("map.redraw", "No overlap\n");
+#endif
+
+  to_redraw->push_back(rect);
+}
+
 void Map::ToRedrawOnScreen(Rectanglei r)
 {
   assert(!r.IsSizeZero());
-  to_redraw->push_back(Rectanglei(r.GetPosition() + Camera::GetInstance()->GetPosition(),
-                                  r.GetSize()));
+  r.SetPosition(r.GetPosition() + Camera::GetInstance()->GetPosition());
+  AddRectangle(to_redraw->begin(), r);
 }
 
 void Map::SwitchDrawingCache()
@@ -124,7 +225,7 @@ void Map::SwitchDrawingCacheParticles()
 void Map::Dig(const Point2i& position, const Surface& surface)
 {
   ground.Dig(position, surface);
-  to_redraw->push_back(Rectanglei(position, surface.GetSize()));
+  AddRectangle(to_redraw->begin(), Rectanglei(position, surface.GetSize()));
 }
 
 void Map::Dig(const Point2i& center, uint radius)
@@ -132,20 +233,20 @@ void Map::Dig(const Point2i& center, uint radius)
   ground.Dig(center, radius);
   radius += EXPLOSION_BORDER_SIZE;
   Point2i ra(radius, radius);
-  to_redraw->push_back(Rectanglei(center - ra, 2*ra));
+  AddRectangle(to_redraw->begin(), Rectanglei(center - ra, 2*ra));
 }
 
 void Map::PutSprite(const Point2i& pos, Sprite* spr)
 {
   ground.PutSprite(pos, spr);
-  to_redraw->push_back(Rectanglei(pos, spr->GetSizeMax()));
+  AddRectangle(to_redraw->begin(), Rectanglei(pos, spr->GetSizeMax()));
 }
 
 void Map::MergeSprite(const Point2i& pos, Sprite * spr)
 {
   Surface& tmp = spr->GetSurface();
   ground.MergeSprite(pos, tmp);
-  to_redraw->push_back(Rectanglei(pos, spr->GetSizeMax()));
+  AddRectangle(to_redraw->begin(), Rectanglei(pos, spr->GetSizeMax()));
 }
 
 void Map::DrawSky(bool redraw_all)
@@ -153,7 +254,31 @@ void Map::DrawSky(bool redraw_all)
   SwitchDrawingCache();
   SwitchDrawingCacheParticles();
 
+#if ADD_CHECK_LEVEL&8
+  std::list<Rectanglei>& first = *to_redraw_now;
+  std::list<Rectanglei>& second = *to_redraw_particles_now;
+  for (std::list<Rectanglei>::iterator it1 = first.begin();
+       it1 != first.end(); ++it1) {
+    for (std::list<Rectanglei>::iterator it2 = second.begin();
+         it2 != second.end(); it2++) {
+      if (it1->Contains(*it2)) {
+        it2 = second.erase(it2);
+        //printf("2\n");
+        if (it2 == second.end())
+          break;
+      }
+    }
+
+    if (it1 == first.end())
+      break;
+  }
+  //printf("\n");
+#endif
+
+#if ADD_CHECK_LEVEL&1
   OptimizeCache(*to_redraw_now);
+#endif
+  // Particles never overlap, so don't optimize it
 
   sky.Draw(redraw_all);
 }
@@ -325,19 +450,18 @@ void Map::OptimizeCache(std::list<Rectanglei>& rectangleCache) const
   if (jt != end) {
     jt++;
   }
-//  std::cout << "Before: " <<  rectangleCache.size()  << std::endl;
 
   while (it != end && jt != end) {
     if ( (*it).Contains(*jt) ) {
-    //   std::cout << "X: " << (*jt).GetPositionX() << " ; " << (*jt).GetBottomRightPoint().GetX() << " - " ;
-//       std::cout << "Y: " << (*jt).GetPositionY() << " ; " << (*jt).GetBottomRightPoint().GetY();
-//       std::cout << std::endl;
       jt = rectangleCache.erase(jt);
+      MSG_DEBUG("map.redraw", "%ix%i at (%i,%i) in %ix%i at (%i,%i)\n",
+                jt->GetSizeX(), jt->GetSizeY(), jt->GetPositionX(), jt->GetPositionY(),
+                it->GetSizeX(), it->GetSizeY(), it->GetPositionX(), it->GetPositionY());
     } else if ( (*jt).Contains(*it) ) {
-//       std::cout << "X: " << (*it).GetPositionX() << " ; " << (*it).GetBottomRightPoint().GetX() << " - " ;
-//       std::cout << "Y: " << (*it).GetPositionY() << " ; " << (*it).GetBottomRightPoint().GetY();
-//       std::cout << std::endl;
       tmp = it;
+      MSG_DEBUG("map.redraw", "%ix%i at (%i,%i) in %ix%i at (%i,%i)\n",
+                it->GetSizeX(), it->GetSizeY(), it->GetPositionX(), it->GetPositionY(),
+                jt->GetSizeX(), jt->GetSizeY(), jt->GetPositionX(), jt->GetPositionY());
       if (tmp == rectangleCache.begin()) {
         rectangleCache.erase(it);
         it = rectangleCache.begin();
@@ -353,9 +477,7 @@ void Map::OptimizeCache(std::list<Rectanglei>& rectangleCache) const
       jt++;
     }
   }
-//   std::cout << "After : " <<  rectangleCache.size()  << std::endl;
-
-//   std::cout << "//#############################" <<std::endl;
+  MSG_DEBUG("map.redraw", "=======\n");
 }
 
 // traces ray, determining the collision point (if any)

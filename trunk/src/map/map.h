@@ -58,6 +58,8 @@ class Map : public Singleton<Map>
   Map();
   ~Map();
 
+  void AddRectangle(std::list<Rectanglei>::iterator it, const Rectanglei& rect);
+
 public:
   Ground ground;
   Sky sky;
