@@ -139,8 +139,8 @@ public:
 
   // Methods to access data of the projectile
   int GetDamage() const;
-  Double GetWindFactor() const;
-  Double GetMass() const;
+  Double GetWindFactor() const { return projectile->GetWindFactor(); }
+  Double GetMass() const { return projectile->GetMass(); }
 
   virtual void Draw();
 
@@ -162,8 +162,8 @@ public:
   // Signal a projectile timeout (for exemple: grenade, disco grenade ... etc.)
   virtual void SignalProjectileTimeout() { SignalEndOfProjectile(); };
 
-  void SetTimeout(int timeout);
-  int GetTimeout();
+  void SetTimeout(int timeout) { projectile->SetTimeOut(timeout); }
+  int GetTimeout() { return projectile->GetTotalTimeout(); }
 
   // Keep the total amount of active projectile
   void IncActiveProjectile() { ++nb_active_projectile; };
@@ -172,21 +172,21 @@ public:
   virtual void IncMissedShots();
 
   // Handle mouse events
-  virtual void HandleMouseWheelUp(bool shift);
-  virtual void HandleMouseWheelDown(bool shift);
+  virtual void HandleMouseWheelUp(bool) { SetTimeoutForAllPlayers(GetTimeout() + 1); }
+  virtual void HandleMouseWheelDown(bool) { SetTimeoutForAllPlayers(GetTimeout() - 1); }
 
   // Handle special keys
-  virtual void HandleKeyReleased_Num1();
-  virtual void HandleKeyReleased_Num2();
-  virtual void HandleKeyReleased_Num3();
-  virtual void HandleKeyReleased_Num4();
-  virtual void HandleKeyReleased_Num5();
-  virtual void HandleKeyReleased_Num6();
-  virtual void HandleKeyReleased_Num7();
-  virtual void HandleKeyReleased_Num8();
-  virtual void HandleKeyReleased_Num9();
-  virtual void HandleKeyReleased_Less();
-  virtual void HandleKeyReleased_More();
+  virtual void HandleKeyReleased_Num1() { SetTimeoutForAllPlayers(1); }
+  virtual void HandleKeyReleased_Num2() { SetTimeoutForAllPlayers(2); }
+  virtual void HandleKeyReleased_Num3() { SetTimeoutForAllPlayers(3); }
+  virtual void HandleKeyReleased_Num4() { SetTimeoutForAllPlayers(4); }
+  virtual void HandleKeyReleased_Num5() { SetTimeoutForAllPlayers(5); }
+  virtual void HandleKeyReleased_Num6() { SetTimeoutForAllPlayers(6); }
+  virtual void HandleKeyReleased_Num7() { SetTimeoutForAllPlayers(7); }
+  virtual void HandleKeyReleased_Num8() { SetTimeoutForAllPlayers(8); }
+  virtual void HandleKeyReleased_Num9() { SetTimeoutForAllPlayers(9); }
+  virtual void HandleKeyReleased_Less() { SetTimeoutForAllPlayers(GetTimeout() - 1); }
+  virtual void HandleKeyReleased_More() { SetTimeoutForAllPlayers(GetTimeout() + 1); }
 
   WeaponProjectile* GetProjectile() { return projectile; };
   ExplosiveWeaponConfig& cfg() const;

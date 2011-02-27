@@ -465,15 +465,6 @@ int WeaponLauncher::GetDamage() const
   return cfg().damage;
 }
 
-Double WeaponLauncher::GetWindFactor() const
-{
-  return projectile->GetWindFactor();
-}
-
-Double WeaponLauncher::GetMass() const
-{
-  return projectile->GetMass();
-}
 
 bool WeaponLauncher::p_Shoot()
 {
@@ -554,85 +545,10 @@ void WeaponLauncher::IncMissedShots()
     GameMessages::GetInstance()->Add(_("Your shot has missed!"), ActiveTeam().GetColor());
 }
 
-void WeaponLauncher::HandleKeyReleased_Num1()
-{
-  SetTimeoutForAllPlayers(1);
-}
-
-void WeaponLauncher::HandleKeyReleased_Num2()
-{
-  SetTimeoutForAllPlayers(2);
-}
-
-void WeaponLauncher::HandleKeyReleased_Num3()
-{
-  SetTimeoutForAllPlayers(3);
-}
-
-void WeaponLauncher::HandleKeyReleased_Num4()
-{
-  SetTimeoutForAllPlayers(4);
-}
-
-void WeaponLauncher::HandleKeyReleased_Num5()
-{
-  SetTimeoutForAllPlayers(5);
-}
-
-void WeaponLauncher::HandleKeyReleased_Num6()
-{
-  SetTimeoutForAllPlayers(6);
-}
-
-void WeaponLauncher::HandleKeyReleased_Num7()
-{
-  SetTimeoutForAllPlayers(7);
-}
-
-void WeaponLauncher::HandleKeyReleased_Num8()
-{
-  SetTimeoutForAllPlayers(8);
-}
-
-void WeaponLauncher::HandleKeyReleased_Num9()
-{
-  SetTimeoutForAllPlayers(9);
-}
-
-void WeaponLauncher::HandleKeyReleased_Less()
-{
-  SetTimeoutForAllPlayers(GetTimeout() - 1);
-}
-
-void WeaponLauncher::HandleKeyReleased_More()
-{
-  SetTimeoutForAllPlayers(GetTimeout() + 1);
-}
-
 void WeaponLauncher::SetTimeoutForAllPlayers(int timeout)
 {
   Action * a = new Action(Action::ACTION_WEAPON_SET_TIMEOUT, timeout);
   ActionHandler::GetInstance()->NewAction(a);
-}
-
-void WeaponLauncher::SetTimeout(int timeout)
-{
-  GetProjectile()->SetTimeOut(timeout);
-}
-
-int WeaponLauncher::GetTimeout()
-{
-  return GetProjectile()->GetTotalTimeout();
-}
-
-void WeaponLauncher::HandleMouseWheelUp(bool /*shift*/)
-{
-  SetTimeoutForAllPlayers(GetTimeout() + 1);
-}
-
-void WeaponLauncher::HandleMouseWheelDown(bool /*shift*/)
-{
-  SetTimeoutForAllPlayers(GetTimeout() - 1);
 }
 
 ExplosiveWeaponConfig& WeaponLauncher::cfg() const
