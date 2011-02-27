@@ -138,14 +138,11 @@ AIStrategy * WasteAmmoUnitsIdea::CreateStrategy() const
                                   ActiveCharacter().GetDirection(), max_angle, used_ammo_units);
 }
 
-ShootDirectlyAtEnemyIdea::ShootDirectlyAtEnemyIdea(WeaponsWeighting & weapons_weighting,
-                                                   Character & shooter, Character & enemy,
+ShootDirectlyAtEnemyIdea::ShootDirectlyAtEnemyIdea(const WeaponsWeighting & weapons_weighting,
+                                                   const Character & shooter, const Character & enemy,
                                                    Weapon::Weapon_type weapon_type,
                                                    int max_distance)
-  : weapons_weighting(weapons_weighting)
-  , shooter(shooter)
-  , enemy(enemy)
-  , weapon_type(weapon_type)
+  : AIShootIdea(weapons_weighting, shooter, enemy, weapon_type)
   , max_sq_distance(max_distance*max_distance)
 {
   // do nothing
@@ -322,13 +319,10 @@ AIStrategy * ShootDirectlyAtEnemyIdea::CreateStrategy() const {
 FireMissileWithFixedDurationIdea::FireMissileWithFixedDurationIdea(const WeaponsWeighting & weapons_weighting,
                                                                    const Character & shooter, const Character & enemy,
                                                                    Weapon::Weapon_type weapon_type,
-                                                                   float duration, int timeout):
-  weapons_weighting(weapons_weighting),
-  shooter(shooter),
-  enemy(enemy),
-  weapon_type(weapon_type),
-  duration(duration),
-  timeout(timeout)
+                                                                   float duration, int timeout)
+  : AIShootIdea(weapons_weighting, shooter, enemy, weapon_type)
+  , duration(duration)
+  , timeout(timeout)
 {
   // do nothing
 }
