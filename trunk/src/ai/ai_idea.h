@@ -44,6 +44,7 @@ public:
   virtual AIStrategy * CreateStrategy() const = 0;
   virtual ~AIIdea() {}
   virtual bool NoLongerPossible() const { return false; }
+  virtual float GetMaxRating(bool) const { return 0.0f; }
 };
 
 class SkipTurnIdea : public AIIdea
@@ -72,6 +73,7 @@ protected:
     : weapons_weighting(w), shooter(s), enemy(e), weapon_type(t) { }
 public:
   virtual bool NoLongerPossible() const;
+  virtual float GetMaxRating(bool one_shot) const;
 };
 
 class ShootDirectlyAtEnemyIdea : public AIShootIdea

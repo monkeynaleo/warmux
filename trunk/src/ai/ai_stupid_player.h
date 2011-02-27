@@ -52,6 +52,7 @@ class AIStupidPlayer : public AIPlayer
   void CheckNextIdea();
 
   static bool IsIdeaRemovable(const AIItem& item);
+  static bool CompareIdeaMaxRating(const AIItem& i1, const AIItem& i2);
 public:
   AIStupidPlayer(Team * team);
   virtual ~AIStupidPlayer();

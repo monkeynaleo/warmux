@@ -143,6 +143,19 @@ bool AIShootIdea::NoLongerPossible() const
   return shooter.IsDead() || enemy.IsDead();
 }
 
+float AIShootIdea::GetMaxRating(bool one_shot) const
+{
+  const WeaponsList *weapons_list = Game::GetInstance()->GetWeaponsList();
+  const WeaponLauncher *weapon = weapons_list->GetWeaponLauncher(weapon_type);
+  int damage = weapon->GetDamage();
+  int units = (one_shot) ? 1 : weapon->ReadInitialNbUnit();
+
+  if (weapon_type == Weapon::WEAPON_SHOTGUN)
+    damage *= SHOTGUN_BULLETS;
+
+  return weapons_weighting.GetFactor(weapon_type)*damage*units;
+}
+
 ShootDirectlyAtEnemyIdea::ShootDirectlyAtEnemyIdea(const WeaponsWeighting & weapons_weighting,
                                                    const Character & shooter, const Character & enemy,
                                                    Weapon::Weapon_type weapon_type,

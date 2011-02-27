@@ -27,61 +27,58 @@
 
 class AIStrategy
 {
-  private:
-    const float rating;
-  public:
-    typedef enum {LOWER_RATING, SIMILAR_RATING, HIGHER_RATING} CompareResult;
-    AIStrategy(float rating);
-    virtual ~AIStrategy() {}
-    /** Creates a command which implements the strategy */
-    virtual AICommand * CreateCommand() const = 0;
-    float GetRating() const { return rating; }
-    CompareResult CompareRatingWith(AIStrategy * other) const;
+  const float rating;
+public:
+  typedef enum {LOWER_RATING, SIMILAR_RATING, HIGHER_RATING} CompareResult;
+  AIStrategy(float rating);
+  virtual ~AIStrategy() {}
+  /** Creates a command which implements the strategy */
+  virtual AICommand * CreateCommand() const = 0;
+  float GetRating() const { return rating; }
+  CompareResult CompareRatingWith(AIStrategy * other) const;
 };
 
 class DoNothingStrategy : public AIStrategy
 {
-  public:
-    DoNothingStrategy();
-    virtual AICommand * CreateCommand() const;
+public:
+  DoNothingStrategy();
+  virtual AICommand * CreateCommand() const;
 };
 
 class SkipTurnStrategy : public AIStrategy
 {
-  public:
-    SkipTurnStrategy();
-    virtual AICommand * CreateCommand() const;
+public:
+  SkipTurnStrategy();
+  virtual AICommand * CreateCommand() const;
 };
 
 class ShootWithGunStrategy : public AIStrategy
 {
-  private:
-    const Character & shooter;
-    Weapon::Weapon_type weapon;
-    LRDirection  direction;
-    float angle;
-    int bullets;
-  public:
-    virtual AICommand * CreateCommand() const;
-    ShootWithGunStrategy(float rating, const Character & shooter,
-                         Weapon::Weapon_type weapon, LRDirection  direction,
-                         float angle, int bullets);
+  const Character & shooter;
+  Weapon::Weapon_type weapon;
+  LRDirection  direction;
+  float angle;
+  int bullets;
+public:
+  virtual AICommand * CreateCommand() const;
+  ShootWithGunStrategy(float rating, const Character & shooter,
+                       Weapon::Weapon_type weapon, LRDirection  direction,
+                       float angle, int bullets);
 };
 
 class LoadAndFireStrategy : public AIStrategy
 {
-  private:
-    const Character & shooter;
-    Weapon::Weapon_type weapon;
-    LRDirection  direction;
-    float angle;
-    float strength;
-    int timeout;
-  public:
-    virtual AICommand * CreateCommand() const;
-    LoadAndFireStrategy(float rating, const Character & shooter,
-                        Weapon::Weapon_type weapon, LRDirection direction,
-                        float angle, float strength, int timeout);
+  const Character & shooter;
+  Weapon::Weapon_type weapon;
+  LRDirection  direction;
+  float angle;
+  float strength;
+  int timeout;
+public:
+  virtual AICommand * CreateCommand() const;
+  LoadAndFireStrategy(float rating, const Character & shooter,
+                      Weapon::Weapon_type weapon, LRDirection direction,
+                      float angle, float strength, int timeout);
 };
 
 

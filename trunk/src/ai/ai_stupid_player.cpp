@@ -95,6 +95,11 @@ public:
   { }
 };
 
+bool AIStupidPlayer::CompareIdeaMaxRating(const AIItem& i1, const AIItem& i2)
+{
+  return i1.first->GetMaxRating(false) > i2.first->GetMaxRating(false);
+}
+
 AIStupidPlayer::AIStupidPlayer(Team * team)
   : team(team)
   , item_iterator(items.begin())
@@ -137,6 +142,7 @@ AIStupidPlayer::AIStupidPlayer(Team * team)
       }
     }
   }
+  items.sort(CompareIdeaMaxRating);
 }
 
 AIStupidPlayer::~AIStupidPlayer()
@@ -192,7 +198,7 @@ void AIStupidPlayer::Refresh()
     bool think_time_over = now >= game_time_at_turn_start + MAX_GAME_TIME_USED_THINKING_IN_MS;
     if (!think_time_over) {
       Stopwatch stopwatch;
-      while(stopwatch.GetValue() < REAL_THINK_TIME_PER_REFRESH_IN_MS && item_iterator != items.end()) {
+      while (stopwatch.GetValue() < REAL_THINK_TIME_PER_REFRESH_IN_MS && item_iterator != items.end()) {
         CheckNextIdea();
       }
     }
@@ -209,8 +215,16 @@ void AIStupidPlayer::Refresh()
 
 void AIStupidPlayer::CheckNextIdea()
 {
+  AIIdea* idea = (*item_iterator).first;
+  float rating = idea->GetMaxRating(true);
+  if (rating < best_strategy->GetRating()) {
+    // All following strategies are going to be less effective, abort search
+    item_iterator = items.end();
+    return;
+  }
+
   Stopwatch stopwatch;
-  AIStrategy * strategy = (*item_iterator).first->CreateStrategy();
+  AIStrategy * strategy = idea->CreateStrategy();
   (*item_iterator).second->AddTiming(stopwatch.GetValue());
   if (strategy) {
     AIStrategy::CompareResult compare_result = strategy->CompareRatingWith(best_strategy);
