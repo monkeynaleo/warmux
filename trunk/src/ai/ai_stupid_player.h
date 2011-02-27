@@ -22,6 +22,8 @@
 #ifndef AI_STUPID_PLAYER_H
 #define AI_STUPID_PLAYER_H
 
+#include <list>
+
 #include "ai/ai_player.h"
 #include "ai/ai_weapons_weighting.h"
 #include "team/team.h"
@@ -34,26 +36,27 @@ class AIStats;
 
 class AIStupidPlayer : public AIPlayer
 {
-  private:
-    Team * team;
+  Team * team;
 
-    typedef std::pair<AIIdea*, AIStats*> AIItem;
-    std::vector<AIItem> items;
-    std::vector<AIItem>::iterator item_iterator;
-    AICommand * command;
-    AIStrategy * best_strategy;
-    bool command_executed;
-    uint game_time_at_turn_start;
-    int best_strategy_counter;
-    WeaponsWeighting weapons_weighting;
+  typedef std::pair<AIIdea*, AIStats*> AIItem;
+  std::list<AIItem> items;
+  std::list<AIItem>::iterator item_iterator;
+  AICommand * command;
+  AIStrategy * best_strategy;
+  bool command_executed;
+  uint game_time_at_turn_start;
+  int best_strategy_counter;
+  WeaponsWeighting weapons_weighting;
 
-    void Reset();
-    void CheckNextIdea();
-  public:
-    AIStupidPlayer(Team * team);
-    virtual ~AIStupidPlayer();
-    virtual void PrepareTurn();
-    virtual void Refresh();
+  void Reset();
+  void CheckNextIdea();
+
+  static bool IsIdeaRemovable(const AIItem& item);
+public:
+  AIStupidPlayer(Team * team);
+  virtual ~AIStupidPlayer();
+  virtual void PrepareTurn();
+  virtual void Refresh();
 };
 
 #endif

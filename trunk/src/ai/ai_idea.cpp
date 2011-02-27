@@ -138,6 +138,11 @@ AIStrategy * WasteAmmoUnitsIdea::CreateStrategy() const
                                   ActiveCharacter().GetDirection(), max_angle, used_ammo_units);
 }
 
+bool AIShootIdea::NoLongerPossible() const
+{
+  return shooter.IsDead() || enemy.IsDead();
+}
+
 ShootDirectlyAtEnemyIdea::ShootDirectlyAtEnemyIdea(const WeaponsWeighting & weapons_weighting,
                                                    const Character & shooter, const Character & enemy,
                                                    Weapon::Weapon_type weapon_type,
