@@ -43,44 +43,59 @@ Symbian version Markus Mertama
 #define SYMBIAN32_GCCE
 #endif
 
-#ifndef _SIZE_T_DEFINED
+#ifdef SYMBIAN32_GCCE
+#endif
+
+
+#if !defined(_SIZE_T_DEFINED) && !defined(_SIZE_T_DECLARED) && !defined(size_t)
 typedef unsigned int size_t;
+#define _SIZE_T_DEFINED
+#define _SIZE_T_DECLARED
 #endif
 
 #ifndef _INTPTR_T_DECLARED
 typedef unsigned int uintptr_t;
+#define _INTPTR_T_DECLARED
 #endif 
 
 #ifndef _INT8_T_DECLARED
 typedef signed char int8_t;
+#define _INT8_T_DECLARED
 #endif 
 
 #ifndef _UINT8_T_DECLARED
 typedef unsigned char uint8_t;
+#define _UINT8_T_DECLARED
 #endif
 
 #ifndef _INT16_T_DECLARED
 typedef signed short int16_t;
+#define _INT16_T_DECLARED
 #endif
 
 #ifndef _UINT16_T_DECLARED
 typedef unsigned short uint16_t;
+#define _UINT16_T_DECLARED
 #endif
 
 #ifndef _INT32_T_DECLARED
 typedef signed int int32_t;
+#define _INT32_T_DECLARED
 #endif
 
 #ifndef _UINT32_T_DECLARED
 typedef unsigned int uint32_t;
+#define _UINT32_T_DECLARED
 #endif
 
 #ifndef _INT64_T_DECLARED
 typedef signed long long int64_t;
+#define _INT64_T_DECLARED
 #endif
 
 #ifndef _UINT64_T_DECLARED
 typedef unsigned long long uint64_t;
+#define _UINT64_T_DECLARED
 #endif
 
 #define SDL_AUDIO_DRIVER_EPOCAUDIO	1
