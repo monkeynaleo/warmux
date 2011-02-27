@@ -57,28 +57,32 @@ public:
   virtual AIStrategy * CreateStrategy() const;
 };
 
-class ShootDirectlyAtEnemyIdea : public AIIdea
+class AIShootIdea : public AIIdea
 {
-private:
+protected:
   const WeaponsWeighting & weapons_weighting;
   const Character & shooter;
   const Character & enemy;
   Weapon::Weapon_type weapon_type;
+
+  AIShootIdea(const WeaponsWeighting & w,
+              const Character & s, const Character & e,
+              Weapon::Weapon_type t)
+    : weapons_weighting(w), shooter(s), enemy(e), weapon_type(t) { }
+};
+
+class ShootDirectlyAtEnemyIdea : public AIShootIdea
+{
   int max_sq_distance;
 public:
-  ShootDirectlyAtEnemyIdea(WeaponsWeighting & weapons_weighting,
-                           Character & shooter, Character & enemy,
+  ShootDirectlyAtEnemyIdea(const WeaponsWeighting & weapons_weighting,
+                           const Character & shooter, const Character & enemy,
                            Weapon::Weapon_type weapon_type, int max_distance);
   virtual AIStrategy * CreateStrategy() const;
 };
 
-class FireMissileWithFixedDurationIdea : public AIIdea
+class FireMissileWithFixedDurationIdea : public AIShootIdea
 {
-private:
-  const WeaponsWeighting & weapons_weighting;
-  const Character & shooter;
-  const Character & enemy;
-  Weapon::Weapon_type weapon_type;
   float duration;
   int timeout; // if positive the character will set it to the specified value.
 public:
