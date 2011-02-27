@@ -30,6 +30,7 @@ class Clothe
 {
   std::string name;
   std::vector<Member*> layers;
+  std::vector<Member*> non_weapon_layers;
   std::vector<Member*> must_refresh;
 
 public:
@@ -40,6 +41,7 @@ public:
   const std::string & GetName() const { return name; }
 
   const std::vector<Member*>& GetLayers() const { return layers; }
+  const std::vector<Member*>& GetNonWeaponLayers() const { return non_weapon_layers; }
   const std::vector<Member*>& MustRefreshMembers() const { return must_refresh; } 
 };
 
