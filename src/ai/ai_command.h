@@ -28,21 +28,21 @@
 
 class AICommand
 {
-  public:
-    /**
-     * Tries to execute the command or tries to continue the execution of the command.
-     * If the command requires an increment in game time then this method returns false.
-     * In such a case this method should be called again when the game time has been increased.
-     * A return value of true indicates that the command has been executed and that the object should not be used further.
-     */
-    virtual bool Execute() = 0;
-    virtual ~AICommand() {};
+public:
+  /**
+   * Tries to execute the command or tries to continue the execution of the command.
+   * If the command requires an increment in game time then this method returns false.
+   * In such a case this method should be called again when the game time has been increased.
+   * A return value of true indicates that the command has been executed and that the object should not be used further.
+   */
+  virtual bool Execute() = 0;
+  virtual ~AICommand() {};
 };
 
 class DoNothingForeverCommand : public AICommand
 {
-  public:
-    virtual bool Execute() { return false; };
+public:
+  virtual bool Execute() { return false; };
 };
 
 /**
@@ -51,13 +51,12 @@ class DoNothingForeverCommand : public AICommand
  */
 class IncreaseAngleCommand : public AICommand
 {
-  private:
-    const float target_angle;
-    const bool slowly;
-    bool is_increasing;
-  public:
-    IncreaseAngleCommand(float target_angle, bool slowly);
-    virtual bool Execute();
+ const float target_angle;
+  const bool slowly;
+  bool is_increasing;
+public:
+  IncreaseAngleCommand(float target_angle, bool slowly);
+  virtual bool Execute();
 };
 
 
@@ -67,79 +66,73 @@ class IncreaseAngleCommand : public AICommand
  */
 class DecreaseAngleCommand : public AICommand
 {
-  private:
-    const float target_angle;
-    const bool slowly;
-    bool is_decreasing;
-  public:
-    DecreaseAngleCommand(float target_angle, bool slowly);
-    virtual bool Execute();
+  const float target_angle;
+  const bool slowly;
+  bool is_decreasing;
+public:
+  DecreaseAngleCommand(float target_angle, bool slowly);
+  virtual bool Execute();
 };
 
 class CommandList : public AICommand
 {
-  private:
-    std::queue<AICommand *> commands;
-  public:
-    CommandList() {};
-    virtual ~CommandList();
-    virtual bool Execute();
-    void Add(AICommand * command) { commands.push(command); }
-    int Size() { return commands.size(); }
+  std::queue<AICommand *> commands;
+public:
+  CommandList() {};
+  virtual ~CommandList();
+  virtual bool Execute();
+  void Add(AICommand * command) { commands.push(command); }
+  int Size() { return commands.size(); }
 };
 
 class SetWeaponAngleCommand : public AICommand
 {
-  private:
-    CommandList commands;
-    const float target_angle;
-  public:
-    SetWeaponAngleCommand(float angle);
-    virtual bool Execute();
+  CommandList commands;
+  const float target_angle;
+public:
+  SetWeaponAngleCommand(float angle);
+  virtual bool Execute();
 };
 
 class StartShootingCommand : public AICommand
 {
-  public:
-    virtual bool Execute();
+public:
+  virtual bool Execute();
 };
 
 class StopShootingCommand : public AICommand
 {
-  public:
-    virtual bool Execute();
+public:
+  virtual bool Execute();
 };
 
 class StartMovingCommand : public AICommand
 {
-  private:
-    LRDirection direction;
-    bool slowly;
-  public:
-    StartMovingCommand(LRDirection direction, bool slowly);
-    virtual bool Execute();
+  LRDirection direction;
+  bool slowly;
+public:
+  StartMovingCommand(LRDirection direction, bool slowly);
+  virtual bool Execute();
 };
 
 class StopMovingCommand : public AICommand
 {
-  private:
-    LRDirection direction;
-    bool slowly;
-  public:
-    StopMovingCommand(LRDirection direction, bool slowly);
-    virtual bool Execute();
+  LRDirection direction;
+  bool slowly;
+public:
+  StopMovingCommand(LRDirection direction, bool slowly);
+  virtual bool Execute();
 };
 
 class SetDirectionCommand : public AICommand
 {
-  private:
-    LRDirection direction;
-    bool turning;
-    CommandList * commands;
-  public:
-    SetDirectionCommand(LRDirection direction);
-    virtual ~SetDirectionCommand();
-    virtual bool Execute();
+  LRDirection direction;
+  bool turning;
+  CommandList * commands;
+public:
+  SetDirectionCommand(LRDirection direction);
+  virtual ~SetDirectionCommand();
+  virtual bool Execute();
 };
 
 /*unused?
@@ -155,48 +148,43 @@ class LoadAndShootCommand : public AICommand
 
 class DoNothingCommand : public AICommand
 {
-  private:
-    const uint duration;
-    uint start_time;
-  public:
-    DoNothingCommand(const uint duration_in_ms);
-    virtual bool Execute();
+  const uint duration;
+  uint start_time;
+public:
+  DoNothingCommand(const uint duration_in_ms);
+  virtual bool Execute();
 };
 
 class SelectWeaponCommand : public AICommand
 {
-  private:
-    Weapon::Weapon_type weapon;
-  public:
-    SelectWeaponCommand(Weapon::Weapon_type weapon);
-    virtual bool Execute();
+  Weapon::Weapon_type weapon;
+public:
+  SelectWeaponCommand(Weapon::Weapon_type weapon);
+  virtual bool Execute();
 };
 
 class SelectCharacterCommand : public AICommand
 {
-  private:
-    const Character * character;
-  public:
-    SelectCharacterCommand(const Character * character);
-    virtual bool Execute();
+  const Character * character;
+public:
+  SelectCharacterCommand(const Character * character);
+  virtual bool Execute();
 };
 
 class WaitForStrengthCommand : public AICommand
 {
-  private:
-    float target_strength;
-  public:
-    WaitForStrengthCommand(float target_strength);
-    virtual bool Execute();
+  float target_strength;
+public:
+  WaitForStrengthCommand(float target_strength);
+  virtual bool Execute();
 };
 
 class SetTimeoutCommand : public AICommand
 {
-  private:
-    int timeout;
-  public:
-    SetTimeoutCommand(int timeout);
-    virtual bool Execute();
+  int timeout;
+public:
+  SetTimeoutCommand(int timeout);
+  virtual bool Execute();
 };
 
 #endif
