@@ -104,7 +104,7 @@ void ComboBox::Draw(const Point2i &mousePosition)
     else
       torus->m_minus->SetCurrentFrame(0);
 
-    torus->m_minus->Blit(window, GetPosition().x + IMG_BUTTONS_W, GetPosition().y + IMG_BUTTONS_H);
+    torus->m_minus->Blit(window, GetPositionX() + IMG_BUTTONS_W, GetPositionY() + IMG_BUTTONS_H);
   }
 
   if (m_index < m_choices.size() - 1) {
@@ -113,12 +113,12 @@ void ComboBox::Draw(const Point2i &mousePosition)
     else
       torus->m_plus->SetCurrentFrame(0);
 
-    torus->m_plus->Blit(window, GetPosition().x + GetSize().x - torus->m_plus->GetWidth() - IMG_BUTTONS_W,
-                     GetPosition().y + IMG_BUTTONS_H);
+    torus->m_plus->Blit(window, GetPositionX() + GetSizeX() - torus->m_plus->GetWidth() - IMG_BUTTONS_W,
+                        GetPosition().y + IMG_BUTTONS_H);
   }
 
   // 3. add in the value image
-  uint tmp_x = center.x;
+  uint tmp_x = GetPositionX() + GetSizeX()/2;
   uint tmp_y = center.y + SMALL_R - 3;
   uint value_h = Font::GetInstance(Font::FONT_MEDIUM)->GetHeight();
 
@@ -126,8 +126,7 @@ void ComboBox::Draw(const Point2i &mousePosition)
   txt_value_white->DrawCenterTop(Point2i(tmp_x, tmp_y - value_h/2));
 
   // 7. and finally the label image
-  txt_label->DrawCenterTop(Point2i(GetPositionX() + GetSizeX()/2,
-                                   GetPositionY() + GetSizeY() - txt_label->GetHeight()));
+  txt_label->DrawCenterTop(Point2i(tmp_x, GetPositionY() + GetSizeY() - txt_label->GetHeight()));
 }
 
 Widget* ComboBox::ClickUp(const Point2i &mousePosition, uint button)
