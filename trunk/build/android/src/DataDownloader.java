@@ -407,6 +407,7 @@ class DataDownloader extends Thread
 					(new File( path.substring(0, path.lastIndexOf("/") ))).mkdirs();
 				} catch( SecurityException e ) { };
 				
+                /*
 				try {
 					CheckedInputStream check = new CheckedInputStream( new FileInputStream(path), new CRC32() );
 					while( check.read(buf, 0, buf.length) > 0 ) {};
@@ -422,6 +423,7 @@ class DataDownloader extends Thread
 				} catch( Exception e )
 				{
 				}
+                */
 
 				try {
 					out = new FileOutputStream( path );
@@ -464,6 +466,7 @@ class DataDownloader extends Thread
 					return false;
 				}
 				
+                /*
 				try {
 					CheckedInputStream check = new CheckedInputStream( new FileInputStream(path), new CRC32() );
 					while( check.read(buf, 0, buf.length) > 0 ) {};
@@ -480,6 +483,7 @@ class DataDownloader extends Thread
 					System.out.println("Saving file '" + path + "' - CRC check failed");
 					return false;
 				}
+                */
 				System.out.println("Saving file '" + path + "' done");
 			}
 		};
