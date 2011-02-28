@@ -59,7 +59,7 @@ private:
   CheckBox *full_screen;
 #endif
   SpinButtonWithPicture *opt_max_fps;
-  SpinButtonWithPicture *opt_quality;
+  ComboBox *opt_quality;
 
   /* Sound options controllers */
 #ifndef HAVE_HANDHELD
