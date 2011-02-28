@@ -121,9 +121,12 @@ OptionMenu::OptionMenu() :
                               option_size, 30, 5, 20,  60);
 #endif
   graphic_options->AddWidget(opt_max_fps);
-  opt_quality =
-    new SpinButtonWithPicture(_("Quality"), "menu/fps",
-                              option_size, config->GetQuality(), 1, 0, QUALITY_MAX-1);
+  std::vector<std::pair<std::string, std::string>> qualities;
+  qualities.push_back(std::pair<std::string, std::string>("0", _("Low memory")));
+  qualities.push_back(std::pair<std::string, std::string>("1", _("Medium")));
+  qualities.push_back(std::pair<std::string, std::string>("2", _("High")));
+  opt_quality = new ComboBox(_("Quality"), "menu/fps", option_size,
+                             qualities, qualities[config->GetQuality()].first);
   graphic_options->AddWidget(opt_quality);
 
 #ifndef HAVE_TOUCHSCREEN
@@ -447,7 +450,9 @@ void OptionMenu::SaveOptions()
 #endif
   config->SetSoundMusic(music_cbox->GetValue());
   config->SetSoundEffects(effects_cbox->GetValue());
-  config->SetQuality((Quality)opt_quality->GetValue());
+  int quality = 0;
+  sscanf(opt_quality->GetValue().c_str(), "%i", &quality);
+  config->SetQuality((Quality)quality);
 
   AppWarmux * app = AppWarmux::GetInstance();
   app->video->SetMaxFps(opt_max_fps->GetValue());
