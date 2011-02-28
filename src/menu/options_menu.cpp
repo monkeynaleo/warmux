@@ -121,7 +121,7 @@ OptionMenu::OptionMenu() :
                               option_size, 30, 5, 20,  60);
 #endif
   graphic_options->AddWidget(opt_max_fps);
-  std::vector<std::pair<std::string, std::string>> qualities;
+  std::vector< std::pair<std::string, std::string> > qualities;
   qualities.push_back(std::pair<std::string, std::string>("0", _("Low memory")));
   qualities.push_back(std::pair<std::string, std::string>("1", _("Medium")));
 #ifndef HAVE_HANDHELD
