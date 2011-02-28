@@ -124,7 +124,9 @@ OptionMenu::OptionMenu() :
   std::vector<std::pair<std::string, std::string>> qualities;
   qualities.push_back(std::pair<std::string, std::string>("0", _("Low memory")));
   qualities.push_back(std::pair<std::string, std::string>("1", _("Medium")));
+#ifndef HAVE_HANDHELD
   qualities.push_back(std::pair<std::string, std::string>("2", _("High")));
+#endif
   opt_quality = new ComboBox(_("Quality"), "menu/fps", option_size,
                              qualities, qualities[config->GetQuality()].first);
   graphic_options->AddWidget(opt_quality);
