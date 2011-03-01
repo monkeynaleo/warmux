@@ -425,7 +425,7 @@ void Menu::HandleEvents()
 
   do {
     // We might be set inactive while in here
-    if (AppWarmux::CheckInactive(evnt))
+    if (AppWarmux::GetInstance()->CheckInactive(evnt))
       continue;
 
     if (!HandleGlobalEvent(evnt)) {

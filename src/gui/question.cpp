@@ -138,7 +138,7 @@ int Question::Ask(bool onKeyUp)
       }
 
       // We might be put inactive while there
-      AppWarmux::CheckInactive(evnt);
+      AppWarmux::GetInstance()->CheckInactive(evnt);
 
       if ((onKeyUp && evnt.type == SDL_KEYUP) || evnt.type == SDL_KEYDOWN) {
         answer = TreatsKey(evnt);

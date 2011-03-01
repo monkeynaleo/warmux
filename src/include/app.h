@@ -58,7 +58,7 @@ public:
   int Main(void);
 
   // Calls this to check if Warmux must be moved to background
-  static bool CheckInactive(SDL_Event& evnt);
+  bool CheckInactive(SDL_Event& evnt);
 };
 
 #endif

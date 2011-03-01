@@ -41,6 +41,7 @@
 #include "menu/game_menu.h"
 #include "menu/help_menu.h"
 #include "menu/main_menu.h"
+#include "menu/pause_menu.h"
 #include "menu/network_connection_menu.h"
 #include "menu/options_menu.h"
 #include "menu/replay_menu.h"
@@ -280,58 +281,53 @@ void AppWarmux::End() const
   SaveStatToXML("stats.xml");
 #endif
   std::cout << "o " << _("If you found a bug or have a feature request "
-                    "send us an email (in english, please):")
+                         "send us an email (in english, please):")
     << " " << Constants::EMAIL << std::endl;
 }
 
 bool AppWarmux::CheckInactive(SDL_Event& evnt)
 {
 #ifdef MAEMO
-  bool pause_all = true;
   Osso::Process();
-  if (evnt.type==SDL_ACTIVEEVENT) {
+#  define CHECK_STATE(e) e.type==SDL_ACTIVEEVENT
 #else
-
-# ifdef ANDROID
-  bool pause_all = true;
-# else
-  bool pause_all = false;
+#  define CHECK_STATE(e) e.type==SDL_ACTIVEEVENT && e.active.state&SDL_APPACTIVE
 # endif
 
-  if (evnt.type==SDL_ACTIVEEVENT && evnt.active.state&SDL_APPACTIVE) {
-#endif
-    if (Network::IsConnected()) {
-      switch (evnt.active.gain) {
-      case 0: JukeBox::GetInstance()->Pause(pause_all); return true;
-      case 1: JukeBox::GetInstance()->Resume(pause_all); return true;
-      default: break;
-      }
-    }
-    else if (evnt.active.gain == 0) {
-#ifdef HAVE_HANDHELD
-      JukeBox::GetInstance()->CloseDevice();
-#else
-      JukeBox::GetInstance()->Pause();
-#endif
-      GameTime::GetInstance()->SetWaitingForUser(true);
-      while (SDL_WaitEvent(&evnt)) {
+  if (CHECK_STATE(evnt) && evnt.active.gain == 0) {
+    JukeBox::GetInstance()->CloseDevice();
+    GameTime::GetInstance()->SetWaitingForUser(true);
+
+    Action a(Action::ACTION_ANNOUNCE_PAUSE);
+    Network::GetInstance()->SendActionToAll(a);
+
+    while (SDL_WaitEvent(&evnt)) {
 #ifdef MAEMO
-  Osso::Process();
+      Osso::Process();
 #endif
-        if (evnt.type == SDL_QUIT) AppWarmux::EmergencyExit();
-        if (evnt.type == SDL_ACTIVEEVENT && evnt.active.gain == 1) {
-#ifdef HAVE_HANDHELD
-    JukeBox::GetInstance()->OpenDevice();
-    JukeBox::GetInstance()->NextMusic();
-#else
-          JukeBox::GetInstance()->Resume();
-#endif
-          GameTime::GetInstance()->SetWaitingForUser(false);
-          break;
+      if (evnt.type == SDL_QUIT) AppWarmux::EmergencyExit();
+      if (evnt.type == SDL_ACTIVEEVENT && evnt.active.gain == 1) {
+        if (Game::GetInstance()->IsRunning()) {
+          bool exit = false;
+          // There shouldn't be any other menu set, right?
+          menu = new PauseMenu(exit);
+          menu->Run();
+          delete menu;
+          menu = NULL;
+          if (exit)
+            Game::GetInstance()->UserAsksForEnd();
         }
+
+        JukeBox::GetInstance()->OpenDevice();
+        JukeBox::GetInstance()->NextMusic();
+        GameTime::GetInstance()->SetWaitingForUser(false);
+
+        break;
       }
-      return true;
+
+      printf("Dropping event %u\n", evnt.type);
     }
+    return true;
   }
   return false;
 }
