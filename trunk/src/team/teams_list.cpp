@@ -98,7 +98,7 @@ Team& TeamsList::ActiveTeam()
 bool TeamsList::LoadOneTeam(const std::string &dir, const std::string &team_name)
 {
   // Skip '.', '..' and hidden files
-  if (team_name[0] == '.')
+  if (team_name[0] == '.' || team_name == "SVN~1")
     return false;
 
   // Is it a directory ?
