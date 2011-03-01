@@ -515,7 +515,7 @@ void Game::RefreshInput()
     }
 
     // Inactive event
-    if (AppWarmux::CheckInactive(evnt))
+    if (AppWarmux::GetInstance()->CheckInactive(evnt))
       continue;
 
     if (benching) {
