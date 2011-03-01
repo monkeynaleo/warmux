@@ -331,7 +331,7 @@ MapsList::~MapsList()
 
 void MapsList::LoadOneMap(const std::string &dir, const std::string &map_name)
 {
-  if (map_name[0] == '.') return;
+  if (map_name[0] == '.' || map_name == "SVN~1") return;
 
   std::string fullname = dir + map_name;
   if (!DoesFolderExist(fullname))
