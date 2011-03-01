@@ -192,6 +192,8 @@ void MapSelectionBox::UpdateMapInfo(PictureWidget * widget, uint index, bool sel
     MapsList::iterator it = MapsList::GetInstance()->lst.begin() + index;
     delete *it;
     MapsList::GetInstance()->lst.erase(it);
+    ChangeMap(selected_map_index);
+    NeedRedrawing();
     return;
   }
 
