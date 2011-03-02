@@ -65,9 +65,8 @@ protected:
 
 //-----------------------------------------------------------------------------
 
-FootBomb::FootBomb(FootBombConfig& cfg,
-                         WeaponLauncher * p_launcher)
-  : WeaponProjectile ("footbomb", cfg, p_launcher)
+FootBomb::FootBomb(FootBombConfig& cfg, WeaponLauncher * p_launcher)
+  : WeaponProjectile("footbomb", cfg, p_launcher)
 {
   m_rebound_sound = "weapon/footbomb_bounce";
   explode_with_collision = false;
@@ -97,11 +96,9 @@ void FootBomb::Refresh()
 {
   WeaponProjectile::Refresh();
 //  image->SetRotation_rad(GetSpeedAngle());
-  if ( IsMoving() )
-  {
-    Double flying_time = (Double) GetMSSinceTimeoutStart();
-    const Double rotations_per_second = 4;
-    image->SetRotation_rad( rotations_per_second * TWO * PI * flying_time / (Double)1000 );
+  if (IsMoving()) {
+#define ROTATIONS_PER_SECOND  4
+    image->SetRotation_rad((ROTATIONS_PER_SECOND*GetMSSinceTimeoutStart()*2) * PI / 1000 );
   }
 }
 
@@ -115,24 +112,21 @@ void FootBomb::DoExplosion()
 {
   WeaponProjectile::DoExplosion();
 
-  if ( 0 == m_recursions )
+  if (!m_recursions)
     return;
 
-  const uint fragments = static_cast<FootBombConfig &>(cfg).nb_fragments;
-  FootBomb * cluster;
-
-  Double half_angle_range = static_cast<FootBombConfig &>(cfg).nb_angle_dispersion * PI / 180;
+  FootBombConfig &config = static_cast<FootBombConfig &>(cfg);
+  Double half_angle_range = config.nb_angle_dispersion * PI / 180;
   Point2i pos = GetPosition();
-  for (uint i = 0; i < fragments; ++i )
-  {
-    Double angle = -PI / 2; // this angle is "upwards" here
-    Double cluster_deviation = RandomSync().GetDouble( -half_angle_range, half_angle_range );
-    Double speed = RandomSync().GetDouble( static_cast<FootBombConfig &>(cfg).nb_min_speed,
-        static_cast<FootBombConfig &>(cfg).nb_max_speed );
 
-    cluster = new FootBomb(static_cast<FootBombConfig &>(cfg), launcher);
-    cluster->Shoot( pos, speed, angle + cluster_deviation, m_recursions - 1 );
-    cluster->SetTimeOut( cfg.timeout + m_timeout_modifier );
+  for (uint i=0; i<config.nb_fragments; ++i) {
+    Double angle = -PI / 2; // this angle is "upwards" here
+    Double cluster_deviation = RandomSync().GetDouble(-half_angle_range, half_angle_range);
+    Double speed = RandomSync().GetDouble(config.nb_min_speed, config.nb_max_speed);
+
+    FootBomb *cluster = new FootBomb(config, launcher);
+    cluster->Shoot(pos, speed, angle+cluster_deviation, m_recursions-1);
+    cluster->SetTimeOut(cfg.timeout + m_timeout_modifier);
 
     ObjectsList::GetRef().AddObject(cluster);
   }
@@ -170,10 +164,9 @@ FootBombConfig& FootBombLauncher::cfg()
 
 std::string FootBombLauncher::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
-  return Format(ngettext(
-            "%s team has won %u football bomb!",
-            "%s team has won %u football bombs!",
-            items_count), TeamName, items_count);
+  return Format(ngettext("%s team has won %u football bomb!",
+                         "%s team has won %u football bombs!",
+                         items_count), TeamName, items_count);
 }
 //-----------------------------------------------------------------------------
 
