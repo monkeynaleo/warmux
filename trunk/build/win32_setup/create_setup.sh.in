@@ -302,7 +302,7 @@ Section \$(TITLE_Warmux) Sec_Warmux
   File "${WIN_WarmuxDIR}\src\warmux.exe"
   WriteUninstaller "uninstall.exe"
   ; data
-  File /r /x .svn /x Makefile* /x Makefile.* "${WIN_WarmuxDIR}\\data"
+  File /r /x .svn /x Makefile* /x Makefile.* /x icon /x warmux_default_*_config.xml "${WIN_WarmuxDIR}\\data"
   ; Licenses
   File /r /x .svn "${WIN_WarmuxDIR}\\doc\\license"
 EOF
