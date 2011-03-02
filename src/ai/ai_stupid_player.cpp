@@ -19,8 +19,6 @@
  * An AI player for a team.
  *****************************************************************************/
 
-#include <algorithm>
-
 #include <WARMUX_random.h>
 #include "ai/ai_command.h"
 #include "ai/ai_idea.h"
@@ -155,16 +153,19 @@ AIStupidPlayer::~AIStupidPlayer()
     delete (*item_iterator).first;
 }
 
-bool AIStupidPlayer::IsIdeaRemovable(const AIItem& item)
-{
-  return item.first->NoLongerPossible();
-}
-
 void AIStupidPlayer::PrepareTurn()
 {
   Reset();
   weapons_weighting.RandomizeFactors();
-  std::remove_if(items.begin(), items.end(), IsIdeaRemovable);
+
+  std::list<AIItem>::iterator it = items.begin();
+  while (it != items.end()) {
+    if (it->first->NoLongerPossible()) {
+      delete it->first;
+      it = items.erase(it);
+    } else
+      ++it;
+  }
 }
 
 void AIStupidPlayer::Reset()
