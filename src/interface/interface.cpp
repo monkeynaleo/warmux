@@ -62,22 +62,33 @@ void Interface::LoadDataInternal(Profile *res)
   if (!clock_emergency)
     clock_emergency = LOAD_RES_SPRITE("interface/clock_emergency");
 
+  bool replay = Replay::GetConstInstance()->IsPlaying();
   last_width = AppWarmux::GetInstance()->video->window.GetWidth();
   if (last_width < tmp.GetWidth()+20) {
     zoom            = last_width / (float)(tmp.GetWidth()+20);
     default_toolbar = tmp.RotoZoom(0.0, zoom, zoom);
-    control_toolbar = LOAD_RES_IMAGE("interface/background_control_interface").RotoZoom(0.0, zoom, zoom);
     small_interface = LOAD_RES_IMAGE("interface/small_background_interface").RotoZoom(0.0, zoom, zoom);
-    replay_toolbar = LOAD_RES_IMAGE("interface/background_replay").RotoZoom(0.0, zoom, zoom);
+    if (replay) {
+      control_toolbar.AutoFree();
+      replay_toolbar = LOAD_RES_IMAGE("interface/background_replay").RotoZoom(0.0, zoom, zoom);
+    } else {
+      replay_toolbar.AutoFree();
+      control_toolbar = LOAD_RES_IMAGE("interface/background_control_interface").RotoZoom(0.0, zoom, zoom);
+    }
     clock_normal->Scale(zoom, zoom);
     clock_emergency->Scale(zoom, zoom);
   }
   else {
     zoom            = 1.0f;
     default_toolbar = tmp;
-    control_toolbar = LOAD_RES_IMAGE("interface/background_control_interface");
+    if (replay) {
+      control_toolbar.AutoFree();
+      replay_toolbar = LOAD_RES_IMAGE("interface/background_replay");
+    } else {
+      replay_toolbar.AutoFree();
+      control_toolbar = LOAD_RES_IMAGE("interface/background_control_interface");
+    }
     small_interface = LOAD_RES_IMAGE("interface/small_background_interface");
-    replay_toolbar = LOAD_RES_IMAGE("interface/background_replay");
   }
   clock_width = 70*zoom+0.5f;
 #if defined(ANDROID) || defined (__SYMBIAN32__)
