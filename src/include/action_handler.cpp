@@ -24,6 +24,7 @@
 #include <SDL_mutex.h>
 #include <WARMUX_debug.h>
 #include <WARMUX_distant_cpu.h>
+#include <WARMUX_file_tools.h>
 #include <WARMUX_team_config.h>
 #include <WARMUX_i18n.h>
 
@@ -873,19 +874,21 @@ static void Action_Network_VerifyRandomSync(Action *a)
 {
   uint local_seed = RandomSync().GetSeed();
   uint remote_seed = (uint)a->PopInt();
-  MSG_DEBUG("random.verify","Verify seed: %d (local) == %d (remote)", local_seed, remote_seed);
+  MSG_DEBUG("random.verify", "Verify seed: %d (local) == %d (remote)", local_seed, remote_seed);
 
   if (local_seed != remote_seed) {
 
     Question question(Question::WARNING);
     question.Set(_("Game is not synchronized anymore! This is BAD, the network game will be "
                    "interrupted, sorry. Please, report the bug to the Warmux Team by mail or "
-                   "through the forum. Precise your computer configuration, the game version "
-                   "the map on which you were playing, and what was the very last events "
-                   "occuring in the game (last weapon used, ...)."),
+                   "through the forum. Precise your computer configuration and attach the "
+                   "bug.wrf file that has just been created in your home folder."),
                    true, 0);
     question.Ask();
     DisconnectOnError(WRONG_SYNC);
+    Replay *replay = Replay::GetInstance();
+    if (replay->IsRecording())
+      replay->SaveReplay(GetHome() + "bug.wrf", "I'm bugged");
   }
 }
 
