@@ -364,8 +364,8 @@ void Interface::DrawWindInfo() const
 void Interface::DrawReplayInfo() const
 {
   t_speed->DrawCenter(bottom_bar_pos + Point2i(576*zoom+0.5f,default_toolbar.GetHeight()>>1));
-  float len = (GameTime::GetConstInstance()->Read() * 60.0f) / Replay::GetConstInstance()->GetDuration();
-  GetMainWindow().BoxColor(Rectanglei(bottom_bar_pos + Point2i(214*zoom, 35*zoom),
+  float len = (GameTime::GetConstInstance()->Read() * 128.0f) / Replay::GetConstInstance()->GetDuration();
+  GetMainWindow().BoxColor(Rectanglei(bottom_bar_pos + Point2i(149*zoom, 35*zoom),
                                       Point2i(len*zoom+0.5f, 11*zoom+0.5f)),
                            primary_red_color);
 }
@@ -877,34 +877,27 @@ bool Interface::ReplayClick(const Point2i &mouse_pos, ClickType type, Point2i ol
 {
   Game     *game = Game::GetInstance();
   Point2i mouse_rel_pos = mouse_pos-bottom_bar_pos;
-  Point2i size(62*zoom, replay_toolbar.GetHeight());
+  Point2i size(64*zoom, replay_toolbar.GetHeight());
 
   old_mouse_pos -= bottom_bar_pos;
 
-  Rectanglei pause_button(Point2i(10*zoom, 0), size);
-  if (pause_button.Contains(mouse_rel_pos)) {
-    // We have to go through the game loop to pause
-    if (type == CLICK_TYPE_DOWN)
-      game->RequestPause(true);
-    return true;
-  }
-
-  Rectanglei play_button(Point2i(72*zoom, 0), size);
+  Rectanglei play_button(Point2i(10*zoom, 0), size);
   if (play_button.Contains(mouse_rel_pos)) {
     // We have to go through the game loop to pause
     if (type == CLICK_TYPE_DOWN)
-      game->RequestPause(false);
+      game->RequestPause(!GameTime::GetConstInstance()->IsPaused());
     return true;
   }
 
-  Rectanglei stop_button(Point2i(134*zoom, 0), size);
+  Rectanglei stop_button(Point2i(72*zoom, 0), size);
   if (stop_button.Contains(mouse_rel_pos)) {
+    // We have to go through the game loop to pause
     if (type == CLICK_TYPE_DOWN)
       game->UserAsksForEnd();
     return true;
   }
 
-  Rectanglei skip_button(Point2i(214*zoom, 0), size);
+  Rectanglei skip_button(Point2i(149*zoom, 0), Point2i(128*zoom, replay_toolbar.GetHeight()));
   if (skip_button.Contains(mouse_rel_pos)) {
     uint time;
     switch (type) {
