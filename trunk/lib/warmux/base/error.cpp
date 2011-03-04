@@ -47,7 +47,7 @@ void WakeUpDebugger()
 void MissedAssertion(const char *filename, unsigned int line,
                      const char *message)
 {
-  std::cout << std::endl;
+  std::cerr << std::endl;
   std::cerr << filename << ':' << line
             << ": Missed assertion \"" << message << "\"."
             << std::endl;
