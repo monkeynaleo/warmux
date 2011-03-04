@@ -482,23 +482,18 @@ void ResultsMenu::OnClickUp(const Point2i &mousePosition, int button)
   Widget *w = widgets.ClickUp(mousePosition, button);
 
   b_cancel->SetVisible(tabs->GetCurrentTabId() == REPLAY_ID);
-  //bool should_be_visible = tabs->GetCurrentTabId() == REPLAY_ID;
-  //if (b_cancel->IsVisible() != should_be_visible) {
-  //  b_cancel->SetVisible(should_be_visible);
-  //  actions_buttons->NeedRedrawing();
-  //}
 
   // Are we recording?
   if (save) {
     // Are we requested to save?
     if (w == save) {
       SaveReplay();
-    }
-  } else if (w == folders) {
-    const char* file = folders->GetSelectedName();
-    // This is a file, use that filename
-    if (file) {
-      replay_name->SetText(file);
+    } else if (w == folders) {
+      const char* file = folders->GetSelectedName();
+      // This is a file, use that filename
+      if (file) {
+        replay_name->SetText(file);
+      }
     }
   }
 }
