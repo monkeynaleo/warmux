@@ -59,11 +59,14 @@ class ResultsMenu : public Menu
   TextBox     *replay_name;
   TextBox     *comment;
 
+  bool signal_ok();
   void key_ok();
 
   void ComputeTeamsOrder();
   void DrawPodium(const Point2i &position) const;
   void DrawTeamOnPodium(const Team& team, const Point2i& relative_position);
+  bool SaveReplay();
+
   void Draw(const Point2i &mousePosition);
   void OnClickUp(const Point2i &mousePosition, int button);
 
