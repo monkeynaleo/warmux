@@ -66,6 +66,8 @@
 
 static const Point2i DefSize(DEF_SIZE, DEF_SIZE);
 
+#define REPLAY_ID "TAB_replay"
+
 class ResultBox : public HBox
 {
   Label  *category;
@@ -227,7 +229,7 @@ static bool IsPodiumSeparate()
 }
 
 ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
-  : Menu("menu/bg_results", vOk)
+  : Menu("menu/bg_results", vOkCancel)
   , results(v)
   , first_team(NULL)
   , second_team(NULL)
@@ -242,6 +244,9 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
   uint x        = wsize.GetX() * 0.02;
   uint tab_x    = small ? x : 260+16+x;
   uint y        = wsize.GetY() * 0.02;
+
+  // Not showing it yet
+  b_cancel->SetVisible(false);
 
   if (!disconnected)
     ComputeTeamsOrder();
@@ -371,7 +376,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
     folders->AddExtensionFilter("wrf");
     folders->StartListing();
     vbox->AddWidget(folders);
-    tabs->AddNewTab("TAB_replay", _("Save replay?"), vbox);
+    tabs->AddNewTab(REPLAY_ID, _("Save replay?"), vbox);
   }
   GetResourceManager().UnLoadXMLProfile(res);
 
@@ -410,6 +415,43 @@ void ResultsMenu::DrawTeamOnPodium(const Team& team, const Point2i& relative_pos
   podium_img.MergeSurface(tmp, position);
 }
 
+bool ResultsMenu::SaveReplay()
+{
+  std::string filename = replay_name->GetText();
+  if (filename.empty() || filename == "") {
+    Question question(Question::WARNING);
+    question.Set(_("Invalid filename"), true, 0);
+    question.Ask();
+    return false;
+  }
+
+#  ifdef _WIN32
+  std::string name = UTF8ToUTF16(folders->GetCurrentFolder(), filename);
+#  else
+  std::string name = folders->GetCurrentFolder() + filename;
+#endif
+  if (!Replay::GetInstance()->SaveReplay(name, comment->GetText().c_str())) {
+    Question question(Question::WARNING);
+    question.Set(_("Failed to save replay"), true, 0);
+    question.Ask();
+    return false;
+  }
+
+  folders->StartListing(folders->GetCurrentFolder().c_str());
+  Question question(Question::NO_TYPE);
+  question.Set(_("Replay saved"), true, 0);
+  question.Ask();
+
+  return true;
+}
+
+bool ResultsMenu::signal_ok()
+{
+  if (tabs->GetCurrentTabId() == REPLAY_ID)
+    return SaveReplay();
+  return true;
+}
+
 void ResultsMenu::key_ok()
 {
   // return was pressed while chat texbox still had focus (player wants to send his msg)
@@ -439,40 +481,24 @@ void ResultsMenu::OnClickUp(const Point2i &mousePosition, int button)
 {
   Widget *w = widgets.ClickUp(mousePosition, button);
 
+  b_cancel->SetVisible(tabs->GetCurrentTabId() == REPLAY_ID);
+  //bool should_be_visible = tabs->GetCurrentTabId() == REPLAY_ID;
+  //if (b_cancel->IsVisible() != should_be_visible) {
+  //  b_cancel->SetVisible(should_be_visible);
+  //  actions_buttons->NeedRedrawing();
+  //}
+
   // Are we recording?
   if (save) {
     // Are we requested to save?
     if (w == save) {
-      std::string filename = replay_name->GetText();
-      if (filename.empty() || filename == "") {
-        Question question(Question::WARNING);
-        question.Set(_("Invalid filename"), true, 0);
-        question.Ask();
-        return;
-      }
-
-#  ifdef _WIN32
-      std::string name = UTF8ToUTF16(folders->GetCurrentFolder(), filename);
-#  else
-      std::string name = folders->GetCurrentFolder() + filename;
-#endif
-      if (!Replay::GetInstance()->SaveReplay(name, comment->GetText().c_str())) {
-        Question question(Question::WARNING);
-        question.Set(_("Failed to save replay"), true, 0);
-        question.Ask();
-        return;
-      }
-
-      folders->StartListing(folders->GetCurrentFolder().c_str());
-      Question question(Question::NO_TYPE);
-      question.Set(_("Replay saved"), true, 0);
-      question.Ask();
-    } else if (w == folders) {
-      const char* file = folders->GetSelectedName();
-      // This is a file, use that filename
-      if (file) {
-        replay_name->SetText(file);
-      }
+      SaveReplay();
+    }
+  } else if (w == folders) {
+    const char* file = folders->GetSelectedName();
+    // This is a file, use that filename
+    if (file) {
+      replay_name->SetText(file);
     }
   }
 }
