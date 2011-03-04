@@ -10,16 +10,16 @@ msgstr ""
 "PO-Revision-Date: 2010-02-11 03:47+0900\n"
 "Last-Translator: Akicks <akicks@gmail.com>\n"
 "Language-Team: Japanese (Japan) <akicks@gmail.com>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=1; plural=0 \n"
 "X-Poedit-Language: Japanese\n"
 "X-Poedit-Country: JAPAN\n"
 
-#: src/map/maps_list.cpp:380
+#: src/map/maps_list.cpp:382
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! マップ「%s」が見つかりません :-("
@@ -41,12 +41,12 @@ msgid "%i player ready"
 msgid_plural "%i players ready"
 msgstr[0] "%i人のプレイヤーの準備ができました"
 
-#: src/map/maps_list.cpp:138
+#: src/map/maps_list.cpp:140
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> aka %s from %s"
 
-#: src/map/maps_list.cpp:145
+#: src/map/maps_list.cpp:147
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> from %s"
@@ -62,40 +62,40 @@ msgstr " %s チーム"
 msgid "%s Team - Remote"
 msgstr " %s チーム - 操作"
 
-#: src/game/game.cpp:1065
+#: src/game/game.cpp:1167
 #, fuzzy, c-format
 msgid "%s from %s team committed suicide!"
 msgstr "%s (%s) は自殺した！"
 
 #. Could be modified, but for now, save on translation
-#: src/game/game.cpp:1091 src/game/game.cpp:1110
+#: src/game/game.cpp:1193 src/game/game.cpp:1212
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s (%s) は死んでしまった。"
 
-#: src/game/game.cpp:1057
+#: src/game/game.cpp:1159
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s (%s) は溺れてしまった。"
 
-#: src/game/game.cpp:1051
+#: src/game/game.cpp:1153
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s (%s) は星になった。"
 
-#: src/game/game.cpp:1071
+#: src/game/game.cpp:1173
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s (%s) は地面に叩き付けられた。"
 
 # what about female names?
 #. The playing character killed himself
-#: src/game/game.cpp:1078
+#: src/game/game.cpp:1180
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s (%s) の死因：ヘタクソ！"
 
-#: src/network/admin_commands.cpp:66
+#: src/network/admin_commands.cpp:69
 #, c-format
 msgid "%s has address %s"
 msgstr ""
@@ -113,7 +113,7 @@ msgstr ""
 msgid "%s has won %u points of energy!"
 msgstr "%s は %u ポイントのライフを獲得した！"
 
-#: src/game/game.cpp:1102
+#: src/game/game.cpp:1204
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s は気が狂ったかのように、味方%sチームのヤツを殺った！"
@@ -123,7 +123,23 @@ msgstr "%s は気が狂ったかのように、味方%sチームのヤツを殺�
 msgid "%s is next to a mine!"
 msgstr "%s の近くに地雷が！"
 
-#: src/network/admin_commands.cpp:63
+#. For translators: extended in "<nickname> (<host>) just connected
+#: src/include/action_handler.cpp:910
+#, fuzzy, c-format
+#| msgid "%i player connected"
+#| msgid_plural "%i players connected"
+msgid "%s just connected"
+msgstr "%i人のプレイヤーが接続しています"
+
+#. For translators: extended in "<nickname> (<host>) just disconnected
+#: src/include/action_handler.cpp:1022
+#, fuzzy, c-format
+#| msgid "%i player connected"
+#| msgid_plural "%i players connected"
+msgid "%s just disconnected"
+msgstr "%i人のプレイヤーが接続しています"
+
+#: src/network/admin_commands.cpp:66
 #, c-format
 msgid "%s kicked from game"
 msgstr ""
@@ -134,7 +150,7 @@ msgid "%s needs a pause."
 msgstr "%s はポーズが必要です"
 
 #. Can happen if the configuration is wrong...
-#: src/object/bonus_box.cpp:88
+#: src/object/bonus_box.cpp:89
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "%s チームの弾薬は %s によって無限だ！"
@@ -245,13 +261,13 @@ msgid "%s team has won %u flame-thrower!"
 msgid_plural "%s team has won %u flame-throwers!"
 msgstr[0] "%s チームは %u つの火炎放射器を手に入れた！"
 
-#: src/weapon/footbomb.cpp:174
+#: src/weapon/footbomb.cpp:167
 #, c-format
 msgid "%s team has won %u football bomb!"
 msgid_plural "%s team has won %u football bombs!"
 msgstr[0] "%s チームは %u つのラグビーボムを手に入れた！"
 
-#: src/weapon/grapple.cpp:716
+#: src/weapon/grapple.cpp:708
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -290,7 +306,7 @@ msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
 msgstr[0] "%s チームは %u つの地雷を手に入れた！"
 
-#: src/weapon/parachute.cpp:171
+#: src/weapon/parachute.cpp:174
 #, c-format
 msgid "%s team has won %u parachute!"
 msgid_plural "%s team has won %u parachutes!"
@@ -376,12 +392,12 @@ msgstr[0] ""
 msgid "%s team was fragged down."
 msgstr "%s チームは降参しました。"
 
-#: src/game/game.cpp:1086 src/game/game.cpp:1098
+#: src/game/game.cpp:1188 src/game/game.cpp:1200
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s は、%s チームのメンバーを道連れにした！"
 
-#: src/network/admin_commands.cpp:78
+#: src/network/admin_commands.cpp:81
 #, c-format
 msgid "%s: no such nickame"
 msgstr ""
@@ -421,12 +437,12 @@ msgstr "武器カテゴリを切り替える"
 msgid "'Tool' weapon category"
 msgstr "武器カテゴリを切り替える"
 
-#: src/interface/interface.cpp:265
+#: src/interface/interface.cpp:274
 msgid "(dead)"
 msgstr "(死)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:334
+#: src/menu/options_menu.cpp:339
 msgid "(system language)"
 msgstr "(システム言語)"
 
@@ -435,11 +451,11 @@ msgid "(unknown time)"
 msgstr "(不明な時間)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:288
+#: src/interface/interface.cpp:297
 msgid "(unlimited)"
 msgstr "(無制限)"
 
-#: src/menu/options_menu.cpp:531
+#: src/menu/options_menu.cpp:538
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s. You may want to "
@@ -462,7 +478,7 @@ msgstr "空爆"
 msgid "Airhammer"
 msgstr "ドリル"
 
-#: src/menu/results_menu.cpp:305
+#: src/menu/results_menu.cpp:308
 msgid "All teams"
 msgstr "全てのチーム"
 
@@ -493,7 +509,7 @@ msgstr "ハンマー台"
 msgid "Area currently displayed"
 msgstr ""
 
-#: src/main.cpp:346
+#: src/main.cpp:344
 msgid "Authors:"
 msgstr "作者:"
 
@@ -545,19 +561,19 @@ msgstr "バウンスボール"
 msgid "Bye bye Tux..."
 msgstr "バイバイ Tux..."
 
-#: src/team/teams_list.cpp:468 src/team/teams_list.cpp:503
-#: src/team/teams_list.cpp:512 src/team/teams_list.cpp:518
-#: src/team/teams_list.cpp:576
+#: src/team/teams_list.cpp:469 src/team/teams_list.cpp:504
+#: src/team/teams_list.cpp:513 src/team/teams_list.cpp:519
+#: src/team/teams_list.cpp:577
 #, c-format
 msgid "Can't find team %s!"
 msgstr "%s! チームが見つかりません。"
 
-#: src/team/teams_list.cpp:157
+#: src/team/teams_list.cpp:158
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "個人チームのディレクトリが開けません (%s)!"
 
-#: src/team/teams_list.cpp:143
+#: src/team/teams_list.cpp:144
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "チームのディレクトリが開けません (%s)!"
@@ -621,7 +637,7 @@ msgid ""
 "Team name."
 msgstr ""
 
-#: src/menu/options_menu.cpp:187
+#: src/menu/options_menu.cpp:192
 msgid "Character names:"
 msgstr "キャラクター名:"
 
@@ -633,11 +649,11 @@ msgstr "キャラクターの切り替え"
 msgid "Chat"
 msgstr ""
 
-#: src/menu/options_menu.cpp:241
+#: src/menu/options_menu.cpp:246
 msgid "Check updates online?"
 msgstr "アップデートをオンラインでチェックしますか？"
 
-#: src/menu/map_selection_box.cpp:225
+#: src/menu/map_selection_box.cpp:227
 msgid "Choose randomly between the different maps"
 msgstr "マップの中からランダムに選択"
 
@@ -677,11 +693,11 @@ msgid ""
 msgstr ""
 
 #. Client Mode
-#: src/menu/network_menu.cpp:170 src/network/network.cpp:450
+#: src/menu/network_menu.cpp:170 src/network/network.cpp:448
 msgid "Client mode"
 msgstr "クライアントモード"
 
-#: src/menu/results_menu.cpp:176 src/menu/results_menu.cpp:178
+#: src/menu/results_menu.cpp:179 src/menu/results_menu.cpp:181
 msgid "Clumsiest"
 msgstr "不器用"
 
@@ -693,7 +709,7 @@ msgstr "クラスターボム"
 msgid "Cluzooka"
 msgstr "クラスターバズーカ"
 
-#: src/menu/results_menu.cpp:350
+#: src/menu/results_menu.cpp:361
 msgid "Comment:"
 msgstr ""
 
@@ -714,7 +730,7 @@ msgstr "ゲームに接続する"
 msgid "Connected !"
 msgstr "接続しました！"
 
-#: src/network/admin_commands.cpp:93
+#: src/network/admin_commands.cpp:96
 msgid "Connected players: "
 msgstr "接続しました！"
 
@@ -722,7 +738,7 @@ msgstr "接続しました！"
 msgid "Construct"
 msgstr "建設資材"
 
-#: src/menu/results_menu.cpp:284
+#: src/menu/results_menu.cpp:287
 msgid "Controlled by: "
 msgstr "コントロール: "
 
@@ -771,7 +787,7 @@ msgstr ""
 msgid "Disco Grenade"
 msgstr "ディスコグレネード"
 
-#: src/network/admin_commands.cpp:31
+#: src/network/admin_commands.cpp:33
 msgid "Displays this message"
 msgstr "メッセージを表示"
 
@@ -808,33 +824,33 @@ msgstr "ターンの時間"
 msgid "Dynamite"
 msgstr "ダイナマイト"
 
-#: src/game/game.cpp:510
+#: src/game/game.cpp:512
 msgid "END OF GAME"
 msgstr "ゲームを終了"
 
-#: src/menu/options_menu.cpp:286
+#: src/menu/options_menu.cpp:291
 msgid "Effects volume"
 msgstr "効果音のボリューム"
 
-#: src/menu/results_menu.cpp:331
+#: src/menu/results_menu.cpp:334
 msgid "Energy"
 msgstr "ライフ"
 
-#: src/include/action_handler.cpp:279
+#: src/include/action_handler.cpp:281
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "ネットワーク初期化エラー : クライアント %s はあなたに同意しません - %s"
 
-#: src/map/ground.cpp:65
+#: src/map/ground.cpp:61
 #, fuzzy
 msgid "Error loading ground"
 msgstr "チーム読み込みエラー :"
 
-#: src/team/custom_teams_list.cpp:93 src/team/teams_list.cpp:118
+#: src/team/custom_teams_list.cpp:93 src/team/teams_list.cpp:119
 msgid "Error loading team :"
 msgstr "チーム読み込みエラー :"
 
-#: src/game/config.cpp:574 src/team/custom_team.cpp:155
+#: src/game/config.cpp:586 src/team/custom_team.cpp:155
 #: src/team/custom_team.cpp:166 src/team/custom_team.cpp:177
 #, c-format
 msgid ""
@@ -925,11 +941,11 @@ msgstr ""
 msgid "Fail to open temporary file: %s"
 msgstr "マップディレクトリが開けません (%s)!"
 
-#: src/menu/results_menu.cpp:444
+#: src/menu/results_menu.cpp:461
 msgid "Failed to save replay"
 msgstr ""
 
-#: src/menu/results_menu.cpp:344
+#: src/menu/results_menu.cpp:349
 #, fuzzy
 #| msgid "Game name:"
 msgid "Filename:"
@@ -939,7 +955,7 @@ msgstr "ゲーム名"
 msgid "Flame Thrower"
 msgstr "火炎放射器"
 
-#: src/weapon/footbomb.cpp:157
+#: src/weapon/footbomb.cpp:151
 msgid "Football Bomb"
 msgstr "ラグビーボム"
 
@@ -977,7 +993,7 @@ msgstr "ゲームモード"
 msgid "Game name:"
 msgstr "ゲーム名"
 
-#: src/include/action_handler.cpp:242
+#: src/include/action_handler.cpp:244
 msgid "Game out of sync!"
 msgstr ""
 
@@ -992,11 +1008,11 @@ msgid ""
 "Will cure your teammate or slowly kill your opponent"
 msgstr ""
 
-#: src/menu/benchmark_menu.cpp:114 src/menu/options_menu.cpp:152
+#: src/menu/benchmark_menu.cpp:114 src/menu/options_menu.cpp:157
 msgid "Graphics"
 msgstr "グラフィック"
 
-#: src/weapon/grapple.cpp:172
+#: src/weapon/grapple.cpp:164
 msgid "Grapple"
 msgstr "鉤縄"
 
@@ -1008,7 +1024,7 @@ msgstr "重力"
 msgid "Grenade"
 msgstr "グレネード"
 
-#: src/map/ground.cpp:43
+#: src/map/ground.cpp:39
 msgid "Ground initialization..."
 msgstr "地面を初期化中..."
 
@@ -1021,7 +1037,7 @@ msgid "Have a good game!"
 msgstr "楽しんで！"
 
 #. *******    Names: "Head commander" + text/custom team    ******
-#: src/interface/interface.cpp:254 src/menu/options_menu.cpp:177
+#: src/interface/interface.cpp:263 src/menu/options_menu.cpp:182
 #: src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr "指揮官"
@@ -1030,6 +1046,12 @@ msgstr "指揮官"
 #: src/menu/pause_menu.cpp:56
 msgid "Help"
 msgstr "ヘルプ"
+
+#: src/menu/options_menu.cpp:128
+#, fuzzy
+#| msgid "High jump"
+msgid "High"
+msgstr "ハイジャンプ"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/interface/man_machine_interface.cpp:1172 src/menu/help_menu.cpp:117
@@ -1044,11 +1066,11 @@ msgstr "ゲームをホストする"
 msgid "Hurry up, you are too slow !!"
 msgstr "急げ、遅すぎるぞ！！"
 
-#: src/menu/results_menu.cpp:351
+#: src/menu/results_menu.cpp:362
 msgid "I like WarMUX :)"
 msgstr ""
 
-#: src/main.cpp:280
+#: src/main.cpp:283
 msgid ""
 "If you found a bug or have a feature request send us an email (in english, "
 "please):"
@@ -1139,11 +1161,11 @@ msgstr "インターフェースの表示/非表示"
 msgid "Interface and touch controls, more details in other tabs"
 msgstr ""
 
-#: src/menu/results_menu.cpp:437
+#: src/menu/results_menu.cpp:449
 msgid "Invalid filename"
 msgstr ""
 
-#: src/game/game.cpp:934
+#: src/game/game.cpp:1037
 msgid "It's a present!"
 msgstr "プレゼントだ！"
 
@@ -1176,7 +1198,7 @@ msgstr ""
 msgid "Key"
 msgstr ""
 
-#: src/menu/options_menu.cpp:162
+#: src/menu/options_menu.cpp:167
 msgid "Key bindings"
 msgstr ""
 
@@ -1185,35 +1207,39 @@ msgstr ""
 msgid "Keyboard"
 msgstr ""
 
-#: src/network/admin_commands.cpp:33
+#: src/network/admin_commands.cpp:35
 #, fuzzy
 msgid "Kicks the player designated by <nickname> out of the game"
 msgstr "<nickname> によってゲームから Kick されました"
 
-#: src/menu/options_menu.cpp:157
+#: src/menu/options_menu.cpp:162
 msgid "Language"
 msgstr "言語"
 
-#: src/menu/options_menu.cpp:247
+#: src/menu/options_menu.cpp:252
 msgid "Left-handed mouse?"
 msgstr "左手マウス？"
 
-#: src/network/admin_commands.cpp:35
+#: src/network/admin_commands.cpp:37
 #, fuzzy
 msgid "Lists the connected players"
 msgstr "接続したプレイヤーのリスト"
 
-#: src/map/maps_list.cpp:278
+#: src/map/maps_list.cpp:280
 msgid "Load maps:"
 msgstr "マップ読込:"
 
-#: src/team/teams_list.cpp:129
+#: src/team/teams_list.cpp:130
 msgid "Load teams:"
 msgstr "チーム読込:"
 
 #: src/menu/teams_selection_box.cpp:95
 msgid "Local teams:"
 msgstr "ローカルチーム:"
+
+#: src/menu/options_menu.cpp:125
+msgid "Low memory"
+msgstr ""
 
 #: src/weapon/lowgrav.cpp:49
 msgid "LowGrav"
@@ -1229,12 +1255,12 @@ msgstr "マニュアル接続"
 msgid "Map"
 msgstr "マップ"
 
-#: src/map/maps_list.cpp:102
+#: src/map/maps_list.cpp:104
 #, c-format
 msgid "Map %s in folder '%s' is invalid: %s"
 msgstr ""
 
-#: src/map/map.cpp:300
+#: src/map/map.cpp:425
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "マップ %s, 作者 : "
@@ -1260,6 +1286,10 @@ msgstr "最大ライフ"
 msgid "Maximum FPS"
 msgstr "最大 FPS"
 
+#: src/menu/options_menu.cpp:126
+msgid "Medium"
+msgstr ""
+
 #: src/menu/benchmark_menu.cpp:113
 msgid "Menu"
 msgstr ""
@@ -1278,7 +1308,7 @@ msgstr "マップ"
 msgid "Minimap, more details in another tab"
 msgstr ""
 
-#: src/menu/options_menu.cpp:262
+#: src/menu/options_menu.cpp:267
 msgid "Misc"
 msgstr "その他"
 
@@ -1292,23 +1322,23 @@ msgstr ""
 msgid "More energy, more shots needed"
 msgstr ""
 
-#: src/menu/results_menu.cpp:184 src/menu/results_menu.cpp:186
+#: src/menu/results_menu.cpp:187 src/menu/results_menu.cpp:189
 msgid "Most accurate"
 msgstr "最精密"
 
-#: src/menu/results_menu.cpp:168 src/menu/results_menu.cpp:170
+#: src/menu/results_menu.cpp:171 src/menu/results_menu.cpp:173
 msgid "Most sold-out"
 msgstr "最も売れている"
 
-#: src/menu/results_menu.cpp:152 src/menu/results_menu.cpp:154
+#: src/menu/results_menu.cpp:155 src/menu/results_menu.cpp:157
 msgid "Most useful"
 msgstr "最も使いやすい"
 
-#: src/menu/results_menu.cpp:160 src/menu/results_menu.cpp:162
+#: src/menu/results_menu.cpp:163 src/menu/results_menu.cpp:165
 msgid "Most useless"
 msgstr "最も失敗作"
 
-#: src/menu/results_menu.cpp:144 src/menu/results_menu.cpp:146
+#: src/menu/results_menu.cpp:147 src/menu/results_menu.cpp:149
 msgid "Most violent"
 msgstr "最も暴力的"
 
@@ -1364,11 +1394,11 @@ msgstr ""
 msgid "Multi-layer sky?"
 msgstr "空のマルチレイヤー?"
 
-#: src/menu/options_menu.cpp:274
+#: src/menu/options_menu.cpp:279
 msgid "Music volume"
 msgstr "音楽のボリューム:"
 
-#: src/menu/options_menu.cpp:269
+#: src/menu/options_menu.cpp:274
 msgid "Music?"
 msgstr "音楽？"
 
@@ -1389,7 +1419,7 @@ msgstr "しない"
 msgid "New network game at "
 msgstr "新規ネットワークゲーム"
 
-#: src/menu/options_menu.cpp:311
+#: src/menu/options_menu.cpp:316
 msgid "New player warning?"
 msgstr "新規プレイヤーのお知らせ？"
 
@@ -1403,7 +1433,7 @@ msgstr "キャラクターの移動"
 msgid "No element <%s> found in the xml config file!"
 msgstr "xml設定ファイル内に<%s>要素が見つかりません！"
 
-#: src/network/admin_commands.cpp:89
+#: src/network/admin_commands.cpp:92
 msgid "No player connected"
 msgstr "%i人のプレイヤーが接続しています"
 
@@ -1411,7 +1441,7 @@ msgstr "%i人のプレイヤーが接続しています"
 msgid "No pointer"
 msgstr ""
 
-#: src/menu/results_menu.cpp:83
+#: src/menu/results_menu.cpp:86
 msgid "Nobody!"
 msgstr "誰もいない！"
 
@@ -1503,7 +1533,7 @@ msgstr "プレイヤーのライフ？"
 msgid "Player's name?"
 msgstr "プレイヤーの名前？"
 
-#: src/menu/results_menu.cpp:297
+#: src/menu/results_menu.cpp:300
 msgid "Podium"
 msgstr ""
 
@@ -1561,7 +1591,7 @@ msgid ""
 "Change angle while shooting"
 msgstr ""
 
-#: src/weapon/grapple.cpp:173
+#: src/weapon/grapple.cpp:165
 msgid ""
 "Press space to shoot grapple\n"
 "Use left/right to swing\n"
@@ -1585,7 +1615,7 @@ msgstr ""
 msgid "Public battles"
 msgstr "パブリックバトル"
 
-#: src/menu/options_menu.cpp:125
+#: src/menu/options_menu.cpp:130
 msgid "Quality"
 msgstr ""
 
@@ -1598,7 +1628,7 @@ msgstr "Ctrlでクイック終了"
 msgid "Quit"
 msgstr "終了"
 
-#: src/main.cpp:269
+#: src/main.cpp:272
 #, fuzzy
 msgid "Quit Warmux"
 msgstr "Warmux を終了"
@@ -1611,7 +1641,7 @@ msgstr "ゲームを終了"
 msgid "Rail Gun"
 msgstr ""
 
-#: src/menu/map_selection_box.cpp:224
+#: src/menu/map_selection_box.cpp:226
 msgid "Random map"
 msgstr "ランダムマップ"
 
@@ -1620,11 +1650,11 @@ msgstr "ランダムマップ"
 msgid "Read only %i bytes"
 msgstr "%i チームがあります。"
 
-#: src/game/config.cpp:385
+#: src/game/config.cpp:397
 msgid "Reading the default config file"
 msgstr "デフォルト構成ファイルの読込中"
 
-#: src/game/config.cpp:442
+#: src/game/config.cpp:454
 msgid "Reading the personal config file"
 msgstr "個人構成ファイルを読込中"
 
@@ -1632,7 +1662,11 @@ msgstr "個人構成ファイルを読込中"
 msgid "Replay"
 msgstr ""
 
-#: src/menu/options_menu.cpp:147
+#: src/menu/results_menu.cpp:468
+msgid "Replay saved"
+msgstr ""
+
+#: src/menu/options_menu.cpp:152
 msgid "Resolution"
 msgstr "解像度"
 
@@ -1640,11 +1674,11 @@ msgstr "解像度"
 msgid "Riot Bomb"
 msgstr "ライオットボム"
 
-#: src/main.cpp:79
+#: src/main.cpp:80
 msgid "Run game"
 msgstr "ゲーム開始"
 
-#: src/menu/results_menu.cpp:362
+#: src/menu/results_menu.cpp:374
 msgid "Save replay?"
 msgstr ""
 
@@ -1652,11 +1686,11 @@ msgstr ""
 msgid "Say: "
 msgstr "発言: "
 
-#: src/menu/options_menu.cpp:257
+#: src/menu/options_menu.cpp:262
 msgid "Scroll border size"
 msgstr "スクロール枠のサイズ"
 
-#: src/menu/options_menu.cpp:252
+#: src/menu/options_menu.cpp:257
 msgid "Scroll on border"
 msgstr "スクロール枠"
 
@@ -1674,7 +1708,7 @@ msgstr "サーバーアドレス"
 msgid "Server available on Internet"
 msgstr "インターネットでサーバーが使用できます"
 
-#: src/menu/network_menu.cpp:177 src/network/network.cpp:480
+#: src/menu/network_menu.cpp:177 src/network/network.cpp:478
 msgid "Server mode"
 msgstr "サーバーモード"
 
@@ -1722,7 +1756,7 @@ msgstr "武器メニューを表示"
 msgid "Show/hide the interface"
 msgstr "インターフェースの表示/非表示"
 
-#: src/network/admin_commands.cpp:37
+#: src/network/admin_commands.cpp:39
 msgid "Shows the designated player address"
 msgstr ""
 
@@ -1747,7 +1781,7 @@ msgstr "照準角度と移動の微調整"
 msgid "Sniper Rifle"
 msgstr "スナイパーライフル"
 
-#: src/object/bonus_box.cpp:75
+#: src/object/bonus_box.cpp:76
 msgid "Someone put a booby trap into the crate!"
 msgstr "誰かが箱に罠を仕掛けたぞ！"
 
@@ -1766,15 +1800,15 @@ msgstr ""
 "す。http://www.warmux.org/wiki/download.php からダウンロードしてアップデート"
 "して下さい。"
 
-#: src/menu/options_menu.cpp:315
+#: src/menu/options_menu.cpp:320
 msgid "Sound"
 msgstr "サウンド"
 
-#: src/menu/options_menu.cpp:280
+#: src/menu/options_menu.cpp:285
 msgid "Sound effects?"
 msgstr "効果音？"
 
-#: src/menu/options_menu.cpp:306
+#: src/menu/options_menu.cpp:311
 msgid "Sound frequency"
 msgstr "サウンド周波数"
 
@@ -1787,7 +1821,7 @@ msgstr "サウンド"
 msgid "Starting a new game"
 msgstr "ゲームを開始中"
 
-#: src/interface/interface.cpp:289
+#: src/interface/interface.cpp:298
 msgid "Stock:"
 msgstr "残り:"
 
@@ -1812,11 +1846,21 @@ msgstr ""
 msgid "Talk in network battles"
 msgstr "ネットワーク対戦で話す"
 
-#: src/menu/results_menu.cpp:330
+#: src/menu/options_menu.cpp:616
+msgid "Team deleted"
+msgstr ""
+
+#: src/menu/results_menu.cpp:333
 msgid "Team graphs"
 msgstr "チームグラフ"
 
-#: src/menu/results_menu.cpp:308
+#: src/menu/options_menu.cpp:596
+#, fuzzy
+#| msgid "Team stats"
+msgid "Team saved"
+msgstr "チーム統計"
+
+#: src/menu/results_menu.cpp:311
 msgid "Team stats"
 msgstr "チーム統計"
 
@@ -1825,7 +1869,7 @@ msgstr "チーム統計"
 msgid "Teams"
 msgstr "チーム"
 
-#: src/menu/options_menu.cpp:224
+#: src/menu/options_menu.cpp:229
 msgid "Teams editor"
 msgstr "チームエディタ"
 
@@ -1842,7 +1886,7 @@ msgstr "テレポート"
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr "クラスターボムは、爆発前に戦場から出てしまいました。"
 
-#: src/weapon/footbomb.cpp:110
+#: src/weapon/footbomb.cpp:107
 msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr "ラグビーボムは、爆発前に戦場から出てしまいました。"
 
@@ -1873,14 +1917,14 @@ msgid ""
 "when it has no players left or its time has ran out."
 msgstr ""
 
-#: src/network/network_client.cpp:96
+#: src/network/network_client.cpp:99
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
 "Please try another server."
 msgstr ""
-"クライアントとサーバーのバージョンの互換性がありません。 (local=%s, server="
-"%s)他のサーバーで試してください。"
+"クライアントとサーバーのバージョンの互換性がありません。 (local=%s, server=%"
+"s)他のサーバーで試してください。"
 
 #: src/network/net_error_msg.cpp:34
 msgid "The connection timed out. Check there is no firewall in the way!"
@@ -1890,7 +1934,7 @@ msgstr "接続がタイムアウトしました。firewall を確認してくだ
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "ディスコグレネードは、爆発前にダンスフロアから出てしまいました。"
 
-#: src/game/game.cpp:762
+#: src/game/game.cpp:765
 msgid "The game was interrupted because you got disconnected."
 msgstr "あなたが切断されたため、ゲームは中断されました。"
 
@@ -1902,7 +1946,7 @@ msgstr "グレネードは、爆発前に戦場から出てしまいました。
 msgid "The others are waiting for you! Wake up! :-)"
 msgstr "他の人が待ってるよ！起きて！ :-)"
 
-#: src/weapon/parachute.cpp:89
+#: src/weapon/parachute.cpp:92
 msgid "The parachute is activated automatically."
 msgstr "パラシュートは自動で使用されます。"
 
@@ -1938,7 +1982,7 @@ msgstr[0] "%i チームがあります。"
 msgid "This key has already been attributed to '%s'"
 msgstr ""
 
-#: src/menu/benchmark_menu.cpp:115 src/menu/results_menu.cpp:331
+#: src/menu/benchmark_menu.cpp:115 src/menu/results_menu.cpp:334
 msgid "Time"
 msgstr "タイム"
 
@@ -1949,7 +1993,7 @@ msgid ""
 "Click to pause"
 msgstr ""
 
-#: src/weapon/cluster_bomb.cpp:188 src/weapon/footbomb.cpp:158
+#: src/weapon/cluster_bomb.cpp:188 src/weapon/footbomb.cpp:152
 #, fuzzy
 msgid ""
 "Timeout: Mouse wheel or Page Up/Down\n"
@@ -2031,12 +2075,12 @@ msgstr ""
 msgid "Unable to contact the host."
 msgstr "ホストにコンタクトできません。"
 
-#: src/map/maps_list.cpp:290
+#: src/map/maps_list.cpp:292
 #, c-format
 msgid "Unable to open the maps directory (%s)!"
 msgstr "マップディレクトリが開けません (%s)!"
 
-#: src/map/maps_list.cpp:304
+#: src/map/maps_list.cpp:306
 #, c-format
 msgid "Unable to open the personal maps directory (%s)!"
 msgstr "個人マップディレクトリが開けません (%s)!"
@@ -2045,11 +2089,11 @@ msgstr "個人マップディレクトリが開けません (%s)!"
 msgid "Unable to use this port!"
 msgstr "このポートは使用できません！"
 
-#: src/network/admin_commands.cpp:120
+#: src/network/admin_commands.cpp:122
 msgid "Unknown command"
 msgstr "不明なコマンド"
 
-#: src/network/admin_commands.cpp:69
+#: src/network/admin_commands.cpp:72
 #, fuzzy, c-format
 msgid "Unknown command of type %i"
 msgstr "不明なコマンド"
@@ -2096,11 +2140,11 @@ msgstr ""
 "砲撃: スペースキーを押し続けて強さを決定\n"
 "ターン毎で1つの弾薬"
 
-#: src/main.cpp:198
+#: src/main.cpp:199
 msgid "Version"
 msgstr "バージョン"
 
-#: src/menu/options_menu.cpp:538
+#: src/menu/options_menu.cpp:545
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr "バージョン確認は失敗しました。 理由: %s"
@@ -2115,7 +2159,7 @@ msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "待ってください！ %i はまだ準備ができていません！"
 
-#: src/game/game.cpp:661
+#: src/game/game.cpp:663
 #, c-format
 msgid "Waiting for %s"
 msgstr "%s を待っています"
@@ -2128,12 +2172,12 @@ msgstr "リモートプレイヤーを待っています"
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "サーバーを待っています。キャンセルとチャットができます！"
 
-#: src/main.cpp:209
+#: src/main.cpp:210
 #, fuzzy
 msgid "Warmux launching..."
 msgstr "Warmux を起動中..."
 
-#: src/main.cpp:345
+#: src/main.cpp:343
 #, fuzzy
 msgid "Warmux version "
 msgstr " Warmux バージョン"
@@ -2153,7 +2197,7 @@ msgstr "武器：攻撃 / ボーナスボックス: 急落下"
 msgid "Weapons"
 msgstr "武器"
 
-#: src/main.cpp:355
+#: src/main.cpp:353
 msgid "Website: "
 msgstr "Webサイト: "
 
@@ -2164,12 +2208,12 @@ msgstr "Webサイト: "
 msgid "Welcome to %s on %s!"
 msgstr "%s (%s)へようこそ！"
 
-#: src/game/game.cpp:1044
+#: src/game/game.cpp:1146
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr "なんと美しいホームランだろう！%s (%s)は異世界へ..."
 
-#: src/game/game.cpp:1107
+#: src/game/game.cpp:1209
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr " %s はハンドガンごときにやられました...これは恥ずかしい！"
@@ -2191,7 +2235,7 @@ msgid ""
 msgstr ""
 
 #
-#: src/menu/results_menu.cpp:276
+#: src/menu/results_menu.cpp:279
 msgid "Winner"
 msgstr "勝者"
 
@@ -2201,15 +2245,15 @@ msgstr "勝者"
 msgid "Woah! Combo of %u!"
 msgstr ""
 
-#: src/include/action_handler.cpp:238
+#: src/include/action_handler.cpp:240
 msgid "Wrong map CRC!"
 msgstr "CRCが間違っているマップです！"
 
-#: src/include/action_handler.cpp:236
+#: src/include/action_handler.cpp:238
 msgid "Wrong map name!"
 msgstr "名前が間違っているマップです！"
 
-#: src/include/action_handler.cpp:240
+#: src/include/action_handler.cpp:242
 msgid "Wrong team!"
 msgstr "チームが間違っています！"
 
@@ -2226,11 +2270,15 @@ msgstr "あなたは孤独・・・ :-/"
 msgid "You are the new turn master!"
 msgstr "あなたは新しいターンマスターです！"
 
-#: src/map/maps_list.cpp:313
+#: src/menu/options_menu.cpp:585
+msgid "You must fill Head Commander and all player names"
+msgstr ""
+
+#: src/map/maps_list.cpp:315
 msgid "You need at least one valid map!"
 msgstr "最低1つの有効なマップが必要です！"
 
-#: src/game/game.cpp:304 src/team/teams_list.cpp:165
+#: src/game/game.cpp:304 src/team/teams_list.cpp:166
 msgid "You need at least two valid teams!"
 msgstr "最低2つの有効なチームが必要です！"
 
@@ -2238,7 +2286,7 @@ msgstr "最低2つの有効なチームが必要です！"
 msgid "You won't be able to play before selecting a team!"
 msgstr "ゲーム開始前にチームを選択してください！"
 
-#: src/weapon/weapon_launcher.cpp:554
+#: src/weapon/weapon_launcher.cpp:545
 msgid "Your shot has missed!"
 msgstr "ミス！"
 
@@ -2258,7 +2306,7 @@ msgstr ""
 "爆撃 : 目標を左クリック\n"
 "ターン毎で1回"
 
-#: src/map/maps_list.cpp:80
+#: src/map/maps_list.cpp:82
 msgid "couldn't load config"
 msgstr "構成が読み込めませんでした。"
 
@@ -2267,11 +2315,11 @@ msgstr "構成が読み込めませんでした。"
 msgid "custom player"
 msgstr "カスタムプレイヤー"
 
-#: src/map/ground.cpp:71
+#: src/map/ground.cpp:67
 msgid "done"
 msgstr "完了"
 
-#: src/map/maps_list.cpp:87
+#: src/map/maps_list.cpp:89
 msgid "error parsing the config file"
 msgstr "構成ファイルを解析しているエラー"
 
@@ -2284,20 +2332,20 @@ msgstr "from"
 msgid "loading..."
 msgstr ""
 
-#: src/map/maps_list.cpp:73
+#: src/map/maps_list.cpp:75
 msgid "no configuration file!"
 msgstr "構成ファイルがありません！"
 
-#: src/sound/jukebox.cpp:186
+#: src/sound/jukebox.cpp:191
 msgid "o Loading music"
 msgstr "o 音楽を読込中"
 
-#: src/sound/jukebox.cpp:368
+#: src/sound/jukebox.cpp:373
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o 音楽設定を読込中 : %s"
 
-#: src/sound/jukebox.cpp:130
+#: src/sound/jukebox.cpp:135
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o 音楽 %d Hz %d bit"
