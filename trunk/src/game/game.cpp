@@ -711,6 +711,9 @@ bool Game::Run()
     ask_for_end = false;
     MainLoop();
 
+    if (Replay::GetConstInstance()->IsPlaying() && ActionHandler::GetConstInstance()->IsEmpty())
+      break;
+
     if (ask_for_end) {
       break;
     }

@@ -66,6 +66,8 @@ public:
   void Register(Action::Action_t action, const std::string &name, callback_t fct);
 
   const std::string &GetActionName(Action::Action_t action) const;
+
+  bool IsEmpty() const { return queue.empty(); }
 };
 
 #endif
