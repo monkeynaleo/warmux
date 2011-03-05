@@ -717,7 +717,7 @@ void Character::Refresh()
   GetSpeed(n, a);
   if (n > MIN_SPEED_TO_FLY && body->GetMovement() != "fly-black"
       && body->GetMovement() != "fall" && body->GetMovement() != "jump"
-      && body->GetMovement() != "fly") {
+      && body->GetMovement() != "fly" && body->GetMovement().substr(0,7) != "jetpack") {
     if (IsGoingUp() || IsGoingDown())
       SetMovement("fall");
     else
