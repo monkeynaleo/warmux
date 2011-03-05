@@ -157,7 +157,7 @@ int GridBox::GetMaxWidthByColumn(uint column)
 
 void GridBox::Pack()
 {
-  if (0 == widget_list.size()) {
+  if (widget_list.empty()) {
     return;
   }
   int heightMax;
