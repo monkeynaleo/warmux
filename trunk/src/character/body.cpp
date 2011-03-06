@@ -769,7 +769,7 @@ void Body::SetMovementOnce(const std::string & name)
     last_refresh = GameTime::GetInstance()->Read();
     main_rotation_rad = 0;
     need_rebuild = true;
-    if (name.substr(0,9) != "animation")
+    if (name.compare(0, 9, "animation"))
       mvt_locked = true;
   } else {
     MSG_DEBUG("body", "Movement not found");
