@@ -34,8 +34,17 @@ WaterParticle::WaterParticle() :
   m_left_time_to_live = 100;
   m_check_move_on_end_turn = false;
 
-  Profile *res = GetResourceManager().LoadXMLProfile("weapons.xml", false);
-  image = GetResourceManager().LoadSprite(res, ActiveMap()->GetWaterType() + "_drop");
+  particle_spr type = CLEARWATER_spr;
+  if (ActiveMap()->GetWaterType() == "lava")
+    type = LAVA_spr;
+  else if (ActiveMap()->GetWaterType() == "radioactive")
+    type = RADIOACTIVE_spr;
+  else if (ActiveMap()->GetWaterType() == "dirtywater")
+    type = DIRTYWATER_spr;
+  else if (ActiveMap()->GetWaterType() == "chocolate_drop")
+    type = CHOCOLATEWATER_spr;
+
+  image = new Sprite(*ParticleEngine::GetSprite(type));
 
   image->SetRotation_HotSpot(bottom_center);
   SetSize(image->GetSize());
@@ -43,6 +52,7 @@ WaterParticle::WaterParticle() :
 
 WaterParticle::~WaterParticle()
 {
+  // Don't delete image here, it will be freed through ~Particle
 }
 
 void WaterParticle::Refresh()
