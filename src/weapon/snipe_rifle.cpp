@@ -163,9 +163,9 @@ void BaseSnipeRifle::DrawBeam()
   // Set area of the screen to be redrawn:
   // Splited into little rectangles to avoid too large area of redraw
   Double redraw_size = 20.0;
-  Point2d pos = Point2d(laser_beam_start.x, laser_beam_start.y);
+  Point2d pos = laser_beam_start;
   Point2d delta = (Point2d(targeted_point.x, targeted_point.y) - pos) * redraw_size / dst;
-  Point2i delta_i((int)delta.x, (int)delta.y);
+  Point2i delta_i = delta;
 
   // the Map::ToRedraw method doesn't support negative rectangles
   if (delta_i.x < 0)
