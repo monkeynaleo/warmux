@@ -166,6 +166,7 @@ void AIStupidPlayer::PrepareTurn()
     } else
       ++it;
   }
+  item_iterator = items.begin();
 }
 
 void AIStupidPlayer::Reset()
