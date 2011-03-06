@@ -41,7 +41,6 @@ Medkit::Medkit()
 
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   anim = GetResourceManager().LoadSprite(res, "object/medkit");
-  GetResourceManager().UnLoadXMLProfile(res);
 
   SetSize(anim->GetSize());
   anim->animation.SetLoopMode(false);

@@ -66,7 +66,6 @@ SpinButton::SpinButton (const std::string & _label,
   m_plus->SetPosition(position.x + size.x - 5, position.y);
   m_minus = new Button(res, "menu/minus");
   m_minus->SetPosition(position.x + size.x - max_value_w - 5 - 2 * margin, position.y);
-  GetResourceManager().UnLoadXMLProfile(res);
 
   ValueHasChanged();
 }

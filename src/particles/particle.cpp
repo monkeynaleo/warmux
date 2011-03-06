@@ -164,7 +164,6 @@ void ParticleEngine::Load()
   particle_sprite[DIRTYWATER_spr] = LOAD_RES_SPRITE("dirtywater_drop");
   particle_sprite[CHOCOLATEWATER_spr] = LOAD_RES_SPRITE("chocolate_drop");
   particle_sprite[EXPLOSION_spr] = LOAD_RES_SPRITE("explosion_particle");
-  GetResourceManager().UnLoadXMLProfile(res);
 
   sprites_loaded = true;
 }

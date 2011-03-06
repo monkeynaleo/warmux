@@ -128,7 +128,6 @@ void Interface::LoadData()
 {
   Profile *res   = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   LoadDataInternal(res);
-  GetResourceManager().UnLoadXMLProfile(res);
 }
 
 Interface::Interface()
@@ -188,8 +187,6 @@ Interface::Interface()
 
   // Weapon help
   help = new WeaponHelp();
-
-  GetResourceManager().UnLoadXMLProfile(res);
 }
 
 Interface::~Interface()

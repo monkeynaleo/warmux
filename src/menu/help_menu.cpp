@@ -143,7 +143,6 @@ HelpMenu::HelpMenu()
   tabs->AddNewTab("unused", _("Current controls"),
                   new ControlConfig(tabs->GetSize(), true));
 
-  GetResourceManager().UnLoadXMLProfile(res);
   widgets.AddWidget(tabs);
   widgets.Pack();
 }

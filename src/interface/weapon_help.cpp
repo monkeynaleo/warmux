@@ -48,8 +48,6 @@ WeaponHelp::WeaponHelp()
   // Polygon Size
   background = LOAD_RES_IMAGE("interface/background_help");
 
-  GetResourceManager().UnLoadXMLProfile(res);
-
   help.SetMaxWidth(background.GetWidth() - 10 - ICON_SIZE - 2*5);
 }
 

@@ -46,9 +46,8 @@ BonusBox::BonusBox(Weapon * weapon):
 {
   SetTestRect(29, 29, 63, 6);
 
-  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
+  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   anim = GetResourceManager().LoadSprite( res, "object/bonus_box");
-  GetResourceManager().UnLoadXMLProfile(res);
 
   SetSize(anim->GetSize());
   anim->animation.SetLoopMode(false);

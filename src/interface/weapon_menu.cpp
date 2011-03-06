@@ -182,8 +182,6 @@ WeaponsMenu::WeaponsMenu()
   weapons_menu->SetBorderColor(border_color);
   tools_menu->SetPlaneColor(plane_color);
   tools_menu->SetBorderColor(border_color);
-
-  GetResourceManager().UnLoadXMLProfile(res);
 }
 
 WeaponsMenu::~WeaponsMenu()

@@ -61,7 +61,7 @@ NetworkMenu::NetworkMenu()
 {
   waiting_for_server = false;
 
-  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml",false);
+  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml",false);
   Point2i pointZero(W_UNDEF, W_UNDEF);
 
   Surface& window = GetMainWindow();
@@ -152,8 +152,6 @@ NetworkMenu::NetworkMenu()
   bottom_box->SetPosition(MARGIN_SIDE, tabs->GetPositionY() + tabs->GetSizeY() + MARGIN_SIDE);
 
   widgets.AddWidget(bottom_box);
-
-  GetResourceManager().UnLoadXMLProfile(res);
 
   if (!Network::GetInstance()->IsServer()) {
 

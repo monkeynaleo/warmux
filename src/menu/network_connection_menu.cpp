@@ -311,8 +311,6 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   msg_box->NewMessage(_("Have a good game!"));
   msg_box->NewMessage(""); // Skip a line
 
-  GetResourceManager().UnLoadXMLProfile(res);
-
   //Double click
   m_last_click_on_games_lst = 0;
   m_Double_click_interval = 400;

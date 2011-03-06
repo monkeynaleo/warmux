@@ -80,7 +80,6 @@ Menu::Menu(const std::string& bg, t_action _actions)
   }
 
   widgets.SetContainer(this);
-  GetResourceManager().UnLoadXMLProfile(res);
 }
 
 Menu::Menu(void)

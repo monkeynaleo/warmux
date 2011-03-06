@@ -74,8 +74,6 @@ MultiTabs::MultiTabs(const Point2i& size)
 
   Widget::SetBorder(defaultOptionColorRect, BORDER);
   Widget::SetBackgroundColor(defaultOptionColorBox);
-
-  GetResourceManager().UnLoadXMLProfile(res);
 }
 
 MultiTabs::~MultiTabs()

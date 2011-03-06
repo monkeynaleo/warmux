@@ -385,8 +385,6 @@ OptionMenu::OptionMenu() :
 # endif
 #endif
 
-  GetResourceManager().UnLoadXMLProfile(res);
-
   widgets.AddWidget(tabs);
   widgets.Pack();
 }

@@ -63,8 +63,6 @@ public:
 
     run = new Button(res, "menu/really_big_plus", true);
     AddWidget(run);
-
-    GetResourceManager().UnLoadXMLProfile(res);
   }
 
   void SetScore(const char* format, float value)

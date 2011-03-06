@@ -115,8 +115,6 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
   nb_characters = new SpinButtonWithPicture(_("Number of characters"), "menu/ico_play",
                                             Point2i(110, 120), 6, 1, 1, 10);
   AddWidget(nb_characters);
-
-  GetResourceManager().UnLoadXMLProfile(res);
 }
 
 void TeamBox::ClearTeam()

@@ -44,7 +44,6 @@ PictureTextCBox::PictureTextCBox(const std::string & label,
   m_enabled = LOAD_RES_IMAGE("menu/enabled");
   m_disabled_front = LOAD_RES_IMAGE("menu/disabled_front");
   m_disabled_back = LOAD_RES_IMAGE("menu/disabled_back");
-  GetResourceManager().UnLoadXMLProfile(res);
   m_value = value;
 
   Text::SetMaxWidth(size.x);
