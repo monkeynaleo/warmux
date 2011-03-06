@@ -43,8 +43,7 @@ WeaponsList::~WeaponsList()
     delete *it;
 
   // no need to delete objects in m_weapons_launcher_list nor clear the 2 lists !
-
-  GetResourceManager().UnLoadXMLProfile(weapons_res_profile);
+  // no need either to release profile, ResourceManager will do it on exit
   weapons_res_profile = NULL;
 }
 
