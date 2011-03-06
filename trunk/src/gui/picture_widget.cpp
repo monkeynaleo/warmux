@@ -174,7 +174,6 @@ void PictureWidget::Draw(const Point2i &/*mousePosition*/)
       return;
     Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
     SetSurface(LOAD_RES_IMAGE(name), type);
-    GetResourceManager().UnLoadXMLProfile(res);
 
     // Needed to set the resizing
     ApplyScaling(type);

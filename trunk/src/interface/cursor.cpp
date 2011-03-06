@@ -34,10 +34,9 @@ CharacterCursor::CharacterCursor()
 {
   arrow = NULL;
 
-  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
-  arrow_jump = GetResourceManager().LoadSprite( res, "gfx/arrow-jump");
-  arrow_change = GetResourceManager().LoadSprite( res, "gfx/arrow-change");
-  GetResourceManager().UnLoadXMLProfile( res);
+  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
+  arrow_jump = GetResourceManager().LoadSprite(res, "gfx/arrow-jump");
+  arrow_change = GetResourceManager().LoadSprite(res, "gfx/arrow-change");
 }
 
 CharacterCursor::~CharacterCursor()

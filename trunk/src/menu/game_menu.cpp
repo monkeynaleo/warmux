@@ -99,8 +99,6 @@ GameMenu::GameMenu() :
 
   widgets.AddWidget(tabs);
   widgets.Pack();
-
-  GetResourceManager().UnLoadXMLProfile(res);
 }
 
 void GameMenu::OnClickUp(const Point2i &mousePosition, int button)

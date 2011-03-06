@@ -378,7 +378,6 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
     vbox->AddWidget(folders);
     tabs->AddNewTab(REPLAY_ID, _("Save replay?"), vbox);
   }
-  GetResourceManager().UnLoadXMLProfile(res);
 
   // Final box
   VBox *vbox = new VBox(tab_size.x, false, false, false);

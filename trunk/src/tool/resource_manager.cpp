@@ -121,7 +121,7 @@ Point2d ResourceManager::LoadPoint2d(const Profile *profile, const std::string& 
 MouseCursor ResourceManager::LoadMouseCursor(const Profile *profile, const std::string& resource_name,
                                              Mouse::pointer_t _pointer_id) const
 {
-  const xmlNode* elem = GetElement (profile, "mouse_cursor", resource_name);
+  const xmlNode* elem = GetElement(profile, "mouse_cursor", resource_name);
   if (!elem)
     Error("ResourceManager: can't find mouse cursor resource \""+resource_name+"\" in profile "+profile->filename);
   std::string filename;
@@ -155,10 +155,12 @@ Profile *ResourceManager::LoadXMLProfile(const std::string& xml_filename, bool i
 {
   ProfileMap::iterator it = profiles.find(xml_filename);
   if (it != profiles.end() && it->second) {
+    MSG_DEBUG("xml.load", "Returning cached %s\n", xml_filename.c_str());
     it->second->ref_count++;
     return it->second;
   }
 
+  MSG_DEBUG("xml.load", "Loading uncached %s\n", xml_filename.c_str());
   XmlReader *doc = new XmlReader;
   std::string filename, path;
   if (!is_absolute_path) {
@@ -182,11 +184,13 @@ Profile *ResourceManager::LoadXMLProfile(const std::string& xml_filename, bool i
   profile->doc = doc;
   profile->filename = xml_filename;
   profile->relative_path = path;
+  profiles[xml_filename] = profile;
   return profile;
 }
 
 void ResourceManager::UnLoadXMLProfile(Profile *profile) const
 {
+  // Let's greedily cache all documents!
   --profile->ref_count;
   if (!profile->ref_count) {
     profiles.erase(profile->filename);

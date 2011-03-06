@@ -93,7 +93,6 @@ Team::Team(XmlReader& doc, Profile* res,
   mini_flag = flag.RotoZoom(ZERO, ONE_HALF, ONE_HALF);
   death_flag = LOAD_RES_IMAGE("death_flag");
   big_flag = LOAD_RES_IMAGE("big_flag");
-  GetResourceManager().UnLoadXMLProfile(res);
 
   // Get sound profile
   if (!XmlReader::ReadString(doc.GetRoot(), "sound_profile", m_sound_profile))

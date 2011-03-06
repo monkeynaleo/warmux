@@ -52,9 +52,8 @@ CheckBox::CheckBox(Profile * profile,
 
 void CheckBox::Init(uint width)
 {
-  Profile * res = GetResourceManager().LoadXMLProfile( "graphism.xml", false);
+  Profile * res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   m_checked_image = GetResourceManager().LoadSprite(res, "menu/check");
-  GetResourceManager().UnLoadXMLProfile(res);
 
   position = Point2i(W_UNDEF, W_UNDEF);
   size.x = width;

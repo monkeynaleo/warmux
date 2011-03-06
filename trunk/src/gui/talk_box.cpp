@@ -50,7 +50,6 @@ TalkBox::TalkBox(const Point2i& size, Font::font_size_t fsize, Font::font_style_
   Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml",false);
   send_txt_bt = new Button(res, "menu/send_txt", true);
   tmp2_box->AddWidget(send_txt_bt);
-  GetResourceManager().UnLoadXMLProfile(res);
 
   AddWidget(tmp2_box);
 }

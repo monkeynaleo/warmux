@@ -637,8 +637,6 @@ void GenerateStyledBorder(Surface & source, DecoratedBox::Style style)
     for (i=0; i<3; i++)
       rounding_style[j][i].SetAlpha(0, 0);
 
-  GetResourceManager().UnLoadXMLProfile(res);
-
   Surface save_surf(source.GetSize(),SDL_SWSURFACE, true);
   source.SetAlpha(0, 0);
   save_surf.Blit(source);

@@ -46,8 +46,6 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool show_border, bool _d
   // random map
   random_map_preview = GetResourceManager().LoadImage(res, "menu/random_map");
 
-  GetResourceManager().UnLoadXMLProfile(res);
-
   // compute margin width between previews
   uint map_preview_height = _size.GetY() -2*10 -40;
 

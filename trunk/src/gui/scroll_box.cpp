@@ -47,7 +47,6 @@ ScrollBox::ScrollBox(const Point2i & _size, bool force_widget_size, bool alterna
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   m_up = new Button(res, "menu/up");
   m_down = new Button(res, "menu/down");
-  GetResourceManager().UnLoadXMLProfile(res);
 
   Widget::SetBorder(white_color, 1);
   Widget::SetBackgroundColor(transparent_color);

@@ -58,7 +58,6 @@ EnergyBar::EnergyBar(uint _x,
     colors_value.SetAlpha(SDL_ALPHA_OPAQUE);
     ProcessThresholds(i, energy_step[i], colors_value);
   }
-  GetResourceManager().UnLoadXMLProfile(res);
   SortThresholds();
 }
 

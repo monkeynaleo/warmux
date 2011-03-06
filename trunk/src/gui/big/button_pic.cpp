@@ -34,7 +34,6 @@ ButtonPic::ButtonPic(const std::string &label,
 {
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   m_img_normal = GetResourceManager().LoadImage(res, resource_id, true);
-  GetResourceManager().UnLoadXMLProfile(res);
 
   txt_label = new Text(label, dark_gray_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
   txt_label->SetMaxWidth(size.x);

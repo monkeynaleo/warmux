@@ -34,9 +34,8 @@ WaterParticle::WaterParticle() :
   m_left_time_to_live = 100;
   m_check_move_on_end_turn = false;
 
-  Profile *res = GetResourceManager().LoadXMLProfile( "weapons.xml", false);
+  Profile *res = GetResourceManager().LoadXMLProfile("weapons.xml", false);
   image = GetResourceManager().LoadSprite(res, ActiveMap()->GetWaterType() + "_drop");
-  GetResourceManager().UnLoadXMLProfile(res);
 
   image->SetRotation_HotSpot(bottom_center);
   SetSize(image->GetSize());
