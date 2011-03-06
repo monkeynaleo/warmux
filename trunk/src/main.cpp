@@ -483,14 +483,14 @@ void ParseArgs(int argc, char * argv[])
       break;
     case 'S':
       {
-	uint width, height;
-	int ret = sscanf(optarg, "%ux%u", &width, &height);
-	if (ret == 2) {
-	  Config::GetInstance()->SetVideoWidth(width);
-	  Config::GetInstance()->SetVideoHeight(height);
-	} else {
-	  fprintf(stderr, "Error: %s is not a valid resolution\n", optarg);
-	}
+	      uint width, height;
+	      int ret = sscanf(optarg, "%ux%u", &width, &height);
+	      if (ret == 2) {
+	        Config::GetInstance()->SetVideoWidth(width);
+	        Config::GetInstance()->SetVideoHeight(height);
+	      } else {
+	        fprintf(stderr, "Error: %s is not a valid resolution\n", optarg);
+	      }
       }
       break;
     case '?': /* returns by getopt if option was invalid */
