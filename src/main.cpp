@@ -58,6 +58,9 @@
 # include "include/debugmasks.h"
 #endif
 
+// Can be accessed by other parts of the code
+bool quit_game = false;
+
 static MainMenu::menu_item choice = MainMenu::NONE;
 static bool skip_menu = false;
 static NetworkConnectionMenu::network_menu_action_t net_action = NetworkConnectionMenu::NET_NOTHING;
@@ -93,8 +96,6 @@ static std::string replay;
 
 int AppWarmux::Main(void)
 {
-  bool quit = false;
-
   DisplayLoadingPicture();
 
   // Now that we are displaying a kind of 'please wait', do preload sounds
@@ -174,7 +175,7 @@ int AppWarmux::Main(void)
         break;
       }
       case MainMenu::QUIT:
-        quit = true;
+        quit_game = true;
         break;
       default:
         break;
@@ -184,7 +185,7 @@ int AppWarmux::Main(void)
     skip_menu = false;
     net_action = NetworkConnectionMenu::NET_NOTHING;
   }
-  while (!quit);
+  while (!quit_game);
 
   End();
 
@@ -378,6 +379,7 @@ void PrintUsage(const char* cmd_name)
   printf("%s [-p|--play] [-g|--game-mode <game_mode>]"
          " [-s|--server] [-c|--client [ip]]\n"
          " [-i|--index-server [ip/hostname of index server]]\n"
+         " [-q|--quick-quit : exit the game immediately after first run\n"
 #ifdef WMX_LOG
          " [-d|--debug <debug_masks>|all]\n"
 #endif
@@ -398,6 +400,7 @@ void ParseArgs(int argc, char * argv[])
     {"help",       no_argument,       NULL, 'h'},
     {"version",    no_argument,       NULL, 'v'},
     {"play",       no_argument,       NULL, 'p'},
+    {"quick-quit", no_argument,       NULL, 'q'},
     {"client",     optional_argument, NULL, 'c'},
     {"server",     no_argument,       NULL, 's'},
     {"index-server", optional_argument, NULL, 'i'},
@@ -409,7 +412,7 @@ void ParseArgs(int argc, char * argv[])
     {NULL,         no_argument,       NULL,  0 }
   };
 
-  while ((c = getopt_long(argc, argv, "ufhvpc::si::g:d:rS:R:",
+  while ((c = getopt_long(argc, argv, "ufhvpqc::si::g:d:rS:R:",
                           long_options, &option_index)) != -1) {
     switch (c) {
     case 'u':
@@ -471,6 +474,9 @@ void ParseArgs(int argc, char * argv[])
     case 'g':
       printf("Game-mode: %s\n", optarg);
       Config::GetInstance()->SetGameMode(optarg);
+      break;
+    case 'q':
+      quit_game = true; // immediately exit the game after first run
       break;
     case 'r':
       {
