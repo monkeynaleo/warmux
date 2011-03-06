@@ -149,7 +149,10 @@ void Camera::AutoCrop()
     target = obj_pos;
 
     if (followed_object->IsMoving()) {
-      Double time_delta = 1000 / (Double)Game::GetInstance()->GetLastFrameRate();
+      float fps = Game::GetInstance()->GetLastFrameRate();
+      if (fps < 0.1)
+        fps = 0.1;
+      Double time_delta = 1000 / (Double)fps;
       Point2d anticipation = followed_object->GetSpeed() * time_delta;
 
       //limit anticipation to screen size/3
