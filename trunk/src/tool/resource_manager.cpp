@@ -155,7 +155,7 @@ Profile *ResourceManager::LoadXMLProfile(const std::string& xml_filename, bool i
 {
   ProfileMap::iterator it = profiles.find(xml_filename);
   if (it != profiles.end() && it->second) {
-    MSG_DEBUG("xml.load", "Returning cached %s\n", xml_filename.c_str());
+    MSG_DEBUG("xml.cached_load", "Returning cached %s\n", xml_filename.c_str());
     it->second->ref_count++;
     return it->second;
   }
