@@ -119,31 +119,31 @@ void WeaponMenuItem::Draw(Surface * dest)
   int nb_bullets = ActiveTeam().ReadNbAmmos(weapon->GetType());
   Point2i tmp = GetOffsetAlignment() + Point2i(0, item->GetWidth() - 10);
 
+  char buffer[5] = { 0, };
   if (nb_bullets ==  INFINITE_AMMO) {
+#define UTF8_INFINITE "\xE2\x88\x9E"
     PolygonItem::Draw(dest);
-    Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)->WriteLeft(tmp, "∞", dark_gray_color);
+    Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)->WriteLeft(tmp, UTF8_INFINITE, dark_gray_color);
   } else if (nb_bullets == 0) {
-      if (weapon->AvailableAfterTurn() > (int)Game::GetInstance()->GetCurrentTurn()-1){
+      int num = weapon->AvailableAfterTurn() - (int)Game::GetInstance()->GetCurrentTurn();
+      if (num > -1){
         PolygonItem::Draw(dest);
         tmp.y -= 4;
         m_parent->m_not_yet_available->Blit(*dest, tmp);
 
-
         tmp.x += m_parent->m_not_yet_available->GetWidth()-5;
         tmp.y += 10;
-        std::ostringstream txt;
-        txt << weapon->AvailableAfterTurn()-Game::GetInstance()->GetCurrentTurn();
-        txt << " ";
-        Font::GetInstance(Font::FONT_SMALL, Font::FONT_BOLD)->WriteLeft(tmp, txt.str(), dark_red_color);
-      }  else{
+        snprintf(buffer, 4, "%i ", num);
+        Font::GetInstance(Font::FONT_SMALL, Font::FONT_BOLD)->WriteLeft(tmp, buffer, dark_red_color);
+      } else {
         item->SetAlpha(0.3);
         PolygonItem::Draw(dest);
       }
   } else {
     PolygonItem::Draw(dest);
     std::ostringstream txt;
-    txt << nb_bullets;
-    Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)->WriteLeft(tmp, txt.str(), dark_gray_color);
+    snprintf(buffer, 4, "%i ", nb_bullets);
+    Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)->WriteLeft(tmp, buffer, dark_gray_color);
   }
 }
 
