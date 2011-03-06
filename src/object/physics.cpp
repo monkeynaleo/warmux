@@ -377,6 +377,11 @@ void Physics::ComputePendulumNextXY(Double delta_t)
   //            m_rope_angle.x0, m_rope_angle.x1, m_rope_angle.x2);
 
   SetPhysXY(x,y);
+
+  Double speed_norm, angle;
+  GetSpeed(speed_norm, angle);
+  angle = -angle;
+  SetSpeed(speed_norm, angle);
 }
 
 // Compute the next position of the object during a free fall.
