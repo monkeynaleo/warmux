@@ -61,7 +61,6 @@ NetworkMenu::NetworkMenu()
 {
   waiting_for_server = false;
 
-  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml",false);
   Point2i pointZero(W_UNDEF, W_UNDEF);
 
   Surface& window = GetMainWindow();

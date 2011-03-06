@@ -43,8 +43,6 @@ static const uint MARGIN_BOTTOM = 40;
 GameMenu::GameMenu() :
   Menu("menu/bg_play")
 {
-  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml",false);
-
   Surface& window = GetMainWindow();
 
   // Calculate main box size

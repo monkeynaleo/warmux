@@ -34,8 +34,6 @@
 HelpMenu::HelpMenu()
   : Menu("help/background", vCancel)
 {
-  Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
-
   int window_w = GetMainWindow().GetWidth();
   int window_h = GetMainWindow().GetHeight();
 
