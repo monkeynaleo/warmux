@@ -402,8 +402,8 @@ void Character::SetEnergyDelta(int delta, Character* dealer)
       JukeBox::GetInstance()->Play(GetTeam().GetSoundProfile(), "injured_high");
 
     // If energy was lost, let's stop playing the idle animation
-    if (body->GetMovement().substr(0,9) == "animation"
-        || body->GetClothe().substr(0,9) == "animation") {
+    if (!body->GetMovement().compare(0, 9, "animation") ||
+        !body->GetClothe().compare(0, 9, "animation")) {
       SetClothe("normal");
       SetMovement("breathe");
     }
@@ -706,9 +706,9 @@ void Character::Refresh()
   // Stop the animation or the black skin if we are playing
   if (IsActiveCharacter()
       && Game::GetInstance()->ReadState() == Game::PLAYING
-      && (body->GetMovement().substr(0,9) == "animation"
-          || body->GetClothe().substr(0,9) == "animation"
-          || body->GetClothe() == "black")) {
+      && (!body->GetMovement().compare(0, 9, "animation") ||
+          !body->GetClothe().compare(0, 9, "animation") ||
+          body->GetClothe() == "black")) {
     SetClothe("normal");
     SetMovement("breathe");
   }
@@ -717,7 +717,7 @@ void Character::Refresh()
   GetSpeed(n, a);
   if (n > MIN_SPEED_TO_FLY && body->GetMovement() != "fly-black"
       && body->GetMovement() != "fall" && body->GetMovement() != "jump"
-      && body->GetMovement() != "fly" && body->GetMovement().substr(0,7) != "jetpack") {
+      && body->GetMovement() != "fly" && body->GetMovement().compare(0, 7, "jetpack")) {
     if (IsGoingUp() || IsGoingDown())
       SetMovement("fall");
     else

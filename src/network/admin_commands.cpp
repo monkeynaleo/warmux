@@ -110,13 +110,13 @@ void ProcessCommand(const std::string & cmd)
 {
   if (cmd == "/help") {
     PrintHelp();
-  } else if (cmd.substr(0, 6) == "/kick ") {
+  } else if (!cmd.compare(0, 6, "/kick ")) {
     std::string nick = cmd.substr(6, cmd.size() - 6);
     UserCommand(nick, USER_KICK);
-  } else if (cmd.substr(0, 9) == "/address ") {
+  } else if (!cmd.compare(0, 9, "/address ")) {
     std::string nick = cmd.substr(9, cmd.size() - 9);
     UserCommand(nick, USER_ADDRESS);
-  } else if (cmd.substr(0, 5) == "/list") {
+  } else if (!cmd.compare(0, 5, "/list")) {
     ListPlayers();
   } else {
     AppWarmux::GetInstance()->ReceiveMsgCallback(_("Unknown command"), primary_red_color);
