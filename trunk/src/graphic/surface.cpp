@@ -239,11 +239,11 @@ int Surface::Blit(const Surface& src, const Rectanglei &srcRect, const Point2i &
  */
 void Surface::MergeSurface(Surface &spr, const Point2i &pos)
 {
-  SDL_PixelFormat* cur_fmt = surface->format;
-  SDL_PixelFormat * spr_fmt = spr.surface->format;
-
   spr.Lock();
   Lock();
+
+  SDL_PixelFormat* cur_fmt = surface->format;
+  SDL_PixelFormat * spr_fmt = spr.surface->format;
 
   // for each pixel lines of a source image
   if (cur_fmt->BytesPerPixel == spr_fmt->BytesPerPixel && cur_fmt->BytesPerPixel == 4) {
@@ -251,7 +251,6 @@ void Surface::MergeSurface(Surface &spr, const Point2i &pos)
     Uint32* cur_ptr   = (Uint32*)surface->pixels;
     int     spr_pitch = (spr.surface->pitch>>2);
     Uint32* spr_ptr   = (Uint32*)spr.surface->pixels;
-    // shift necessary to move the RGB triplet into the LSBs
     Uint32  spr_pix, cur_pix, a, p_a;
     Point2i offset;
 
