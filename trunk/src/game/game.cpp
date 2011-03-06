@@ -773,7 +773,8 @@ void Game::MessageEndOfGame() const
 
   JukeBox::GetInstance()->StopAll();
 
-  if (!benching && !ask_for_end) {
+  extern bool quit_game;
+  if (!benching && !ask_for_end && !quit_game) {
     std::vector<TeamResults*>* results_list = TeamResults::createAllResults();
     ResultsMenu menu(*results_list, disconnected);
     menu.Run();
