@@ -52,7 +52,7 @@ typedef enum {
   particle_EXPLOSION
 } particle_t;
 
-enum particle_spr
+typedef enum
 {
   SMOKE_spr,
   EXPLOSION_SMOKE_spr,
@@ -72,7 +72,7 @@ enum particle_spr
   DIRTYWATER_spr,
   CHOCOLATEWATER_spr,
   EXPLOSION_spr
-};
+} particle_spr;
 
 const int particle_spr_nbr = EXPLOSION_spr + 1;
 
