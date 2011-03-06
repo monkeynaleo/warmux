@@ -202,8 +202,8 @@ bool InfoMap::ProcessXmlData(const xmlNode *xml)
 
 InfoMap::~InfoMap()
 {
-  if (res_profile)
-    GetResourceManager().UnLoadXMLProfile(res_profile);
+  // No need to unload profile, it will get automatically cleaned by ResourceManager
+  res_profile = NULL;
   if (normal)
     delete normal;
   if (basic)
@@ -260,11 +260,6 @@ void InfoMap::FreeData()
   delete normal; normal = NULL;
 }
 
-std::string InfoMap::GetConfigFilepath() const
-{
-  return m_directory + PATH_SEPARATOR + "config.xml";
-}
-
 /* ========================================================================== */
 static inline bool compareMaps(const InfoMap* a, const InfoMap* b)
 {
@@ -311,7 +306,7 @@ MapsList::MapsList()
   std::cout << std::endl << std::endl;
 
   // On a au moins une carte ?
-  if (lst.size() < 1)
+  if (lst.empty())
     Error(_("You need at least one valid map!"));
 
   /* Get the full set of map ordered */

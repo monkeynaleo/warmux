@@ -98,7 +98,7 @@ public:
 
   const std::string& GetRawName() const { return m_map_name; }
   const std::string& GetDirectory() const { return m_directory; }
-  std::string GetConfigFilepath() const;
+  std::string GetConfigFilepath() const { return m_directory + PATH_SEPARATOR + "config.xml"; }
 
   Profile * ResProfile() const { return res_profile; }
 
