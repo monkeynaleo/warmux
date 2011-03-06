@@ -224,7 +224,7 @@ void Physics::SetPhysFixationPointXY(Double g_x, Double g_y, Double dx,
     m_rope_angle.x0 = HALF_PI - V.ComputeAngle();
 
     // Convert the linear speed to angular speed.
-    m_rope_angle.x1 = ( m_pos_x.x1 * cos(m_rope_angle.x0) +
+    m_rope_angle.x1 = ( m_pos_x.x1 * cos(m_rope_angle.x0) -
                         m_pos_y.x1 * sin(m_rope_angle.x0) ) / m_rope_length.x0;
 
     // Reset the angular acceleration.
