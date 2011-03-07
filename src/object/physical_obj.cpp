@@ -191,6 +191,8 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
   if (IsGhost())
     return NO_COLLISION;
 
+  Point2d contactPos;
+  Double contactAngle;
   Point2d pos, offset;
   PhysicalObj* collided_obj = NULL;
 
@@ -299,6 +301,8 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     speed_collided_obj = collided_obj->GetSpeed();
   }
 
+  ContactPointAngleOnGround(pos, contactPos, contactAngle);
+
   Collide(collision, collided_obj, pos);
 
   // ===================================
@@ -313,7 +317,7 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     ASSERT(!collided_obj);
     break;
   case COLLISION_ON_GROUND:
-    SignalGroundCollision(speed_before_collision);
+    SignalGroundCollision(speed_before_collision, contactAngle);
     break;
   case COLLISION_ON_OBJECT:
     SignalObjectCollision(speed_before_collision, collided_obj, speed_collided_obj);
@@ -338,7 +342,6 @@ void PhysicalObj::Collide(collision_t collision, PhysicalObj* collided_obj, cons
 
   case COLLISION_ON_GROUND:
     ASSERT(!collided_obj);
-    ContactPointAngleOnGround(position, contactPos, contactAngle);
     break;
 
   case COLLISION_ON_OBJECT:
