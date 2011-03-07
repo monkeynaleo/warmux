@@ -81,7 +81,7 @@ class Particle : public PhysicalObj
 protected:
   bool on_top; // if true displayed on top of characters and weapons
   uint m_initial_time_to_live;
-  uint m_left_time_to_live;
+  uint m_time_left_to_live;
   bool m_check_move_on_end_turn;
   uint m_time_between_scale;
   uint m_last_refresh;
@@ -95,7 +95,7 @@ public:
   virtual void Refresh();
   void SetOnTop(bool b) { on_top = b; }
   bool IsOnTop() const { return on_top; }
-  bool StillUseful() const { return m_left_time_to_live > 0; }
+  bool StillUseful() const { return m_time_left_to_live > 0; }
   bool CheckOnEndTurn() const { return m_check_move_on_end_turn; }
 };
 

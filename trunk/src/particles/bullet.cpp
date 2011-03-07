@@ -31,7 +31,7 @@ BulletParticle::BulletParticle() :
 {
   SetCollisionModel(true, false, false);
   m_rebound_sound = "weapon/m16_cartridge";
-  m_left_time_to_live = 1;
+  m_time_left_to_live = 1;
   start_to_fade = 0;
 
   image = ParticleEngine::GetSprite(BULLET_spr);
@@ -42,15 +42,15 @@ BulletParticle::BulletParticle() :
 void BulletParticle::Refresh()
 {
   if(IsOutsideWorldXY(GetPosition())) {
-    m_left_time_to_live = 0;
+    m_time_left_to_live = 0;
     return;
   }
   int current_time = GameTime::GetInstance()->Read();
   UpdatePosition();
   image->Update();
   if(start_to_fade > 0) {
-    m_left_time_to_live = start_to_fade + BULLET_PARTICLE_FADE_TIME - current_time;
-    m_left_time_to_live = (m_left_time_to_live > 0 ? m_left_time_to_live : 0);
+    m_time_left_to_live = start_to_fade + BULLET_PARTICLE_FADE_TIME - current_time;
+    m_time_left_to_live = (m_time_left_to_live > 0 ? m_time_left_to_live : 0);
     image->SetAlpha(ONE - ((Double)(current_time - start_to_fade)) / BULLET_PARTICLE_FADE_TIME);
   } else {
     // FIXME this is still a ugly hack

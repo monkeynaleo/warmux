@@ -39,13 +39,13 @@ FadingText::FadingText(const std::string & text) : ExplosionSmoke(20)
 
 void FadingText::Refresh()
 {
-  if (m_left_time_to_live <= 0) return ;
+  if (m_time_left_to_live <= 0) return ;
   uint current_time = GameTime::GetInstance()->Read();
-  m_left_time_to_live--;
+  m_time_left_to_live--;
   image->Scale(1.0, 1.0);
   if(start_to_fade < current_time) {
-    m_left_time_to_live = start_to_fade + TEXT_FADE_TIME - current_time;
-    m_left_time_to_live = (m_left_time_to_live > 0 ? m_left_time_to_live : 0);
+    m_time_left_to_live = start_to_fade + TEXT_FADE_TIME - current_time;
+    m_time_left_to_live = (m_time_left_to_live > 0 ? m_time_left_to_live : 0);
     SetXY(GetPosition() + Point2i(0, -4));
     image->SetAlpha(ONE - ((Double)(current_time - start_to_fade)) / TEXT_FADE_TIME);
   }

@@ -30,7 +30,7 @@ MagicStarParticle::MagicStarParticle() :
   Particle("magic_star_particle")
 {
   m_initial_time_to_live = 30;
-  m_left_time_to_live = m_initial_time_to_live;
+  m_time_left_to_live = m_initial_time_to_live;
   m_time_between_scale = 25;
 
   MSG_DEBUG("random.get", "MagicStarParticle::MagicStarParticle()");
@@ -50,8 +50,8 @@ void MagicStarParticle::Refresh()
 {
   uint time = GameTime::GetInstance()->Read() - m_last_refresh;
   if (time >= m_time_between_scale) {
-    if (m_left_time_to_live <= 0) return ;
-    Double lived_time = m_initial_time_to_live - m_left_time_to_live;
+    if (m_time_left_to_live <= 0) return ;
+    Double lived_time = m_initial_time_to_live - m_time_left_to_live;
     Double coeff = sin(HALF_PI*((Double)lived_time/((Double)m_initial_time_to_live)));
     image->SetRotation_rad(coeff * TWO_PI);
   }

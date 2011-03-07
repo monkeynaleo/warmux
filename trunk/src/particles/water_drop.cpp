@@ -52,7 +52,7 @@ WaterParticle::WaterParticle(particle_spr type)
 void WaterParticle::SetDefaults(particle_spr type)
 {
   SetCollisionModel(false, false, false);
-  m_left_time_to_live = 100;
+  m_time_left_to_live = 100;
   m_check_move_on_end_turn = false;
 
   image = new Sprite(*ParticleEngine::GetSprite(type));
@@ -93,10 +93,10 @@ void WaterParticle::Draw()
 
 void WaterParticle::SignalDrowning()
 {
-  m_left_time_to_live = 0;
+  m_time_left_to_live = 0;
 }
 
 void WaterParticle::SignalOutOfMap()
 {
-  m_left_time_to_live = 0;
+  m_time_left_to_live = 0;
 }

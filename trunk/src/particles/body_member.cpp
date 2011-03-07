@@ -29,7 +29,7 @@ BodyMemberParticle::BodyMemberParticle(Sprite& spr, const Point2i& position)
   , angle_rad(0)
 {
   SetCollisionModel(true, false, false);
-  m_left_time_to_live = 100;
+  m_time_left_to_live = 100;
   // Bug #17408: make sure there's an available surface for the sprite
   spr.RefreshSurface();
   image = new Sprite(spr.GetSurface());
@@ -48,14 +48,14 @@ BodyMemberParticle::BodyMemberParticle(Sprite& spr, const Point2i& position)
 
 void BodyMemberParticle::Refresh()
 {
-  m_left_time_to_live--;
+  m_time_left_to_live--;
   UpdatePosition();
 
   angle_rad += GetSpeedXY().Norm() * 20;
   angle_rad = fmod(angle_rad, 2 *PI);
   //FIXME what about negatives values ? what would happen ?
-  if (m_left_time_to_live < 50)
-    image->SetAlpha(m_left_time_to_live / 50.0);
+  if (m_time_left_to_live < 50)
+    image->SetAlpha(m_time_left_to_live / 50.0);
   image->SetRotation_rad(angle_rad);
   image->Update();
 }

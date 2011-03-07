@@ -62,12 +62,12 @@ void IllBubble::Refresh()
 
 void IllBubble::Draw()
 {
-  if (m_left_time_to_live > m_initial_time_to_live - 3)
-    image->SetAlpha( (Double)(m_initial_time_to_live - m_left_time_to_live) / THREE );
+  if (m_time_left_to_live > m_initial_time_to_live - 3)
+    image->SetAlpha( (Double)(m_initial_time_to_live - m_time_left_to_live) / THREE );
   else
     image->SetAlpha(ONE);
 
-  if (m_left_time_to_live > 0)
+  if (m_time_left_to_live > 0)
     image->Draw(GetPosition() - image->GetSize() / 2);
 }
 

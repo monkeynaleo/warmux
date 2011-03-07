@@ -27,7 +27,7 @@ DarkSmoke::DarkSmoke() :
   Particle("dark_smoke")
 {
   m_initial_time_to_live = 20;
-  m_left_time_to_live = m_initial_time_to_live;
+  m_time_left_to_live = m_initial_time_to_live;
   m_time_between_scale = 15;
 
   image = ParticleEngine::GetSprite(DARK_SMOKE_spr);

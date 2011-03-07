@@ -36,7 +36,7 @@ ExplosionParticle::ExplosionParticle() :
 
   image = ParticleEngine::GetSprite(EXPLOSION_spr);
   m_initial_time_to_live = image->GetFrameCount();
-  m_left_time_to_live = m_initial_time_to_live;
+  m_time_left_to_live = m_initial_time_to_live;
   m_time_between_scale = image->GetCurrentDelay();
 
   image->SetCurrentFrame(0);
@@ -52,16 +52,16 @@ void ExplosionParticle::Refresh()
   image->Update();
 
   if (time >= m_time_between_scale) {
-    if (m_left_time_to_live <= 0) return ;
+    if (m_time_left_to_live <= 0) return ;
 
-    m_left_time_to_live--;
+    m_time_left_to_live--;
     m_last_refresh = GameTime::GetInstance()->Read() ;
   }
 }
 
 void ExplosionParticle::Draw()
 {
-  if (m_left_time_to_live > 0) {
+  if (m_time_left_to_live > 0) {
     image->Draw(GetPosition() - image->GetSize() /2);
   }
 }
