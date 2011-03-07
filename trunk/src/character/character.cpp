@@ -786,7 +786,7 @@ void Character::Collision(const Point2d& speed_vector)
 
   Double norm = speed_vector.Norm();
 
-  if (norm > game_mode->safe_fall && speed_vector.y > ZERO) {
+  if (norm > game_mode->safe_fall) {
     // TODO: take the angle of collision into account!
 
     norm -= game_mode->safe_fall;
