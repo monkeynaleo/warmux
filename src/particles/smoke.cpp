@@ -27,7 +27,7 @@ Smoke::Smoke() :
   Particle("smoke_particle")
 {
   m_initial_time_to_live = 10;
-  m_left_time_to_live = m_initial_time_to_live;
+  m_time_left_to_live = m_initial_time_to_live;
   m_time_between_scale = 100;
 
   image = ParticleEngine::GetSprite(SMOKE_spr);

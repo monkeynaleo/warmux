@@ -34,7 +34,7 @@ ExplosionSmoke::ExplosionSmoke(const uint size_init) :
 
   image = ParticleEngine::GetSprite(EXPLOSION_BIG_SMOKE_spr);
   m_initial_time_to_live = image->GetFrameCount();
-  m_left_time_to_live = m_initial_time_to_live;
+  m_time_left_to_live = m_initial_time_to_live;
   m_time_between_scale = image->GetCurrentDelay();
 
   image->SetCurrentFrame(0);
@@ -57,17 +57,17 @@ void ExplosionSmoke::Refresh()
   image->Update();
 
   if (time >= m_time_between_scale) {
-    //ASSERT(m_left_time_to_live > 0);
-    if (m_left_time_to_live <= 0) return ;
+    //ASSERT(m_time_left_to_live > 0);
+    if (m_time_left_to_live <= 0) return ;
 
-    m_left_time_to_live--;
+    m_time_left_to_live--;
     m_last_refresh = GameTime::GetInstance()->Read() ;
   }
 }
 
 void ExplosionSmoke::Draw()
 {
-  if (m_left_time_to_live > 0){
+  if (m_time_left_to_live > 0){
     image->Draw(GetPosition()-Point2i(m_initial_size/2,0));
   }
 

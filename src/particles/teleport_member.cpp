@@ -35,7 +35,7 @@ TeleportMemberParticle::TeleportMemberParticle(Sprite& spr, const Point2i& posit
 
   ASSERT(image->GetWidth() && image->GetHeight());
   SetXY(position);
-  m_left_time_to_live = 1;
+  m_time_left_to_live = 1;
 
   SetSize(image->GetSize());
   SetOnTop(true);
@@ -60,7 +60,7 @@ void TeleportMemberParticle::Refresh()
 {
   uint now = GameTime::GetInstance()->Read();
   if (now > time + TELEPORTATION_ANIM_DURATION)
-    m_left_time_to_live = 0;
+    m_time_left_to_live = 0;
 
   uint dt = now - time;
   Point2i dpos = destination - start;

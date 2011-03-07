@@ -52,7 +52,7 @@ Particle::Particle(const std::string &name) :
   PhysicalObj(name),
   on_top(true), // if true displayed on top of characters and weapons
   m_initial_time_to_live(20),
-  m_left_time_to_live(0),
+  m_time_left_to_live(0),
   m_check_move_on_end_turn(false),
   m_time_between_scale(0),
   m_last_refresh(GameTime::GetInstance()->Read()),
@@ -68,7 +68,7 @@ Particle::~Particle()
 
 void Particle::Draw()
 {
-  if (m_left_time_to_live > 0) {
+  if (m_time_left_to_live > 0) {
     image->Draw(GetPosition());
   }
 }
@@ -83,12 +83,12 @@ void Particle::Refresh()
 
   if (time >= m_time_between_scale) {
 
-    //ASSERT(m_left_time_to_live > 0);
-    if (m_left_time_to_live <= 0) return ;
+    //ASSERT(m_time_left_to_live > 0);
+    if (m_time_left_to_live <= 0) return ;
 
-    m_left_time_to_live--;
+    m_time_left_to_live--;
 
-    uint lived_time = m_initial_time_to_live - m_left_time_to_live;
+    uint lived_time = m_initial_time_to_live - m_time_left_to_live;
 
     //during the 1st half of the time, increase size of particle
     //after the 1st half, decrease the alpha value

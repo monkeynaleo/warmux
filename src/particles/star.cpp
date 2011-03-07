@@ -27,7 +27,7 @@ StarParticle::StarParticle() :
   Particle("star_particle")
 {
   m_initial_time_to_live = 30;
-  m_left_time_to_live = m_initial_time_to_live;
+  m_time_left_to_live = m_initial_time_to_live;
   m_time_between_scale = 50;
 
   image = ParticleEngine::GetSprite(STAR_spr);

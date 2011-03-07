@@ -46,7 +46,7 @@ FireParticle::FireParticle()
   , oscil_delta(GetRandomDigGroundTime())
 {
   SetCollisionModel(true, false, false);
-  m_left_time_to_live = 100;
+  m_time_left_to_live = 100;
   m_check_move_on_end_turn = true;
   m_is_fire = true;
 
@@ -72,7 +72,7 @@ void FireParticle::Refresh()
   image->Update();
 
   if (creation_time + living_time < now)
-    m_left_time_to_live = 0;
+    m_time_left_to_live = 0;
 
   Double scale = (now - creation_time)/(Double)living_time;
   scale = (scale > ONE) ? ZERO : ONE - scale;
@@ -121,11 +121,11 @@ void FireParticle::Draw()
 
 void FireParticle::SignalDrowning()
 {
-  m_left_time_to_live = 0;
+  m_time_left_to_live = 0;
   // JukeBox::GetInstance()->Play("default","fire/pschiit");
 }
 
 void FireParticle::SignalOutOfMap()
 {
-  m_left_time_to_live = 0;
+  m_time_left_to_live = 0;
 }

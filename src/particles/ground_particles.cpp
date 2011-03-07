@@ -31,7 +31,7 @@ GroundParticle::GroundParticle(const Point2i& size, const Point2i& position) :
   SetCollisionModel(false, false, false);
   SetSize(Point2i(1,1));
   m_initial_time_to_live = 1; // used as a boolean because we redefine Refresh!
-  m_left_time_to_live = 1; // used as a boolean because we redefine Refresh!
+  m_time_left_to_live = 1; // used as a boolean because we redefine Refresh!
   image = NULL;
 
   Rectanglei rec;
@@ -46,6 +46,6 @@ void GroundParticle::Refresh()
   image->SetRotation_rad(GameTime::GetInstance()->Read() / (Double)180.0 * PI);
   image->Update();
   if(IsOutsideWorld()) {
-    m_left_time_to_live = 0;
+    m_time_left_to_live = 0;
   }
 }
