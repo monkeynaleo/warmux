@@ -115,7 +115,9 @@ void Interface::LoadDataInternal(Profile *res)
   t_character_energy = new Text("Dead", m_energy_text_color, fsize, Font::FONT_BOLD);
 
   // Replay labels
-  t_speed = new Text("x1", primary_red_color, Font::FONT_HUGE*zoom+0.5f, Font::FONT_BOLD, true);
+  char t[] = { 'x', '1', 0 };
+  t[1] = 48+(uint)GameTime::GetConstInstance()->GetSpeed();
+  t_speed = new Text(t, primary_red_color, Font::FONT_HUGE*zoom+0.5f, Font::FONT_BOLD, true);
 
   // Timer
   global_timer = new Text("0", gray_color, Font::FONT_BIG*zoom+0.5f, Font::FONT_BOLD, false);
