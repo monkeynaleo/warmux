@@ -150,8 +150,8 @@ void Camera::AutoCrop()
 
     if (followed_object->IsMoving()) {
       float fps = Game::GetInstance()->GetLastFrameRate();
-      if (fps < 0.1)
-        fps = 0.1;
+      if (fps < 0.1f)
+        fps = 0.1f;
       Double time_delta = 1000 / (Double)fps;
       Point2d anticipation = followed_object->GetSpeed() * time_delta;
 
