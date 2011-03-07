@@ -94,20 +94,30 @@ HelpMenu::HelpMenu()
                        "help/touch interface", Font::FONT_LARGE);
   w->AddCaption(_("Touch/click to fire / start filling weapon speed gauge"), 415, 42, 707); // TRANSLATORS: please be imaginative and keep it short!
   w->AddCaption(_("Touch/click the left or right arrows to move respectively left or right"), 204, 150, 400); // TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Touch/click the left or right arrows to respectively raise or lower the aim"), 594, 155, 359); // TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Touch/click the left or right arrows to respectively raise or lower the aim"), 597, 155, 359); // TRANSLATORS: please be imaginative and keep it short!
   w->AddCaption(_("Touch/click to jump. Maintaining the touch/click to high jump."), 354, 345, 705); // TRANSLATORS: please be imaginative and keep it short!
   w->AddCaption(_("Touch/click to change the weapon timer"), 382, 428, 758); // TRANSLATORS: please be imaginative and keep it short!
   tabs->AddNewTab("unused", _("Touch controls"), w);
 
   w = new FigureWidget(Point2i(max_w,
                                tabs->GetSizeY() - tabs->GetHeaderHeight()),
-                       "help/minimap", Font::FONT_BIG);
+                       "help/replay", Font::FONT_LARGE);
+  w->AddCaption(_("Switch between classical and replay interface"), 415, 37, 707); // TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Right button to resume/pause replay.\nSquare right button to immediately exit it."), 230, 138, 445); // TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Change replay speed.\nRight part displays current speed."), 624, 138, 327); // TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Replay progress bar, not used for precise seeking.\nShort click for a +30s jump, long for +60s jump."), 238, 375, 475); // TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Current turn time info.\nClick to launch the pause menu."), 640, 375, 315); // TRANSLATORS: please be imaginative and keep it short!
+  tabs->AddNewTab("unused", _("Replay controls"), w);
+
+  w = new FigureWidget(Point2i(max_w,
+                               tabs->GetSizeY() - tabs->GetHeaderHeight()),
+                       "help/minimap", Font::FONT_HUGE);
   w->AddCaption(_("Area currently displayed"), 205, 270, 405);// TRANSLATORS: please be imaginative and keep it short!
   w->AddCaption(_("Position of the characters.\nA circle surrounds the active character."), 610, 335, 375);// TRANSLATORS: please be imaginative and keep it short!
-  w->AddCaption(_("Position of bonus boxes or medkits"), 205, 403, 405);// TRANSLATORS: please be imaginative and keep it short!
+  w->AddCaption(_("Position of bonus boxes or medkits"), 207, 400, 405);// TRANSLATORS: please be imaginative and keep it short!
   tabs->AddNewTab("unused", _("Minimap"), w);
 
-#ifndef ANDROID
+#if !defined(ANDROID) && !defined(__SYMBIAN32__)
   w = new FigureWidget(Point2i(max_w,
                                tabs->GetSizeY() - tabs->GetHeaderHeight()),
                        "help/shortkeys", (Font::font_size_t)14);
