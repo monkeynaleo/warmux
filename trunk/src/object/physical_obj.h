@@ -225,7 +225,7 @@ public:
 
 protected:
   virtual void SignalRebound();
-  virtual void SignalGroundCollision(const Point2d& /* my_speed_before */) { };
+  virtual void SignalGroundCollision(const Point2d& /* my_speed_before */, const Double& /*contactAngle*/) { };
   virtual void SignalObjectCollision(const Point2d& /* my_speed_before */,
                                      PhysicalObj * /* collided/ing object */,
                                      const Point2d& /* object speed_before */) { };
