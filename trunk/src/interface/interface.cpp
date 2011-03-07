@@ -115,9 +115,8 @@ void Interface::LoadDataInternal(Profile *res)
   t_character_energy = new Text("Dead", m_energy_text_color, fsize, Font::FONT_BOLD);
 
   // Replay labels
-  char t[] = { 'x', '1', 0 };
-  t[1] = 48+(uint)GameTime::GetConstInstance()->GetSpeed();
-  t_speed = new Text(t, primary_red_color, Font::FONT_HUGE*zoom+0.5f, Font::FONT_BOLD, true);
+  if (replay)
+    t_speed = new Text("", primary_red_color, Font::FONT_HUGE*zoom+0.5f, Font::FONT_BOLD, true);
 
   // Timer
   global_timer = new Text("0", gray_color, Font::FONT_BIG*zoom+0.5f, Font::FONT_BOLD, false);
@@ -233,6 +232,11 @@ void Interface::Reset()
   help->Reset();
   energy_bar->InitVal(0, 0, GameMode::GetInstance()->character.init_energy);
   TeamEnergy::SetSpacing((174-MARGIN)*zoom / TeamsList::GetInstance()->GetPlayingList().size());
+  if (t_speed) {
+    char t[] = { 'x', '1', 0 };
+    t[1] = 48+(uint)GameTime::GetConstInstance()->GetSpeed();
+    t_speed->SetText(t);
+  }
   FOR_EACH_TEAM(tmp_team)
     (*tmp_team)->GetEnergyBar().SetHeight(default_toolbar.GetHeight());
 }
