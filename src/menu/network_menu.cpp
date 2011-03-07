@@ -424,7 +424,7 @@ void NetworkMenu::ChangeMapCallback()
 void NetworkMenu::SetGameMasterCallback()
 {
   // We are becoming game master, updating the menu...
-  AppWarmux::GetInstance()->video->SetWindowCaption(std::string("Warmux ") +
+  AppWarmux::GetInstance()->video->SetWindowCaption(std::string("WarMUX ") +
                                                     Constants::WARMUX_VERSION + " - " +
                                                     _("Master mode"));
   AddGameModeTab();
