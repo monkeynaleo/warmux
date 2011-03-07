@@ -33,6 +33,7 @@
 #include "game/game.h"
 #include "game/game_mode.h"
 #include "game/config.h"
+#include "game/game_time.h"
 #include "map/maps_list.h"
 #include "include/action_handler.h"
 #include "include/constant.h"
@@ -457,9 +458,11 @@ void StartPlaying(const std::string& name)
 
   replay->Init(false);
   if (replay->LoadReplay(name.c_str())) {
+    Double speed = GameTime::GetInstance()->GetSpeed();
     if (replay->StartPlaying()) {
       Game::GetInstance()->Start();
       replay->StopPlaying();
+      GameTime::GetInstance()->SetSpeed(speed);
     }
   }
   replay->DeInit();
