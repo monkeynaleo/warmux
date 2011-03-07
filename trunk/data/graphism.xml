@@ -199,6 +199,7 @@
   <surface name="game_mode" file="menu/help_game_mode.jpg" />
   <surface name="minimap" file="menu/help_minimap.png" />
   <surface name="touch interface" file="menu/help_touch_interface.png" />
+  <surface name="replay" file="menu/help_replay.png" />
 </section>
 
 <section name="object">
