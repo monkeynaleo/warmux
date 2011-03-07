@@ -32,6 +32,7 @@
 #include "gui/question.h"
 #include "include/app.h"
 #include "include/action_handler.h"
+#include "include/constant.h"
 #include "interface/cursor.h"
 #include "interface/interface.h"
 #include "interface/keyboard.h"
@@ -136,6 +137,7 @@ void Game::InitEverything()
     if (Network::GetInstance()->IsGameMaster()) {
       InitGameData_NetGameMaster();
     } else if (Network::GetInstance()->IsLocal()) {
+      AppWarmux::GetInstance()->video->SetWindowCaption(std::string("WarMUX ") + Constants::WARMUX_VERSION);
       RandomSync().InitRandom();
     }
 
@@ -205,11 +207,9 @@ void Game::InitEverything()
 
 void Game::InitGameData_RePlay()
 {
-  AppWarmux * app = AppWarmux::GetInstance();
-  Replay *replay = Replay::GetInstance();
-
-  app->video->SetWindowCaption("Wormux - Replay mode");
-  RandomSync().SetSeed(replay->GetSeed());
+  AppWarmux::GetInstance()->video->SetWindowCaption("WarMUX " + Constants::WARMUX_VERSION +
+                                                    " - " + _("Replay mode"));
+  RandomSync().SetSeed(Replay::GetInstance()->GetSeed());
 }
 
 void Game::InitGameData_NetGameMaster()
