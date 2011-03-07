@@ -224,15 +224,15 @@ void ParticleEngine::AddNow(const Point2i &position,
       break;
     case particle_WATER : particle = new WaterParticle();
       break;
-    case particle_CLEARWATER : particle = new ClearWaterParticle();
+    case particle_CLEARWATER : particle = new WaterParticle(CLEARWATER_spr);
       break;
-    case particle_LAVA: particle = new LavaParticle();
+    case particle_LAVA: particle = new WaterParticle(LAVA_spr);
       break;
-    case particle_RADIOACTIVE: particle = new RadioactiveParticle();
+    case particle_RADIOACTIVE: particle = new WaterParticle(RADIOACTIVE_spr);
       break;
-    case particle_DIRTYWATER: particle = new DirtyWaterParticle();
+    case particle_DIRTYWATER: particle = new WaterParticle(DIRTYWATER_spr);
       break;
-    case particle_CHOCOLATEWATER: particle = new ChocolateWaterParticle();
+    case particle_CHOCOLATEWATER: particle = new WaterParticle(RADIOACTIVE_spr);
       break;
     case particle_EXPLOSION: particle = new ExplosionParticle();
     case particle_BODY_MEMBER:

@@ -27,13 +27,9 @@
 
 const uint living_time = 5000;
 
-WaterParticle::WaterParticle() :
-  Particle("water_particle")
+WaterParticle::WaterParticle()
+  : Particle("water_particle")
 {
-  SetCollisionModel(false, false, false);
-  m_left_time_to_live = 100;
-  m_check_move_on_end_turn = false;
-
   particle_spr type = CLEARWATER_spr;
   if (ActiveMap()->GetWaterType() == "lava")
     type = LAVA_spr;
@@ -43,6 +39,21 @@ WaterParticle::WaterParticle() :
     type = DIRTYWATER_spr;
   else if (ActiveMap()->GetWaterType() == "chocolate_drop")
     type = CHOCOLATEWATER_spr;
+
+  SetDefaults(type);
+}
+
+WaterParticle::WaterParticle(particle_spr type)
+  : Particle("water_particle")
+{
+  SetDefaults(type);
+}
+
+void WaterParticle::SetDefaults(particle_spr type)
+{
+  SetCollisionModel(false, false, false);
+  m_left_time_to_live = 100;
+  m_check_move_on_end_turn = false;
 
   image = new Sprite(*ParticleEngine::GetSprite(type));
 
@@ -61,8 +72,7 @@ void WaterParticle::Refresh()
   UpdatePosition();
   image->Update();
 
-  if (image->GetSize().x != 0 && image->GetSize().y != 0)
-  {
+  if (image->GetSize().x != 0 && image->GetSize().y != 0) {
     int dx = (GetWidth() - image->GetWidth()) / 2;
     int dy = std::max(0, GetHeight() - 2);
     SetTestRect(dx, dx, dy, 1);
@@ -89,39 +99,4 @@ void WaterParticle::SignalDrowning()
 void WaterParticle::SignalOutOfMap()
 {
   m_left_time_to_live = 0;
-}
-
-ClearWaterParticle::ClearWaterParticle()
-{
-  // delete std water image
-  delete image;
-  image = ParticleEngine::GetSprite(CLEARWATER_spr);
-}
-
-LavaParticle::LavaParticle()
-{
-  // delete std water image
-  delete image;
-  image = ParticleEngine::GetSprite(LAVA_spr);
-}
-
-RadioactiveParticle::RadioactiveParticle()
-{
-  // delete std water image
-  delete image;
-  image = ParticleEngine::GetSprite(RADIOACTIVE_spr);
-}
-
-DirtyWaterParticle::DirtyWaterParticle()
-{
-  // delete std water image
-  delete image;
-  image = ParticleEngine::GetSprite(DIRTYWATER_spr);
-}
-
-ChocolateWaterParticle::ChocolateWaterParticle()
-{
-  // delete std water image
-  delete image;
-  image = ParticleEngine::GetSprite(CHOCOLATEWATER_spr);
 }

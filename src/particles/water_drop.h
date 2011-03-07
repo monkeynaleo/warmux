@@ -25,7 +25,9 @@
 
 class WaterParticle : public Particle
 {
+  void SetDefaults(particle_spr type);
 public:
+  WaterParticle(particle_spr type);
   WaterParticle();
   virtual ~WaterParticle();
   void Refresh();
@@ -33,36 +35,6 @@ public:
 protected:
   void SignalDrowning();
   void SignalOutOfMap();
-};
-
-class ClearWaterParticle : public WaterParticle
-{
-public:
-  ClearWaterParticle();
-};
-
-class LavaParticle : public WaterParticle
-{
-public:
-  LavaParticle();
-};
-
-class RadioactiveParticle : public WaterParticle
-{
-public:
-  RadioactiveParticle();
-};
-
-class DirtyWaterParticle : public WaterParticle
-{
-public:
-  DirtyWaterParticle();
-};
-
-class ChocolateWaterParticle : public WaterParticle
-{
-public:
-  ChocolateWaterParticle();
 };
 
 #endif /* WATER_DROP_H */
