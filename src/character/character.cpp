@@ -761,7 +761,7 @@ void Character::PrepareTurn()
 }
 
 // Signal the end of a fall
-void Character::Collision(const Point2d& speed_vector, const Double& contactAngle)
+void Character::Collision(const Point2d& speed_vector)
 {
   // Do not manage dead characters.
   if (IsDead()) return;
@@ -784,9 +784,11 @@ void Character::Collision(const Point2d& speed_vector, const Double& contactAngl
   body->SetRotation(0.0);
   back_jumping = false;
 
-  Double norm = speed_vector.Norm()*abs(sin((speed_vector.ComputeAngle()+HALF_PI)-contactAngle));
+  Double norm = speed_vector.Norm();
 
   if (norm > game_mode->safe_fall) {
+    // TODO: take the angle of collision into account!
+
     norm -= game_mode->safe_fall;
     Double degat = norm * game_mode->damage_per_fall_unit;
     // If the player was clumsy and felt, he is the active character and the damage dealer
@@ -801,17 +803,15 @@ void Character::Collision(const Point2d& speed_vector, const Double& contactAngl
   }
 }
 
-void Character::SignalGroundCollision(const Point2d& speed_before, const Double& contactAngle)
+void Character::SignalGroundCollision(const Point2d& speed_before)
 {
-  MSG_DEBUG("character.collision", "%s collides on ground with speed %s, %s (norm = %s, angle=%s, contactAngle=%s)",
+  MSG_DEBUG("character.collision", "%s collides on ground with speed %s, %s (norm = %s)",
             character_name.c_str(),
             Double2str(speed_before.x).c_str(),
             Double2str(speed_before.y).c_str(),
-            Double2str(speed_before.Norm()).c_str(),
-            Double2str(speed_before.ComputeAngle()).c_str(),
-            Double2str(contactAngle).c_str());
+            Double2str(speed_before.Norm()).c_str());
 
-  Collision(speed_before, contactAngle);
+  Collision(speed_before);
 }
 
 void Character::SignalObjectCollision(const Point2d& my_speed_before,
@@ -826,7 +826,7 @@ void Character::SignalObjectCollision(const Point2d& my_speed_before,
   // In case an object collides with the character, we don't want
   // the character to have huge damage because of the speed of the object.
   // Damage should be applied when felt or when hurted by a weapon.
-  Collision(my_speed_before, my_speed_before.ComputeAngle());
+  Collision(my_speed_before);
 }
 
 void Character::SignalExplosion()
