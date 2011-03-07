@@ -803,7 +803,7 @@ void Character::Collision(const Point2d& speed_vector, const Double& contactAngl
 
 void Character::SignalGroundCollision(const Point2d& speed_before, const Double& contactAngle)
 {
-  MSG_DEBUG("character.collision", "%s collides on ground with speed %s, %s (norm = %s)",
+  MSG_DEBUG("character.collision", "%s collides on ground with speed %s, %s (norm = %s, angle=%s, contactAngle=%s)",
             character_name.c_str(),
             Double2str(speed_before.x).c_str(),
             Double2str(speed_before.y).c_str(),
