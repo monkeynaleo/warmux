@@ -547,14 +547,7 @@ void Physics::Rebound(Point2d /*contactPos*/, Double contact_angle)
 
       m_rope_angle.x0 = HALF_PI - V.ComputeAngle();
 
-      // Convert the linear speed of the rebound to angular speed.
-      V.x = PENDULUM_REBOUND_FACTOR * norme * cos(angle);
-      V.y = PENDULUM_REBOUND_FACTOR * norme * sin(angle);
-
-      angle = angle + PI;
-
-      m_rope_angle.x1 = ( norme * cos(angle) * cos(m_rope_angle.x0) +
-                          norme * sin(angle) * sin(m_rope_angle.x0) ) / m_rope_length.x0;
+      m_rope_angle.x1 = -PENDULUM_REBOUND_FACTOR * m_rope_angle.x1;
 
       m_rope_angle.x2 = 0;
       m_extern_force.Clear();
