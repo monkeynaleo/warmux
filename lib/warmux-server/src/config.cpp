@@ -96,29 +96,29 @@ void ServerConfig::Parse(std::ifstream & fin)
 
       std::string::size_type equ_pos = line.find('=',0);
       if (equ_pos == std::string::npos) {
-	DPRINT(INFO, "Wrong format on line %i",line_nbr);
-	continue;
+        DPRINT(INFO, "Wrong format on line %i",line_nbr);
+	      continue;
       }
 
       std::string opt = line.substr(0, equ_pos);
       std::string val = line.substr(equ_pos+1);
 
       if (opt == "versions") {
-	if (support_versions) {
-	  supported_versions.clear(); // useful only for reloading
-	  ServerConfig::SplitVersionsString(val, supported_versions);
-	} else {
-	  fprintf(stderr, "Option 'versions' is ignored.\n");
-	}
-	continue;
+        if (support_versions) {
+          supported_versions.clear(); // useful only for reloading
+          ServerConfig::SplitVersionsString(val, supported_versions);
+        } else {
+          fprintf(stderr, "Option 'versions' is ignored.\n");
+        }
+        continue;
       } else if (opt == "hidden_versions") {
-	if (support_versions) {
-	  hidden_supported_versions.clear(); // useful only for reloading
-	  ServerConfig::SplitVersionsString(val, hidden_supported_versions);
-	} else {
-	  fprintf(stderr, "Option 'hidden_versions' is ignored.\n");
-	}
-	continue;
+        if (support_versions) {
+          hidden_supported_versions.clear(); // useful only for reloading
+          ServerConfig::SplitVersionsString(val, hidden_supported_versions);
+        } else {
+          fprintf(stderr, "Option 'hidden_versions' is ignored.\n");
+        }
+        continue;
       }
 
       if (opt == "verbose")
