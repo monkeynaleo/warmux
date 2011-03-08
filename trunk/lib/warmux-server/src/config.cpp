@@ -41,10 +41,10 @@ ServerConfig::ServerConfig(bool versions) : support_versions(versions)
 void ServerConfig::Load(const std::string & _config_file)
 {
   if (config_file != "") {
-        DPRINTMSG(stderr,
-		  "Config file %s is already loaded. %s will not be loaded",
-		  config_file.c_str(), _config_file.c_str());
-	exit(EXIT_FAILURE);
+    DPRINTMSG(stderr,
+		          "Config file %s is already loaded. %s will not be loaded",
+		          config_file.c_str(), _config_file.c_str());
+	  exit(EXIT_FAILURE);
   }
 
   // Get its full pathname to allow "automatic" reloading
@@ -88,63 +88,59 @@ void ServerConfig::Parse(std::ifstream & fin)
   std::string line;
   int line_nbr = 0;
 
-  while ((read = getline(line, fin)) >= 0)
-    {
-      line_nbr++;
-      if(line.size() == 0 || line.at(0) == '#' )
-        continue;
+  while ((read = getline(line, fin)) >= 0) {
+    line_nbr++;
+    if(line.size() == 0 || line.at(0) == '#' )
+      continue;
 
-      std::string::size_type equ_pos = line.find('=',0);
-      if (equ_pos == std::string::npos) {
-        DPRINT(INFO, "Wrong format on line %i",line_nbr);
-	      continue;
-      }
-
-      std::string opt = line.substr(0, equ_pos);
-      std::string val = line.substr(equ_pos+1);
-
-      if (opt == "versions") {
-        if (support_versions) {
-          supported_versions.clear(); // useful only for reloading
-          ServerConfig::SplitVersionsString(val, supported_versions);
-        } else {
-          fprintf(stderr, "Option 'versions' is ignored.\n");
-        }
-        continue;
-      } else if (opt == "hidden_versions") {
-        if (support_versions) {
-          hidden_supported_versions.clear(); // useful only for reloading
-          ServerConfig::SplitVersionsString(val, hidden_supported_versions);
-        } else {
-          fprintf(stderr, "Option 'hidden_versions' is ignored.\n");
-        }
-        continue;
-      }
-
-      if (opt == "verbose")
-        if (val == "false")
-          WSERVER_Verbose = false;
-
-      // val is considered to be an int if it doesn't contain
-      // a '.' (ip address have to be handled as string...
-      if(val.find('.',0) == std::string::npos
-         && ((val.at(0) >= '0' && val.at(0) <= '9')
-             ||   val.at(0) == '-' ))
-        {
-          int nbr = atoi(val.c_str());
-          int_value[ opt ] = nbr;
-        }
-      else
-        {
-          if(val == "true")
-            bool_value[ opt ] = true;
-          else
-            if(val == "false")
-              bool_value[ opt ] = false;
-            else
-              str_value[ opt ] = val;
-        }
+    std::string::size_type equ_pos = line.find('=',0);
+    if (equ_pos == std::string::npos) {
+      DPRINT(INFO, "Wrong format on line %i",line_nbr);
+      continue;
     }
+
+    std::string opt = line.substr(0, equ_pos);
+    std::string val = line.substr(equ_pos+1);
+
+    if (opt == "versions") {
+      if (support_versions) {
+        supported_versions.clear(); // useful only for reloading
+        ServerConfig::SplitVersionsString(val, supported_versions);
+      } else {
+        fprintf(stderr, "Option 'versions' is ignored.\n");
+      }
+      continue;
+    } else if (opt == "hidden_versions") {
+      if (support_versions) {
+        hidden_supported_versions.clear(); // useful only for reloading
+        ServerConfig::SplitVersionsString(val, hidden_supported_versions);
+      } else {
+        fprintf(stderr, "Option 'hidden_versions' is ignored.\n");
+      }
+      continue;
+    }
+
+    if (opt == "verbose")
+      if (val == "false")
+        WSERVER_Verbose = false;
+
+    // val is considered to be an int if it doesn't contain
+    // a '.' (ip address have to be handled as string...
+    if(val.find('.',0) == std::string::npos
+       && ((val.at(0) >= '0' && val.at(0) <= '9')
+           ||   val.at(0) == '-' )) {
+      int nbr = atoi(val.c_str());
+      int_value[ opt ] = nbr;
+    } else {
+      if(val == "true")
+        bool_value[ opt ] = true;
+      else
+        if(val == "false")
+          bool_value[ opt ] = false;
+        else
+          str_value[ opt ] = val;
+    }
+  }
 }
 
 void ServerConfig::Reload()
@@ -157,30 +153,27 @@ void ServerConfig::Display() const
   DPRINT(INFO, "Current config:");
   for(std::map<std::string, bool>::const_iterator cfg = bool_value.begin();
       cfg != bool_value.end();
-      ++cfg)
-    {
-      DPRINT(INFO, "(bool) %s = %s", cfg->first.c_str(), cfg->second?"true":"false");
-    }
+      ++cfg) {
+    DPRINT(INFO, "(bool) %s = %s", cfg->first.c_str(), cfg->second?"true":"false");
+  }
 
   for(std::map<std::string, int>::const_iterator cfg = int_value.begin();
       cfg != int_value.end();
-      ++cfg)
-    {
-      DPRINT(INFO, "(int) %s = %i", cfg->first.c_str(), cfg->second);
-    }
+      ++cfg) {
+    DPRINT(INFO, "(int) %s = %i", cfg->first.c_str(), cfg->second);
+  }
 
   for(std::map<std::string, std::string>::const_iterator cfg = str_value.begin();
       cfg != str_value.end();
-      ++cfg)
-    {
-      DPRINT(INFO, "(str) %s = %s", cfg->first.c_str(), cfg->second.c_str());
-    }
+      ++cfg) {
+    DPRINT(INFO, "(str) %s = %s", cfg->first.c_str(), cfg->second.c_str());
+  }
 
   if (support_versions) {
     DPRINT(INFO, "Supported versions: %s",
-	   ServerConfig::SupportedVersions2Str(supported_versions).c_str());
+	         ServerConfig::SupportedVersions2Str(supported_versions).c_str());
     DPRINT(INFO, "Hidden but supported versions: %s",
-	   ServerConfig::SupportedVersions2Str(hidden_supported_versions).c_str());
+	         ServerConfig::SupportedVersions2Str(hidden_supported_versions).c_str());
   }
 }
 
@@ -226,31 +219,28 @@ bool ServerConfig::Get(const std::string & name, std::string & value) const
 void ServerConfig::SetDefault(const std::string & name, const bool & value)
 {
   bool val;
-  if( ! Get(name, val) )
-    {
-      DPRINT(INFO, "Setting to default value : %s", name.c_str());
-      bool_value[ name ] = value;
-    }
+  if( ! Get(name, val) ) {
+    DPRINT(INFO, "Setting to default value : %s", name.c_str());
+    bool_value[ name ] = value;
+  }
 }
 
 void ServerConfig::SetDefault(const std::string & name, const int & value)
 {
   int val;
-  if( ! Get(name, val) )
-    {
-      DPRINT(INFO, "Setting to default value : %s", name.c_str());
-      int_value[ name ] = value;
-    }
+  if( ! Get(name, val) ) {
+    DPRINT(INFO, "Setting to default value : %s", name.c_str());
+    int_value[ name ] = value;
+  }
 }
 
 void ServerConfig::SetDefault(const std::string & name, const std::string & value)
 {
   std::string val;
-  if( ! Get(name, val) )
-    {
-      DPRINT(INFO, "Setting to default value : %s", value.c_str());
-      str_value[ name ] = value;
-    }
+  if( ! Get(name, val) ) {
+    DPRINT(INFO, "Setting to default value : %s", value.c_str());
+    str_value[ name ] = value;
+  }
 }
 
 
