@@ -71,7 +71,7 @@ protected:
   uint GetMSSinceTimeoutStart() const;
   void Collision();
 
-  virtual void SignalGroundCollision(const Point2d& speed_before);
+  virtual void SignalGroundCollision(const Point2d& speed_before, const Double& contactAngle);
   virtual void SignalObjectCollision(const Point2d& my_speed_before,
                                      PhysicalObj * obj,
                                      const Point2d& obj_speed);
@@ -98,7 +98,7 @@ public:
   virtual ~WeaponBullet(){};
   virtual void Refresh();
 protected:
-  virtual void SignalGroundCollision(const Point2d& speed_before);
+  virtual void SignalGroundCollision(const Point2d& speed_before, const Double& contactAngle);
   virtual void SignalObjectCollision(const Point2d& my_speed_before,
                                      PhysicalObj * obj,
                                      const Point2d& obj_speed);

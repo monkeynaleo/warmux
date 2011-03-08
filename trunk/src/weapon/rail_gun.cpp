@@ -39,7 +39,7 @@ protected:
   void ShootSound();
   void SignalDrowning();
 
-  void SignalGroundCollision(const Point2d& speed_before);
+  void SignalGroundCollision(const Point2d& speed_before, const Double& contactAngle);
   void SignalObjectCollision(const Point2d& my_speed_before,
                              PhysicalObj * obj,
                              const Point2d& /*obj_speed*/);
@@ -65,11 +65,11 @@ void RailBullet::SignalDrowning()
   Ghost();
 }
 
-void RailBullet::SignalGroundCollision(const Point2d& speed_before)
+void RailBullet::SignalGroundCollision(const Point2d& speed_before, const Double& contactAngle)
 {
   // Change that sound?
   //JukeBox::GetInstance()->Play("default", "weapon/ricoche1");
-  WeaponProjectile::SignalGroundCollision(speed_before);
+  WeaponProjectile::SignalGroundCollision(speed_before, contactAngle);
   launcher->IncMissedShots();
 }
 

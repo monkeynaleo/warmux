@@ -761,7 +761,7 @@ void Character::PrepareTurn()
 }
 
 // Signal the end of a fall
-void Character::Collision(const Point2d& speed_vector)
+void Character::Collision(const Point2d& speed_vector, const Double& contactAngle)
 {
   // Do not manage dead characters.
   if (IsDead()) return;
@@ -784,11 +784,9 @@ void Character::Collision(const Point2d& speed_vector)
   body->SetRotation(0.0);
   back_jumping = false;
 
-  Double norm = speed_vector.Norm();
+  Double norm = speed_vector.Norm()*abs(sin((speed_vector.ComputeAngle()+HALF_PI)-contactAngle));
 
   if (norm > game_mode->safe_fall) {
-    // TODO: take the angle of collision into account!
-
     norm -= game_mode->safe_fall;
     Double degat = norm * game_mode->damage_per_fall_unit;
     // If the player was clumsy and felt, he is the active character and the damage dealer
@@ -803,15 +801,17 @@ void Character::Collision(const Point2d& speed_vector)
   }
 }
 
-void Character::SignalGroundCollision(const Point2d& speed_before)
+void Character::SignalGroundCollision(const Point2d& speed_before, const Double& contactAngle)
 {
-  MSG_DEBUG("character.collision", "%s collides on ground with speed %s, %s (norm = %s)",
+  MSG_DEBUG("character.collision", "%s collides on ground with speed %s, %s (norm = %s, angle=%s, contactAngle=%s)",
             character_name.c_str(),
             Double2str(speed_before.x).c_str(),
             Double2str(speed_before.y).c_str(),
-            Double2str(speed_before.Norm()).c_str());
+            Double2str(speed_before.Norm()).c_str(),
+            Double2str(speed_before.ComputeAngle()).c_str(),
+            Double2str(contactAngle).c_str());
 
-  Collision(speed_before);
+  Collision(speed_before, contactAngle);
 }
 
 void Character::SignalObjectCollision(const Point2d& my_speed_before,
@@ -826,7 +826,7 @@ void Character::SignalObjectCollision(const Point2d& my_speed_before,
   // In case an object collides with the character, we don't want
   // the character to have huge damage because of the speed of the object.
   // Damage should be applied when felt or when hurted by a weapon.
-  Collision(my_speed_before);
+  Collision(my_speed_before, my_speed_before.ComputeAngle());
 }
 
 void Character::SignalExplosion()

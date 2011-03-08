@@ -57,7 +57,7 @@ protected:
   void ShootSound();
   void RandomizeShoot(Double &angle, Double &strength);
   void DoExplosion();
-  void SignalGroundCollision(const Point2d& speed_before);
+  void SignalGroundCollision(const Point2d& speed_before, const Double& contactAngle);
   void SignalDrowning();
 };
 
@@ -95,9 +95,9 @@ void FlameThrowerBullet::DoExplosion()
   particle.AddNow(pos, 2, particle_SMOKE, true, 0, 1);
 }
 
-void FlameThrowerBullet::SignalGroundCollision(const Point2d& speed_before)
+void FlameThrowerBullet::SignalGroundCollision(const Point2d& speed_before, const Double& contactAngle)
 {
-  WeaponProjectile::SignalGroundCollision(speed_before);
+  WeaponProjectile::SignalGroundCollision(speed_before, contactAngle);
   launcher->IncMissedShots();
 }
 
