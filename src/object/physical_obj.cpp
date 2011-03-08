@@ -341,6 +341,7 @@ void PhysicalObj::Collide(collision_t collision, PhysicalObj* collided_obj, cons
     return;
 
   case COLLISION_ON_GROUND:
+    ContactPointAngleOnGround(position, contactPos, contactAngle);
     ASSERT(!collided_obj);
     break;
 
