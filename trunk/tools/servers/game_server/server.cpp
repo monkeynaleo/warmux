@@ -159,10 +159,8 @@ void NetworkGame::SendAction(const Action& a, DistantComputer* client, bool clt_
     ASSERT(client);
     client->SendData(packet, size);
   } else {
-
     for (std::list<DistantComputer*>::const_iterator it = cpulist.begin();
          it != cpulist.end(); it++) {
-
       if ((*it) != client) {
         (*it)->SendData(packet, size);
       }
@@ -194,16 +192,41 @@ void NetworkGame::StopGame()
 void NetworkGame::ForwardPacket(const char *buffer, size_t len, DistantComputer* sender)
 {
   std::list<DistantComputer*>::iterator it;
+  Action a(buffer, sender);
 
+  if (a.GetType() == Action::ACTION_NETWORK_CLIENT_CHANGE_STATE) {
+    int player_id = a.PopInt(); // Ignore player id
+    WNet::net_game_state_t state = (WNet::net_game_state_t)a.PopInt();
+    if (state != WNet::NETWORK_MENU_OK)
+      goto out;
+    sender->GetPlayer(player_id)->SetState(Player::STATE_INITIALIZED);
+
+    uint not_ready = 0;
+    DistantComputer *last = NULL;
+
+    for (it = cpulist.begin(); it != cpulist.end(); it++) {
+      if ((int)(*it)->GetPlayers().size() != (*it)->GetNumberOfPlayersWithState(Player::STATE_INITIALIZED)) {
+        not_ready++;
+        last = (*it);
+      }
+
+      if ((*it) != sender) {
+        (*it)->SendData(buffer, len);
+      }
+    }
+    if (not_ready == 1)
+      DPRINT(INFO, "%p is the last not ready!\n", last);
+    return;
+  }
+
+out:
   for (it = cpulist.begin(); it != cpulist.end(); it++) {
-
     if ((*it) != sender) {
       (*it)->SendData(buffer, len);
     }
   }
 
   if (sender == cpulist.front()) {
-    Action a(buffer, sender);
     if (a.GetType() == Action::ACTION_NETWORK_MASTER_CHANGE_STATE) {
       int net_state = a.PopInt();
       if (net_state == WNet::NETWORK_LOADING_DATA) {
