@@ -421,6 +421,7 @@ void Grapple::AttachRope(const Point2i& contact_point)
   ActiveCharacter().SetMovement("ninja-rope");
 
   ActiveCharacter().SetFiringAngle(-PI / 3);
+  ActiveCharacter().StopBackJumping();
 
   // Camera should focus on it!
   Camera::GetInstance()->FollowObject(&ActiveCharacter());
