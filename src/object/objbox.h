@@ -60,7 +60,7 @@ protected:
   static int start_life_points;
   void Explode();
 
-  virtual void SignalGroundCollision(const Point2d& my_speed_before);
+  virtual void SignalGroundCollision(const Point2d& my_speed_before, const Double& contactAngle);
   virtual void SignalObjectCollision(const Point2d& my_speed_before,
                                      PhysicalObj *object,
                                      const Point2d& object_speed);

@@ -62,10 +62,10 @@ WeaponBullet::WeaponBullet(const std::string &name,
 }
 
 // Signal that the bullet has hit the ground
-void WeaponBullet::SignalGroundCollision(const Point2d& speed_before)
+void WeaponBullet::SignalGroundCollision(const Point2d& speed_before, const Double& contactAngle)
 {
   JukeBox::GetInstance()->Play("default", "weapon/ricoche1");
-  WeaponProjectile::SignalGroundCollision(speed_before);
+  WeaponProjectile::SignalGroundCollision(speed_before, contactAngle);
   launcher->IncMissedShots();
 }
 
@@ -307,7 +307,7 @@ void WeaponProjectile::SignalObjectCollision(const Point2d& /* my_speed_before *
 }
 
 // projectile explode when hiting the ground
-void WeaponProjectile::SignalGroundCollision(const Point2d& /*speed_before*/)
+void WeaponProjectile::SignalGroundCollision(const Point2d& /*speed_before*/, const Double& /*contactAngle*/)
 {
   MSG_DEBUG("weapon.projectile", "SignalGroundCollision \"%s\": %d, %d", m_name.c_str(), GetX(), GetY());
   if (explode_with_collision)

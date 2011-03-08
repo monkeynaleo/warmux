@@ -84,7 +84,7 @@ void ObjBox::CloseParachute()
   anim->Start();
 }
 
-void ObjBox::SignalGroundCollision(const Point2d& /*my_speed_before*/)
+void ObjBox::SignalGroundCollision(const Point2d& /*my_speed_before*/, const Double& /*contactAngle*/)
 {
   CloseParachute();
 }
