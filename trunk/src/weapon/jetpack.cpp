@@ -139,6 +139,8 @@ void JetPack::StartFlying()
   // this avoids to show the arrow on top of character that can hide the ammo units
   ActiveCharacter().UpdateLastMovingTime();
 
+  ActiveCharacter().StopBackJumping();
+
   // do not display the character on top of the active character
   // else it will hide the ammo unit of the jetpack (bug #11479)
   CharacterCursor::GetInstance()->Hide();
