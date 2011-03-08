@@ -63,7 +63,7 @@ const std::list<DistantComputer*>& NetworkGame::GetCpus() const
 
 bool NetworkGame::AcceptNewComputers() const
 {
-  if (game_started || cpulist.size() >= 4) {
+  if (game_started || cpulist.size() >= 8) {
     return false;
   }
 
@@ -121,7 +121,7 @@ void NetworkGame::ElectGameMaster()
 
 void NetworkGame::SendAdminMessage(const std::string& message)
 {
-  Action a(Action::ACTION_CHAT_MESSAGE);
+  Action a(Action::ACTION_CHAT_MENU_MESSAGE);
   std::string msg = "***" + message;
   a.Push(0);
   a.Push(msg);
@@ -508,34 +508,21 @@ void GameServer::RunLoop()
   } // while (true)
 }
 
-uint Action_TimeStamp()
-{
-  return 0;
-}
-
 void WARMUX_ConnectHost(DistantComputer& host)
 {
-  std::string hostname = host.GetAddress();
-  std::string nicknames = host.GetNicknames();
-
   Action a(Action::ACTION_INFO_CLIENT_CONNECT);
   ASSERT(host.GetPlayers().size() == 1);
   int player_id = host.GetPlayers().back().GetId();
   a.Push(player_id);
-  a.Push(hostname);
-  a.Push(nicknames);
+  a.Push(host.ToString());
 
   GameServer::GetInstance()->GetGame(host.GetGameId()).SendActionToAllExceptOne(a, &host);
 }
 
 void WARMUX_DisconnectHost(DistantComputer& host)
 {
-  std::string hostname = host.GetAddress();
-  std::string nicknames = host.GetNicknames();
-
   Action a(Action::ACTION_INFO_CLIENT_DISCONNECT);
-  a.Push(hostname);
-  a.Push(nicknames);
+  a.Push(host.ToString());
   a.Push(int(host.GetPlayers().size()));
 
   std::list<Player>::const_iterator player_it;
