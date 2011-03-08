@@ -193,6 +193,7 @@ public:
   void Jump();
   void HighJump();
   void BackJump();
+  void StopBackJumping() { back_jumping = false; }
 
   // Direction of the character ( -1 == looks to the left / +1 == looks to the right)
   void SetDirection(LRDirection direction);
