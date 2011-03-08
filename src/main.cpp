@@ -308,7 +308,8 @@ bool AppWarmux::CheckInactive(SDL_Event& evnt)
 #endif
       if (evnt.type == SDL_QUIT) AppWarmux::EmergencyExit();
       if (evnt.type == SDL_ACTIVEEVENT && evnt.active.gain == 1) {
-        if (Game::GetInstance()->IsRunning()) {
+        if ((!menu || choice != MainMenu::NONE) &&Game::GetInstance()->IsRunning()) {
+          choice = MainMenu::NONE;
           bool exit = false;
           // There shouldn't be any other menu set, right?
           menu = new PauseMenu(exit);
