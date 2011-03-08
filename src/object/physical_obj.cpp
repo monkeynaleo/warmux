@@ -314,7 +314,6 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
   switch (collision) {
   case NO_COLLISION:
     // Nothing more to do!
-    ASSERT(!collided_obj);
     break;
   case COLLISION_ON_GROUND:
     SignalGroundCollision(speed_before_collision, contactAngle);
@@ -337,7 +336,6 @@ void PhysicalObj::Collide(collision_t collision, PhysicalObj* collided_obj, cons
   switch (collision) {
   case NO_COLLISION:
     // Nothing more to do!
-    ASSERT(!collided_obj);
     return;
 
   case COLLISION_ON_GROUND:
