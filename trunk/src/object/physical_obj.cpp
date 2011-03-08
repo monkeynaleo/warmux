@@ -295,9 +295,6 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     lg -= ONE;
   } while (ZERO < lg);
 
-  if (collision == NO_COLLISION && collided_obj == NULL)
-    return collision;
-
   Point2d speed_before_collision = GetSpeed();
   Point2d speed_collided_obj;
   if (collided_obj) {
