@@ -33,8 +33,10 @@ public:
   void Refresh();
   void Draw();
 protected:
-  void SignalDrowning();
-  void SignalOutOfMap();
+  void SignalDrowning() { m_time_left_to_live = 0; }
+  void SignalOutOfMap() { m_time_left_to_live = 0; }
+  void SignalRebound() { m_time_left_to_live = 0; }
+  void SignalGroundCollision(const Point2d&) { m_time_left_to_live = 0; }
 };
 
 #endif /* WATER_DROP_H */

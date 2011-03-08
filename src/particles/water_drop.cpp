@@ -30,6 +30,7 @@ const uint living_time = 5000;
 WaterParticle::WaterParticle()
   : Particle("water_particle")
 {
+  assert(ActiveMap()->GetWaterType() != "no");
   particle_spr type = CLEARWATER_spr;
   if (ActiveMap()->GetWaterType() == "lava")
     type = LAVA_spr;
@@ -51,7 +52,7 @@ WaterParticle::WaterParticle(particle_spr type)
 
 void WaterParticle::SetDefaults(particle_spr type)
 {
-  SetCollisionModel(false, false, false);
+  SetCollisionModel(true, false, false);
   m_time_left_to_live = 100;
   m_check_move_on_end_turn = false;
 
@@ -68,6 +69,10 @@ WaterParticle::~WaterParticle()
 
 void WaterParticle::Refresh()
 {
+  // No need to continue if no longer really existing
+  if (!m_time_left_to_live)
+    return;
+
   uint now = GameTime::GetInstance()->Read();
   UpdatePosition();
   image->Update();
@@ -86,17 +91,11 @@ void WaterParticle::Refresh()
 
 void WaterParticle::Draw()
 {
+  // No need to continue if no longer really existing
+  if (!m_time_left_to_live)
+    return;
+
   Point2i draw_pos = GetPosition();
   draw_pos.y += GetHeight()/2;
   image->Draw( draw_pos );
-}
-
-void WaterParticle::SignalDrowning()
-{
-  m_time_left_to_live = 0;
-}
-
-void WaterParticle::SignalOutOfMap()
-{
-  m_time_left_to_live = 0;
 }
