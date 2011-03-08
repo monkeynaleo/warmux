@@ -96,6 +96,7 @@ public:
   // Auto crop on an object
   void FollowObject(const PhysicalObj *obj, bool follow_closely = false);
   void StopFollowingObj(const PhysicalObj* obj);
+  const PhysicalObj* GetFollowedObj() const { return followed_object; }
 
   void CenterOnActiveCharacter();
 

@@ -326,6 +326,10 @@ void Grapple::Refresh()
 
   ActiveCharacter().SetMovement("ninja-rope");
   ActiveCharacter().UpdatePosition();
+
+  if (attached && Camera::GetInstance()->GetFollowedObj() != &ActiveCharacter()) {
+    Camera::GetInstance()->FollowObject(&ActiveCharacter());
+  }
 }
 
 void Grapple::Draw()
