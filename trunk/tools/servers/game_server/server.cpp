@@ -17,6 +17,8 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************/
 
+#include <algorithm>
+
 #include <WARMUX_action.h>
 #include <WARMUX_error.h>
 #include <WARMUX_i18n.h>
@@ -27,6 +29,7 @@
 NetworkGame::NetworkGame(const std::string& _game_name, const std::string& _password) :
   game_name(_game_name), password(_password), game_started(false)
 {
+  ResetWaiting();
 }
 
 const std::string& NetworkGame::GetName() const
@@ -42,6 +45,8 @@ const std::string& NetworkGame::GetPassword() const
 void NetworkGame::AddCpu(DistantComputer* cpu)
 {
   cpulist.push_back(cpu);
+
+  start_waiting = SDL_GetTicks();
 
   std::string msg = Format("[Game %s] New client connected: %s - total: %zd",
                            game_name.c_str(), cpu->ToString().c_str(), cpulist.size());
@@ -76,6 +81,7 @@ NetworkGame::CloseConnection(std::list<DistantComputer*>::iterator closed)
   std::list<DistantComputer*>::iterator it;
   DistantComputer *host = *closed;
 
+  start_waiting = SDL_GetTicks();
   it = cpulist.erase(closed);
 
   DPRINT(INFO, "[Game %s] Client disconnected: %s - total: %zd", game_name.c_str(),
@@ -128,6 +134,15 @@ void NetworkGame::SendAdminMessage(const std::string& message)
   SendActionToAll(a);
 }
 
+void NetworkGame::SendSingleAdminMessage(DistantComputer* client, const std::string& message)
+{
+  Action a(Action::ACTION_CHAT_MENU_MESSAGE);
+  std::string msg = "***" + message;
+  a.Push(0);
+  a.Push(msg);
+  SendActionToOne(a, client);
+}
+
 // Send Messages
 void NetworkGame::SendActionToAll(const Action& a) const
 {
@@ -174,6 +189,9 @@ void NetworkGame::StartGame()
 {
   DPRINT(INFO, "[Game %s] started with %zd players", game_name.c_str(), cpulist.size());
 
+  // Reset any wait - task #6684
+  ResetWaiting();
+
   std::list<DistantComputer*>::iterator it;
   int i = 0;
   for (it = cpulist.begin(); it != cpulist.end(); it++, i++) {
@@ -186,6 +204,7 @@ void NetworkGame::StartGame()
 void NetworkGame::StopGame()
 {
   DPRINT(INFO, "[Game %s] finished with %zd players", game_name.c_str(), cpulist.size());
+  ResetWaiting();
   game_started = false;
 }
 
@@ -202,20 +221,22 @@ void NetworkGame::ForwardPacket(const char *buffer, size_t len, DistantComputer*
     sender->GetPlayer(player_id)->SetState(Player::STATE_INITIALIZED);
 
     uint not_ready = 0;
-    DistantComputer *last = NULL;
+    waited = NULL;
 
     for (it = cpulist.begin(); it != cpulist.end(); it++) {
       if ((int)(*it)->GetPlayers().size() != (*it)->GetNumberOfPlayersWithState(Player::STATE_INITIALIZED)) {
         not_ready++;
-        last = (*it);
+        waited = (*it);
       }
 
       if ((*it) != sender) {
         (*it)->SendData(buffer, len);
       }
     }
-    if (not_ready == 1)
-      DPRINT(INFO, "%p is the last not ready!\n", last);
+    if (not_ready == 1) {
+      start_waiting = SDL_GetTicks();
+      DPRINT(INFO, "%p is the last not ready!\n", waited);
+    }
     return;
   }
 
@@ -477,9 +498,6 @@ void GameServer::RunLoop()
     if (num_ready == -1) { // Means an error
       fprintf(stderr, "SDLNet_CheckSockets: %s\n", SDLNet_GetError());
       continue; //Or break?
-    } else if (num_ready == 0) {
-      // nothing to do
-      continue;
     }
 
     char *buffer;
@@ -489,6 +507,29 @@ void GameServer::RunLoop()
     std::list<DistantComputer*>::iterator dst_cpu;
 
     for (gamelst_it = games.begin(); gamelst_it != games.end(); gamelst_it++) {
+      // task #6684 - check waited
+      NetworkGame& game = gamelst_it->second;
+      if (game.waited) {
+        int wait = SDL_GetTicks()-game.start_waiting;
+        if (wait > 30000 && !game.warned) {
+          game.SendSingleAdminMessage(game.waited,
+                                      "Game waiting for you for more than 30s -"
+                                      " in 30s you'll get kicked!\n");
+          game.warned = true;
+        } else if (game.warned && wait>60000) {
+          dst_cpu = std::find(game.GetCpus().begin(), game.GetCpus().end(), game.waited);
+          if (dst_cpu != game.GetCpus().end()) {
+            game.SendSingleAdminMessage(game.waited, "More than 60s of inactivity, you're out!\n");
+            game.CloseConnection(dst_cpu);
+            game.ResetWaiting();
+          }
+        }
+      }
+
+      if (num_ready == 0) {
+        // nothing to do
+        continue;
+      }
 
       for (dst_cpu = gamelst_it->second.GetCpus().begin();
            dst_cpu != gamelst_it->second.GetCpus().end();

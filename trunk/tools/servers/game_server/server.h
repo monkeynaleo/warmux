@@ -36,9 +36,9 @@
 class NetworkGame
 {
 private:
-  std::string game_name;
-  std::string password;
-  bool game_started;
+  std::string      game_name;
+  std::string      password;
+  bool             game_started;
   std::list<DistantComputer*> cpulist;
 
   void SendAdminMessage(const std::string& message);
@@ -66,6 +66,13 @@ public:
   void SendActionToAll(const Action& action) const;
   void SendActionToOne(const Action& action, DistantComputer* client) const;
   void SendActionToAllExceptOne(const Action& action, DistantComputer* client) const;
+
+  DistantComputer* waited;
+  uint             start_waiting;
+  bool             warned;
+
+  void SendSingleAdminMessage(DistantComputer* client, const std::string& message);
+  void ResetWaiting() { warned = false; waited = NULL; start_waiting = 0; }
 };
 
 class GameServer : public Singleton<GameServer>
