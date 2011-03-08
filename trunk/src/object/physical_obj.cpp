@@ -534,7 +534,7 @@ void PhysicalObj::Drown()
   if (m_is_fire)
     GetWorld().water.Smoke(GetPosition());
   // make a splash in the water :-)
-  else if (GetMass() >= 2)
+  else if (GetMass() >= 2 && GetName() != "water_particle")
     GetWorld().water.Splash(GetPosition());
 
   StopMoving();
