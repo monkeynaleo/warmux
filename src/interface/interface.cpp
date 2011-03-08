@@ -1134,8 +1134,7 @@ bool Interface::ActionClickUp(const Point2i &mouse_pos, const Point2i &old_click
     }
   }
 
-  if (display_minimap && // We are not targetting
-      Mouse::GetInstance()->GetPointer() == Mouse::POINTER_SELECT) {
+  if (display_minimap) {
     Point2i    offset(window.GetWidth() - GetWorld().ground.GetPreviewSize().x - 2*MARGIN, 2*MARGIN);
     Rectanglei rect_preview(offset, GetWorld().ground.GetPreviewSize());
     if (rect_preview.Contains(mouse_pos)) {
