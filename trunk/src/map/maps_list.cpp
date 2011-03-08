@@ -33,6 +33,7 @@
 #include "game/config.h"
 #include "graphic/surface.h"
 #include "gui/question.h"
+#include "tool/ansi_convert.h"
 #include "tool/resource_manager.h"
 #include "tool/string_tools.h"
 #include "tool/xml_document.h"
@@ -332,9 +333,10 @@ void MapsList::LoadOneMap(const std::string &dir, const std::string &map_name)
   if (!DoesFolderExist(fullname))
     return;
 
-  InfoMap *nv_terrain = new InfoMap(map_name, fullname + PATH_SEPARATOR);
+  std::string real_name = ANSIToUTF8(dir, map_name);
+  InfoMap *nv_terrain = new InfoMap(real_name, fullname + PATH_SEPARATOR);
 
-  std::cout << (lst.empty()?" ":", ") << map_name;
+  std::cout << (lst.empty()?" ":", ") << real_name;
   std::cout.flush();
   lst.push_back(nv_terrain);
 }
