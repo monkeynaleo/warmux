@@ -46,6 +46,35 @@ void NetworkGame::AddCpu(DistantComputer* cpu)
 {
   cpulist.push_back(cpu);
 
+  // Prepare the list of common maps
+  std::vector<std::string> list;
+  std::list<DistantComputer*>::const_iterator first = cpulist.begin();
+  const std::vector<std::string>& start_list = (*first)->GetAvailableMaps();
+  for (uint n=0; n<start_list.size(); n++) {
+    const std::string& name = start_list[n];
+    std::list<DistantComputer*>::const_iterator client = first;
+    bool found = true;
+    client++;
+    for (; client != cpulist.end(); client++) {
+      const std::vector<std::string>& other_list = (*client)->GetAvailableMaps();
+      if (std::find(other_list.begin(), other_list.end(), name) == other_list.end()) {
+        found = false;
+        break;
+      }
+    }
+
+    if (found)
+      list.push_back(name);
+  }
+
+  // Send the common list
+  Action b(Action::ACTION_GAME_SET_MAP_LIST);
+  b.Push(int(list.size()));
+  for (uint i=0; i<list.size(); i++)
+    b.Push(list[i]);
+  b.Push("dummy");
+  SendActionToAll(b);
+
   start_waiting = SDL_GetTicks();
 
   std::string msg = Format("[Game %s] New client connected: %s - total: %zd",
@@ -390,14 +419,15 @@ bool GameServer::ServerStart(uint _port, uint _max_nb_games, uint max_nb_clients
   return true;
 }
 
-bool GameServer::HandShake(uint game_id, WSocket& client_socket, std::string& nickname, uint player_id)
+bool GameServer::HandShake(uint game_id, WSocket& client_socket, std::string& nickname,
+                           uint player_id, std::vector<std::string>& map_list)
 {
   bool client_will_be_master = false;
   if (GetCpus(game_id).empty())
     client_will_be_master = true;
 
   bool r = WNet::Server_HandShake(client_socket, GetGame(game_id).GetName(), GetGame(game_id).GetPassword(),
-                                  nickname, player_id, client_will_be_master);
+                                  nickname, player_id, map_list, client_will_be_master);
 
   if (r && client_will_be_master)
     DPRINT(INFO, "[Game %s] %s (%s) will be game master", GetGame(game_id).GetName().c_str(),
@@ -453,9 +483,10 @@ void GameServer::WaitClients()
     DPRINT(INFO, "Connexion from %s\n", incoming->GetAddress().c_str());
 
     std::string client_nickname;
+    std::vector<std::string> maps;
     uint player_id = GetGame(game_id).NextPlayerId();
 
-    if (!HandShake(game_id, *incoming, client_nickname, player_id)) {
+    if (!HandShake(game_id, *incoming, client_nickname, player_id, maps)) {
       incoming->Disconnect();
       return;
     }
@@ -463,6 +494,7 @@ void GameServer::WaitClients()
     clients_socket_set->AddSocket(incoming);
 
     DistantComputer* client = new DistantComputer(incoming, client_nickname, game_id, player_id);
+    client->GetAvailableMaps() = maps;
     GetGame(game_id).AddCpu(client);
 
     if (clients_socket_set->NbSockets() == clients_socket_set->MaxNbSockets())
