@@ -104,7 +104,8 @@ private:
   std::list<DistantComputer*>& GetCpus(uint game_id);
   const std::list<DistantComputer*>& GetCpus(uint game_id) const;
 
-  bool HandShake(uint game_id, WSocket& client_socket, std::string& client_nickname, uint player_id);
+  bool HandShake(uint game_id, WSocket& client_socket, std::string& client_nickname,
+                 uint player_id, std::vector<std::string>& map_list);
   void WaitClients();
   void RejectIncoming();
 
