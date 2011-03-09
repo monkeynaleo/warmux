@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: src/map/maps_list.cpp:382
+#: src/map/maps_list.cpp:379
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s nebyla nalezena :-("
@@ -28,7 +28,7 @@ msgstr "! Mapa %s nebyla nalezena :-("
 msgid "%.1f fps"
 msgstr "%.1f fps"
 
-#: src/menu/network_menu.cpp:131 src/menu/network_menu.cpp:362
+#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:359
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
@@ -36,7 +36,7 @@ msgstr[0] "%i hráč připojen"
 msgstr[1] "%i hráči připojeni"
 msgstr[2] "%i hráčů připojeno"
 
-#: src/menu/network_menu.cpp:135 src/menu/network_menu.cpp:372
+#: src/menu/network_menu.cpp:134 src/menu/network_menu.cpp:369
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -44,55 +44,55 @@ msgstr[0] "%i hráč připraven"
 msgstr[1] "%i hráči připraveni"
 msgstr[2] "%i hráčů připraveno"
 
-#: src/map/maps_list.cpp:140
+#: src/map/maps_list.cpp:141
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> jako %s z %s"
 
-#: src/map/maps_list.cpp:147
+#: src/map/maps_list.cpp:148
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> z %s"
 
-#: src/menu/team_box.cpp:255
+#: src/menu/team_box.cpp:253
 #, c-format
 msgid "%s Team"
 msgstr "%s Tým"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:247
+#: src/menu/team_box.cpp:245
 #, c-format
 msgid "%s Team - Remote"
 msgstr "%s Tým - Vzdálený"
 
-#: src/game/game.cpp:1167
+#: src/game/game.cpp:1171
 #, fuzzy, c-format
 msgid "%s from %s team committed suicide!"
 msgstr "%s z týmu %s spáchal sebevraždu !"
 
 #. Could be modified, but for now, save on translation
-#: src/game/game.cpp:1193 src/game/game.cpp:1212
+#: src/game/game.cpp:1197 src/game/game.cpp:1216
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s z týmu %s zemřel."
 
-#: src/game/game.cpp:1159
+#: src/game/game.cpp:1163
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s z týmu %s se utopil."
 
-#: src/game/game.cpp:1153
+#: src/game/game.cpp:1157
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s z týmu %s spadl z mapy!"
 
-#: src/game/game.cpp:1173
+#: src/game/game.cpp:1177
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s z týmu %s narazil tvrdě na zem!"
 
 #. The playing character killed himself
-#: src/game/game.cpp:1180
+#: src/game/game.cpp:1184
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s z týmu %s je mrtvý, protože je trdlo!"
@@ -109,12 +109,12 @@ msgid ""
 "fart."
 msgstr ""
 
-#: src/object/medkit.cpp:74
+#: src/object/medkit.cpp:73
 #, fuzzy, c-format
 msgid "%s has won %u points of energy!"
 msgstr "%s získal %u život!"
 
-#: src/game/game.cpp:1204
+#: src/game/game.cpp:1208
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s je psychouš, zabil člena týmu %s!"
@@ -125,7 +125,7 @@ msgid "%s is next to a mine!"
 msgstr "%s šlápl na minu!"
 
 #. For translators: extended in "<nickname> (<host>) just connected
-#: src/include/action_handler.cpp:910
+#: src/include/action_handler.cpp:913
 #, fuzzy, c-format
 #| msgid "%i player connected"
 #| msgid_plural "%i players connected"
@@ -133,7 +133,7 @@ msgid "%s just connected"
 msgstr "%i hráč připojen"
 
 #. For translators: extended in "<nickname> (<host>) just disconnected
-#: src/include/action_handler.cpp:1022
+#: src/include/action_handler.cpp:1025
 #, fuzzy, c-format
 #| msgid "%i player connected"
 #| msgid_plural "%i players connected"
@@ -145,13 +145,13 @@ msgstr "%i hráč připojen"
 msgid "%s kicked from game"
 msgstr ""
 
-#: src/include/action_handler.cpp:473
+#: src/include/action_handler.cpp:474
 #, c-format
 msgid "%s needs a pause."
 msgstr ""
 
 #. Can happen if the configuration is wrong...
-#: src/object/bonus_box.cpp:89
+#: src/object/bonus_box.cpp:88
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Tým %s již má nekonečně nábojů pro %s!"
@@ -310,7 +310,7 @@ msgstr[0] "Tým %s získal %u ragbyovou bombu!"
 msgstr[1] "Tým %s získal %u ragbyové bomby!"
 msgstr[2] "Tým %s získal %u baseballových pálek!"
 
-#: src/weapon/grapple.cpp:708
+#: src/weapon/grapple.cpp:713
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -334,7 +334,7 @@ msgstr[0] "Tým %s získal %u pistoli!"
 msgstr[1] "Tým %s získal %u pistole!"
 msgstr[2] "Tým %s získal %u pistolí!"
 
-#: src/weapon/jetpack.cpp:204
+#: src/weapon/jetpack.cpp:206
 #, c-format
 msgid "%s team has won %u jetpack! Groovy!"
 msgid_plural "%s team has won %u jetpacks! Groovy!"
@@ -409,7 +409,7 @@ msgstr[0] "Tým %s získal %u pohlavek!"
 msgstr[1] "Tým %s získal %u pohlavky!"
 msgstr[2] "Tým %s získal %u pohlavků!"
 
-#: src/weapon/snipe_rifle.cpp:257
+#: src/weapon/snipe_rifle.cpp:259
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
 msgid_plural ""
@@ -442,7 +442,7 @@ msgstr[0] "Tým %s získal %u stříkačku!"
 msgstr[1] "Tým %s získal %u stříkačky!"
 msgstr[2] "Tým %s získal %u stříkaček!"
 
-#: src/weapon/teleportation.cpp:123
+#: src/weapon/teleportation.cpp:126
 #, c-format
 msgid "%s team has won %u teleportation!"
 msgid_plural "%s team has won %u teleportations!"
@@ -474,7 +474,7 @@ msgstr[2] ""
 msgid "%s team was fragged down."
 msgstr "Tým %s byl rozcupován."
 
-#: src/game/game.cpp:1188 src/game/game.cpp:1200
+#: src/game/game.cpp:1192 src/game/game.cpp:1204
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s vzal sebou do hrobu člena týmu %s!"
@@ -519,7 +519,7 @@ msgstr "Změnit druh zbraně"
 msgid "'Tool' weapon category"
 msgstr "Změnit druh zbraně"
 
-#: src/interface/interface.cpp:274
+#: src/interface/interface.cpp:291
 msgid "(dead)"
 msgstr "(mrtvý)"
 
@@ -533,11 +533,11 @@ msgid "(unknown time)"
 msgstr "(neznámý čas)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:297
+#: src/interface/interface.cpp:314
 msgid "(unlimited)"
 msgstr "(neomezeně)"
 
-#: src/menu/options_menu.cpp:538
+#: src/menu/options_menu.cpp:536
 #, fuzzy, c-format
 msgid ""
 "A new version %s is available, while your version is %s. You may want to "
@@ -560,7 +560,7 @@ msgstr "Vzdušný útok"
 msgid "Airhammer"
 msgstr "Pneumatické kladivo"
 
-#: src/menu/results_menu.cpp:308
+#: src/menu/results_menu.cpp:313
 msgid "All teams"
 msgstr "Všechny týmy"
 
@@ -587,11 +587,11 @@ msgstr ""
 msgid "Anvil"
 msgstr "Kovadlina"
 
-#: src/menu/help_menu.cpp:107
+#: src/menu/help_menu.cpp:115
 msgid "Area currently displayed"
 msgstr ""
 
-#: src/main.cpp:344
+#: src/main.cpp:346
 msgid "Authors:"
 msgstr "Autoři:"
 
@@ -667,7 +667,7 @@ msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Nepodařilo se otevřít osobní adresář týmů (%s)!"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:121 src/menu/help_menu.cpp:138
+#: src/menu/help_menu.cpp:129 src/menu/help_menu.cpp:146
 #, fuzzy
 msgid "Center camera on character"
 msgstr "Vystředit kameru na hráče"
@@ -678,22 +678,29 @@ msgid "Center on active character"
 msgstr "Změnit aktivního hráče"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:137
+#: src/menu/help_menu.cpp:145
 #, fuzzy
 msgid "Change active character"
 msgstr "Změnit aktivního hráče"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:128
+#: src/menu/help_menu.cpp:136
 #, fuzzy
 msgid "Change aim angle"
 msgstr "Změnit náměr"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:56
+#: src/menu/help_menu.cpp:54
 #, fuzzy
 msgid "Change number of players per team"
 msgstr "Maximální počet hráčů:"
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:107
+msgid ""
+"Change replay speed.\n"
+"Right part displays current speed."
+msgstr ""
 
 #: src/interface/man_machine_interface.cpp:1176
 #, fuzzy
@@ -701,19 +708,19 @@ msgid "Change weapon"
 msgstr "Změnit druh zbraně"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:126
+#: src/menu/help_menu.cpp:134
 #, fuzzy
 msgid "Change weapon category"
 msgstr "Změnit druh zbraně"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:127
+#: src/menu/help_menu.cpp:135
 #, fuzzy
 msgid "Change weapon countdown"
 msgstr "Změnit odpočet zbraní"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:88
+#: src/menu/help_menu.cpp:86
 msgid ""
 "Character name.\n"
 "Character energy.\n"
@@ -737,7 +744,7 @@ msgstr ""
 msgid "Check updates online?"
 msgstr "Zjistit online aktualizace?"
 
-#: src/menu/map_selection_box.cpp:227
+#: src/menu/map_selection_box.cpp:225
 msgid "Choose randomly between the different maps"
 msgstr "Vyber náhodně mezi mapami"
 
@@ -746,7 +753,7 @@ msgid "Classic"
 msgstr "Klasický"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:60
+#: src/menu/help_menu.cpp:58
 msgid ""
 "Click on either side of the central (selected) map or use wheelmouse to "
 "change the selected map."
@@ -765,23 +772,23 @@ msgid ""
 "Up/down changes direction."
 msgstr ""
 
-#: src/menu/help_menu.cpp:58
+#: src/menu/help_menu.cpp:56
 msgid "Click to let a player handle the team instead of the AI, and vice versa"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:57
+#: src/menu/help_menu.cpp:55
 msgid ""
 "Click/wheelmouse to change the team.\n"
 "You can't select the same team several times."
 msgstr ""
 
 #. Client Mode
-#: src/menu/network_menu.cpp:170 src/network/network.cpp:448
+#: src/menu/network_menu.cpp:167 src/network/network.cpp:448
 msgid "Client mode"
 msgstr "Klientský režim"
 
-#: src/menu/results_menu.cpp:179 src/menu/results_menu.cpp:181
+#: src/menu/results_menu.cpp:181 src/menu/results_menu.cpp:183
 msgid "Clumsiest"
 msgstr "Největší trdlo"
 
@@ -793,7 +800,7 @@ msgstr "Tříštivá bomba"
 msgid "Cluzooka"
 msgstr "Cluzuka"
 
-#: src/menu/results_menu.cpp:361
+#: src/menu/results_menu.cpp:366
 msgid "Comment:"
 msgstr ""
 
@@ -802,7 +809,7 @@ msgid "Commit Suicide"
 msgstr "Spáchat sebevraždu"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:124
+#: src/menu/help_menu.cpp:132
 msgid "Configuration menu"
 msgstr "Menu nastavení"
 
@@ -822,7 +829,7 @@ msgstr "Připojení hráči: "
 msgid "Construct"
 msgstr "Stavba"
 
-#: src/menu/results_menu.cpp:287
+#: src/menu/results_menu.cpp:292
 msgid "Controlled by: "
 msgstr "Řízeno: "
 
@@ -840,12 +847,19 @@ msgstr "Nepodařilo otevřít soubor %s"
 msgid "Credits"
 msgstr "Zásluhy"
 
-#: src/menu/help_menu.cpp:143
+#: src/menu/help_menu.cpp:151
 msgid "Current controls"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:90
+#: src/menu/help_menu.cpp:109
+msgid ""
+"Current turn time info.\n"
+"Click to launch the pause menu."
+msgstr ""
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:88
 msgid ""
 "Current weapon and ammo left, long click to display its help.\n"
 "Click to open selection menu."
@@ -875,7 +889,7 @@ msgstr "Disco granát"
 msgid "Displays this message"
 msgstr "Zobrazí tuto zprávu"
 
-#: src/menu/network_menu.cpp:172
+#: src/menu/network_menu.cpp:169
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr ""
 
@@ -888,7 +902,7 @@ msgid "Down slowly"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:120
+#: src/menu/help_menu.cpp:128
 #, fuzzy
 msgid "Drag&drop: Move camera"
 msgstr "Táhni&pusť: posun kamery"
@@ -914,11 +928,11 @@ msgstr "KONEC HRY"
 msgid "Effects volume"
 msgstr "Hlasitost efektů"
 
-#: src/menu/results_menu.cpp:334
+#: src/menu/results_menu.cpp:339
 msgid "Energy"
 msgstr "Zdraví"
 
-#: src/include/action_handler.cpp:281
+#: src/include/action_handler.cpp:282
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr "Chyba při přípravě sítě: Klient %s nesouhlasí!!- %s"
@@ -954,30 +968,30 @@ msgstr ""
 "Chyba při vytváření adresáře \"%s\": nebylo možné uložit konfigurační soubor."
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:526
+#: src/menu/network_connection_menu.cpp:524
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Chyba: Nepodařilo se připojit k %s:%s"
 
-#: src/menu/network_connection_menu.cpp:476
+#: src/menu/network_connection_menu.cpp:474
 #, fuzzy
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "Chyba: Nepodařilo se kontaktovat index server k hostování hry"
 
-#: src/menu/network_connection_menu.cpp:387
+#: src/menu/network_connection_menu.cpp:385
 #, fuzzy
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
 "Chyba: Nepodařilo se kontaktovat index server pro vyhledání internetové hry"
 
-#: src/menu/network_connection_menu.cpp:504
+#: src/menu/network_connection_menu.cpp:502
 #, fuzzy
 msgid "Error: Unable to start the server"
 msgstr "Chyba: Nepodařilo se spustit herní server"
 
-#: src/menu/network_connection_menu.cpp:497
-#: tools/servers/game_server/server.cpp:303
+#: src/menu/network_connection_menu.cpp:495
+#: tools/servers/game_server/server.cpp:337
 #, fuzzy, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -990,12 +1004,12 @@ msgstr ""
 "Internetu, zkontrolujte nastavení routeru: TCP port %s musí být přesměrován "
 "na váš počítač."
 
-#: src/team/team.cpp:162
+#: src/team/team.cpp:161
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Chyba: Nepodařilo se najít tělo \"%s\" pro tým \"%s\"."
 
-#: src/menu/help_menu.cpp:67
+#: src/menu/help_menu.cpp:65
 msgid "Experiment new game rules"
 msgstr ""
 
@@ -1012,7 +1026,7 @@ msgstr ""
 msgid "Explosion delay of %u"
 msgstr ""
 
-#: src/menu/benchmark_menu.cpp:115
+#: src/menu/benchmark_menu.cpp:113
 msgid "FPS"
 msgstr ""
 
@@ -1026,11 +1040,11 @@ msgstr ""
 msgid "Fail to open temporary file: %s"
 msgstr "Nepodařilo se otevřít adresář s mapami (%s)!"
 
-#: src/menu/results_menu.cpp:461
+#: src/menu/results_menu.cpp:434
 msgid "Failed to save replay"
 msgstr ""
 
-#: src/menu/results_menu.cpp:349
+#: src/menu/results_menu.cpp:354
 #, fuzzy
 #| msgid "Game name:"
 msgid "Filename:"
@@ -1048,20 +1062,19 @@ msgstr "Ragbyová bomba"
 msgid "Fullscreen?"
 msgstr "Celá obrazovka?"
 
-#: src/menu/game_menu.cpp:96 src/menu/network_menu.cpp:200
+#: src/menu/game_menu.cpp:94 src/menu/network_menu.cpp:197
 msgid "Game"
 msgstr "Hra"
 
-#: src/include/action_handler.cpp:881
+#: src/include/action_handler.cpp:882
 msgid ""
 "Game is not synchronized anymore! This is BAD, the network game will be "
 "interrupted, sorry. Please, report the bug to the Warmux Team by mail or "
-"through the forum. Precise your computer configuration, the game version the "
-"map on which you were playing, and what was the very last events occuring in "
-"the game (last weapon used, ...)."
+"through the forum. Precise your computer configuration and attach the bug."
+"wrf file that has just been created in your home folder."
 msgstr ""
 
-#: src/menu/help_menu.cpp:61
+#: src/menu/help_menu.cpp:59
 #, fuzzy
 msgid "Game menu"
 msgstr "Jméno hry:"
@@ -1069,8 +1082,8 @@ msgstr "Jméno hry:"
 #. TRANSLATORS: please be imaginative and keep it short!
 #. Using the game mode editor but currently we are not able to send
 #. custom parameters to client
-#: src/menu/game_mode_editor.cpp:45 src/menu/help_menu.cpp:75
-#: src/menu/network_menu.cpp:196
+#: src/menu/game_mode_editor.cpp:45 src/menu/help_menu.cpp:73
+#: src/menu/network_menu.cpp:193
 #, fuzzy
 msgid "Game mode"
 msgstr "Jméno hry:"
@@ -1079,7 +1092,7 @@ msgstr "Jméno hry:"
 msgid "Game name:"
 msgstr "Jméno hry:"
 
-#: src/include/action_handler.cpp:244
+#: src/include/action_handler.cpp:245
 msgid "Game out of sync!"
 msgstr ""
 
@@ -1094,7 +1107,7 @@ msgid ""
 "Will cure your teammate or slowly kill your opponent"
 msgstr ""
 
-#: src/menu/benchmark_menu.cpp:114 src/menu/options_menu.cpp:157
+#: src/menu/benchmark_menu.cpp:112 src/menu/options_menu.cpp:157
 #, fuzzy
 msgid "Graphics"
 msgstr "Grafika"
@@ -1124,7 +1137,7 @@ msgid "Have a good game!"
 msgstr "Přeji dobrou hru!"
 
 #. *******    Names: "Head commander" + text/custom team    ******
-#: src/interface/interface.cpp:263 src/menu/options_menu.cpp:182
+#: src/interface/interface.cpp:280 src/menu/options_menu.cpp:182
 #: src/menu/team_box.cpp:81
 msgid "Head commander"
 msgstr "Velitel"
@@ -1141,7 +1154,7 @@ msgid "High"
 msgstr "Vysoký skok"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/interface/man_machine_interface.cpp:1172 src/menu/help_menu.cpp:117
+#: src/interface/man_machine_interface.cpp:1172 src/menu/help_menu.cpp:125
 msgid "High jump"
 msgstr "Vysoký skok"
 
@@ -1153,11 +1166,11 @@ msgstr "Hostovat hru"
 msgid "Hurry up, you are too slow !!"
 msgstr "Pospěš si, jsi pomalý!!"
 
-#: src/menu/results_menu.cpp:362
+#: src/menu/results_menu.cpp:367
 msgid "I like WarMUX :)"
 msgstr ""
 
-#: src/main.cpp:283
+#: src/main.cpp:284
 #, fuzzy
 msgid ""
 "If you found a bug or have a feature request send us an email (in english, "
@@ -1167,7 +1180,7 @@ msgstr ""
 "angličtine):"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:71
+#: src/menu/help_menu.cpp:69
 msgid ""
 "If you like medkits,\n"
 "increase this"
@@ -1186,23 +1199,23 @@ msgid "Increase sound volume"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:73
+#: src/menu/help_menu.cpp:71
 #, fuzzy
 msgid "Increase this for faster death mode end"
 msgstr "Doba před zabijáckým režimem"
 
 #. Select between "classic", "blitz" and "unlimited" rules
-#: src/menu/help_menu.cpp:68
+#: src/menu/help_menu.cpp:66
 msgid "Increase this if you are a slow player"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:72
+#: src/menu/help_menu.cpp:70
 msgid "Increase this if you like long games"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:82
+#: src/menu/help_menu.cpp:80
 msgid "Ingame display"
 msgstr ""
 
@@ -1223,39 +1236,39 @@ msgstr ""
 "Odpálení : držet mezerník až na požadovanou sílu\n"
 "munice letí obloukem"
 
-#: src/game/game.cpp:122
+#: src/game/game.cpp:123
 msgid "Initialisation"
 msgstr "Inicializace"
 
 #. Load the map
-#: src/game/game.cpp:158
+#: src/game/game.cpp:160
 msgid "Initialise map"
 msgstr "Inicializovat mapu"
 
-#: src/game/game.cpp:169
+#: src/game/game.cpp:171
 msgid "Initialise sounds"
 msgstr "Inicializovat zvuky"
 
-#: src/game/game.cpp:165
+#: src/game/game.cpp:167
 msgid "Initialise teams"
 msgstr "Inicializovat týmy"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:92
+#: src/menu/help_menu.cpp:90
 #, fuzzy
 msgid "Interface"
 msgstr "Zobrazit/skrýt rozhraní"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:81
+#: src/menu/help_menu.cpp:79
 msgid "Interface and touch controls, more details in other tabs"
 msgstr ""
 
-#: src/menu/results_menu.cpp:449
+#: src/menu/results_menu.cpp:422
 msgid "Invalid filename"
 msgstr ""
 
-#: src/game/game.cpp:1037
+#: src/game/game.cpp:1041
 msgid "It's a present!"
 msgstr "To je dáreček!"
 
@@ -1268,7 +1281,7 @@ msgid "Jump"
 msgstr "Skočit"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:118 src/menu/help_menu.cpp:119
+#: src/menu/help_menu.cpp:126 src/menu/help_menu.cpp:127
 msgid "Jump backwards"
 msgstr "Skočit dozadu"
 
@@ -1293,7 +1306,7 @@ msgid "Key bindings"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:140
+#: src/menu/help_menu.cpp:148
 msgid "Keyboard"
 msgstr ""
 
@@ -1315,7 +1328,7 @@ msgstr ""
 msgid "Lists the connected players"
 msgstr "Vypsat připojené hráče"
 
-#: src/map/maps_list.cpp:280
+#: src/map/maps_list.cpp:276
 msgid "Load maps:"
 msgstr "Nahrát mapy:"
 
@@ -1340,12 +1353,12 @@ msgstr "Nízká gravitace"
 msgid "Manual connection"
 msgstr "Připojit se ručně"
 
-#: src/menu/game_menu.cpp:79 src/menu/game_menu.cpp:83
-#: src/menu/network_menu.cpp:100 src/menu/network_menu.cpp:104
+#: src/menu/game_menu.cpp:77 src/menu/game_menu.cpp:81
+#: src/menu/network_menu.cpp:99 src/menu/network_menu.cpp:103
 msgid "Map"
 msgstr "Mapa"
 
-#: src/map/maps_list.cpp:104
+#: src/map/maps_list.cpp:105
 #, c-format
 msgid "Map %s in folder '%s' is invalid: %s"
 msgstr ""
@@ -1356,15 +1369,15 @@ msgid "Map %s, a creation of: "
 msgstr "Mapu %s vytvořil: "
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:59
+#: src/menu/help_menu.cpp:57
 msgid "Map author information: name, email, nickname, country"
 msgstr ""
 
-#: src/game/game.cpp:159
+#: src/game/game.cpp:161
 msgid "Maps"
 msgstr "Mapy"
 
-#: src/menu/network_menu.cpp:432 src/menu/network_menu.cpp:434
+#: src/menu/network_menu.cpp:429 src/menu/network_menu.cpp:431
 #, fuzzy
 msgid "Master mode"
 msgstr "Jméno hry:"
@@ -1382,7 +1395,7 @@ msgstr "Maximum FPS"
 msgid "Medium"
 msgstr ""
 
-#: src/menu/benchmark_menu.cpp:113
+#: src/menu/benchmark_menu.cpp:111
 msgid "Menu"
 msgstr ""
 
@@ -1391,12 +1404,12 @@ msgid "Mine"
 msgstr "Mina"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:110
+#: src/menu/help_menu.cpp:118
 #, fuzzy
 msgid "Minimap"
 msgstr "Mapa"
 
-#: src/menu/help_menu.cpp:80
+#: src/menu/help_menu.cpp:78
 msgid "Minimap, more details in another tab"
 msgstr ""
 
@@ -1410,27 +1423,27 @@ msgid "Modifiers"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:70
+#: src/menu/help_menu.cpp:68
 msgid "More energy, more shots needed"
 msgstr ""
 
-#: src/menu/results_menu.cpp:187 src/menu/results_menu.cpp:189
+#: src/menu/results_menu.cpp:189 src/menu/results_menu.cpp:191
 msgid "Most accurate"
 msgstr "Nejpřesnější"
 
-#: src/menu/results_menu.cpp:171 src/menu/results_menu.cpp:173
+#: src/menu/results_menu.cpp:173 src/menu/results_menu.cpp:175
 msgid "Most sold-out"
 msgstr "Největší zrádce"
 
-#: src/menu/results_menu.cpp:155 src/menu/results_menu.cpp:157
+#: src/menu/results_menu.cpp:157 src/menu/results_menu.cpp:159
 msgid "Most useful"
 msgstr "Nejužitečnější"
 
-#: src/menu/results_menu.cpp:163 src/menu/results_menu.cpp:165
+#: src/menu/results_menu.cpp:165 src/menu/results_menu.cpp:167
 msgid "Most useless"
 msgstr "Nejzbytečnější"
 
-#: src/menu/results_menu.cpp:147 src/menu/results_menu.cpp:149
+#: src/menu/results_menu.cpp:149 src/menu/results_menu.cpp:151
 msgid "Most violent"
 msgstr "Nejnásilnější"
 
@@ -1455,13 +1468,13 @@ msgid "Move camera up"
 msgstr "Padák"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:134
+#: src/menu/help_menu.cpp:142
 #, fuzzy
 msgid "Move camera with mouse or arrows"
 msgstr "Posuň kameru myší nebo šipkami"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:129
+#: src/menu/help_menu.cpp:137
 #, fuzzy
 msgid "Move character"
 msgstr "Padák"
@@ -1494,7 +1507,7 @@ msgstr "Hlasitost hudby"
 msgid "Music?"
 msgstr "Hudba?"
 
-#: src/game/game.cpp:182
+#: src/game/game.cpp:184
 #, fuzzy
 msgid "Network"
 msgstr "Síťová hra"
@@ -1535,7 +1548,7 @@ msgstr "%i hráč připojen"
 msgid "No pointer"
 msgstr ""
 
-#: src/menu/results_menu.cpp:86
+#: src/menu/results_menu.cpp:88
 msgid "Nobody!"
 msgstr "Nikdo!"
 
@@ -1555,13 +1568,13 @@ msgid "Number of teams:"
 msgstr "Počet týmů:"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:131
+#: src/menu/help_menu.cpp:139
 #, fuzzy
 msgid "On a character: select it"
 msgstr "Na hráči: změní aktivního"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:130
+#: src/menu/help_menu.cpp:138
 #, fuzzy
 msgid "On map: select a target"
 msgstr "Na mapě: vybrat cíl"
@@ -1611,7 +1624,7 @@ msgstr ""
 msgid "Play"
 msgstr "Hrát"
 
-#: src/menu/network_menu.cpp:128
+#: src/menu/network_menu.cpp:127
 msgid "Play several times"
 msgstr "Hrát několikrát"
 
@@ -1627,7 +1640,7 @@ msgstr "Životy hráče?"
 msgid "Player's name?"
 msgstr "Jméno hráče?"
 
-#: src/menu/results_menu.cpp:300
+#: src/menu/results_menu.cpp:305
 msgid "Podium"
 msgstr ""
 
@@ -1641,12 +1654,12 @@ msgid "Port:"
 msgstr "Port:"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:109
+#: src/menu/help_menu.cpp:117
 msgid "Position of bonus boxes or medkits"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:108
+#: src/menu/help_menu.cpp:116
 #, fuzzy
 msgid ""
 "Position of the characters.\n"
@@ -1672,7 +1685,7 @@ msgid ""
 msgstr ""
 
 #: src/weapon/gun.cpp:73 src/weapon/shotgun.cpp:87
-#: src/weapon/snipe_rifle.cpp:246
+#: src/weapon/snipe_rifle.cpp:248
 msgid ""
 "Press space to shoot\n"
 "Use Up/Down to change initial angle"
@@ -1714,7 +1727,7 @@ msgid "Quality"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:139
+#: src/menu/help_menu.cpp:147
 msgid "Quickly quit game with Ctrl"
 msgstr ""
 
@@ -1722,12 +1735,12 @@ msgstr ""
 msgid "Quit"
 msgstr "Ukončit"
 
-#: src/main.cpp:272
+#: src/main.cpp:273
 #, fuzzy
 msgid "Quit Warmux"
 msgstr "Ukončit Warmux"
 
-#: src/menu/help_menu.cpp:116 src/menu/pause_menu.cpp:59
+#: src/menu/help_menu.cpp:124 src/menu/pause_menu.cpp:59
 #, fuzzy
 msgid "Quit game"
 msgstr "Spustit hru"
@@ -1736,7 +1749,7 @@ msgstr "Spustit hru"
 msgid "Rail Gun"
 msgstr ""
 
-#: src/menu/map_selection_box.cpp:226
+#: src/menu/map_selection_box.cpp:224
 msgid "Random map"
 msgstr "Náhodná mapa"
 
@@ -1759,7 +1772,24 @@ msgstr "Čtu osobní konfigurační soubor"
 msgid "Replay"
 msgstr ""
 
-#: src/menu/results_menu.cpp:468
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:110
+msgid "Replay controls"
+msgstr ""
+
+#: src/game/game.cpp:211
+#, fuzzy
+msgid "Replay mode"
+msgstr "Jméno hry:"
+
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:108
+msgid ""
+"Replay progress bar, not used for precise seeking.\n"
+"Short click for a +30s jump, long for +60s jump."
+msgstr ""
+
+#: src/menu/results_menu.cpp:441
 msgid "Replay saved"
 msgstr ""
 
@@ -1767,16 +1797,23 @@ msgstr ""
 msgid "Resolution"
 msgstr "Rozlišení"
 
+#. TRANSLATORS: please be imaginative and keep it short!
+#: src/menu/help_menu.cpp:106
+msgid ""
+"Right button to resume/pause replay.\n"
+"Square right button to immediately exit it."
+msgstr ""
+
 #: src/weapon/riot_bomb.cpp:119
 #, fuzzy
 msgid "Riot Bomb"
 msgstr "Protipovstalecký granát"
 
-#: src/main.cpp:80
+#: src/main.cpp:83
 msgid "Run game"
 msgstr "Spustit hru"
 
-#: src/menu/results_menu.cpp:374
+#: src/menu/results_menu.cpp:379
 msgid "Save replay?"
 msgstr ""
 
@@ -1792,7 +1829,7 @@ msgstr "Velikost posuvníků"
 msgid "Scroll on border"
 msgstr "Posuvníky na okrajích"
 
-#: src/menu/help_menu.cpp:55
+#: src/menu/help_menu.cpp:53
 #, fuzzy
 msgid "Select number of playing teams"
 msgstr "Maximální počet hráčů:"
@@ -1806,7 +1843,7 @@ msgstr "Adresa serveru:"
 msgid "Server available on Internet"
 msgstr "Server přístupný z Internetu"
 
-#: src/menu/network_menu.cpp:177 src/network/network.cpp:478
+#: src/menu/network_menu.cpp:174 src/network/network.cpp:478
 msgid "Server mode"
 msgstr "Serverový režim"
 
@@ -1844,13 +1881,13 @@ msgid "Shotgun"
 msgstr "Brokovnice"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:132
+#: src/menu/help_menu.cpp:140
 #, fuzzy
 msgid "Show weapons menu"
 msgstr "Volby menu"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:122
+#: src/menu/help_menu.cpp:130
 #, fuzzy
 msgid "Show/hide the interface"
 msgstr "Zobrazit/skrýt rozhraní"
@@ -1872,24 +1909,24 @@ msgid "Slap the enemy to make him jump a bit."
 msgstr "Dejte nepříteli pohlavek až poskočí."
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:133
+#: src/menu/help_menu.cpp:141
 msgid "Smaller aim angle and walk step"
 msgstr "Menší posun náměru a menší krok"
 
-#: src/weapon/snipe_rifle.cpp:245
+#: src/weapon/snipe_rifle.cpp:247
 msgid "Sniper Rifle"
 msgstr "Ostřelovací puška"
 
-#: src/object/bonus_box.cpp:76
+#: src/object/bonus_box.cpp:75
 msgid "Someone put a booby trap into the crate!"
 msgstr "Někdo dal dítě do bedny!"
 
-#: src/menu/network_connection_menu.cpp:392
+#: src/menu/network_connection_menu.cpp:390
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Promiňte, zrovna není hra, které chybějí hráči"
 
-#: src/menu/network_connection_menu.cpp:446
-#: tools/servers/game_server/server.cpp:288
+#: src/menu/network_connection_menu.cpp:444
+#: tools/servers/game_server/server.cpp:322
 #, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1912,15 +1949,15 @@ msgid "Sound frequency"
 msgstr "Kvalita zvuku"
 
 #. Load teams' sound profiles
-#: src/game/game.cpp:171
+#: src/game/game.cpp:173
 msgid "Sounds"
 msgstr "Zvuky"
 
-#: src/game/game.cpp:203
+#: src/game/game.cpp:205
 msgid "Starting a new game"
 msgstr "Spouštím novou hru"
 
-#: src/interface/interface.cpp:298
+#: src/interface/interface.cpp:315
 msgid "Stock:"
 msgstr "Zásoby:"
 
@@ -1932,6 +1969,10 @@ msgstr "Samopal"
 msgid "SuperTux"
 msgstr "SuperTux"
 
+#: src/menu/help_menu.cpp:105
+msgid "Switch between classical and replay interface"
+msgstr ""
+
 #: src/weapon/syringe.cpp:69
 msgid "Syringe"
 msgstr "Stříkačka"
@@ -1941,31 +1982,31 @@ msgid "Take screenshot"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:125
+#: src/menu/help_menu.cpp:133
 #, fuzzy
 msgid "Talk in network battles"
 msgstr "Zpět do hry"
 
-#: src/menu/options_menu.cpp:616
+#: src/menu/options_menu.cpp:614
 msgid "Team deleted"
 msgstr ""
 
-#: src/menu/results_menu.cpp:333
+#: src/menu/results_menu.cpp:338
 msgid "Team graphs"
 msgstr "Týmový graf"
 
-#: src/menu/options_menu.cpp:596
+#: src/menu/options_menu.cpp:594
 #, fuzzy
 #| msgid "Team stats"
 msgid "Team saved"
 msgstr "Týmová statistika"
 
-#: src/menu/results_menu.cpp:311
+#: src/menu/results_menu.cpp:316
 msgid "Team stats"
 msgstr "Týmová statistika"
 
-#: src/game/game.cpp:166 src/menu/game_menu.cpp:78 src/menu/game_menu.cpp:82
-#: src/menu/network_menu.cpp:99 src/menu/network_menu.cpp:103
+#: src/game/game.cpp:168 src/menu/game_menu.cpp:76 src/menu/game_menu.cpp:80
+#: src/menu/network_menu.cpp:98 src/menu/network_menu.cpp:102
 msgid "Teams"
 msgstr "Týmy"
 
@@ -1974,7 +2015,7 @@ msgid "Teams editor"
 msgstr "Editor týmů"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:89
+#: src/menu/help_menu.cpp:87
 msgid "Teams in decreasing order of total energy"
 msgstr ""
 
@@ -2010,7 +2051,7 @@ msgid "The ball left the battlefield before exploding!"
 msgstr "Míč opustil bitevní pole předtím, než explodoval"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:74
+#: src/menu/help_menu.cpp:72
 msgid "The bigger the faster you'll fall!"
 msgstr ""
 
@@ -2038,7 +2079,7 @@ msgstr "Vypršel limit spojení. Zkontrolujte, zda není v cestě firewall!"
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "Disco granát opustil bitevní pole předtím, než explodoval"
 
-#: src/game/game.cpp:765
+#: src/game/game.cpp:768
 msgid "The game was interrupted because you got disconnected."
 msgstr "Hra byla ukončena, protože jste byl odpojen."
 
@@ -2047,7 +2088,7 @@ msgstr "Hra byla ukončena, protože jste byl odpojen."
 msgid "The grenade left the battlefield before exploding!"
 msgstr "Granát opustil bitevní pole předtím, než explodoval"
 
-#: src/menu/network_menu.cpp:378
+#: src/menu/network_menu.cpp:375
 #, fuzzy
 msgid "The others are waiting for you! Wake up! :-)"
 msgstr "Ostatní na vás čekají! Vstávat :-)"
@@ -2076,7 +2117,7 @@ msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:283
+#: src/menu/network_menu.cpp:280
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -2089,12 +2130,12 @@ msgstr[2] "Zde je jen %i týmů."
 msgid "This key has already been attributed to '%s'"
 msgstr ""
 
-#: src/menu/benchmark_menu.cpp:115 src/menu/results_menu.cpp:334
+#: src/menu/benchmark_menu.cpp:113 src/menu/results_menu.cpp:339
 msgid "Time"
 msgstr "Čas"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:91
+#: src/menu/help_menu.cpp:89
 msgid ""
 "Time left in this turn and time elapsed since game start.\n"
 "Click to pause"
@@ -2127,7 +2168,7 @@ msgstr ""
 "munice letí obloukem"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/interface/man_machine_interface.cpp:1154 src/menu/help_menu.cpp:123
+#: src/interface/man_machine_interface.cpp:1154 src/menu/help_menu.cpp:131
 #, fuzzy
 msgid "Toggle fullscreen"
 msgstr "Celá obrazovka?"
@@ -2138,7 +2179,7 @@ msgid "Toggle interface"
 msgstr "Zobrazit/skrýt rozhraní"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/interface/man_machine_interface.cpp:1190 src/menu/help_menu.cpp:136
+#: src/interface/man_machine_interface.cpp:1190 src/menu/help_menu.cpp:144
 #, fuzzy
 msgid "Toggle minimap"
 msgstr "Zobrazit/skrýt minimapu"
@@ -2149,32 +2190,32 @@ msgid "Toggle weapons menu"
 msgstr "Volby menu"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:102
+#: src/menu/help_menu.cpp:100
 msgid "Touch controls"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:98
+#: src/menu/help_menu.cpp:96
 msgid "Touch/click the left or right arrows to move respectively left or right"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:99
+#: src/menu/help_menu.cpp:97
 msgid ""
 "Touch/click the left or right arrows to respectively raise or lower the aim"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:101
+#: src/menu/help_menu.cpp:99
 msgid "Touch/click to change the weapon timer"
 msgstr ""
 
-#: src/menu/help_menu.cpp:97
+#: src/menu/help_menu.cpp:95
 msgid "Touch/click to fire / start filling weapon speed gauge"
 msgstr ""
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:100
+#: src/menu/help_menu.cpp:98
 msgid "Touch/click to jump. Maintaining the touch/click to high jump."
 msgstr ""
 
@@ -2183,12 +2224,12 @@ msgstr ""
 msgid "Unable to contact the host."
 msgstr "Nepodařilo kontaktovat hostitele."
 
-#: src/map/maps_list.cpp:292
+#: src/map/maps_list.cpp:288
 #, fuzzy, c-format
 msgid "Unable to open the maps directory (%s)!"
 msgstr "Nepodařilo se otevřít adresář s mapami (%s)!"
 
-#: src/map/maps_list.cpp:306
+#: src/map/maps_list.cpp:302
 #, fuzzy, c-format
 msgid "Unable to open the personal maps directory (%s)!"
 msgstr "Nepodařilo se otevřít osobní adresář s mapami (%s)!"
@@ -2249,20 +2290,20 @@ msgstr ""
 "Odpálení : držet mezerník až na požadovanou sílu\n"
 "munice letí obloukem"
 
-#: src/main.cpp:199
+#: src/main.cpp:200
 msgid "Version"
 msgstr "Verze"
 
-#: src/menu/options_menu.cpp:545
+#: src/menu/options_menu.cpp:543
 #, fuzzy, c-format
 msgid "Version verification failed because: %s"
 msgstr "Kontrola verze selhala: %s\n"
 
-#: src/menu/network_menu.cpp:446
+#: src/menu/network_menu.cpp:443
 msgid "Wait until some opponent(s) connect!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:295
+#: src/menu/network_menu.cpp:292
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -2275,21 +2316,21 @@ msgstr[2] "Počkejte! %i hráčů ještě není připraveno!"
 msgid "Waiting for %s"
 msgstr ""
 
-#: src/game/game.cpp:181
+#: src/game/game.cpp:183
 msgid "Waiting for remote players"
 msgstr ""
 
-#: src/menu/network_menu.cpp:512
+#: src/menu/network_menu.cpp:509
 #, fuzzy
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Čeká se na server, jediné co můžete je zrušit to, nebo chatovat!"
 
-#: src/main.cpp:210
+#: src/main.cpp:211
 #, fuzzy
 msgid "Warmux launching..."
 msgstr "Spouští se Warmux..."
 
-#: src/main.cpp:343
+#: src/main.cpp:345
 #, fuzzy
 msgid "Warmux version "
 msgstr "Warmux verze"
@@ -2300,38 +2341,38 @@ msgid "Weapon category 8"
 msgstr "Změnit druh zbraně"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:135
+#: src/menu/help_menu.cpp:143
 #, fuzzy
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Zbraň: palba / Krabice s překvapením: spadne rychleji"
 
-#: src/game/game.cpp:162
+#: src/game/game.cpp:164
 msgid "Weapons"
 msgstr "Zbraně"
 
-#: src/main.cpp:353
+#: src/main.cpp:355
 msgid "Website: "
 msgstr "Webová stránka: "
 
 #. First %s will be replaced with the name of the network game,
 #. second %s by the server hostname
-#: src/menu/network_menu.cpp:162
+#: src/menu/network_menu.cpp:159
 #, fuzzy, c-format
 msgid "Welcome to %s on %s!"
 msgstr "Vítejte v %s!"
 
-#: src/game/game.cpp:1146
+#: src/game/game.cpp:1150
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr ""
 
-#: src/game/game.cpp:1209
+#: src/game/game.cpp:1213
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Jaká hanba pro %s - zabil se tak hloupou zbraní!"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#: src/menu/help_menu.cpp:69
+#: src/menu/help_menu.cpp:67
 #, fuzzy
 msgid "When a character can be switched"
 msgstr "Na hráči: změní aktivního"
@@ -2340,13 +2381,13 @@ msgstr "Na hráči: změní aktivního"
 msgid "Wind particles?"
 msgstr "Poletující částice?"
 
-#: src/menu/help_menu.cpp:87
+#: src/menu/help_menu.cpp:85
 msgid ""
 "Wind strength and direction.\n"
 "Click here to switch to touch controls."
 msgstr ""
 
-#: src/menu/results_menu.cpp:279
+#: src/menu/results_menu.cpp:284
 msgid "Winner"
 msgstr "Vítěz"
 
@@ -2356,16 +2397,16 @@ msgstr "Vítěz"
 msgid "Woah! Combo of %u!"
 msgstr ""
 
-#: src/include/action_handler.cpp:240
+#: src/include/action_handler.cpp:241
 #, fuzzy
 msgid "Wrong map CRC!"
 msgstr "Špatný kontrolní součet mapy!"
 
-#: src/include/action_handler.cpp:238
+#: src/include/action_handler.cpp:239
 msgid "Wrong map name!"
 msgstr "Špatné jméno mapy!"
 
-#: src/include/action_handler.cpp:242
+#: src/include/action_handler.cpp:243
 msgid "Wrong team!"
 msgstr "Špatný tým!"
 
@@ -2374,20 +2415,21 @@ msgstr "Špatný tým!"
 msgid "Wrote %i/%i bytes"
 msgstr ""
 
-#: src/menu/network_menu.cpp:290 src/menu/network_menu.cpp:382
+#: src/menu/network_menu.cpp:287 src/menu/network_menu.cpp:379
 #, fuzzy
 msgid "You are alone. :-/"
 msgstr "Jste sám :-/"
 
-#: src/menu/network_menu.cpp:445
-msgid "You are the new turn master!"
-msgstr "Jste nový šéf tahů!"
+#: src/menu/network_menu.cpp:442
+msgid ""
+"You are the new turn master! Learn about your new powers by typing /help"
+msgstr ""
 
-#: src/menu/options_menu.cpp:585
+#: src/menu/options_menu.cpp:583
 msgid "You must fill Head Commander and all player names"
 msgstr ""
 
-#: src/map/maps_list.cpp:315
+#: src/map/maps_list.cpp:311
 #, fuzzy
 msgid "You need at least one valid map!"
 msgstr "Potřebujete nejméně jednu použitelnou mapu!"
@@ -2397,7 +2439,7 @@ msgstr "Potřebujete nejméně jednu použitelnou mapu!"
 msgid "You need at least two valid teams!"
 msgstr "Potřebujete nejméně dva použitelné týmy!"
 
-#: src/menu/network_menu.cpp:270
+#: src/menu/network_menu.cpp:267
 #, fuzzy
 msgid "You won't be able to play before selecting a team!"
 msgstr "Nebudete schopen hrát, dokud si nevyberete tým!"
@@ -2421,7 +2463,7 @@ msgstr ""
 "Bombardování : kliknout levým tlačítkem na cíl\n"
 "bombardování letí obloukem"
 
-#: src/map/maps_list.cpp:82
+#: src/map/maps_list.cpp:83
 msgid "couldn't load config"
 msgstr "nepodařilo se načíst konfigurační soubor"
 
@@ -2434,7 +2476,7 @@ msgstr ""
 msgid "done"
 msgstr "hotovo"
 
-#: src/map/maps_list.cpp:89
+#: src/map/maps_list.cpp:90
 msgid "error parsing the config file"
 msgstr "chyba při zpracovávání konfiguračního souboru"
 
@@ -2446,7 +2488,7 @@ msgstr "z"
 msgid "loading..."
 msgstr ""
 
-#: src/map/maps_list.cpp:75
+#: src/map/maps_list.cpp:76
 msgid "no configuration file!"
 msgstr "žádný konfigurační soubor!"
 
@@ -2463,6 +2505,9 @@ msgstr "o Načítám hudební profil: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Otevřena hudba o %d Hz %d bitech"
+
+#~ msgid "You are the new turn master!"
+#~ msgstr "Jste nový šéf tahů!"
 
 #, fuzzy
 #~ msgid "Selected weapon and ammo left"
