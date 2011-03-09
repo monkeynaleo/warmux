@@ -27,7 +27,7 @@
 #include "server.h"
 
 NetworkGame::NetworkGame(const std::string& _game_name, const std::string& _password) :
-  game_name(_game_name), password(_password), game_started(false)
+  game_name(_game_name), password(_password), game_started(false), selected_map("dummy")
 {
   ResetWaiting();
 }
@@ -72,7 +72,7 @@ void NetworkGame::AddCpu(DistantComputer* cpu)
   b.Push(int(list.size()));
   for (uint i=0; i<list.size(); i++)
     b.Push(list[i]);
-  b.Push("dummy");
+  b.Push(selected_map);
   SendActionToAll(b);
 
   start_waiting = SDL_GetTicks();
@@ -275,6 +275,9 @@ void NetworkGame::ForwardPacket(const char *buffer, size_t len, DistantComputer*
       else if (net_state == WNet::NETWORK_NEXT_GAME) {
         StopGame();
       }
+    } else if (Action::GetType(buffer) == Action::ACTION_GAME_SET_MAP) {
+      Action a(buffer, sender);
+      selected_map = a.PopString();
     }
   }
 }
