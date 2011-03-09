@@ -439,7 +439,7 @@ void NetworkMenu::SetGameMasterCallback()
   RedrawMenu();
 
   waiting_for_server = false;
-  msg_box->NewMessage(_("You are the new turn master!"), c_red);
+  msg_box->NewMessage(_("You are the new turn master! Learn about your new powers by typing /help"), c_red);
   msg_box->NewMessage(_("Wait until some opponent(s) connect!"), c_red);
 }
 
