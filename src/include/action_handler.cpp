@@ -102,9 +102,9 @@ static void Action_Network_ClientChangeState(Action *a)
   WNet::net_game_state_t client_state = (WNet::net_game_state_t)a->PopInt();
 
   MSG_DEBUG("network.game_state", "game master (%s) <-- player %d (%s)",
-    WNet::GetGameStateAsString(Network::GetInstance()->GetState()),
-    player_id,
-    WNet::GetGameStateAsString(client_state));
+            WNet::GetGameStateAsString(Network::GetInstance()->GetState()),
+            player_id,
+            WNet::GetGameStateAsString(client_state));
 
   switch (Network::GetInstance()->GetState()) {
   case WNet::NO_NETWORK:
