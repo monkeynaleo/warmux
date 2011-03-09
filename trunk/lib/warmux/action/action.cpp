@@ -303,3 +303,8 @@ EulerVector Action::PopEulerVector()
   x2 = PopDouble();
   return EulerVector(x0, x1, x2);
 }
+
+Action::Action_t Action::GetType(const char *buffer)
+{
+  return (Action_t)SDLNet_Read32(buffer);
+}
