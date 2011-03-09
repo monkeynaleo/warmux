@@ -186,7 +186,7 @@ bool ServerConfig::Get(const std::string & name, bool & value) const
   std::map<std::string, bool>::const_iterator it = bool_value.find(name);
 
   if (it == bool_value.end()) {
-    DPRINT(INFO, "Unknown boolean (true/false) config option: %s", name.c_str());
+    DPRINT(INFO, "Unknown or unset boolean (true/false) config option: %s", name.c_str());
     return false;
   }
 
@@ -199,7 +199,7 @@ bool ServerConfig::Get(const std::string & name, int & value) const
   std::map<std::string, int>::const_iterator it = int_value.find(name);
 
   if (it == int_value.end()) {
-    DPRINT(INFO, "Unknown integer config option: %s", name.c_str());
+    DPRINT(INFO, "Unknown or unset integer config option: %s", name.c_str());
     return false;
   }
 
@@ -212,7 +212,7 @@ bool ServerConfig::Get(const std::string & name, std::string & value) const
   std::map<std::string, std::string>::const_iterator it = str_value.find(name);
 
   if (it == str_value.end()) {
-    DPRINT(INFO, "Unknown string config option: %s", name.c_str());
+    DPRINT(INFO, "Unknown or unset string config option: %s", name.c_str());
     return false;
   }
 
