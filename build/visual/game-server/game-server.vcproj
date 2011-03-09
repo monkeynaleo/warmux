@@ -64,6 +64,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="advapi32.lib kernel32.lib shell32.lib user32.lib Ws2_32.lib winmm.lib SDL.lib SDL_net.lib wldap32.lib fribidi.lib intl.lib libcurl.lib"
+				OutputFile="$(SolutionDir)..\..\$(ProjectName)d.exe"
 				LinkIncremental="2"
 				IgnoreDefaultLibraryNames="msvcrt.lib;libcmt.lib"
 				GenerateDebugInformation="true"
@@ -142,6 +143,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="advapi32.lib kernel32.lib shell32.lib user32.lib Ws2_32.lib winmm.lib SDL.lib SDL_net.lib wldap32.lib fribidi.lib intl.lib libcurl.lib"
+				OutputFile="$(SolutionDir)..\..\$(ProjectName).exe"
 				LinkIncremental="1"
 				IgnoreDefaultLibraryNames="msvcrt.lib;libcmt.lib"
 				GenerateDebugInformation="true"
