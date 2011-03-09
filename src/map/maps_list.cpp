@@ -402,3 +402,13 @@ void MapsList::FillActionMenuSetMap(Action& a) const
     a.Push(lst.at(active_map_index)->GetRawName());
   }
 }
+
+std::vector<std::string> MapsList::GetAvailableMaps() const
+{
+  std::vector<std::string> list;
+  MSG_DEBUG("map.list", "Converting available maps\n");
+  for (uint i=0; i<lst.size(); ++i)
+    list.push_back(lst[i]->GetRawName());
+
+  return list;
+}

@@ -24,6 +24,7 @@
 //-----------------------------------------------------------------------------
 #include <map>
 #include <list>
+#include <vector>
 #include <WARMUX_action_handler.h>
 #include <WARMUX_singleton.h>
 

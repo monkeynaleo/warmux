@@ -529,6 +529,7 @@ static void _Action_AddTeam(Action *a, Player* player)
   player->AddTeam(the_team);
 }
 
+
 static void Action_Game_Info(Action *a)
 {
   FAIL_IF_GAMEMASTER(a);
@@ -925,6 +926,19 @@ static void _Info_ConnectHost(const std::string& host_info)
     JukeBox::GetInstance()->Play("default", "menu/newcomer");
 }
 
+
+void Action_Game_SetMapList(Action *a)
+{
+  std::vector<std::string>& list = a->GetCreator()->GetAvailableMaps();
+
+  int nb_maps = a->PopInt();
+  while (nb_maps--)
+    list.push_back(a->PopString());
+
+  if (Network::GetInstance()->network_menu)
+    Network::GetInstance()->network_menu->SetMapsCallback(list, a->PopString());
+}
+
 static inline void add_player_info_to_action(Action& a, const Player& player)
 {
   a.Push(int(player.GetId()));
@@ -956,6 +970,8 @@ void SendInitialGameInfo(DistantComputer* client, int added_player_id)
   std::list<Player>::const_iterator player;
 
   for (it = hosts.begin(); it != hosts.end(); it++) {
+    if (*it == client)
+      continue;
     const std::list<Player>& players = (*it)->GetPlayers();
 
     for (player = players.begin(); player != players.end(); player++) {
@@ -971,6 +987,8 @@ void SendInitialGameInfo(DistantComputer* client, int added_player_id)
   add_player_info_to_action(a, Network::GetInstance()->GetPlayer());
 
   for (it = hosts.begin(); it != hosts.end(); it++) {
+    if (*it == client)
+      continue;
     const std::list<Player>& players = (*it)->GetPlayers();
 
     for (player = players.begin(); player != players.end(); player++) {
@@ -983,6 +1001,20 @@ void SendInitialGameInfo(DistantComputer* client, int added_player_id)
   Network::GetInstance()->UnlockRemoteHosts();
 
   Network::GetInstance()->SendActionToOne(a, client);
+
+  // Send common maps
+  std::vector<std::string> list = Network::GetInstance()->GetCommonMaps();
+  NetworkMenu *menu = Network::GetInstance()->network_menu;
+  const std::string& selected = MapsList::GetInstance()->ActiveMap()->GetRawName();
+  if (menu) {
+    menu->SetMapsCallback(list, selected);
+  }
+  Action b(Action::ACTION_GAME_SET_MAP_LIST);
+  b.Push(int(list.size()));
+  for (uint i=0; i<list.size(); i++)
+    b.Push(list[i]);
+  b.Push(selected);
+  Network::GetInstance()->SendActionToAll(a);
 }
 
 // Only used to notify clients that someone connected to the server
@@ -993,7 +1025,6 @@ static void Action_Info_ClientConnect(Action *a)
 
   ASSERT(a->GetCreator() && a->GetCreator()->GetPlayer(player_id) == NULL);
   a->GetCreator()->AddPlayer(player_id);
-
 
   _Info_ConnectHost(host_info);
 
@@ -1098,6 +1129,7 @@ void Action_Handler_Init()
 
   // Map selection in network menu
   ActionHandler::GetInstance()->Register(Action::ACTION_GAME_SET_MAP, "GAME_set_map", &Action_Game_SetMap);
+  ActionHandler::GetInstance()->Register(Action::ACTION_GAME_SET_MAP_LIST, "GAME_set_map_list", &Action_Game_SetMapList);
 
   // Teams selection in network menu
   ActionHandler::GetInstance()->Register(Action::ACTION_GAME_ADD_TEAM, "GAME_add_team", &Action_Game_AddTeam);

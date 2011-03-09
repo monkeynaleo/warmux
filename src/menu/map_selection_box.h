@@ -22,25 +22,23 @@
 #ifndef MAP_SELECTION_BOX_H
 #define MAP_SELECTION_BOX_H
 
-#include "graphic/surface.h"
-#include "gui/vertical_box.h"
+#include <vector>
+
 #include <WARMUX_base.h>
 #include <WARMUX_point.h>
 #include <WARMUX_rectangle.h>
+
+#include "graphic/surface.h"
+#include "gui/vertical_box.h"
 
 // Forward declarations
 class Button;
 class Label;
 class PictureWidget;
+class InfoMap;
 
 class MapSelectionBox : public VBox
 {
- private:
-  /* If you need this, implement it (correctly) */
-  MapSelectionBox(const MapSelectionBox&);
-  MapSelectionBox operator=(const MapSelectionBox&);
-  /**********************************************/
-
   uint selected_map_index;
   bool display_only;
 
@@ -57,12 +55,16 @@ class MapSelectionBox : public VBox
   void UpdateMapInfo(PictureWidget * widget, uint index, bool selected);
   void UpdateRandomMapInfo(PictureWidget * widget, bool selected);
 
+  std::vector<InfoMap*> common;
+
  public:
   void ChangeMapDelta(int delta_index);
   MapSelectionBox(const Point2i &size, bool show_border, bool _display_only = false);
 
   void ValidMapSelection();
   void ChangeMapCallback();
+  void ChangeMapListCallback(const std::vector<std::string>& list,
+                             const std::string& selected);
   void AllowSelection();
 
   virtual Widget* Click(const Point2i &mousePosition, uint button);

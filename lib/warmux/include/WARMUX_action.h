@@ -60,6 +60,7 @@ public:
 
     // Map selection in network menu
     ACTION_GAME_SET_MAP,
+    ACTION_GAME_SET_MAP_LIST,
 
     // Teams selection in network menu
     ACTION_GAME_ADD_TEAM,
