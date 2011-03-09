@@ -22,7 +22,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
+#ifdef _WIN32
+#else
+# include <unistd.h>
+#endif
 #include <errno.h>
 #include <WSERVER_clock.h>
 #include <WSERVER_config.h>
@@ -35,19 +38,19 @@
 
 #define LOG_LEVEL    TRAFFIC
 
-#define DPRINTMSG(STREAM, ARGS...)					\
+#define DPRINTMSG(STREAM, ...)					\
   {									\
   fprintf(STREAM, "%s %s| %18s,%4i : ", BasicClock::DateStr(),		\
           BasicClock::TimeStr(),__FILE__,__LINE__);			\
-  fprintf(STREAM, ARGS);						\
+  fprintf(STREAM, ## __VA_ARGS__);						\
   fprintf(STREAM,"\n");							\
   }									\
 
-#define DPRINT(LEVEL, ARGS...)                                          \
+#define DPRINT(LEVEL, ...)                                          \
   {                                                                     \
     if (WSERVER_Verbose)                                                \
       if((LEVEL) >= LOG_LEVEL )                                         \
-        DPRINTMSG(stdout, ARGS);						\
+        DPRINTMSG(stdout, ## __VA_ARGS__);						\
   }
 
 #define PRINT_FATAL_ERROR						\

@@ -21,6 +21,10 @@
 #include <fstream>
 #include <WSERVER_config.h>
 #include <WSERVER_debug.h>
+#ifdef _WIN32
+typedef int ssize_t;
+#define realpath(str_, ptr) ((char*)str_)
+#endif
 
 bool WSERVER_Verbose = true;
 
@@ -30,7 +34,7 @@ static ssize_t getline(std::string& line, std::ifstream& file)
   std::getline(file, line);
   if(file.eof())
     return -1;
-  return line.size();
+  return (ssize_t)line.size();
 }
 
 ServerConfig::ServerConfig(bool versions) : support_versions(versions)
@@ -48,7 +52,7 @@ void ServerConfig::Load(const std::string & _config_file)
   }
 
   // Get its full pathname to allow "automatic" reloading
-  char *config_path = realpath(_config_file.c_str(), NULL);
+  char *config_path = realpath((_config_file.c_str()), NULL);
   if (!config_path) {
     DPRINTMSG(stderr, "Unable to open config file %s: %s", _config_file.c_str(), strerror(errno));
     exit(EXIT_FAILURE);

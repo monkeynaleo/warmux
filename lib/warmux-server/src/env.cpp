@@ -17,8 +17,14 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************/
 #include <signal.h>
-#include <sys/time.h>
-#include <sys/resource.h>
+#ifdef _WIN32
+# include <windows.h>
+# include <direct.h>
+# define chdir(a) _chdir(a)
+#else
+# include <sys/time.h>
+# include <sys/resource.h>
+#endif
 
 #include <WSERVER_env.h>
 #include <WSERVER_config.h>
@@ -33,6 +39,7 @@ void Env::SetConfigClass(ServerConfig& _config)
 
 void Env::Daemonize(void)
 {
+#ifndef _WIN32
   pid_t fwis = fork();
   switch (fwis) {
     case EAGAIN:
@@ -49,10 +56,12 @@ void Env::Daemonize(void)
       exit(EXIT_SUCCESS);
       break;
   }
+#endif
 }
 
 void Env::SetChroot()
 {
+#ifndef _WIN32
   bool r;
 
   bool chroot_opt;
@@ -90,6 +99,7 @@ void Env::SetChroot()
     DPRINT(INFO, "Don't start me as root user!!");
     exit(EXIT_FAILURE);
   }
+#endif
 }
 
 void Env::SetWorkingDir()
@@ -109,6 +119,7 @@ void Env::SetWorkingDir()
 
 void Env::SetMaxConnection()
 {
+#ifndef _WIN32
   bool r;
 
   // Set the maximum number of file descriptor allowed
@@ -141,15 +152,17 @@ void Env::SetMaxConnection()
     PRINT_FATAL_ERROR;
 
   DPRINT(INFO, "Number of connexions allowed : %i", max_conn);
+#endif
 }
 
-static void signal_handler(int sig, siginfo_t */*si*/, void */*unused*/)
+static void signal_handler(int sig, siginfo_t* /*si*/, void* /*unused*/)
 {
   DPRINT(INFO, "Signal received: %d", sig);
 }
 
 void Env::MaskSigPipe()
 {
+#ifndef _WIN32
   // silently handle SIGPIPE... (not sure it is needed :-/)
   struct sigaction sa;
   sa.sa_flags = SA_SIGINFO;
@@ -157,6 +170,7 @@ void Env::MaskSigPipe()
   sa.sa_sigaction = signal_handler;
   if (sigaction(SIGPIPE, &sa, NULL) == -1)
     PRINT_FATAL_ERROR;
+#endif
 }
 
 void reload_config(int, siginfo_t *, void *)
@@ -166,10 +180,12 @@ void reload_config(int, siginfo_t *, void *)
 
 void Env::SetupAutoReloadConf()
 {
+#ifndef _WIN32
   struct sigaction sa;
   sa.sa_flags = SA_SIGINFO;
   sigemptyset(&sa.sa_mask);
   sa.sa_sigaction = reload_config;
   if (sigaction(SIGHUP, &sa, NULL) == -1)
     PRINT_FATAL_ERROR;
+#endif
 }
