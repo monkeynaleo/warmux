@@ -76,6 +76,7 @@ public:
   void SendSingleAdminMessage(DistantComputer* client, const std::string& message);
   void CheckWaited();
   void ResetWaiting() { warned = false; waited = NULL; start_waiting = 0; }
+  bool IsGameMaster(std::list<DistantComputer*>::const_iterator& cpu) const { return cpu == cpulist.begin(); }
 };
 
 class GameServer : public Singleton<GameServer>
