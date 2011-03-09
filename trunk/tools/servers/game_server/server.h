@@ -40,6 +40,7 @@ private:
   std::string      password;
   bool             game_started;
   std::list<DistantComputer*> cpulist;
+  std::string      selected_map;
 
   void SendAdminMessage(const std::string& message);
   void SendAction(const Action& a, DistantComputer* client, bool clt_as_rcver) const;
