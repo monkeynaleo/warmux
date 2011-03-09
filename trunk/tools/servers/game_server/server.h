@@ -77,6 +77,7 @@ public:
   void CheckWaited();
   void ResetWaiting() { warned = false; waited = NULL; start_waiting = 0; }
   bool IsGameMaster(std::list<DistantComputer*>::const_iterator& cpu) const { return cpu == cpulist.begin(); }
+  bool IsGameMaster(std::list<DistantComputer*>::iterator& cpu) { return cpu == cpulist.begin(); }
 };
 
 class GameServer : public Singleton<GameServer>
