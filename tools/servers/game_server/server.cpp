@@ -23,8 +23,8 @@
 #include <WARMUX_error.h>
 #include <WARMUX_i18n.h>
 #include <WARMUX_index_server.h>
-#include <config.h>
-#include <server.h>
+#include "config.h"
+#include "server.h"
 
 NetworkGame::NetworkGame(const std::string& _game_name, const std::string& _password) :
   game_name(_game_name), password(_password), game_started(false)
