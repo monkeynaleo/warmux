@@ -81,8 +81,15 @@ void WeaponBullet::SignalObjectCollision(const Point2d& my_speed_before,
                                          const Point2d& /*obj_speed*/)
 {
 #if 1
-  if (cfg.speed_on_hit.IsNotZero())
-    obj->AddSpeed(cfg.speed_on_hit, my_speed_before.ComputeAngle());
+  if (cfg.speed_on_hit.IsNotZero()) {
+    Double angle = my_speed_before.ComputeAngle();
+    if (angle > ZERO && angle <= HALF_PI)        angle -= ONE_HALF * QUARTER_PI;
+    else if (angle > HALF_PI && angle <= PI)     angle += ONE_HALF * QUARTER_PI;
+    else if (angle <= ZERO && angle >= -HALF_PI) angle -= ONE_HALF * QUARTER_PI;
+    else if (angle < -HALF_PI && angle >= -PI)   angle += ONE_HALF * QUARTER_PI;
+
+    obj->AddSpeed(cfg.speed_on_hit, angle);
+  }
 #else
   // multiply by ten to get something more funny
   Double bullet_mass = GetMass()/* * 10*/;
