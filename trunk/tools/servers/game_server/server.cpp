@@ -204,8 +204,11 @@ void NetworkGame::CheckWaited()
     } else if (warned && wait>60000) {
       std::list<DistantComputer*>::iterator dst_cpu = std::find(cpulist.begin(), cpulist.end(), waited);
       if (dst_cpu != cpulist.end()) {
+        bool was_master = dst_cpu == cpulist.begin();
         SendSingleAdminMessage(waited, "More than 60s of inactivity, you're out!\n");
         CloseConnection(dst_cpu);
+        if (was_master)
+          ElectGameMaster();
         ResetWaiting();
       }
     }
