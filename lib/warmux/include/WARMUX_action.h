@@ -195,6 +195,8 @@ public:
   DistantComputer* GetCreator() const { return m_creator; }
   Action_t GetType() const { return (Action_t)m_header.type; }
   bool IsFrameLess() const { return m_header.type <= LAST_FRAME_LESS_ACTION; }
+
+  static Action_t GetType(const char *buffer);
 };
 
 #endif
