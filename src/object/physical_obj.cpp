@@ -596,6 +596,7 @@ void PhysicalObj::CheckRebound()
     if (Pendulum!=GetMotionType() && m_rebound_position==GetPosition()) {
       MSG_DEBUG("physic.state", "%s seems to be stuck in ground. Stop moving!",
                 GetName().c_str());
+      m_rebound_position = Point2i(-1, -1);
       StopMoving();
     }
   }
