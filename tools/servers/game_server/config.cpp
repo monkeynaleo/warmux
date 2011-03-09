@@ -31,7 +31,7 @@ void Config::Load(const std::string & config_file)
 {
   ServerConfig::Load(config_file);
   SetDefault("port", 3826);
-  SetDefault("working_dir", "warmux_log/");
+  SetDefault("working_dir", std::string("warmux_log/"));
   SetDefault("chroot", true);
   SetDefault("chroot_gid", 500);
   SetDefault("chroot_uid", 500);
