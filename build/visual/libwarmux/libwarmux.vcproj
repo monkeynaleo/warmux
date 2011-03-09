@@ -39,6 +39,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP"
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;$(SolutionDir)..\..\lib\warmux\include&quot;;&quot;$(SolutionDir)..\..\lib\fixedpoint&quot;"
 				PreprocessorDefinitions="WIN32;DEBUG;_DEBUG;WMX_LOG;FRIBIDI_STATICLIB;CURL_STATICLIB;main=SDL_main;INSTALL_DATADIR=\&quot;data\&quot;;INSTALL_LOCALEDIR=\&quot;locale\&quot;;FONT_FILE=\&quot;data\\font\\Ubuntu-R.ttf\&quot;;M_PI=3.14159265358979323846;M_PI_2=1.57079632679489661923;M_PI_4=0.78539816339744830962;snprintf=_snprintf;_CRT_SECURE_NO_WARNINGS"
@@ -103,6 +104,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP"
 				AdditionalIncludeDirectories="&quot;$(SolutionDir)..\..\lib\warmux\include&quot;;&quot;$(SolutionDir)..\..\lib\fixedpoint&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;FRIBIDI_STATICLIB;CURL_STATICLIB;main=SDL_main;INSTALL_DATADIR=\&quot;data\&quot;;INSTALL_LOCALEDIR=\&quot;locale\&quot;;FONT_FILE=\&quot;data\\font\\Ubuntu-R.ttf\&quot;;M_PI=3.14159265358979323846;M_PI_2=1.57079632679489661923;M_PI_4=0.78539816339744830962;snprintf=_snprintf;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
@@ -152,11 +154,11 @@
 				Name="action"
 				>
 				<File
-					RelativePath="..\..\lib\warmux\action\action.cpp"
+					RelativePath="..\..\..\lib\warmux\action\action.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\warmux\action\action_handler.cpp"
+					RelativePath="..\..\..\lib\warmux\action\action_handler.cpp"
 					>
 				</File>
 			</Filter>
@@ -164,15 +166,15 @@
 				Name="base"
 				>
 				<File
-					RelativePath="..\..\lib\warmux\base\error.cpp"
+					RelativePath="..\..\..\lib\warmux\base\error.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\warmux\base\i18n.cpp"
+					RelativePath="..\..\..\lib\warmux\base\i18n.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\warmux\base\singleton.cpp"
+					RelativePath="..\..\..\lib\warmux\base\singleton.cpp"
 					>
 				</File>
 			</Filter>
@@ -180,7 +182,7 @@
 				Name="maths"
 				>
 				<File
-					RelativePath="..\..\lib\warmux\maths\euler_vector.cpp"
+					RelativePath="..\..\..\lib\warmux\maths\euler_vector.cpp"
 					>
 				</File>
 			</Filter>
@@ -188,35 +190,35 @@
 				Name="net"
 				>
 				<File
-					RelativePath="..\..\lib\warmux\net\distant_cpu.cpp"
+					RelativePath="..\..\..\lib\warmux\net\distant_cpu.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\warmux\net\download.cpp"
+					RelativePath="..\..\..\lib\warmux\net\download.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\warmux\net\extSDL_net.cpp"
+					RelativePath="..\..\..\lib\warmux\net\extSDL_net.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\warmux\net\extSDL_net.h"
+					RelativePath="..\..\..\lib\warmux\net\extSDL_net.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\warmux\net\index_server.cpp"
+					RelativePath="..\..\..\lib\warmux\net\index_server.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\warmux\net\network.cpp"
+					RelativePath="..\..\..\lib\warmux\net\network.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\warmux\net\player.cpp"
+					RelativePath="..\..\..\lib\warmux\net\player.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\warmux\net\socket.cpp"
+					RelativePath="..\..\..\lib\warmux\net\socket.cpp"
 					>
 				</File>
 			</Filter>
@@ -224,15 +226,15 @@
 				Name="tools"
 				>
 				<File
-					RelativePath="..\..\lib\warmux\tools\debug.cpp"
+					RelativePath="..\..\..\lib\warmux\tools\debug.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\warmux\tools\file_tools.cpp"
+					RelativePath="..\..\..\lib\warmux\tools\file_tools.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\lib\warmux\tools\random.cpp"
+					RelativePath="..\..\..\lib\warmux\tools\random.cpp"
 					>
 				</File>
 			</Filter>
@@ -243,99 +245,99 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\..\lib\warmux\include\config_visual.h"
+				RelativePath="..\..\..\lib\warmux\include\config_visual.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\lib\warmux\include\WARMUX_action.h"
+				RelativePath="..\..\..\lib\warmux\include\WARMUX_action.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\lib\warmux\include\WARMUX_action_handler.h"
+				RelativePath="..\..\..\lib\warmux\include\WARMUX_action_handler.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\lib\warmux\include\WARMUX_base.h"
+				RelativePath="..\..\..\lib\warmux\include\WARMUX_base.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\lib\warmux\include\WARMUX_config.h"
+				RelativePath="..\..\..\lib\warmux\include\WARMUX_config.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\lib\warmux\include\WARMUX_debug.h"
+				RelativePath="..\..\..\lib\warmux\include\WARMUX_debug.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\lib\warmux\include\WARMUX_distant_cpu.h"
+				RelativePath="..\..\..\lib\warmux\include\WARMUX_distant_cpu.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\lib\warmux\include\WARMUX_download.h"
+				RelativePath="..\..\..\lib\warmux\include\WARMUX_download.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\lib\warmux\include\WARMUX_error.h"
+				RelativePath="..\..\..\lib\warmux\include\WARMUX_error.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\lib\warmux\include\WARMUX_euler_vector.h"
+				RelativePath="..\..\..\lib\warmux\include\WARMUX_euler_vector.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\lib\warmux\include\WARMUX_file_tools.h"
+				RelativePath="..\..\..\lib\warmux\include\WARMUX_file_tools.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\lib\warmux\include\WARMUX_i18n.h"
+				RelativePath="..\..\..\lib\warmux\include\WARMUX_i18n.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\lib\warmux\include\WARMUX_index_server.h"
+				RelativePath="..\..\..\lib\warmux\include\WARMUX_index_server.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\lib\warmux\include\WARMUX_index_svr_msg.h"
+				RelativePath="..\..\..\lib\warmux\include\WARMUX_index_svr_msg.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\lib\warmux\include\WARMUX_network.h"
+				RelativePath="..\..\..\lib\warmux\include\WARMUX_network.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\lib\warmux\include\WARMUX_player.h"
+				RelativePath="..\..\..\lib\warmux\include\WARMUX_player.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\lib\warmux\include\WARMUX_point.h"
+				RelativePath="..\..\..\lib\warmux\include\WARMUX_point.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\lib\warmux\include\WARMUX_random.h"
+				RelativePath="..\..\..\lib\warmux\include\WARMUX_random.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\lib\warmux\include\WARMUX_rectangle.h"
+				RelativePath="..\..\..\lib\warmux\include\WARMUX_rectangle.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\lib\warmux\include\WARMUX_singleton.h"
+				RelativePath="..\..\..\lib\warmux\include\WARMUX_singleton.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\lib\warmux\include\WARMUX_socket.h"
+				RelativePath="..\..\..\lib\warmux\include\WARMUX_socket.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\lib\warmux\include\WARMUX_team_config.h"
+				RelativePath="..\..\..\lib\warmux\include\WARMUX_team_config.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\lib\warmux\include\WARMUX_types.h"
+				RelativePath="..\..\..\lib\warmux\include\WARMUX_types.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\lib\warmux\include\WARMUX_vector2.h"
+				RelativePath="..\..\..\lib\warmux\include\WARMUX_vector2.h"
 				>
 			</File>
 		</Filter>
