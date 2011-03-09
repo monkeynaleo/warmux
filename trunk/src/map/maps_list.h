@@ -171,6 +171,7 @@ public:
   InfoMap* ActiveMap() { return lst.at(active_map_index); }
 
   void FillActionMenuSetMap(Action& a) const;
+  std::vector<std::string> GetAvailableMaps() const;
 };
 
 inline InfoMap* ActiveMap() { return MapsList::GetInstance()->ActiveMap(); }

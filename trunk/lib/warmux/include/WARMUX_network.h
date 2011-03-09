@@ -24,6 +24,7 @@
 //-----------------------------------------------------------------------------
 #include <SDL_net.h>
 #include <string>
+#include <vector>
 #include <WARMUX_types.h>
 //-----------------------------------------------------------------------------
 
@@ -81,6 +82,7 @@ public:
                                const std::string& password,
                                std::string& client_nickname,
                                uint client_player_id,
+                               std::vector<std::string>& map_list,
                                bool client_will_be_master);
 
   static const char * GetGameStateAsString(net_game_state_t state);

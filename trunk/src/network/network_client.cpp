@@ -39,6 +39,7 @@
 #include "include/constant.h"
 #include "network/network_client.h"
 #include "network/net_error_msg.h"
+#include "map/maps_list.h"
 #include "tool/string_tools.h"
 
 //-----------------------------------------------------------------------------
@@ -138,6 +139,16 @@ connection_state_t NetworkClient::HandShake(WSocket& server_socket)
   // 6) Receive my player id
   if (!server_socket.ReceiveInt(player_id))
     goto error;
+
+  // 7) Send my maps if not game master
+  if (!game_master_player) {
+    const std::vector<InfoMap*>& lst = MapsList::GetConstInstance()->lst;
+    if (!server_socket.SendInt(lst.size()))
+      goto error;
+    for (uint i=0; i<lst.size(); i++)
+      if (!server_socket.SendStr(lst[i]->GetRawName()))
+        goto error;
+  }
 
   GetPlayer().SetId(uint(player_id));
 

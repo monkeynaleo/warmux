@@ -19,6 +19,8 @@
  * Map selection box
  *****************************************************************************/
 
+#include <algorithm>
+
 #include "menu/map_selection_box.h"
 #include "game/config.h"
 #include "gui/button.h"
@@ -109,15 +111,14 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool show_border, bool _d
                                Text::ALIGN_CENTER_TOP, false);
   AddWidget(map_author_label);
 
-  // Load Maps' list
-  uint i = MapsList::GetInstance()->GetActiveMapIndex();
-
   if (display_only) {
     bt_map_minus->SetVisible(false);
     bt_map_plus->SetVisible(false);
   }
 
-  ChangeMap(i);
+  // Load Maps' list
+  ChangeMapListCallback(MapsList::GetInstance()->GetAvailableMaps(),
+                        MapsList::GetInstance()->ActiveMap()->GetRawName());
 }
 
 void MapSelectionBox::ChangeMapDelta(int delta_index)
@@ -127,7 +128,7 @@ void MapSelectionBox::ChangeMapDelta(int delta_index)
   int tmp = selected_map_index + delta_index;
 
   // +1 is for random map!
-  tmp = (tmp < 0 ? tmp + MapsList::GetInstance()->lst.size() + 1 : tmp) % (MapsList::GetInstance()->lst.size() + 1);
+  tmp = (tmp < 0 ? tmp + common.size() + 1 : tmp) % (common.size() + 1);
 
   ChangeMap(tmp);
 }
@@ -135,7 +136,7 @@ void MapSelectionBox::ChangeMapDelta(int delta_index)
 void MapSelectionBox::ChangeMap(uint index)
 {
   int tmp;
-  if (index > MapsList::GetInstance()->lst.size()+1) return;
+  if (index > common.size()+1) return;
 
   // Callback other network players
   if (Network::GetInstance()->IsGameMaster()) {
@@ -144,10 +145,10 @@ void MapSelectionBox::ChangeMap(uint index)
     // We need to do it here to send the right map to still not connected clients
     // in distant_cpu::distant_cpu
 
-    if (selected_map_index == MapsList::GetInstance()->lst.size()) { // random map
+    if (selected_map_index == common.size()) { // random map
       MapsList::GetInstance()->SelectMapByName("random");
     } else {
-      MapsList::GetInstance()->SelectMapByIndex(index);
+      MapsList::GetInstance()->SelectMapByName(common[index]->GetRawName());
     }
 
     Action a(Action::ACTION_GAME_SET_MAP);
@@ -162,34 +163,39 @@ void MapSelectionBox::ChangeMap(uint index)
 
   // Set previews
   tmp = index - 1;
-  tmp = (tmp < 0 ? tmp + MapsList::GetInstance()->lst.size() + 1: tmp);
+  tmp = (tmp < 0 ? tmp + common.size() + 1: tmp);
   UpdateMapInfo(map_preview_before, tmp, false);
 
   tmp = index - 2;
-  tmp = (tmp < 0 ? tmp + MapsList::GetInstance()->lst.size() + 1: tmp);
+  tmp = (tmp < 0 ? tmp + common.size() + 1: tmp);
   UpdateMapInfo(map_preview_before2, tmp, false);
 
-  UpdateMapInfo(map_preview_after,  (index + 1) % (MapsList::GetInstance()->lst.size() +1), false);
-  UpdateMapInfo(map_preview_after2, (index + 2) % (MapsList::GetInstance()->lst.size() +1), false);
+  UpdateMapInfo(map_preview_after,  (index + 1) % (common.size() +1), false);
+  UpdateMapInfo(map_preview_after2, (index + 2) % (common.size() +1), false);
 }
 
 void MapSelectionBox::UpdateMapInfo(PictureWidget * widget, uint index, bool selected)
 {
-  if (index == MapsList::GetInstance()->lst.size()) {
+  if (index == common.size()) {
     UpdateRandomMapInfo(widget, selected);
     return;
   }
 
   InfoMapBasicAccessor* basic = NULL;
 
-  basic = MapsList::GetInstance()->lst[index]->LoadBasicInfo();
+  basic = common[index]->LoadBasicInfo();
   if (!basic) {
     // Error already reported by LoadBasicInfo()
 
     // Crude
+#if 0
     MapsList::iterator it = MapsList::GetInstance()->lst.begin() + index;
     delete *it;
     MapsList::GetInstance()->lst.erase(it);
+#endif
+    MapsList::iterator it = common.begin() + index;
+    common.erase(it);
+
     ChangeMap(selected_map_index);
     NeedRedrawing();
     return;
@@ -264,7 +270,7 @@ void MapSelectionBox::ValidMapSelection()
 {
   std::string map_name;
 
-  if (selected_map_index == MapsList::GetInstance()->lst.size()) {
+  if (selected_map_index == common.size()) {
     // Choose one and select it!
     map_name = "random";
 
@@ -272,8 +278,8 @@ void MapSelectionBox::ValidMapSelection()
       MapsList::GetInstance()->SelectMapByName(map_name);
     }
   } else {
-    map_name = MapsList::GetInstance()->lst[selected_map_index]->GetRawName();
-    MapsList::GetInstance()->SelectMapByIndex(selected_map_index);
+    map_name = common[selected_map_index]->GetRawName();
+    MapsList::GetInstance()->SelectMapByName(map_name);
   }
 
   /* The player chose a map, save it in the main config so that this will be
@@ -283,7 +289,30 @@ void MapSelectionBox::ValidMapSelection()
 
 void MapSelectionBox::ChangeMapCallback()
 {
-  int index = MapsList::GetInstance()->GetActiveMapIndex();
+  const InfoMap* current = MapsList::GetInstance()->ActiveMap();
+  for (uint i=0; i<common.size(); i++) {
+    if (common[i] == current)
+      ChangeMap(i);
+  }
+}
+
+void MapSelectionBox::ChangeMapListCallback(const std::vector<std::string>& list,
+                                            const std::string& selected)
+{
+  std::vector<InfoMap*> local = MapsList::GetInstance()->lst;
+  int index = 0;
+
+  common.clear();
+  for (uint i=0; i<local.size(); i++) {
+    if (std::find(list.begin(), list.end(), local[i]->GetRawName()) != list.end())
+      common.push_back(local[i]);
+  }
+
+  for (uint i=0; i<list.size(); i++) {
+    if (selected == list[i])
+      index = i;
+  }
+
   ChangeMap(index);
 }
 
