@@ -21,6 +21,9 @@
 #define WARMUX_SERVER_ENV_H
 
 #include <signal.h>
+#ifdef _WIN32
+typedef void siginfo_t;
+#endif
 
 class ServerConfig;
 
