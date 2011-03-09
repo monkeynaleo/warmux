@@ -598,6 +598,7 @@ void PhysicalObj::CheckRebound()
                 GetName().c_str());
       m_rebound_position = Point2i(-1, -1);
       StopMoving();
+      return;
     }
   }
   m_rebound_position = GetPosition();
