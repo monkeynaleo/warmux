@@ -56,25 +56,6 @@ void NetworkGame::AddCpu(DistantComputer* cpu)
   SendAdminMessage(msg);
 }
 
-std::list<DistantComputer*>& NetworkGame::GetCpus()
-{
-  return cpulist;
-}
-
-const std::list<DistantComputer*>& NetworkGame::GetCpus() const
-{
-  return cpulist;
-}
-
-bool NetworkGame::AcceptNewComputers() const
-{
-  if (game_started || cpulist.size() >= 8) {
-    return false;
-  }
-
-  return true;
-}
-
 std::list<DistantComputer*>::iterator
 NetworkGame::CloseConnection(std::list<DistantComputer*>::iterator closed)
 {
@@ -143,22 +124,6 @@ void NetworkGame::SendSingleAdminMessage(DistantComputer* client, const std::str
   SendActionToOne(a, client);
 }
 
-// Send Messages
-void NetworkGame::SendActionToAll(const Action& a) const
-{
-  SendAction(a, NULL, false);
-}
-
-void NetworkGame::SendActionToOne(const Action& a, DistantComputer* client) const
-{
-  SendAction(a, client, true);
-}
-
-void NetworkGame::SendActionToAllExceptOne(const Action& a, DistantComputer* client) const
-{
-  SendAction(a, client, false);
-}
-
 // if (client == NULL) sending to every clients
 // if (clt_as_rcver) sending only to client 'client'
 // if (!clt_as_rcver) sending to all EXCEPT client 'client'
@@ -208,39 +173,60 @@ void NetworkGame::StopGame()
   game_started = false;
 }
 
+void NetworkGame::UpdateWaited()
+{
+  uint not_ready = 0;
+  waited = NULL;
+
+  std::list<DistantComputer*>::iterator it = cpulist.begin();
+  while (it != cpulist.end()) {
+    if ((int)(*it)->GetPlayers().size() != (*it)->GetNumberOfPlayersWithState(Player::STATE_INITIALIZED)) {
+      not_ready++;
+      waited = (*it);
+    }
+    ++it;
+  }
+  if (not_ready == 1) {
+    start_waiting = SDL_GetTicks();
+    DPRINT(INFO, "%p is the last not ready!\n", waited);
+  }
+}
+
+void NetworkGame::CheckWaited()
+{
+  if (waited) {
+    int wait = SDL_GetTicks()-start_waiting;
+    if (wait > 30000 && !warned) {
+      SendSingleAdminMessage(waited,
+                             "Game waiting for you for more than 30s -"
+                             " in 30s you'll get kicked!\n");
+      warned = true;
+    } else if (warned && wait>60000) {
+      std::list<DistantComputer*>::iterator dst_cpu = std::find(cpulist.begin(), cpulist.end(), waited);
+      if (dst_cpu != cpulist.end()) {
+        SendSingleAdminMessage(waited, "More than 60s of inactivity, you're out!\n");
+        CloseConnection(dst_cpu);
+        ResetWaiting();
+      }
+    }
+  }
+}
+
 void NetworkGame::ForwardPacket(const char *buffer, size_t len, DistantComputer* sender)
 {
   std::list<DistantComputer*>::iterator it;
   Action a(buffer, sender);
 
-  if (a.GetType() == Action::ACTION_NETWORK_CLIENT_CHANGE_STATE) {
+  if (Action::GetType(buffer) == Action::ACTION_NETWORK_CLIENT_CHANGE_STATE) {
+    Action a(buffer, sender);
     int player_id = a.PopInt(); // Ignore player id
     WNet::net_game_state_t state = (WNet::net_game_state_t)a.PopInt();
-    if (state != WNet::NETWORK_MENU_OK)
-      goto out;
-    sender->GetPlayer(player_id)->SetState(Player::STATE_INITIALIZED);
-
-    uint not_ready = 0;
-    waited = NULL;
-
-    for (it = cpulist.begin(); it != cpulist.end(); it++) {
-      if ((int)(*it)->GetPlayers().size() != (*it)->GetNumberOfPlayersWithState(Player::STATE_INITIALIZED)) {
-        not_ready++;
-        waited = (*it);
-      }
-
-      if ((*it) != sender) {
-        (*it)->SendData(buffer, len);
-      }
+    if (state == WNet::NETWORK_MENU_OK) {
+      sender->GetPlayer(player_id)->SetState(Player::STATE_INITIALIZED);
+      UpdateWaited();
     }
-    if (not_ready == 1) {
-      start_waiting = SDL_GetTicks();
-      DPRINT(INFO, "%p is the last not ready!\n", waited);
-    }
-    return;
   }
 
-out:
   for (it = cpulist.begin(); it != cpulist.end(); it++) {
     if ((*it) != sender) {
       (*it)->SendData(buffer, len);
@@ -248,7 +234,8 @@ out:
   }
 
   if (sender == cpulist.front()) {
-    if (a.GetType() == Action::ACTION_NETWORK_MASTER_CHANGE_STATE) {
+    if (Action::GetType(buffer) == Action::ACTION_NETWORK_MASTER_CHANGE_STATE) {
+      Action a(buffer, sender);
       int net_state = a.PopInt();
       if (net_state == WNet::NETWORK_LOADING_DATA) {
         StartGame();

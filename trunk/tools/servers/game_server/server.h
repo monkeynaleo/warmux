@@ -46,6 +46,8 @@ private:
   void StartGame();
   void StopGame();
 
+  void UpdateWaited();
+
 public:
   NetworkGame(const std::string& game_name, const std::string& password);
 
@@ -55,23 +57,24 @@ public:
   void AddCpu(DistantComputer* cpu);
   std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed);
 
-  std::list<DistantComputer*>& GetCpus();
-  const std::list<DistantComputer*>& GetCpus() const;
+  std::list<DistantComputer*>& GetCpus() { return cpulist; }
+  const std::list<DistantComputer*>& GetCpus() const { return cpulist; }
 
-  bool AcceptNewComputers() const;
+  bool AcceptNewComputers() const { return !game_started && cpulist.size() < 8; }
 
   uint NextPlayerId() const;
   void ElectGameMaster();
   void ForwardPacket(const char *buffer, size_t len, DistantComputer* sender);
-  void SendActionToAll(const Action& action) const;
-  void SendActionToOne(const Action& action, DistantComputer* client) const;
-  void SendActionToAllExceptOne(const Action& action, DistantComputer* client) const;
+  void SendActionToAll(const Action& a) const { SendAction(a, NULL, false); }
+  void SendActionToOne(const Action& a, DistantComputer* client) const { SendAction(a, client, true); }
+  void SendActionToAllExceptOne(const Action& a, DistantComputer* client) const { SendAction(a, client, false); }
 
   DistantComputer* waited;
   uint             start_waiting;
   bool             warned;
 
   void SendSingleAdminMessage(DistantComputer* client, const std::string& message);
+  void CheckWaited();
   void ResetWaiting() { warned = false; waited = NULL; start_waiting = 0; }
 };
 
