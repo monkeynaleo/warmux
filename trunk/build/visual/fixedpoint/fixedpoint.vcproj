@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8,00"
-	Name="libwarmux-server"
-	ProjectGUID="{23B17D3F-63C2-4AEF-BE67-2D937F07C5FC}"
-	RootNamespace="libwarmuxserver"
+	Name="fixedpoint"
+	ProjectGUID="{ABB66755-B294-4794-A5B3-811EC497F94E}"
+	RootNamespace="fixedpoint"
 	>
 	<Platforms>
 		<Platform
@@ -20,6 +20,7 @@
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			CharacterSet="0"
+			WholeProgramOptimization="0"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -39,7 +40,6 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)..\..\lib\warmux-server\include&quot;"
 				PreprocessorDefinitions="WIN32;DEBUG;_DEBUG;WMX_LOG;FRIBIDI_STATICLIB;CURL_STATICLIB;main=SDL_main;INSTALL_DATADIR=\&quot;data\&quot;;INSTALL_LOCALEDIR=\&quot;locale\&quot;;FONT_FILE=\&quot;data\\font\\Ubuntu-R.ttf\&quot;;M_PI=3.14159265358979323846;M_PI_2=1.57079632679489661923;M_PI_4=0.78539816339744830962;snprintf=_snprintf;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -47,6 +47,7 @@
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="true"
 				DebugInformationFormat="4"
+				DisableSpecificWarnings="4244"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -101,12 +102,12 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)..\..\lib\warmux-server\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;FRIBIDI_STATICLIB;CURL_STATICLIB;main=SDL_main;INSTALL_DATADIR=\&quot;data\&quot;;INSTALL_LOCALEDIR=\&quot;locale\&quot;;FONT_FILE=\&quot;data\\font\\Ubuntu-R.ttf\&quot;;M_PI=3.14159265358979323846;M_PI_2=1.57079632679489661923;M_PI_4=0.78539816339744830962;snprintf=_snprintf;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="true"
 				DebugInformationFormat="3"
+				DisableSpecificWarnings="4244"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -146,19 +147,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\..\lib\warmux-server\src\clock.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\lib\warmux-server\src\config.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\lib\warmux-server\src\env.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\lib\warmux-server\src\logfile.cpp"
+				RelativePath="..\..\..\lib\fixedpoint\fixed_func.cpp"
 				>
 			</File>
 		</Filter>
@@ -168,27 +157,27 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\..\lib\warmux-server\include\WSERVER_clock.h"
+				RelativePath="..\..\..\lib\fixedpoint\fixasintab.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\lib\warmux-server\include\WSERVER_config.h"
+				RelativePath="..\..\..\lib\fixedpoint\fixatantab.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\lib\warmux-server\include\WSERVER_debug.h"
+				RelativePath="..\..\..\lib\fixedpoint\fixed_class.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\lib\warmux-server\include\WSERVER_env.h"
+				RelativePath="..\..\..\lib\fixedpoint\fixed_func.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\lib\warmux-server\include\WSERVER_index_msg.h"
+				RelativePath="..\..\..\lib\fixedpoint\fixsintab.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\lib\warmux-server\include\WSERVER_logfile.h"
+				RelativePath="..\..\..\lib\fixedpoint\stdint_fallback.h"
 				>
 			</File>
 		</Filter>
