@@ -20,14 +20,16 @@
 
 #include <stdio.h>
 #include <sys/types.h>
-#include <sys/time.h>
-#include <sys/socket.h>
-#include <sys/resource.h>
-#include <unistd.h>
+#ifndef _WIN32
+# include <sys/time.h>
+# include <sys/socket.h>
+# include <sys/resource.h>
+# include <unistd.h>
+# include <netinet/in.h>
+# include <sys/time.h>
+# include <sys/ioctl.h>
+#endif
 #include <getopt.h>
-#include <netinet/in.h>
-#include <sys/time.h>
-#include <sys/ioctl.h>
 #include <errno.h>
 #include <string.h>
 #include <list>
@@ -35,6 +37,7 @@
 
 #include <WARMUX_index_server.h>
 #include <WARMUX_types.h>
+#include <WARMUX_config.h>
 #include <WARMUX_network.h>
 #include <WARMUX_random.h>
 #include <WARMUX_socket.h>
@@ -44,6 +47,10 @@
 #include <WSERVER_env.h>
 #include "config.h"
 #include "server.h"
+
+#ifdef WIN32
+# undef main
+#endif
 
 BasicClock wx_clock;
 std::string config_file = "warmux_server.conf";
@@ -175,4 +182,3 @@ int main(int argc, char* argv[])
 
   GameServer::GetInstance()->RunLoop();
 }
-
