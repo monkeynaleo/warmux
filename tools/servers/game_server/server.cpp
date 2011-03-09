@@ -204,7 +204,7 @@ void NetworkGame::CheckWaited()
     } else if (warned && wait>60000) {
       std::list<DistantComputer*>::iterator dst_cpu = std::find(cpulist.begin(), cpulist.end(), waited);
       if (dst_cpu != cpulist.end()) {
-        bool was_master = dst_cpu == cpulist.begin();
+        bool was_master = IsGameMaster(dst_cpu);
         SendSingleAdminMessage(waited, "More than 60s of inactivity, you're out!\n");
         CloseConnection(dst_cpu);
         if (was_master)
@@ -501,8 +501,8 @@ void GameServer::RunLoop()
         continue;
       }
 
-      std::list<DistantComputer*>::iterator dst_cpu = gamelst_it->second.GetCpus().begin();
-      for (; dst_cpu != gamelst_it->second.GetCpus().end(); dst_cpu++) {
+      std::list<DistantComputer*>::iterator dst_cpu = game.GetCpus().begin();
+      for (; dst_cpu != game.GetCpus().end(); dst_cpu++) {
 
         if ((*dst_cpu)->SocketReady()) {// Check if this socket contains data to receive
           char *buffer;
@@ -511,8 +511,8 @@ void GameServer::RunLoop()
           if (!(*dst_cpu)->ReceiveData(&buffer, &packet_size)) {
             // An error occured during the reception
 
-            bool turn_master_lost = (dst_cpu == gamelst_it->second.GetCpus().begin());
-            dst_cpu = gamelst_it->second.CloseConnection(dst_cpu);
+            bool turn_master_lost = game.IsGameMaster(dst_cpu);
+            dst_cpu = game.CloseConnection(dst_cpu);
 
             if (clients_socket_set->NbSockets() + 1 == clients_socket_set->MaxNbSockets()) {
               // A new player will be able to connect, so we reopen the socket
@@ -522,7 +522,7 @@ void GameServer::RunLoop()
               server_socket.AcceptIncoming(port);
             }
 
-            if (gamelst_it->second.GetCpus().size() != 0) {
+            if (!game.GetCpus().empty()) {
               if (turn_master_lost) {
                 GetGame(gamelst_it->first).ElectGameMaster();
               }
