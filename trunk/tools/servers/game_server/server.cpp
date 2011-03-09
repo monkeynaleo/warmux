@@ -490,42 +490,23 @@ void GameServer::RunLoop()
       continue; //Or break?
     }
 
-    char *buffer;
-    size_t packet_size;
-
-    std::map<uint, NetworkGame>::iterator gamelst_it;
-    std::list<DistantComputer*>::iterator dst_cpu;
-
-    for (gamelst_it = games.begin(); gamelst_it != games.end(); gamelst_it++) {
+    std::map<uint, NetworkGame>::iterator gamelst_it = games.begin();
+    for (; gamelst_it != games.end(); gamelst_it++) {
       // task #6684 - check waited
       NetworkGame& game = gamelst_it->second;
-      if (game.waited) {
-        int wait = SDL_GetTicks()-game.start_waiting;
-        if (wait > 30000 && !game.warned) {
-          game.SendSingleAdminMessage(game.waited,
-                                      "Game waiting for you for more than 30s -"
-                                      " in 30s you'll get kicked!\n");
-          game.warned = true;
-        } else if (game.warned && wait>60000) {
-          dst_cpu = std::find(game.GetCpus().begin(), game.GetCpus().end(), game.waited);
-          if (dst_cpu != game.GetCpus().end()) {
-            game.SendSingleAdminMessage(game.waited, "More than 60s of inactivity, you're out!\n");
-            game.CloseConnection(dst_cpu);
-            game.ResetWaiting();
-          }
-        }
-      }
+      game.CheckWaited();
 
       if (num_ready == 0) {
         // nothing to do
         continue;
       }
 
-      for (dst_cpu = gamelst_it->second.GetCpus().begin();
-           dst_cpu != gamelst_it->second.GetCpus().end();
-           dst_cpu++) {
+      std::list<DistantComputer*>::iterator dst_cpu = gamelst_it->second.GetCpus().begin();
+      for (; dst_cpu != gamelst_it->second.GetCpus().end(); dst_cpu++) {
 
         if ((*dst_cpu)->SocketReady()) {// Check if this socket contains data to receive
+          char *buffer;
+          size_t packet_size;
 
           if (!(*dst_cpu)->ReceiveData(&buffer, &packet_size)) {
             // An error occured during the reception
