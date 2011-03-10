@@ -448,10 +448,9 @@ void NetworkMenu::ReceiveMsgCallback(const std::string& msg, const Color& color)
   msg_box->NewMessage(msg, color);
 }
 
-void NetworkMenu::SetMapsCallback(const std::vector<std::string>& list,
-                                  const std::string& selected)
+void NetworkMenu::SetMapsCallback(const std::vector<std::string>& list)
 {
-  map_box->ChangeMapListCallback(list, selected);
+  map_box->ChangeMapListCallback(list);
 }
 
 Team * NetworkMenu::FindUnusedTeam(const std::string default_team_id)
