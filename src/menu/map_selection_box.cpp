@@ -291,8 +291,10 @@ void MapSelectionBox::ChangeMapCallback()
 {
   const InfoMap* current = MapsList::GetInstance()->ActiveMap();
   for (uint i=0; i<common.size(); i++) {
-    if (common[i] == current)
+    if (common[i] == current) {
       ChangeMap(i);
+      break;
+    }
   }
 }
 
@@ -308,9 +310,10 @@ void MapSelectionBox::ChangeMapListCallback(const std::vector<std::string>& list
       common.push_back(local[i]);
   }
 
-  for (uint i=0; i<list.size(); i++) {
-    if (selected == list[i])
+  for (uint i=0; i<common.size(); i++) {
+    if (selected == common[i]->GetRawName()) {
       index = i;
+    }
   }
 
   ChangeMap(index);
