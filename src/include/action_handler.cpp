@@ -530,6 +530,24 @@ static void _Action_AddTeam(Action *a, Player* player)
 }
 
 
+
+static void Action_Game_SetMapList(Action *a)
+{
+  std::vector<std::string>& list = a->GetCreator()->GetAvailableMaps();
+
+  // First set the selected map
+  _Action_SelectMap(a);
+
+  int nb_maps = a->PopInt();
+  while (nb_maps--)
+    list.push_back(a->PopString());
+
+  if (Network::GetInstance()->network_menu)
+    Network::GetInstance()->network_menu->SetMapsCallback(list);
+  else
+    printf("No menu yet!\n");
+}
+
 static void Action_Game_Info(Action *a)
 {
   FAIL_IF_GAMEMASTER(a);
@@ -539,12 +557,9 @@ static void Action_Game_Info(Action *a)
 
   Network::GetInstance()->SetState(WNet::NETWORK_MENU_INIT);
 
-  _Action_SelectMap(a);
-
   uint nb_players = a->PopInt();
   for (uint i = 0; i < nb_players; i++) {
     uint player_id = a->PopInt();
-
 
     ASSERT (a->GetCreator() && a->GetCreator()->GetPlayer(player_id) == NULL);
     ASSERT (player_id != Network::GetInstance()->GetPlayer().GetId());
@@ -557,6 +572,9 @@ static void Action_Game_Info(Action *a)
       _Action_AddTeam(a, player);
     }
   }
+
+  // The action also contains the content of a set map list action
+  Action_Game_SetMapList(a);
 }
 
 static void Action_Game_SetMap(Action *a)
@@ -927,17 +945,6 @@ static void _Info_ConnectHost(const std::string& host_info)
 }
 
 
-void Action_Game_SetMapList(Action *a)
-{
-  std::vector<std::string>& list = a->GetCreator()->GetAvailableMaps();
-
-  int nb_maps = a->PopInt();
-  while (nb_maps--)
-    list.push_back(a->PopString());
-
-  if (Network::GetInstance()->network_menu)
-    Network::GetInstance()->network_menu->SetMapsCallback(list, a->PopString());
-}
 
 static inline void add_player_info_to_action(Action& a, const Player& player)
 {
@@ -958,7 +965,6 @@ void SendInitialGameInfo(DistantComputer* client, int added_player_id)
   MSG_DEBUG("network", "Server: Sending map information");
 
   Action a(Action::ACTION_GAME_INFO);
-  MapsList::GetInstance()->FillActionMenuSetMap(a);
 
   MSG_DEBUG("network", "Server: Sending teams information");
 
@@ -1000,21 +1006,25 @@ void SendInitialGameInfo(DistantComputer* client, int added_player_id)
 
   Network::GetInstance()->UnlockRemoteHosts();
 
-  Network::GetInstance()->SendActionToOne(a, client);
-
   // Send common maps
   std::vector<std::string> list = Network::GetInstance()->GetCommonMaps();
   NetworkMenu *menu = Network::GetInstance()->network_menu;
-  const std::string& selected = MapsList::GetInstance()->ActiveMap()->GetRawName();
+  MapsList::GetInstance()->FillActionMenuSetMap(a);
   if (menu) {
-    menu->SetMapsCallback(list, selected);
+    // The active map will be automatically reset if common maps have changed
+    menu->SetMapsCallback(list);
   }
   Action b(Action::ACTION_GAME_SET_MAP_LIST);
+  MapsList::GetInstance()->FillActionMenuSetMap(b);
   b.Push(int(list.size()));
-  for (uint i=0; i<list.size(); i++)
+  a.Push(int(list.size()));
+  for (uint i=0; i<list.size(); i++) {
+    a.Push(list[i]);
     b.Push(list[i]);
-  b.Push(selected);
-  Network::GetInstance()->SendActionToAll(b);
+  }
+
+  Network::GetInstance()->SendActionToOne(a, client);
+  Network::GetInstance()->SendActionToAllExceptOne(b, client);
 }
 
 // Only used to notify clients that someone connected to the server

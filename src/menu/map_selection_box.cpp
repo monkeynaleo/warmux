@@ -117,8 +117,7 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool show_border, bool _d
   }
 
   // Load Maps' list
-  ChangeMapListCallback(MapsList::GetInstance()->GetAvailableMaps(),
-                        MapsList::GetInstance()->ActiveMap()->GetRawName());
+  ChangeMapListCallback(MapsList::GetInstance()->GetAvailableMaps());
 }
 
 void MapSelectionBox::ChangeMapDelta(int delta_index)
@@ -298,11 +297,10 @@ void MapSelectionBox::ChangeMapCallback()
   }
 }
 
-void MapSelectionBox::ChangeMapListCallback(const std::vector<std::string>& list,
-                                            const std::string& selected)
+void MapSelectionBox::ChangeMapListCallback(const std::vector<std::string>& list)
 {
   std::vector<InfoMap*> local = MapsList::GetInstance()->lst;
-  int index = 0;
+  int index = -1;
 
   common.clear();
   for (uint i=0; i<local.size(); i++) {
@@ -310,13 +308,25 @@ void MapSelectionBox::ChangeMapListCallback(const std::vector<std::string>& list
       common.push_back(local[i]);
   }
 
+  const std::string& selected = MapsList::GetInstance()->ActiveMap()->GetRawName();
   for (uint i=0; i<common.size(); i++) {
     if (selected == common[i]->GetRawName()) {
       index = i;
     }
   }
 
-  ChangeMap(index);
+  if (index == -1) {
+    ChangeMap(0);
+#if 0
+    // Make sure any outstanding refresh has been made
+    AppWarmux::GetInstance()->video->Flip();
+    Question question(Question::WARNING);
+    question.Set(_("The previouly selected map has been deselected because someone didn't have it."),
+                 true, 0);
+    question.Ask();
+#endif
+  } else
+    ChangeMap(index);
 }
 
 void MapSelectionBox::AllowSelection()
