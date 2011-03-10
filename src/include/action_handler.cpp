@@ -1014,7 +1014,7 @@ void SendInitialGameInfo(DistantComputer* client, int added_player_id)
   for (uint i=0; i<list.size(); i++)
     b.Push(list[i]);
   b.Push(selected);
-  Network::GetInstance()->SendActionToAll(a);
+  Network::GetInstance()->SendActionToAll(b);
 }
 
 // Only used to notify clients that someone connected to the server
