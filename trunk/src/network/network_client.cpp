@@ -211,6 +211,7 @@ std::string NetworkClient::GetServerAddress() const
 
 void NetworkClient::SendMapsList(DistantComputer *host)
 {
+  MSG_DEBUG("action_handler.map", "Sending list to %p\n", host);
   Action a(Action::ACTION_GAME_SET_MAP_LIST);
   const std::vector<InfoMap*>& map_list = MapsList::GetConstInstance()->lst;
   a.Push(map_list.size());

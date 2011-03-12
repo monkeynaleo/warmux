@@ -286,6 +286,7 @@ void Network::RemoveRemoteHost(std::list<DistantComputer*>::iterator host_it)
   // the iterator is removed from the list and has become invalid!
   DistantComputer *host =  *host_it;
   cpu.erase(host_it);
+  // host can no longer receive packets, now disconnect it
   delete host;
   SDL_UnlockMutex(cpus_lock);
 }
