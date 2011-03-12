@@ -485,8 +485,9 @@ static void _Action_SelectMap(Action *a)
     MapsList::GetInstance()->SelectRandomMapByName(a->PopString());
   }
 
-  if (Network::GetInstance()->network_menu != NULL) {
-    Network::GetInstance()->network_menu->ChangeMapCallback();
+  Network *net = Network::GetInstance();
+  if (net->network_menu && !net->IsGameMaster()) {
+    net->network_menu->ChangeMapCallback();
   }
 }
 
@@ -543,20 +544,18 @@ static void Action_Game_SetMapList(Action *a)
     map_list->SelectMapByIndex(0);
   }
 
-  // Apply locally: list and current active one
-  net->network_menu->SetMapsCallback(common_list);
-  net->network_menu->ChangeMapCallback();
-
   Action b(Action::ACTION_GAME_FORCE_MAP_LIST);
 
   b.Push(common_list.size());
   for (uint i=0; i<common_list.size(); i++)
     b.Push(map_list->lst[common_list[i]]->GetRawName());
 
-  // And now send the selected map
-  map_list->FillActionMenuSetMap(b);
-
   net->SendActionToAll(b);
+
+  // Apply locally: list and current active one
+  net->network_menu->SetMapsCallback(common_list);
+  // Calling this will send an action, check MapSelectionBox::ChangeMap
+  net->network_menu->ChangeMapCallback();
 }
 
 static void Action_Game_ForceMapList(Action *a)
