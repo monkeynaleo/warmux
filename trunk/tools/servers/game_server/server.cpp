@@ -70,6 +70,10 @@ NetworkGame::CloseConnection(std::list<DistantComputer*>::iterator closed)
 
   delete host;
 
+  // Update list
+  if (!cpulist.empty())
+    SendMapsList(cpulist.front());
+
   return it;
 }
 
@@ -105,21 +109,26 @@ void NetworkGame::ElectGameMaster()
   Action a(Action::ACTION_NETWORK_SET_GAME_MASTER);
   SendActionToOne(a, host);
 
-  std::vector<uint> index_list = DistantComputer::GetCommonMaps(cpulist);
-  Action b(Action::ACTION_GAME_SET_MAP_LIST);
+  SendMapsList(host);
+}
 
-  b.Push(index_list.size());
+void NetworkGame::SendMapsList(DistantComputer *host)
+{
+  std::vector<uint> index_list = DistantComputer::GetCommonMaps(cpulist);
+  Action a(Action::ACTION_GAME_SET_MAP_LIST);
+
+  a.Push(index_list.size());
   for (uint i=0; i<index_list.size(); i++) {
     std::map<std::string, uint>::const_iterator it = name_index_map.begin();
     while (it != name_index_map.end()) {
       if (it->second == index_list[i]) {
-        b.Push(it->first);
+        a.Push(it->first);
         break;
       }
     }
   }
 
-  SendActionToOne(b, host);
+  SendActionToOne(a, host);
 }
 
 void NetworkGame::SendAdminMessage(const std::string& message)
