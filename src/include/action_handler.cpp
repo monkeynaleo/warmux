@@ -511,9 +511,13 @@ static void _Action_Game_MapList(Action *a)
 
 static void Action_Game_SetMapList(Action *a)
 {
+  Network  *net      = Network::GetInstance();
+  if (!net->IsGameMaster()) {
+    MSG_DEBUG("action_handler.map", "Dropping message from %p that I shouldn't have received...\n", a->GetCreator());
+    return;
+  }
   if (a)
     _Action_Game_MapList(a);
-  Network  *net      = Network::GetInstance();
   MapsList *map_list = MapsList::GetInstance();
 
   // We are the game master: the received list must be used to determine
