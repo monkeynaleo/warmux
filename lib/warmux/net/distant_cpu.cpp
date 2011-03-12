@@ -25,6 +25,7 @@
 #include <WARMUX_error.h>
 #include <WARMUX_i18n.h>
 #include <WARMUX_socket.h>
+#include <WARMUX_debug.h>
 
 static const int MAX_PACKET_SIZE = 250*1024;
 
@@ -63,6 +64,8 @@ DistantComputer::~DistantComputer()
   WARMUX_DisconnectHost(*this);
 
   // This will call the needed player->Disconnect() for each player
+  // This doesn't receive or send info from the network, so it's safe
+  // to do this after WARMUX_DisconnectHost to not delay disconnection
   players.clear();
 
   delete sock;
@@ -162,6 +165,7 @@ std::vector<uint> DistantComputer::GetCommonMaps(const std::list<DistantComputer
 
   if (cpu.size() == 1) {
     index_list = cpu.front()->GetAvailableMaps();
+    MSG_DEBUG("action_handler.map", "Getting front CPU list of size %u from %p\n", index_list.size(), cpu.front());
     return index_list;
   }
 
@@ -184,5 +188,6 @@ std::vector<uint> DistantComputer::GetCommonMaps(const std::list<DistantComputer
       index_list.push_back(index);
   }
 
+  MSG_DEBUG("action_handler.map", "List of size %u\n", index_list.size());
   return index_list;
 }
