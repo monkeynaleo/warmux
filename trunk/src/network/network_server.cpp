@@ -19,6 +19,7 @@
  * Network server layer for Warmux.
  *****************************************************************************/
 
+#include <algorithm>
 #include <sys/types.h>
 #ifdef LOG_NETWORK
 #  include <sys/stat.h>
@@ -33,7 +34,6 @@
 #include <SDL_thread.h>
 
 #include "include/action_handler.h"
-#include "map/maps_list.h"
 #include "network/network_server.h"
 #include "tool/string_tools.h"
 
@@ -86,11 +86,10 @@ uint NetworkServer::NextPlayerId() const
 
 bool NetworkServer::HandShake(WSocket& client_socket,
                               std::string& nickname,
-                              uint player_id,
-                              std::vector<std::string>& lst) const
+                              uint player_id) const
 {
   return WNet::Server_HandShake(client_socket, GetGameName(), GetPassword(),
-                                nickname, player_id, lst, false);
+                                nickname, player_id, false);
 }
 
 void NetworkServer::WaitActionSleep()
@@ -101,16 +100,14 @@ void NetworkServer::WaitActionSleep()
     WSocket* incoming = server_socket.LookForClient();
     if (incoming) {
       std::string nickname;
-      std::vector<std::string> map_list;
       uint player_id = NextPlayerId();
 
-      if (!HandShake(*incoming, nickname, player_id, map_list))
+      if (!HandShake(*incoming, nickname, player_id))
         return;
 
       socket_set->AddSocket(incoming);
 
       DistantComputer* client = new DistantComputer(incoming, nickname, player_id);
-      client->GetAvailableMaps() = map_list;
       AddRemoteHost(client);
       SendInitialGameInfo(client, player_id);
 

@@ -33,7 +33,7 @@ class NetworkServer : public Network
   int port; // store listening port
 
   uint NextPlayerId() const;
-  bool HandShake(WSocket& client_socket, std::string& nickname, uint player_id, std::vector<std::string>& lst) const;
+  bool HandShake(WSocket& client_socket, std::string& nickname, uint player_id) const;
 
 protected:
   virtual void HandleAction(Action* a, DistantComputer* sender);
@@ -52,7 +52,6 @@ public:
   void RejectIncoming();
   void CloseConnection(std::list<DistantComputer*>::iterator closed);
   void SetMaxNumberOfPlayers(uint max_nb_players);
-
 };
 
 //-----------------------------------------------------------------------------

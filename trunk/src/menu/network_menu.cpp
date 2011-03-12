@@ -448,7 +448,7 @@ void NetworkMenu::ReceiveMsgCallback(const std::string& msg, const Color& color)
   msg_box->NewMessage(msg, color);
 }
 
-void NetworkMenu::SetMapsCallback(const std::vector<std::string>& list)
+void NetworkMenu::SetMapsCallback(const std::vector<uint>& list)
 {
   map_box->ChangeMapListCallback(list);
 }

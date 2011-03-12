@@ -556,29 +556,10 @@ uint Network::GetNbPlayersWithState(Player::State player_state) const
   return counter;
 }
 
-std::vector<std::string> Network::GetCommonMaps()
+std::vector<uint> Network::GetCommonMaps()
 {
-  std::vector<std::string> list;
-
   SDL_LockMutex(cpus_lock);
-  std::list<DistantComputer*>::const_iterator first = cpu.begin();
-  const std::vector<std::string>& start_list = (*first)->GetAvailableMaps();
-  for (uint n=0; n<start_list.size(); n++) {
-    const std::string& name = start_list[n];
-    std::list<DistantComputer*>::const_iterator client = first;
-    bool found = true;
-    client++;
-    for (; client != cpu.end(); client++) {
-      const std::vector<std::string>& other_list = (*client)->GetAvailableMaps();
-      if (std::find(other_list.begin(), other_list.end(), name) == other_list.end()) {
-        found = false;
-        break;
-      }
-    }
-
-    if (found)
-      list.push_back(name);
-  }
+  std::vector<uint> list = DistantComputer::GetCommonMaps(cpu);
   SDL_UnlockMutex(cpus_lock);
 
   return list;

@@ -48,6 +48,7 @@ public:
                                    const std::string& port);
 
   std::string GetServerAddress() const;
+  void SendMapsList(DistantComputer *host);
 };
 
 //-----------------------------------------------------------------------------

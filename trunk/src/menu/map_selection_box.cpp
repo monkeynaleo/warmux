@@ -34,8 +34,10 @@
 #include "network/network.h"
 #include "tool/resource_manager.h"
 
-MapSelectionBox::MapSelectionBox(const Point2i &_size, bool show_border, bool _display_only) :
-  VBox(_size.GetX(), show_border, false), selected_map_index(0)
+MapSelectionBox::MapSelectionBox(const Point2i &_size, bool show_border, bool _display_only)
+  : VBox(_size.GetX(), show_border, false)
+  , selected_map_index(0)
+  , common(MapsList::GetInstance()->lst) // Created with an already initialized list
 {
   display_only = _display_only;
 
@@ -115,9 +117,6 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool show_border, bool _d
     bt_map_minus->SetVisible(false);
     bt_map_plus->SetVisible(false);
   }
-
-  // Load Maps' list
-  ChangeMapListCallback(MapsList::GetInstance()->GetAvailableMaps());
 }
 
 void MapSelectionBox::ChangeMapDelta(int delta_index)
@@ -297,36 +296,16 @@ void MapSelectionBox::ChangeMapCallback()
   }
 }
 
-void MapSelectionBox::ChangeMapListCallback(const std::vector<std::string>& list)
+void MapSelectionBox::ChangeMapListCallback(const std::vector<uint>& index_list)
 {
   std::vector<InfoMap*> local = MapsList::GetInstance()->lst;
   int index = -1;
 
-  common.clear();
-  for (uint i=0; i<local.size(); i++) {
-    if (std::find(list.begin(), list.end(), local[i]->GetRawName()) != list.end())
-      common.push_back(local[i]);
+  // Index list is made of indices of local maps: it's a subset
+  common.resize(index_list.size());
+  for (uint i=0; i<index_list.size(); i++) {
+    common[i] = local[index_list[i]];
   }
-
-  const std::string& selected = MapsList::GetInstance()->ActiveMap()->GetRawName();
-  for (uint i=0; i<common.size(); i++) {
-    if (selected == common[i]->GetRawName()) {
-      index = i;
-    }
-  }
-
-  if (index == -1) {
-    ChangeMap(0);
-#if 0
-    // Make sure any outstanding refresh has been made
-    AppWarmux::GetInstance()->video->Flip();
-    Question question(Question::WARNING);
-    question.Set(_("The previouly selected map has been deselected because someone didn't have it."),
-                 true, 0);
-    question.Ask();
-#endif
-  } else
-    ChangeMap(index);
 }
 
 void MapSelectionBox::AllowSelection()

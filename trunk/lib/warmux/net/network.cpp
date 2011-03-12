@@ -289,7 +289,6 @@ bool WNet::Server_HandShake(WSocket& client_socket,
                             const std::string& password,
                             std::string& nickname,
                             uint client_player_id,
-                            std::vector<std::string>& map_list,
                             bool client_will_be_master)
 {
   bool ret = false;
@@ -343,16 +342,6 @@ bool WNet::Server_HandShake(WSocket& client_socket,
   // 6) Send its player id to the client
   if (!client_socket.SendInt(client_player_id))
     goto error;
-
-  // 7) Receive maps
-  int num;
-  if (!client_socket.ReceiveInt(num) || num<1)
-    goto error;
-  map_list.resize(num);
-  for (uint i=0; i<(uint)num; i++) {
-    if (!client_socket.ReceiveStr(map_list[i], 100))
-      goto error;
-  }
 
   // Server: Handshake done successfully :)
   ret = true;

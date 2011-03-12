@@ -170,6 +170,7 @@ public:
   int GetActiveMapIndex() const { return random_map ? lst.size() : active_map_index; }
   InfoMap* ActiveMap() { return lst.at(active_map_index); }
 
+  bool IsRandom() const { return random_map; }
   void FillActionMenuSetMap(Action& a) const;
   std::vector<std::string> GetAvailableMaps() const;
 };
