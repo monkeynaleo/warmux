@@ -41,9 +41,9 @@
 static const Point2f MAX_CAMERA_SPEED(5000, 5000);
 static const Point2f MAX_CAMERA_ACCELERATION(1.5,1.5);
 
-#define REACTIVITY             0.6
-#define SPEED_REACTIVITY       0.05
-#define REALTIME_FOLLOW_FACTOR 0.15
+#define REACTIVITY             0.6f
+#define SPEED_REACTIVITY       0.05f
+#define REALTIME_FOLLOW_FACTOR 0.15f
 
 #define ANTICIPATION               18
 #define ADVANCE_ANTICIPATION       20

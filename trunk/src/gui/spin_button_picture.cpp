@@ -117,7 +117,7 @@ void SpinButtonWithPicture::Draw(const Point2i &mousePosition)
 
 void SpinButtonWithPicture::RecreateTorus()
 {
-  float angle = (M_PI*2 - OPEN_ANGLE) * (GetValue() - GetMinValue())
+  float angle = (2.0f*M_PI - OPEN_ANGLE) * (GetValue() - GetMinValue())
               / (GetMaxValue() - GetMinValue());
   torus->Refresh(angle, OPEN_ANGLE);
 }
