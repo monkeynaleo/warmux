@@ -125,6 +125,7 @@ void NetworkGame::SendMapsList(DistantComputer *host)
         a.Push(it->first);
         break;
       }
+      ++it;
     }
   }
 
