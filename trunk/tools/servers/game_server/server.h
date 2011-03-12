@@ -43,6 +43,11 @@ private:
   std::map<std::string, uint> name_index_map;
   std::string      selected_map;
 
+  // To handle an idling game master
+  DistantComputer* waited;
+  uint             start_waiting;
+  bool             warned;
+
   void SendAdminMessage(const std::string& message);
   void SendAction(const Action& a, DistantComputer* client, bool clt_as_rcver) const;
   void StartGame();
@@ -70,10 +75,6 @@ public:
   void SendActionToAll(const Action& a) const { SendAction(a, NULL, false); }
   void SendActionToOne(const Action& a, DistantComputer* client) const { SendAction(a, client, true); }
   void SendActionToAllExceptOne(const Action& a, DistantComputer* client) const { SendAction(a, client, false); }
-
-  DistantComputer* waited;
-  uint             start_waiting;
-  bool             warned;
 
   void SendSingleAdminMessage(DistantComputer* client, const std::string& message);
   void CheckWaited();
