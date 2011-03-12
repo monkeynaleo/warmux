@@ -28,10 +28,6 @@
 #include <WARMUX_team_config.h>
 //-----------------------------------------------------------------------------
 
-// It's up to the program using class Player to define WARMUX_DisconnectPlayer();
-// Currently it is expected not to use the network: check ~DistantComputer()
-extern void WARMUX_DisconnectPlayer(Player& player);
-
 class Player
 {
   friend void WARMUX_DisconnectPlayer(Player& player);
@@ -80,6 +76,10 @@ public:
 
   static std::string GetDefaultNickname();
 };
+
+// It's up to the program using class Player to define WARMUX_DisconnectPlayer();
+// Currently it is expected not to use the network: check ~DistantComputer()
+extern void WARMUX_DisconnectPlayer(Player& player);
 
 #endif
 
