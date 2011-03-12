@@ -39,7 +39,7 @@
 #define   BACK_ALPHA      0
 #define   BACKGROUND_GREY (255*6)/10
 
-#define MOVE_DURATION     750.0
+#define MOVE_DURATION     750.0f
 
 void EnergyList::Reset()
 {

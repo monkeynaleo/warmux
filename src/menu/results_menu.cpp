@@ -241,9 +241,9 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
   Profile *res  = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   Point2i wsize = GetMainWindow().GetSize();
   bool    small = !IsPodiumSeparate();
-  uint x        = wsize.GetX() * 0.02;
+  uint x        = wsize.GetX() * 0.02f;
   uint tab_x    = small ? x : 260+16+x;
-  uint y        = wsize.GetY() * 0.02;
+  uint y        = wsize.GetY() * 0.02f;
 
   // Not showing it yet
   b_cancel->SetVisible(false);

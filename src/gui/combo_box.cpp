@@ -173,7 +173,7 @@ void ComboBox::RecreateTorus()
 {
   float angle;
   if (m_choices.size () > 1)
-    angle = m_index*(2*M_PI - OPEN_ANGLE) / (m_choices.size () - 1);
+    angle = m_index*(2.0f*M_PI - OPEN_ANGLE) / (m_choices.size () - 1);
   else
     angle = 0;
   torus->Refresh(angle, OPEN_ANGLE);
