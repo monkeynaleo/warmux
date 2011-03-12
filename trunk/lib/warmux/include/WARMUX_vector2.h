@@ -446,10 +446,10 @@ template<class T> class Vector2
         if (!IsZero(y)) {
           float angle = atan(y/(float)x);
           if (x<0)
-            return (y>0) ? angle+M_PI : angle-M_PI;
+            return (y>0) ? angle+(float)M_PI : angle-(float)M_PI;
           return angle;
         } else {
-          return (x>0) ? 0 : M_PI;
+          return (x>0) ? 0.0f : (float)M_PI;
         }
       } else if (y>0) {
         return float(0.5f*M_PI);
