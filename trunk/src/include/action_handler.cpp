@@ -505,8 +505,9 @@ static void _Action_Game_MapList(Action *a)
     int index = map_list->FindMapById(map_name);
     if (index != -1) {
       index_list.push_back(index);
-      MSG_DEBUG("action_handler.map", "Adding map %s of index %i\n", map_name.c_str(), index);
-    }
+      MSG_DEBUG("action_handler.map", "Adding map %s of index %i (%i left)\n", map_name.c_str(), index, num);
+    } else
+      MSG_DEBUG("action_handler.map", "Rejecting map %s  (%i left)\n", map_name.c_str(), num);
   }
 }
 
@@ -567,9 +568,6 @@ static void Action_Game_ForceMapList(Action *a)
   Network  *net      = Network::GetInstance();
   ASSERT(net->network_menu);
   net->network_menu->SetMapsCallback(a->GetCreator()->GetAvailableMaps());
-
-  // And now set the selected map
-  _Action_SelectMap(a);
 }
 
 static Player* _Action_GetPlayer(Action *a, uint player_id)
