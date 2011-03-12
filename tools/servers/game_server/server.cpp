@@ -104,6 +104,22 @@ void NetworkGame::ElectGameMaster()
 
   Action a(Action::ACTION_NETWORK_SET_GAME_MASTER);
   SendActionToOne(a, host);
+
+  std::vector<uint> index_list = DistantComputer::GetCommonMaps(cpulist);
+  Action b(Action::ACTION_GAME_SET_MAP_LIST);
+
+  b.Push(index_list.size());
+  for (uint i=0; i<index_list.size(); i++) {
+    std::map<std::string, uint>::const_iterator it = name_index_map.begin();
+    while (it != name_index_map.end()) {
+      if (it->second == index_list[i]) {
+        b.Push(it->first);
+        break;
+      }
+    }
+  }
+
+  SendActionToOne(b, host);
 }
 
 void NetworkGame::SendAdminMessage(const std::string& message)
