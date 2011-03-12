@@ -33,6 +33,9 @@ public:
   std::string player_name;
   uint nb_characters;
   std::string ai;
+
+  bool operator ==(const ConfigTeam& other) const { return id == other.id; }
+  bool operator ==(const std::string& other_id) const { return id == other_id; }
 };
 
 #endif
