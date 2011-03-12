@@ -490,7 +490,7 @@ static void _Action_SelectMap(Action *a)
   }
 }
 
-static void Action_Game_MapList(Action *a)
+static void _Action_Game_MapList(Action *a)
 {
   int                num        = a->PopInt();
   MapsList          *map_list   = MapsList::GetInstance();
@@ -498,11 +498,13 @@ static void Action_Game_MapList(Action *a)
   std::vector<uint>& index_list = a->GetCreator()->GetAvailableMaps();
 
   index_list.clear();
+  MSG_DEBUG("action_handler.map", "Map list size for %p: %i\n", a->GetCreator(), num);
   while (num--) {
     std::string map_name = a->PopString();
     int index = map_list->FindMapById(map_name);
     if (index != -1) {
       index_list.push_back(index);
+      MSG_DEBUG("action_handler.map", "Adding map %s of index %i\n", map_name.c_str(), index);
     }
   }
 }
@@ -510,7 +512,7 @@ static void Action_Game_MapList(Action *a)
 static void Action_Game_SetMapList(Action *a)
 {
   if (a)
-    Action_Game_MapList(a);
+    _Action_Game_MapList(a);
   Network  *net      = Network::GetInstance();
   MapsList *map_list = MapsList::GetInstance();
 
@@ -526,6 +528,7 @@ static void Action_Game_SetMapList(Action *a)
   } else {
     common_list = net->GetCommonMaps();
   }
+  MSG_DEBUG("action_handler.map", "Common list has now %u maps\n", common_list.size());
 
   int index = map_list->GetActiveMapIndex();
   if (map_list->IsRandom()) {
@@ -536,7 +539,7 @@ static void Action_Game_SetMapList(Action *a)
     map_list->SelectMapByIndex(0);
   }
 
-  // Apply localy: list and current active one
+  // Apply locally: list and current active one
   net->network_menu->SetMapsCallback(common_list);
   net->network_menu->ChangeMapCallback();
 
@@ -554,7 +557,7 @@ static void Action_Game_SetMapList(Action *a)
 
 static void Action_Game_ForceMapList(Action *a)
 {
-  Action_Game_MapList(a);
+  _Action_Game_MapList(a);
 
   // This list should be the common list, already a subset of our own
   // and thus we should apply it
@@ -1139,7 +1142,7 @@ void WARMUX_DisconnectHost(DistantComputer& host)
     Network::GetInstance()->SendActionToAll(a); // host is already removed from the list
   }
 
-  // Passing NULL for action makes it not parse the action but do the remaining option
+  // Passing NULL for action makes it not parse the action but do the remaining processing
   Action_Game_SetMapList(NULL);
 }
 // ########################################################
