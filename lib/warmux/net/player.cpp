@@ -19,6 +19,7 @@
  * A network player (local or remote)
  *****************************************************************************/
 
+#include <algorithm> // For std::find
 #include <stdlib.h>
 #ifdef WIN32
 # include <windows.h> // DWORD, GetUserName
@@ -44,12 +45,7 @@ Player::Player() :
 
 std::list<ConfigTeam>::iterator Player::FindTeamWithId(const std::string team_id)
 {
-  std::list<ConfigTeam>::iterator it = owned_teams.begin();
-
-  while (it != owned_teams.end() && it->id != team_id) {
-    it++;
-  }
-  return it;
+  return std::find(owned_teams.begin(), owned_teams.end(), team_id);
 }
 
 void Player::UpdateNickname()
