@@ -268,7 +268,7 @@ void NetworkGame::ForwardPacket(const char *buffer, size_t len, DistantComputer*
         uint size = name_index_map.size();
         printf("Associated %s to %u\n", map_name.c_str(), size);
         name_index_map[map_name] = size;
-        list[num] = size+1;
+        list[num] = size;
       } else {
         list[num] = it->second;
       }
