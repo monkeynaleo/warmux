@@ -252,7 +252,28 @@ void NetworkGame::ForwardPacket(const char *buffer, size_t len, DistantComputer*
     }
   }
 
-  if (sender == cpulist.front()) {
+  if (Action::GetType(buffer) == Action::ACTION_GAME_SET_MAP_LIST) {
+    // The game server is the only one having the full list of available maps
+    Action a(buffer, sender);
+    int num = a.PopInt();
+    std::vector<uint>& list = a.GetCreator()->GetAvailableMaps();
+
+    list.resize(num);
+    // Check each map and add it to the pool of known map indices
+    while (num--) {
+      std::string map_name = a.PopString();
+      std::map<std::string, uint>::const_iterator it = name_index_map.find(map_name);
+      if (it == name_index_map.end()) {
+        // Not present, increase size and add
+        uint size = name_index_map.size();
+        printf("Associated %s to %u\n", map_name.c_str(), size);
+        name_index_map[map_name] = size;
+        list[num] = size+1;
+      } else {
+        list[num] = it->second;
+      }
+    }
+  } else if (sender == cpulist.front()) {
     if (Action::GetType(buffer) == Action::ACTION_NETWORK_MASTER_CHANGE_STATE) {
       // We need to track the game started/stopped state
       Action a(buffer, sender);
@@ -267,26 +288,6 @@ void NetworkGame::ForwardPacket(const char *buffer, size_t len, DistantComputer*
       // We need to know the selected map
       Action a(buffer, sender);
       selected_map = a.PopString();
-    } else if (Action::GetType(buffer) == Action::ACTION_GAME_SET_MAP_LIST) {
-      // The game server is the only one having the full list of available maps
-      Action a(buffer, sender);
-      int num = a.PopInt();
-      std::vector<uint>& list = a.GetCreator()->GetAvailableMaps();
-
-      list.resize(num);
-      // Check each map and add it to the pool of known map indices
-      while (num--) {
-        std::string map_name = a.PopString();
-        std::map<std::string, uint>::const_iterator it = name_index_map.find(map_name);
-        if (it == name_index_map.end()) {
-          // Not present, increase size and add
-          int size = name_index_map.size();
-          name_index_map[map_name] = size+1;
-          list[num] = size+1;
-        } else {
-          list[num] = it->second;
-        }
-      }
     }
   }
 }
