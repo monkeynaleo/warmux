@@ -51,8 +51,8 @@ inline Double InverseAngle(const Double &angle) {
 }
 inline float InverseAngle(const float angle) {
   if (angle < 0)
-    return -M_PI -angle;
-  return M_PI - angle;
+    return (float)-M_PI -angle;
+  return (float)M_PI - angle;
 }
 
 inline Double InverseAngleDeg(const Double &angle) {
