@@ -40,6 +40,7 @@ private:
   std::string      password;
   bool             game_started;
   std::list<DistantComputer*> cpulist;
+  std::map<std::string, uint> name_index_map;
   std::string      selected_map;
 
   void SendAdminMessage(const std::string& message);
@@ -105,8 +106,7 @@ private:
   std::list<DistantComputer*>& GetCpus(uint game_id);
   const std::list<DistantComputer*>& GetCpus(uint game_id) const;
 
-  bool HandShake(uint game_id, WSocket& client_socket, std::string& client_nickname,
-                 uint player_id, std::vector<std::string>& map_list);
+  bool HandShake(uint game_id, WSocket& client_socket, std::string& client_nickname, uint player_id);
   void WaitClients();
   void RejectIncoming();
 

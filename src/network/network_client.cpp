@@ -140,16 +140,6 @@ connection_state_t NetworkClient::HandShake(WSocket& server_socket)
   if (!server_socket.ReceiveInt(player_id))
     goto error;
 
-  // 7) Send my maps if not game master
-  if (!game_master_player) {
-    const std::vector<InfoMap*>& lst = MapsList::GetConstInstance()->lst;
-    if (!server_socket.SendInt(lst.size()))
-      goto error;
-    for (uint i=0; i<lst.size(); i++)
-      if (!server_socket.SendStr(lst[i]->GetRawName()))
-        goto error;
-  }
-
   GetPlayer().SetId(uint(player_id));
 
   SetGameName(game_name);
@@ -198,6 +188,7 @@ NetworkClient::ClientConnect(const std::string &host, const std::string& port)
   socket_set->AddSocket(socket);
   server = new DistantComputer(socket);
 
+  SendMapsList(server);
   AddRemoteHost(server);
 
   NetworkThread::Start();
@@ -216,4 +207,16 @@ std::string NetworkClient::GetServerAddress() const
     return "??";
 
   return (*sockets.begin())->GetAddress();
+}
+
+void NetworkClient::SendMapsList(DistantComputer *host)
+{
+  Action a(Action::ACTION_GAME_SET_MAP_LIST);
+  const std::vector<InfoMap*>& map_list = MapsList::GetConstInstance()->lst;
+  a.Push(map_list.size());
+  for (uint i=0; i<map_list.size(); i++)
+    a.Push(map_list[i]->GetRawName());
+
+  // We only send to game master, which should be the only one anyway
+  SendActionToOne(a, host);
 }

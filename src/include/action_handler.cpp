@@ -490,6 +490,82 @@ static void _Action_SelectMap(Action *a)
   }
 }
 
+static void Action_Game_MapList(Action *a)
+{
+  int                num        = a->PopInt();
+  MapsList          *map_list   = MapsList::GetInstance();
+  // We are going to directly update the DistantComputer map list
+  std::vector<uint>& index_list = a->GetCreator()->GetAvailableMaps();
+
+  index_list.clear();
+  while (num--) {
+    std::string map_name = a->PopString();
+    int index = map_list->FindMapById(map_name);
+    if (index != -1) {
+      index_list.push_back(index);
+    }
+  }
+}
+
+static void Action_Game_SetMapList(Action *a)
+{
+  if (a)
+    Action_Game_MapList(a);
+  Network  *net      = Network::GetInstance();
+  MapsList *map_list = MapsList::GetInstance();
+
+  // We are the game master: the received list must be used to determine
+  // the common list and inform *all* distant computers
+  // Furthermore, there should be no additional integer for the currently selected
+  ASSERT(net->network_menu);
+  std::vector<uint> common_list;
+  if (net->GetRemoteHosts().empty()) {
+    common_list.resize(map_list->lst.size());
+    for (uint i=0; i<map_list->lst.size(); i++)
+      common_list[i] = i;
+  } else {
+    common_list = net->GetCommonMaps();
+  }
+
+  int index = map_list->GetActiveMapIndex();
+  if (map_list->IsRandom()) {
+    index = common_list.size();
+  } else if (std::find(common_list.begin(), common_list.end(), index) == common_list.end()) {
+    // Not found, reset
+    index = 0;
+    map_list->SelectMapByIndex(0);
+  }
+
+  // Apply localy: list and current active one
+  net->network_menu->SetMapsCallback(common_list);
+  net->network_menu->ChangeMapCallback();
+
+  Action b(Action::ACTION_GAME_FORCE_MAP_LIST);
+
+  b.Push(common_list.size());
+  for (uint i=0; i<common_list.size(); i++)
+    b.Push(map_list->lst[common_list[i]]->GetRawName());
+
+  // And now send the selected map
+  map_list->FillActionMenuSetMap(b);
+
+  net->SendActionToAll(b);
+}
+
+static void Action_Game_ForceMapList(Action *a)
+{
+  Action_Game_MapList(a);
+
+  // This list should be the common list, already a subset of our own
+  // and thus we should apply it
+  Network  *net      = Network::GetInstance();
+  ASSERT(net->network_menu);
+  net->network_menu->SetMapsCallback(a->GetCreator()->GetAvailableMaps());
+
+  // And now set the selected map
+  _Action_SelectMap(a);
+}
+
 static Player* _Action_GetPlayer(Action *a, uint player_id)
 {
   Player *player = NULL;
@@ -529,25 +605,6 @@ static void _Action_AddTeam(Action *a, Player* player)
   player->AddTeam(the_team);
 }
 
-
-
-static void Action_Game_SetMapList(Action *a)
-{
-  std::vector<std::string>& list = a->GetCreator()->GetAvailableMaps();
-
-  // First set the selected map
-  _Action_SelectMap(a);
-
-  int nb_maps = a->PopInt();
-  while (nb_maps--)
-    list.push_back(a->PopString());
-
-  if (Network::GetInstance()->network_menu)
-    Network::GetInstance()->network_menu->SetMapsCallback(list);
-  else
-    printf("No menu yet!\n");
-}
-
 static void Action_Game_Info(Action *a)
 {
   FAIL_IF_GAMEMASTER(a);
@@ -572,9 +629,6 @@ static void Action_Game_Info(Action *a)
       _Action_AddTeam(a, player);
     }
   }
-
-  // The action also contains the content of a set map list action
-  Action_Game_SetMapList(a);
 }
 
 static void Action_Game_SetMap(Action *a)
@@ -1006,25 +1060,7 @@ void SendInitialGameInfo(DistantComputer* client, int added_player_id)
 
   Network::GetInstance()->UnlockRemoteHosts();
 
-  // Send common maps
-  std::vector<std::string> list = Network::GetInstance()->GetCommonMaps();
-  NetworkMenu *menu = Network::GetInstance()->network_menu;
-  MapsList::GetInstance()->FillActionMenuSetMap(a);
-  if (menu) {
-    // The active map will be automatically reset if common maps have changed
-    menu->SetMapsCallback(list);
-  }
-  Action b(Action::ACTION_GAME_SET_MAP_LIST);
-  MapsList::GetInstance()->FillActionMenuSetMap(b);
-  b.Push(int(list.size()));
-  a.Push(int(list.size()));
-  for (uint i=0; i<list.size(); i++) {
-    a.Push(list[i]);
-    b.Push(list[i]);
-  }
-
   Network::GetInstance()->SendActionToOne(a, client);
-  Network::GetInstance()->SendActionToAllExceptOne(b, client);
 }
 
 // Only used to notify clients that someone connected to the server
@@ -1102,6 +1138,9 @@ void WARMUX_DisconnectHost(DistantComputer& host)
     }
     Network::GetInstance()->SendActionToAll(a); // host is already removed from the list
   }
+
+  // Passing NULL for action makes it not parse the action but do the remaining option
+  Action_Game_SetMapList(NULL);
 }
 // ########################################################
 // ########################################################
@@ -1140,6 +1179,7 @@ void Action_Handler_Init()
   // Map selection in network menu
   ActionHandler::GetInstance()->Register(Action::ACTION_GAME_SET_MAP, "GAME_set_map", &Action_Game_SetMap);
   ActionHandler::GetInstance()->Register(Action::ACTION_GAME_SET_MAP_LIST, "GAME_set_map_list", &Action_Game_SetMapList);
+  ActionHandler::GetInstance()->Register(Action::ACTION_GAME_FORCE_MAP_LIST, "GAME_set_map_list", &Action_Game_ForceMapList);
 
   // Teams selection in network menu
   ActionHandler::GetInstance()->Register(Action::ACTION_GAME_ADD_TEAM, "GAME_add_team", &Action_Game_AddTeam);

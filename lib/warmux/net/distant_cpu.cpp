@@ -155,3 +155,34 @@ const std::string DistantComputer::ToString() const
   str += " (" + GetAddress() + ")";
   return str;
 }
+
+std::vector<uint> DistantComputer::GetCommonMaps(const std::list<DistantComputer*>& cpu)
+{
+  std::vector<uint> index_list;
+
+  if (cpu.size() == 1) {
+    index_list = cpu.front()->GetAvailableMaps();
+    return index_list;
+  }
+
+  std::list<DistantComputer*>::const_iterator first = cpu.begin();
+  const std::vector<uint>& start_list = (*first)->GetAvailableMaps();
+  for (uint n=0; n<start_list.size(); n++) {
+    uint index = start_list[n];
+    std::list<DistantComputer*>::const_iterator client = first;
+    bool found = true;
+    client++;
+    for (; client != cpu.end(); client++) {
+      const std::vector<uint>& other_list = (*client)->GetAvailableMaps();
+      if (std::find(other_list.begin(), other_list.end(), index) == other_list.end()) {
+        found = false;
+        break;
+      }
+    }
+
+    if (found)
+      index_list.push_back(index);
+  }
+
+  return index_list;
+}

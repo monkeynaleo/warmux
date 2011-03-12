@@ -63,7 +63,7 @@ class MapSelectionBox : public VBox
 
   void ValidMapSelection();
   void ChangeMapCallback();
-  void ChangeMapListCallback(const std::vector<std::string>& list);
+  void ChangeMapListCallback(const std::vector<uint>& list);
   void AllowSelection();
 
   virtual Widget* Click(const Point2i &mousePosition, uint button);

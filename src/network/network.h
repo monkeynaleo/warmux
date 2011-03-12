@@ -157,7 +157,7 @@ public:
 
   uint GetNbPlayersConnected() const;
   uint GetNbPlayersWithState(Player::State player_state) const;
-  std::vector<std::string> GetCommonMaps();
+  std::vector<uint> GetCommonMaps();
 };
 
 //-----------------------------------------------------------------------------

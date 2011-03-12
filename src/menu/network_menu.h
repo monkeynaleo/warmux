@@ -84,7 +84,7 @@ public:
   bool HasOpenTeamSlot();
 
   void ReceiveMsgCallback(const std::string& msg, const Color& color);
-  void SetMapsCallback(const std::vector<std::string>& list);
+  void SetMapsCallback(const std::vector<uint>& list);
 };
 
 #endif
