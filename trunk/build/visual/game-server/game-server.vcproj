@@ -198,6 +198,22 @@
 				RelativePath="..\..\..\tools\servers\game_server\server.cpp"
 				>
 			</File>
+			<Filter
+				Name="msvc"
+				>
+				<File
+					RelativePath="..\..\..\src\msvc\config.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\msvc\getopt.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\msvc\getopt.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Fichiers d&apos;en-tête"
@@ -210,22 +226,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\tools\servers\game_server\server.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="msvc"
-			>
-			<File
-				RelativePath="..\..\..\src\msvc\config.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\msvc\getopt.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\msvc\getopt.h"
 				>
 			</File>
 		</Filter>
