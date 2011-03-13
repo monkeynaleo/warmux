@@ -13,9 +13,9 @@
  <point name="upper_left_pad" x="500" y="500" /> 
  <point name="lower_right_pad" x="500" y="0" /> 
  
- <surface name="sky" file="Qubos Castle BG.jpg" />
- <surface name="map" file="Qubos Castle FG.png" />
- <surface name="preview" file="Qubos Castle PR.jpg" />
+ <surface name="sky" file="bg.jpg" />
+ <surface name="map" file="fg.png" />
+ <surface name="preview" file="pr.jpg" />
  
  <name>Qubos Castle</name>
   <water>water</water>
