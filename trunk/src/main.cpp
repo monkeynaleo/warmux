@@ -57,6 +57,12 @@
 #ifdef WMX_LOG
 # include "include/debugmasks.h"
 #endif
+#ifdef ANDROID
+# include <android/log.h>
+# define PAUSE_LOG(fmt, ...) __android_log_print(ANDROID_LOG_INFO, "warmux", fmt, ##__VA_ARGS__ )
+#else
+# define PAUSE_LOG(fmt, ...) MSG_DEBUG("pause", fmt, ##__VA_ARGS__ )
+#endif
 
 // Can be accessed by other parts of the code
 bool quit_game = false;
@@ -293,9 +299,10 @@ bool AppWarmux::CheckInactive(SDL_Event& evnt)
 #  define CHECK_STATE(e) e.type==SDL_ACTIVEEVENT
 #else
 #  define CHECK_STATE(e) e.type==SDL_ACTIVEEVENT && e.active.state&SDL_APPACTIVE
-# endif
+#endif
 
   if (CHECK_STATE(evnt) && evnt.active.gain == 0) {
+    PAUSE_LOG("Pause: entering, state=%X\n", evnt.active.state);
     JukeBox::GetInstance()->CloseDevice();
     GameTime::GetInstance()->SetWaitingForUser(true);
 
@@ -308,7 +315,9 @@ bool AppWarmux::CheckInactive(SDL_Event& evnt)
 #endif
       if (evnt.type == SDL_QUIT) AppWarmux::EmergencyExit();
       if (evnt.type == SDL_ACTIVEEVENT && evnt.active.gain == 1) {
-        if ((!menu || choice != MainMenu::NONE) &&Game::GetInstance()->IsRunning()) {
+        PAUSE_LOG("Active: state=%X\n", evnt.active.state);
+        if ((!menu || choice != MainMenu::NONE) && Game::GetInstance()->IsRunning()) {
+          PAUSE_LOG("Pause: menu=%p\n", menu);
           choice = MainMenu::NONE;
           bool exit = false;
           // There shouldn't be any other menu set, right?
@@ -327,7 +336,7 @@ bool AppWarmux::CheckInactive(SDL_Event& evnt)
         break;
       }
 
-      printf("Dropping event %u\n", evnt.type);
+      PAUSE_LOG("Dropping event %u\n", evnt.type);
     }
     return true;
   }
