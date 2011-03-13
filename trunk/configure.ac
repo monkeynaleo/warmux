@@ -374,7 +374,7 @@ dnl ========================================================================
 dnl === Data file substitution.                                          ===
 dnl ========================================================================
 
-DATA_FILES=`cd data ; find . \( -name CVS -o -name ".svn*" -o -name "Makefile*" -o -name warmux.desktop \) -prune -o -name ".#*" -o -type d -o -print`
+DATA_FILES=`cd data ; find . \( -name CVS -o -name ".svn*" -o -name "Makefile*" -o -name "warmux*.desktop" \) -prune -o -name ".#*" -o -type d -o -print`
 DATA_FILES=`echo $DATA_FILES`
 
 AC_SUBST([DATA_FILES])
