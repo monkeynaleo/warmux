@@ -96,4 +96,4 @@ check_case_files || exit 1
 check_maps_config || exit 1
 
 DATE=`date +%Y%m%d`
-tar -czf WarMUX-BonusMaps-${DATE}.tar.gz * --exclude=.svn --exclude=src --exclude=compress.sh --exclude=*~
+tar -czf WarMUX-CommunituMaps-${DATE}.tar.gz * --exclude=.svn --exclude=src --exclude=compress.sh --exclude=*~
