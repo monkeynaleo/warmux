@@ -184,18 +184,16 @@ void MapSelectionBox::UpdateMapInfo(PictureWidget * widget, uint index, bool sel
   basic = common[index]->LoadBasicInfo();
   if (!basic) {
     // Error already reported by LoadBasicInfo()
+    MapsList *map_list = MapsList::GetInstance();
 
     // Crude
-#if 0
-    MapsList::iterator it = MapsList::GetInstance()->lst.begin() + index;
+    MapsList::iterator it = map_list->lst.begin()
+                          + map_list->FindMapById(common[index]->GetRawName());
     delete *it;
-    MapsList::GetInstance()->lst.erase(it);
-#endif
-    MapsList::iterator it = common.begin() + index;
-    common.erase(it);
+    map_list->lst.erase(it);
 
-    ChangeMap(selected_map_index);
-    NeedRedrawing();
+    // Inform network if need be - will call back up to this very function
+    Network::GetInstance()->SendMapsList();
     return;
   }
 

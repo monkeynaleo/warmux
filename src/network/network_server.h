@@ -51,7 +51,8 @@ public:
 
   void RejectIncoming();
   void CloseConnection(std::list<DistantComputer*>::iterator closed);
-  void SetMaxNumberOfPlayers(uint max_nb_players);
+  void SetMaxNumberOfPlayers(uint num) { max_nb_players = num; }
+  void SendMapsList();
 };
 
 //-----------------------------------------------------------------------------
