@@ -296,6 +296,9 @@ bool AppWarmux::CheckInactive(SDL_Event& evnt)
 {
 #ifdef MAEMO
   Osso::Process();
+#endif
+
+#ifdef HAVE_HANDHELD
 #  define CHECK_STATE(e) e.type==SDL_ACTIVEEVENT
 #else
 #  define CHECK_STATE(e) e.type==SDL_ACTIVEEVENT && e.active.state&SDL_APPACTIVE
