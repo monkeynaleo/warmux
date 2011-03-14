@@ -297,7 +297,6 @@ void MapSelectionBox::ChangeMapCallback()
 void MapSelectionBox::ChangeMapListCallback(const std::vector<uint>& index_list)
 {
   std::vector<InfoMap*> local = MapsList::GetInstance()->lst;
-  int index = -1;
 
   // Index list is made of indices of local maps: it's a subset
   common.resize(index_list.size());
