@@ -520,43 +520,9 @@ static void Action_Game_SetMapList(Action *a)
     MSG_DEBUG("action_handler.map", "Dropping message from %p that I shouldn't have received...\n", a->GetCreator());
     return;
   }
-  MapsList *map_list = MapsList::GetInstance();
 
-  // We are the game master: the received list must be used to determine
-  // the common list and inform *all* distant computers
-  // Furthermore, there should be no additional integer for the currently selected
-  ASSERT(net->network_menu);
-  std::vector<uint> common_list;
-  if (net->GetRemoteHosts().empty()) {
-    common_list.resize(map_list->lst.size());
-    for (uint i=0; i<map_list->lst.size(); i++)
-      common_list[i] = i;
-  } else {
-    common_list = net->GetCommonMaps();
-  }
-  MSG_DEBUG("action_handler.map", "Common list has now %u maps\n", common_list.size());
-
-  int index = map_list->GetActiveMapIndex();
-  if (map_list->IsRandom()) {
-    index = common_list.size();
-  } else if (std::find(common_list.begin(), common_list.end(), index) == common_list.end()) {
-    // Not found, reset
-    index = 0;
-    map_list->SelectMapByIndex(0);
-  }
-
-  Action b(Action::ACTION_GAME_FORCE_MAP_LIST);
-
-  b.Push(common_list.size());
-  for (uint i=0; i<common_list.size(); i++)
-    b.Push(map_list->lst[common_list[i]]->GetRawName());
-
-  net->SendActionToAll(b);
-
-  // Apply locally: list and current active one
-  net->network_menu->SetMapsCallback(common_list);
-  // Calling this will send an action, check MapSelectionBox::ChangeMap
-  net->network_menu->ChangeMapCallback();
+  // This is NetworkServer being invoked here
+  net->SendMapsList();
 }
 
 static void Action_Game_ForceMapList(Action *a)

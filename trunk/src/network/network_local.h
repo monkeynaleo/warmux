@@ -40,6 +40,7 @@ public:
   virtual bool IsLocal() const { return true; }
 
   virtual void CloseConnection(std::list<DistantComputer*>::iterator closed);
+  void SendMapsList() { };
 };
 
 //-----------------------------------------------------------------------------

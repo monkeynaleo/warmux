@@ -34,6 +34,8 @@
 #include <SDL_thread.h>
 
 #include "include/action_handler.h"
+#include "map/maps_list.h"
+#include "menu/network_menu.h"
 #include "network/network_server.h"
 #include "tool/string_tools.h"
 
@@ -163,8 +165,7 @@ void NetworkServer::CloseConnection(std::list<DistantComputer*>::iterator closed
 {
   RemoveRemoteHost(closed);
 
-  if (GetNbPlayersConnected() == max_nb_players)
-  {
+  if (GetNbPlayersConnected() == max_nb_players) {
     // A new player will be able to connect, so we reopen the socket
     // For incoming connections
     printf("Allowing new connections\n");
@@ -172,7 +173,45 @@ void NetworkServer::CloseConnection(std::list<DistantComputer*>::iterator closed
   }
 }
 
-void NetworkServer::SetMaxNumberOfPlayers(uint _max_nb_players)
+void NetworkServer::SendMapsList()
 {
-  max_nb_players = _max_nb_players;
+  MapsList *map_list = MapsList::GetInstance();
+
+  // We are the game master: the received list must be used to determine
+  // the common list and inform *all* distant computers
+  // Furthermore, there should be no additional integer for the currently selected
+  std::vector<uint> common_list;
+  if (GetRemoteHosts().empty()) {
+    // No host, create a ful list list for ourselves at least
+    common_list.resize(map_list->lst.size());
+    for (uint i=0; i<map_list->lst.size(); i++)
+      common_list[i] = i;
+  } else {
+    common_list = GetCommonMaps();
+  }
+  MSG_DEBUG("action_handler.map", "Common list has now %u maps\n", common_list.size());
+
+  int index = map_list->GetActiveMapIndex();
+  if (map_list->IsRandom()) {
+    index = common_list.size();
+  } else if (std::find(common_list.begin(), common_list.end(), index) == common_list.end()) {
+    // Not found, reset
+    index = 0;
+    map_list->SelectMapByIndex(0);
+  }
+
+  Action a(Action::ACTION_GAME_FORCE_MAP_LIST);
+
+  a.Push(common_list.size());
+  for (uint i=0; i<common_list.size(); i++)
+    a.Push(map_list->lst[common_list[i]]->GetRawName());
+
+  SendActionToAll(a);
+
+  if (network_menu) {
+    // Apply locally: list and current active one
+    network_menu->SetMapsCallback(common_list);
+    // Calling this will send an action, check MapSelectionBox::ChangeMap
+    network_menu->ChangeMapCallback();
+  }
 }
