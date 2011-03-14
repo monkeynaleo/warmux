@@ -1,6 +1,10 @@
 > 2011/03/xx - 11.03 release
   - Replay functionality! Still a bit unstable and version-specific
+    (thanks mylad for the help image)
+  - The various funny animations are now displayed more often
   - Fixed various bugs with grapple and construct in far edges of the world
+    (thanks peterolen and lordjj for the bug reports)
+  - Improved a bit the grapple behaviour (patch from peterolen)
   - Reduced max memory usage for the Symbian and Android ports
   - Introduce quality settings, and add one level for handhelds allowing
     alphablending and thus much higher quality ground.
