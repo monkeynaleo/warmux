@@ -182,8 +182,9 @@ class DemoRenderer extends GLSurfaceView_SDL.Renderer {
 	}
 	
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
+		System.out.println("libSDL: DemoRenderer.onSurfaceCreated(): paused " + mPaused + " mFirstTimeStart " + mFirstTimeStart );
 		mGlSurfaceCreated = true;
-		if( mGlSurfaceCreated && ! mPaused && ! mFirstTimeStart )
+		if( ! mPaused && ! mFirstTimeStart )
 			nativeGlContextRecreated();
 		mFirstTimeStart = false;
 	}
@@ -229,7 +230,6 @@ class DemoRenderer extends GLSurfaceView_SDL.Renderer {
 
 		Settings.Apply(context);
 		accelerometer = new AccelerometerReader(context);
-        URLDownloader tmp = new URLDownloader();
 		// Tweak video thread priority, if user selected big audio buffer
 		if(Globals.AudioBufferConfig >= 2)
 			Thread.currentThread().setPriority( (Thread.NORM_PRIORITY + Thread.MIN_PRIORITY) / 2 ); // Lower than normal
@@ -254,20 +254,22 @@ class DemoRenderer extends GLSurfaceView_SDL.Renderer {
 		return 1;
 	}
 
-	public void showScreenKeyboard(final String oldText) // Called from native code
+	public void showScreenKeyboard(final String oldText, int sendBackspace) // Called from native code
 	{
 		class Callback implements Runnable
 		{
 			public MainActivity parent;
 			public String oldText;
+			public boolean sendBackspace;
 			public void run()
 			{
-				parent.showScreenKeyboard(oldText);
+				parent.showScreenKeyboard(oldText, sendBackspace);
 			}
 		}
 		Callback cb = new Callback();
 		cb.parent = context;
 		cb.oldText = oldText;
+		cb.sendBackspace = (sendBackspace != 0);
 		context.runOnUiThread(cb);
 	}
 
@@ -340,7 +342,8 @@ class DemoGLSurfaceView extends GLSurfaceView_SDL {
 	public void onResume() {
 		super.onResume();
 		mRenderer.mPaused = false;
-		if( mRenderer.mGlSurfaceCreated && ! mRenderer.mPaused )
+		System.out.println("libSDL: DemoGLSurfaceView.onResume(): mRenderer.mGlSurfaceCreated " + mRenderer.mGlSurfaceCreated + " mRenderer.mPaused " + mRenderer.mPaused);
+		if( mRenderer.mGlSurfaceCreated && ! mRenderer.mPaused || Globals.NonBlockingSwapBuffers )
 			mRenderer.nativeGlContextRecreated();
 	};
 

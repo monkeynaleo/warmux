@@ -120,8 +120,7 @@ int oldMouseButtons = 0;
 static int UnicodeToUtf8(int src, char * dest)
 {
 	int len = 0;
-    if (src<32) {
-    } else if ( src <= 0x007f) {
+    if ( src <= 0x007f) {
         *dest++ = (char)src;
         len = 1;
     } else if (src <= 0x07ff) {
@@ -680,7 +679,7 @@ void SDL_ANDROID_TextInputInit(char * buffer, int len)
 {
 	textInputBuffer = buffer;
 	textInputBufferLen = len;
-    textInputBufferPos = 0;
+	textInputBufferPos = 0;
 }
 
 JNIEXPORT void JNICALL
@@ -1200,57 +1199,61 @@ static SDL_mutex * BufferedEventsMutex = NULL;
 
 extern void SDL_ANDROID_PumpEvents()
 {
+	SDL_Event ev;
 	SDL_ANDROID_processAndroidTrackballDampening();
 	SDL_ANDROID_processMoveMouseWithKeyboard();
 
 	if( !BufferedEventsMutex )
 		BufferedEventsMutex = SDL_CreateMutex();
+
 	SDL_mutexP(BufferedEventsMutex);
 	while( BufferedEventsStart != BufferedEventsEnd )
 	{
-		SDL_Event * ev = &BufferedEvents[BufferedEventsStart];
+		ev = BufferedEvents[BufferedEventsStart];
+		BufferedEvents[BufferedEventsStart].type = 0;
+		BufferedEventsStart++;
+		if( BufferedEventsStart >= MAX_BUFFERED_EVENTS )
+			BufferedEventsStart = 0;
+		SDL_mutexV(BufferedEventsMutex);
 		
-		switch( ev->type )
+		switch( ev.type )
 		{
 			case SDL_MOUSEMOTION:
-				SDL_SendMouseMotion(NULL, 0, ev->motion.x, ev->motion.y);
+				SDL_SendMouseMotion(NULL, 0, ev.motion.x, ev.motion.y);
 				break;
 			case SDL_MOUSEBUTTONDOWN:
-				if( ((oldMouseButtons & SDL_BUTTON(ev->button.button)) != 0) != ev->button.state )
+				if( ((oldMouseButtons & SDL_BUTTON(ev.button.button)) != 0) != ev.button.state )
 				{
-					oldMouseButtons = (oldMouseButtons & ~SDL_BUTTON(ev->button.button)) | (ev->button.state ? SDL_BUTTON(ev->button.button) : 0);
-					SDL_SendMouseButton( NULL, ev->button.state, ev->button.button );
+					oldMouseButtons = (oldMouseButtons & ~SDL_BUTTON(ev.button.button)) | (ev.button.state ? SDL_BUTTON(ev.button.button) : 0);
+					SDL_SendMouseButton( NULL, ev.button.state, ev.button.button );
 				}
 				break;
 			case SDL_KEYDOWN:
 				//__android_log_print(ANDROID_LOG_INFO, "libSDL", "SDL_KEYDOWN: %i %i", ev->key.keysym.sym, ev->key.state);
-				SDL_SendKeyboardKey( ev->key.state, &ev->key.keysym );
+				SDL_SendKeyboardKey( ev.key.state, &ev.key.keysym );
 				break;
 			case SDL_JOYAXISMOTION:
-				if( ev->jaxis.which < MAX_MULTITOUCH_POINTERS+1 && SDL_ANDROID_CurrentJoysticks[ev->jaxis.which] )
-					SDL_PrivateJoystickAxis( SDL_ANDROID_CurrentJoysticks[ev->jaxis.which], ev->jaxis.axis, ev->jaxis.value );
+				if( ev.jaxis.which < MAX_MULTITOUCH_POINTERS+1 && SDL_ANDROID_CurrentJoysticks[ev.jaxis.which] )
+					SDL_PrivateJoystickAxis( SDL_ANDROID_CurrentJoysticks[ev.jaxis.which], ev.jaxis.axis, ev.jaxis.value );
 				break;
 			case SDL_JOYBUTTONDOWN:
-				if( ev->jbutton.which < MAX_MULTITOUCH_POINTERS+1 && SDL_ANDROID_CurrentJoysticks[ev->jbutton.which] )
-					SDL_PrivateJoystickButton( SDL_ANDROID_CurrentJoysticks[ev->jbutton.which], ev->jbutton.button, ev->jbutton.state );
+				if( ev.jbutton.which < MAX_MULTITOUCH_POINTERS+1 && SDL_ANDROID_CurrentJoysticks[ev.jbutton.which] )
+					SDL_PrivateJoystickButton( SDL_ANDROID_CurrentJoysticks[ev.jbutton.which], ev.jbutton.button, ev.jbutton.state );
 				break;
 #if SDL_VERSION_ATLEAST(1,3,0)
 			case SDL_FINGERMOTION:
-				SDL_SendTouchMotion(0, ev->tfinger.fingerId, 0, ev->tfinger.x, ev->tfinger.y, ev->tfinger.pressure);
+				SDL_SendTouchMotion(0, ev.tfinger.fingerId, 0, ev.tfinger.x, ev.tfinger.y, ev.tfinger.pressure);
 				break;
 			case SDL_FINGERDOWN:
-				SDL_SendFingerDown(0, ev->tfinger.fingerId, ev->tfinger.state ? 1 : 0, ev->tfinger.x, ev->tfinger.y, ev->tfinger.pressure);
+				SDL_SendFingerDown(0, ev.tfinger.fingerId, ev.tfinger.state ? 1 : 0, ev.tfinger.x, ev.tfinger.y, ev.tfinger.pressure);
 				break;
 			case SDL_TEXTINPUT:
-				SDL_SendKeyboardText(ev->text.text);
+				SDL_SendKeyboardText(ev.text.text);
 				break;
 #endif
 		}
-		
-		ev->type = 0;
-		BufferedEventsStart++;
-		if( BufferedEventsStart >= MAX_BUFFERED_EVENTS )
-			BufferedEventsStart = 0;
+
+		SDL_mutexP(BufferedEventsMutex);
 	}
 	SDL_mutexV(BufferedEventsMutex);
 };
@@ -1610,7 +1613,7 @@ extern void SDL_ANDROID_MainThreadPushText( int ascii, int unicode )
 			deferredTextIdx2 = 0;
 		deferredText[deferredTextIdx2].down = SDL_PRESSED;
 		deferredText[deferredTextIdx2].scancode = SDLK_LSHIFT;
-		deferredText[deferredTextIdx2].unicode = SDLK_LSHIFT;
+		deferredText[deferredTextIdx2].unicode = 0;
 	}
 	deferredTextIdx2++;
 	if( deferredTextIdx2 >= DEFERRED_TEXT_COUNT )
@@ -1632,7 +1635,7 @@ extern void SDL_ANDROID_MainThreadPushText( int ascii, int unicode )
 			deferredTextIdx2 = 0;
 		deferredText[deferredTextIdx2].down = SDL_RELEASED;
 		deferredText[deferredTextIdx2].scancode = SDLK_LSHIFT;
-		deferredText[deferredTextIdx2].unicode = SDLK_LSHIFT;
+		deferredText[deferredTextIdx2].unicode = 0;
 	}
 
 	SDL_mutexV(deferredTextMutex);
@@ -1834,7 +1837,9 @@ JAVA_EXPORT_NAME(Settings_nativeInitKeymap) ( JNIEnv*  env, jobject thiz )
   
   keymap[KEYCODE_HOME] = SDL_KEY(HOME); // Cannot be used in application
 
+  // On some devices pressing Camera key will generate Camera keyevent, but releasing it will generate Focus keyevent.
   keymap[KEYCODE_CAMERA] = SDL_KEY(SDL_KEY_VAL(SDL_ANDROID_KEYCODE_6));
+  keymap[KEYCODE_FOCUS] = SDL_KEY(SDL_KEY_VAL(SDL_ANDROID_KEYCODE_6));
 
   keymap[KEYCODE_0] = SDL_KEY(0);
   keymap[KEYCODE_1] = SDL_KEY(1);
@@ -1924,7 +1929,6 @@ JAVA_EXPORT_NAME(Settings_nativeInitKeymap) ( JNIEnv*  env, jobject thiz )
   keymap[KEYCODE_ENVELOPE] = SDL_KEY(F4);
 
   keymap[KEYCODE_HEADSETHOOK] = SDL_KEY(F5);
-  //keymap[KEYCODE_FOCUS] = SDL_KEY(F6);
   keymap[KEYCODE_NOTIFICATION] = SDL_KEY(F7);
 
   // Cannot be received by application, OS internal
