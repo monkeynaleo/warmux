@@ -27,6 +27,7 @@
 #include "SDL_thread.h"
 #include "../SDL_sysvideo.h"
 #include "../SDL_pixels_c.h"
+#include "../../events/SDL_events_c.h"
 
 #include "SDL_pixels.h"
 #include "SDL_video-1.3.h"
@@ -934,6 +935,18 @@ void SDL_ANDROID_VideoContextLost()
 
 void SDL_ANDROID_VideoContextRecreated()
 {
+	__android_log_print(ANDROID_LOG_INFO, "libSDL", "Sending SDL_VIDEORESIZE event %dx%d", SDL_ANDROID_sFakeWindowWidth, SDL_ANDROID_sFakeWindowHeight);
+	//SDL_PrivateResize(SDL_ANDROID_sFakeWindowWidth, SDL_ANDROID_sFakeWindowHeight);
+	if ( SDL_ProcessEvents[SDL_VIDEORESIZE] == SDL_ENABLE ) {
+		SDL_Event event;
+		event.type = SDL_VIDEORESIZE;
+		event.resize.w = SDL_ANDROID_sFakeWindowWidth;
+		event.resize.h = SDL_ANDROID_sFakeWindowHeight;
+		if ( (SDL_EventOK == NULL) || (*SDL_EventOK)(&event) ) {
+			SDL_PushEvent(&event);
+		}
+	}
+
 	if( ! sdl_opengl )
 	{
 		int i;
@@ -1044,7 +1057,9 @@ void SDL_ANDROID_MultiThreadedVideoLoop()
 		if( signalNeeded )
 			SDL_CondSignal(videoThread.cond2);
 		if( swapBuffersNeeded )
+		{
 			SDL_ANDROID_CallJavaSwapBuffers();
+		}
 	}
 }
 
@@ -1069,7 +1084,6 @@ SDL_Surface *ANDROID_SetVideoModeMT(_THIS, SDL_Surface *current, int width, int 
 {
 	if( flags & SDL_OPENGL || flags & SDL_HWSURFACE )
 	{
-		__android_log_print(ANDROID_LOG_FATAL, "libSDL", "SDL_SetVideoMode(): cannot use multi-threaded video with SDL_OPENGL or SDL_HWSURFACE flags");
 		return NULL;
 	}
 	SDL_mutexP(videoThread.mutex);
