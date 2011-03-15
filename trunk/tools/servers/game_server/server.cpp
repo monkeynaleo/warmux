@@ -248,7 +248,7 @@ void NetworkGame::ForwardPacket(const char *buffer, size_t len, DistantComputer*
 
   if (Action::GetType(buffer) == Action::ACTION_NETWORK_CLIENT_CHANGE_STATE) {
     Action a(buffer, sender);
-    int player_id = a.PopInt(); // Ignore player id
+    int player_id = a.PopInt();
     WNet::net_game_state_t state = (WNet::net_game_state_t)a.PopInt();
     if (state == WNet::NETWORK_MENU_OK) {
       sender->GetPlayer(player_id)->SetState(Player::STATE_INITIALIZED);
