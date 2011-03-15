@@ -15,7 +15,7 @@ class Globals {
 	public static final boolean Using_SDL_1_3 = false;
 
 	// Should be zip file
-	public static String DataDownloadUrl = "!Data|http://download.gna.org/warmux/android/android-data-svn.zip";
+	public static String DataDownloadUrl = "!Data|http://download.gna.org/warmux/android/android-data-11.04.zip";
 
 	// Set this value to true if you're planning to render 3D using OpenGL - it eats some GFX resources, so disabled for 2D
 	public static boolean NeedDepthBuffer = false;
