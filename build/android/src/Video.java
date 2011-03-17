@@ -230,6 +230,7 @@ class DemoRenderer extends GLSurfaceView_SDL.Renderer {
 
 		Settings.Apply(context);
 		accelerometer = new AccelerometerReader(context);
+    URLDownloader tmp = new URLDownloader();
 		// Tweak video thread priority, if user selected big audio buffer
 		if(Globals.AudioBufferConfig >= 2)
 			Thread.currentThread().setPriority( (Thread.NORM_PRIORITY + Thread.MIN_PRIORITY) / 2 ); // Lower than normal
