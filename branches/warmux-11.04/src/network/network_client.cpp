@@ -188,8 +188,8 @@ NetworkClient::ClientConnect(const std::string &host, const std::string& port)
   socket_set->AddSocket(socket);
   server = new DistantComputer(socket);
 
-  SendMapsList();
   AddRemoteHost(server);
+  SendMapsList();
 
   NetworkThread::Start();
   return CONNECTED;
@@ -211,7 +211,10 @@ std::string NetworkClient::GetServerAddress() const
 
 void NetworkClient::SendMapsList()
 {
-  DistantComputer* host = GetRemoteHosts().front();
+  std::list<DistantComputer*> &list = GetRemoteHosts();
+  if (list.empty())
+    return;
+  DistantComputer* host = list.front();
   MSG_DEBUG("action_handler.map", "Sending list to %p\n", host);
   Action a(Action::ACTION_GAME_SET_MAP_LIST);
   const std::vector<InfoMap*>& map_list = MapsList::GetConstInstance()->lst;
