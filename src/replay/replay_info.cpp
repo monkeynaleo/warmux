@@ -39,17 +39,17 @@ const uint32_t DATA_MAGIC   = 0xDEADBEEF;
 
 void Write32(FILE *out, uint32_t val)
 {
-  char  render[4];
-  SDLNet_Write32(val, (void*)render);
-  fwrite(render, 1, 4, out);
+  uint32_t render;
+  SDLNet_Write32(val, &render);
+  fwrite(&render, 1, 4, out);
 }
 
 uint32_t Read32(FILE *in)
 {
-  char  render[4];
-  int i_dont_care = fread(render, 1, 4, in);
+  uint32_t render;
+  int i_dont_care = fread(&render, 1, 4, in);
   i_dont_care = 0;
-  return SDLNet_Read32((void*)render);
+  return SDLNet_Read32(&render);
 }
 
 ReplayInfo::ReplayInfo(time_t d, uint32_t dms)
