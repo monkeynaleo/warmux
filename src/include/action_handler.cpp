@@ -433,35 +433,29 @@ static void Action_ChatMessage(Action *a)
   DistantComputer *cpu = a->GetCreator();
   const Team *team = NULL;
   std::string nickname = "?";
+  const Player* player = (cpu) ? cpu->GetPlayer(player_id)
+                               : &Network::GetInstance()->GetPlayer();
 
-  if (cpu) {
-    const Player* player = cpu->GetPlayer(player_id);
-
-    // Search first active team
-    if (player) {
-      const std::list<ConfigTeam>& teams = player->GetTeams();
-      std::list<ConfigTeam>::const_iterator it = teams.begin(), found = it;
-      for (; it != teams.end(); ++it) {
-        if (it->ai == NO_AI_NAME) {
-          found = it;
-          break;
-        }
+  // Search first active team
+  if (player) {
+    const std::list<ConfigTeam>& teams = player->GetTeams();
+    std::list<ConfigTeam>::const_iterator it = teams.begin(), found = it;
+    for (; it != teams.end(); ++it) {
+      if (it->ai == NO_AI_NAME) {
+        found = it;
+        break;
       }
-
-      int unused_buffer;
-      team = GetTeamsList().FindById(found->id, unused_buffer);
-      nickname = team->GetPlayerName();
     }
-  } else {
-    // Hack for local replay
-    team = GetTeamsList().GetPlayingList()[player_id];
+
+    int unused_buffer;
+    team = GetTeamsList().FindById(found->id, unused_buffer);
     nickname = team->GetPlayerName();
   }
   const Color& color = (team) ? team->GetColor()
                               : DefaultCPUColor(cpu);
 
   // cpu is NULL on replay, so only log if !=NULL
-  if (cpu)
+  if (Replay::GetConstInstance()->IsPlaying())
     ChatLogger::GetInstance()->LogMessage(nickname+"> "+message);
   AppWarmux::GetInstance()->ReceiveMsgCallback(nickname+"> "+message, color,
                                                a->GetType() == Action::ACTION_CHAT_INGAME_MESSAGE);
