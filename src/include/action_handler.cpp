@@ -455,7 +455,7 @@ static void Action_ChatMessage(Action *a)
                               : DefaultCPUColor(cpu);
 
   // cpu is NULL on replay, so only log if !=NULL
-  if (cpu)
+  if (Replay::GetConstInstance()->IsPlaying())
     ChatLogger::GetInstance()->LogMessage(nickname+"> "+message);
   AppWarmux::GetInstance()->ReceiveMsgCallback(nickname+"> "+message, color,
                                                a->GetType() == Action::ACTION_CHAT_INGAME_MESSAGE);
