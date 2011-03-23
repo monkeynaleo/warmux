@@ -511,7 +511,7 @@ static void Action_Game_SetMapList(Action *a)
     _Action_Game_MapList(a);
   Network  *net      = Network::GetInstance();
   if (!net->IsGameMaster()) {
-    MSG_DEBUG("action_handler.map", "Dropping message from %p that I shouldn't have received...\n", a->GetCreator());
+    MSG_DEBUG("action_handler.map", "Dropping message from %p\n", a->GetCreator());
     return;
   }
 
@@ -528,6 +528,8 @@ static void Action_Game_ForceMapList(Action *a)
   Network  *net      = Network::GetInstance();
   ASSERT(net->network_menu);
   net->network_menu->SetMapsCallback(a->GetCreator()->GetAvailableMaps());
+
+  //_Action_SelectMap(a);
 }
 
 static Player* _Action_GetPlayer(Action *a, uint player_id)

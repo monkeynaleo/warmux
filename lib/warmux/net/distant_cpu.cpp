@@ -163,8 +163,14 @@ std::vector<uint> DistantComputer::GetCommonMaps(const std::list<DistantComputer
 {
   std::vector<uint> index_list;
 
+  if (cpu.empty()) {
+    MSG_DEBUG("action_handler.map", "No CPU, empty list\n");
+    return index_list;
+  }
+
   if (cpu.size() == 1) {
     index_list = cpu.front()->GetAvailableMaps();
+
     MSG_DEBUG("action_handler.map", "Getting front CPU list of size %u from %p\n", index_list.size(), cpu.front());
     return index_list;
   }
