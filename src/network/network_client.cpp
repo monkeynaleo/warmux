@@ -39,7 +39,6 @@
 #include "include/constant.h"
 #include "network/network_client.h"
 #include "network/net_error_msg.h"
-#include "map/maps_list.h"
 #include "tool/string_tools.h"
 
 //-----------------------------------------------------------------------------
@@ -207,21 +206,4 @@ std::string NetworkClient::GetServerAddress() const
     return "??";
 
   return (*sockets.begin())->GetAddress();
-}
-
-void NetworkClient::SendMapsList()
-{
-  std::list<DistantComputer*> &list = GetRemoteHosts();
-  if (list.empty())
-    return;
-  DistantComputer* host = list.front();
-  MSG_DEBUG("action_handler.map", "Sending list to %p\n", host);
-  Action a(Action::ACTION_GAME_SET_MAP_LIST);
-  const std::vector<InfoMap*>& map_list = MapsList::GetConstInstance()->lst;
-  a.Push(map_list.size());
-  for (uint i=0; i<map_list.size(); i++)
-    a.Push(map_list[i]->GetRawName());
-
-  // We only send to game master, which should be the only one anyway
-  SendActionToOne(a, host);
 }

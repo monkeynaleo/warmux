@@ -159,7 +159,7 @@ public:
   uint GetNbPlayersWithState(Player::State player_state) const;
   std::vector<uint> GetCommonMaps();
 
-  virtual void SendMapsList() = 0;
+  void SendMapsList();
 };
 
 //-----------------------------------------------------------------------------
