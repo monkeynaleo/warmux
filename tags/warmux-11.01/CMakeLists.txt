@@ -88,6 +88,8 @@ FIND_PACKAGE(GLUT REQUIRED)
 FIND_PACKAGE(OpenGL REQUIRED)
 FIND_PACKAGE(FriBiDi)
 
+ADD_DEFINITIONS(-DHAVE_LIBCURL)
+
 IF(APPLE)
     # to ease packaging, we'll use a static libintl
     # we also need to link against the SDL_main library (required by the mac version of SDL)
