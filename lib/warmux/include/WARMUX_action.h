@@ -56,6 +56,9 @@ public:
 
     // Initial information about the game: map, teams already selected, ...
     ACTION_CHAT_MENU_MESSAGE,
+    // Chat message
+    ACTION_CHAT_INGAME_MESSAGE,
+
     ACTION_GAME_INFO,
 
     // Map selection in network menu
@@ -83,9 +86,6 @@ public:
     ACTION_GAME_CALCULATE_FRAME,
     ACTION_PLAYER_CHANGE_WEAPON,
     ACTION_PLAYER_CHANGE_CHARACTER,
-
-    // Chat message
-    ACTION_CHAT_INGAME_MESSAGE,
 
     // ########################################################
     // Character's move
