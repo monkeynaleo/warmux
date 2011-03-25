@@ -19,6 +19,7 @@
   - Android port: better resume
   - Android port: text editing with the classical virtual keyboard
   - Android port: can go to sleep when downloading (also more robust)
+  - Fix MacOSX not able to list public games
 
 > 2011/01/21 - 11.01 release
   - Name and numbering change!
