@@ -178,7 +178,7 @@ void Replay::StoreAction(const Action* a)
   ASSERT(is_recorder && replay_state==RECORDING);
 
   Action::Action_t type = a->GetType();
-  if (a->IsFrameLess() ||
+  if ((type!=Action::ACTION_CHAT_INGAME_MESSAGE && a->IsFrameLess()) ||
       type == Action::ACTION_NETWORK_PING ||
       type == Action::ACTION_NETWORK_VERIFY_RANDOM_SYNC ||
       type == Action::ACTION_TIME_VERIFY_SYNC ||
