@@ -70,7 +70,7 @@ bool Downloader::Get(const char* url, FILE* file)
   if (r == CURLE_OK)
     return true;
 
-  error = std::string(curl_error_buf);
+  error = std::string(curl_error_buf) + "(Curl no." + r + ")";
   return false;
 }
 #elif defined(ANDROID)
