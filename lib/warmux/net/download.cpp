@@ -70,7 +70,11 @@ bool Downloader::Get(const char* url, FILE* file)
   if (r == CURLE_OK)
     return true;
 
-  error = std::string(curl_error_buf) + "(Curl no." + r + ")";
+  error = std::string(curl_error_buf);
+  if (error.empty()) {
+    snprintf(curl_error_buf, CURLOPT_ERRORBUFFER-1, "Unknown Curl error no.%i", r);
+    error = std::string(curl_error_buf);
+  }
   return false;
 }
 #elif defined(ANDROID)
