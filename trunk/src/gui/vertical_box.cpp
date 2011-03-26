@@ -79,5 +79,3 @@ bool VBox::LoadXMLConfiguration(void)
 
   return true;
 }
-
-
