@@ -324,7 +324,9 @@ void WidgetList::Update(const Point2i& mousePosition,
     }
   }
 
-  if (need_redrawing)
+  if (need_redrawing ||
+      (Rectanglei::Contains(mousePosition) && mousePosition != lastMousePosition) ||
+      (Rectanglei::Contains(lastMousePosition) && !Rectanglei::Contains(mousePosition)))
     RedrawForeground();
 
   // Restore initial clip rectangle
