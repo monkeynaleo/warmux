@@ -112,6 +112,10 @@ std::list<WSocket*>& WSocketSet::GetSockets()
 
 int WSocketSet::CheckActivity(int timeout)
 {
+  if (sockets.empty()) {
+    SDL_Delay(timeout);
+    return 0;
+  }
   return SDLNet_CheckSockets(socket_set, timeout);
 }
 
