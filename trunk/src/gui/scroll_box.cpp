@@ -233,7 +233,7 @@ int ScrollBox::GetTrackHeight() const
   return size.y - 2*(m_up->GetSizeY()+border_size);
 }
 
-void ScrollBox::Update(const Point2i &mousePosition,
+bool ScrollBox::Update(const Point2i &mousePosition,
                        const Point2i &lastMousePosition)
 {
   // Force redrawing if we are scrolling and the mouse has moved
@@ -242,14 +242,14 @@ void ScrollBox::Update(const Point2i &mousePosition,
   }
 
   bool redraw = need_redrawing;
-  Widget::Update(mousePosition, lastMousePosition);
+  bool updated = Widget::Update(mousePosition, lastMousePosition);
   need_redrawing = redraw;
 
   bool has_scrollbar = HasScrollBar();
   m_up->SetVisible(has_scrollbar);
   m_down->SetVisible(has_scrollbar);
 
-  WidgetList::Update(mousePosition, lastMousePosition);
+  updated |= WidgetList::Update(mousePosition, lastMousePosition);
 
   if (has_scrollbar) {
     GetMainWindow().BoxColor(GetScrollTrack(), dark_gray_color);
@@ -258,6 +258,7 @@ void ScrollBox::Update(const Point2i &mousePosition,
     bool over = scroll_mode==SCROLL_MODE_THUMB || thumb.Contains(mousePosition);
     GetMainWindow().BoxColor(thumb, over ? white_color : gray_color);
   }
+  return updated;
 }
 
 void ScrollBox::Pack()

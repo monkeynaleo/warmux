@@ -66,7 +66,7 @@ public:
   // from widget
   virtual void NeedRedrawing();
   virtual void Draw(const Point2i &mousePosition);
-  virtual void Update(const Point2i &mousePosition,
+  virtual bool Update(const Point2i &mousePosition,
                       const Point2i &lastMousePosition);
   virtual void Pack();
 

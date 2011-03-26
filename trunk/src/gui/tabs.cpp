@@ -201,26 +201,29 @@ void MultiTabs::Draw(const Point2i &mousePosition)
   tabs[current_tab].box->Draw(mousePosition);
 }
 
-void MultiTabs::Update(const Point2i &mousePosition,
+bool MultiTabs::Update(const Point2i &mousePosition,
                        const Point2i &lastMousePosition)
 {
   Rectanglei header(position.x, position.y,
                     next_tab_bt->GetPositionX() + next_tab_bt->GetSizeX() - position.x,
                     prev_tab_bt->GetSizeY());
 
+  bool updated = false;
   if (need_redrawing) {
-    Widget::Update(mousePosition, lastMousePosition);
+    updated = Widget::Update(mousePosition, lastMousePosition);
   } else if ((header.Contains(mousePosition) && mousePosition != lastMousePosition) ||
              (header.Contains(lastMousePosition) && !header.Contains(mousePosition))) {
     RedrawBackground(header);
 
     DrawHeader(mousePosition);
     RedrawForeground();
+    updated = true;
   }
-    if (!tabs.empty())
-      tabs[current_tab].box->Update(mousePosition, lastMousePosition);
+  if (!tabs.empty())
+    tabs[current_tab].box->Update(mousePosition, lastMousePosition);
 
   need_redrawing = false;
+  return updated;
 }
 
 void MultiTabs::Pack()

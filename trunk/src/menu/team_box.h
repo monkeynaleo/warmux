@@ -73,7 +73,7 @@ class TeamBox : public HBox
 
   bool IsLocal() const;
 
-  virtual void Update(const Point2i &mousePosition,
+  virtual bool Update(const Point2i &mousePosition,
                       const Point2i &lastMousePosition);
 
   virtual Widget* Click(const Point2i &mousePosition, uint button);

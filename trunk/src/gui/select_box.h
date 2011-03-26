@@ -45,7 +45,7 @@ public:
             bool alternate_colors = true);
 
   // No need for a Draw method: the additional stuff drawn is made by Update
-  virtual void Update(const Point2i& mousePosition,
+  virtual bool Update(const Point2i& mousePosition,
                       const Point2i& lastMousePosition);
   virtual Widget* ClickUp(const Point2i & mousePosition, uint button);
 

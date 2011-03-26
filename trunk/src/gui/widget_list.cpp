@@ -298,15 +298,16 @@ bool WidgetList::SendKey(SDL_keysym key)
   return false;
 }
 
-void WidgetList::Update(const Point2i& mousePosition,
+bool WidgetList::Update(const Point2i& mousePosition,
                         const Point2i& lastMousePosition)
 {
   Rectanglei clip;
   Rectanglei wlr = GetClip(clip);
   if (!wlr.GetSizeX() || !wlr.GetSizeY())
-      return;
+      return false;
 
   // Redraw the background
+  bool updated = false;
   if (need_redrawing)
     RedrawBackground(wlr);
 
@@ -319,19 +320,18 @@ void WidgetList::Update(const Point2i& mousePosition,
 
     if (r.GetSizeX() && r.GetSizeY()) {
       SwapWindowClip(r);
-      (*w)->Update(mousePosition, lastMousePosition);
+      updated |= (*w)->Update(mousePosition, lastMousePosition);
       SwapWindowClip(r);
     }
   }
 
-  if (need_redrawing ||
-      (Rectanglei::Contains(mousePosition) && mousePosition != lastMousePosition) ||
-      (Rectanglei::Contains(lastMousePosition) && !Rectanglei::Contains(mousePosition)))
+  if (updated)
     RedrawForeground();
 
   // Restore initial clip rectangle
   UnsetClip(clip);
   need_redrawing = false;
+  return updated;
 }
 
 void WidgetList::Draw(const Point2i &mousePosition)

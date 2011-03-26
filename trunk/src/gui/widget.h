@@ -85,7 +85,8 @@ public:
 
   virtual bool LoadXMLConfiguration(void) { return false; };
 
-  virtual void Update(const Point2i &mousePosition,
+  /** Returns whether it actually was updated, which might be useful to the parent */
+  virtual bool Update(const Point2i &mousePosition,
                       const Point2i &lastMousePosition); // Virtual for widget_list: to remove!
 
   virtual void Draw(const Point2i & mousePosition) = 0;
