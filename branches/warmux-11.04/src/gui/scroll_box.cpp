@@ -249,7 +249,6 @@ void ScrollBox::Update(const Point2i &mousePosition,
   m_up->SetVisible(has_scrollbar);
   m_down->SetVisible(has_scrollbar);
 
-  //printf("Update: size=%ix%i max=%i\n", size.x, size.y, GetMaxOffset());
   WidgetList::Update(mousePosition, lastMousePosition);
 
   if (has_scrollbar) {
