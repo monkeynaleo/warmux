@@ -55,7 +55,7 @@ public:
   virtual void SetSelfBackgroundColor(const Color &background_color);
   virtual void SetSelfHighlightBgColor(const Color &highlight_bg_color);
 
-  virtual void Update(const Point2i &mousePosition,
+  virtual bool Update(const Point2i &mousePosition,
                       const Point2i &lastMousePosition);
   virtual void Draw(const Point2i &mousePosition);
   // set need_redrawing to true for all sub widgets;
