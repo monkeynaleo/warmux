@@ -151,7 +151,7 @@ void TeamBox::UpdatePlayerNameColor()
   }
 }
 
-void TeamBox::Update(const Point2i &mousePosition,
+bool TeamBox::Update(const Point2i &mousePosition,
                      const Point2i &lastMousePosition)
 {
   UpdatePlayerNameColor();
@@ -175,6 +175,7 @@ void TeamBox::Update(const Point2i &mousePosition,
 
   //SwapWindowClip(r);
   need_redrawing = false;
+  return true;
 }
 
 Widget* TeamBox::ClickUp(const Point2i &mousePosition, uint button)

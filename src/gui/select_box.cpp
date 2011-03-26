@@ -35,21 +35,25 @@ SelectBox::SelectBox(const Point2i& size, bool always, bool force, bool alt)
   vbox->SetMargin(0);
 }
 
-void SelectBox::Update(const Point2i& mousePosition,
+bool SelectBox::Update(const Point2i& mousePosition,
                        const Point2i& lastMousePosition)
 {
+  bool updated = false;
   if (last && (selected_item==-1 || m_items[selected_item]!=last)) {
     last->SetHighlighted(false);
     last->SetHighlightBgColor(selected_item_color);
+    updated = true;
   }
   int item = MouseIsOnWhichItem(mousePosition);
   if (item!=-1 && item!=selected_item) {
     last = m_items[item];
     last->SetHighlighted(true);
     last->SetHighlightBgColor(default_item_color);
+    updated = true;
   }
 
-  ScrollBox::Update(mousePosition, lastMousePosition);
+  updated |= ScrollBox::Update(mousePosition, lastMousePosition);
+  return updated;
 }
 
 Widget * SelectBox::ClickUp(const Point2i & mousePosition, uint button)

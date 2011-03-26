@@ -230,9 +230,10 @@ void Widget::ParseXMLGeometry(void)
   }
 }
 
-void Widget::Update(const Point2i &mousePosition,
+bool Widget::Update(const Point2i &mousePosition,
                     const Point2i &lastMousePosition)
 {
+  bool updated = false;
   if (need_redrawing ||
       (Rectanglei::Contains(mousePosition) && mousePosition != lastMousePosition) ||
       (Rectanglei::Contains(lastMousePosition) && !Rectanglei::Contains(mousePosition))) {
@@ -246,8 +247,10 @@ void Widget::Update(const Point2i &mousePosition,
       Draw(mousePosition);
     }
     RedrawForeground();
+    updated = true;
   }
   need_redrawing = false;
+  return updated;
 }
 
 void Widget::SetFocus(bool focus)
