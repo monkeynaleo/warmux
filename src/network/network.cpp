@@ -108,6 +108,8 @@ void NetworkThread::Wait()
   stop_thread = false;
 }
 
+static int count=0;
+
 void NetworkThread::ReceiveActions()
 {
   char* buffer;
@@ -155,8 +157,8 @@ void NetworkThread::ReceiveActions()
       // Means an error
       else if (num_ready == -1) {
         //Spams a lot under windows without the errno check...
-        if (errno<0)
-          std::cerr << "SDLNet_CheckSockets: " << SDLNet_GetError() << std::endl;
+        fprintf(stderr, "SDLNet_CheckSockets: %s\n", SDLNet_GetError());
+
         continue; //Or break?
       }
     }

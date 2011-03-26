@@ -73,7 +73,7 @@ public:
   virtual ~ScrollBox() { };
 
   // No need for a Draw method: the additional stuff drawn is made by Update
-  virtual void Update(const Point2i &mousePosition,
+  virtual bool Update(const Point2i &mousePosition,
                       const Point2i &lastMousePosition);
   virtual Widget* Click(const Point2i & mousePosition, uint button);
   virtual Widget* ClickUp(const Point2i & mousePosition, uint button);
