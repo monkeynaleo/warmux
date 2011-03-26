@@ -250,7 +250,6 @@ void ScrollBox::Update(const Point2i &mousePosition,
   m_down->SetVisible(has_scrollbar);
 
   WidgetList::Update(mousePosition, lastMousePosition);
-  RedrawForeground();
 
   if (has_scrollbar) {
     GetMainWindow().BoxColor(GetScrollTrack(), dark_gray_color);
