@@ -27,7 +27,7 @@ const std::string Constants::ENV_DATADIR = "WARMUX_DATADIR";
 const std::string Constants::ENV_LOCALEDIR = "WARMUX_LOCALEDIR";
 const std::string Constants::ENV_FONT_PATH = "WARMUX_FONT_PATH";
 
-const std::string Constants::WEB_SITE = "http://www.warmux.org";
+const std::string Constants::WEB_SITE = "www.warmux.org";
 const std::string Constants::EMAIL = "warmux-dev .AT. gna .DOT. org";
 
 // Size min/max of the map (pixels)
@@ -36,18 +36,19 @@ const int Constants::MAP_MAX_SIZE = 6000*6000;
 
 Constants::Constants()
 {
-  AUTHORS.push_back ("Lawrence AZZOUG");
-  AUTHORS.push_back ("Frédéric BERTOLUS");
-  AUTHORS.push_back ("Anthony CARRÉ");
-  AUTHORS.push_back ("Laurent DEFERT SIMONNEAU");
-  AUTHORS.push_back ("Jean-Christophe DUBERGA");
-  AUTHORS.push_back ("Matthieu FERTRÉ");
-  AUTHORS.push_back ("Christophe GISQUET");
-  AUTHORS.push_back ("Sebastien GONZALVE");
-  AUTHORS.push_back ("Reiner HERRMANN");
-  AUTHORS.push_back ("Florian KÖBERLE");
-  AUTHORS.push_back ("Renaud LOTTIAUX");
-  AUTHORS.push_back ("Yannig PERRÉ");
-  AUTHORS.push_back ("Olivie SERRES");
-  AUTHORS.push_back ("Victor STINNER");
+  AUTHORS.push_back("Lawrence AZZOUG");
+  AUTHORS.push_back("Frédéric BERTOLUS");
+  AUTHORS.push_back("Anthony CARRÉ");
+  AUTHORS.push_back("Laurent DEFERT SIMONNEAU");
+  AUTHORS.push_back("Jean-Christophe DUBERGA");
+  AUTHORS.push_back("Matthieu FERTRÉ");
+  AUTHORS.push_back("Christophe GISQUET");
+  AUTHORS.push_back("Sebastien GONZALVE");
+  AUTHORS.push_back("Reiner HERRMANN");
+  AUTHORS.push_back("Florian KÖBERLE");
+  AUTHORS.push_back("Renaud LOTTIAUX");
+  AUTHORS.push_back("Yannig PERRÉ");
+  AUTHORS.push_back("Olivie SERRES");
+  AUTHORS.push_back("Victor STINNER");
+  AUTHORS.push_back("Mikko VARTIAINEN");
 }
