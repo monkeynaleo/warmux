@@ -390,13 +390,13 @@ bool WSocket::SendInt_NoLock(const int& nbr)
   if (!IsConnected())
     return false;
 
-  char tmppacket[4];
+  Uint32 tmp;
   // this is not cute, but we don't want an int -> uint conversion here
   Uint32 u_nbr = *((const Uint32*)&nbr);
 
-  SDLNet_Write32(u_nbr, (void*)tmppacket);
-  int len = SDLNet_TCP_Send_noBlocking(socket, tmppacket, sizeof(tmppacket));
-  if (len < int(sizeof(tmppacket))) {
+  SDLNet_Write32(u_nbr, &tmp);
+  int len = SDLNet_TCP_Send_noBlocking(socket, &tmp, 4);
+  if (len < 4) {
     print_net_error("SDLNet_TCP_Send");
     return false;
   }
@@ -529,14 +529,13 @@ bool WSocket::ReceiveInt_NoLock(int& nbr)
   if (!IsConnected())
     return false;
 
-  char tmppacket[4];
-  Uint32 u_nbr;
+  Uint32 tmp;
 
-  if (!ReceiveBuffer_NoLock(tmppacket, sizeof(tmppacket))) {
+  if (!ReceiveBuffer_NoLock(&tmp, 4)) {
     return false;
   }
 
-  u_nbr = SDLNet_Read32((void*)tmppacket);
+  Uint32 u_nbr = SDLNet_Read32(&tmp);
   nbr = *((int*)&u_nbr);
 
   return true;
