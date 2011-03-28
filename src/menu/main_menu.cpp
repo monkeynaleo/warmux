@@ -87,7 +87,7 @@ MainMenu::MainMenu() :
 
   widgets.Pack();
 
-  std::string s("Version "+Constants::WARMUX_VERSION);
+  std::string s = _("Version") + std::string(" ")+Constants::WARMUX_VERSION;
   version_text = new Text(s, orange_color, Font::FONT_MEDIUM, Font::FONT_BOLD, true);
 
   std::string s2(Constants::WEB_SITE);
