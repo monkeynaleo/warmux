@@ -130,7 +130,7 @@ msgid "%s is next to a mine!"
 msgstr "%s anda preto dunha mina!"
 
 #. For translators: extended in "<nickname> (<host>) just connected
-#: src/include/action_handler.cpp:913
+#: src/include/action_handler.cpp:950
 #, fuzzy, c-format
 #| msgid "%i player connected"
 #| msgid_plural "%i players connected"
@@ -138,7 +138,7 @@ msgid "%s just connected"
 msgstr "%i xogador conectado"
 
 #. For translators: extended in "<nickname> (<host>) just disconnected
-#: src/include/action_handler.cpp:1025
+#: src/include/action_handler.cpp:1066
 #, fuzzy, c-format
 #| msgid "%i player connected"
 #| msgid_plural "%i players connected"
@@ -150,7 +150,7 @@ msgstr "%i xogador conectado"
 msgid "%s kicked from game"
 msgstr "%s foi expulsado da partida."
 
-#: src/include/action_handler.cpp:474
+#: src/include/action_handler.cpp:468
 #, c-format
 msgid "%s needs a pause."
 msgstr "%s pediu un descanso."
@@ -564,7 +564,7 @@ msgstr "Bicorna"
 msgid "Area currently displayed"
 msgstr "Zona que se está a ver."
 
-#: src/main.cpp:346
+#: src/main.cpp:358
 msgid "Authors:"
 msgstr "Autores:"
 
@@ -711,7 +711,7 @@ msgid "Check updates online?"
 msgstr ""
 "Empregar a Internet para comprobar se hai unha nova versión dispoñíbel?"
 
-#: src/menu/map_selection_box.cpp:225
+#: src/menu/map_selection_box.cpp:227
 msgid "Choose randomly between the different maps"
 msgstr "Elixir un dos escenarios ao chou."
 
@@ -763,7 +763,7 @@ msgstr ""
 "Non podes escoller varias veces o mesmo equipo."
 
 #. Client Mode
-#: src/menu/network_menu.cpp:167 src/network/network.cpp:448
+#: src/menu/network_menu.cpp:167 src/network/network.cpp:453
 msgid "Client mode"
 msgstr "Modo cliente"
 
@@ -977,7 +977,7 @@ msgid "Error: Unable to start the server"
 msgstr "Houbo un erro: non se puido iniciar o servidor."
 
 #: src/menu/network_connection_menu.cpp:495
-#: tools/servers/game_server/server.cpp:337
+#: tools/servers/game_server/server.cpp:389
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -1053,7 +1053,7 @@ msgstr "Pantalla completa?"
 msgid "Game"
 msgstr "Partida"
 
-#: src/include/action_handler.cpp:882
+#: src/include/action_handler.cpp:919
 msgid ""
 "Game is not synchronized anymore! This is BAD, the network game will be "
 "interrupted, sorry. Please, report the bug to the Warmux Team by mail or "
@@ -1157,7 +1157,7 @@ msgstr "Veña, ho, que é para hoxe!"
 msgid "I like WarMUX :)"
 msgstr ""
 
-#: src/main.cpp:284
+#: src/main.cpp:290
 msgid ""
 "If you found a bug or have a feature request send us an email (in english, "
 "please):"
@@ -1729,7 +1729,7 @@ msgstr "Sae da partida de seguida con Ctrl"
 msgid "Quit"
 msgstr "Saír"
 
-#: src/main.cpp:273
+#: src/main.cpp:279
 msgid "Quit Warmux"
 msgstr "Saír do Warmux"
 
@@ -1741,7 +1741,7 @@ msgstr "Saír da partida"
 msgid "Rail Gun"
 msgstr "Rifle eléctrico"
 
-#: src/menu/map_selection_box.cpp:224
+#: src/menu/map_selection_box.cpp:226
 msgid "Random map"
 msgstr "Escenario ao chou"
 
@@ -1801,7 +1801,7 @@ msgstr ""
 msgid "Riot Bomb"
 msgstr "Bomba antimateria"
 
-#: src/main.cpp:83
+#: src/main.cpp:89
 msgid "Run game"
 msgstr "Comezar a partida"
 
@@ -1834,7 +1834,7 @@ msgstr "Enderezo do servidor:"
 msgid "Server available on Internet"
 msgstr "Servidor dispoñíbel na Internet."
 
-#: src/menu/network_menu.cpp:174 src/network/network.cpp:478
+#: src/menu/network_menu.cpp:174 src/network/network.cpp:483
 msgid "Server mode"
 msgstr "Modo servidor"
 
@@ -1923,7 +1923,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Nestes momentos non hai partidas agardando por xogadores."
 
 #: src/menu/network_connection_menu.cpp:444
-#: tools/servers/game_server/server.cpp:322
+#: tools/servers/game_server/server.cpp:374
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -2056,7 +2056,7 @@ msgstr ""
 "O modo agresivo non restablece o tempo entre as quendas dos xogadores. Os "
 "equipos perden ao quedar sen xogadores ou sen tempo."
 
-#: src/network/network_client.cpp:99
+#: src/network/network_client.cpp:100
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -2285,7 +2285,7 @@ msgstr ""
 "Disparo: mantén premida a barra espaciadora ata acadar a potencia desexada.\n"
 "Un uso por quenda."
 
-#: src/main.cpp:200
+#: src/main.cpp:206
 msgid "Version"
 msgstr "Versión"
 
@@ -2314,17 +2314,17 @@ msgstr "Agardando por %s."
 msgid "Waiting for remote players"
 msgstr "Agardando polos xogadores remotos."
 
-#: src/menu/network_menu.cpp:509
+#: src/menu/network_menu.cpp:514
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr ""
 "Agardando polo servidor. Todo canto podes facer é cancelar, conversar ou ir "
 "ao baño!"
 
-#: src/main.cpp:211
+#: src/main.cpp:217
 msgid "Warmux launching..."
 msgstr "Iniciando o Warmux..."
 
-#: src/main.cpp:345
+#: src/main.cpp:357
 msgid "Warmux version "
 msgstr "Versión do Warmux "
 
@@ -2341,7 +2341,7 @@ msgstr "Arma: Disparar / Caixas de bonificación: caer."
 msgid "Weapons"
 msgstr "Armas"
 
-#: src/main.cpp:355
+#: src/main.cpp:367
 msgid "Website: "
 msgstr "Sitio web: "
 
@@ -2431,7 +2431,7 @@ msgstr "Necesitas polo menos dous equipos correctos!"
 msgid "You won't be able to play before selecting a team!"
 msgstr "Non poderás xogar sen antes escoller un equipo!"
 
-#: src/weapon/weapon_launcher.cpp:545
+#: src/weapon/weapon_launcher.cpp:552
 msgid "Your shot has missed!"
 msgstr "O teu disparo foi tomar polo cú!"
 
