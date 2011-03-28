@@ -97,6 +97,7 @@ POTFILES = \
         src/menu/network_teams_selection_box.cpp \
         src/menu/options_menu.cpp \
         src/menu/pause_menu.cpp \
+        src/menu/replay_menu.cpp \
         src/menu/results_menu.cpp \
         src/menu/team_box.cpp \
         src/menu/teams_selection_box.cpp \
