@@ -658,6 +658,8 @@ msgid ""
 "Change replay speed.\n"
 "Right part displays current speed."
 msgstr ""
+"Change la vitesse du replay.\n"
+"La partie droite indique la vitesse actuelle."
 
 #: src/interface/man_machine_interface.cpp:1176
 msgid "Change weapon"
@@ -822,6 +824,8 @@ msgid ""
 "Current turn time info.\n"
 "Click to launch the pause menu."
 msgstr ""
+"Info de temps pour le tour en cours.\n"
+"Clic pour ouvrir le menu de pause."
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:88
@@ -1759,6 +1763,8 @@ msgid ""
 "Replay progress bar, not used for precise seeking.\n"
 "Short click for a +30s jump, long for +60s jump."
 msgstr ""
+"Barre d'avancement du replay sans utilité pour un déplacement rapide.\n"
+"Clic court pour un saut de 30s, un long pour 60s."
 
 #: src/menu/results_menu.cpp:441
 msgid "Replay saved"
@@ -1774,6 +1780,8 @@ msgid ""
 "Right button to resume/pause replay.\n"
 "Square right button to immediately exit it."
 msgstr ""
+"Bouton droit pour pauser/redémarrer le replay.\n"
+"Bouton carré pour en sortir de suite."
 
 #: src/weapon/riot_bomb.cpp:119
 msgid "Riot Bomb"
@@ -1947,7 +1955,7 @@ msgstr "SuperTux"
 
 #: src/menu/help_menu.cpp:105
 msgid "Switch between classical and replay interface"
-msgstr ""
+msgstr "Passe entre les modes classique et replay de l'interface"
 
 #: src/weapon/syringe.cpp:69
 msgid "Syringe"
