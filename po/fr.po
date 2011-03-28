@@ -124,13 +124,13 @@ msgid "%s is next to a mine!"
 msgstr "%s est près d'une mine !"
 
 #. For translators: extended in "<nickname> (<host>) just connected
-#: src/include/action_handler.cpp:913
+#: src/include/action_handler.cpp:950
 #, c-format
 msgid "%s just connected"
 msgstr "Connexion de %s"
 
 #. For translators: extended in "<nickname> (<host>) just disconnected
-#: src/include/action_handler.cpp:1025
+#: src/include/action_handler.cpp:1066
 #, c-format
 msgid "%s just disconnected"
 msgstr "Déconnexion de %s"
@@ -140,7 +140,7 @@ msgstr "Déconnexion de %s"
 msgid "%s kicked from game"
 msgstr "%s bouté hors de la partie"
 
-#: src/include/action_handler.cpp:474
+#: src/include/action_handler.cpp:468
 #, c-format
 msgid "%s needs a pause."
 msgstr "%s a besoin d'une pause"
@@ -554,7 +554,7 @@ msgstr "Enclume"
 msgid "Area currently displayed"
 msgstr "Zone actuellement affichée"
 
-#: src/main.cpp:346
+#: src/main.cpp:358
 msgid "Authors:"
 msgstr "Auteurs :"
 
@@ -700,7 +700,7 @@ msgstr "Tchat"
 msgid "Check updates online?"
 msgstr "Vérifier les mises à jour ?"
 
-#: src/menu/map_selection_box.cpp:225
+#: src/menu/map_selection_box.cpp:227
 msgid "Choose randomly between the different maps"
 msgstr "Choisir aléatoirement parmi les différents terrains"
 
@@ -749,7 +749,7 @@ msgstr ""
 "Une équipe ne peut être choisie plusieurs fois."
 
 #. Client Mode
-#: src/menu/network_menu.cpp:167 src/network/network.cpp:448
+#: src/menu/network_menu.cpp:167 src/network/network.cpp:453
 msgid "Client mode"
 msgstr "Mode client"
 
@@ -963,7 +963,7 @@ msgid "Error: Unable to start the server"
 msgstr "Erreur : Impossible de démarrer le serveur"
 
 #: src/menu/network_connection_menu.cpp:495
-#: tools/servers/game_server/server.cpp:337
+#: tools/servers/game_server/server.cpp:389
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -1037,13 +1037,7 @@ msgstr "Plein écran ?"
 msgid "Game"
 msgstr "Partie"
 
-#: src/include/action_handler.cpp:882
-#| msgid ""
-#| "Game is not synchronized anymore! This is BAD, the network game will be "
-#| "interrupted, sorry. Please, report the bug to the Warmux Team by mail or "
-#| "through the forum. Precise your computer configuration, the game version "
-#| "the map on which you were playing, and what was the very last events "
-#| "occuring in the game (last weapon used, ...)."
+#: src/include/action_handler.cpp:919
 msgid ""
 "Game is not synchronized anymore! This is BAD, the network game will be "
 "interrupted, sorry. Please, report the bug to the Warmux Team by mail or "
@@ -1053,7 +1047,8 @@ msgstr ""
 "La partie n'est plus synchronisée! C'est MAL, la partie réseau va devoir "
 "s'interrompre, désolé. SVP, informez l'équipe de WarMUX de ce bug par mail "
 "ou via le forum. Précisez la configuration de votre ordi, et joindre le "
-"nouveau fichier bug.wrf qui vient d'être créé dans votre répertoire personnel."
+"nouveau fichier bug.wrf qui vient d'être créé dans votre répertoire "
+"personnel."
 
 #: src/menu/help_menu.cpp:59
 msgid "Game menu"
@@ -1149,7 +1144,7 @@ msgstr "Dépêchez-vous, vous êtes trop lents !!"
 msgid "I like WarMUX :)"
 msgstr "J'aime WarMUX :)"
 
-#: src/main.cpp:284
+#: src/main.cpp:290
 msgid ""
 "If you found a bug or have a feature request send us an email (in english, "
 "please):"
@@ -1716,7 +1711,7 @@ msgstr "Quitter rapidement le jeu avec la touche [Ctrl]"
 msgid "Quit"
 msgstr "Quitter"
 
-#: src/main.cpp:273
+#: src/main.cpp:279
 msgid "Quit Warmux"
 msgstr "Quitter Warmux"
 
@@ -1728,7 +1723,7 @@ msgstr "Quitter la partie"
 msgid "Rail Gun"
 msgstr "Rail Gun"
 
-#: src/menu/map_selection_box.cpp:224
+#: src/menu/map_selection_box.cpp:226
 msgid "Random map"
 msgstr "Terrain aléatoire"
 
@@ -1751,12 +1746,10 @@ msgstr "Replay"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:110
-#| msgid "Current controls"
 msgid "Replay controls"
 msgstr "Contrôles du replay"
 
 #: src/game/game.cpp:211
-#| msgid "Replay"
 msgid "Replay mode"
 msgstr "Mode replay"
 
@@ -1786,7 +1779,7 @@ msgstr ""
 msgid "Riot Bomb"
 msgstr "Bombe Anti-émeute"
 
-#: src/main.cpp:83
+#: src/main.cpp:89
 msgid "Run game"
 msgstr "Lancer le jeu"
 
@@ -1821,7 +1814,7 @@ msgstr "Adresse du serveur :"
 msgid "Server available on Internet"
 msgstr "Serveur disponible sur Internet"
 
-#: src/menu/network_menu.cpp:174 src/network/network.cpp:478
+#: src/menu/network_menu.cpp:174 src/network/network.cpp:483
 msgid "Server mode"
 msgstr "Mode serveur"
 
@@ -1909,7 +1902,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Désolé, il n'y a actuellement aucun jeu en attente de joueurs"
 
 #: src/menu/network_connection_menu.cpp:444
-#: tools/servers/game_server/server.cpp:322
+#: tools/servers/game_server/server.cpp:374
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -2042,7 +2035,7 @@ msgstr ""
 "équipe. Une équipe perd quand elle n'a plus de joueur ou que son temps "
 "imparti s'est écoulé."
 
-#: src/network/network_client.cpp:99
+#: src/network/network_client.cpp:100
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -2264,7 +2257,7 @@ msgstr ""
 "Tirer : appuyer sur la touche espace jusqu'à la puissance désirée\n"
 "Une munition par tour"
 
-#: src/main.cpp:200
+#: src/main.cpp:206
 msgid "Version"
 msgstr "Version"
 
@@ -2293,15 +2286,15 @@ msgstr "En attente de %s"
 msgid "Waiting for remote players"
 msgstr "En attente de joueurs distants"
 
-#: src/menu/network_menu.cpp:509
+#: src/menu/network_menu.cpp:514
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Attente du serveur, vous pouvez seulement annuler ou discuter !"
 
-#: src/main.cpp:211
+#: src/main.cpp:217
 msgid "Warmux launching..."
 msgstr "Lancement de Warmux..."
 
-#: src/main.cpp:345
+#: src/main.cpp:357
 msgid "Warmux version "
 msgstr "Version de Warmux"
 
@@ -2318,7 +2311,7 @@ msgstr "Arme : tir / Boite de bonus : chute"
 msgid "Weapons"
 msgstr "Armes"
 
-#: src/main.cpp:355
+#: src/main.cpp:367
 msgid "Website: "
 msgstr "Site web : "
 
@@ -2391,8 +2384,8 @@ msgstr "T'es tout seul :-/"
 msgid ""
 "You are the new turn master! Learn about your new powers by typing /help"
 msgstr ""
-"Vous êtes le nouveau maître du jeu! Apprenez vos nouveaux pouvoirs "
-"en tappant /help"
+"Vous êtes le nouveau maître du jeu! Apprenez vos nouveaux pouvoirs en "
+"tappant /help"
 
 #: src/menu/options_menu.cpp:583
 msgid "You must fill Head Commander and all player names"
@@ -2410,7 +2403,7 @@ msgstr "Il faut au minimum deux équipes valides !"
 msgid "You won't be able to play before selecting a team!"
 msgstr "Vous ne pourrez jouer sans sélectionner d'équipe !"
 
-#: src/weapon/weapon_launcher.cpp:545
+#: src/weapon/weapon_launcher.cpp:552
 msgid "Your shot has missed!"
 msgstr "Tir dans le vide..."
 
