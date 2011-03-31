@@ -4,11 +4,12 @@
 #
 # Bastian Salmela <bastian.salmela@hel.fi>, 2006.
 # Bastian Salmela <basse@kulma.org>, 2008.
+# Mikko Vartiainen, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: fi 0.8.3\n"
 "Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
-"PO-Revision-Date: 2010-12-19 23:30+0200\n"
+"PO-Revision-Date: 2011-04-01 01:40+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -129,19 +130,19 @@ msgstr "%s on aivan miinan vieressä!"
 
 #. For translators: extended in "<nickname> (<host>) just connected
 #: src/include/action_handler.cpp:950
-#, fuzzy, c-format
+#, c-format
 #| msgid "%i player connected"
 #| msgid_plural "%i players connected"
 msgid "%s just connected"
-msgstr "%i pelaaja liittyneenä"
+msgstr "%s liittyi peliin"
 
 #. For translators: extended in "<nickname> (<host>) just disconnected
 #: src/include/action_handler.cpp:1066
-#, fuzzy, c-format
+#, c-format
 #| msgid "%i player connected"
 #| msgid_plural "%i players connected"
 msgid "%s just disconnected"
-msgstr "%i pelaaja liittyneenä"
+msgstr "%s poistui pelistä"
 
 #: src/network/admin_commands.cpp:66
 #, c-format
@@ -656,6 +657,8 @@ msgid ""
 "Change replay speed.\n"
 "Right part displays current speed."
 msgstr ""
+"Vaihda toistonopeutta.\n"
+"Oikealla nykyinen nopeus."
 
 #: src/interface/man_machine_interface.cpp:1176
 msgid "Change weapon"
@@ -763,7 +766,7 @@ msgstr "Rypälesinko"
 
 #: src/menu/results_menu.cpp:366
 msgid "Comment:"
-msgstr ""
+msgstr "Kommentti:"
 
 #: src/weapon/suicide.cpp:46
 msgid "Commit Suicide"
@@ -818,6 +821,8 @@ msgid ""
 "Current turn time info.\n"
 "Click to launch the pause menu."
 msgstr ""
+"Vuoron aikainformaatio.\n"
+"Klikkaus avaa taukovalikon."
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:88
@@ -1001,13 +1006,12 @@ msgstr "Väliaikaisen tiedoston avaaminen epäonnistui (%s)"
 
 #: src/menu/results_menu.cpp:434
 msgid "Failed to save replay"
-msgstr ""
+msgstr "Tallenteen kirjoitus epäonnistui"
 
 #: src/menu/results_menu.cpp:354
-#, fuzzy
 #| msgid "Game name:"
 msgid "Filename:"
-msgstr "Pelin nimi:"
+msgstr "Tiedoston nimi:"
 
 #: src/weapon/flamethrower.cpp:134
 msgid "Flame Thrower"
@@ -1032,6 +1036,10 @@ msgid ""
 "through the forum. Precise your computer configuration and attach the bug."
 "wrf file that has just been created in your home folder."
 msgstr ""
+"Peli ei ole enää synkronoitu. Verkopeli on pakko keskeyttää. Ilmoita bugi "
+"Warmux Teamille sähköpostilla tai forumin kautta. Kerro tietokoneesi tyyppi "
+"ja käyttöjärjestelmä ja liitä bug.wrf tiedosto kotihakemistostasi "
+"bugiraporttiin."
 
 #: src/menu/help_menu.cpp:59
 msgid "Game menu"
@@ -1051,7 +1059,7 @@ msgstr "Pelin nimi:"
 
 #: src/include/action_handler.cpp:245
 msgid "Game out of sync!"
-msgstr ""
+msgstr "Peli ei ole synkronoitu!"
 
 #: src/weapon/gnu.cpp:162
 msgid "Gnu Launcher"
@@ -1107,10 +1115,9 @@ msgid "Help"
 msgstr "Ohje"
 
 #: src/menu/options_menu.cpp:128
-#, fuzzy
 #| msgid "High jump"
 msgid "High"
-msgstr "Korkea hyppy"
+msgstr "Korkea"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/interface/man_machine_interface.cpp:1172 src/menu/help_menu.cpp:125
@@ -1127,7 +1134,7 @@ msgstr "Vauhtia, olette liian hitaita !!"
 
 #: src/menu/results_menu.cpp:367
 msgid "I like WarMUX :)"
-msgstr ""
+msgstr "Pidän WarMUXista :)"
 
 #: src/main.cpp:290
 msgid ""
@@ -1223,7 +1230,7 @@ msgstr "Käyttöliittymä ja kosketusohjaimet, lisää tietoa muissa välilehdis
 
 #: src/menu/results_menu.cpp:422
 msgid "Invalid filename"
-msgstr ""
+msgstr "Virheellinen tiedoston nimi"
 
 #: src/game/game.cpp:1041
 msgid "It's a present!"
@@ -1296,7 +1303,7 @@ msgstr "Paikalliset joukkueet:"
 
 #: src/menu/options_menu.cpp:125
 msgid "Low memory"
-msgstr ""
+msgstr "Muistia säästävä"
 
 #: src/weapon/lowgrav.cpp:49
 msgid "LowGrav"
@@ -1344,10 +1351,9 @@ msgid "Maximum FPS"
 msgstr "Maksimi FPS"
 
 #: src/menu/options_menu.cpp:126
-#, fuzzy
 #| msgid "Podium"
 msgid "Medium"
-msgstr "Palkintokoroke"
+msgstr "Keskilaatu"
 
 #: src/menu/benchmark_menu.cpp:111
 msgid "Menu"
@@ -1688,7 +1694,7 @@ msgstr "Julkiset taistelut"
 
 #: src/menu/options_menu.cpp:130
 msgid "Quality"
-msgstr ""
+msgstr "Laatu"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:147
@@ -1730,20 +1736,18 @@ msgstr "Luetaan henkilökohtaisia asetuksia"
 
 #: src/menu/main_menu.cpp:73
 msgid "Replay"
-msgstr ""
+msgstr "Tallenteet"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:110
-#, fuzzy
 #| msgid "Current controls"
 msgid "Replay controls"
-msgstr "Näppäinasetukset"
+msgstr "Toiston ohjaimet"
 
 #: src/game/game.cpp:211
-#, fuzzy
 #| msgid "Game mode"
 msgid "Replay mode"
-msgstr "Pelitila"
+msgstr "Toistotila"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:108
@@ -1751,10 +1755,12 @@ msgid ""
 "Replay progress bar, not used for precise seeking.\n"
 "Short click for a +30s jump, long for +60s jump."
 msgstr ""
+"Tallenteen edistymispalkki, ei voi käyttää tarkkaan hakuun.\n"
+"Lyhyt klikkaus +30s hyppy, pitkä klikkaus +60s hyppy."
 
 #: src/menu/results_menu.cpp:441
 msgid "Replay saved"
-msgstr ""
+msgstr "Tallenne kirjoitettu"
 
 #: src/menu/options_menu.cpp:152
 msgid "Resolution"
@@ -1766,6 +1772,8 @@ msgid ""
 "Right button to resume/pause replay.\n"
 "Square right button to immediately exit it."
 msgstr ""
+"Oikea nappi jatkaa/pysäyttää toiston.\n"
+"Neliö nappi poistuu toisto tilasta."
 
 #: src/weapon/riot_bomb.cpp:119
 msgid "Riot Bomb"
@@ -1777,7 +1785,7 @@ msgstr "Aloita peli"
 
 #: src/menu/results_menu.cpp:379
 msgid "Save replay?"
-msgstr ""
+msgstr "Kirjoita tallenne?"
 
 #: src/network/chat.cpp:83
 msgid "Say: "
@@ -1937,7 +1945,7 @@ msgstr "SuperTux"
 
 #: src/menu/help_menu.cpp:105
 msgid "Switch between classical and replay interface"
-msgstr ""
+msgstr "Vaihda klassisen ja toisto tilan välillä"
 
 #: src/weapon/syringe.cpp:69
 msgid "Syringe"
@@ -1954,17 +1962,16 @@ msgstr "Puhu verkkotaisteluissa"
 
 #: src/menu/options_menu.cpp:614
 msgid "Team deleted"
-msgstr ""
+msgstr "Joukkue poistettu."
 
 #: src/menu/results_menu.cpp:338
 msgid "Team graphs"
 msgstr "Joukkueen graafi"
 
 #: src/menu/options_menu.cpp:594
-#, fuzzy
 #| msgid "Team stats"
 msgid "Team saved"
-msgstr "Joukkueen tilastot"
+msgstr "Joukkue tallennettu"
 
 #: src/menu/results_menu.cpp:316
 msgid "Team stats"
@@ -2373,11 +2380,11 @@ msgstr "Olet yksin :-/"
 #: src/menu/network_menu.cpp:442
 msgid ""
 "You are the new turn master! Learn about your new powers by typing /help"
-msgstr ""
+msgstr "Olet uusi vuoromestari! Opi uusista kyvyistä kirjoittamalla /help"
 
 #: src/menu/options_menu.cpp:583
 msgid "You must fill Head Commander and all player names"
-msgstr ""
+msgstr "Ylikomentajan ja kaikkien pelaajien nimet pitää täyttää"
 
 #: src/map/maps_list.cpp:311
 msgid "You need at least one valid map!"
