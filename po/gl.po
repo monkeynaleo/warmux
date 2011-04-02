@@ -5,12 +5,12 @@
 #
 # Ignacio Casal Quinteiro <icq@cvs.gnome.org>, 2007.
 # Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2008, 2009, 2010. (Proxecto Trasno <proxecto@trasno.net>).
-# Adrián Chaves Fernández (Gallaecio) <adriyetichaves@gmail.com>, 2010.
+# Adrián Chaves Fernández (Gallaecio) <adriyetichaves@gmail.com>, 2010, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Warmux. gl\n"
 "Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
-"PO-Revision-Date: 2010-12-11 20:42+0100\n"
+"PO-Revision-Date: 2011-04-02 14:39+0200\n"
 "Last-Translator: Adrián Chaves Fernández (Gallaecio) <adriyetichaves@gmail."
 "com>\n"
 "Language-Team: American English <proxecto@trasno.net>\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);X-Generator: KBabel 1.11.4\n"
 "X-Poedit-Language: Galician\n"
 "X-Poedit-Country: SPAIN\n"
-"X-Generator: Lokalize 1.1\n"
+"X-Generator: Lokalize 1.2\n"
 
 #: src/map/maps_list.cpp:379
 #, c-format
@@ -131,19 +131,19 @@ msgstr "%s anda preto dunha mina!"
 
 #. For translators: extended in "<nickname> (<host>) just connected
 #: src/include/action_handler.cpp:950
-#, fuzzy, c-format
+#, c-format
 #| msgid "%i player connected"
 #| msgid_plural "%i players connected"
 msgid "%s just connected"
-msgstr "%i xogador conectado"
+msgstr "%s acaba de conectarse"
 
 #. For translators: extended in "<nickname> (<host>) just disconnected
 #: src/include/action_handler.cpp:1066
-#, fuzzy, c-format
+#, c-format
 #| msgid "%i player connected"
 #| msgid_plural "%i players connected"
 msgid "%s just disconnected"
-msgstr "%i xogador conectado"
+msgstr "%s acaba de desconectarse"
 
 #: src/network/admin_commands.cpp:66
 #, c-format
@@ -668,6 +668,8 @@ msgid ""
 "Change replay speed.\n"
 "Right part displays current speed."
 msgstr ""
+"Cambiar a velocidade da repetición.\n"
+"A velocidade aparece na parte dereita."
 
 #: src/interface/man_machine_interface.cpp:1176
 msgid "Change weapon"
@@ -781,7 +783,7 @@ msgstr "Bazuca de fragmentación"
 
 #: src/menu/results_menu.cpp:366
 msgid "Comment:"
-msgstr ""
+msgstr "Comentario:"
 
 #: src/weapon/suicide.cpp:46
 msgid "Commit Suicide"
@@ -836,6 +838,8 @@ msgid ""
 "Current turn time info.\n"
 "Click to launch the pause menu."
 msgstr ""
+"Tempo restante da quenda.\n"
+"Premer para acceder ao menú de pausa."
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:88
@@ -994,7 +998,8 @@ msgstr ""
 #: src/team/team.cpp:161
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
-msgstr "Houbo un erro: non se puido atopar o individuo «%s» para o equipo «%s»."
+msgstr ""
+"Houbo un erro: non se puido atopar o individuo «%s» para o equipo «%s»."
 
 #: src/menu/help_menu.cpp:65
 msgid "Experiment new game rules"
@@ -1029,13 +1034,12 @@ msgstr "Non se puido abrir un ficheiro temporal: %s."
 
 #: src/menu/results_menu.cpp:434
 msgid "Failed to save replay"
-msgstr ""
+msgstr "Non se puido gardar a repetición."
 
 #: src/menu/results_menu.cpp:354
-#, fuzzy
 #| msgid "Game name:"
 msgid "Filename:"
-msgstr "Nome da partida:"
+msgstr "Nome do ficheiro:"
 
 #: src/weapon/flamethrower.cpp:134
 msgid "Flame Thrower"
@@ -1060,6 +1064,11 @@ msgid ""
 "through the forum. Precise your computer configuration and attach the bug."
 "wrf file that has just been created in your home folder."
 msgstr ""
+"A partida xa non está sincronizada. Iso non é nada bo, e desgraciadamente"
+"vaise interromper a partida. Informe do erro ao equipo de desenvolvemento"
+"de Warmux por correo electrónico ou nos foros. Non esqueza detallar as"
+"peculiaridades do seu computador e engadir o ficheiro «bug.wrf» que atopará"
+"no seu cartafol persoal."
 
 #: src/menu/help_menu.cpp:59
 msgid "Game menu"
@@ -1079,7 +1088,7 @@ msgstr "Nome da partida:"
 
 #: src/include/action_handler.cpp:245
 msgid "Game out of sync!"
-msgstr ""
+msgstr "A partida deixou de estar sincronizada!"
 
 #: src/weapon/gnu.cpp:162
 msgid "Gnu Launcher"
@@ -1135,10 +1144,9 @@ msgid "Help"
 msgstr "Axuda"
 
 #: src/menu/options_menu.cpp:128
-#, fuzzy
 #| msgid "High jump"
 msgid "High"
-msgstr "Saltar alto"
+msgstr "Alta"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/interface/man_machine_interface.cpp:1172 src/menu/help_menu.cpp:125
@@ -1155,7 +1163,7 @@ msgstr "Veña, ho, que é para hoxe!"
 
 #: src/menu/results_menu.cpp:367
 msgid "I like WarMUX :)"
-msgstr ""
+msgstr "Gústame WarMUX :)"
 
 #: src/main.cpp:290
 msgid ""
@@ -1251,7 +1259,7 @@ msgstr "Interface e controis táctiles, máis información noutras lapelas."
 
 #: src/menu/results_menu.cpp:422
 msgid "Invalid filename"
-msgstr ""
+msgstr "Nome de ficheiro incorrecto."
 
 #: src/game/game.cpp:1041
 msgid "It's a present!"
@@ -1324,7 +1332,7 @@ msgstr "Equipos locais:"
 
 #: src/menu/options_menu.cpp:125
 msgid "Low memory"
-msgstr ""
+msgstr "Pouca memoria"
 
 #: src/weapon/lowgrav.cpp:49
 msgid "LowGrav"
@@ -1374,10 +1382,9 @@ msgid "Maximum FPS"
 msgstr "Número máximo de FPS"
 
 #: src/menu/options_menu.cpp:126
-#, fuzzy
 #| msgid "Podium"
 msgid "Medium"
-msgstr "Podio"
+msgstr "Media"
 
 #: src/menu/benchmark_menu.cpp:111
 msgid "Menu"
@@ -1718,7 +1725,7 @@ msgstr "Batallas públicas"
 
 #: src/menu/options_menu.cpp:130
 msgid "Quality"
-msgstr ""
+msgstr "Calidade"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:147
@@ -1760,20 +1767,18 @@ msgstr "Lendo o ficheiro de configuración persoal."
 
 #: src/menu/main_menu.cpp:73
 msgid "Replay"
-msgstr ""
+msgstr "Repetición"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:110
-#, fuzzy
 #| msgid "Current controls"
 msgid "Replay controls"
-msgstr "Controis actuais"
+msgstr "Controis da repetición"
 
 #: src/game/game.cpp:211
-#, fuzzy
 #| msgid "Game mode"
 msgid "Replay mode"
-msgstr "Modo de xogo"
+msgstr "Modo de repetición"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:108
@@ -1781,10 +1786,12 @@ msgid ""
 "Replay progress bar, not used for precise seeking.\n"
 "Short click for a +30s jump, long for +60s jump."
 msgstr ""
+"Barra de progreso da repetición, non permite buscas precisas.\n"
+"Prema pouco tempo para avanzar trinta segundos, ou máis para sesenta."
 
 #: src/menu/results_menu.cpp:441
 msgid "Replay saved"
-msgstr ""
+msgstr "Gardouse a repetición."
 
 #: src/menu/options_menu.cpp:152
 msgid "Resolution"
@@ -1796,6 +1803,8 @@ msgid ""
 "Right button to resume/pause replay.\n"
 "Square right button to immediately exit it."
 msgstr ""
+"Botón dereito para deter ou reaundar a reprodución.\n"
+"Botón dereito dúas veces para saír."
 
 #: src/weapon/riot_bomb.cpp:119
 msgid "Riot Bomb"
@@ -1807,7 +1816,7 @@ msgstr "Comezar a partida"
 
 #: src/menu/results_menu.cpp:379
 msgid "Save replay?"
-msgstr ""
+msgstr "Gardar a repetición?"
 
 #: src/network/chat.cpp:83
 msgid "Say: "
@@ -1967,7 +1976,7 @@ msgstr "Lanzador de Tux"
 
 #: src/menu/help_menu.cpp:105
 msgid "Switch between classical and replay interface"
-msgstr ""
+msgstr "Intercambiar as interfaces clásica e de repetición"
 
 #: src/weapon/syringe.cpp:69
 msgid "Syringe"
@@ -1984,17 +1993,16 @@ msgstr "Falar nas batallas en liña."
 
 #: src/menu/options_menu.cpp:614
 msgid "Team deleted"
-msgstr ""
+msgstr "Eliminouse o equipo."
 
 #: src/menu/results_menu.cpp:338
 msgid "Team graphs"
 msgstr "Gráficos do equipo"
 
 #: src/menu/options_menu.cpp:594
-#, fuzzy
 #| msgid "Team stats"
 msgid "Team saved"
-msgstr "Estatísticas do equipo"
+msgstr "Gardouse do equipo."
 
 #: src/menu/results_menu.cpp:316
 msgid "Team stats"
@@ -2414,10 +2422,12 @@ msgstr "Estás só. :-/"
 msgid ""
 "You are the new turn master! Learn about your new powers by typing /help"
 msgstr ""
+"Es o novo administrador das quendas, escribe «/help» para máis información "
+"sobre os teus novos poderes."
 
 #: src/menu/options_menu.cpp:583
 msgid "You must fill Head Commander and all player names"
-msgstr ""
+msgstr "Debes darlles nome ao comandante e ao resto dos xogadores."
 
 #: src/map/maps_list.cpp:311
 msgid "You need at least one valid map!"
