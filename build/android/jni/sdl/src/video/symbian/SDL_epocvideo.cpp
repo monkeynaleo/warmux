@@ -886,7 +886,7 @@ static void DirectUpdate(_THIS, int numrects, SDL_Rect *rects)
 	    } 
 	
 	
-	if(EpocSdlEnv::IsDsaAvailable())
+	if(1)
 		{
 		const TSize screenSize = EpocSdlEnv::WindowSize();
 		if(screenSize.iWidth < SDL_VideoSurface->w || screenSize.iHeight <  SDL_VideoSurface->h)
@@ -912,15 +912,6 @@ static void DirectUpdate(_THIS, int numrects, SDL_Rect *rects)
 		    }
 		EpocSdlEnv::PostUpdate();
 		}
-   else
-    	{  
-    	EpocSdlEnv::WaitDsaAvailable();              
-    	}
-	if(0 == (Private->iFlags & EFocusedWindow))
-	    {
-	    /* Bartosz Taudul idea to reduce power consumption when not focuced*/
-	    User::After(300000);
-	    }
 	//gLastError = _L("out du");
 	}
 

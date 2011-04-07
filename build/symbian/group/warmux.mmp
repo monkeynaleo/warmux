@@ -111,3 +111,6 @@ END
 CAPABILITY NetworkServices
 
 ALWAYS_BUILD_AS_ARM
+
+SOURCEPATH ..\..\..\src\tool
+SOURCE ansi_convert.cpp

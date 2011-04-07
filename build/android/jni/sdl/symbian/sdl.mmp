@@ -11,8 +11,6 @@ MACRO		NO_SIGNAL_H
 MACRO		ENABLE_EPOC
 MACRO		DISABLE_JOYSTICK
 MACRO		DISABLE_CDROM
-MACRO		__SYMBIAN_STDCPP_SUPPORT__
-MACRO		_WCHAR_T
 
 SOURCEPATH      ..\src
 
@@ -71,6 +69,10 @@ SOURCE		src/sdlenvutils.cpp
 SOURCE		src/sdlexe.cpp
 SOURCE		src/streamplayer.cpp
 SOURCE		src/vectorbuffer.cpp
+SOURCE		src/zoomer.cpp
+SOURCE		src/fpsview.cpp
+SOURCE		src/virtualcursor.cpp
+
 
 
 SYSTEMINCLUDE	\epoc32\include

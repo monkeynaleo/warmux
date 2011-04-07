@@ -44,9 +44,11 @@ public:
 		EParamQueryDialog	          = 0x9, //view parameter query dialog if paramt.txt is not found
 		EFastZoomBlitter              = 0x10, //Use faster blitter when zoomin up frames, CSDL::EMainThread and CSDL::EAllowImageResize should be set! (not checked however, if some one writes more flexible blitter :-)
 		EEnableVirtualMouseMoveEvents = 0x24, // mouse + move event simulation. When arrow is yellow, move messages are passed
-		EHWABlitter                     = 0x100, //Use HWA for blitting
+		EHWABlitter                     = 0x100, //Use HWA for blitting, default
 		EHWABlitterNoScale              = 0x140, //Use HWA for blitting
 		EHWABlitterRatioScale           = 0x180, //Use HWA for blitting
+		ENoHWABlitter                   = 0x200, //no HWA for blitting
+		EViewFPS                        = 0x400, //display fps on screen
 		};
 	IMPORT_C static TInt SetMain(const TMainFunc& aFunc, TInt aSdlFlags, MSDLMainObs* aObs = NULL, TInt aEnvFlags = EFlagsNone);
  	};

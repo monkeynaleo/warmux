@@ -1,6 +1,8 @@
 #include "hwablitter.h"
 #include <gdi.h>
 #include <fbs.h>
+#include <bitdev.h>
+#include <aknutils.h>
 #include <GLES/egl.h>
 #include <GLES/gl.h>
 
@@ -9,7 +11,28 @@
 #endif
 
 #ifdef OPENVGSUPPORT
-extern void OSPrint(CFbsBitmap& aCanvas, const TRect& aRect, const TDesC& aText);
+void OSPrint(CFbsBitmap& aCanvas, const TRect& aRect, const TDesC& aText)
+    {
+    CFbsBitmapDevice* bd = CFbsBitmapDevice::NewL(&aCanvas);
+    CleanupStack::PushL(bd);
+    CFbsBitGc* gc;
+    User::LeaveIfError(bd->CreateContext(gc));
+    CleanupStack::PushL(gc);
+    gc->SetDrawMode(CGraphicsContext::EDrawModeWriteAlpha);
+    gc->Activate(bd);
+   
+    gc->SetPenStyle(CGraphicsContext::ESolidPen);
+    gc->SetBrushStyle(CGraphicsContext::ESolidBrush);
+    gc->SetPenColor(KRgbBlack);
+    gc->SetBrushColor(KRgbYellow);
+    gc->DrawRect(aRect);
+    const CFont* font = AknLayoutUtils::FontFromId(EAknLogicalFontPrimarySmallFont);
+    gc->UseFont(font);
+    const TInt h = font->BaselineOffsetInPixels();
+    DrawUtils::DrawText(*gc, aText, aRect, (aRect.Height() / 2) + h, CGraphicsContext::ECenter, 0, font);
+    gc->DiscardFont();
+    CleanupStack::PopAndDestroy(2);
+    }
 
 
 void OSPrintf(CFbsBitmap& aCanvas, TRefByValue<const TDesC16> aFmt,...)
@@ -340,7 +363,7 @@ void HWAImp::Blit(const CFbsBitmap& aBitmap, const TPoint& aPos, TReal aVScale, 
 CHWABlitter::CHWABlitter(TInt aFlags) : iFlags(aFlags)
     {}
 
-CHWABlitter* CHWABlitter::NewL(RWindow& aWindow, TInt aFlags)
+EXPORT_C CHWABlitter* CHWABlitter::NewL(RWindow& aWindow, TInt aFlags)
 	{
 #ifdef OPENVGSUPPORT
 	CHWABlitter* b = new (ELeave) CHWABlitter(aFlags);
@@ -353,12 +376,12 @@ CHWABlitter* CHWABlitter::NewL(RWindow& aWindow, TInt aFlags)
 #endif
 	}
 	
-CHWABlitter::~CHWABlitter()
+EXPORT_C CHWABlitter::~CHWABlitter()
 {
 	delete iImp;
 }
 
-	TBool CHWABlitter::BitBlt(CBitmapContext& /*aGc*/,
+EXPORT_C TBool CHWABlitter::BitBlt(CBitmapContext& /*aGc*/,
 		CFbsBitmap& aBmp,
 		const TRect& aTargetRect,
 		const TSize& aSize)

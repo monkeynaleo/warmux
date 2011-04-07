@@ -322,21 +322,11 @@ LOCAL_C TInt KeyUpEvent(_THIS, const TWsEvent& aWsEvent)
 
 LOCAL_C TInt FocusGainedEvent(_THIS)
     {
-    Private->iFlags |= EFocusedWindow;
-    DisableKeyBlocking(_this);  //Markus: guess why:-)
-    EpocSdlEnv::ResumeDsa();
-    SDL_PauseAudio(0);
     return SDL_PrivateAppActive(1, SDL_APPINPUTFOCUS|SDL_APPMOUSEFOCUS);
     }
 
 LOCAL_C TInt FocusLostEvent(_THIS)
     {
-    Private->iFlags &= ~EFocusedWindow;
-    SDL_PauseAudio(1);
-    if(EpocSdlEnv::Flags(CSDL::EEnableFocusStop))
-        {
-        EpocSdlEnv::WaitDsaAvailable();
-        }
     return SDL_PrivateAppActive(0, SDL_APPINPUTFOCUS|SDL_APPMOUSEFOCUS);
     }
 
