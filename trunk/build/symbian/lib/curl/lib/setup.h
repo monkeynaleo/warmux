@@ -474,7 +474,7 @@ int netware_init(void);
 #endif
 
 #ifdef __SYMBIAN32__
-#ifndef HAVE_BOOL
+#ifndef bool
 typedef int bool;
 #endif
 #endif
