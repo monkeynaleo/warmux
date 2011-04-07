@@ -8,7 +8,7 @@
 &EN
 
 ; Package header format: Package Name, UID, Major version, Minor Version, Build Number,Package-Options
-#{"Warmux"},(0xECF75E71),10,12,0,NC
+#{"Warmux"},(0xECF75E71),11,04,0
 
 ;Localised Vendor name
 %{"www.warmux.org-EN"}
