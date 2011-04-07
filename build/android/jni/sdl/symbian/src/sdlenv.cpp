@@ -379,7 +379,7 @@ void EpocSdlEnv::FreeSurface()
 	        {
 	        gEpocEnv->iDsa->SetUpdating(EFalse);
 	        }
-	    gEpocEnv->iDsa->ASSERT_Update(__LINE__);
+	    __ASSERT_ALWAYS(!gEpocEnv->iDsa->IsUpdating(), PANIC(KErrNotReady));
 	    gEpocEnv->iDsa->Free();
 	    }
 	}
@@ -567,7 +567,7 @@ void EpocSdlEnvData::Free()
     	{
     	if(iDsa != NULL)
     	    {
-    	    iDsa->ASSERT_Update(__LINE__);
+    	    __ASSERT_ALWAYS(!iDsa->IsUpdating(), PANIC(KErrNotReady));
     		iDsa->Free();
     	    }
     	return;
@@ -594,7 +594,7 @@ void EpocSdlEnvData::Free()
     
     if(iDsa != NULL)
         {
-        gEpocEnv->iDsa->ASSERT_Update(__LINE__);
+        __ASSERT_ALWAYS(!gEpocEnv->iDsa->IsUpdating(), PANIC(KErrNotReady));
     	iDsa->Free();
         }
     

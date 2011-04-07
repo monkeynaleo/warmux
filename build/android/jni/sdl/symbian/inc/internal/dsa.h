@@ -54,7 +54,7 @@ NONSHARABLE_CLASS(CDsa) : public CBase
 		inline TBool IsHwScreenSurface() const;
         inline const TRect& ScreenRect() const;
         
-        inline void ASSERT_Update(int line) const;
+        inline TBool IsUpdating() const;
         
         TThreadId OwnerThread() const;
    	
@@ -63,6 +63,7 @@ NONSHARABLE_CLASS(CDsa) : public CBase
 		~CDsa();
    		 	
    		TUint8* LockHwSurface();
+   		void UnlockHwSurface();
    		TInt AllocSurface(TBool aHwSurface, const TSize& aSize, TDisplayMode aMode);
    		inline TDisplayMode DisplayMode() const;
    		
@@ -112,7 +113,7 @@ NONSHARABLE_CLASS(CDsa) : public CBase
 		
 		virtual TUint8* LockSurface() = 0;
 		virtual void UnlockHWSurfaceRequestComplete() = 0;
-		virtual void UnlockHwSurface() = 0;
+		virtual void UnlockSurface() = 0;
 		virtual void Update() = 0;
 	//	virtual void Resume() = 0;
 		
@@ -226,9 +227,9 @@ inline const TRect& CDsa::HwRect() const
 	return iTargetRect;
 	}
 	
-inline void CDsa::ASSERT_Update(int line) const
+inline CDsa::IsUpdating() const
     {
-    __ASSERT_ALWAYS((iStateFlags & EUpdating) == 0, Panic(KErrNotReady, line));
+    return iStateFlags & EUpdating;
     }
 
 inline const TSize& CDsa::SwSize() const
@@ -267,7 +268,6 @@ inline TBool CDsa::IsHwScreenSurface() const
     }
 
 
-#define _ASSERT_Update CDsa::ASSERT_Update(__LINE__)
 
 #endif	
 		
