@@ -72,6 +72,7 @@ protected:
   std::vector< std::pair<float, float> > bench_res;
 
   friend class Singleton<Game>;
+  friend bool GameIsRunning();
   Game();
   virtual ~Game();
 
@@ -155,7 +156,6 @@ public:
   static Game * GetInstance();
   static std::string GetUniqueId();
   static void ResetUniqueIds() { last_unique_id = 0; }
-  static bool IsRunning() { return (singleton) ? singleton->IsGameLaunched() : false; }
   uint GetCurrentTurn();
   WeaponsList * GetWeaponsList() const { return weapons_list; }
   void UpdateTranslation();
@@ -206,4 +206,7 @@ public:
 
   float GetLastFrameRate() const;
 };
+
+inline bool GameIsRunning() { return (Game::singleton) ? Game::singleton->IsGameLaunched() : false; }
+
 #endif // GAME_H

@@ -230,7 +230,7 @@ void AppWarmux::DisplayLoadingPicture()
 
 void AppWarmux::RefreshDisplay()
 {
-  if (Game::IsRunning()) {
+  if (GameIsRunning()) {
     if (Game::GetCurrentMenu()) {
       Game::GetCurrentMenu()->RedrawMenu();
       return;
@@ -248,7 +248,7 @@ void AppWarmux::DisplayError(const std::string &msg)
 {
   std::cerr << msg << std::endl;
 
-  if (Game::IsRunning()) {
+  if (GameIsRunning()) {
     if (Game::GetCurrentMenu()) {
       Game::GetCurrentMenu()->DisplayError(msg);
     }
@@ -262,7 +262,7 @@ void AppWarmux::ReceiveMsgCallback(const std::string& msg, const Color& color, b
 {
   if (Replay::GetConstInstance()->IsPlaying() && in_game) {
     Game::GetInstance()->chatsession.NewMessage(msg, color);
-  } else if (Game::IsRunning()) {
+  } else if (GameIsRunning()) {
     if (Game::GetCurrentMenu() && !in_game) {
       // Drop message, we should be paused anyway
     } else {
@@ -319,7 +319,7 @@ bool AppWarmux::CheckInactive(SDL_Event& evnt)
       if (evnt.type == SDL_QUIT) AppWarmux::EmergencyExit();
       if (evnt.type == SDL_ACTIVEEVENT && evnt.active.gain == 1) {
         PAUSE_LOG("Active: state=%X\n", evnt.active.state);
-        if ((!menu || choice != MainMenu::NONE) && Game::GetInstance()->IsRunning()) {
+        if ((!menu || choice != MainMenu::NONE) && GameIsRunning()) {
           PAUSE_LOG("Pause: menu=%p\n", menu);
           choice = MainMenu::NONE;
           bool exit = false;
