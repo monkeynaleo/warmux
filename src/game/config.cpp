@@ -322,7 +322,7 @@ void Config::SetLanguage(const std::string& language)
   InitI18N(TranslateDirectory(locale_dir), language);
 
   Font::ReleaseInstances();
-  if (Game::IsRunning()) {
+  if (GameIsRunning()) {
     Game::GetInstance()->UpdateTranslation();
   }
 }
