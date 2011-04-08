@@ -746,7 +746,7 @@ void WARMUX_DisconnectPlayer(Player& player)
   while (it != player.owned_teams.end()) {
     std::string team_id = it->id;
 
-    if (Game::IsRunning()) {
+    if (GameIsRunning()) {
       player.RemoveTeam(team_id);
       int unused_buffer;
       Team* the_team = GetTeamsList().FindById(team_id, unused_buffer);
@@ -954,7 +954,7 @@ static void _Info_ConnectHost(const std::string& host_info)
 
   ChatLogger::LogMessageIfOpen(msg);
 
-  if (Game::IsRunning())
+  if (GameIsRunning())
     GameMessages::GetInstance()->Add(msg, primary_red_color);
   else if (Network::GetInstance()->network_menu)
     //Network Menu
@@ -1222,7 +1222,7 @@ static bool IsFrameAction(const Action* a)
 
 bool ActionHandler::ExecActionsForOneFrame()
 {
-  ASSERT(Game::GetInstance()->IsRunning());
+  ASSERT(GameIsRunning());
 
   Lock();
   if (std::find_if(queue.begin(), queue.end(), IsFrameAction) == queue.end()) {

@@ -169,7 +169,7 @@ OptionMenu::OptionMenu() :
   /* Team editor */
 
   // bug #12193 : Missed assertion in game option (custom team editor) while playing
-  if (!Game::IsRunning()) {
+  if (!GameIsRunning()) {
     Box * teams_editor = new HBox(option_size.y, false, false, true);
 
     lbox_teams = new ItemBox(option_size, false);
@@ -425,7 +425,7 @@ void OptionMenu::SaveOptions()
   // Graphic options
   config->SetWindParticlesPercentage(opt_wind_particles_percentage->GetValue());
   // bug #11826 : Segmentation fault while exiting the menu.
-  if (Game::IsRunning())
+  if (GameIsRunning())
     Wind::GetRef().Reset();
 
 #ifndef HAVE_HANDHELD
@@ -498,7 +498,7 @@ void OptionMenu::SaveOptions()
   config->Save();
 
   //Team editor
-  if (!Game::IsRunning() && TeamInfoValid()) {
+  if (!GameIsRunning() && TeamInfoValid()) {
     if (!lbox_teams->IsItemSelected()) {
       AddTeam();
     }
@@ -575,7 +575,7 @@ bool OptionMenu::TeamInfoValid()
 
 void OptionMenu::AddTeam()
 {
-  if (Game::IsRunning())
+  if (GameIsRunning())
     return;
 
   if (!TeamInfoValid()) {
@@ -601,7 +601,7 @@ void OptionMenu::AddTeam()
 
 void OptionMenu::DeleteTeam()
 {
-  if (Game::IsRunning())
+  if (GameIsRunning())
     return;
 
   if (selected_team) {
@@ -622,7 +622,7 @@ void OptionMenu::DeleteTeam()
 
 void OptionMenu::LoadTeam()
 {
-  if (Game::IsRunning())
+  if (GameIsRunning())
     return;
 
   if (selected_team) {
@@ -644,7 +644,7 @@ void OptionMenu::LoadTeam()
 
 void OptionMenu::ReloadTeamList()
 {
-  if (Game::IsRunning())
+  if (GameIsRunning())
     return;
 
   lbox_teams->Clear();
@@ -671,7 +671,7 @@ void OptionMenu::ReloadTeamList()
 
 bool OptionMenu::SaveTeam()
 {
-  if (Game::IsRunning())
+  if (GameIsRunning())
     return false;
 
   if (!TeamInfoValid())
@@ -692,7 +692,7 @@ bool OptionMenu::SaveTeam()
 
 void OptionMenu::SelectTeam()
 {
-  if (Game::IsRunning())
+  if (GameIsRunning())
     return;
 
   if (lbox_teams->IsItemSelected()) {
