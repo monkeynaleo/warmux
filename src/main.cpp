@@ -319,7 +319,7 @@ bool AppWarmux::CheckInactive(SDL_Event& evnt)
       if (evnt.type == SDL_QUIT) AppWarmux::EmergencyExit();
       if (evnt.type == SDL_ACTIVEEVENT && evnt.active.gain == 1) {
         PAUSE_LOG("Active: state=%X\n", evnt.active.state);
-        if ((!menu || choice != MainMenu::NONE) && Game::GetInstance()->IsRunning()) {
+        if ((!menu || choice != MainMenu::NONE) && Game::IsRunning()) {
           PAUSE_LOG("Pause: menu=%p\n", menu);
           choice = MainMenu::NONE;
           bool exit = false;

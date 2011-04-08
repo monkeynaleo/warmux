@@ -1222,7 +1222,7 @@ static bool IsFrameAction(const Action* a)
 
 bool ActionHandler::ExecActionsForOneFrame()
 {
-  ASSERT(Game::GetInstance()->IsRunning());
+  ASSERT(Game::IsRunning());
 
   Lock();
   if (std::find_if(queue.begin(), queue.end(), IsFrameAction) == queue.end()) {
