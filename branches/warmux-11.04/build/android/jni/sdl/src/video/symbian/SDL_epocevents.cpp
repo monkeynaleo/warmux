@@ -45,7 +45,7 @@ extern "C" {
 
 extern "C"
 	{
-	static SDL_keysym *TranslateKey(_THIS, int scancode, SDL_keysym *keysym);
+	static SDL_keysym *TranslateKey(_THIS, int scancode, unsigned int icode, SDL_keysym *keysym);
 	void SDL_PauseAudio(int);
 	int SDL_PrivateResize(int, int);
 	}
@@ -53,7 +53,7 @@ extern "C"
 //extern "C" {
 /* The translation tables from a console scancode to a SDL keysym */
 static SDLKey keymap[MAX_SCANCODE];
-static SDL_keysym *TranslateKey(_THIS, int scancode, SDL_keysym *keysym);
+static SDL_keysym *TranslateKey(_THIS, int scancode, unsigned int icode, SDL_keysym *keysym);
 void DisableKeyBlocking(_THIS);
 
 //} /* extern "C" */
@@ -306,17 +306,30 @@ LOCAL_C TInt PointerEvent(_THIS, const TWsEvent& aWsEvent)
     return posted;
     }
 
+LOCAL_C TInt KeyEvent(_THIS, const TWsEvent& aWsEvent)
+    {
+    SDL_keysym keysym;
+    TKeyEvent *event = aWsEvent.Key();
+    TranslateKey(_this, event->iScanCode, event->iCode, &keysym);
+    return SDL_PrivateKeyboard(SDL_PRESSED, &keysym);
+    }
+
 LOCAL_C TInt KeyDownEvent(_THIS, const TWsEvent& aWsEvent)
     {
     SDL_keysym keysym;
-    TranslateKey(_this, aWsEvent.Key()->iScanCode, &keysym);
+    TKeyEvent *event = aWsEvent.Key();
+    if (SDL_TranslateUNICODE)
+        return 0;
+    
+    TranslateKey(_this, event->iScanCode, event->iCode, &keysym);
     return SDL_PrivateKeyboard(SDL_PRESSED, &keysym);
     }
 
 LOCAL_C TInt KeyUpEvent(_THIS, const TWsEvent& aWsEvent)
     {
     SDL_keysym keysym;
-    TranslateKey(_this, aWsEvent.Key()->iScanCode, &keysym);
+    TKeyEvent *event = aWsEvent.Key();
+    TranslateKey(_this, event->iScanCode, event->iCode, &keysym);
     return SDL_PrivateKeyboard(SDL_RELEASED, &keysym);
     }
 
@@ -416,6 +429,8 @@ int HandleWsEvent(_THIS, const TWsEvent& aWsEvent)
     	    return PointerBufferReadyEvent(_this);
         case EEventPointer: /* Mouse pointer events */
             return PointerEvent(_this, aWsEvent);
+        case EEventKey: /* Key events */
+            return KeyEvent(_this, aWsEvent);
         case EEventKeyDown: /* Key events */
             return KeyDownEvent(_this, aWsEvent);
         case EEventKeyUp: /* Key events */
@@ -462,7 +477,7 @@ void InitOSKeymap(_THIS)
 	EpocSdlEnv::ObserverEvent(MSDLObserver::EEventKeyMapInit ,0);
 	}
 
-static SDL_keysym* TranslateKey(_THIS, int scancode, SDL_keysym* keysym)
+static SDL_keysym* TranslateKey(_THIS, int scancode, unsigned int icode, SDL_keysym* keysym)
 {
 //    char debug[256];
     //SDL_TRACE1("SDL: TranslateKey, scancode=%d", scancode); //!!
@@ -516,12 +531,12 @@ static SDL_keysym* TranslateKey(_THIS, int scancode, SDL_keysym* keysym)
 
 #if 1 // !!TODO:unicode
 
-	if ( SDL_TranslateUNICODE )
+	if ( SDL_TranslateUNICODE && icode != 0)
 		{
 		if (scancode < 0x80)
 			{
 			/* Populate the unicode field with the ASCII value */
-			keysym->unicode = keymap[scancode];
+			keysym->unicode = icode;
 			}
 		}
 
