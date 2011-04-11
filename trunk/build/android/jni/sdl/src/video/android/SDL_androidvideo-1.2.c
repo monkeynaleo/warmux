@@ -106,8 +106,12 @@ void ANDROID_WarpWMCursor(_THIS, Uint16 x, Uint16 y)
 }
 //void ANDROID_MoveWMCursor(_THIS, int x, int y) { }
 
+#if 0
+# define SDL_NUMMODES 12
+#else
+# define SDL_NUMMODES 1
+#endif
 
-#define SDL_NUMMODES 12
 static SDL_Rect *SDL_modelist[SDL_NUMMODES+1];
 
 //#define SDL_modelist		(this->hidden->SDL_modelist)
@@ -240,6 +244,9 @@ int ANDROID_VideoInit(_THIS, SDL_PixelFormat *vformat)
 	/* Modes sorted largest to smallest */
 	SDL_modelist[0]->w = SDL_ANDROID_sWindowWidth;
 	SDL_modelist[0]->h = SDL_ANDROID_sWindowHeight;
+  __android_log_print(ANDROID_LOG_INFO, "libSDL", "First video mode is %dx%d",
+                      SDL_ANDROID_sWindowWidth, SDL_ANDROID_sWindowHeight );
+#if SDL_NUMMODES > 1
 	SDL_modelist[1]->w = 800; SDL_modelist[1]->h = 600; // Will likely be shrinked
 	SDL_modelist[2]->w = 640; SDL_modelist[2]->h = 480; // Will likely be shrinked
 	SDL_modelist[3]->w = 640; SDL_modelist[3]->h = 400; // Will likely be shrinked
@@ -253,7 +260,8 @@ int ANDROID_VideoInit(_THIS, SDL_PixelFormat *vformat)
 	SDL_modelist[9]->w = 480; SDL_modelist[9]->h = 320; // Virtual wide-screen mode
 	SDL_modelist[10]->w = 800; SDL_modelist[10]->h = 480; // Virtual wide-screen mode
 	SDL_modelist[11]->w = 544; SDL_modelist[11]->h = 332; // I have no idea where this videomode is used
-	SDL_modelist[12] = NULL;
+#endif
+	SDL_modelist[SDL_NUMMODES+1] = NULL;
 	
 	SDL_VideoInit_1_3(NULL, 0);
 	
