@@ -108,8 +108,6 @@ void NetworkThread::Wait()
   stop_thread = false;
 }
 
-static int count=0;
-
 void NetworkThread::ReceiveActions()
 {
   char* buffer;
@@ -166,7 +164,8 @@ void NetworkThread::ReceiveActions()
     for (dst_cpu = cpu.begin();
          Continue() && dst_cpu != cpu.end();
          dst_cpu++) {
-      if((*dst_cpu)->SocketReady()) {// Check if this socket contains data to receive
+      // Check if this socket contains data to receive
+      if ((*dst_cpu)->SocketReady()) {
 
         if (!(*dst_cpu)->ReceiveData(&buffer, &packet_size)) {
           // An error occured during the reception
