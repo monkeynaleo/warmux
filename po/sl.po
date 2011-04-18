@@ -129,7 +129,7 @@ msgid "%s is next to a mine!"
 msgstr "%s je blizu mine!"
 
 #. For translators: extended in "<nickname> (<host>) just connected
-#: src/include/action_handler.cpp:913
+#: src/include/action_handler.cpp:950
 #, fuzzy, c-format
 #| msgid "%i player connected"
 #| msgid_plural "%i players connected"
@@ -137,7 +137,7 @@ msgid "%s just connected"
 msgstr "povezan %i igralec"
 
 #. For translators: extended in "<nickname> (<host>) just disconnected
-#: src/include/action_handler.cpp:1025
+#: src/include/action_handler.cpp:1066
 #, fuzzy, c-format
 #| msgid "%i player connected"
 #| msgid_plural "%i players connected"
@@ -149,7 +149,7 @@ msgstr "povezan %i igralec"
 msgid "%s kicked from game"
 msgstr ""
 
-#: src/include/action_handler.cpp:474
+#: src/include/action_handler.cpp:468
 #, c-format
 msgid "%s needs a pause."
 msgstr "%s rabi pavzo."
@@ -623,7 +623,7 @@ msgstr "Nakovalo"
 msgid "Area currently displayed"
 msgstr ""
 
-#: src/main.cpp:346
+#: src/main.cpp:358
 msgid "Authors:"
 msgstr "Avtorji:"
 
@@ -769,7 +769,7 @@ msgstr ""
 msgid "Check updates online?"
 msgstr "Preveri možno posodobitev?"
 
-#: src/menu/map_selection_box.cpp:225
+#: src/menu/map_selection_box.cpp:227
 msgid "Choose randomly between the different maps"
 msgstr "Izberi naključno karto"
 
@@ -809,7 +809,7 @@ msgid ""
 msgstr ""
 
 #. Client Mode
-#: src/menu/network_menu.cpp:167 src/network/network.cpp:448
+#: src/menu/network_menu.cpp:167 src/network/network.cpp:453
 msgid "Client mode"
 msgstr "Odjemalski način"
 
@@ -1014,7 +1014,7 @@ msgid "Error: Unable to start the server"
 msgstr "Napaka: Ni bilo mogoče zagnati strežnika"
 
 #: src/menu/network_connection_menu.cpp:495
-#: tools/servers/game_server/server.cpp:337
+#: tools/servers/game_server/server.cpp:389
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -1089,7 +1089,7 @@ msgstr "Celozaslonski način?"
 msgid "Game"
 msgstr "Igra"
 
-#: src/include/action_handler.cpp:882
+#: src/include/action_handler.cpp:919
 msgid ""
 "Game is not synchronized anymore! This is BAD, the network game will be "
 "interrupted, sorry. Please, report the bug to the Warmux Team by mail or "
@@ -1191,7 +1191,7 @@ msgstr "Pohitite, prepočasni ste!!"
 msgid "I like WarMUX :)"
 msgstr ""
 
-#: src/main.cpp:284
+#: src/main.cpp:290
 msgid ""
 "If you found a bug or have a feature request send us an email (in english, "
 "please):"
@@ -1747,7 +1747,7 @@ msgstr "Takojšnji izhod iz igre (s ctrl)"
 msgid "Quit"
 msgstr "Končaj"
 
-#: src/main.cpp:273
+#: src/main.cpp:279
 #, fuzzy
 msgid "Quit Warmux"
 msgstr "Končaj Warmux"
@@ -1760,7 +1760,7 @@ msgstr "Končaj igro"
 msgid "Rail Gun"
 msgstr ""
 
-#: src/menu/map_selection_box.cpp:224
+#: src/menu/map_selection_box.cpp:226
 msgid "Random map"
 msgstr "Naključna karta"
 
@@ -1818,7 +1818,7 @@ msgstr ""
 msgid "Riot Bomb"
 msgstr "Kopaška granata"
 
-#: src/main.cpp:83
+#: src/main.cpp:89
 msgid "Run game"
 msgstr "Poženi igro"
 
@@ -1852,7 +1852,7 @@ msgstr "Naslov strežnika:"
 msgid "Server available on Internet"
 msgstr "Strežnik naj bo viden na Internetu"
 
-#: src/menu/network_menu.cpp:174 src/network/network.cpp:478
+#: src/menu/network_menu.cpp:174 src/network/network.cpp:483
 msgid "Server mode"
 msgstr "Strežniški način"
 
@@ -1933,7 +1933,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Oprostite, nobena igra trenutno ne čaka na igralce"
 
 #: src/menu/network_connection_menu.cpp:444
-#: tools/servers/game_server/server.cpp:322
+#: tools/servers/game_server/server.cpp:374
 #, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -2066,7 +2066,7 @@ msgstr ""
 "V načinu Blitz se po vsaki potezi ekipni čas *ne* ponastavi. Ekipa izgubi, "
 "če ji zmanjka članov ali časa."
 
-#: src/network/network_client.cpp:99
+#: src/network/network_client.cpp:100
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -2291,7 +2291,7 @@ msgstr ""
 "Strel: držite preslednico dokler raketa ne doseže željene moči\n"
 "ena uporaba na potezo"
 
-#: src/main.cpp:200
+#: src/main.cpp:206
 msgid "Version"
 msgstr "Različica"
 
@@ -2322,16 +2322,16 @@ msgstr "Čakanje na %s"
 msgid "Waiting for remote players"
 msgstr "Čakanje na oddaljene igralce"
 
-#: src/menu/network_menu.cpp:509
+#: src/menu/network_menu.cpp:514
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Čakanje na strežnik, lahko se samo pogovarjate!"
 
-#: src/main.cpp:211
+#: src/main.cpp:217
 #, fuzzy
 msgid "Warmux launching..."
 msgstr "Warmux se zaganja ..."
 
-#: src/main.cpp:345
+#: src/main.cpp:357
 #, fuzzy
 msgid "Warmux version "
 msgstr "Warmux različica "
@@ -2350,7 +2350,7 @@ msgstr "Orožje: streljaj / Paket: hiter padec"
 msgid "Weapons"
 msgstr "Orožja"
 
-#: src/main.cpp:355
+#: src/main.cpp:367
 msgid "Website: "
 msgstr "Spletna stran: "
 
@@ -2439,7 +2439,7 @@ msgstr "Potrebujete vsaj dve veljavni ekipi !"
 msgid "You won't be able to play before selecting a team!"
 msgstr "Dokler ne izberete ekipe ne boste mogli igrati!"
 
-#: src/weapon/weapon_launcher.cpp:545
+#: src/weapon/weapon_launcher.cpp:552
 msgid "Your shot has missed!"
 msgstr "Zgrešili ste!"
 

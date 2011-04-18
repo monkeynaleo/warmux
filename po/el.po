@@ -125,7 +125,7 @@ msgid "%s is next to a mine!"
 msgstr "O %s είναι δίπλα σε νάρκη!"
 
 #. For translators: extended in "<nickname> (<host>) just connected
-#: src/include/action_handler.cpp:913
+#: src/include/action_handler.cpp:950
 #, fuzzy, c-format
 #| msgid "%i player connected"
 #| msgid_plural "%i players connected"
@@ -133,7 +133,7 @@ msgid "%s just connected"
 msgstr "%i παίκτης συνδέθηκε"
 
 #. For translators: extended in "<nickname> (<host>) just disconnected
-#: src/include/action_handler.cpp:1025
+#: src/include/action_handler.cpp:1066
 #, fuzzy, c-format
 #| msgid "%i player connected"
 #| msgid_plural "%i players connected"
@@ -145,7 +145,7 @@ msgstr "%i παίκτης συνδέθηκε"
 msgid "%s kicked from game"
 msgstr "%s αποβλήθηκε από το παιχνίδι"
 
-#: src/include/action_handler.cpp:474
+#: src/include/action_handler.cpp:468
 #, c-format
 msgid "%s needs a pause."
 msgstr "Ο %s χρειάζεται ένα διάλειμμα."
@@ -567,7 +567,7 @@ msgstr "Αμόνι"
 msgid "Area currently displayed"
 msgstr "Περιοχή που εμφανίζεται"
 
-#: src/main.cpp:346
+#: src/main.cpp:358
 msgid "Authors:"
 msgstr "Συγγραφείς:"
 
@@ -713,7 +713,7 @@ msgstr "Συνομιλία"
 msgid "Check updates online?"
 msgstr "Έλεγχος ενημερώσεων στο διαδίκτυο;"
 
-#: src/menu/map_selection_box.cpp:225
+#: src/menu/map_selection_box.cpp:227
 msgid "Choose randomly between the different maps"
 msgstr "Επίλεξε τυχαία έναν μεταξύ των διαφορετικών χαρτών"
 
@@ -762,7 +762,7 @@ msgstr ""
 "Δεν μπορείς να επιλέξεις την ίδια ομάδα πολλές φορές."
 
 #. Client Mode
-#: src/menu/network_menu.cpp:167 src/network/network.cpp:448
+#: src/menu/network_menu.cpp:167 src/network/network.cpp:453
 msgid "Client mode"
 msgstr "Σε κατάσταση πελάτη"
 
@@ -979,7 +979,7 @@ msgstr "Αδύνατη η έναρξη του διακομιστή."
 
 # Erreur : Votre serveur n'est pas accessible depuis Internet. Vérifier la configuration de votre firewall : le port TCP %s doit accepter les connexions extérieures. Si vous n'êtes pas directement connecté à Internet, vérifier la configuration de votre routeur : le port TCP %s doit être redirigé vers votre ordinateur.
 #: src/menu/network_connection_menu.cpp:495
-#: tools/servers/game_server/server.cpp:337
+#: tools/servers/game_server/server.cpp:389
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -1056,7 +1056,7 @@ msgstr "Πλήρης οθόνη;"
 msgid "Game"
 msgstr "Παιχνίδι"
 
-#: src/include/action_handler.cpp:882
+#: src/include/action_handler.cpp:919
 msgid ""
 "Game is not synchronized anymore! This is BAD, the network game will be "
 "interrupted, sorry. Please, report the bug to the Warmux Team by mail or "
@@ -1161,7 +1161,7 @@ msgid "I like WarMUX :)"
 msgstr ""
 
 # Si vous trouvez un bug ou si vous pensez qu'il manque quelque chose à Warmux, envoyez un mail (en anglais, svp) :
-#: src/main.cpp:284
+#: src/main.cpp:290
 msgid ""
 "If you found a bug or have a feature request send us an email (in english, "
 "please):"
@@ -1737,7 +1737,7 @@ msgstr "Γρήγορα εγκατάλειψε το παιχνίδι με το Ct
 msgid "Quit"
 msgstr "Εγκατάλειψε"
 
-#: src/main.cpp:273
+#: src/main.cpp:279
 msgid "Quit Warmux"
 msgstr "Εγκατάλειψε το  Warmux"
 
@@ -1749,7 +1749,7 @@ msgstr "Εγκατάλειψε το παιχνίδι"
 msgid "Rail Gun"
 msgstr "Αυτόματο"
 
-#: src/menu/map_selection_box.cpp:224
+#: src/menu/map_selection_box.cpp:226
 msgid "Random map"
 msgstr "Τυχαίος χάρτης"
 
@@ -1813,7 +1813,7 @@ msgstr ""
 msgid "Riot Bomb"
 msgstr "Βόμβα διατάραξης"
 
-#: src/main.cpp:83
+#: src/main.cpp:89
 msgid "Run game"
 msgstr "Έναρξη παιχνιδιού"
 
@@ -1846,7 +1846,7 @@ msgstr "Διεύθυνση διακομιστή:"
 msgid "Server available on Internet"
 msgstr "Διακομιστής διαθέσιμος στο διαδίκτυο"
 
-#: src/menu/network_menu.cpp:174 src/network/network.cpp:478
+#: src/menu/network_menu.cpp:174 src/network/network.cpp:483
 msgid "Server mode"
 msgstr "Κατάσταση διακομιστή"
 
@@ -1937,7 +1937,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Συγγνώμη, δεν υπάρχει κανένα παιχνίδι να περιμένει παίκτες"
 
 #: src/menu/network_connection_menu.cpp:444
-#: tools/servers/game_server/server.cpp:322
+#: tools/servers/game_server/server.cpp:374
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -2075,7 +2075,7 @@ msgstr ""
 "Ο αστραπιαίος πόλεμος δεν επαναφέρει τον χρόνο μεταξύ κάθε γύρου. Μία ομάδα "
 "χάνει όταν δεν έχει παίκτες ή ο χρόνος της τελείωσε."
 
-#: src/network/network_client.cpp:99
+#: src/network/network_client.cpp:100
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -2308,7 +2308,7 @@ msgstr ""
 "Πυρ: κρατήστε το space μέχρι την επιθυμητή δύναμη\n"
 "ένα από τα πολεμοφόδια ανά γύρο"
 
-#: src/main.cpp:200
+#: src/main.cpp:206
 msgid "Version"
 msgstr "Έκδοση"
 
@@ -2338,15 +2338,15 @@ msgid "Waiting for remote players"
 msgstr "Περιμένοντας για απομακρυσμένους παίκτες"
 
 # Attente du serveur, vous pouvez annuler ou discuter !
-#: src/menu/network_menu.cpp:509
+#: src/menu/network_menu.cpp:514
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Αναμένοντας το διακομιστή, μπορείτε να ακυρώσετε ή να συζητήσετε!"
 
-#: src/main.cpp:211
+#: src/main.cpp:217
 msgid "Warmux launching..."
 msgstr "Έναρξη του Warmux..."
 
-#: src/main.cpp:345
+#: src/main.cpp:357
 msgid "Warmux version "
 msgstr "Έκδοση του Warmux"
 
@@ -2363,7 +2363,7 @@ msgstr "Όπλο: Πυρ / Κουτί δώρο: πτώση"
 msgid "Weapons"
 msgstr "Όπλα"
 
-#: src/main.cpp:355
+#: src/main.cpp:367
 msgid "Website: "
 msgstr "Ιστοσελίδα: "
 
@@ -2457,7 +2457,7 @@ msgstr "Χρειάζονται τουλάχιστον δύο έγκυρες ομ
 msgid "You won't be able to play before selecting a team!"
 msgstr "Δεν μπορείτε να παίξετε χωρίς να διαλέξετε ομάδα!"
 
-#: src/weapon/weapon_launcher.cpp:545
+#: src/weapon/weapon_launcher.cpp:552
 msgid "Your shot has missed!"
 msgstr "Αστόχησες..."
 

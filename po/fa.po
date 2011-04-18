@@ -119,7 +119,7 @@ msgid "%s is next to a mine!"
 msgstr "%s نزدیک یک مین است!"
 
 #. For translators: extended in "<nickname> (<host>) just connected
-#: src/include/action_handler.cpp:913
+#: src/include/action_handler.cpp:950
 #, fuzzy, c-format
 #| msgid "%i player connected"
 #| msgid_plural "%i players connected"
@@ -127,7 +127,7 @@ msgid "%s just connected"
 msgstr "بازیکن %i وصل شد"
 
 #. For translators: extended in "<nickname> (<host>) just disconnected
-#: src/include/action_handler.cpp:1025
+#: src/include/action_handler.cpp:1066
 #, fuzzy, c-format
 #| msgid "%i player connected"
 #| msgid_plural "%i players connected"
@@ -139,7 +139,7 @@ msgstr "بازیکن %i وصل شد"
 msgid "%s kicked from game"
 msgstr ""
 
-#: src/include/action_handler.cpp:474
+#: src/include/action_handler.cpp:468
 #, c-format
 msgid "%s needs a pause."
 msgstr ""
@@ -509,7 +509,7 @@ msgstr "سندان"
 msgid "Area currently displayed"
 msgstr ""
 
-#: src/main.cpp:346
+#: src/main.cpp:358
 msgid "Authors:"
 msgstr "نویسندگان:"
 
@@ -662,7 +662,7 @@ msgstr ""
 msgid "Check updates online?"
 msgstr ""
 
-#: src/menu/map_selection_box.cpp:225
+#: src/menu/map_selection_box.cpp:227
 msgid "Choose randomly between the different maps"
 msgstr "به صورت تصادفی یک نقشه از بین نقشه‌های مختلف انتخاب کن"
 
@@ -702,7 +702,7 @@ msgid ""
 msgstr ""
 
 #. Client Mode
-#: src/menu/network_menu.cpp:167 src/network/network.cpp:448
+#: src/menu/network_menu.cpp:167 src/network/network.cpp:453
 msgid "Client mode"
 msgstr "حالت کارگیر (کلاینت)"
 
@@ -907,7 +907,7 @@ msgid "Error: Unable to start the server"
 msgstr "مشکل: ناتوان در راه‌اندازی یک کارگزار"
 
 #: src/menu/network_connection_menu.cpp:495
-#: tools/servers/game_server/server.cpp:337
+#: tools/servers/game_server/server.cpp:389
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -977,7 +977,7 @@ msgstr "تمام صفحه؟"
 msgid "Game"
 msgstr ""
 
-#: src/include/action_handler.cpp:882
+#: src/include/action_handler.cpp:919
 msgid ""
 "Game is not synchronized anymore! This is BAD, the network game will be "
 "interrupted, sorry. Please, report the bug to the Warmux Team by mail or "
@@ -1078,7 +1078,7 @@ msgstr "بجنب، خیلی کندی! بابا صد رحمت به لاک‌پش�
 msgid "I like WarMUX :)"
 msgstr ""
 
-#: src/main.cpp:284
+#: src/main.cpp:290
 #, fuzzy
 msgid ""
 "If you found a bug or have a feature request send us an email (in english, "
@@ -1641,7 +1641,7 @@ msgstr ""
 msgid "Quit"
 msgstr "خروج"
 
-#: src/main.cpp:273
+#: src/main.cpp:279
 #, fuzzy
 msgid "Quit Warmux"
 msgstr "خروج از ورموکس"
@@ -1655,7 +1655,7 @@ msgstr "اجرای بازی"
 msgid "Rail Gun"
 msgstr ""
 
-#: src/menu/map_selection_box.cpp:224
+#: src/menu/map_selection_box.cpp:226
 msgid "Random map"
 msgstr "نقشه تصادفی"
 
@@ -1714,7 +1714,7 @@ msgstr ""
 msgid "Riot Bomb"
 msgstr "بمب تخریبی"
 
-#: src/main.cpp:83
+#: src/main.cpp:89
 msgid "Run game"
 msgstr "اجرای بازی"
 
@@ -1749,7 +1749,7 @@ msgstr "آدرس کارگزار:"
 msgid "Server available on Internet"
 msgstr "کارگزار حاضر در اینترنت"
 
-#: src/menu/network_menu.cpp:174 src/network/network.cpp:478
+#: src/menu/network_menu.cpp:174 src/network/network.cpp:483
 msgid "Server mode"
 msgstr "حالت کارگزار"
 
@@ -1831,7 +1831,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "شرمنده، در حال حاضر، هیچ بازی منتظر بازیکنان دیگر نیست."
 
 #: src/menu/network_connection_menu.cpp:444
-#: tools/servers/game_server/server.cpp:322
+#: tools/servers/game_server/server.cpp:374
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1965,7 +1965,7 @@ msgid ""
 "when it has no players left or its time has ran out."
 msgstr ""
 
-#: src/network/network_client.cpp:99
+#: src/network/network_client.cpp:100
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -2189,7 +2189,7 @@ msgstr ""
 "دارید\n"
 "یک بار در هر نوبت"
 
-#: src/main.cpp:200
+#: src/main.cpp:206
 msgid "Version"
 msgstr "نسخه"
 
@@ -2217,17 +2217,17 @@ msgstr ""
 msgid "Waiting for remote players"
 msgstr ""
 
-#: src/menu/network_menu.cpp:509
+#: src/menu/network_menu.cpp:514
 #, fuzzy
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "در انتظار کارگزار، شما فقط می‌توانید رد کنید و یا گپ بزنید!"
 
-#: src/main.cpp:211
+#: src/main.cpp:217
 #, fuzzy
 msgid "Warmux launching..."
 msgstr "ورموکس در حال اجراست..."
 
-#: src/main.cpp:345
+#: src/main.cpp:357
 #, fuzzy
 msgid "Warmux version "
 msgstr "نسخه‌ی ورموکس"
@@ -2246,7 +2246,7 @@ msgstr ""
 msgid "Weapons"
 msgstr "اسلحه‌ها"
 
-#: src/main.cpp:355
+#: src/main.cpp:367
 msgid "Website: "
 msgstr "وب‌سایت: "
 
@@ -2338,7 +2338,7 @@ msgstr "شما حداقل به ۲ تیم نیاز دارید!"
 msgid "You won't be able to play before selecting a team!"
 msgstr "شما قبل از اینکه تیمی انتخاب کنید نمی‌توانید بازی کنید!"
 
-#: src/weapon/weapon_launcher.cpp:545
+#: src/weapon/weapon_launcher.cpp:552
 msgid "Your shot has missed!"
 msgstr "شلیک شما از دست رفت!"
 

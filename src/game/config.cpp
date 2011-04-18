@@ -741,16 +741,13 @@ uint Config::GetMaxVolume()
 const std::string& Config::GetTtfFilename() const
 {
 #ifdef ENABLE_NLS
-  std::map<std::string, std::string>::const_iterator it = fonts.begin();
-  while (it != fonts.end()) {
-    const std::string& lang = it->first;
-    if (!lang.compare(0, lang.size(), default_language)) {
-      printf("Matched %s to %s\n", default_language.c_str(), lang.c_str());
-      return it->second;
-    }
-    ++it;
+  if (fonts.find(default_language) == fonts.end())
+    return ttf_filename;
+  else {
+    std::map<std::string, std::string>::const_iterator it = fonts.find(default_language);
+    ASSERT(it != fonts.end());
+    return it->second;
   }
-  return ttf_filename;
 #else
   return ttf_filename;
 #endif

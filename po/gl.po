@@ -5,12 +5,12 @@
 #
 # Ignacio Casal Quinteiro <icq@cvs.gnome.org>, 2007.
 # Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2008, 2009, 2010. (Proxecto Trasno <proxecto@trasno.net>).
-# Adrián Chaves Fernández (Gallaecio) <adriyetichaves@gmail.com>, 2010.
+# Adrián Chaves Fernández (Gallaecio) <adriyetichaves@gmail.com>, 2010, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Warmux. gl\n"
 "Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
-"PO-Revision-Date: 2010-12-11 20:42+0100\n"
+"PO-Revision-Date: 2011-04-02 14:39+0200\n"
 "Last-Translator: Adrián Chaves Fernández (Gallaecio) <adriyetichaves@gmail."
 "com>\n"
 "Language-Team: American English <proxecto@trasno.net>\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);X-Generator: KBabel 1.11.4\n"
 "X-Poedit-Language: Galician\n"
 "X-Poedit-Country: SPAIN\n"
-"X-Generator: Lokalize 1.1\n"
+"X-Generator: Lokalize 1.2\n"
 
 #: src/map/maps_list.cpp:379
 #, c-format
@@ -130,27 +130,27 @@ msgid "%s is next to a mine!"
 msgstr "%s anda preto dunha mina!"
 
 #. For translators: extended in "<nickname> (<host>) just connected
-#: src/include/action_handler.cpp:913
-#, fuzzy, c-format
+#: src/include/action_handler.cpp:950
+#, c-format
 #| msgid "%i player connected"
 #| msgid_plural "%i players connected"
 msgid "%s just connected"
-msgstr "%i xogador conectado"
+msgstr "%s acaba de conectarse"
 
 #. For translators: extended in "<nickname> (<host>) just disconnected
-#: src/include/action_handler.cpp:1025
-#, fuzzy, c-format
+#: src/include/action_handler.cpp:1066
+#, c-format
 #| msgid "%i player connected"
 #| msgid_plural "%i players connected"
 msgid "%s just disconnected"
-msgstr "%i xogador conectado"
+msgstr "%s acaba de desconectarse"
 
 #: src/network/admin_commands.cpp:66
 #, c-format
 msgid "%s kicked from game"
 msgstr "%s foi expulsado da partida."
 
-#: src/include/action_handler.cpp:474
+#: src/include/action_handler.cpp:468
 #, c-format
 msgid "%s needs a pause."
 msgstr "%s pediu un descanso."
@@ -564,7 +564,7 @@ msgstr "Bicorna"
 msgid "Area currently displayed"
 msgstr "Zona que se está a ver."
 
-#: src/main.cpp:346
+#: src/main.cpp:358
 msgid "Authors:"
 msgstr "Autores:"
 
@@ -668,6 +668,8 @@ msgid ""
 "Change replay speed.\n"
 "Right part displays current speed."
 msgstr ""
+"Cambiar a velocidade da repetición.\n"
+"A velocidade aparece na parte dereita."
 
 #: src/interface/man_machine_interface.cpp:1176
 msgid "Change weapon"
@@ -711,7 +713,7 @@ msgid "Check updates online?"
 msgstr ""
 "Empregar a Internet para comprobar se hai unha nova versión dispoñíbel?"
 
-#: src/menu/map_selection_box.cpp:225
+#: src/menu/map_selection_box.cpp:227
 msgid "Choose randomly between the different maps"
 msgstr "Elixir un dos escenarios ao chou."
 
@@ -763,7 +765,7 @@ msgstr ""
 "Non podes escoller varias veces o mesmo equipo."
 
 #. Client Mode
-#: src/menu/network_menu.cpp:167 src/network/network.cpp:448
+#: src/menu/network_menu.cpp:167 src/network/network.cpp:453
 msgid "Client mode"
 msgstr "Modo cliente"
 
@@ -781,7 +783,7 @@ msgstr "Bazuca de fragmentación"
 
 #: src/menu/results_menu.cpp:366
 msgid "Comment:"
-msgstr ""
+msgstr "Comentario:"
 
 #: src/weapon/suicide.cpp:46
 msgid "Commit Suicide"
@@ -836,6 +838,8 @@ msgid ""
 "Current turn time info.\n"
 "Click to launch the pause menu."
 msgstr ""
+"Tempo restante da quenda.\n"
+"Premer para acceder ao menú de pausa."
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:88
@@ -977,7 +981,7 @@ msgid "Error: Unable to start the server"
 msgstr "Houbo un erro: non se puido iniciar o servidor."
 
 #: src/menu/network_connection_menu.cpp:495
-#: tools/servers/game_server/server.cpp:337
+#: tools/servers/game_server/server.cpp:389
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -994,7 +998,8 @@ msgstr ""
 #: src/team/team.cpp:161
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
-msgstr "Houbo un erro: non se puido atopar o individuo «%s» para o equipo «%s»."
+msgstr ""
+"Houbo un erro: non se puido atopar o individuo «%s» para o equipo «%s»."
 
 #: src/menu/help_menu.cpp:65
 msgid "Experiment new game rules"
@@ -1029,13 +1034,12 @@ msgstr "Non se puido abrir un ficheiro temporal: %s."
 
 #: src/menu/results_menu.cpp:434
 msgid "Failed to save replay"
-msgstr ""
+msgstr "Non se puido gardar a repetición."
 
 #: src/menu/results_menu.cpp:354
-#, fuzzy
 #| msgid "Game name:"
 msgid "Filename:"
-msgstr "Nome da partida:"
+msgstr "Nome do ficheiro:"
 
 #: src/weapon/flamethrower.cpp:134
 msgid "Flame Thrower"
@@ -1053,13 +1057,18 @@ msgstr "Pantalla completa?"
 msgid "Game"
 msgstr "Partida"
 
-#: src/include/action_handler.cpp:882
+#: src/include/action_handler.cpp:919
 msgid ""
 "Game is not synchronized anymore! This is BAD, the network game will be "
 "interrupted, sorry. Please, report the bug to the Warmux Team by mail or "
 "through the forum. Precise your computer configuration and attach the bug."
 "wrf file that has just been created in your home folder."
 msgstr ""
+"A partida xa non está sincronizada. Iso non é nada bo, e desgraciadamente"
+"vaise interromper a partida. Informe do erro ao equipo de desenvolvemento"
+"de Warmux por correo electrónico ou nos foros. Non esqueza detallar as"
+"peculiaridades do seu computador e engadir o ficheiro «bug.wrf» que atopará"
+"no seu cartafol persoal."
 
 #: src/menu/help_menu.cpp:59
 msgid "Game menu"
@@ -1079,7 +1088,7 @@ msgstr "Nome da partida:"
 
 #: src/include/action_handler.cpp:245
 msgid "Game out of sync!"
-msgstr ""
+msgstr "A partida deixou de estar sincronizada!"
 
 #: src/weapon/gnu.cpp:162
 msgid "Gnu Launcher"
@@ -1135,10 +1144,9 @@ msgid "Help"
 msgstr "Axuda"
 
 #: src/menu/options_menu.cpp:128
-#, fuzzy
 #| msgid "High jump"
 msgid "High"
-msgstr "Saltar alto"
+msgstr "Alta"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/interface/man_machine_interface.cpp:1172 src/menu/help_menu.cpp:125
@@ -1155,9 +1163,9 @@ msgstr "Veña, ho, que é para hoxe!"
 
 #: src/menu/results_menu.cpp:367
 msgid "I like WarMUX :)"
-msgstr ""
+msgstr "Gústame WarMUX :)"
 
-#: src/main.cpp:284
+#: src/main.cpp:290
 msgid ""
 "If you found a bug or have a feature request send us an email (in english, "
 "please):"
@@ -1251,7 +1259,7 @@ msgstr "Interface e controis táctiles, máis información noutras lapelas."
 
 #: src/menu/results_menu.cpp:422
 msgid "Invalid filename"
-msgstr ""
+msgstr "Nome de ficheiro incorrecto."
 
 #: src/game/game.cpp:1041
 msgid "It's a present!"
@@ -1324,7 +1332,7 @@ msgstr "Equipos locais:"
 
 #: src/menu/options_menu.cpp:125
 msgid "Low memory"
-msgstr ""
+msgstr "Pouca memoria"
 
 #: src/weapon/lowgrav.cpp:49
 msgid "LowGrav"
@@ -1374,10 +1382,9 @@ msgid "Maximum FPS"
 msgstr "Número máximo de FPS"
 
 #: src/menu/options_menu.cpp:126
-#, fuzzy
 #| msgid "Podium"
 msgid "Medium"
-msgstr "Podio"
+msgstr "Media"
 
 #: src/menu/benchmark_menu.cpp:111
 msgid "Menu"
@@ -1718,7 +1725,7 @@ msgstr "Batallas públicas"
 
 #: src/menu/options_menu.cpp:130
 msgid "Quality"
-msgstr ""
+msgstr "Calidade"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:147
@@ -1729,7 +1736,7 @@ msgstr "Sae da partida de seguida con Ctrl"
 msgid "Quit"
 msgstr "Saír"
 
-#: src/main.cpp:273
+#: src/main.cpp:279
 msgid "Quit Warmux"
 msgstr "Saír do Warmux"
 
@@ -1741,7 +1748,7 @@ msgstr "Saír da partida"
 msgid "Rail Gun"
 msgstr "Rifle eléctrico"
 
-#: src/menu/map_selection_box.cpp:224
+#: src/menu/map_selection_box.cpp:226
 msgid "Random map"
 msgstr "Escenario ao chou"
 
@@ -1760,20 +1767,18 @@ msgstr "Lendo o ficheiro de configuración persoal."
 
 #: src/menu/main_menu.cpp:73
 msgid "Replay"
-msgstr ""
+msgstr "Repetición"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:110
-#, fuzzy
 #| msgid "Current controls"
 msgid "Replay controls"
-msgstr "Controis actuais"
+msgstr "Controis da repetición"
 
 #: src/game/game.cpp:211
-#, fuzzy
 #| msgid "Game mode"
 msgid "Replay mode"
-msgstr "Modo de xogo"
+msgstr "Modo de repetición"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:108
@@ -1781,10 +1786,12 @@ msgid ""
 "Replay progress bar, not used for precise seeking.\n"
 "Short click for a +30s jump, long for +60s jump."
 msgstr ""
+"Barra de progreso da repetición, non permite buscas precisas.\n"
+"Prema pouco tempo para avanzar trinta segundos, ou máis para sesenta."
 
 #: src/menu/results_menu.cpp:441
 msgid "Replay saved"
-msgstr ""
+msgstr "Gardouse a repetición."
 
 #: src/menu/options_menu.cpp:152
 msgid "Resolution"
@@ -1796,18 +1803,20 @@ msgid ""
 "Right button to resume/pause replay.\n"
 "Square right button to immediately exit it."
 msgstr ""
+"Botón dereito para deter ou reaundar a reprodución.\n"
+"Botón dereito dúas veces para saír."
 
 #: src/weapon/riot_bomb.cpp:119
 msgid "Riot Bomb"
 msgstr "Bomba antimateria"
 
-#: src/main.cpp:83
+#: src/main.cpp:89
 msgid "Run game"
 msgstr "Comezar a partida"
 
 #: src/menu/results_menu.cpp:379
 msgid "Save replay?"
-msgstr ""
+msgstr "Gardar a repetición?"
 
 #: src/network/chat.cpp:83
 msgid "Say: "
@@ -1834,7 +1843,7 @@ msgstr "Enderezo do servidor:"
 msgid "Server available on Internet"
 msgstr "Servidor dispoñíbel na Internet."
 
-#: src/menu/network_menu.cpp:174 src/network/network.cpp:478
+#: src/menu/network_menu.cpp:174 src/network/network.cpp:483
 msgid "Server mode"
 msgstr "Modo servidor"
 
@@ -1923,7 +1932,7 @@ msgid "Sorry, currently, no game is waiting for players"
 msgstr "Nestes momentos non hai partidas agardando por xogadores."
 
 #: src/menu/network_connection_menu.cpp:444
-#: tools/servers/game_server/server.cpp:322
+#: tools/servers/game_server/server.cpp:374
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1967,7 +1976,7 @@ msgstr "Lanzador de Tux"
 
 #: src/menu/help_menu.cpp:105
 msgid "Switch between classical and replay interface"
-msgstr ""
+msgstr "Intercambiar as interfaces clásica e de repetición"
 
 #: src/weapon/syringe.cpp:69
 msgid "Syringe"
@@ -1984,17 +1993,16 @@ msgstr "Falar nas batallas en liña."
 
 #: src/menu/options_menu.cpp:614
 msgid "Team deleted"
-msgstr ""
+msgstr "Eliminouse o equipo."
 
 #: src/menu/results_menu.cpp:338
 msgid "Team graphs"
 msgstr "Gráficos do equipo"
 
 #: src/menu/options_menu.cpp:594
-#, fuzzy
 #| msgid "Team stats"
 msgid "Team saved"
-msgstr "Estatísticas do equipo"
+msgstr "Gardouse do equipo."
 
 #: src/menu/results_menu.cpp:316
 msgid "Team stats"
@@ -2056,7 +2064,7 @@ msgstr ""
 "O modo agresivo non restablece o tempo entre as quendas dos xogadores. Os "
 "equipos perden ao quedar sen xogadores ou sen tempo."
 
-#: src/network/network_client.cpp:99
+#: src/network/network_client.cpp:100
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -2285,7 +2293,7 @@ msgstr ""
 "Disparo: mantén premida a barra espaciadora ata acadar a potencia desexada.\n"
 "Un uso por quenda."
 
-#: src/main.cpp:200
+#: src/main.cpp:206
 msgid "Version"
 msgstr "Versión"
 
@@ -2314,17 +2322,17 @@ msgstr "Agardando por %s."
 msgid "Waiting for remote players"
 msgstr "Agardando polos xogadores remotos."
 
-#: src/menu/network_menu.cpp:509
+#: src/menu/network_menu.cpp:514
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr ""
 "Agardando polo servidor. Todo canto podes facer é cancelar, conversar ou ir "
 "ao baño!"
 
-#: src/main.cpp:211
+#: src/main.cpp:217
 msgid "Warmux launching..."
 msgstr "Iniciando o Warmux..."
 
-#: src/main.cpp:345
+#: src/main.cpp:357
 msgid "Warmux version "
 msgstr "Versión do Warmux "
 
@@ -2341,7 +2349,7 @@ msgstr "Arma: Disparar / Caixas de bonificación: caer."
 msgid "Weapons"
 msgstr "Armas"
 
-#: src/main.cpp:355
+#: src/main.cpp:367
 msgid "Website: "
 msgstr "Sitio web: "
 
@@ -2414,10 +2422,12 @@ msgstr "Estás só. :-/"
 msgid ""
 "You are the new turn master! Learn about your new powers by typing /help"
 msgstr ""
+"Es o novo administrador das quendas, escribe «/help» para máis información "
+"sobre os teus novos poderes."
 
 #: src/menu/options_menu.cpp:583
 msgid "You must fill Head Commander and all player names"
-msgstr ""
+msgstr "Debes darlles nome ao comandante e ao resto dos xogadores."
 
 #: src/map/maps_list.cpp:311
 msgid "You need at least one valid map!"
@@ -2431,7 +2441,7 @@ msgstr "Necesitas polo menos dous equipos correctos!"
 msgid "You won't be able to play before selecting a team!"
 msgstr "Non poderás xogar sen antes escoller un equipo!"
 
-#: src/weapon/weapon_launcher.cpp:545
+#: src/weapon/weapon_launcher.cpp:552
 msgid "Your shot has missed!"
 msgstr "O teu disparo foi tomar polo cú!"
 

@@ -309,9 +309,6 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   widgets.Pack();
 
   msg_box->NewMessage(_("Have a good game!"));
-#ifndef HAVE_LIBCURL
-  msg_box->NewMessage(_("This version was compiled without curl, you can't list public games!"));
-#endif
   msg_box->NewMessage(""); // Skip a line
 
   //Double click
