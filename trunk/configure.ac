@@ -282,8 +282,25 @@ fi
 if test "$static" = yes; then
   LIBS="$LIBS -lm -ldl -lfreetype -lz"
 fi
-AC_CHECK_LIB(SDL_gfx, rotozoomSurfaceXY,,check_sdl_gfx="no")
-AC_CHECK_HEADER(SDL_rotozoom.h,,check_sdl_gfx="no")
+AC_CHECK_HEADER(SDL_rotozoom.h,,AC_MSG_ERROR(Please install SDL_gfx))
+AC_CHECK_LIB(SDL_gfx, rotozoomSurfaceXY,, AC_MSG_ERROR(Please install SDL_gfx))
+AC_MSG_CHECKING([whether SDL_gfx - version >= 2.0.22 ])
+AC_RUN_IFELSE([
+#include <stdio.h>
+#include <SDL_gfxPrimitives.h>
+#undef main
+int main(void)
+{
+  FILE *f = fopen("conftest.out", "wt+");
+  fprintf(f, "%i.%i.%i\n",
+         SDL_GFXPRIMITIVES_MAJOR, SDL_GFXPRIMITIVES_MINOR, SDL_GFXPRIMITIVES_MICRO);
+  fclose(f);
+  int ver = SDL_GFXPRIMITIVES_MAJOR*1000+SDL_GFXPRIMITIVES_MINOR*100+SDL_GFXPRIMITIVES_MICRO;
+  return ver < 2022;
+}],
+  [echo "`cat conftest.out`, OK"],
+  [cat conftest.out
+   AC_MSG_ERROR(Please upgrade SDL_gfx)])
 
 dnl === Check for curl =====================================================
 
@@ -325,7 +342,6 @@ if test \
      x${check_sdl_image} = xno \
   -o x${check_sdl_mixer} = xno \
   -o x${check_sdl_ttf} = xno \
-  -o x${check_sdl_gfx} = xno \
   -o x${check_sdl_net} = xno \
   -o x${check_libxml} = xno \
   ; then
@@ -338,9 +354,6 @@ if test \
   fi
   if test x${check_sdl_ttf} = xno; then
     AC_MSG_RESULT([ERROR: SDL_ttf library required])
-  fi
-  if test x${check_sdl_gfx} = xno; then
-    AC_MSG_RESULT([ERROR: SDL_gfx library version >= 2.0.13 required])
   fi
   if test x${check_sdl_net} = xno; then
     AC_MSG_RESULT([ERROR: SDL_net library required])
