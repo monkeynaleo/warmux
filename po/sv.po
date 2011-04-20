@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: warmux\n"
 "Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
+"POT-Creation-Date: 2011-04-20 19:52+0200\n"
 "PO-Revision-Date: 2009-09-11 15:45+0100\n"
 "Last-Translator: Peter Olsson <peterdenbra@gmail.com>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -51,13 +52,13 @@ msgstr "%s <%s> även känd som %s från %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> från %s"
 
-#: src/menu/team_box.cpp:253
+#: src/menu/team_box.cpp:254
 #, c-format
 msgid "%s Team"
 msgstr "Lag %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:245
+#: src/menu/team_box.cpp:246
 #, c-format
 msgid "%s Team - Remote"
 msgstr "Lag %s - Fjärr"
@@ -124,18 +125,14 @@ msgid "%s is next to a mine!"
 msgstr "%s står bredvid en mina!"
 
 #. For translators: extended in "<nickname> (<host>) just connected
-#: src/include/action_handler.cpp:913
+#: src/include/action_handler.cpp:952
 #, fuzzy, c-format
-#| msgid "%i player connected"
-#| msgid_plural "%i players connected"
 msgid "%s just connected"
 msgstr "%i spelare ansluten"
 
 #. For translators: extended in "<nickname> (<host>) just disconnected
-#: src/include/action_handler.cpp:1025
+#: src/include/action_handler.cpp:1068
 #, fuzzy, c-format
-#| msgid "%i player connected"
-#| msgid_plural "%i players connected"
 msgid "%s just disconnected"
 msgstr "%i spelare ansluten"
 
@@ -144,7 +141,7 @@ msgstr "%i spelare ansluten"
 msgid "%s kicked from game"
 msgstr ""
 
-#: src/include/action_handler.cpp:474
+#: src/include/action_handler.cpp:468
 #, c-format
 msgid "%s needs a pause."
 msgstr ""
@@ -556,7 +553,7 @@ msgstr "Städ"
 msgid "Area currently displayed"
 msgstr ""
 
-#: src/main.cpp:346
+#: src/main.cpp:358
 msgid "Authors:"
 msgstr "Upphovsmän:"
 
@@ -707,7 +704,7 @@ msgstr ""
 msgid "Check updates online?"
 msgstr "Leta uppdateringar online?"
 
-#: src/menu/map_selection_box.cpp:225
+#: src/menu/map_selection_box.cpp:227
 msgid "Choose randomly between the different maps"
 msgstr "Välj slumpmässigt mellan de olika banorna"
 
@@ -747,7 +744,7 @@ msgid ""
 msgstr ""
 
 #. Client Mode
-#: src/menu/network_menu.cpp:167 src/network/network.cpp:448
+#: src/menu/network_menu.cpp:167 src/network/network.cpp:455
 msgid "Client mode"
 msgstr "Klientläge"
 
@@ -762,6 +759,11 @@ msgstr "Splitterbomb"
 #: src/weapon/cluzooka.cpp:373
 msgid "Cluzooka"
 msgstr "Klustergevär"
+
+#. Comment
+#: src/menu/replay_menu.cpp:89
+msgid "Comment"
+msgstr ""
 
 #: src/menu/results_menu.cpp:366
 msgid "Comment:"
@@ -796,7 +798,7 @@ msgstr "Konstruera"
 msgid "Controlled by: "
 msgstr "Kontrolleras av: "
 
-#: lib/warmux/net/download.cpp:199
+#: lib/warmux/net/download.cpp:203
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr "Kunde inte läsa senaste version från %s"
@@ -831,6 +833,12 @@ msgstr ""
 #: src/menu/game_mode_editor.cpp:88
 msgid "Damage per turn during death mode"
 msgstr "Sudden Death rondskada"
+
+#. Date
+#: src/menu/replay_menu.cpp:79
+#, fuzzy
+msgid "Date"
+msgstr "Dynamit"
 
 #: src/interface/man_machine_interface.cpp:1186
 msgid "Decrease explosion delay"
@@ -869,6 +877,12 @@ msgstr ""
 #, fuzzy
 msgid "Drag&drop: Move camera"
 msgstr "Dra och släpp: Flyttar bilden"
+
+#. Duration
+#: src/menu/replay_menu.cpp:84
+#, fuzzy
+msgid "Duration"
+msgstr "Längd per omgång"
 
 #. some death mode options
 #: src/menu/game_mode_editor.cpp:82
@@ -934,27 +948,27 @@ msgstr ""
 "raderas."
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:524
+#: src/menu/network_connection_menu.cpp:527
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Fel: Kunde inte ansluta till %s:%s"
 
-#: src/menu/network_connection_menu.cpp:474
+#: src/menu/network_connection_menu.cpp:477
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "Fel: Kunde inte ansluta till indexservern för att skapa ett spel"
 
-#: src/menu/network_connection_menu.cpp:385
+#: src/menu/network_connection_menu.cpp:388
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
 "Fel: Kunde inte ansluta till indexservern för att söka efter internetspel"
 
-#: src/menu/network_connection_menu.cpp:502
+#: src/menu/network_connection_menu.cpp:505
 msgid "Error: Unable to start the server"
 msgstr "Fel: Kunde inte starta servern"
 
-#: src/menu/network_connection_menu.cpp:495
-#: tools/servers/game_server/server.cpp:337
+#: src/menu/network_connection_menu.cpp:498
+#: tools/servers/game_server/server.cpp:389
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -993,12 +1007,12 @@ msgstr ""
 msgid "FPS"
 msgstr ""
 
-#: lib/warmux/net/download.cpp:184 lib/warmux/net/download.cpp:225
+#: lib/warmux/net/download.cpp:188 lib/warmux/net/download.cpp:229
 #, c-format
 msgid "Fail to create temporary file: %s"
 msgstr ""
 
-#: lib/warmux/net/download.cpp:191
+#: lib/warmux/net/download.cpp:195
 #, fuzzy, c-format
 msgid "Fail to open temporary file: %s"
 msgstr "Kunde inte öppna bankatalogen (%s)!"
@@ -1009,7 +1023,6 @@ msgstr ""
 
 #: src/menu/results_menu.cpp:354
 #, fuzzy
-#| msgid "Game name:"
 msgid "Filename:"
 msgstr "Spelnamn:"
 
@@ -1029,7 +1042,7 @@ msgstr "Helskärm?"
 msgid "Game"
 msgstr "Spelet"
 
-#: src/include/action_handler.cpp:882
+#: src/include/action_handler.cpp:921
 msgid ""
 "Game is not synchronized anymore! This is BAD, the network game will be "
 "interrupted, sorry. Please, report the bug to the Warmux Team by mail or "
@@ -1110,7 +1123,6 @@ msgstr "Hjälp"
 
 #: src/menu/options_menu.cpp:128
 #, fuzzy
-#| msgid "High jump"
 msgid "High"
 msgstr "Högt hopp"
 
@@ -1131,7 +1143,7 @@ msgstr "Skynda dig, du är för långsam!!"
 msgid "I like WarMUX :)"
 msgstr ""
 
-#: src/main.cpp:284
+#: src/main.cpp:290
 msgid ""
 "If you found a bug or have a feature request send us an email (in english, "
 "please):"
@@ -1501,7 +1513,7 @@ msgstr "Inget <%s>-element hittades i xml-konfigurationsfilen!"
 msgid "No player connected"
 msgstr "Inga spelare anslutna"
 
-#: lib/warmux/net/download.cpp:140
+#: lib/warmux/net/download.cpp:144
 msgid "No pointer"
 msgstr ""
 
@@ -1692,7 +1704,7 @@ msgstr ""
 msgid "Quit"
 msgstr "Avsluta"
 
-#: src/main.cpp:273
+#: src/main.cpp:279
 #, fuzzy
 msgid "Quit Warmux"
 msgstr "Avsluta Warmux"
@@ -1705,11 +1717,11 @@ msgstr "Avsluta spel"
 msgid "Rail Gun"
 msgstr ""
 
-#: src/menu/map_selection_box.cpp:224
+#: src/menu/map_selection_box.cpp:226
 msgid "Random map"
 msgstr "Slumpad bana"
 
-#: lib/warmux/net/download.cpp:134
+#: lib/warmux/net/download.cpp:138
 #, fuzzy, c-format
 msgid "Read only %i bytes"
 msgstr "Det finns endast %i lag."
@@ -1731,9 +1743,13 @@ msgstr ""
 msgid "Replay controls"
 msgstr ""
 
+#: src/menu/replay_menu.cpp:69
+#, fuzzy
+msgid "Replay info"
+msgstr "Spelläge"
+
 #: src/game/game.cpp:211
 #, fuzzy
-#| msgid "Game mode"
 msgid "Replay mode"
 msgstr "Spelläge"
 
@@ -1763,7 +1779,7 @@ msgstr ""
 msgid "Riot Bomb"
 msgstr "Massbomb"
 
-#: src/main.cpp:83
+#: src/main.cpp:89
 msgid "Run game"
 msgstr "Kör spel"
 
@@ -1783,6 +1799,10 @@ msgstr "Storlek på Skrollkant"
 msgid "Scroll on border"
 msgstr "Skrolla vid kant"
 
+#: src/menu/replay_menu.cpp:55
+msgid "Select a replay:"
+msgstr ""
+
 #: src/menu/help_menu.cpp:53
 #, fuzzy
 msgid "Select number of playing teams"
@@ -1797,7 +1817,7 @@ msgstr "Serveradress:"
 msgid "Server available on Internet"
 msgstr "Server tillgänglig på Internet"
 
-#: src/menu/network_menu.cpp:174 src/network/network.cpp:478
+#: src/menu/network_menu.cpp:174 src/network/network.cpp:485
 msgid "Server mode"
 msgstr "Serverläge"
 
@@ -1874,12 +1894,12 @@ msgstr "Prickskyttegevär"
 msgid "Someone put a booby trap into the crate!"
 msgstr "Någon har lagt en fälla i lådan!"
 
-#: src/menu/network_connection_menu.cpp:390
+#: src/menu/network_connection_menu.cpp:393
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Tyvärr, inget spel väntar just nu på spelare"
 
-#: src/menu/network_connection_menu.cpp:444
-#: tools/servers/game_server/server.cpp:322
+#: src/menu/network_connection_menu.cpp:447
+#: tools/servers/game_server/server.cpp:374
 #, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1948,7 +1968,6 @@ msgstr "Grafer"
 
 #: src/menu/options_menu.cpp:594
 #, fuzzy
-#| msgid "Team stats"
 msgid "Team saved"
 msgstr "Lagstatistik"
 
@@ -1956,8 +1975,10 @@ msgstr "Lagstatistik"
 msgid "Team stats"
 msgstr "Lagstatistik"
 
+#. Teams
 #: src/game/game.cpp:168 src/menu/game_menu.cpp:76 src/menu/game_menu.cpp:80
 #: src/menu/network_menu.cpp:98 src/menu/network_menu.cpp:102
+#: src/menu/replay_menu.cpp:94
 msgid "Teams"
 msgstr "Lag"
 
@@ -2075,6 +2096,10 @@ msgstr[1] "Det finns endast %i lag."
 #: src/gui/control_config.cpp:206
 #, c-format
 msgid "This key has already been attributed to '%s'"
+msgstr ""
+
+#: src/menu/network_connection_menu.cpp:313
+msgid "This version was compiled without curl, you can't list public games!"
 msgstr ""
 
 #: src/menu/benchmark_menu.cpp:113 src/menu/results_menu.cpp:339
@@ -2235,7 +2260,8 @@ msgstr ""
 "Avfyra : håll ner mellanslag tills önskad kraft har uppnåts\n"
 "en ammunition per omgång"
 
-#: src/main.cpp:200
+#. Version
+#: src/main.cpp:206 src/menu/main_menu.cpp:90 src/menu/replay_menu.cpp:74
 msgid "Version"
 msgstr "Version"
 
@@ -2264,16 +2290,16 @@ msgstr ""
 msgid "Waiting for remote players"
 msgstr ""
 
-#: src/menu/network_menu.cpp:509
+#: src/menu/network_menu.cpp:514
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Väntar på servern. Allt du kan göra är att avbryta eller chatta!"
 
-#: src/main.cpp:211
+#: src/main.cpp:217
 #, fuzzy
 msgid "Warmux launching..."
 msgstr "Warmux startar..."
 
-#: src/main.cpp:345
+#: src/main.cpp:357
 #, fuzzy
 msgid "Warmux version "
 msgstr "Warmux version "
@@ -2293,7 +2319,7 @@ msgstr "Vapen: Avfyra / Bonuslåda: faller snabbt"
 msgid "Weapons"
 msgstr "Vapen"
 
-#: src/main.cpp:355
+#: src/main.cpp:367
 msgid "Website: "
 msgstr "Webbplats: "
 
@@ -2352,7 +2378,7 @@ msgstr "Fel bannamn!"
 msgid "Wrong team!"
 msgstr "Fel lag!"
 
-#: lib/warmux/net/download.cpp:150
+#: lib/warmux/net/download.cpp:154
 #, c-format
 msgid "Wrote %i/%i bytes"
 msgstr ""
@@ -2382,7 +2408,7 @@ msgstr "Du behöver åtminstone två giltiga lag!"
 msgid "You won't be able to play before selecting a team!"
 msgstr "Du kommer inte att kunna spela innan du har valt ett lag!"
 
-#: src/weapon/weapon_launcher.cpp:545
+#: src/weapon/weapon_launcher.cpp:552
 msgid "Your shot has missed!"
 msgstr "Ditt skott missade!"
 

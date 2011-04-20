@@ -9,6 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sl\n"
 "Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
+"POT-Creation-Date: 2011-04-20 19:52+0200\n"
 "PO-Revision-Date: 2009-01-05 18:30+0100\n"
 "Last-Translator: Jaka Kranjc <mokovec@gmail.com>\n"
 "Language-Team:  <sl@li.org>\n"
@@ -58,13 +59,13 @@ msgstr "%s <%s> znan kot %s iz %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> iz <%s>"
 
-#: src/menu/team_box.cpp:253
+#: src/menu/team_box.cpp:254
 #, c-format
 msgid "%s Team"
 msgstr "Ekipa %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:245
+#: src/menu/team_box.cpp:246
 #, c-format
 msgid "%s Team - Remote"
 msgstr "Ekipa %s - Oddaljena"
@@ -129,18 +130,14 @@ msgid "%s is next to a mine!"
 msgstr "%s je blizu mine!"
 
 #. For translators: extended in "<nickname> (<host>) just connected
-#: src/include/action_handler.cpp:913
+#: src/include/action_handler.cpp:952
 #, fuzzy, c-format
-#| msgid "%i player connected"
-#| msgid_plural "%i players connected"
 msgid "%s just connected"
 msgstr "povezan %i igralec"
 
 #. For translators: extended in "<nickname> (<host>) just disconnected
-#: src/include/action_handler.cpp:1025
+#: src/include/action_handler.cpp:1068
 #, fuzzy, c-format
-#| msgid "%i player connected"
-#| msgid_plural "%i players connected"
 msgid "%s just disconnected"
 msgstr "povezan %i igralec"
 
@@ -149,7 +146,7 @@ msgstr "povezan %i igralec"
 msgid "%s kicked from game"
 msgstr ""
 
-#: src/include/action_handler.cpp:474
+#: src/include/action_handler.cpp:468
 #, c-format
 msgid "%s needs a pause."
 msgstr "%s rabi pavzo."
@@ -623,7 +620,7 @@ msgstr "Nakovalo"
 msgid "Area currently displayed"
 msgstr ""
 
-#: src/main.cpp:346
+#: src/main.cpp:358
 msgid "Authors:"
 msgstr "Avtorji:"
 
@@ -769,7 +766,7 @@ msgstr ""
 msgid "Check updates online?"
 msgstr "Preveri možno posodobitev?"
 
-#: src/menu/map_selection_box.cpp:225
+#: src/menu/map_selection_box.cpp:227
 msgid "Choose randomly between the different maps"
 msgstr "Izberi naključno karto"
 
@@ -809,7 +806,7 @@ msgid ""
 msgstr ""
 
 #. Client Mode
-#: src/menu/network_menu.cpp:167 src/network/network.cpp:448
+#: src/menu/network_menu.cpp:167 src/network/network.cpp:455
 msgid "Client mode"
 msgstr "Odjemalski način"
 
@@ -824,6 +821,11 @@ msgstr "Kasetna granata"
 #: src/weapon/cluzooka.cpp:373
 msgid "Cluzooka"
 msgstr "Kasetna bazuka"
+
+#. Comment
+#: src/menu/replay_menu.cpp:89
+msgid "Comment"
+msgstr ""
 
 #: src/menu/results_menu.cpp:366
 msgid "Comment:"
@@ -858,7 +860,7 @@ msgstr "Tram"
 msgid "Controlled by: "
 msgstr "Vodja: "
 
-#: lib/warmux/net/download.cpp:199
+#: lib/warmux/net/download.cpp:203
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr "Ni bilo mogoče pridobiti zadnje različice iz %s"
@@ -893,6 +895,12 @@ msgstr ""
 #: src/menu/game_mode_editor.cpp:88
 msgid "Damage per turn during death mode"
 msgstr "Škoda na potezo v fatalnem načinu"
+
+#. Date
+#: src/menu/replay_menu.cpp:79
+#, fuzzy
+msgid "Date"
+msgstr "Dinamit"
 
 #: src/interface/man_machine_interface.cpp:1186
 msgid "Decrease explosion delay"
@@ -930,6 +938,12 @@ msgstr ""
 #: src/menu/help_menu.cpp:128
 msgid "Drag&drop: Move camera"
 msgstr "Povleci&spusti: premakne kamero"
+
+#. Duration
+#: src/menu/replay_menu.cpp:84
+#, fuzzy
+msgid "Duration"
+msgstr "Trajanje poteze"
 
 #. some death mode options
 #: src/menu/game_mode_editor.cpp:82
@@ -991,30 +1005,30 @@ msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr "Napaka pri brisanju datoteke \"%s\". Ni bilo mogoče izbrisati ekipe."
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:524
+#: src/menu/network_connection_menu.cpp:527
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Napaka: Ni se bilo mogoče povezati na %s:%s"
 
-#: src/menu/network_connection_menu.cpp:474
+#: src/menu/network_connection_menu.cpp:477
 msgid "Error: Unable to contact the index server to host a game"
 msgstr ""
 "Napaka: Ni bilo mogoče kontaktirati strežnika s kazalom, da bi lahko gostili "
 "igro"
 
-#: src/menu/network_connection_menu.cpp:385
+#: src/menu/network_connection_menu.cpp:388
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
 "Napaka: Ni bilo mogoče kontaktirati strežnika s kazalom, da bi lahko iskali "
 "internetne igre"
 
-#: src/menu/network_connection_menu.cpp:502
+#: src/menu/network_connection_menu.cpp:505
 msgid "Error: Unable to start the server"
 msgstr "Napaka: Ni bilo mogoče zagnati strežnika"
 
-#: src/menu/network_connection_menu.cpp:495
-#: tools/servers/game_server/server.cpp:337
+#: src/menu/network_connection_menu.cpp:498
+#: tools/servers/game_server/server.cpp:389
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -1053,12 +1067,12 @@ msgstr ""
 msgid "FPS"
 msgstr ""
 
-#: lib/warmux/net/download.cpp:184 lib/warmux/net/download.cpp:225
+#: lib/warmux/net/download.cpp:188 lib/warmux/net/download.cpp:229
 #, c-format
 msgid "Fail to create temporary file: %s"
 msgstr ""
 
-#: lib/warmux/net/download.cpp:191
+#: lib/warmux/net/download.cpp:195
 #, fuzzy, c-format
 msgid "Fail to open temporary file: %s"
 msgstr "Ni bilo mogoče odpreti imenika s kartami (%s)!"
@@ -1069,7 +1083,6 @@ msgstr ""
 
 #: src/menu/results_menu.cpp:354
 #, fuzzy
-#| msgid "Game name:"
 msgid "Filename:"
 msgstr "Ime igre:"
 
@@ -1089,7 +1102,7 @@ msgstr "Celozaslonski način?"
 msgid "Game"
 msgstr "Igra"
 
-#: src/include/action_handler.cpp:882
+#: src/include/action_handler.cpp:921
 msgid ""
 "Game is not synchronized anymore! This is BAD, the network game will be "
 "interrupted, sorry. Please, report the bug to the Warmux Team by mail or "
@@ -1170,7 +1183,6 @@ msgstr "Pomoč"
 
 #: src/menu/options_menu.cpp:128
 #, fuzzy
-#| msgid "High jump"
 msgid "High"
 msgstr "Visoki skok"
 
@@ -1191,7 +1203,7 @@ msgstr "Pohitite, prepočasni ste!!"
 msgid "I like WarMUX :)"
 msgstr ""
 
-#: src/main.cpp:284
+#: src/main.cpp:290
 msgid ""
 "If you found a bug or have a feature request send us an email (in english, "
 "please):"
@@ -1558,7 +1570,7 @@ msgstr "V xml nastavitveni datoteki ni bil najden noben element <%s>!"
 msgid "No player connected"
 msgstr "Povezan ni noben igralec"
 
-#: lib/warmux/net/download.cpp:140
+#: lib/warmux/net/download.cpp:144
 msgid "No pointer"
 msgstr ""
 
@@ -1747,7 +1759,7 @@ msgstr "Takojšnji izhod iz igre (s ctrl)"
 msgid "Quit"
 msgstr "Končaj"
 
-#: src/main.cpp:273
+#: src/main.cpp:279
 #, fuzzy
 msgid "Quit Warmux"
 msgstr "Končaj Warmux"
@@ -1760,11 +1772,11 @@ msgstr "Končaj igro"
 msgid "Rail Gun"
 msgstr ""
 
-#: src/menu/map_selection_box.cpp:224
+#: src/menu/map_selection_box.cpp:226
 msgid "Random map"
 msgstr "Naključna karta"
 
-#: lib/warmux/net/download.cpp:134
+#: lib/warmux/net/download.cpp:138
 #, fuzzy, c-format
 msgid "Read only %i bytes"
 msgstr "Tukaj je samo %i ekipa."
@@ -1786,9 +1798,13 @@ msgstr ""
 msgid "Replay controls"
 msgstr ""
 
+#: src/menu/replay_menu.cpp:69
+#, fuzzy
+msgid "Replay info"
+msgstr "Vrsta igre"
+
 #: src/game/game.cpp:211
 #, fuzzy
-#| msgid "Game mode"
 msgid "Replay mode"
 msgstr "Vrsta igre"
 
@@ -1818,7 +1834,7 @@ msgstr ""
 msgid "Riot Bomb"
 msgstr "Kopaška granata"
 
-#: src/main.cpp:83
+#: src/main.cpp:89
 msgid "Run game"
 msgstr "Poženi igro"
 
@@ -1838,6 +1854,10 @@ msgstr "Meja drsenja na robu"
 msgid "Scroll on border"
 msgstr "Drsenje na robu"
 
+#: src/menu/replay_menu.cpp:55
+msgid "Select a replay:"
+msgstr ""
+
 #: src/menu/help_menu.cpp:53
 #, fuzzy
 msgid "Select number of playing teams"
@@ -1852,7 +1872,7 @@ msgstr "Naslov strežnika:"
 msgid "Server available on Internet"
 msgstr "Strežnik naj bo viden na Internetu"
 
-#: src/menu/network_menu.cpp:174 src/network/network.cpp:478
+#: src/menu/network_menu.cpp:174 src/network/network.cpp:485
 msgid "Server mode"
 msgstr "Strežniški način"
 
@@ -1928,12 +1948,12 @@ msgstr "Ostrostrelska puška"
 msgid "Someone put a booby trap into the crate!"
 msgstr "Nekdo je v zaboj podtaknil bombo!"
 
-#: src/menu/network_connection_menu.cpp:390
+#: src/menu/network_connection_menu.cpp:393
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Oprostite, nobena igra trenutno ne čaka na igralce"
 
-#: src/menu/network_connection_menu.cpp:444
-#: tools/servers/game_server/server.cpp:322
+#: src/menu/network_connection_menu.cpp:447
+#: tools/servers/game_server/server.cpp:374
 #, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -2003,7 +2023,6 @@ msgstr "Ekipni grafi"
 
 #: src/menu/options_menu.cpp:594
 #, fuzzy
-#| msgid "Team stats"
 msgid "Team saved"
 msgstr "Ekipna statistika"
 
@@ -2011,8 +2030,10 @@ msgstr "Ekipna statistika"
 msgid "Team stats"
 msgstr "Ekipna statistika"
 
+#. Teams
 #: src/game/game.cpp:168 src/menu/game_menu.cpp:76 src/menu/game_menu.cpp:80
 #: src/menu/network_menu.cpp:98 src/menu/network_menu.cpp:102
+#: src/menu/replay_menu.cpp:94
 msgid "Teams"
 msgstr "Ekipe"
 
@@ -2131,6 +2152,10 @@ msgstr[3] "Tukaj je samo %i ekip."
 #: src/gui/control_config.cpp:206
 #, c-format
 msgid "This key has already been attributed to '%s'"
+msgstr ""
+
+#: src/menu/network_connection_menu.cpp:313
+msgid "This version was compiled without curl, you can't list public games!"
 msgstr ""
 
 #: src/menu/benchmark_menu.cpp:113 src/menu/results_menu.cpp:339
@@ -2291,7 +2316,8 @@ msgstr ""
 "Strel: držite preslednico dokler raketa ne doseže željene moči\n"
 "ena uporaba na potezo"
 
-#: src/main.cpp:200
+#. Version
+#: src/main.cpp:206 src/menu/main_menu.cpp:90 src/menu/replay_menu.cpp:74
 msgid "Version"
 msgstr "Različica"
 
@@ -2322,16 +2348,16 @@ msgstr "Čakanje na %s"
 msgid "Waiting for remote players"
 msgstr "Čakanje na oddaljene igralce"
 
-#: src/menu/network_menu.cpp:509
+#: src/menu/network_menu.cpp:514
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Čakanje na strežnik, lahko se samo pogovarjate!"
 
-#: src/main.cpp:211
+#: src/main.cpp:217
 #, fuzzy
 msgid "Warmux launching..."
 msgstr "Warmux se zaganja ..."
 
-#: src/main.cpp:345
+#: src/main.cpp:357
 #, fuzzy
 msgid "Warmux version "
 msgstr "Warmux različica "
@@ -2350,7 +2376,7 @@ msgstr "Orožje: streljaj / Paket: hiter padec"
 msgid "Weapons"
 msgstr "Orožja"
 
-#: src/main.cpp:355
+#: src/main.cpp:367
 msgid "Website: "
 msgstr "Spletna stran: "
 
@@ -2409,7 +2435,7 @@ msgstr "Napačno ime karte!"
 msgid "Wrong team!"
 msgstr "Napačna ekipa!"
 
-#: lib/warmux/net/download.cpp:150
+#: lib/warmux/net/download.cpp:154
 #, c-format
 msgid "Wrote %i/%i bytes"
 msgstr ""
@@ -2439,7 +2465,7 @@ msgstr "Potrebujete vsaj dve veljavni ekipi !"
 msgid "You won't be able to play before selecting a team!"
 msgstr "Dokler ne izberete ekipe ne boste mogli igrati!"
 
-#: src/weapon/weapon_launcher.cpp:545
+#: src/weapon/weapon_launcher.cpp:552
 msgid "Your shot has missed!"
 msgstr "Zgrešili ste!"
 

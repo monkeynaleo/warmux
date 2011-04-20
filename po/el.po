@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Μετάφραση Πολέμιουξ\n"
 "Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
+"POT-Creation-Date: 2011-04-20 19:52+0200\n"
 "PO-Revision-Date: 2010-12-25 17:10+0200\n"
 "Last-Translator: Steve <gba2211 AT gmail DOT com>\n"
 "Language-Team: \n"
@@ -53,13 +54,13 @@ msgstr "%s <%s> γνωστός και ως %s από %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> από %s"
 
-#: src/menu/team_box.cpp:253
+#: src/menu/team_box.cpp:254
 #, c-format
 msgid "%s Team"
 msgstr "Ομάδα %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:245
+#: src/menu/team_box.cpp:246
 #, c-format
 msgid "%s Team - Remote"
 msgstr "Ομάδα %s - Απομακρυσμένη"
@@ -125,18 +126,14 @@ msgid "%s is next to a mine!"
 msgstr "O %s είναι δίπλα σε νάρκη!"
 
 #. For translators: extended in "<nickname> (<host>) just connected
-#: src/include/action_handler.cpp:913
+#: src/include/action_handler.cpp:952
 #, fuzzy, c-format
-#| msgid "%i player connected"
-#| msgid_plural "%i players connected"
 msgid "%s just connected"
 msgstr "%i παίκτης συνδέθηκε"
 
 #. For translators: extended in "<nickname> (<host>) just disconnected
-#: src/include/action_handler.cpp:1025
+#: src/include/action_handler.cpp:1068
 #, fuzzy, c-format
-#| msgid "%i player connected"
-#| msgid_plural "%i players connected"
 msgid "%s just disconnected"
 msgstr "%i παίκτης συνδέθηκε"
 
@@ -145,7 +142,7 @@ msgstr "%i παίκτης συνδέθηκε"
 msgid "%s kicked from game"
 msgstr "%s αποβλήθηκε από το παιχνίδι"
 
-#: src/include/action_handler.cpp:474
+#: src/include/action_handler.cpp:468
 #, c-format
 msgid "%s needs a pause."
 msgstr "Ο %s χρειάζεται ένα διάλειμμα."
@@ -567,7 +564,7 @@ msgstr "Αμόνι"
 msgid "Area currently displayed"
 msgstr "Περιοχή που εμφανίζεται"
 
-#: src/main.cpp:346
+#: src/main.cpp:358
 msgid "Authors:"
 msgstr "Συγγραφείς:"
 
@@ -713,7 +710,7 @@ msgstr "Συνομιλία"
 msgid "Check updates online?"
 msgstr "Έλεγχος ενημερώσεων στο διαδίκτυο;"
 
-#: src/menu/map_selection_box.cpp:225
+#: src/menu/map_selection_box.cpp:227
 msgid "Choose randomly between the different maps"
 msgstr "Επίλεξε τυχαία έναν μεταξύ των διαφορετικών χαρτών"
 
@@ -762,7 +759,7 @@ msgstr ""
 "Δεν μπορείς να επιλέξεις την ίδια ομάδα πολλές φορές."
 
 #. Client Mode
-#: src/menu/network_menu.cpp:167 src/network/network.cpp:448
+#: src/menu/network_menu.cpp:167 src/network/network.cpp:455
 msgid "Client mode"
 msgstr "Σε κατάσταση πελάτη"
 
@@ -779,6 +776,11 @@ msgstr "Χειροβομβίδα διασποράς"
 #: src/weapon/cluzooka.cpp:373
 msgid "Cluzooka"
 msgstr "Μπαζούκα διασποράς"
+
+#. Comment
+#: src/menu/replay_menu.cpp:89
+msgid "Comment"
+msgstr ""
 
 #: src/menu/results_menu.cpp:366
 msgid "Comment:"
@@ -814,7 +816,7 @@ msgstr "Κατασκευή"
 msgid "Controlled by: "
 msgstr "Ελεγχόμενος από:"
 
-#: lib/warmux/net/download.cpp:199
+#: lib/warmux/net/download.cpp:203
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr "Δεν μπόρεσε να πάρει την τελευταία έκδοση από τον %s"
@@ -853,6 +855,12 @@ msgstr ""
 msgid "Damage per turn during death mode"
 msgstr "Τραυματισμός ανά γύρο κατά τη διάρκεια της κατάστασης θανάτου"
 
+#. Date
+#: src/menu/replay_menu.cpp:79
+#, fuzzy
+msgid "Date"
+msgstr "Δυναμίτης"
+
 #: src/interface/man_machine_interface.cpp:1186
 msgid "Decrease explosion delay"
 msgstr "Μείωσε την καθυστέρηση της έκρηξης"
@@ -889,6 +897,12 @@ msgstr "Κάτω αργά"
 #: src/menu/help_menu.cpp:128
 msgid "Drag&drop: Move camera"
 msgstr "Σύρε&άφησε: Μετακίνησε την κάμερα"
+
+#. Duration
+#: src/menu/replay_menu.cpp:84
+#, fuzzy
+msgid "Duration"
+msgstr "Διάρκεια ενός γύρου"
 
 #. some death mode options
 #: src/menu/game_mode_editor.cpp:82
@@ -954,18 +968,18 @@ msgstr ""
 "ομάδα."
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:524
+#: src/menu/network_connection_menu.cpp:527
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Αδύνατη η σύνδεση στο %s:%s"
 
-#: src/menu/network_connection_menu.cpp:474
+#: src/menu/network_connection_menu.cpp:477
 msgid "Error: Unable to contact the index server to host a game"
 msgstr ""
 "Αδύνατη η επικοινωνία με το δείκτη διακομιστή για τη δημιουργία ενός "
 "παιχνιδιού."
 
-#: src/menu/network_connection_menu.cpp:385
+#: src/menu/network_connection_menu.cpp:388
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
@@ -973,13 +987,13 @@ msgstr ""
 "διαδίκτυο."
 
 # Impossible de se connecter à %s : %s
-#: src/menu/network_connection_menu.cpp:502
+#: src/menu/network_connection_menu.cpp:505
 msgid "Error: Unable to start the server"
 msgstr "Αδύνατη η έναρξη του διακομιστή."
 
 # Erreur : Votre serveur n'est pas accessible depuis Internet. Vérifier la configuration de votre firewall : le port TCP %s doit accepter les connexions extérieures. Si vous n'êtes pas directement connecté à Internet, vérifier la configuration de votre routeur : le port TCP %s doit être redirigé vers votre ordinateur.
-#: src/menu/network_connection_menu.cpp:495
-#: tools/servers/game_server/server.cpp:337
+#: src/menu/network_connection_menu.cpp:498
+#: tools/servers/game_server/server.cpp:389
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -1019,12 +1033,12 @@ msgstr "Καθυστέρηση έκρηξης %u"
 msgid "FPS"
 msgstr "εικ./δευτ."
 
-#: lib/warmux/net/download.cpp:184 lib/warmux/net/download.cpp:225
+#: lib/warmux/net/download.cpp:188 lib/warmux/net/download.cpp:229
 #, c-format
 msgid "Fail to create temporary file: %s"
 msgstr "Απέτυχε η δημιουργία προσωρινού αρχείου: %s"
 
-#: lib/warmux/net/download.cpp:191
+#: lib/warmux/net/download.cpp:195
 #, c-format
 msgid "Fail to open temporary file: %s"
 msgstr "Αδύνατον να ανοίξει το προσωρινό αρχείο: %s"
@@ -1035,7 +1049,6 @@ msgstr ""
 
 #: src/menu/results_menu.cpp:354
 #, fuzzy
-#| msgid "Game name:"
 msgid "Filename:"
 msgstr "Όνομα παιχνιδιού:"
 
@@ -1056,7 +1069,7 @@ msgstr "Πλήρης οθόνη;"
 msgid "Game"
 msgstr "Παιχνίδι"
 
-#: src/include/action_handler.cpp:882
+#: src/include/action_handler.cpp:921
 msgid ""
 "Game is not synchronized anymore! This is BAD, the network game will be "
 "interrupted, sorry. Please, report the bug to the Warmux Team by mail or "
@@ -1139,7 +1152,6 @@ msgstr "Βοήθεια"
 
 #: src/menu/options_menu.cpp:128
 #, fuzzy
-#| msgid "High jump"
 msgid "High"
 msgstr "Ψηλό άλμα"
 
@@ -1161,7 +1173,7 @@ msgid "I like WarMUX :)"
 msgstr ""
 
 # Si vous trouvez un bug ou si vous pensez qu'il manque quelque chose à Warmux, envoyez un mail (en anglais, svp) :
-#: src/main.cpp:284
+#: src/main.cpp:290
 msgid ""
 "If you found a bug or have a feature request send us an email (in english, "
 "please):"
@@ -1377,7 +1389,6 @@ msgstr "Μέγιστο πλήθος εικόνων/δευτ."
 
 #: src/menu/options_menu.cpp:126
 #, fuzzy
-#| msgid "Podium"
 msgid "Medium"
 msgstr "Πόντιουμ"
 
@@ -1520,7 +1531,7 @@ msgstr "Κανένα στοιχείο <%s> δεν βρέθηκε στο αρχε
 msgid "No player connected"
 msgstr "Κανένας παίκτης συνδεδεμένος"
 
-#: lib/warmux/net/download.cpp:140
+#: lib/warmux/net/download.cpp:144
 msgid "No pointer"
 msgstr "Όχι δείκτης"
 
@@ -1723,7 +1734,6 @@ msgstr "Δημόσιες μάχες"
 # quitter
 #: src/menu/options_menu.cpp:130
 #, fuzzy
-#| msgid "Quit"
 msgid "Quality"
 msgstr "Εγκατάλειψε"
 
@@ -1737,7 +1747,7 @@ msgstr "Γρήγορα εγκατάλειψε το παιχνίδι με το Ct
 msgid "Quit"
 msgstr "Εγκατάλειψε"
 
-#: src/main.cpp:273
+#: src/main.cpp:279
 msgid "Quit Warmux"
 msgstr "Εγκατάλειψε το  Warmux"
 
@@ -1749,12 +1759,12 @@ msgstr "Εγκατάλειψε το παιχνίδι"
 msgid "Rail Gun"
 msgstr "Αυτόματο"
 
-#: src/menu/map_selection_box.cpp:224
+#: src/menu/map_selection_box.cpp:226
 msgid "Random map"
 msgstr "Τυχαίος χάρτης"
 
 # Il n'y a que %i équipe.
-#: lib/warmux/net/download.cpp:134
+#: lib/warmux/net/download.cpp:138
 #, c-format
 msgid "Read only %i bytes"
 msgstr "Διάβασε μόνο %i bytes"
@@ -1769,20 +1779,22 @@ msgstr "Ανάγνωση προσωπικού αρχείου διαμόρφωσ�
 
 #: src/menu/main_menu.cpp:73
 #, fuzzy
-#| msgid "Play"
 msgid "Replay"
 msgstr "Παίξε"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:110
 #, fuzzy
-#| msgid "Current controls"
 msgid "Replay controls"
 msgstr "Τρέχοντες χειρισμοί"
 
+#: src/menu/replay_menu.cpp:69
+#, fuzzy
+msgid "Replay info"
+msgstr "Παίξε"
+
 #: src/game/game.cpp:211
 #, fuzzy
-#| msgid "Play"
 msgid "Replay mode"
 msgstr "Παίξε"
 
@@ -1813,7 +1825,7 @@ msgstr ""
 msgid "Riot Bomb"
 msgstr "Βόμβα διατάραξης"
 
-#: src/main.cpp:83
+#: src/main.cpp:89
 msgid "Run game"
 msgstr "Έναρξη παιχνιδιού"
 
@@ -1833,6 +1845,10 @@ msgstr "Μέγεθος ξετυλίγματος στα όρια"
 msgid "Scroll on border"
 msgstr "Ξετύλιγμα στα όρια"
 
+#: src/menu/replay_menu.cpp:55
+msgid "Select a replay:"
+msgstr ""
+
 #: src/menu/help_menu.cpp:53
 msgid "Select number of playing teams"
 msgstr "Επίλεξε τον αριθμό των παικτών"
@@ -1846,7 +1862,7 @@ msgstr "Διεύθυνση διακομιστή:"
 msgid "Server available on Internet"
 msgstr "Διακομιστής διαθέσιμος στο διαδίκτυο"
 
-#: src/menu/network_menu.cpp:174 src/network/network.cpp:478
+#: src/menu/network_menu.cpp:174 src/network/network.cpp:485
 msgid "Server mode"
 msgstr "Κατάσταση διακομιστή"
 
@@ -1932,12 +1948,12 @@ msgid "Someone put a booby trap into the crate!"
 msgstr "Κάποιος παγίδευσε το κιβώτιο!"
 
 # Désolé, il n'y a actuellement aucun jeu en attente de joueurs
-#: src/menu/network_connection_menu.cpp:390
+#: src/menu/network_connection_menu.cpp:393
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Συγγνώμη, δεν υπάρχει κανένα παιχνίδι να περιμένει παίκτες"
 
-#: src/menu/network_connection_menu.cpp:444
-#: tools/servers/game_server/server.cpp:322
+#: src/menu/network_connection_menu.cpp:447
+#: tools/servers/game_server/server.cpp:374
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -2007,7 +2023,6 @@ msgstr "Γράφημα ομάδων"
 
 #: src/menu/options_menu.cpp:594
 #, fuzzy
-#| msgid "Team stats"
 msgid "Team saved"
 msgstr "Στατιστικά ομάδων"
 
@@ -2015,8 +2030,10 @@ msgstr "Στατιστικά ομάδων"
 msgid "Team stats"
 msgstr "Στατιστικά ομάδων"
 
+#. Teams
 #: src/game/game.cpp:168 src/menu/game_menu.cpp:76 src/menu/game_menu.cpp:80
 #: src/menu/network_menu.cpp:98 src/menu/network_menu.cpp:102
+#: src/menu/replay_menu.cpp:94
 msgid "Teams"
 msgstr "Ομάδες"
 
@@ -2148,6 +2165,10 @@ msgstr[1] "Υπάρχουν μόνο %i ομάδες."
 #, c-format
 msgid "This key has already been attributed to '%s'"
 msgstr "Αυτό το κουμπί έχει αποδοθεί στο '%s'"
+
+#: src/menu/network_connection_menu.cpp:313
+msgid "This version was compiled without curl, you can't list public games!"
+msgstr ""
 
 #: src/menu/benchmark_menu.cpp:113 src/menu/results_menu.cpp:339
 msgid "Time"
@@ -2308,7 +2329,8 @@ msgstr ""
 "Πυρ: κρατήστε το space μέχρι την επιθυμητή δύναμη\n"
 "ένα από τα πολεμοφόδια ανά γύρο"
 
-#: src/main.cpp:200
+#. Version
+#: src/main.cpp:206 src/menu/main_menu.cpp:90 src/menu/replay_menu.cpp:74
 msgid "Version"
 msgstr "Έκδοση"
 
@@ -2338,15 +2360,15 @@ msgid "Waiting for remote players"
 msgstr "Περιμένοντας για απομακρυσμένους παίκτες"
 
 # Attente du serveur, vous pouvez annuler ou discuter !
-#: src/menu/network_menu.cpp:509
+#: src/menu/network_menu.cpp:514
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Αναμένοντας το διακομιστή, μπορείτε να ακυρώσετε ή να συζητήσετε!"
 
-#: src/main.cpp:211
+#: src/main.cpp:217
 msgid "Warmux launching..."
 msgstr "Έναρξη του Warmux..."
 
-#: src/main.cpp:345
+#: src/main.cpp:357
 msgid "Warmux version "
 msgstr "Έκδοση του Warmux"
 
@@ -2363,7 +2385,7 @@ msgstr "Όπλο: Πυρ / Κουτί δώρο: πτώση"
 msgid "Weapons"
 msgstr "Όπλα"
 
-#: src/main.cpp:355
+#: src/main.cpp:367
 msgid "Website: "
 msgstr "Ιστοσελίδα: "
 
@@ -2426,7 +2448,7 @@ msgstr "Λάθος όνομα χάρτη!"
 msgid "Wrong team!"
 msgstr "Λάθος ομάδα!"
 
-#: lib/warmux/net/download.cpp:150
+#: lib/warmux/net/download.cpp:154
 #, c-format
 msgid "Wrote %i/%i bytes"
 msgstr "Γράφτηκαν %i/%i bytes"
@@ -2457,7 +2479,7 @@ msgstr "Χρειάζονται τουλάχιστον δύο έγκυρες ομ
 msgid "You won't be able to play before selecting a team!"
 msgstr "Δεν μπορείτε να παίξετε χωρίς να διαλέξετε ομάδα!"
 
-#: src/weapon/weapon_launcher.cpp:545
+#: src/weapon/weapon_launcher.cpp:552
 msgid "Your shot has missed!"
 msgstr "Αστόχησες..."
 

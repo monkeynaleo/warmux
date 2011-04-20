@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the warmux package.
 #
 # <luojie-dune@operamail.com>,2007.
-# jiero <lililjlj@gmail.com>, 2010.
+# jiero <lililjlj@gmail.com>, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: zh-CN\n"
 "Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
-"PO-Revision-Date: 2010-12-13 23:19+1100\n"
+"POT-Creation-Date: 2011-04-20 19:52+0200\n"
+"PO-Revision-Date: 2011-03-31 11:37+1100\n"
 "Last-Translator: jiero <lililjlj@gmail.com>\n"
 "Language-Team: Simplified Chinese <i18n-zh@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -51,13 +52,13 @@ msgstr "%s <%s> aka %s 从 %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> 从 %s"
 
-#: src/menu/team_box.cpp:253
+#: src/menu/team_box.cpp:254
 #, c-format
 msgid "%s Team"
 msgstr " %s 队伍"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:245
+#: src/menu/team_box.cpp:246
 #, c-format
 msgid "%s Team - Remote"
 msgstr " %s 队伍- 遥控"
@@ -123,23 +124,23 @@ msgid "%s is next to a mine!"
 msgstr "%s 在地雷身边！"
 
 #. For translators: extended in "<nickname> (<host>) just connected
-#: src/include/action_handler.cpp:913
-#, fuzzy, c-format
+#: src/include/action_handler.cpp:952
+#, c-format
 msgid "%s just connected"
-msgstr "%s 玩家已连接"
+msgstr "%s 刚刚连接"
 
 #. For translators: extended in "<nickname> (<host>) just disconnected
-#: src/include/action_handler.cpp:1025
-#, fuzzy, c-format
+#: src/include/action_handler.cpp:1068
+#, c-format
 msgid "%s just disconnected"
-msgstr "%s 玩家已连接"
+msgstr "%s 刚刚断开连接"
 
 #: src/network/admin_commands.cpp:66
 #, c-format
 msgid "%s kicked from game"
 msgstr "%s 被踢出游戏"
 
-#: src/include/action_handler.cpp:474
+#: src/include/action_handler.cpp:468
 #, c-format
 msgid "%s needs a pause."
 msgstr "%s 需要叫暂停。"
@@ -490,7 +491,7 @@ msgstr "铁砧"
 msgid "Area currently displayed"
 msgstr "当前显示区域"
 
-#: src/main.cpp:346
+#: src/main.cpp:358
 msgid "Authors:"
 msgstr "作者:"
 
@@ -594,6 +595,8 @@ msgid ""
 "Change replay speed.\n"
 "Right part displays current speed."
 msgstr ""
+"改变回放速度。\n"
+"右面显示当前速度。"
 
 #: src/interface/man_machine_interface.cpp:1176
 msgid "Change weapon"
@@ -636,7 +639,7 @@ msgstr "聊天"
 msgid "Check updates online?"
 msgstr "网上检查升级？"
 
-#: src/menu/map_selection_box.cpp:225
+#: src/menu/map_selection_box.cpp:227
 msgid "Choose randomly between the different maps"
 msgstr "在地图中随机选择"
 
@@ -683,7 +686,7 @@ msgstr ""
 "无法重复选择同一队伍。"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:167 src/network/network.cpp:448
+#: src/menu/network_menu.cpp:167 src/network/network.cpp:455
 msgid "Client mode"
 msgstr "客户端模式 "
 
@@ -699,9 +702,15 @@ msgstr "集束炸弹"
 msgid "Cluzooka"
 msgstr "开花弹"
 
+#. Comment
+#: src/menu/replay_menu.cpp:89
+#, fuzzy
+msgid "Comment"
+msgstr "评论："
+
 #: src/menu/results_menu.cpp:366
 msgid "Comment:"
-msgstr ""
+msgstr "评论："
 
 #: src/weapon/suicide.cpp:46
 msgid "Commit Suicide"
@@ -732,7 +741,7 @@ msgstr "建筑工具"
 msgid "Controlled by: "
 msgstr "控制者: "
 
-#: lib/warmux/net/download.cpp:199
+#: lib/warmux/net/download.cpp:203
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr "不能从 %s获取最新版本"
@@ -756,6 +765,8 @@ msgid ""
 "Current turn time info.\n"
 "Click to launch the pause menu."
 msgstr ""
+"当前回合时间。\n"
+"点击运行暂停菜单。"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:88
@@ -767,6 +778,12 @@ msgstr "当前武器和弹药剩余，点击显示帮助。点击打开选择菜
 #: src/menu/game_mode_editor.cpp:88
 msgid "Damage per turn during death mode"
 msgstr "死亡模式每回合伤害"
+
+#. Date
+#: src/menu/replay_menu.cpp:79
+#, fuzzy
+msgid "Date"
+msgstr "炸药"
 
 #: src/interface/man_machine_interface.cpp:1186
 msgid "Decrease explosion delay"
@@ -804,6 +821,12 @@ msgstr "缓慢向下"
 #: src/menu/help_menu.cpp:128
 msgid "Drag&drop: Move camera"
 msgstr "拖拉：移动镜头"
+
+#. Duration
+#: src/menu/replay_menu.cpp:84
+#, fuzzy
+msgid "Duration"
+msgstr "回合时间长度"
 
 #. some death mode options
 #: src/menu/game_mode_editor.cpp:82
@@ -862,26 +885,26 @@ msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr "删除文件 \"%s\"失败: 不能删除自定义队伍。"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:524
+#: src/menu/network_connection_menu.cpp:527
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "错误: 连不到%s:%s"
 
-#: src/menu/network_connection_menu.cpp:474
+#: src/menu/network_connection_menu.cpp:477
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "错误: 无法联系索引服务器建立游戏"
 
-#: src/menu/network_connection_menu.cpp:385
+#: src/menu/network_connection_menu.cpp:388
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr "错误: 无法联系索引服务器寻找游戏"
 
-#: src/menu/network_connection_menu.cpp:502
+#: src/menu/network_connection_menu.cpp:505
 msgid "Error: Unable to start the server"
 msgstr "错误: 无法开始服务器"
 
-#: src/menu/network_connection_menu.cpp:495
-#: tools/servers/game_server/server.cpp:337
+#: src/menu/network_connection_menu.cpp:498
+#: tools/servers/game_server/server.cpp:389
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -919,25 +942,23 @@ msgstr "%u 的起爆延迟"
 msgid "FPS"
 msgstr "FPS"
 
-#: lib/warmux/net/download.cpp:184 lib/warmux/net/download.cpp:225
+#: lib/warmux/net/download.cpp:188 lib/warmux/net/download.cpp:229
 #, c-format
 msgid "Fail to create temporary file: %s"
 msgstr "无法创建临时文件: %s"
 
-#: lib/warmux/net/download.cpp:191
+#: lib/warmux/net/download.cpp:195
 #, c-format
 msgid "Fail to open temporary file: %s"
 msgstr "无法打开临时文件: %s"
 
 #: src/menu/results_menu.cpp:434
 msgid "Failed to save replay"
-msgstr ""
+msgstr "无法保存回放"
 
 #: src/menu/results_menu.cpp:354
-#, fuzzy
-#| msgid "Game name:"
 msgid "Filename:"
-msgstr "游戏名:"
+msgstr "文件名:"
 
 #: src/weapon/flamethrower.cpp:134
 msgid "Flame Thrower"
@@ -955,13 +976,15 @@ msgstr "全屏?"
 msgid "Game"
 msgstr "游戏"
 
-#: src/include/action_handler.cpp:882
+#: src/include/action_handler.cpp:921
 msgid ""
 "Game is not synchronized anymore! This is BAD, the network game will be "
 "interrupted, sorry. Please, report the bug to the Warmux Team by mail or "
 "through the forum. Precise your computer configuration and attach the bug."
 "wrf file that has just been created in your home folder."
 msgstr ""
+"游戏不再同步！很失败。网络游戏迫不得已中止。请报告错误给Warmux团队。Email或者"
+"论坛都行。请包含您的计算机配置和附带用户文件夹里的bug.wrf。"
 
 #: src/menu/help_menu.cpp:59
 msgid "Game menu"
@@ -981,7 +1004,7 @@ msgstr "游戏名:"
 
 #: src/include/action_handler.cpp:245
 msgid "Game out of sync!"
-msgstr ""
+msgstr "游戏同步失败！"
 
 #: src/weapon/gnu.cpp:162
 msgid "Gnu Launcher"
@@ -1037,10 +1060,8 @@ msgid "Help"
 msgstr "帮助"
 
 #: src/menu/options_menu.cpp:128
-#, fuzzy
-#| msgid "High jump"
 msgid "High"
-msgstr "高跳"
+msgstr "高"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/interface/man_machine_interface.cpp:1172 src/menu/help_menu.cpp:125
@@ -1057,9 +1078,9 @@ msgstr "快点,伙计你也太慢了！"
 
 #: src/menu/results_menu.cpp:367
 msgid "I like WarMUX :)"
-msgstr ""
+msgstr "我喜欢 WarMUX :)"
 
-#: src/main.cpp:284
+#: src/main.cpp:290
 msgid ""
 "If you found a bug or have a feature request send us an email (in english, "
 "please):"
@@ -1151,7 +1172,7 @@ msgstr "界面和触摸控制，更多细节在其他标签页"
 
 #: src/menu/results_menu.cpp:422
 msgid "Invalid filename"
-msgstr ""
+msgstr "不可用的文件名"
 
 #: src/game/game.cpp:1041
 msgid "It's a present!"
@@ -1224,7 +1245,7 @@ msgstr "本地队伍:"
 
 #: src/menu/options_menu.cpp:125
 msgid "Low memory"
-msgstr ""
+msgstr "低内存"
 
 #: src/weapon/lowgrav.cpp:49
 msgid "LowGrav"
@@ -1272,10 +1293,8 @@ msgid "Maximum FPS"
 msgstr "最大 FPS"
 
 #: src/menu/options_menu.cpp:126
-#, fuzzy
-#| msgid "Podium"
 msgid "Medium"
-msgstr "讲台"
+msgstr "适中"
 
 #: src/menu/benchmark_menu.cpp:111
 msgid "Menu"
@@ -1416,7 +1435,7 @@ msgstr "没找到 <%s>重点 xml配置文件 ！"
 msgid "No player connected"
 msgstr "没有玩家连接"
 
-#: lib/warmux/net/download.cpp:140
+#: lib/warmux/net/download.cpp:144
 msgid "No pointer"
 msgstr "无指针"
 
@@ -1616,7 +1635,7 @@ msgstr "公开战斗"
 
 #: src/menu/options_menu.cpp:130
 msgid "Quality"
-msgstr ""
+msgstr "质量"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:147
@@ -1627,7 +1646,7 @@ msgstr "借用Ctrl快速退出游戏"
 msgid "Quit"
 msgstr "退出"
 
-#: src/main.cpp:273
+#: src/main.cpp:279
 msgid "Quit Warmux"
 msgstr "退出Warmux"
 
@@ -1639,11 +1658,11 @@ msgstr "退出游戏"
 msgid "Rail Gun"
 msgstr "轨道枪"
 
-#: src/menu/map_selection_box.cpp:224
+#: src/menu/map_selection_box.cpp:226
 msgid "Random map"
 msgstr "随机读取地图"
 
-#: lib/warmux/net/download.cpp:134
+#: lib/warmux/net/download.cpp:138
 #, c-format
 msgid "Read only %i bytes"
 msgstr "只读取 %i 比特"
@@ -1658,20 +1677,21 @@ msgstr "正读取个人设置文件"
 
 #: src/menu/main_menu.cpp:73
 msgid "Replay"
-msgstr ""
+msgstr "回放"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:110
-#, fuzzy
-#| msgid "Current controls"
 msgid "Replay controls"
-msgstr "当前控制"
+msgstr "回复控制"
+
+#: src/menu/replay_menu.cpp:69
+#, fuzzy
+msgid "Replay info"
+msgstr "回放模式"
 
 #: src/game/game.cpp:211
-#, fuzzy
-#| msgid "Game mode"
 msgid "Replay mode"
-msgstr "游戏模式"
+msgstr "回放模式"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:108
@@ -1679,10 +1699,12 @@ msgid ""
 "Replay progress bar, not used for precise seeking.\n"
 "Short click for a +30s jump, long for +60s jump."
 msgstr ""
+"回放进度条，不能用于精确的检索。\n"
+"短时点击则为+30秒跳进，长时为+60秒跳进。"
 
 #: src/menu/results_menu.cpp:441
 msgid "Replay saved"
-msgstr ""
+msgstr "回放保存"
 
 #: src/menu/options_menu.cpp:152
 msgid "Resolution"
@@ -1694,18 +1716,20 @@ msgid ""
 "Right button to resume/pause replay.\n"
 "Square right button to immediately exit it."
 msgstr ""
+"鼠标右键继续/暂停回放。\n"
+"键盘右键退出。"
 
 #: src/weapon/riot_bomb.cpp:119
 msgid "Riot Bomb"
 msgstr "碎片炸弹"
 
-#: src/main.cpp:83
+#: src/main.cpp:89
 msgid "Run game"
 msgstr "运行游戏"
 
 #: src/menu/results_menu.cpp:379
 msgid "Save replay?"
-msgstr ""
+msgstr "保存回放记录？"
 
 #: src/network/chat.cpp:83
 msgid "Say: "
@@ -1718,6 +1742,11 @@ msgstr "滚动边界尺寸"
 #: src/menu/options_menu.cpp:257
 msgid "Scroll on border"
 msgstr "滚动边界"
+
+#: src/menu/replay_menu.cpp:55
+#, fuzzy
+msgid "Select a replay:"
+msgstr "无法保存回放"
 
 #: src/menu/help_menu.cpp:53
 msgid "Select number of playing teams"
@@ -1732,7 +1761,7 @@ msgstr "服务器地址"
 msgid "Server available on Internet"
 msgstr "Internet可用服务器"
 
-#: src/menu/network_menu.cpp:174 src/network/network.cpp:478
+#: src/menu/network_menu.cpp:174 src/network/network.cpp:485
 msgid "Server mode"
 msgstr "服务器设置"
 
@@ -1815,12 +1844,12 @@ msgstr "狙击步枪"
 msgid "Someone put a booby trap into the crate!"
 msgstr "有人在箱子里布置了炸弹作礼物！"
 
-#: src/menu/network_connection_menu.cpp:390
+#: src/menu/network_connection_menu.cpp:393
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "抱歉噢。没人等你。"
 
-#: src/menu/network_connection_menu.cpp:444
-#: tools/servers/game_server/server.cpp:322
+#: src/menu/network_connection_menu.cpp:447
+#: tools/servers/game_server/server.cpp:374
 #, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -1864,7 +1893,7 @@ msgstr "SuperTux-超级企鹅"
 
 #: src/menu/help_menu.cpp:105
 msgid "Switch between classical and replay interface"
-msgstr ""
+msgstr "在经典和回放两种界面间切换"
 
 #: src/weapon/syringe.cpp:69
 msgid "Syringe"
@@ -1881,24 +1910,24 @@ msgstr "网络战斗中对话"
 
 #: src/menu/options_menu.cpp:614
 msgid "Team deleted"
-msgstr ""
+msgstr "队伍已经删除"
 
 #: src/menu/results_menu.cpp:338
 msgid "Team graphs"
 msgstr "队伍图示"
 
 #: src/menu/options_menu.cpp:594
-#, fuzzy
-#| msgid "Team stats"
 msgid "Team saved"
-msgstr "队伍状态"
+msgstr "队伍已经保存"
 
 #: src/menu/results_menu.cpp:316
 msgid "Team stats"
 msgstr "队伍状态"
 
+#. Teams
 #: src/game/game.cpp:168 src/menu/game_menu.cpp:76 src/menu/game_menu.cpp:80
 #: src/menu/network_menu.cpp:98 src/menu/network_menu.cpp:102
+#: src/menu/replay_menu.cpp:94
 msgid "Teams"
 msgstr "队伍"
 
@@ -1917,23 +1946,23 @@ msgstr "传送"
 
 #: src/weapon/cluster_bomb.cpp:145
 msgid "The Cluster Bomb has left the battlefield before it could explode."
-msgstr "集束炸弹离开战场---"
+msgstr "集束炸弹匆忙离开战场"
 
 #: src/weapon/footbomb.cpp:107
 msgid "The Football Bomb has left the battlefield before it could explode."
-msgstr "集束炸弹离开战场---"
+msgstr "足球炸弹到了界外"
 
 #: src/weapon/gnu.cpp:137
 msgid "The Gnu left the battlefield before exploding!"
-msgstr "Gnu-野牛离开战场。。。"
+msgstr "Gnu-野牛离开战场的怒气被无视了"
 
 #: src/weapon/polecat.cpp:172
 msgid "The Polecat left the battlefield before exploding!"
-msgstr "臭鼬离开了战场。。。"
+msgstr "臭鼬从战场撤离"
 
 #: src/weapon/auto_bazooka.cpp:175
 msgid "The automatic rocket has left the battlefield..."
-msgstr "制导火箭离开战场。。。"
+msgstr "制导火箭离开战场寻找其他目标"
 
 #: src/weapon/bounce_ball.cpp:73
 msgid "The ball left the battlefield before exploding!"
@@ -1942,7 +1971,7 @@ msgstr "球膨胀前离开战场"
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:72
 msgid "The bigger the faster you'll fall!"
-msgstr "越大越快代表失败!"
+msgstr "越大越快越失败!"
 
 #: src/menu/game_mode_editor.cpp:132
 msgid ""
@@ -1963,7 +1992,7 @@ msgstr "连接超时。请检查防火墙！"
 
 #: src/weapon/disco_grenade.cpp:127
 msgid "The disco grenade has left the dance floor before exploding!"
-msgstr "跃动手雷离开舞池前发生爆炸"
+msgstr "跃动手雷离开舞台前发生爆炸"
 
 #: src/game/game.cpp:768
 msgid "The game was interrupted because you got disconnected."
@@ -2010,6 +2039,10 @@ msgstr[0] "只有 %i 队"
 #, c-format
 msgid "This key has already been attributed to '%s'"
 msgstr "这个键已经标注了 '%s'"
+
+#: src/menu/network_connection_menu.cpp:313
+msgid "This version was compiled without curl, you can't list public games!"
+msgstr ""
 
 #: src/menu/benchmark_menu.cpp:113 src/menu/results_menu.cpp:339
 msgid "Time"
@@ -2167,7 +2200,8 @@ msgstr ""
 "开火: 按住空格键积攒到需要的力量\n"
 "每回合一个弹夹"
 
-#: src/main.cpp:200
+#. Version
+#: src/main.cpp:206 src/menu/main_menu.cpp:90 src/menu/replay_menu.cpp:74
 msgid "Version"
 msgstr "版本"
 
@@ -2195,15 +2229,15 @@ msgstr "等待 %s"
 msgid "Waiting for remote players"
 msgstr "等待远方的玩家"
 
-#: src/menu/network_menu.cpp:509
+#: src/menu/network_menu.cpp:514
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "等着接受服务吧, 现在先聊天 ！"
 
-#: src/main.cpp:211
+#: src/main.cpp:217
 msgid "Warmux launching..."
 msgstr "Warmux启动中..."
 
-#: src/main.cpp:345
+#: src/main.cpp:357
 msgid "Warmux version "
 msgstr " Warmux 版本"
 
@@ -2220,7 +2254,7 @@ msgstr "武器: 开火/盒子: 降落"
 msgid "Weapons"
 msgstr "武器"
 
-#: src/main.cpp:355
+#: src/main.cpp:367
 msgid "Website: "
 msgstr "网站："
 
@@ -2281,7 +2315,7 @@ msgstr "地图名错误！"
 msgid "Wrong team!"
 msgstr "队伍错了！"
 
-#: lib/warmux/net/download.cpp:150
+#: lib/warmux/net/download.cpp:154
 #, c-format
 msgid "Wrote %i/%i bytes"
 msgstr "写入 %i/%i 比特"
@@ -2293,11 +2327,11 @@ msgstr "你是孤单的 :-/"
 #: src/menu/network_menu.cpp:442
 msgid ""
 "You are the new turn master! Learn about your new powers by typing /help"
-msgstr ""
+msgstr "你是新回合的控制者！键入 /help 了解你的新力量"
 
 #: src/menu/options_menu.cpp:583
 msgid "You must fill Head Commander and all player names"
-msgstr ""
+msgstr "你必须输入指挥官和全部玩家名称"
 
 #: src/map/maps_list.cpp:311
 msgid "You need at least one valid map!"
@@ -2311,7 +2345,7 @@ msgstr "至少有2组才能开始 ！"
 msgid "You won't be able to play before selecting a team!"
 msgstr "没有队伍，就不会有战斗！"
 
-#: src/weapon/weapon_launcher.cpp:545
+#: src/weapon/weapon_launcher.cpp:552
 msgid "Your shot has missed!"
 msgstr "你打偏了！"
 

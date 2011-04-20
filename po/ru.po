@@ -10,6 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
+"POT-Creation-Date: 2011-04-20 19:52+0200\n"
 "PO-Revision-Date: 2010-05-12 23:05+0700\n"
 "Last-Translator: Vladislav 'SnoUweR' Kovalev <snouwer@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -60,13 +61,13 @@ msgstr "%s <%s>, также известный как %s из %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> из %s"
 
-#: src/menu/team_box.cpp:253
+#: src/menu/team_box.cpp:254
 #, c-format
 msgid "%s Team"
 msgstr "Команда %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:245
+#: src/menu/team_box.cpp:246
 #, c-format
 msgid "%s Team - Remote"
 msgstr "Команда %s - Удалённо"
@@ -131,18 +132,14 @@ msgid "%s is next to a mine!"
 msgstr "%s рядом с миной!"
 
 #. For translators: extended in "<nickname> (<host>) just connected
-#: src/include/action_handler.cpp:913
+#: src/include/action_handler.cpp:952
 #, fuzzy, c-format
-#| msgid "%i player connected"
-#| msgid_plural "%i players connected"
 msgid "%s just connected"
 msgstr "%i игрок присоединился"
 
 #. For translators: extended in "<nickname> (<host>) just disconnected
-#: src/include/action_handler.cpp:1025
+#: src/include/action_handler.cpp:1068
 #, fuzzy, c-format
-#| msgid "%i player connected"
-#| msgid_plural "%i players connected"
 msgid "%s just disconnected"
 msgstr "%i игрок присоединился"
 
@@ -151,7 +148,7 @@ msgstr "%i игрок присоединился"
 msgid "%s kicked from game"
 msgstr ""
 
-#: src/include/action_handler.cpp:474
+#: src/include/action_handler.cpp:468
 #, c-format
 msgid "%s needs a pause."
 msgstr "%s нуждается в паузе."
@@ -617,7 +614,7 @@ msgstr "Наковальня"
 msgid "Area currently displayed"
 msgstr ""
 
-#: src/main.cpp:346
+#: src/main.cpp:358
 msgid "Authors:"
 msgstr "Авторы:"
 
@@ -768,7 +765,7 @@ msgstr ""
 msgid "Check updates online?"
 msgstr "Проверять обновления игры?"
 
-#: src/menu/map_selection_box.cpp:225
+#: src/menu/map_selection_box.cpp:227
 msgid "Choose randomly between the different maps"
 msgstr "Выбрать карту случайно"
 
@@ -808,7 +805,7 @@ msgid ""
 msgstr ""
 
 #. Client Mode
-#: src/menu/network_menu.cpp:167 src/network/network.cpp:448
+#: src/menu/network_menu.cpp:167 src/network/network.cpp:455
 msgid "Client mode"
 msgstr "Режим клиента"
 
@@ -823,6 +820,11 @@ msgstr "Кассетная бомба"
 #: src/weapon/cluzooka.cpp:373
 msgid "Cluzooka"
 msgstr "Осколочная базука"
+
+#. Comment
+#: src/menu/replay_menu.cpp:89
+msgid "Comment"
+msgstr ""
 
 #: src/menu/results_menu.cpp:366
 msgid "Comment:"
@@ -857,7 +859,7 @@ msgstr "Строительство"
 msgid "Controlled by: "
 msgstr "Контролируется: "
 
-#: lib/warmux/net/download.cpp:199
+#: lib/warmux/net/download.cpp:203
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr "Не получается скачать новую версию с %s"
@@ -892,6 +894,12 @@ msgstr ""
 #: src/menu/game_mode_editor.cpp:88
 msgid "Damage per turn during death mode"
 msgstr "Урон за ход во время режима смерти"
+
+#. Date
+#: src/menu/replay_menu.cpp:79
+#, fuzzy
+msgid "Date"
+msgstr "Динамит"
 
 #: src/interface/man_machine_interface.cpp:1186
 msgid "Decrease explosion delay"
@@ -931,6 +939,12 @@ msgstr ""
 #, fuzzy
 msgid "Drag&drop: Move camera"
 msgstr "Удерживая колёсико мышки: перевести обзор камеры"
+
+#. Duration
+#: src/menu/replay_menu.cpp:84
+#, fuzzy
+msgid "Duration"
+msgstr "Продолжительность хода"
 
 #. some death mode options
 #: src/menu/game_mode_editor.cpp:82
@@ -991,29 +1005,29 @@ msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr "Ошибка при удалении файла \"%s\": не удалось удалить личную команду."
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:524
+#: src/menu/network_connection_menu.cpp:527
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Ошибка: не удалось подключиться к %s: %s"
 
-#: src/menu/network_connection_menu.cpp:474
+#: src/menu/network_connection_menu.cpp:477
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "Ошибка: Не удалось соединиться с сервером, чтобы создать игру"
 
-#: src/menu/network_connection_menu.cpp:385
+#: src/menu/network_connection_menu.cpp:388
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
 "Ошибка: Не удалось соединиться с указанным сервером, чтобы найти Интернет-"
 "игру"
 
-#: src/menu/network_connection_menu.cpp:502
+#: src/menu/network_connection_menu.cpp:505
 #, fuzzy
 msgid "Error: Unable to start the server"
 msgstr "Ошибка: Не получилось запустить сервер"
 
-#: src/menu/network_connection_menu.cpp:495
-#: tools/servers/game_server/server.cpp:337
+#: src/menu/network_connection_menu.cpp:498
+#: tools/servers/game_server/server.cpp:389
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -1052,12 +1066,12 @@ msgstr ""
 msgid "FPS"
 msgstr ""
 
-#: lib/warmux/net/download.cpp:184 lib/warmux/net/download.cpp:225
+#: lib/warmux/net/download.cpp:188 lib/warmux/net/download.cpp:229
 #, c-format
 msgid "Fail to create temporary file: %s"
 msgstr ""
 
-#: lib/warmux/net/download.cpp:191
+#: lib/warmux/net/download.cpp:195
 #, fuzzy, c-format
 msgid "Fail to open temporary file: %s"
 msgstr "Невозможно открыть каталог с картами (%s)!"
@@ -1068,7 +1082,6 @@ msgstr ""
 
 #: src/menu/results_menu.cpp:354
 #, fuzzy
-#| msgid "Game name:"
 msgid "Filename:"
 msgstr "Имя игры:"
 
@@ -1088,7 +1101,7 @@ msgstr "На весь экран?"
 msgid "Game"
 msgstr "Игра"
 
-#: src/include/action_handler.cpp:882
+#: src/include/action_handler.cpp:921
 msgid ""
 "Game is not synchronized anymore! This is BAD, the network game will be "
 "interrupted, sorry. Please, report the bug to the Warmux Team by mail or "
@@ -1170,7 +1183,6 @@ msgstr "Справка"
 
 #: src/menu/options_menu.cpp:128
 #, fuzzy
-#| msgid "High jump"
 msgid "High"
 msgstr "Высокий прыжок"
 
@@ -1191,7 +1203,7 @@ msgstr "Торопитесь, вы слишком медленные !!"
 msgid "I like WarMUX :)"
 msgstr ""
 
-#: src/main.cpp:284
+#: src/main.cpp:290
 msgid ""
 "If you found a bug or have a feature request send us an email (in english, "
 "please):"
@@ -1561,7 +1573,7 @@ msgstr "Элемент <%s> не найден в файле с настройк�
 msgid "No player connected"
 msgstr "Нет присоединённых игроков"
 
-#: lib/warmux/net/download.cpp:140
+#: lib/warmux/net/download.cpp:144
 msgid "No pointer"
 msgstr ""
 
@@ -1752,7 +1764,7 @@ msgstr "Быстро выйти из игры используя Ctrl"
 msgid "Quit"
 msgstr "Выйти"
 
-#: src/main.cpp:273
+#: src/main.cpp:279
 #, fuzzy
 msgid "Quit Warmux"
 msgstr "Выйти из Warmux"
@@ -1765,11 +1777,11 @@ msgstr "Выйти из игры"
 msgid "Rail Gun"
 msgstr ""
 
-#: src/menu/map_selection_box.cpp:224
+#: src/menu/map_selection_box.cpp:226
 msgid "Random map"
 msgstr "Случайная карта"
 
-#: lib/warmux/net/download.cpp:134
+#: lib/warmux/net/download.cpp:138
 #, fuzzy, c-format
 msgid "Read only %i bytes"
 msgstr "Всего %i команда."
@@ -1793,9 +1805,13 @@ msgstr ""
 msgid "Replay controls"
 msgstr ""
 
+#: src/menu/replay_menu.cpp:69
+#, fuzzy
+msgid "Replay info"
+msgstr "Режим игры"
+
 #: src/game/game.cpp:211
 #, fuzzy
-#| msgid "Game mode"
 msgid "Replay mode"
 msgstr "Режим игры"
 
@@ -1825,7 +1841,7 @@ msgstr ""
 msgid "Riot Bomb"
 msgstr "Пустотная бомба"
 
-#: src/main.cpp:83
+#: src/main.cpp:89
 msgid "Run game"
 msgstr "Начать игру"
 
@@ -1845,6 +1861,10 @@ msgstr "Размер прокрутки"
 msgid "Scroll on border"
 msgstr "Прокрутка на границе"
 
+#: src/menu/replay_menu.cpp:55
+msgid "Select a replay:"
+msgstr ""
+
 #: src/menu/help_menu.cpp:53
 #, fuzzy
 msgid "Select number of playing teams"
@@ -1859,7 +1879,7 @@ msgstr "Адрес сервера:"
 msgid "Server available on Internet"
 msgstr "Сервер доступен в интернете"
 
-#: src/menu/network_menu.cpp:174 src/network/network.cpp:478
+#: src/menu/network_menu.cpp:174 src/network/network.cpp:485
 msgid "Server mode"
 msgstr "Режим сервера"
 
@@ -1936,12 +1956,12 @@ msgstr "Снайперская винтовка"
 msgid "Someone put a booby trap into the crate!"
 msgstr "В контейнере была мина-ловушка!"
 
-#: src/menu/network_connection_menu.cpp:390
+#: src/menu/network_connection_menu.cpp:393
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Извините, в данный момент нет игр ожидающих игроков"
 
-#: src/menu/network_connection_menu.cpp:444
-#: tools/servers/game_server/server.cpp:322
+#: src/menu/network_connection_menu.cpp:447
+#: tools/servers/game_server/server.cpp:374
 #, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
@@ -2012,7 +2032,6 @@ msgstr "Графики команды"
 
 #: src/menu/options_menu.cpp:594
 #, fuzzy
-#| msgid "Team stats"
 msgid "Team saved"
 msgstr "Статистика команды"
 
@@ -2020,8 +2039,10 @@ msgstr "Статистика команды"
 msgid "Team stats"
 msgstr "Статистика команды"
 
+#. Teams
 #: src/game/game.cpp:168 src/menu/game_menu.cpp:76 src/menu/game_menu.cpp:80
 #: src/menu/network_menu.cpp:98 src/menu/network_menu.cpp:102
+#: src/menu/replay_menu.cpp:94
 msgid "Teams"
 msgstr "Команды"
 
@@ -2141,6 +2162,10 @@ msgstr[2] "Всего %i команд"
 #: src/gui/control_config.cpp:206
 #, c-format
 msgid "This key has already been attributed to '%s'"
+msgstr ""
+
+#: src/menu/network_connection_menu.cpp:313
+msgid "This version was compiled without curl, you can't list public games!"
 msgstr ""
 
 #: src/menu/benchmark_menu.cpp:113 src/menu/results_menu.cpp:339
@@ -2302,7 +2327,8 @@ msgstr ""
 "Стрельба : удерживайте пробел до достижения желаемой силы\n"
 "патрон за ход"
 
-#: src/main.cpp:200
+#. Version
+#: src/main.cpp:206 src/menu/main_menu.cpp:90 src/menu/replay_menu.cpp:74
 msgid "Version"
 msgstr "Версия"
 
@@ -2332,18 +2358,18 @@ msgstr "Ожидание %s"
 msgid "Waiting for remote players"
 msgstr "Ожидание удалённых игроков"
 
-#: src/menu/network_menu.cpp:509
+#: src/menu/network_menu.cpp:514
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr ""
 "Ожидание сервера. Всё что вы можете сделать, это отменить свою готовность "
 "или поболтать!"
 
-#: src/main.cpp:211
+#: src/main.cpp:217
 #, fuzzy
 msgid "Warmux launching..."
 msgstr "Warmux запускается..."
 
-#: src/main.cpp:345
+#: src/main.cpp:357
 #, fuzzy
 msgid "Warmux version "
 msgstr "Warmux версии "
@@ -2363,7 +2389,7 @@ msgstr "Оружие: Огонь / Бонусные коробки: падают
 msgid "Weapons"
 msgstr "Оружие"
 
-#: src/main.cpp:355
+#: src/main.cpp:367
 msgid "Website: "
 msgstr "Веб-сайт: "
 
@@ -2422,7 +2448,7 @@ msgstr "Неверное имя карты!"
 msgid "Wrong team!"
 msgstr "Неверная команда!"
 
-#: lib/warmux/net/download.cpp:150
+#: lib/warmux/net/download.cpp:154
 #, c-format
 msgid "Wrote %i/%i bytes"
 msgstr ""
@@ -2455,7 +2481,7 @@ msgstr "Вам нужны хотя бы две команды!"
 msgid "You won't be able to play before selecting a team!"
 msgstr "Вы не сможете играть не выбрав команду!"
 
-#: src/weapon/weapon_launcher.cpp:545
+#: src/weapon/weapon_launcher.cpp:552
 msgid "Your shot has missed!"
 msgstr "Вы промазали!"
 
