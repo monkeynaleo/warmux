@@ -282,6 +282,7 @@ void Camera::ScrollCamera()
     MSG_DEBUG("camera",
               "scroll_vector=(%.3f,%.3f) mousePos=(%i,%i) lastMousePos=(%i,%i) scrollStartPos=(%i,%i)",
               m_scroll_vector.GetX(), m_scroll_vector.GetY(),
+              mousePos.GetX(), mousePos.GetY(), 
               m_last_mouse_pos.GetX(), m_last_mouse_pos.GetY(),
               m_scroll_start_pos.GetX(), m_scroll_start_pos.GetY());
 
