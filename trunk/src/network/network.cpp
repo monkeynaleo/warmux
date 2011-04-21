@@ -22,7 +22,9 @@
 #include <algorithm>
 
 #ifdef WIN32
-#  define NOMINMAX // Avoid Windows headers to define max()
+#  ifndef NOMINMAX
+#  define NOMINMAX 1 // Avoid Windows headers to define max()
+#  endif
 #  include <winsock2.h>
 #else
 #  ifdef GEKKO
