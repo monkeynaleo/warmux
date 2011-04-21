@@ -251,9 +251,8 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
       SetXY(pos);
 
       MSG_DEBUG("physic.move", "%s moves (%f, %f) -> (%f, %f) : OUTSIDE WORLD",
-                GetName().c_str(),
-                Double2str(oldPos.x).c_str(), Double2str(oldPos.y).c_str(),
-                Double2str(newPos.x).c_str(), Double2str(newPos.y).c_str());
+                GetName().c_str(), oldPos.x.tofloat(), oldPos.y.tofloat(),
+                newPos.x.tofloat(), newPos.y.tofloat());
       return NO_COLLISION;
     }
 
@@ -888,7 +887,7 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, Double min_dst_with_characte
 
     // Check distance with characters
     FOR_ALL_LIVING_CHARACTERS(team, character) if (&(*character) != this) {
-      MSG_DEBUG("physic.position", "Checking distance to %s", (*character).m_name.c_str(), (*character).m_name.c_str());
+      MSG_DEBUG("physic.position", "Checking distance to %s", (*character).m_name.c_str());
       if (min_dst_with_characters == 0) {
 
         if (Overlapse(*character)) {
