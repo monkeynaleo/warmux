@@ -90,14 +90,7 @@ class JukeBox : public Singleton<JukeBox>
   PlayListMap::const_iterator playing_pl;
   std::vector<std::string>::const_iterator playing_music;
 
-  struct s_m_config
-  {
-    bool music;
-    bool effects;
-    int frequency;
-    int channels; // (1 channel = mono, 2 = stereo, etc)
-  } m_config;
-
+  int channels; // (1 channel = mono, 2 = stereo, etc)
   bool m_init;
   SampleCache m_cache;
 
@@ -122,18 +115,12 @@ public:
   bool OpenDevice();
   void CloseDevice();
 
-  bool UseMusic() const { return m_config.music; }
-  bool UseEffects() const { return m_config.effects; }
-  int GetFrequency() const { return m_config.frequency; }
-  int HowManyChannels() const { return m_config.channels; }
   void Pause(bool all=false) const;
   void Resume(bool all=false) const;
 
   void ActiveMusic(bool on);
-  void ActiveEffects(bool on) { m_config.effects = on; }
 
-  void SetFrequency(int frequency);
-  void SetNumbersOfChannel(int channels); // Not used
+  void SetFrequency(uint frequency);
 
   void LoadXML(const std::string& profile);
 
