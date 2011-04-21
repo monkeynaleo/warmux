@@ -127,7 +127,11 @@ Config::Config()
   , scroll_border_size(50)
   , sound_music(true)
   , sound_effects(true)
+#ifdef HAVE_HANDHELD
+  , sound_frequency(22050)
+#else
   , sound_frequency(44100)
+#endif
   , warn_on_new_player(true)
   , check_updates(false)
   , lefthanded_mouse(false)
@@ -515,7 +519,9 @@ void Config::LoadXml(const xmlNode *xml)
   if ((elem = XmlReader::GetMarker(xml, "sound"))) {
     XmlReader::ReadBool(elem, "music", sound_music);
     XmlReader::ReadBool(elem, "effects", sound_effects);
+#ifndef HAVE_HANDHELD
     XmlReader::ReadUint(elem, "frequency", sound_frequency);
+#endif
     XmlReader::ReadUint(elem, "volume_music", volume_music);
     XmlReader::ReadUint(elem, "volume_effects", volume_effects);
   }
@@ -668,7 +674,9 @@ bool Config::SaveXml(bool save_current_teams)
   xmlNode *sound_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"sound"));
   doc.WriteElement(sound_node, "music",  bool2str(JukeBox::GetConstInstance()->UseMusic()));
   doc.WriteElement(sound_node, "effects", bool2str(JukeBox::GetConstInstance()->UseEffects()));
-  doc.WriteElement(sound_node, "frequency", uint2str(JukeBox::GetConstInstance()->GetFrequency()));
+#ifndef HAVE_HANDHELD
+  doc.WriteElement(sound_node, "frequency", uint2str(sound_frequency));
+#endif
   doc.WriteElement(sound_node, "volume_music",  uint2str(volume_music));
   doc.WriteElement(sound_node, "volume_effects", uint2str(volume_effects));
 
