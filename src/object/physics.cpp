@@ -368,7 +368,7 @@ void Physics::ComputePendulumNextXY(Double delta_t)
   Double y = m_fix_point_gnd.y - m_fix_point_dxy.y
            + m_rope_length.x0 * cos(m_rope_angle.x0);
 
-  MSG_DBG_RTTI("physic.pendulum", "%s angle: %.2f %.2f %.2f pos: %.2f %.2f fixpoint: %s, %s",
+  MSG_DBG_RTTI("physic.pendulum", "%s angle=(%.2f,%.2f,%.2f) pos=(%.2f,%.2f) fixpoint=(%.2f,%.2f)",
                typeid(*this).name(),
                m_rope_angle.x0.tofloat(), m_rope_angle.x1.tofloat(), m_rope_angle.x2.tofloat(),
                x.tofloat(), y.tofloat(), m_fix_point_gnd.x.tofloat(), m_fix_point_gnd.y.tofloat());
@@ -450,8 +450,7 @@ void Physics::ComputeFallNextXY(Double delta_t)
 // Compute the position of the object at current time.
 Point2d Physics::ComputeNextXY(Double delta_t){
 
-  MSG_DBG_RTTI("physic.compute", "%s: delta: %f",
-               typeid(*this).name(), Double2str(delta_t).c_str());
+  MSG_DBG_RTTI("physic.compute", "%s: delta: %f", typeid(*this).name(), delta_t.tofloat());
 
   if (FreeFall == m_motion_type) {
     ComputeFallNextXY(delta_t);
