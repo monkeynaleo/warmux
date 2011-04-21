@@ -24,9 +24,18 @@
 
 #include <string>
 
-void MissedAssertion(const char *filename, unsigned int line,
-                     const char *message);
-void WakeUpDebugger();
+#ifdef _MSC_VER
+#  define ATTRIBUTE_NORETURN __declspec(noreturn)
+#elif defined(__GNUC__)
+#  define ATTRIBUTE_NORETURN __attribute__((noreturn))
+#else
+#  define ATTRIBUTE_NORETURN
+#endif
+
+#ifdef DEBUG
+ATTRIBUTE_NORETURN
+#endif
+void MissedAssertion(const char *filename, unsigned int line, const char *message);
 
 // Assertion (disabled in release mode)
 #undef ASSERT
@@ -53,10 +62,9 @@ void WakeUpDebugger();
   if(!(COND))
 #endif
 
-void TriggerWarning(const char *filename, unsigned int line,
-                    const std::string &txt);
-void TriggerError(const char *filename, unsigned int line,
-                  const std::string &txt);
+void TriggerWarning(const char *filename, unsigned line, const std::string &txt);
+ATTRIBUTE_NORETURN void
+TriggerError(const char *filename, unsigned line, const std::string &txt);
 
 #define Warning(txt) TriggerWarning(__FILE__, __LINE__, txt)
 #define Error(txt) TriggerError(__FILE__, __LINE__, txt)
