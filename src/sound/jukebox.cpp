@@ -40,21 +40,17 @@ JukeBox::JukeBox()
   , m_init(false)
   , m_cache(0) // Defaults to unlimited cache
 {
-  m_config.music = true;
-  m_config.effects = true;
 #ifdef HAVE_HANDHELD
-  // reduce memory usage
-  m_config.frequency = 22050; //MIX_DEFAULT_FREQUENCY;
-  m_config.channels = 1; // mono
+  channels = 1; // mono
 #else
-  m_config.frequency = 44100; //MIX_DEFAULT_FREQUENCY;
-  m_config.channels = 2; // stereo
+  channels = 2; // stereo
 #endif
 }
 
 void JukeBox::Pause(bool all) const
 {
-  if (m_config.music || m_config.effects)
+  const Config* cfg = Config::GetConstInstance();
+  if (cfg->GetSoundEffects() || cfg->GetSoundMusic())
     Mix_Pause(-1);
   if (all)
     Mix_PauseMusic();
@@ -62,7 +58,8 @@ void JukeBox::Pause(bool all) const
 
 void JukeBox::Resume(bool all) const
 {
-  if (m_config.music || m_config.effects)
+  const Config* cfg = Config::GetConstInstance();
+  if (cfg->GetSoundEffects() || cfg->GetSoundMusic())
     Mix_Resume(-1);
   if (all)
     Mix_ResumeMusic();
@@ -73,9 +70,9 @@ void JukeBox::SetMusicVolume(uint vol) { Mix_VolumeMusic(vol); }
 
 void JukeBox::Init()
 {
-  ActiveMusic(Config::GetInstance()->GetSoundMusic());
-  ActiveEffects(Config::GetInstance()->GetSoundEffects());
-  SetFrequency(Config::GetInstance()->GetSoundFrequency());
+  const Config* cfg = Config::GetConstInstance();
+  ActiveMusic(cfg->GetSoundMusic());
+  SetFrequency(cfg->GetSoundFrequency());
 
   if (!OpenDevice()) {
     End();
@@ -110,7 +107,8 @@ bool JukeBox::OpenDevice()
 {
   if (m_init)
     return true;
-  if (!m_config.music && !m_config.effects) {
+  Config* cfg = Config::GetInstance();
+  if (!cfg->GetSoundEffects() && !cfg->GetSoundMusic()) {
     End();
     return false;
   }
@@ -126,14 +124,16 @@ bool JukeBox::OpenDevice()
   int audio_buffer = 1024;
 
   /* Open the audio device */
-  if (Mix_OpenAudio(m_config.frequency, audio_format, m_config.channels, audio_buffer) < 0) {
+  if (Mix_OpenAudio(cfg->GetSoundFrequency(), audio_format, channels, audio_buffer) < 0) {
     std::cerr << "* Couldn't open audio: " <<  SDL_GetError() << std::endl;
     End();
     return false;
   } else {
-    Mix_QuerySpec(&m_config.frequency, &audio_format, &m_config.channels);
+    int frequency;
+    Mix_QuerySpec(&frequency, &audio_format, &channels);
     std::cout << Format(_("o Opened audio at %d Hz %d bit"),
-                        m_config.frequency, (audio_format&0xFF)) << std::endl;
+                        frequency, (audio_format&0xFF)) << std::endl;
+    cfg->SetSoundFrequency(frequency);
   }
   Mix_ChannelFinished(JukeBox::EndChunk);
   Mix_HookMusicFinished(JukeBox::EndMusic);
@@ -152,7 +152,7 @@ void JukeBox::CloseDevice()
   m_init = false;
 }
 
-void JukeBox::SetFrequency(int frequency)
+void JukeBox::SetFrequency(uint frequency)
 {
   // We ignore frequency changes requests
 #ifndef HAVE_HANDHELD
@@ -160,9 +160,10 @@ void JukeBox::SetFrequency(int frequency)
       && (frequency != 22050)
       && (frequency != 44100)) frequency = 44100;
 
-  if (m_config.frequency == frequency) return;
+  if (Config::GetConstInstance()->GetSoundFrequency() == frequency)
+    return;
 
-  m_config.frequency = frequency;
+  Config::GetInstance()->SetSoundFrequency(frequency);
 
   // Close and reopen audio device
   End();
@@ -174,7 +175,7 @@ void JukeBox::ActiveMusic(bool on)
 {
    if (IsPlayingMusic() && !on)
       StopMusic();
-   m_config.music = on;
+   Config::GetInstance()->SetSoundMusic(on);
 }
 
 void JukeBox::LoadMusicXML()
@@ -264,7 +265,7 @@ void JukeBox::EndMusic()
   Mix_FreeMusic(jukebox->music);
   jukebox->music = 0;
 
-  if (!jukebox->UseMusic() || !jukebox->IsPlayingMusic())
+  if (!Config::GetInstance()->GetSoundMusic() || !jukebox->IsPlayingMusic())
     return;
 
   if (jukebox->playing_music+1 == jukebox->playing_pl->second.end())
@@ -299,7 +300,7 @@ void JukeBox::NextMusic()
 
 bool JukeBox::PlayMusic(const std::string& type)
 {
-  if (m_init == false || !UseMusic())
+  if (m_init == false || !Config::GetInstance()->GetSoundMusic())
     return false;
 
   PlayListMap::iterator it = playlist.find(type);
@@ -318,7 +319,7 @@ bool JukeBox::PlayMusic(const std::string& type)
 
   StopMusic();
 
-  if (it->second.empty() || !UseMusic())
+  if (it->second.empty() || !Config::GetInstance()->GetSoundMusic())
     return false;
 
   playing_pl = it;
@@ -337,7 +338,7 @@ bool JukeBox::PlayMusic(const std::string& type)
 
 bool JukeBox::PlayMusicSample(const std::vector<std::string>::const_iterator& file_it)
 {
-  if (!m_init || !UseMusic())
+  if (!m_init || !Config::GetInstance()->GetSoundMusic())
     return false;
 
   std::string file = *file_it;
@@ -427,7 +428,7 @@ void JukeBox::LoadXML(const std::string& profile)
 int JukeBox::Play(const std::string& category, const std::string& sample,
                   const int loop)
 {
-  if (!UseEffects() || !m_init) return -1;
+  if (!Config::GetInstance()->GetSoundEffects() || !m_init) return -1;
 
   uint nb_sounds= m_soundsamples.count(category+ "/" +sample);
   if (nb_sounds) {
@@ -463,7 +464,8 @@ int JukeBox::Play(const std::string& category, const std::string& sample,
 int JukeBox::Stop(int channel) const
 {
   if (!m_init) return 0;
-  if (!m_config.music && !m_config.effects) return 0;
+  const Config* cfg = Config::GetConstInstance();
+  if (!cfg->GetSoundMusic() && !cfg->GetSoundEffects()) return 0;
   if (channel == -1) return 0;
   return Mix_HaltChannel(channel);
 }
@@ -472,7 +474,8 @@ int JukeBox::StopAll() const
 {
   if (!m_init)
     return 0;
-  if (!m_config.music && !m_config.effects) return 0;
+  const Config* cfg = Config::GetConstInstance();
+  if (!cfg->GetSoundMusic() && !cfg->GetSoundEffects()) return 0;
 
   // halt playback on all channels
   return Mix_HaltChannel(-1);
