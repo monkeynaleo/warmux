@@ -672,8 +672,8 @@ bool Config::SaveXml(bool save_current_teams)
 
   //=== Sound ===
   xmlNode *sound_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"sound"));
-  doc.WriteElement(sound_node, "music",  bool2str(JukeBox::GetConstInstance()->UseMusic()));
-  doc.WriteElement(sound_node, "effects", bool2str(JukeBox::GetConstInstance()->UseEffects()));
+  doc.WriteElement(sound_node, "music",  bool2str(sound_music));
+  doc.WriteElement(sound_node, "effects", bool2str(sound_effects));
 #ifndef HAVE_HANDHELD
   doc.WriteElement(sound_node, "frequency", uint2str(sound_frequency));
 #endif
