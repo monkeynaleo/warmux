@@ -736,33 +736,8 @@ TBool CSDLAppUi::ProcessCommandParametersL(CApaCommandLine &aCommandLine)
  
  TBool CSDLAppUi::CreateHwaBlitterL(RWindow& aWindow, TInt aFlags)
      {
-     _LIT(hwaFile, "sdl_blitter.txt");
-     TFileName name;
-     
-     if(FindFileL(hwaFile, name) || FindFileL(hwaFile, name, KGlobalPath))
-         {
-         RFile file;
-         User::LeaveIfError(file.Open(iEikonEnv->FsSession(), name, EFileRead));
-         TBuf8<256> n8;
-         file.Read(n8);
-         file.Close(); 
-         name.Copy(n8);
-         }
-     else
-         {
-         name = KDefaultHWABlitter;
-         }
-   
-     const TInt err = iHwaLib.Load(name);
-     if(err == KErrNone)
-         {
-         TLibraryFunction f = iHwaLib.Lookup(1);
-         CreateExtBlitterL createBlitterL = reinterpret_cast<CreateExtBlitterL>(f);
-         iZoomer = createBlitterL(aWindow, aFlags);
-         return ETrue;
-         }
-       
-     return EFalse;
+	 iZoomer = CHWABlitter::NewL(aWindow, aFlags);
+	 return ETrue;
      }
  	
  void CSDLAppUi::StartL()	
