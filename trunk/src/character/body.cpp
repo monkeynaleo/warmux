@@ -543,9 +543,9 @@ void Body::RefreshSprites()
 std::string Body::GetFrameLoop() const
 {
   char str[32];
-  snprintf(str, 32, "%u/%u-%u/%" SIZE_T_FORMAT "u",
+  snprintf(str, 32, "%u/%u-%u/%u",
            current_loop+1, current_mvt->GetNbLoops(),
-           current_frame+1, current_mvt->GetFrames().size());
+           current_frame+1, (uint)current_mvt->GetFrames().size());
 
   return std::string(str);
 }
