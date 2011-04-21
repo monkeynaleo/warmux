@@ -199,7 +199,7 @@ void RandomMap::GenerateIsland()
         Point2i position((int)current_x_pos, (int)(current_y_pos + y_offset));
         Surface * tmp_surf = new Surface(random_element->GetSurface());
         AddElement(tmp_surf, Point2i((int)current_x_pos, (int)(current_y_pos + y_offset)));
-        MSG_DEBUG("ground_generator.element", "Add an element in (x = %f, y = %f)", position.GetX(), position.GetY());
+        MSG_DEBUG("ground_generator.element", "Add an element in (x = %i, y = %i)", position.GetX(), position.GetY());
       }
     }
   }
