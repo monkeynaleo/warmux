@@ -115,8 +115,8 @@ void ApplyExplosion (const Point2i &pos,
     // If the character is in the explosion range, apply damage on it !
     int dmg = GetDamageFromExplosion(config, distance);
     if (dmg != 0) {
-      MSG_DEBUG("explosion", "\n*Character %s : distance= %f", character->GetName().c_str(), Double2str(distance).c_str());
-      MSG_DEBUG("explosion", "hit_point_loss energy= %d", character->GetName().c_str(), dmg);
+      MSG_DEBUG("explosion", "\n* Character %s : distance=%f hit_point_loss energy=%d",
+                character->GetName().c_str(), distance.tofloat(), dmg);
       character->SetEnergyDelta(-dmg, player);
     }
 
