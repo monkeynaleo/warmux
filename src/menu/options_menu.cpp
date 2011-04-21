@@ -293,7 +293,7 @@ OptionMenu::OptionMenu() :
   sound_options->AddWidget(volume_effects);
 
   // Generate sound mode list
-  uint current_freq = JukeBox::GetInstance()->GetFrequency();
+  uint current_freq = Config::GetInstance()->GetSoundFrequency();
   std::vector<std::pair<std::string, std::string> > sound_freqs;
   std::string current_sound_freq;
   sound_freqs.push_back(std::pair<std::string, std::string>("11025", "11 kHz"));
@@ -405,7 +405,7 @@ void OptionMenu::OnClickUp(const Point2i &mousePosition, int button)
     JukeBox::GetInstance()->ActiveMusic(music_cbox->GetValue());
   }
   else if (w == effects_cbox) {
-    JukeBox::GetInstance()->ActiveEffects(effects_cbox->GetValue());
+    Config::GetInstance()->SetSoundEffects(effects_cbox->GetValue());
   }
   else if (w == add_team) {
     AddTeam();
