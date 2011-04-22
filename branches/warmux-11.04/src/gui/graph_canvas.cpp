@@ -86,7 +86,7 @@ void GraphCanvas::DrawGraph(uint i, float xmax, float xmin,
     int ex = x+int((val.first-xmin)*xscale),
         ey = y-int(val.second*yscale);
 
-    MSG_DEBUG("menu", "   Next point: (%u,%u) -> (%i,%i)",
+    MSG_DEBUG("menu", "   Next point: (%.3f,%.3f) -> (%i,%i)",
               val.first, val.second, ex, ey);
     surface.BoxColor(Rectanglei(sx, sy, ex-sx, thickness), color);
     surface.BoxColor(Rectanglei(ex, std::min(sy,ey), thickness, abs(ey-sy)), color);

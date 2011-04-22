@@ -171,7 +171,8 @@ std::vector<uint> DistantComputer::GetCommonMaps(const std::list<DistantComputer
   if (cpu.size() == 1) {
     index_list = cpu.front()->GetAvailableMaps();
 
-    MSG_DEBUG("action_handler.map", "Getting front CPU list of size %u from %p\n", index_list.size(), cpu.front());
+    MSG_DEBUG("action_handler.map", "Getting front CPU list of size %u from %p\n",
+              (uint)index_list.size(), cpu.front());
     return index_list;
   }
 
@@ -194,6 +195,6 @@ std::vector<uint> DistantComputer::GetCommonMaps(const std::list<DistantComputer
       index_list.push_back(index);
   }
 
-  MSG_DEBUG("action_handler.map", "List of size %u\n", index_list.size());
+  MSG_DEBUG("action_handler.map", "List of size %u\n", (uint)index_list.size());
   return index_list;
 }

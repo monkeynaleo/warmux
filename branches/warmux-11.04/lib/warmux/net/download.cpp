@@ -256,7 +256,8 @@ bool Downloader::GetServerList(std::map<std::string, int>& server_lst, const std
   fclose(file);
   remove(server_file.c_str());
 
-  MSG_DEBUG("downloader", "Server list retrieved. %i servers are running", server_lst.size());
+  MSG_DEBUG("downloader", "Server list retrieved. %u servers are running",
+            (uint)server_lst.size());
 
   return true;
 }

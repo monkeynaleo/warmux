@@ -330,8 +330,8 @@ bool IndexServer::SendServerStatus(const std::string& game_name, bool pwd, int p
   if (!r || ack != "OK")
     goto disconnect;
 
-  MSG_DEBUG("index_server", "ACK received \\o/\n",
-            game_name.c_str(), pwd, port);
+  MSG_DEBUG("index_server", "ACK received by '%s' on port %i (pwd=%i)\n",
+            game_name.c_str(), port, pwd);
 
   Unlock();
   return true;

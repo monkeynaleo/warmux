@@ -270,7 +270,7 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
           cfg->SetVolumeEffects(volume);
         } else {
           cfg->SetVolumeEffects(0);
-          JukeBox::GetInstance()->ActiveEffects(false);
+          cfg->SetSoundEffects(false);
         }
         return;
       }
@@ -292,7 +292,7 @@ void ManMachineInterface::HandleKeyReleased(const Key_t &key)
         } else {
           cfg->SetVolumeEffects(max_volume);
         }
-        JukeBox::GetInstance()->ActiveEffects(true);
+        cfg->SetSoundEffects(true);
         return;
       }
     default:
