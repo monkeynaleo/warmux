@@ -39,7 +39,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <stdio.h>
 #include "fixed_func.h"
 
-namespace fixedpoint {
+namespace fp {
 
 static const int32_t FIX16_2PI     = float2fix<16>(2*M_PI);
 static const int32_t FIX16_HALF_PI = float2fix<16>(0.5*M_PI);
@@ -58,9 +58,9 @@ static const uint16_t atan_tab[] = {
 };
 
 
-fixint_t fixcos16(fixint_t a)
+fint_t fixcos16(fint_t a)
 {
-  fixint_t v;
+  fint_t v;
   /* reduce to [0,1) */
   while (a < 0) a += FIX16_2PI;
   a = fixmul<16>(a, FIX16_R2PI);
@@ -74,9 +74,9 @@ fixint_t fixcos16(fixint_t a)
   return (a & 0x800) ? -v : v;
 }
 
-fixint_t fixsin16(fixint_t a)
+fint_t fixsin16(fint_t a)
 {
-  fixint_t v;
+  fint_t v;
 
   /* reduce to [0,1) */
   while (a < 0) a += FIX16_2PI;
@@ -90,12 +90,12 @@ fixint_t fixsin16(fixint_t a)
   return (a & 0x800) ? -v : v;
 }
 
-fixint_t fixacos16(fixint_t a)
+fint_t fixacos16(fint_t a)
 {
   return FIX16_HALF_PI - fixasin16(a);
 }
 
-fixint_t fixasin16(fixint_t a)
+fint_t fixasin16(fint_t a)
 {
   if (a > 0) {
     if (a >= 0x10000)
@@ -108,7 +108,7 @@ fixint_t fixasin16(fixint_t a)
   }
 }
 
-fixint_t fixatan16(fixint_t a)
+fint_t fixatan16(fint_t a)
 {
   if (a > 0) {
     if (a <= 0x10000) {
@@ -125,15 +125,15 @@ fixint_t fixatan16(fixint_t a)
   }
 }
 
-fixint_t fixrsqrt16(fixint_t a)
+fint_t fixrsqrt16(fint_t a)
 {
-  fixint_t x;
+  fint_t x;
 
   static const uint16_t rsq_tab[] = { /* domain 0.5 .. 1.0-1/16 */
     0xb504, 0xaaaa, 0xa1e8, 0x9a5f, 0x93cd, 0x8e00, 0x88d6, 0x8432,
   };
 
-  fixint_t i, exp;
+  fint_t i, exp;
   if (a == 0) return 0x7fffffff;
   if (a == (1<<16)) return a;
 
@@ -158,7 +158,7 @@ fixint_t fixrsqrt16(fixint_t a)
   return x;
 }
 
-static inline fixint_t fast_div16(fixint_t a, fixint_t b)
+static inline fint_t fast_div16(fint_t a, fint_t b)
 {
   if ((b >> 24) && (b >> 24) + 1) {
     return fixmul<16>(a >> 8, fixinv<16>(b >> 8));
@@ -167,21 +167,21 @@ static inline fixint_t fast_div16(fixint_t a, fixint_t b)
   }
 }
 
-fixint_t fixsqrt16(fixint_t a)
+fint_t fixsqrt16(fint_t a)
 {
   if (a < 1<<7) {
     return 0;
   }
 
 #if 0
-  static fixint_t max = 0;
+  static fint_t max = 0;
   if (max < a) {
     printf("max: %"PRIi64"\n", a);
     max = a;
   }
 #endif
 
-  fixint_t s = (a + (1<<16)) >> 1;
+  fint_t s = (a + (1<<16)) >> 1;
   /* 14 iterations to find exact value for max 948015267840 */
   for (int i = 0; i < 14; i++) {
     s = (s + (a<<16) / s) >> 1;
@@ -189,21 +189,21 @@ fixint_t fixsqrt16(fixint_t a)
   return s;
 }
 
-fixint_t fixsqrt16_approx(fixint_t a)
+fint_t fixsqrt16_approx(fint_t a)
 {
   if (a < 1<<7) {
     return 0;
   }
 
 #if 0
-  static fixint_t max = 0;
+  static fint_t max = 0;
   if (max < a) {
     printf("max: %"PRIi64"\n", a);
     max = a;
   }
 #endif
 
-  fixint_t s = (a + (1<<16)) >> 1;
+  fint_t s = (a + (1<<16)) >> 1;
   /* 6 iterations to find exact value for max 34668544 */
   for (int i = 0; i < 6; i++) {
     s = (s + (a<<16) / s) >> 1;
@@ -211,4 +211,4 @@ fixint_t fixsqrt16_approx(fixint_t a)
   return s;
 }
 
-} // end namespace fixedpoint
+} // end namespace fp

@@ -54,14 +54,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define FIXINT_BITS  64
 
-namespace fixedpoint {
+namespace fp {
 
 #if FIXINT_BITS == 64
-typedef int64_t fixint_t;
-typedef uint64_t fixuint_t;
+typedef int64_t fint_t;
+typedef uint64_t fuint_t;
 #else
-typedef int32_t fixint_t;
-typedef uint32_t fixuint_t;
+typedef int32_t fint_t;
+typedef uint32_t fuint_t;
 #endif
 
 // The template argument p in all of the following functions refers to the
@@ -70,7 +70,7 @@ typedef uint32_t fixuint_t;
 // Perform a fixed point multiplication without a 64-bit intermediate result.
 // This is fast but beware of overflow!
 template <int p>
-inline fixint_t fixmulf(fixint_t a, fixint_t b)
+inline fint_t fixmulf(fint_t a, fint_t b)
 {
   return (a * b) >> p;
 }
@@ -78,14 +78,14 @@ inline fixint_t fixmulf(fixint_t a, fixint_t b)
 // Perform a fixed point multiplication using a 64-bit intermediate result to
 // prevent overflow problems.
 template <int p>
-inline fixint_t fixmul(fixint_t a, fixint_t b)
+inline fint_t fixmul(fint_t a, fint_t b)
 {
   return ((a * b) >> p);
 }
 
 // Fixed point division
 template <int p>
-inline int fixdiv(fixint_t a, fixint_t b)
+inline int fixdiv(fint_t a, fint_t b)
 {
 #if 1
   return int((a << p) / b);
@@ -93,7 +93,7 @@ inline int fixdiv(fixint_t a, fixint_t b)
   // The following produces the same results as the above but gcc 4.0.3
   // generates fewer instructions (at least on the ARM processor).
   union {
-    fixint_t a;
+    fint_t a;
     struct {
       int32_t l;
       int32_t h;
@@ -142,7 +142,7 @@ namespace detail {
 // q is the precision of the input
 // output has 32-q bits of fraction
 template <int p>
-inline fixint_t fixinv(fixint_t a)
+inline fint_t fixinv(fint_t a)
 {
   return fixdiv<p>(1 << p, a);
 }
@@ -186,33 +186,33 @@ inline int fixinv(int32_t a)
 // Conversion from and to float
 
 template <int p>
-inline float fix2float(fixint_t f)
+inline float fix2float(fint_t f)
 {
   static const float inv = 1.0f / (1<<p);
   return f * inv;
 }
 
 template <int p>
-inline fixint_t float2fix(float f)
+inline fint_t float2fix(float f)
 {
-  return (fixint_t)(f * (1 << p));
+  return (fint_t)(f * (1 << p));
 }
 
 template <int p>
-inline fixint_t float2fix(double f)
+inline fint_t float2fix(double f)
 {
-  return (fixint_t)(f * (1 << p));
+  return (fint_t)(f * (1 << p));
 }
 
-fixint_t fixcos16(fixint_t a);
-fixint_t fixsin16(fixint_t a);
-fixint_t fixacos16(fixint_t a);
-fixint_t fixasin16(fixint_t a);
-fixint_t fixatan16(fixint_t a);
-fixint_t fixrsqrt16(fixint_t a);
-fixint_t fixsqrt16(fixint_t a);
-fixint_t fixsqrt16_approx(fixint_t a);
+fint_t fixcos16(fint_t a);
+fint_t fixsin16(fint_t a);
+fint_t fixacos16(fint_t a);
+fint_t fixasin16(fint_t a);
+fint_t fixatan16(fint_t a);
+fint_t fixrsqrt16(fint_t a);
+fint_t fixsqrt16(fint_t a);
+fint_t fixsqrt16_approx(fint_t a);
 
-} // end namespace fixedpoint
+} // end namespace fp
 
 #endif
