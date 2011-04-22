@@ -27,6 +27,10 @@ import android.os.Build;
 import java.lang.reflect.Method;
 import java.util.LinkedList;
 
+// For mail
+import android.content.Intent;
+import android.net.Uri;
+import java.util.ArrayList;
 
 abstract class DifferentTouchInput
 {
@@ -235,8 +239,22 @@ class DemoRenderer extends GLSurfaceView_SDL.Renderer {
 		if(Globals.AudioBufferConfig >= 2)
 			Thread.currentThread().setPriority( (Thread.NORM_PRIORITY + Thread.MIN_PRIORITY) / 2 ); // Lower than normal
 		nativeInit( Globals.DataDir,
-					Globals.CommandLine,
-					( Globals.SwVideoMode && Globals.MultiThreadedVideo ) ? 1 : 0 ); // Calls main() and never returns, hehe - we'll call eglSwapBuffers() from native code
+		            Globals.CommandLine,
+			          ( Globals.SwVideoMode && Globals.MultiThreadedVideo ) ? 1 : 0 );
+    {
+      //need to "send multiple" to get more than one attachment
+      final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND_MULTIPLE);
+      emailIntent.setType("plain/text");
+      emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, "kurosu@free.fr");
+      emailIntent.putExtra(Intent.EXTRA_SUBJECT, "[Warmux] Automatic debug output");
+       //has to be an ArrayList
+      ArrayList<Uri> uris = new ArrayList<Uri>();
+      //convert from paths to Android friendly Parcelable Uri's
+      uris.add(Uri.parse("file:///sdcard/Warmux/stdout.txt"));
+      uris.add(Uri.parse("file:///sdcard/Warmux/stderr.txt"));
+      emailIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
+      context.startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+    }
 		System.exit(0); // The main() returns here - I don't bother with deinit stuff, just terminate process
 	}
 
