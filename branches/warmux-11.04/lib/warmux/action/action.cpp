@@ -178,7 +178,7 @@ void Action::Push(Double m_val)
   SDLNet_Write32(tmp[0], m_write); m_write+= 4;
 #  endif
 #endif
-  m_header.len += sizeof(fixedpoint::fixint_t);
+  m_header.len += sizeof(fp::fint_t);
 }
 
 void Action::Push(const Point2i& m_val)
@@ -232,7 +232,7 @@ int Action::PopInt()
 
 Double Action::PopDouble()
 {
-  NET_ASSERT(MemReadLeft() >= sizeof(fixedpoint::fixint_t))
+  NET_ASSERT(MemReadLeft() >= sizeof(fp::fint_t))
   {
     if (m_creator) m_creator->ForceDisconnection();
     return 0.0;
@@ -240,11 +240,11 @@ Double Action::PopDouble()
 
   union
   {
-	uint32_t u32[sizeof(fixedpoint::fixint_t)/4];
-	fixedpoint::fixint_t f;
+	uint32_t u32[sizeof(fp::fint_t)/4];
+	fp::fint_t f;
   } tmp;
   
-  static const uint len = sizeof(fixedpoint::fixint_t)/4;
+  static const uint len = sizeof(fp::fint_t)/4;
   for (uint i=0; i<len; i++) {
 #  if SDL_BYTEORDER == SDL_LIL_ENDIAN
     tmp.u32[i] = SDLNet_Read32(m_read);
