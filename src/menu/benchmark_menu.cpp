@@ -171,8 +171,8 @@ bool BenchmarkMenu::Launch(BenchItem *b)
 
       // Mute all sounds
       JukeBox *jbox = JukeBox::GetInstance();
-      bool music = jbox->UseMusic(); jbox->ActiveMusic(false);
-      bool sfx = jbox->UseEffects(); jbox->ActiveEffects(false);
+      bool music = cfg->GetSoundMusic(); jbox->ActiveMusic(false);
+      bool sfx = cfg->GetSoundEffects(); cfg->SetSoundEffects(false);
 
       // Backup and set default map - should I save the config?
       std::string map_name = cfg->GetMapName();
@@ -214,7 +214,7 @@ bool BenchmarkMenu::Launch(BenchItem *b)
       // Restore all!
       video->SetMaxFps(fps);
       jbox->ActiveMusic(music);
-      jbox->ActiveEffects(sfx);
+      cfg->SetSoundEffects(sfx);
       maps->SelectMapByIndex(map_id_bak);
       cfg->SetMapName(map_name);
       cfg->SetDisplayMultiLayerSky(display_multisky);

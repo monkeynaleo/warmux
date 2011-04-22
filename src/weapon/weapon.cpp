@@ -217,8 +217,8 @@ bool Weapon::CanChangeWeapon() const
 
 void Weapon::PrepareShoot()
 {
-  MSG_DEBUG("weapon.shoot", "Try to shoot with strength:%f, angle:%f",
-            Double2str(m_strength).c_str(), Double2str(ActiveCharacter().GetFiringAngle()).c_str());
+  MSG_DEBUG("weapon.shoot", "Try to shoot with strength=%f, angle:%f",
+            m_strength.tofloat(), ActiveCharacter().GetFiringAngle().tofloat());
   StopLoading();
 
   ActiveCharacter().PrepareShoot();

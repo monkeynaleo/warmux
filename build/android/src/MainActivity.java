@@ -34,7 +34,7 @@ import java.io.FileOutputStream;
 import java.io.File;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
-
+import android.text.SpannedString;
 
 
 public class MainActivity extends Activity {
@@ -357,7 +357,7 @@ public class MainActivity extends Activity {
 		class Callback implements Runnable
 		{
 			MainActivity Parent;
-			public String text;
+			public SpannedString text;
 			public void run()
 			{
 				Parent.setUpStatusLabel();
@@ -366,7 +366,7 @@ public class MainActivity extends Activity {
 			}
 		}
 		Callback cb = new Callback();
-		cb.text = new String(t);
+		cb.text = new SpannedString(t);
 		cb.Parent = this;
 		this.runOnUiThread(cb);
 	}

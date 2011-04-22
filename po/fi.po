@@ -56,45 +56,45 @@ msgstr "%s <%s> aka %s, kotipaikka: %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> maasta %s"
 
-#: src/menu/team_box.cpp:253
+#: src/menu/team_box.cpp:254
 #, c-format
 msgid "%s Team"
 msgstr "Joukkue %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:245
+#: src/menu/team_box.cpp:246
 #, c-format
 msgid "%s Team - Remote"
 msgstr "%s Joukkue - Etä"
 
-#: src/game/game.cpp:1171
+#: src/game/game.cpp:1172
 #, c-format
 msgid "%s from %s team committed suicide!"
 msgstr "%s joukkueesta %s suoritti itsemurhan !"
 
 #. Could be modified, but for now, save on translation
-#: src/game/game.cpp:1197 src/game/game.cpp:1216
+#: src/game/game.cpp:1198 src/game/game.cpp:1217
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s joukkueesta %s kuoli."
 
-#: src/game/game.cpp:1163
+#: src/game/game.cpp:1164
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s joukkueesta %s sukelsi syvyyksiin."
 
-#: src/game/game.cpp:1157
+#: src/game/game.cpp:1158
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s joukkueesta %s tipahti ulos kartalta!"
 
-#: src/game/game.cpp:1177
+#: src/game/game.cpp:1178
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s joukkueesta %s osui maahan liian lujaa!"
 
 #. The playing character killed himself
-#: src/game/game.cpp:1184
+#: src/game/game.cpp:1185
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s joukkueesta %s kuoli kömpelyyteensä!"
@@ -118,7 +118,7 @@ msgstr ""
 msgid "%s has won %u points of energy!"
 msgstr "%s voitti %u pistettä voimaa."
 
-#: src/game/game.cpp:1208
+#: src/game/game.cpp:1209
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "Psykopaatti %s tappaa jäseniä ryhmästä %s!"
@@ -129,18 +129,14 @@ msgid "%s is next to a mine!"
 msgstr "%s on aivan miinan vieressä!"
 
 #. For translators: extended in "<nickname> (<host>) just connected
-#: src/include/action_handler.cpp:950
+#: src/include/action_handler.cpp:952
 #, c-format
-#| msgid "%i player connected"
-#| msgid_plural "%i players connected"
 msgid "%s just connected"
 msgstr "%s liittyi peliin"
 
 #. For translators: extended in "<nickname> (<host>) just disconnected
-#: src/include/action_handler.cpp:1066
+#: src/include/action_handler.cpp:1068
 #, c-format
-#| msgid "%i player connected"
-#| msgid_plural "%i players connected"
 msgid "%s just disconnected"
 msgstr "%s poistui pelistä"
 
@@ -445,7 +441,7 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "Joukkue %s tapettiin."
 
-#: src/game/game.cpp:1192 src/game/game.cpp:1204
+#: src/game/game.cpp:1193 src/game/game.cpp:1205
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s vei joukkueen %s jäsenen mukanaan hautaan!"
@@ -748,7 +744,7 @@ msgstr ""
 "Saman joukkueen voi valita vain kerran."
 
 #. Client Mode
-#: src/menu/network_menu.cpp:167 src/network/network.cpp:453
+#: src/menu/network_menu.cpp:167 src/network/network.cpp:456
 msgid "Client mode"
 msgstr "Asiakastila"
 
@@ -763,6 +759,13 @@ msgstr "Rypälepommi"
 #: src/weapon/cluzooka.cpp:373
 msgid "Cluzooka"
 msgstr "Rypälesinko"
+
+#. Comment
+#: src/menu/replay_menu.cpp:89
+#, fuzzy
+#| msgid "Comment:"
+msgid "Comment"
+msgstr "Kommentti:"
 
 #: src/menu/results_menu.cpp:366
 msgid "Comment:"
@@ -837,6 +840,13 @@ msgstr ""
 msgid "Damage per turn during death mode"
 msgstr "Vahinko per kierros kuolon tilassa"
 
+#. Date
+#: src/menu/replay_menu.cpp:79
+#, fuzzy
+#| msgid "Dynamite"
+msgid "Date"
+msgstr "Dynamiitti"
+
 #: src/interface/man_machine_interface.cpp:1186
 msgid "Decrease explosion delay"
 msgstr "Vähennä ajastimen viivettä"
@@ -874,6 +884,13 @@ msgstr "Hitaasti alas"
 msgid "Drag&drop: Move camera"
 msgstr "Vedä&pudota: Siirrä kameraa"
 
+#. Duration
+#: src/menu/replay_menu.cpp:84
+#, fuzzy
+#| msgid "Duration of a turn"
+msgid "Duration"
+msgstr "Vuoron kesto"
+
 #. some death mode options
 #: src/menu/game_mode_editor.cpp:82
 msgid "Duration before death mode"
@@ -887,7 +904,7 @@ msgstr "Vuoron kesto"
 msgid "Dynamite"
 msgstr "Dynamiitti"
 
-#: src/game/game.cpp:512
+#: src/game/game.cpp:513
 msgid "END OF GAME"
 msgstr "PELI LOPPUI"
 
@@ -912,7 +929,7 @@ msgstr "Virhe ladattaessa maastoa"
 msgid "Error loading team :"
 msgstr "Virhe ladattaessa joukkuetta :"
 
-#: src/game/config.cpp:586 src/team/custom_team.cpp:155
+#: src/game/config.cpp:592 src/team/custom_team.cpp:155
 #: src/team/custom_team.cpp:166 src/team/custom_team.cpp:177
 #, c-format
 msgid ""
@@ -1009,7 +1026,6 @@ msgid "Failed to save replay"
 msgstr "Tallenteen kirjoitus epäonnistui"
 
 #: src/menu/results_menu.cpp:354
-#| msgid "Game name:"
 msgid "Filename:"
 msgstr "Tiedoston nimi:"
 
@@ -1029,7 +1045,7 @@ msgstr "Kokoruutu"
 msgid "Game"
 msgstr "Peli"
 
-#: src/include/action_handler.cpp:919
+#: src/include/action_handler.cpp:921
 msgid ""
 "Game is not synchronized anymore! This is BAD, the network game will be "
 "interrupted, sorry. Please, report the bug to the Warmux Team by mail or "
@@ -1115,7 +1131,6 @@ msgid "Help"
 msgstr "Ohje"
 
 #: src/menu/options_menu.cpp:128
-#| msgid "High jump"
 msgid "High"
 msgstr "Korkea"
 
@@ -1201,20 +1216,20 @@ msgstr ""
 "Ammu : pidä välilyönti painettuna\n"
 "Yksi ammus per vuoro"
 
-#: src/game/game.cpp:123
+#: src/game/game.cpp:124
 msgid "Initialisation"
 msgstr "Alustus"
 
 #. Load the map
-#: src/game/game.cpp:160
+#: src/game/game.cpp:161
 msgid "Initialise map"
 msgstr "Alusta kartta"
 
-#: src/game/game.cpp:171
+#: src/game/game.cpp:172
 msgid "Initialise sounds"
 msgstr "Alusta äänet"
 
-#: src/game/game.cpp:167
+#: src/game/game.cpp:168
 msgid "Initialise teams"
 msgstr "Alusta joukkueet"
 
@@ -1232,7 +1247,7 @@ msgstr "Käyttöliittymä ja kosketusohjaimet, lisää tietoa muissa välilehdis
 msgid "Invalid filename"
 msgstr "Virheellinen tiedoston nimi"
 
-#: src/game/game.cpp:1041
+#: src/game/game.cpp:1042
 msgid "It's a present!"
 msgstr "Taivaalta sataa lahjoja!"
 
@@ -1334,7 +1349,7 @@ msgstr "Kartta %s, tehnyt :"
 msgid "Map author information: name, email, nickname, country"
 msgstr "Tietoja kartan tekijästä"
 
-#: src/game/game.cpp:161
+#: src/game/game.cpp:162
 msgid "Maps"
 msgstr "Kartat"
 
@@ -1351,7 +1366,6 @@ msgid "Maximum FPS"
 msgstr "Maksimi FPS"
 
 #: src/menu/options_menu.cpp:126
-#| msgid "Podium"
 msgid "Medium"
 msgstr "Keskilaatu"
 
@@ -1460,7 +1474,7 @@ msgstr "Musiikin voimakkuus"
 msgid "Music?"
 msgstr "Musiikki"
 
-#: src/game/game.cpp:184
+#: src/game/game.cpp:185
 msgid "Network"
 msgstr "Verkko"
 
@@ -1726,11 +1740,11 @@ msgstr "Satunnainen kartta"
 msgid "Read only %i bytes"
 msgstr "Luettiin vain %i tavua."
 
-#: src/game/config.cpp:397
+#: src/game/config.cpp:401
 msgid "Reading the default config file"
 msgstr "Luetaan oletusasetuksia"
 
-#: src/game/config.cpp:454
+#: src/game/config.cpp:458
 msgid "Reading the personal config file"
 msgstr "Luetaan henkilökohtaisia asetuksia"
 
@@ -1740,12 +1754,16 @@ msgstr "Tallenteet"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:110
-#| msgid "Current controls"
 msgid "Replay controls"
 msgstr "Toiston ohjaimet"
 
-#: src/game/game.cpp:211
-#| msgid "Game mode"
+#: src/menu/replay_menu.cpp:69
+#, fuzzy
+#| msgid "Replay mode"
+msgid "Replay info"
+msgstr "Toistotila"
+
+#: src/game/game.cpp:212
 msgid "Replay mode"
 msgstr "Toistotila"
 
@@ -1799,6 +1817,12 @@ msgstr "Reunuksen koko"
 msgid "Scroll on border"
 msgstr "Vieritä ruudun reunoista"
 
+#: src/menu/replay_menu.cpp:55
+#, fuzzy
+#| msgid "Failed to save replay"
+msgid "Select a replay:"
+msgstr "Tallenteen kirjoitus epäonnistui"
+
 #: src/menu/help_menu.cpp:53
 msgid "Select number of playing teams"
 msgstr "Pelaajien määrä joukkueessa:"
@@ -1812,7 +1836,7 @@ msgstr "Palvelimen osoite:"
 msgid "Server available on Internet"
 msgstr "Palvelimelle on pääsy internetistä"
 
-#: src/menu/network_menu.cpp:174 src/network/network.cpp:483
+#: src/menu/network_menu.cpp:174 src/network/network.cpp:486
 msgid "Server mode"
 msgstr "Palvelimen tila"
 
@@ -1923,11 +1947,11 @@ msgid "Sound frequency"
 msgstr "Näytetaajuus"
 
 #. Load teams' sound profiles
-#: src/game/game.cpp:173
+#: src/game/game.cpp:174
 msgid "Sounds"
 msgstr "Ääniasetukset"
 
-#: src/game/game.cpp:205
+#: src/game/game.cpp:206
 msgid "Starting a new game"
 msgstr "Aloitetaan uusi peli"
 
@@ -1969,7 +1993,6 @@ msgid "Team graphs"
 msgstr "Joukkueen graafi"
 
 #: src/menu/options_menu.cpp:594
-#| msgid "Team stats"
 msgid "Team saved"
 msgstr "Joukkue tallennettu"
 
@@ -1977,8 +2000,10 @@ msgstr "Joukkue tallennettu"
 msgid "Team stats"
 msgstr "Joukkueen tilastot"
 
-#: src/game/game.cpp:168 src/menu/game_menu.cpp:76 src/menu/game_menu.cpp:80
+#. Teams
+#: src/game/game.cpp:169 src/menu/game_menu.cpp:76 src/menu/game_menu.cpp:80
 #: src/menu/network_menu.cpp:98 src/menu/network_menu.cpp:102
+#: src/menu/replay_menu.cpp:94
 msgid "Teams"
 msgstr "Joukkueet"
 
@@ -2032,7 +2057,7 @@ msgstr ""
 "Salamasota ei nollaa aikaa vuoron jälkeen. Se joukkue häviää, jonka vuorolla "
 "aika loppuu."
 
-#: src/network/network_client.cpp:100
+#: src/network/network_client.cpp:99
 #, c-format
 msgid ""
 "The client and server versions are incompatible (local=%s, server=%s). "
@@ -2049,7 +2074,7 @@ msgstr "Yhteyden aikakatkaisu. Tarkista ettei palomuuri ole tiellä!"
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "Diskokranaatti jätti tanssilattian ennen räjähtämistä!"
 
-#: src/game/game.cpp:768
+#: src/game/game.cpp:769
 msgid "The game was interrupted because you got disconnected."
 msgstr "Peli keskeytyi koska yhteytesi katkesi."
 
@@ -2254,7 +2279,8 @@ msgstr ""
 "Ammu : pidä välilyönti painettuna\n"
 "Yksi ammus per vuoro"
 
-#: src/main.cpp:206
+#. Version
+#: src/main.cpp:206 src/menu/main_menu.cpp:90 src/menu/replay_menu.cpp:74
 msgid "Version"
 msgstr "Versio"
 
@@ -2274,12 +2300,12 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Hetkinen! %i pelaaja ei ole vielä valmis!"
 msgstr[1] "Hetkinen! %i pelaajaa ei ole vielä valmiita!"
 
-#: src/game/game.cpp:663
+#: src/game/game.cpp:664
 #, c-format
 msgid "Waiting for %s"
 msgstr "Odotetaan henkilöä %s"
 
-#: src/game/game.cpp:183
+#: src/game/game.cpp:184
 msgid "Waiting for remote players"
 msgstr "Odotetaan etäpelaajia"
 
@@ -2304,7 +2330,7 @@ msgstr "Aseluokka 8"
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Ase: Ammu / Bonuslaatikko: pudota"
 
-#: src/game/game.cpp:164
+#: src/game/game.cpp:165
 msgid "Weapons"
 msgstr "Aseet"
 
@@ -2319,12 +2345,12 @@ msgstr "Verkkosivu:"
 msgid "Welcome to %s on %s!"
 msgstr "Tervetuloa kohteeseen %s paikassa %s!"
 
-#: src/game/game.cpp:1150
+#: src/game/game.cpp:1151
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr "Loistava kunnari! %s joukkueesta %s  on toisessa maailmassa..."
 
-#: src/game/game.cpp:1213
+#: src/game/game.cpp:1214
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Mikä harmi, %s kuoli pikku pyssyn luodista!"
@@ -2390,7 +2416,7 @@ msgstr "Ylikomentajan ja kaikkien pelaajien nimet pitää täyttää"
 msgid "You need at least one valid map!"
 msgstr "Tarvitset ainakin yhden kunnollisen kartan !"
 
-#: src/game/game.cpp:304 src/team/teams_list.cpp:166
+#: src/game/game.cpp:305 src/team/teams_list.cpp:166
 msgid "You need at least two valid teams!"
 msgstr "Tarvitset ainakin kaksi kelvollista joukkuetta!"
 
@@ -2445,16 +2471,16 @@ msgstr "ladataan..."
 msgid "no configuration file!"
 msgstr "ei asetustiedostoa!"
 
-#: src/sound/jukebox.cpp:191
+#: src/sound/jukebox.cpp:192
 msgid "o Loading music"
 msgstr "o Ladataan musiikki"
 
-#: src/sound/jukebox.cpp:373
+#: src/sound/jukebox.cpp:374
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Ladataan ääniprofiili: %s"
 
-#: src/sound/jukebox.cpp:135
+#: src/sound/jukebox.cpp:134
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Avataan äänet: %d Hz %d bittiä."

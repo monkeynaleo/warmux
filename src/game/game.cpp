@@ -112,11 +112,12 @@ void Game::InitEverything()
   int icon_count = Network::GetInstance()->IsLocal() ? 4 : 5;
   LoadingScreen loading_screen(icon_count);
 
-  Config::GetInstance()->RemoveAllObjectConfigs();
+  Config *cfg = Config::GetInstance();
+  cfg->RemoveAllObjectConfigs();
 
   // Disable sound during the loading of data
-  bool enable_sound = JukeBox::GetInstance()->UseEffects();
-  JukeBox::GetInstance()->ActiveEffects(false);
+  bool enable_sound = cfg->GetSoundEffects();
+  cfg->SetSoundEffects(false);
 
   Mouse::GetInstance()->Hide();
 
@@ -176,7 +177,7 @@ void Game::InitEverything()
   InitInterface();
 
   // Loading is finished, sound effects can be enabled again
-  JukeBox::GetInstance()->ActiveEffects(enable_sound);
+  cfg->SetSoundEffects(enable_sound);
 
   // Waiting for others players
   if (!Network::GetInstance()->IsLocal()) {

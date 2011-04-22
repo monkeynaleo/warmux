@@ -6,14 +6,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.8\n"
 "Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
-"POT-Creation-Date: 2011-03-27 20:41+0200\n"
 "PO-Revision-Date: 2011-03-27 22:52+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
-"Language: nn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: nn\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 1.0\n"
 
@@ -62,34 +61,34 @@ msgstr "%s-laget"
 msgid "%s Team - Remote"
 msgstr "%s-laget – frå nettet"
 
-#: src/game/game.cpp:1171
+#: src/game/game.cpp:1172
 #, c-format
 msgid "%s from %s team committed suicide!"
 msgstr "%s frå %s-laget gjorde sjølvmord!"
 
 #. Could be modified, but for now, save on translation
-#: src/game/game.cpp:1197 src/game/game.cpp:1216
+#: src/game/game.cpp:1198 src/game/game.cpp:1217
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s frå %s-laget døydde!"
 
-#: src/game/game.cpp:1163
+#: src/game/game.cpp:1164
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s frå %s-laget fall i vatnet!"
 
-#: src/game/game.cpp:1157
+#: src/game/game.cpp:1158
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s frå %s-laget fall ut av kartet!"
 
-#: src/game/game.cpp:1177
+#: src/game/game.cpp:1178
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s frå %s-laget trefte bakken for hardt!"
 
 #. The playing character killed himself
-#: src/game/game.cpp:1184
+#: src/game/game.cpp:1185
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s frå %s-laget døydde fordi han var klønete!"
@@ -112,7 +111,7 @@ msgstr ""
 msgid "%s has won %u points of energy!"
 msgstr "%s fekk %u livspoeng!"
 
-#: src/game/game.cpp:1208
+#: src/game/game.cpp:1209
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s er vorten sinnssjuk, og har drept nokon frå %s-laget!"
@@ -437,7 +436,7 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "%s-laget vart meia ned."
 
-#: src/game/game.cpp:1192 src/game/game.cpp:1204
+#: src/game/game.cpp:1193 src/game/game.cpp:1205
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s tok eit medlem av %s-laget med seg i grava!"
@@ -739,7 +738,7 @@ msgstr ""
 "Du kan berre velja kvart lag éin gong."
 
 #. Client Mode
-#: src/menu/network_menu.cpp:167 src/network/network.cpp:457
+#: src/menu/network_menu.cpp:167 src/network/network.cpp:456
 msgid "Client mode"
 msgstr "Klientmodus"
 
@@ -754,6 +753,13 @@ msgstr "Klasebombe"
 #: src/weapon/cluzooka.cpp:373
 msgid "Cluzooka"
 msgstr "Klaserakett"
+
+#. Comment
+#: src/menu/replay_menu.cpp:89
+#, fuzzy
+#| msgid "Comment:"
+msgid "Comment"
+msgstr "Kommentar:"
 
 #: src/menu/results_menu.cpp:366
 msgid "Comment:"
@@ -828,6 +834,13 @@ msgstr ""
 msgid "Damage per turn during death mode"
 msgstr "Skade per runde i dødsmodus"
 
+#. Date
+#: src/menu/replay_menu.cpp:79
+#, fuzzy
+#| msgid "Dynamite"
+msgid "Date"
+msgstr "Dynamitt"
+
 #: src/interface/man_machine_interface.cpp:1186
 msgid "Decrease explosion delay"
 msgstr "Lågare ventetid før eksplosjon"
@@ -865,6 +878,13 @@ msgstr "Nedover sakte"
 msgid "Drag&drop: Move camera"
 msgstr "Dra: flytt kameraet"
 
+#. Duration
+#: src/menu/replay_menu.cpp:84
+#, fuzzy
+#| msgid "Duration of a turn"
+msgid "Duration"
+msgstr "Rundelengd"
+
 #. some death mode options
 #: src/menu/game_mode_editor.cpp:82
 msgid "Duration before death mode"
@@ -878,7 +898,7 @@ msgstr "Rundelengd"
 msgid "Dynamite"
 msgstr "Dynamitt"
 
-#: src/game/game.cpp:512
+#: src/game/game.cpp:513
 msgid "END OF GAME"
 msgstr "SPELET ER SLUTT"
 
@@ -903,7 +923,7 @@ msgstr "Klarte ikkje lasta bakgrunnen:"
 msgid "Error loading team :"
 msgstr "Klarte ikkje lasta laget:"
 
-#: src/game/config.cpp:586 src/team/custom_team.cpp:155
+#: src/game/config.cpp:592 src/team/custom_team.cpp:155
 #: src/team/custom_team.cpp:166 src/team/custom_team.cpp:177
 #, c-format
 msgid ""
@@ -921,8 +941,7 @@ msgstr ""
 #: src/team/custom_team.cpp:125
 #, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
-msgstr ""
-"Klarte ikkje sletta fila «%s», og kan derfor ikkje sletta tilpassa lag."
+msgstr "Klarte ikkje sletta fila «%s», og kan derfor ikkje sletta tilpassa lag."
 
 #. translators: %s:%s will expand to something like "example.org:9999"
 #: src/menu/network_connection_menu.cpp:524
@@ -1188,20 +1207,20 @@ msgstr ""
 "Skyt: hald inne mellomromstasten for å velja styrke\n"
 "Eitt skot per runde"
 
-#: src/game/game.cpp:123
+#: src/game/game.cpp:124
 msgid "Initialisation"
 msgstr "Startar"
 
 #. Load the map
-#: src/game/game.cpp:160
+#: src/game/game.cpp:161
 msgid "Initialise map"
 msgstr "Lagar kart"
 
-#: src/game/game.cpp:171
+#: src/game/game.cpp:172
 msgid "Initialise sounds"
 msgstr "Lastar lydar"
 
-#: src/game/game.cpp:167
+#: src/game/game.cpp:168
 msgid "Initialise teams"
 msgstr "Lastar lag"
 
@@ -1219,7 +1238,7 @@ msgstr "Brukargrensesnitt og kontrollar (meir informasjon i andre faner)"
 msgid "Invalid filename"
 msgstr "Ugyldig filnamn"
 
-#: src/game/game.cpp:1041
+#: src/game/game.cpp:1042
 msgid "It's a present!"
 msgstr "Det kom ei gåve frå oven!"
 
@@ -1321,7 +1340,7 @@ msgstr "Kartet %s er laga av: "
 msgid "Map author information: name, email, nickname, country"
 msgstr "Kartutviklar: namn, e-postadresse, kallenamn og land"
 
-#: src/game/game.cpp:161
+#: src/game/game.cpp:162
 msgid "Maps"
 msgstr "Kart"
 
@@ -1446,7 +1465,7 @@ msgstr "Lydstyrke: musikk"
 msgid "Music?"
 msgstr "Musikk"
 
-#: src/game/game.cpp:184
+#: src/game/game.cpp:185
 msgid "Network"
 msgstr "Nettverk"
 
@@ -1712,11 +1731,11 @@ msgstr "Tilfeldig kart"
 msgid "Read only %i bytes"
 msgstr "Les berre %i byte"
 
-#: src/game/config.cpp:397
+#: src/game/config.cpp:401
 msgid "Reading the default config file"
 msgstr "Laster standard oppsettfil"
 
-#: src/game/config.cpp:454
+#: src/game/config.cpp:458
 msgid "Reading the personal config file"
 msgstr "Laster personleg oppsettfil"
 
@@ -1729,7 +1748,13 @@ msgstr "Spelopptak"
 msgid "Replay controls"
 msgstr "Avspelingskontrollar"
 
-#: src/game/game.cpp:211
+#: src/menu/replay_menu.cpp:69
+#, fuzzy
+#| msgid "Replay mode"
+msgid "Replay info"
+msgstr "Opptaksmodus"
+
+#: src/game/game.cpp:212
 msgid "Replay mode"
 msgstr "Opptaksmodus"
 
@@ -1783,6 +1808,12 @@ msgstr "Storleik på skjermkant"
 msgid "Scroll on border"
 msgstr "Rull ved skjermkant"
 
+#: src/menu/replay_menu.cpp:55
+#, fuzzy
+#| msgid "Failed to save replay"
+msgid "Select a replay:"
+msgstr "Klarte ikkje lagra spelopptak"
+
 #: src/menu/help_menu.cpp:53
 msgid "Select number of playing teams"
 msgstr "Vel talet på lag"
@@ -1796,7 +1827,7 @@ msgstr "Tenaradresse:"
 msgid "Server available on Internet"
 msgstr "Tenar tilgjengeleg på nettet"
 
-#: src/menu/network_menu.cpp:174 src/network/network.cpp:487
+#: src/menu/network_menu.cpp:174 src/network/network.cpp:486
 msgid "Server mode"
 msgstr "Tenarmodus"
 
@@ -1907,11 +1938,11 @@ msgid "Sound frequency"
 msgstr "Lydfrekvens"
 
 #. Load teams' sound profiles
-#: src/game/game.cpp:173
+#: src/game/game.cpp:174
 msgid "Sounds"
 msgstr "Lydar"
 
-#: src/game/game.cpp:205
+#: src/game/game.cpp:206
 msgid "Starting a new game"
 msgstr "Startar nytt spel"
 
@@ -1960,8 +1991,10 @@ msgstr "Lag redda"
 msgid "Team stats"
 msgstr "Lagstatistikk"
 
-#: src/game/game.cpp:168 src/menu/game_menu.cpp:76 src/menu/game_menu.cpp:80
+#. Teams
+#: src/game/game.cpp:169 src/menu/game_menu.cpp:76 src/menu/game_menu.cpp:80
 #: src/menu/network_menu.cpp:98 src/menu/network_menu.cpp:102
+#: src/menu/replay_menu.cpp:94
 msgid "Teams"
 msgstr "Lag"
 
@@ -2034,7 +2067,7 @@ msgstr ""
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "Diskogranaten forlot dansegolvet før han eksploderte!"
 
-#: src/game/game.cpp:768
+#: src/game/game.cpp:769
 msgid "The game was interrupted because you got disconnected."
 msgstr "Spelet vart avbrote fordi du mista nettsambandet."
 
@@ -2238,7 +2271,8 @@ msgstr ""
 "Skyt: hald inne mellomromstasten for å velja styrke\n"
 "Eitt skot per runde"
 
-#: src/main.cpp:206
+#. Version
+#: src/main.cpp:206 src/menu/main_menu.cpp:90 src/menu/replay_menu.cpp:74
 msgid "Version"
 msgstr "Versjon"
 
@@ -2258,12 +2292,12 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Vent! %i spelar er ikkje klar enno!"
 msgstr[1] "Vent! %i spelarar er ikkje klare enno!"
 
-#: src/game/game.cpp:663
+#: src/game/game.cpp:664
 #, c-format
 msgid "Waiting for %s"
 msgstr "Ventar på %s"
 
-#: src/game/game.cpp:183
+#: src/game/game.cpp:184
 msgid "Waiting for remote players"
 msgstr "Ventar på nettverksspelarar"
 
@@ -2288,7 +2322,7 @@ msgstr "Våpenkategori 8"
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Våpen: skyt / Bonusboks: fall fort"
 
-#: src/game/game.cpp:164
+#: src/game/game.cpp:165
 msgid "Weapons"
 msgstr "Våpen"
 
@@ -2303,12 +2337,12 @@ msgstr "Heimeside: "
 msgid "Welcome to %s on %s!"
 msgstr "Velkommen til %s på %s!"
 
-#: src/game/game.cpp:1150
+#: src/game/game.cpp:1151
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr "Og for eit slag! %s frå %s-laget er i ei anna verd …"
 
-#: src/game/game.cpp:1213
+#: src/game/game.cpp:1214
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Stakkars %s, som vart drepen av ein liten pistol!"
@@ -2375,7 +2409,7 @@ msgstr "Du må skriva inn namn på lagkapteinen og alle spelarane"
 msgid "You need at least one valid map!"
 msgstr "Du må har minst eitt gyldig kart!"
 
-#: src/game/game.cpp:304 src/team/teams_list.cpp:166
+#: src/game/game.cpp:305 src/team/teams_list.cpp:166
 msgid "You need at least two valid teams!"
 msgstr "Du må har minst to gyldige lag!"
 
@@ -2430,16 +2464,16 @@ msgstr "lastar …"
 msgid "no configuration file!"
 msgstr "Manglar oppsettfil!"
 
-#: src/sound/jukebox.cpp:191
+#: src/sound/jukebox.cpp:192
 msgid "o Loading music"
 msgstr "o Lastar musikk"
 
-#: src/sound/jukebox.cpp:373
+#: src/sound/jukebox.cpp:374
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Lastar lydprofil: %s"
 
-#: src/sound/jukebox.cpp:135
+#: src/sound/jukebox.cpp:134
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Opna lydfil: %d Hz og %d bits"

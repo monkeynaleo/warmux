@@ -26,6 +26,16 @@
 #  define __PRETTY_FUNCTION__  __FUNCTION__
 #endif
 
+#if defined(__GNUC__)
+#  ifdef WIN32
+#    define ATTRIBUTE_FORMAT(fun, fmt, params) __attribute__((format(ms_ ## fun, fmt, params)))
+#  else
+#    define ATTRIBUTE_FORMAT(fun, fmt, params) __attribute__((format(fun, fmt, params)))
+#  endif
+#else
+#  define ATTRIBUTE_FORMAT(fun, fmt, params)
+#endif
+
 /** Usage example :
  *
  * MSG_DEBUG( "game.pause", "Salut %s", "Truc" )
@@ -58,7 +68,7 @@ extern bool debug_all;
 #endif
 
 void PrintDebug(const char *filename, const char *function, unsigned long line,
-                const char *level, const char *message, ...);
+                const char *level, const char *message, ...) ATTRIBUTE_FORMAT(printf, 5, 6);
 void AddDebugMode(const std::string& mode);
 
 #endif

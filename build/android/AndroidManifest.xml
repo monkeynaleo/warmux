@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="org.warmux"
-      android:versionCode="9892"
+      android:versionCode="9991"
       android:versionName="11.04"
       android:installLocation="preferExternal"
 >
