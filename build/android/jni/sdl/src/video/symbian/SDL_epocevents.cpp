@@ -335,11 +335,13 @@ LOCAL_C TInt KeyUpEvent(_THIS, const TWsEvent& aWsEvent)
 
 LOCAL_C TInt FocusGainedEvent(_THIS)
     {
+    EpocSdlEnv::EnableDraw();
     return SDL_PrivateAppActive(1, SDL_APPINPUTFOCUS|SDL_APPMOUSEFOCUS);
     }
 
 LOCAL_C TInt FocusLostEvent(_THIS)
     {
+    EpocSdlEnv::DisableDraw();
     return SDL_PrivateAppActive(0, SDL_APPINPUTFOCUS|SDL_APPMOUSEFOCUS);
     }
 

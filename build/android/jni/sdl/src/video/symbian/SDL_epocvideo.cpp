@@ -878,15 +878,13 @@ static void RequestVideoUpdate(_THIS, int numrects, SDL_Rect* rects)
 
 static void DirectUpdate(_THIS, int numrects, SDL_Rect *rects)
 	{
-       
 	if(!EpocSdlEnv::IsVideoThread())
 	    {
         RequestVideoUpdate(_this, numrects, rects);
 	    return;
 	    } 
 	
-	
-	if(1)
+	if(EpocSdlEnv::IsDsaAvailable())
 		{
 		const TSize screenSize = EpocSdlEnv::WindowSize();
 		if(screenSize.iWidth < SDL_VideoSurface->w || screenSize.iHeight <  SDL_VideoSurface->h)
