@@ -671,9 +671,11 @@ void CDirectDsa::RestartL()
 
 void CDirectDsa::AbortNow(RDirectScreenAccess::TTerminationReasons /*aReason*/)
 	{
+/*  
     SetUpdating(EFalse);
     UnlockHwSurface(); 
 	Stop();
+*/
 	}
 	
 void CDirectDsa::Restart(RDirectScreenAccess::TTerminationReasons aReason)
