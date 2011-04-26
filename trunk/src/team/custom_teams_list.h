@@ -38,9 +38,9 @@ public:
   CustomTeamsList() { LoadList(); }
   ~CustomTeamsList() { Clear(); }
   void LoadList();
-  std::vector<CustomTeam *> GetList() { return full_list; }
+  std::vector<CustomTeam *> GetList() const { return full_list; }
   CustomTeam* GetByName(std::string name);
-  uint GetNumCustomTeam() { return full_list.size(); }
+  uint GetNumCustomTeam() const { return full_list.size(); }
 
 private:
   std::vector<CustomTeam *> full_list;
@@ -48,7 +48,7 @@ private:
   void Clear();
   void Sort();
   bool LoadOneTeam(const std::string &dir, const std::string &file);
-  static bool CompareItems( CustomTeam* p1, CustomTeam* p2 );
+  static bool CompareItems(CustomTeam* p1, CustomTeam* p2);
 };
 
 
