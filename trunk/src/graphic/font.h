@@ -65,6 +65,14 @@ public:
   static Font * GetInstance(font_size_t size, 
                             font_style_t style = FONT_BOLD);
   static void ReleaseInstances(void);
+  static font_size_t GetFixedSize(uint s)
+  {
+    if (s <= (FONT_TINY+FONT_SMALL)/2) return FONT_TINY;
+    if (s <= (FONT_SMALL+FONT_MEDIUM)/2) return FONT_SMALL;
+    if (s <= (FONT_MEDIUM+FONT_BIG)/2) return FONT_MEDIUM;
+    if (s <= (FONT_BIG+FONT_LARGE)/2) return FONT_LARGE;
+    return FONT_HUGE;
+  }
 
   ~Font();
 
