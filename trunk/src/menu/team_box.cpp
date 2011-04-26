@@ -228,11 +228,6 @@ Widget* TeamBox::ClickUp(const Point2i &mousePosition, uint button)
   return NULL;
 }
 
-Widget* TeamBox::Click(const Point2i &/*mousePosition*/, uint /*button*/)
-{
-  return NULL;
-}
-
 void TeamBox::SetTeam(Team& _team, bool read_team_values)
 {
   Team* old_team = associated_team;
