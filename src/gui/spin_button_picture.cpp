@@ -37,7 +37,9 @@ SpinButtonWithPicture::SpinButtonWithPicture(const std::string& label,
                                              const std::string& resource_id,
                                              const Point2i& _size,
                                              int value, int step,
-                                             int min_value, int max_value)
+                                             int min_value, int max_value,
+                                             Font::font_size_t legend_fsize,
+                                             Font::font_size_t value_fsize)
   : AbstractSpinButton(value, step, min_value, max_value)
 {
   position = Point2i(-1, -1);
@@ -46,11 +48,12 @@ SpinButtonWithPicture::SpinButtonWithPicture(const std::string& label,
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   torus = new TorusCache(res, resource_id, BIG_R, SMALL_R);
 
-  txt_label = new Text(label, dark_gray_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
+  txt_label = new Text(label, dark_gray_color, legend_fsize, Font::FONT_BOLD, false);
   txt_label->SetMaxWidth(GetSizeX());
 
-  txt_value_black = new Text("", black_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
-  txt_value_white = new Text("", white_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
+  value_h = Font::GetInstance(value_fsize)->GetHeight();
+  txt_value_black = new Text("", black_color, value_fsize, Font::FONT_BOLD, false);
+  txt_value_white = new Text("", white_color, value_fsize, Font::FONT_BOLD, false);
 
   ValueHasChanged();
 }
@@ -105,7 +108,6 @@ void SpinButtonWithPicture::Draw(const Point2i &mousePosition)
   // 6. add in the value image
   int tmp_x = center.x;
   int tmp_y = center.y + SMALL_R - 3;
-  uint value_h = Font::GetInstance(Font::FONT_MEDIUM)->GetHeight();
 
   txt_value_black->DrawCenterTop(Point2i(tmp_x + 1, tmp_y + 1 - value_h/2));
   txt_value_white->DrawCenterTop(Point2i(tmp_x, tmp_y - value_h/2));
