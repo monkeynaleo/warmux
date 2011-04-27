@@ -37,7 +37,6 @@ class TorusCache;
 class SpinButtonWithPicture : public AbstractSpinButton
 {
   TorusCache *torus;
-  uint value_h;
 
  protected:
   Text *txt_label, *txt_value_white, *txt_value_black;

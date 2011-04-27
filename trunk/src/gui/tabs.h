@@ -24,6 +24,7 @@
 
 #include <vector>
 #include <WARMUX_base.h>
+#include "graphic/font.h"
 #include "gui/widget.h"
 
 class Button;
@@ -43,6 +44,7 @@ private:
   uint nb_visible_tabs;
   uint tab_header_width;
   uint tab_header_height;
+  Font::font_size_t fsize;
 
   Button* prev_tab_bt;
   Button* next_tab_bt;
@@ -53,7 +55,7 @@ private:
   void DrawHeader(const Point2i &mousePosition) const;
 
 public:
-  MultiTabs(const Point2i& size);
+  MultiTabs(const Point2i& size, Font::font_size_t fsize = Font::FONT_MEDIUM);
   virtual ~MultiTabs();
 
   void AddNewTab(const std::string& id, const std::string& title, Widget* w);

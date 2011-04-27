@@ -43,7 +43,7 @@ public:
   ~TorusCache();
   void Draw(const Rectanglei& box);
   void Refresh(float angle, float open);
-  Point2i GetCenter() const;
+  Point2i GetSize() const;
 
   Sprite  *m_plus;
   Sprite  *m_minus;
