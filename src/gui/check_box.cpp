@@ -36,7 +36,9 @@ CheckBox::CheckBox(const std::string & label,
        fsize,
        Font::FONT_BOLD,
        false,
-       black_color),
+       black_color,
+       false,
+       Text::ALIGN_CENTER),
   m_value(value),
   m_checked_image(NULL)
 {

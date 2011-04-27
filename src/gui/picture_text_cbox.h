@@ -36,7 +36,8 @@ public:
   PictureTextCBox(const std::string & label,
                   const std::string & resource_id,
                   const Point2i & size,
-                  bool value = true);
+                  bool value = true,
+                  Font::font_size_t fsize = Font::FONT_SMALL);
   PictureTextCBox(Profile * profile,
                   const xmlNode * pictureNode);
 

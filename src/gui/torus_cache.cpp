@@ -76,16 +76,17 @@ TorusCache::~TorusCache()
   }
 }
 
-Point2i TorusCache::GetCenter() const
+Point2i TorusCache::GetSize() const
 {
-  return annulus_background->GetSize() / 2;
+  return annulus_background->GetSize();
 }
 
 void TorusCache::Draw(const Rectanglei& box)
 {
   Surface& surf = GetMainWindow();
   //  the computed centers are to center on the image part of the widget
-  Point2i center = box.GetPosition() + box.GetSize()/2;
+  Point2i center(box.GetPositionX() + box.GetSizeX()/2,
+                 box.GetPositionY() + annulus_background->GetHeight()/2);
 
   // 1. first draw the annulus background
   surf.Blit(*annulus_background, center - annulus_background->GetSize()/2);
