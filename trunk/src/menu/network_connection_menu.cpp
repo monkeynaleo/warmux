@@ -153,18 +153,21 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   uint max_width = 0.95f*GetMainWindow().GetWidth();
   uint offset    = (GetMainWindow().GetWidth() - max_width)/2;
   float zoom     = GetMainWindow().GetWidth() / 640.0;
-  uint width     = max_width - 10*zoom - 2*5; // 5 is the tab default margin
-  Font::font_size_t fsmall = Font::GetFixedSize(Font::FONT_SMALL*zoom);
+  uint border    = 5*zoom+0.5f;
+  uint width     = max_width - 2*(border + 5); // 5 is the tab default margin
+  Font::font_size_t fsmall  = Font::GetFixedSize(Font::FONT_SMALL*zoom);
+  Font::font_size_t fmedium = Font::GetFixedSize(Font::FONT_MEDIUM*zoom);
+  Font::font_size_t fadapt  = (fmedium > Font::FONT_BIG) ? Font::FONT_BIG : fmedium;
 
   /* Tabs */
   tabs = new MultiTabs(Point2i(max_width,
-                               GetMainWindow().GetHeight()-140));
+                               GetMainWindow().GetHeight()*0.6f), fadapt);
   tabs->SetPosition(offset, offset);
 
   // #############################
   /* client connection related widgets */
-  Box * cl_connection_box = new VBox(W_UNDEF, false, false, false);
-  cl_connection_box->SetBorder(5*zoom);
+  Box * cl_connection_box = new VBox(width, false, false, true);
+  cl_connection_box->SetBorder(border);
 
   // Public battles
   Box * cl_tmp_box = new HBox(W_UNDEF, false, false, false);
@@ -174,12 +177,12 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   cl_refresh_net_games = new Button(res, "menu/refresh_small", false);
   cl_tmp_box->AddWidget(cl_refresh_net_games);
   refresh_net_games_label = new Label(_("Public battles"), width - cl_refresh_net_games->GetSizeX(),
-                                      Font::GetFixedSize(Font::FONT_MEDIUM*zoom), Font::FONT_BOLD, c_red,
+                                      fmedium, Font::FONT_BOLD, c_red,
                                       Text::ALIGN_LEFT_TOP, true);
   cl_tmp_box->AddWidget(refresh_net_games_label);
   cl_connection_box->AddWidget(cl_tmp_box);
 
-  cl_net_games_lst = new GameListBox(Point2i(width, 30));
+  cl_net_games_lst = new GameListBox(Point2i(width-2*border, 30*zoom));
   cl_connection_box->AddWidget(cl_net_games_lst);
 
   // Server password
@@ -187,8 +190,8 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   cl_tmp_box->SetMargin(0);
   cl_tmp_box->SetNoBorder();
 
-  cl_tmp_box->AddWidget(new Label(_("Password:"), width/3));
-  cl_net_server_pwd = new PasswordBox("", (2*width)/3);
+  cl_tmp_box->AddWidget(new Label(_("Password:"), width/3, fsmall));
+  cl_net_server_pwd = new PasswordBox("", (2*width)/3, fsmall);
   cl_tmp_box->AddWidget(cl_net_server_pwd);
 
   cl_connection_box->AddWidget(cl_tmp_box);
@@ -196,7 +199,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   // #############################
   // Manual connection
   Box *manual_connection_box = new VBox(W_UNDEF, false, false, false);
-  manual_connection_box->SetBorder(5*zoom);
+  manual_connection_box->SetBorder(border);
 
   // Server address
   cl_tmp_box = new HBox(W_UNDEF, false, false, false);
@@ -233,7 +236,7 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   // #############################
   /* server connection related widgets */
   Box * srv_connection_box = new VBox(W_UNDEF, false, false, false);
-  srv_connection_box->SetBorder(5*zoom);
+  srv_connection_box->SetBorder(border);
 
   // Server port
   Box * srv_tmp_box = new HBox(W_UNDEF, false, false, false);
