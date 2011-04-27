@@ -56,6 +56,7 @@ protected:
   Font::font_size_t font_size;
   Font::font_style_t font_style;
   int offset;
+  bool center;
 
   virtual void Render();
   static int GetLineHeight(const Font *f) { return (7*f->GetHeight())>>3; }
@@ -68,7 +69,8 @@ public:
        Font::font_style_t fontStyle = Font::FONT_BOLD,
        bool shadowed = true,
        const Color & shadowColor = black_color,
-       bool dummy = false);
+       bool dummy = false,
+       Alignment align = ALIGN_LEFT_TOP);
   Text(void);
 
   virtual ~Text() { }
