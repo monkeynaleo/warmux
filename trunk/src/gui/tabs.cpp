@@ -64,8 +64,8 @@ MultiTabs::MultiTabs(const Point2i& size, Font::font_size_t fs)
  , current_tab(-1)
  , first_tab(0)
  , nb_visible_tabs(1)
- , fsize(fs)
  , tab_header_width(TAB_MIN_WIDTH)
+ , fsize(fs)
 {
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml",false);
 
