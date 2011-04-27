@@ -425,6 +425,7 @@ void CSDLWin:: ConstructL(const TRect& aRect, TBool aBackup)
         CreateBackedUpWindowL(iEikonEnv->RootWin());
     else
         CreateWindowL();
+    Window().EnableModifierChangedEvents(0xFFFFFFFF, EEventControlOnlyWithKeyboardFocus);
 	SetRect(aRect);
 	ActivateL();
 	}
