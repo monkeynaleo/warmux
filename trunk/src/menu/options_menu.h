@@ -99,7 +99,7 @@ private:
   std::vector<TextBox *> tbox_character_name_list;
 
 #ifdef ENABLE_NLS
-  void AddLanguageItem(const char* label, const char* value);
+  void AddLanguageItem(const char* label, const char* value, uint fsize);
 #endif
   bool TeamInfoValid();
   void AddTeam();
