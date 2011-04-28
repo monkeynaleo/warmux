@@ -55,6 +55,11 @@ class GridBox : public Box
                            uint y);
     virtual bool LoadXMLConfiguration(void);
     virtual void Pack();
+
+    Point2i GetDefaultBoxSize(const Point2i& full_size) const
+    {
+      return Point2i(full_size.x/columns-fixedMargin, full_size.y/lines-fixedMargin);
+    }
 };
 
 #endif

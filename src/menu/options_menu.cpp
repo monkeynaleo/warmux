@@ -68,7 +68,6 @@ OptionMenu::OptionMenu() :
   int max_w  = window_w - 2*border;
   float   factor = window_w / 640.0f;
   if (factor > 1.5f) factor = 1.5f;
-  Point2i option_size(130*factor, 134*factor);
   Font::font_size_t fsmall  = Font::GetFixedSize(Font::FONT_SMALL*factor+0.5f);
   Font::font_size_t fmedium = Font::GetFixedSize(Font::FONT_MEDIUM*factor+0.5f);
   Font::font_size_t fadapt  = (fmedium > Font::FONT_BIG) ? Font::FONT_BIG : fmedium;
@@ -77,40 +76,42 @@ OptionMenu::OptionMenu() :
   /* Tabs */
   MultiTabs * tabs =
     new MultiTabs(Point2i(max_w, window_h - actions_buttons->GetSizeY() -border), fadapt);
+  Point2i tabs_size(max_w, window_h - actions_buttons->GetSizeY() - border - tabs->GetHeaderHeight());
   tabs->SetPosition(border, border);
 
   /* Graphic options */
-  Box * graphic_options = new GridBox(2, 4, 0, false);
+  GridBox * graphic_options = new GridBox(2, 4, 20*factor, false);
+  Point2i gfx_option_size = graphic_options->GetDefaultBoxSize(tabs_size);
 
   // Various options
   opt_wind_particles_percentage =
     new SpinButtonWithPicture(_("Wind particles?"), "menu/display_wind_particles",
-                              option_size, 100, 20, 0, 100, fmedium, fmedium);
+                              gfx_option_size, 100, 20, 0, 100, fmedium, fmedium);
   graphic_options->AddWidget(opt_wind_particles_percentage);
 
 #ifndef HAVE_HANDHELD
   opt_display_multisky =
-    new PictureTextCBox(_("Multi-layer sky?"), "menu/multisky", option_size, true, fmedium);
+    new PictureTextCBox(_("Multi-layer sky?"), "menu/multisky", gfx_option_size, true, fmedium);
   graphic_options->AddWidget(opt_display_multisky);
 #endif
 
   opt_display_energy =
-    new PictureTextCBox(_("Player energy?"), "menu/display_energy", option_size, true, fmedium);
+    new PictureTextCBox(_("Player energy?"), "menu/display_energy", gfx_option_size, true, fmedium);
   graphic_options->AddWidget(opt_display_energy);
 
   opt_display_name =
-    new PictureTextCBox(_("Player's name?"), "menu/display_name", option_size, true, fmedium);
+    new PictureTextCBox(_("Player's name?"), "menu/display_name", gfx_option_size, true, fmedium);
   graphic_options->AddWidget(opt_display_name);
 
 #ifndef HAVE_TOUCHSCREEN
   full_screen =
-    new PictureTextCBox(_("Fullscreen?"), "menu/fullscreen", option_size, true, fmedium);
+    new PictureTextCBox(_("Fullscreen?"), "menu/fullscreen", gfx_option_size, true, fmedium);
   graphic_options->AddWidget(full_screen);
 #endif
 
   opt_max_fps =
     new SpinButtonWithPicture(_("Maximum FPS"), "menu/fps",
-                              option_size, 30, 5, 20, 60, fmedium, fmedium);
+                              gfx_option_size, 30, 5, 20, 60, fmedium, fmedium);
   graphic_options->AddWidget(opt_max_fps);
   std::vector< std::pair<std::string, std::string> > qualities;
   qualities.push_back(std::pair<std::string, std::string>("0", _("Low memory")));
@@ -118,7 +119,7 @@ OptionMenu::OptionMenu() :
 #ifndef HAVE_HANDHELD
   qualities.push_back(std::pair<std::string, std::string>("2", _("High")));
 #endif
-  opt_quality = new ComboBox(_("Quality"), "menu/fps", option_size,
+  opt_quality = new ComboBox(_("Quality"), "menu/fps", gfx_option_size,
                              qualities, qualities[config->GetQuality()].first,
                              fmedium, fmedium);
   graphic_options->AddWidget(opt_quality);
@@ -141,7 +142,7 @@ OptionMenu::OptionMenu() :
     video_resolutions.push_back (std::pair<std::string, std::string>(text, text));
   }
   cbox_video_mode =
-    new ComboBox(_("Resolution"), "menu/resolution", option_size,
+    new ComboBox(_("Resolution"), "menu/resolution", gfx_option_size,
                  video_resolutions, current_resolution, fmedium, fmedium);
   graphic_options->AddWidget(cbox_video_mode);
 #endif
@@ -162,6 +163,8 @@ OptionMenu::OptionMenu() :
 
   // bug #12193 : Missed assertion in game option (custom team editor) while playing
   if (!GameIsRunning()) {
+    GridBox * teams_editor_names = new GridBox(5, 2, 2, false);
+    Point2i option_size = teams_editor_names->GetDefaultBoxSize(tabs_size);
     Box * teams_editor = new HBox(option_size.y, false, false, true);
 
     lbox_teams = new ItemBox(option_size, false);
@@ -181,8 +184,6 @@ OptionMenu::OptionMenu() :
 
     Label* label_ch_names = new Label(_("Character names:"), 0, fsmall);
     teams_editor_inf->AddWidget(label_ch_names);
-
-    Box * teams_editor_names = new GridBox(5, 2, 2, false);
 
     for (uint i=0; i < 10; i++) {
       std::ostringstream oss;
@@ -228,27 +229,28 @@ OptionMenu::OptionMenu() :
 
 #if USE_MISC_TAB
   /* Misc options */
-  Box * misc_options = new GridBox(2, 2, 0, false);
+  GridBox * misc_options = new GridBox(2, 2, 50*factor, false);
+  Point2i misc_option_size = misc_options->GetDefaultBoxSize(tabs_size);
 
   opt_updates =
-    new PictureTextCBox(_("Check updates online?"),
-                        "menu/ico_update", option_size, true, fmedium);
+    new PictureTextCBox(_("Check updates online?"), "menu/ico_update",
+                        misc_option_size, true, fmedium);
   misc_options->AddWidget(opt_updates);
 
 #ifndef HAVE_TOUCHSCREEN
   opt_lefthanded_mouse =
-    new PictureTextCBox(_("Left-handed mouse?"),
-                        "menu/ico_lefthanded_mouse", option_size, true, fmedium);
+    new PictureTextCBox(_("Left-handed mouse?"), "menu/ico_lefthanded_mouse",
+                        misc_option_size, true, fmedium);
   misc_options->AddWidget(opt_lefthanded_mouse);
 
   opt_scroll_on_border =
-    new PictureTextCBox(_("Scroll on border"),
-                        "menu/scroll_on_border", option_size, true, fmedium);
+    new PictureTextCBox(_("Scroll on border"), "menu/scroll_on_border",
+                        misc_option_size, true, fmedium);
   misc_options->AddWidget(opt_scroll_on_border);
 
   opt_scroll_border_size =
     new SpinButtonWithPicture(_("Scroll border size"), "menu/scroll_on_border",
-                              option_size, 50, 5, 5, 80, fmedium, fmedium);
+                              misc_option_size, 50, 5, 5, 80, fmedium, fmedium);
   misc_options->AddWidget(opt_scroll_border_size);
 #endif
 
@@ -256,28 +258,29 @@ OptionMenu::OptionMenu() :
 #endif
 
   /* Sound options */
-  Box * sound_options = new GridBox(2, 3, 0, false);
+  GridBox * sound_options = new GridBox(2, 3, 20*factor, false);
+  Point2i sound_option_size = sound_options->GetDefaultBoxSize(tabs_size);
 
   music_cbox =
-    new PictureTextCBox(_("Music?"), "menu/music_enable", option_size, true, fmedium);
+    new PictureTextCBox(_("Music?"), "menu/music_enable",
+                        sound_option_size, true, fmedium);
   sound_options->AddWidget(music_cbox);
 
   initial_vol_mus = config->GetVolumeMusic();
   volume_music =
-    new SpinButtonWithPicture(_("Music volume"), "menu/music_enable",
-                              option_size,
+    new SpinButtonWithPicture(_("Music volume"), "menu/music_enable", sound_option_size,
                               fromVolume(initial_vol_mus), 5, 0, 100, fmedium, fmedium);
   sound_options->AddWidget(volume_music);
 
   effects_cbox =
-    new PictureTextCBox(_("Sound effects?"),
-                        "menu/sound_effects_enable", option_size, true, fmedium);
+    new PictureTextCBox(_("Sound effects?"), "menu/sound_effects_enable",
+                        sound_option_size, true, fmedium);
   sound_options->AddWidget(effects_cbox);
 
   initial_vol_eff = config->GetVolumeEffects();
   volume_effects =
-    new SpinButtonWithPicture(_("Effects volume"), "menu/sound_effects_enable",
-                              option_size, fromVolume(initial_vol_eff), 5, 0, 100, fmedium, fmedium);
+    new SpinButtonWithPicture(_("Effects volume"), "menu/sound_effects_enable", sound_option_size,
+                              fromVolume(initial_vol_eff), 5, 0, 100, fmedium, fmedium);
   sound_options->AddWidget(volume_effects);
 
   // Generate sound mode list
@@ -296,13 +299,13 @@ OptionMenu::OptionMenu() :
     current_sound_freq = "11025";
 
 #ifndef HAVE_HANDHELD
-  cbox_sound_freq = new ComboBox(_("Sound frequency"), "menu/sound_frequency",
-                                 option_size, sound_freqs, current_sound_freq, fmedium, fmedium);
+  cbox_sound_freq = new ComboBox(_("Sound frequency"), "menu/sound_frequency", sound_option_size,
+                                 sound_freqs, current_sound_freq, fmedium, fmedium);
   sound_options->AddWidget(cbox_sound_freq);
 #endif
 
-  warn_cbox = new PictureTextCBox(_("New player warning?"),
-                                  "menu/warn_on_new_player", option_size, true, fmedium);
+  warn_cbox = new PictureTextCBox(_("New player warning?"), "menu/warn_on_new_player",
+                                  sound_option_size, true, fmedium);
   sound_options->AddWidget(warn_cbox);
 
   tabs->AddNewTab("unused", _("Sound"), sound_options);
