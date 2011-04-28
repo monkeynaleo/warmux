@@ -133,7 +133,7 @@ msgid "%s just connected"
 msgstr "%i spēlētājs pieslēdzies"
 
 #. For translators: extended in "<nickname> (<host>) just disconnected
-#: src/include/action_handler.cpp:1068
+#: src/include/action_handler.cpp:1064
 #, fuzzy, c-format
 #| msgid "%i player connected"
 #| msgid_plural "%i players connected"
@@ -162,7 +162,7 @@ msgstr "%s komandai jau ir bezgalīgs daudzums munīcijas priekš %s!"
 msgid "%s team has skipped its turn."
 msgstr "%s komnda izlaiž gājienu."
 
-#: src/weapon/cluzooka.cpp:379
+#: src/weapon/cluzooka.cpp:360
 #, fuzzy, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
@@ -780,7 +780,7 @@ msgstr "Visneveiklākais"
 msgid "Cluster Bomb"
 msgstr "Ķekarbumba"
 
-#: src/weapon/cluzooka.cpp:373
+#: src/weapon/cluzooka.cpp:354
 #, fuzzy
 msgid "Cluzooka"
 msgstr "Bazuka"
@@ -1217,7 +1217,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Enerģija"
 
-#: src/weapon/bazooka.cpp:120 src/weapon/cluzooka.cpp:374
+#: src/weapon/bazooka.cpp:120 src/weapon/cluzooka.cpp:355
 #: src/weapon/riot_bomb.cpp:120
 #, fuzzy
 msgid ""
@@ -2098,7 +2098,7 @@ msgstr "Citi gaida uz tevi! Dari kaut ko :-)"
 msgid "The parachute is activated automatically."
 msgstr "Parašūts aktivizējas automātiski."
 
-#: src/weapon/bazooka.cpp:80 src/weapon/cluzooka.cpp:323
+#: src/weapon/bazooka.cpp:80 src/weapon/cluzooka.cpp:304
 #: src/weapon/riot_bomb.cpp:85
 msgid "The rocket has left the battlefield..."
 msgstr "Raķete izgāja no spēles laukuma..."

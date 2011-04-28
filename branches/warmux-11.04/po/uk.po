@@ -138,7 +138,7 @@ msgid "%s just connected"
 msgstr "%i гравець приєднався"
 
 #. For translators: extended in "<nickname> (<host>) just disconnected
-#: src/include/action_handler.cpp:1068
+#: src/include/action_handler.cpp:1064
 #, fuzzy, c-format
 #| msgid "%i player connected"
 #| msgid_plural "%i players connected"
@@ -167,7 +167,7 @@ msgstr "Команда %s вже має нескінченний запас бо
 msgid "%s team has skipped its turn."
 msgstr "Команда %s пропустила свій хід."
 
-#: src/weapon/cluzooka.cpp:379
+#: src/weapon/cluzooka.cpp:360
 #, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
@@ -794,7 +794,7 @@ msgstr "Найбільш незграбний"
 msgid "Cluster Bomb"
 msgstr "Касетна бомба"
 
-#: src/weapon/cluzooka.cpp:373
+#: src/weapon/cluzooka.cpp:354
 msgid "Cluzooka"
 msgstr "Осколкова базука"
 
@@ -1234,7 +1234,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Початкова енергія"
 
-#: src/weapon/bazooka.cpp:120 src/weapon/cluzooka.cpp:374
+#: src/weapon/bazooka.cpp:120 src/weapon/cluzooka.cpp:355
 #: src/weapon/riot_bomb.cpp:120
 msgid ""
 "Initial fire angle: Up/Down\n"
@@ -2087,7 +2087,7 @@ msgstr "Всі чекають на тебе! Прокинься :-)"
 msgid "The parachute is activated automatically."
 msgstr "Парашут розкрився автоматично."
 
-#: src/weapon/bazooka.cpp:80 src/weapon/cluzooka.cpp:323
+#: src/weapon/bazooka.cpp:80 src/weapon/cluzooka.cpp:304
 #: src/weapon/riot_bomb.cpp:85
 msgid "The rocket has left the battlefield..."
 msgstr "Ракета вилетіла за межі поля битви..."

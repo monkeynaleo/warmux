@@ -996,8 +996,6 @@ void SendInitialGameInfo(DistantComputer* client, int added_player_id)
   std::list<Player>::const_iterator player;
 
   for (it = hosts.begin(); it != hosts.end(); it++) {
-    if (*it == client)
-      continue;
     const std::list<Player>& players = (*it)->GetPlayers();
 
     for (player = players.begin(); player != players.end(); player++) {
@@ -1013,8 +1011,6 @@ void SendInitialGameInfo(DistantComputer* client, int added_player_id)
   add_player_info_to_action(a, Network::GetInstance()->GetPlayer());
 
   for (it = hosts.begin(); it != hosts.end(); it++) {
-    if (*it == client)
-      continue;
     const std::list<Player>& players = (*it)->GetPlayers();
 
     for (player = players.begin(); player != players.end(); player++) {

@@ -24,6 +24,7 @@
 //-----------------------------------------------------------------------------
 #include <string>
 #include <iostream>
+#include <cstddef>
 
 #include <WARMUX_types.h>
 #include <WARMUX_point.h>

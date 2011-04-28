@@ -129,7 +129,7 @@ msgid "%s just connected"
 msgstr ""
 
 #. For translators: extended in "<nickname> (<host>) just disconnected
-#: src/include/action_handler.cpp:1068
+#: src/include/action_handler.cpp:1064
 #, c-format
 msgid "%s just disconnected"
 msgstr ""
@@ -156,7 +156,7 @@ msgstr "%s takımı zaten %s için sınırsız cephaneye sahip!"
 msgid "%s team has skipped its turn."
 msgstr "%s takımı sırasını atladı."
 
-#: src/weapon/cluzooka.cpp:379
+#: src/weapon/cluzooka.cpp:360
 #, fuzzy, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
@@ -690,7 +690,7 @@ msgstr ""
 msgid "Cluster Bomb"
 msgstr "Şarapnelli Bomba"
 
-#: src/weapon/cluzooka.cpp:373
+#: src/weapon/cluzooka.cpp:354
 #, fuzzy
 msgid "Cluzooka"
 msgstr "Bazuka"
@@ -1124,7 +1124,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Başlangıç enerjisi"
 
-#: src/weapon/bazooka.cpp:120 src/weapon/cluzooka.cpp:374
+#: src/weapon/bazooka.cpp:120 src/weapon/cluzooka.cpp:355
 #: src/weapon/riot_bomb.cpp:120
 msgid ""
 "Initial fire angle: Up/Down\n"
@@ -1994,7 +1994,7 @@ msgstr ""
 msgid "The parachute is activated automatically."
 msgstr "Paraşüt otomatik olarak etkinleştirildi."
 
-#: src/weapon/bazooka.cpp:80 src/weapon/cluzooka.cpp:323
+#: src/weapon/bazooka.cpp:80 src/weapon/cluzooka.cpp:304
 #: src/weapon/riot_bomb.cpp:85
 msgid "The rocket has left the battlefield..."
 msgstr "Roket savaş alanını terketti..."

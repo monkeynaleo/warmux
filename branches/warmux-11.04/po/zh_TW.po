@@ -129,7 +129,7 @@ msgid "%s just connected"
 msgstr "%i 玩家已連線"
 
 #. For translators: extended in "<nickname> (<host>) just disconnected
-#: src/include/action_handler.cpp:1068
+#: src/include/action_handler.cpp:1064
 #, fuzzy, c-format
 #| msgid "%i player connected"
 #| msgid_plural "%i players connected"
@@ -158,7 +158,7 @@ msgstr "%s 隊有無窮的 %s彈夾！"
 msgid "%s team has skipped its turn."
 msgstr "%s隊略過一回合。"
 
-#: src/weapon/cluzooka.cpp:379
+#: src/weapon/cluzooka.cpp:360
 #, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
@@ -705,7 +705,7 @@ msgstr "最笨手笨腳的"
 msgid "Cluster Bomb"
 msgstr "集束炸彈"
 
-#: src/weapon/cluzooka.cpp:373
+#: src/weapon/cluzooka.cpp:354
 msgid "Cluzooka"
 msgstr "開花彈"
 
@@ -1142,7 +1142,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "初始耐久"
 
-#: src/weapon/bazooka.cpp:120 src/weapon/cluzooka.cpp:374
+#: src/weapon/bazooka.cpp:120 src/weapon/cluzooka.cpp:355
 #: src/weapon/riot_bomb.cpp:120
 #, fuzzy
 msgid ""
@@ -2021,7 +2021,7 @@ msgstr "別人在等你！ 快醒吧:-)"
 msgid "The parachute is activated automatically."
 msgstr "自動使用"
 
-#: src/weapon/bazooka.cpp:80 src/weapon/cluzooka.cpp:323
+#: src/weapon/bazooka.cpp:80 src/weapon/cluzooka.cpp:304
 #: src/weapon/riot_bomb.cpp:85
 msgid "The rocket has left the battlefield..."
 msgstr "火箭離開了戰場。。。"
