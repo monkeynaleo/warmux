@@ -423,9 +423,9 @@ void Map::DrawAuthorName()
   if (author_info1 == NULL) {
     InfoMapBasicAccessor *basic = ActiveMap()->LoadBasicInfo();
     std::string txt = Format(_("Map %s, a creation of: "), basic->ReadFullMapName().c_str());
-    author_info1 = new Text(txt, white_color, Font::FONT_SMALL, Font::FONT_BOLD);
+    author_info1 = new Text(txt, white_color, Font::FONT_SMALL, Font::FONT_BOLD, true);
     txt = basic->ReadAuthorInfo();
-    author_info2 = new Text(txt, white_color, Font::FONT_SMALL, Font::FONT_BOLD);
+    author_info2 = new Text(txt, white_color, Font::FONT_SMALL, Font::FONT_BOLD, true);
   }
 
   /* FIXME use a real layout here... not calculated positions */

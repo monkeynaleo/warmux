@@ -41,7 +41,7 @@ LoadingScreen::LoadingScreen(int icon_count):
   loading_bg->ScaleSize(app->video->window.GetWidth(), app->video->window.GetHeight());
 
   std::string loading_str(_("loading..."));
-  loading_text = new Text(loading_str, white_color, Font::FONT_HUGE, Font::FONT_BOLD, false);
+  loading_text = new Text(loading_str, white_color, Font::FONT_HUGE);
 
   // Get profile from resource manager
   res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
@@ -79,8 +79,8 @@ void LoadingScreen::StartLoading(uint nb, const std::string& resource,
   Rectanglei dest (x+slot_margin_x, y, image.GetWidth(), image.GetHeight());
   GetMainWindow().Blit(image, dest.GetPosition());
 
-  Font::GetInstance(Font::FONT_MEDIUM)->WriteCenter(Point2i(x+120/2, y+80),
-                                                    label, white_color);
+  Text tmp(label, white_color, Font::FONT_MEDIUM, Font::FONT_BOLD, true);
+  tmp.DrawCenter(Point2i(x+120/2, y+80));
 
   AppWarmux::GetInstance()->video->Flip();
 }
