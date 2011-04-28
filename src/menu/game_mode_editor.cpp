@@ -34,7 +34,7 @@ const uint TPS_TOUR_MAX = 240;
 static bool warned = false;
 
 GameModeEditor::GameModeEditor(uint max_line_width, const Point2i& option_size, bool _draw_border) :
-  GridBox(4, 4, 0, _draw_border)
+  GridBox(2, 4, 0, _draw_border)
 {
   (void)max_line_width;
   // ################################################

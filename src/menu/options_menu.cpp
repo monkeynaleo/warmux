@@ -228,7 +228,7 @@ OptionMenu::OptionMenu() :
 
 #if USE_MISC_TAB
   /* Misc options */
-  Box * misc_options = new GridBox(3, 3, 0, false);
+  Box * misc_options = new GridBox(2, 2, 0, false);
 
   opt_updates =
     new PictureTextCBox(_("Check updates online?"),
@@ -256,7 +256,7 @@ OptionMenu::OptionMenu() :
 #endif
 
   /* Sound options */
-  Box * sound_options = new GridBox(3, 3, 0, false);
+  Box * sound_options = new GridBox(2, 3, 0, false);
 
   music_cbox =
     new PictureTextCBox(_("Music?"), "menu/music_enable", option_size, true, fmedium);
