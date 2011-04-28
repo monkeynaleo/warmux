@@ -308,6 +308,9 @@ LOCAL_C TInt PointerEvent(_THIS, const TWsEvent& aWsEvent)
 
 LOCAL_C TInt KeyEvent(_THIS, const TWsEvent& aWsEvent)
     {
+    if (!SDL_TranslateUNICODE)
+        return 0;
+
     SDL_keysym keysym;
     TKeyEvent *event = aWsEvent.Key();
     TranslateKey(_this, event->iScanCode, event->iCode, &keysym);
@@ -335,11 +338,13 @@ LOCAL_C TInt KeyUpEvent(_THIS, const TWsEvent& aWsEvent)
 
 LOCAL_C TInt FocusGainedEvent(_THIS)
     {
+    EpocSdlEnv::EnableDraw();
     return SDL_PrivateAppActive(1, SDL_APPINPUTFOCUS|SDL_APPMOUSEFOCUS);
     }
 
 LOCAL_C TInt FocusLostEvent(_THIS)
     {
+    EpocSdlEnv::DisableDraw();
     return SDL_PrivateAppActive(0, SDL_APPINPUTFOCUS|SDL_APPMOUSEFOCUS);
     }
 
@@ -365,7 +370,7 @@ LOCAL_C TInt ModifiersChangedEvent(const TWsEvent& aWsEvent)
         modstate |= KMOD_RMETA;
     if (modEvent->iModifiers & EModifierCapsLock)
         modstate |= KMOD_CAPS;
-    SDL_SetModState(STATIC_CAST(SDLMod,(modstate | KMOD_LSHIFT)));
+    SDL_SetModState(STATIC_CAST(SDLMod,modstate));
     return 0;
     }
 

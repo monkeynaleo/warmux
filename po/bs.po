@@ -131,7 +131,7 @@ msgid "%s just connected"
 msgstr "%i igrač konektovan"
 
 #. For translators: extended in "<nickname> (<host>) just disconnected
-#: src/include/action_handler.cpp:1068
+#: src/include/action_handler.cpp:1064
 #, fuzzy, c-format
 #| msgid "%i player connected"
 #| msgid_plural "%i players connected"
@@ -160,7 +160,7 @@ msgstr "%s tim već ima neograničenu municiju za %s!"
 msgid "%s team has skipped its turn."
 msgstr "%s tim je preskočio svoj red."
 
-#: src/weapon/cluzooka.cpp:379
+#: src/weapon/cluzooka.cpp:360
 #, fuzzy, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
@@ -752,7 +752,7 @@ msgstr "Najkorisniji"
 msgid "Cluster Bomb"
 msgstr "Kasetna bomba"
 
-#: src/weapon/cluzooka.cpp:373
+#: src/weapon/cluzooka.cpp:354
 #, fuzzy
 msgid "Cluzooka"
 msgstr "Bazuka"
@@ -1195,7 +1195,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Početna energija"
 
-#: src/weapon/bazooka.cpp:120 src/weapon/cluzooka.cpp:374
+#: src/weapon/bazooka.cpp:120 src/weapon/cluzooka.cpp:355
 #: src/weapon/riot_bomb.cpp:120
 #, fuzzy
 msgid ""
@@ -2076,7 +2076,7 @@ msgstr "Drugi te čekaju! Probudi se :)"
 msgid "The parachute is activated automatically."
 msgstr "Padobran se automatski aktivira."
 
-#: src/weapon/bazooka.cpp:80 src/weapon/cluzooka.cpp:323
+#: src/weapon/bazooka.cpp:80 src/weapon/cluzooka.cpp:304
 #: src/weapon/riot_bomb.cpp:85
 msgid "The rocket has left the battlefield..."
 msgstr "Raketa je napustila bojište..."

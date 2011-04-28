@@ -25,7 +25,7 @@
 #include "menu.h"
 #include <vector>
 
-#if !defined (MAEMO) && !defined (__SYMBIAN32__) && !defined(ANDROID)
+#if defined (MAEMO) || defined(ANDROID)
 #  define USE_MISC_TAB  0
 #else
 #  define USE_MISC_TAB  1

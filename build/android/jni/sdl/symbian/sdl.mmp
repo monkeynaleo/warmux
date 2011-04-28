@@ -1,9 +1,9 @@
+#include "../../../../symbian/group/build_conf.inf"
+
 TARGET		warmux_sdl.dll
 TARGETTYPE	dll
 UID         0x1000008d 0xE5A8B053
 CAPABILITY  WriteUserData ReadUserData NetworkServices LocalServices
-
-#define SYMBIAN3 SYMBIAN3
 
 EPOCALLOWDLLDATA
 MACRO		OPENC

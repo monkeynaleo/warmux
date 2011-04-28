@@ -227,7 +227,7 @@ inline const TRect& CDsa::HwRect() const
 	return iTargetRect;
 	}
 	
-inline CDsa::IsUpdating() const
+inline TBool CDsa::IsUpdating() const
     {
     return iStateFlags & EUpdating;
     }

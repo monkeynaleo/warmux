@@ -1,3 +1,4 @@
+#include "build_conf.inf"
 
 TARGET            warmux.exe
 TARGETTYPE        exe
@@ -7,7 +8,11 @@ STDCPP
 
 MACRO __SYMBIAN_STDCPP_SUPPORT__
 
+#ifndef SYMBIAN3
 SYSTEMINCLUDE   \epoc32\include\stlport
+#else
+SYSTEMINCLUDE   \epoc32\include\stdapis\stlportv5
+#endif
 SYSTEMINCLUDE   \epoc32\include\stdapis
 SYSTEMINCLUDE   \epoc32\include
 SYSTEMINCLUDE   \epoc32\include\SDL
@@ -90,7 +95,11 @@ STATICLIBRARY   abiv2_libjpeg-6.lib
 STATICLIBRARY   freetype.lib
 STATICLIBRARY   tremor.lib
 STATICLIBRARY   wormux_xmlengine.lib
+#ifndef SYMBIAN3
 STATICLIBRARY   stlport_s.lib
+#else
+LIBRARY         libstdcppv5.lib
+#endif
 
 //This is required even if the wchar type is not used.
 OPTION CW -wchar_t on

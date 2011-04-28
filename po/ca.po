@@ -136,7 +136,7 @@ msgid "%s just connected"
 msgstr "%i jugador connectat"
 
 #. For translators: extended in "<nickname> (<host>) just disconnected
-#: src/include/action_handler.cpp:1068
+#: src/include/action_handler.cpp:1064
 #, fuzzy, c-format
 #| msgid "%i player connected"
 #| msgid_plural "%i players connected"
@@ -165,7 +165,7 @@ msgstr "%s es un psicòpata!!, ha mort a un membre des seu equip %s"
 msgid "%s team has skipped its turn."
 msgstr "%s ha perdut es seu torn."
 
-#: src/weapon/cluzooka.cpp:379
+#: src/weapon/cluzooka.cpp:360
 #, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
@@ -749,7 +749,7 @@ msgstr "El més maldestre"
 msgid "Cluster Bomb"
 msgstr "Bomba de fragmentació"
 
-#: src/weapon/cluzooka.cpp:373
+#: src/weapon/cluzooka.cpp:354
 msgid "Cluzooka"
 msgstr "Bazooka"
 
@@ -1198,7 +1198,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Energia inicial"
 
-#: src/weapon/bazooka.cpp:120 src/weapon/cluzooka.cpp:374
+#: src/weapon/bazooka.cpp:120 src/weapon/cluzooka.cpp:355
 #: src/weapon/riot_bomb.cpp:120
 #, fuzzy
 msgid ""
@@ -2091,7 +2091,7 @@ msgstr "Tots estan esperant! Venja que tots estan per tu :-) "
 msgid "The parachute is activated automatically."
 msgstr "El paracaigudes s'activa automàticament."
 
-#: src/weapon/bazooka.cpp:80 src/weapon/cluzooka.cpp:323
+#: src/weapon/bazooka.cpp:80 src/weapon/cluzooka.cpp:304
 #: src/weapon/riot_bomb.cpp:85
 msgid "The rocket has left the battlefield..."
 msgstr "El coet ha anat a un altre mon..."

@@ -1,6 +1,10 @@
 /* Master build file for Warmux and libraries */
 
+#include "group/build_conf.inf"
+
+#ifndef SYMBIAN3
 #include "lib/stlport/symbian/bld.inf"
+#endif
 #include "lib/libxml2/group/bld.inf"
 #include "lib/curl/packages/Symbian/group/bld.inf"
 #include "../android/jni/jpeg/symbian/group/bld.inf"

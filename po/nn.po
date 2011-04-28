@@ -128,7 +128,7 @@ msgid "%s just connected"
 msgstr "%s kopla nettopp til"
 
 #. For translators: extended in "<nickname> (<host>) just disconnected
-#: src/include/action_handler.cpp:1068
+#: src/include/action_handler.cpp:1064
 #, c-format
 msgid "%s just disconnected"
 msgstr "%s kopla nettopp frå"
@@ -155,7 +155,7 @@ msgstr "%s-laget har alt uendeleg ammunisjon for %s!"
 msgid "%s team has skipped its turn."
 msgstr "%s hoppa over sin tur."
 
-#: src/weapon/cluzooka.cpp:379
+#: src/weapon/cluzooka.cpp:360
 #, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
@@ -750,7 +750,7 @@ msgstr "Mest klønete"
 msgid "Cluster Bomb"
 msgstr "Klasebombe"
 
-#: src/weapon/cluzooka.cpp:373
+#: src/weapon/cluzooka.cpp:354
 msgid "Cluzooka"
 msgstr "Klaserakett"
 
@@ -1196,7 +1196,7 @@ msgstr "Inforuter i spelet"
 msgid "Initial energy"
 msgstr "Energi ved start"
 
-#: src/weapon/bazooka.cpp:120 src/weapon/cluzooka.cpp:374
+#: src/weapon/bazooka.cpp:120 src/weapon/cluzooka.cpp:355
 #: src/weapon/riot_bomb.cpp:120
 msgid ""
 "Initial fire angle: Up/Down\n"
@@ -2083,7 +2083,7 @@ msgstr "Dei andre ventar på deg! Vakna! :–)"
 msgid "The parachute is activated automatically."
 msgstr "Fallskjermen vert automatisk løyst ut."
 
-#: src/weapon/bazooka.cpp:80 src/weapon/cluzooka.cpp:323
+#: src/weapon/bazooka.cpp:80 src/weapon/cluzooka.cpp:304
 #: src/weapon/riot_bomb.cpp:85
 msgid "The rocket has left the battlefield..."
 msgstr "Raketten forsvann frå kartet før han eksploderte."
