@@ -47,15 +47,15 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 //#define TRACK_MINMAX
 
-namespace fixedpoint {
+namespace fp {
 
 // The template argument p in all of the following functions refers to the
 // fixed point precision (e.g. p = 8 gives 24.8 fixed point functions).
 template <int p>
 struct fixed_point {
-  fixint_t intValue;
+  fint_t intValue;
 #ifdef TRACK_MINMAX
-  static fixint_t min, max;
+  static fint_t min, max;
   ~fixed_point()
   {
     if (min > intValue) {
@@ -70,14 +70,14 @@ struct fixed_point {
 #endif
 
   fixed_point() {}
-  /*explicit*/ fixed_point(fixint_t i) : intValue(i << p) {}
+  /*explicit*/ fixed_point(fint_t i) : intValue(i << p) {}
 #if FIXINT_BITS == 64
-  /*explicit*/ fixed_point(int32_t i) : intValue(((fixint_t)i) << p) {}
+  /*explicit*/ fixed_point(int32_t i) : intValue(((fint_t)i) << p) {}
 #endif
   /*explicit*/ fixed_point(float f) : intValue(float2fix<p>(f)) {}
   /*explicit*/ fixed_point(double d) : intValue(float2fix<p>((float)d)) {}
-  /*explicit*/ fixed_point(unsigned int u) : intValue(((fixint_t)u) << p) {}
-  /*explicit*/ fixed_point(unsigned long int u) : intValue(((fixint_t)u) << p) {}
+  /*explicit*/ fixed_point(unsigned int u) : intValue(((fint_t)u) << p) {}
+  /*explicit*/ fixed_point(unsigned long int u) : intValue(((fint_t)u) << p) {}
 
   fixed_point& operator += (const fixed_point& r) { intValue += r.intValue; return *this; }
   fixed_point& operator -= (const fixed_point& r) { intValue -= r.intValue; return *this; }
@@ -94,16 +94,16 @@ struct fixed_point {
   fixed_point operator / (const fixed_point& r) const { fixed_point x = *this; x /= r; return x;}
 
   bool operator == (const fixed_point& r) const { return intValue == r.intValue; }
-  bool operator == (int i) const { return intValue == (((fixint_t)i) << p); }
+  bool operator == (int i) const { return intValue == (((fint_t)i) << p); }
   bool operator != (const fixed_point& r) const { return !(*this == r); }
   bool operator <  (const fixed_point& r) const { return intValue < r.intValue; }
-  bool operator < (int i) const { return intValue < (((fixint_t)i)  << p); }
+  bool operator < (int i) const { return intValue < (((fint_t)i)  << p); }
   bool operator >  (const fixed_point& r) const { return intValue > r.intValue; }
-  bool operator > (int i) const { return intValue > (((fixint_t)i)  << p); }
+  bool operator > (int i) const { return intValue > (((fint_t)i)  << p); }
   bool operator <= (const fixed_point& r) const { return intValue <= r.intValue; }
-  bool operator <= (int i) const { return intValue <= (((fixint_t)i)  << p); }
+  bool operator <= (int i) const { return intValue <= (((fint_t)i)  << p); }
   bool operator >= (const fixed_point& r) const { return intValue >= r.intValue; }
-  bool operator >= (int i) const { return intValue >= (((fixint_t)i) << p); }
+  bool operator >= (int i) const { return intValue >= (((fint_t)i) << p); }
 
   fixed_point operator + (int32_t r) const { fixed_point x = *this; x += r; return x;}
   fixed_point operator - (int32_t r) const { fixed_point x = *this; x -= r; return x;}
@@ -116,8 +116,8 @@ struct fixed_point {
 
   operator int() const
   {
-    fixuint_t sign = ((fixuint_t)intValue)>>(FIXINT_BITS-1);
-    return int(((fixint_t)(intValue+(sign<<p)-sign))>>p);
+    fuint_t sign = ((fuint_t)intValue)>>(FIXINT_BITS-1);
+    return int(((fint_t)(intValue+(sign<<p)-sign))>>p);
   }
 
   // Must be used explicily as we don't want to calculate with doubles!
@@ -154,9 +154,9 @@ inline fixed_point<p> operator / (int32_t a, const fixed_point<p>& b)
 { fixed_point<p> r(a); r /= b; return r; }
 #ifdef TRACK_MINMAX
 template <int p>
-fixint_t fixed_point<p>::min = LLONG_MAX;
+fint_t fixed_point<p>::min = LLONG_MAX;
 template <int p>
-fixint_t fixed_point<p>::max = LLONG_MIN;
+fint_t fixed_point<p>::max = LLONG_MIN;
 #endif
 
 
@@ -176,7 +176,7 @@ template <int p>
 inline fixed_point<p> operator / (unsigned int a, const fixed_point<p>& b)
 { fixed_point<p> r(a); r /= b; return r; }
 
-#ifdef SIZE_T_FIXEDPOINT_METHODS
+#ifdef SIZE_T_fp_METHODS
 template <int p>
 inline fixed_point<p> operator + (size_t a, fixed_point<p> b)
 { return b + a; }
@@ -277,7 +277,7 @@ void printTo(std::ostream & os, const fixed_point<p> & r, int digits = -1)
     rounding_correction = - rounding_correction;
   fixed_point<p> to_print = r + rounding_correction;
 
-  fixint_t left_of_dot = (int) r;
+  fint_t left_of_dot = (int) r;
   os << left_of_dot;
   if (digits == 0) {
     return;
@@ -351,7 +351,7 @@ inline fixed_point<p> inv(fixed_point<p> a);
 template <int p>
 inline fixed_point<p> abs(fixed_point<p> a)
 {
-  fixint_t sign = a.intValue >> (FIXINT_BITS-1);
+  fint_t sign = a.intValue >> (FIXINT_BITS-1);
   fixed_point<p> r;
   r.intValue = a.intValue^sign;
   r.intValue -= sign;
@@ -445,7 +445,7 @@ inline fixed_point<16> inv(fixed_point<16> a)
   return r;
 }
 
-} // end namespace fixedpoint
+} // end namespace fp
 
 #endif
 

@@ -38,9 +38,7 @@ ComboBox::ComboBox (const std::string &label,
                     const std::string &resource_id,
                     const Point2i &_size,
                     const std::vector<std::pair<std::string, std::string> > &choices,
-                    const std::string choice,
-                    Font::font_size_t legend_fsize,
-                    Font::font_size_t value_fsize)
+                    const std::string choice)
   : m_choices(choices)
   , m_index(0)
 {
@@ -50,11 +48,11 @@ ComboBox::ComboBox (const std::string &label,
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   torus = new TorusCache(res, resource_id, BIG_R, SMALL_R);
 
-  txt_label = new Text(label, dark_gray_color, legend_fsize, Font::FONT_BOLD, false);
+  txt_label = new Text(label, dark_gray_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
   txt_label->SetMaxWidth(GetSizeX());
 
-  txt_value_black = new Text("", black_color, value_fsize, Font::FONT_BOLD, false);
-  txt_value_white = new Text("", white_color, value_fsize, Font::FONT_BOLD, false);
+  txt_value_black = new Text("", black_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
+  txt_value_white = new Text("", white_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
 
   std::vector<std::string>::size_type index = 0;
   for (std::vector<std::pair<std::string, std::string> >::const_iterator iter
@@ -92,40 +90,42 @@ void ComboBox::Draw(const Point2i &mousePosition)
   // 1. first draw the torus
   torus->Draw(*this);
 
+
   // 2. then draw buttons
   #define IMG_BUTTONS_W 5
   #define IMG_BUTTONS_H 12
 
-  int center = position.x + torus->GetSize().x/2;
+  Point2i center = GetPosition() + torus->GetCenter();
   if (m_index > 0) {
 
-    if (Contains(mousePosition) && mousePosition.x < center)
+    if (Contains(mousePosition) && mousePosition.x < center.x)
       torus->m_minus->SetCurrentFrame(1);
     else
       torus->m_minus->SetCurrentFrame(0);
 
-    torus->m_minus->Blit(window, position.x + IMG_BUTTONS_W, position.y + IMG_BUTTONS_H);
+    torus->m_minus->Blit(window, GetPositionX() + IMG_BUTTONS_W, GetPositionY() + IMG_BUTTONS_H);
   }
 
   if (m_index < m_choices.size() - 1) {
-    if (Contains(mousePosition) && mousePosition.x > center)
+    if (Contains(mousePosition) && mousePosition.x > center.x)
       torus->m_plus->SetCurrentFrame(1);
     else
       torus->m_plus->SetCurrentFrame(0);
 
-    torus->m_plus->Blit(window, position.x + size.x - torus->m_plus->GetWidth() - IMG_BUTTONS_W,
+    torus->m_plus->Blit(window, GetPositionX() + GetSizeX() - torus->m_plus->GetWidth() - IMG_BUTTONS_W,
                         GetPosition().y + IMG_BUTTONS_H);
   }
 
   // 3. add in the value image
-  uint tmp_x = position.x + size.x/2;
-  uint tmp_y = position.y + torus->GetSize().y/2 + IMG_BUTTONS_H;
+  uint tmp_x = GetPositionX() + GetSizeX()/2;
+  uint tmp_y = center.y + SMALL_R - 3;
+  uint value_h = Font::GetInstance(Font::FONT_MEDIUM)->GetHeight();
 
-  txt_value_black->DrawCenterTop(Point2i(tmp_x + 1, tmp_y + 1));
-  txt_value_white->DrawCenterTop(Point2i(tmp_x, tmp_y));
+  txt_value_black->DrawCenterTop(Point2i(tmp_x + 1, tmp_y + 1 - value_h/2));
+  txt_value_white->DrawCenterTop(Point2i(tmp_x, tmp_y - value_h/2));
 
   // 7. and finally the label image
-  txt_label->DrawCenterTop(Point2i(tmp_x, position.y + size.y - txt_label->GetHeight()));
+  txt_label->DrawCenterTop(Point2i(tmp_x, GetPositionY() + GetSizeY() - txt_label->GetHeight()));
 }
 
 Widget* ComboBox::ClickUp(const Point2i &mousePosition, uint button)
@@ -133,11 +133,11 @@ Widget* ComboBox::ClickUp(const Point2i &mousePosition, uint button)
   NeedRedrawing();
 
   bool is_click = Mouse::IS_CLICK_BUTTON(button);
-  if ( (is_click && mousePosition.x > (GetPositionX() + size.x/2))
+  if ( (is_click && mousePosition.x > (GetPositionX() + GetSizeX()/2))
        || button == SDL_BUTTON_WHEELUP ) {
     SetChoice(m_index + 1);
     return this;
-  } else if ( (is_click && mousePosition.x <= (GetPositionX() + size.x/2))
+  } else if ( (is_click && mousePosition.x <= (GetPositionX() + GetSizeX()/2))
               || button == SDL_BUTTON_WHEELDOWN ) {
     SetChoice(m_index - 1);
     return this;

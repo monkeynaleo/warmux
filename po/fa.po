@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fa\n"
 "Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
-"POT-Creation-Date: 2011-04-20 19:52+0200\n"
 "PO-Revision-Date: 2007-12-14 18:03+0100\n"
 "Last-Translator: Behdad Pournader <behdadp@farsiweb.info>\n"
 "Language-Team: Warmux Fa <behdadp@farsiweb.info>\n"
@@ -60,34 +59,34 @@ msgstr "تیم %s"
 msgid "%s Team - Remote"
 msgstr "تیم %s- از راه دور"
 
-#: src/game/game.cpp:1171
+#: src/game/game.cpp:1172
 #, fuzzy, c-format
 msgid "%s from %s team committed suicide!"
 msgstr "%s خودکشی کرد!"
 
 #. Could be modified, but for now, save on translation
-#: src/game/game.cpp:1197 src/game/game.cpp:1216
+#: src/game/game.cpp:1198 src/game/game.cpp:1217
 #, fuzzy, c-format
 msgid "%s from %s team has died."
 msgstr "%s (%s) مرد."
 
-#: src/game/game.cpp:1163
+#: src/game/game.cpp:1164
 #, fuzzy, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s در آب افتاد."
 
-#: src/game/game.cpp:1157
+#: src/game/game.cpp:1158
 #, fuzzy, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s از نقشه بیرون افتاد."
 
-#: src/game/game.cpp:1177
+#: src/game/game.cpp:1178
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr ""
 
 #. The playing character killed himself
-#: src/game/game.cpp:1184
+#: src/game/game.cpp:1185
 #, fuzzy, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s کشته شد، بخاطر اینکه او یک احمق بود!"
@@ -109,7 +108,7 @@ msgstr ""
 msgid "%s has won %u points of energy!"
 msgstr "%s %u انرژی برنده شد!"
 
-#: src/game/game.cpp:1208
+#: src/game/game.cpp:1209
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s یک موجود روانی است، او یکی از اعضای تیم %s را به کشتن داد."
@@ -122,12 +121,16 @@ msgstr "%s نزدیک یک مین است!"
 #. For translators: extended in "<nickname> (<host>) just connected
 #: src/include/action_handler.cpp:952
 #, fuzzy, c-format
+#| msgid "%i player connected"
+#| msgid_plural "%i players connected"
 msgid "%s just connected"
 msgstr "بازیکن %i وصل شد"
 
 #. For translators: extended in "<nickname> (<host>) just disconnected
-#: src/include/action_handler.cpp:1068
+#: src/include/action_handler.cpp:1064
 #, fuzzy, c-format
+#| msgid "%i player connected"
+#| msgid_plural "%i players connected"
 msgid "%s just disconnected"
 msgstr "بازیکن %i وصل شد"
 
@@ -153,7 +156,7 @@ msgstr ""
 msgid "%s team has skipped its turn."
 msgstr "تیم %s نوبت خود را خارج کرد."
 
-#: src/weapon/cluzooka.cpp:379
+#: src/weapon/cluzooka.cpp:360
 #, fuzzy, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
@@ -390,7 +393,7 @@ msgstr[0] ""
 msgid "%s team was fragged down."
 msgstr ""
 
-#: src/game/game.cpp:1192 src/game/game.cpp:1204
+#: src/game/game.cpp:1193 src/game/game.cpp:1205
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr ""
@@ -699,7 +702,7 @@ msgid ""
 msgstr ""
 
 #. Client Mode
-#: src/menu/network_menu.cpp:167 src/network/network.cpp:455
+#: src/menu/network_menu.cpp:167 src/network/network.cpp:456
 msgid "Client mode"
 msgstr "حالت کارگیر (کلاینت)"
 
@@ -711,7 +714,7 @@ msgstr "احمق‌ترین"
 msgid "Cluster Bomb"
 msgstr "بمب خوشه‌ای"
 
-#: src/weapon/cluzooka.cpp:373
+#: src/weapon/cluzooka.cpp:354
 #, fuzzy
 msgid "Cluzooka"
 msgstr "باوکا"
@@ -756,7 +759,7 @@ msgstr "سازه"
 msgid "Controlled by: "
 msgstr "کنترل شده بوسیله‌ی: "
 
-#: lib/warmux/net/download.cpp:203
+#: lib/warmux/net/download.cpp:199
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr ""
@@ -795,6 +798,7 @@ msgstr ""
 #. Date
 #: src/menu/replay_menu.cpp:79
 #, fuzzy
+#| msgid "Dynamite"
 msgid "Date"
 msgstr "دینامیت"
 
@@ -838,6 +842,7 @@ msgstr ""
 #. Duration
 #: src/menu/replay_menu.cpp:84
 #, fuzzy
+#| msgid "Duration of a turn"
 msgid "Duration"
 msgstr "زمان یک نوبت"
 
@@ -854,7 +859,7 @@ msgstr "زمان یک نوبت"
 msgid "Dynamite"
 msgstr "دینامیت"
 
-#: src/game/game.cpp:512
+#: src/game/game.cpp:513
 msgid "END OF GAME"
 msgstr "پایان بازی"
 
@@ -880,7 +885,7 @@ msgstr "مشکل در بارگذاری تیم: "
 msgid "Error loading team :"
 msgstr "مشکل در بارگذاری تیم: "
 
-#: src/game/config.cpp:586 src/team/custom_team.cpp:155
+#: src/game/config.cpp:592 src/team/custom_team.cpp:155
 #: src/team/custom_team.cpp:166 src/team/custom_team.cpp:177
 #, c-format
 msgid ""
@@ -899,28 +904,28 @@ msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr "مشکل در ساخت پوشه‌ی جدید \"%s\": ناتوان در ذخیره‌ی پرونده‌ی تنظیمات."
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:527
+#: src/menu/network_connection_menu.cpp:524
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "مشکل: ناتوان در اتصال به %s:%s"
 
-#: src/menu/network_connection_menu.cpp:477
+#: src/menu/network_connection_menu.cpp:474
 #, fuzzy
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "مشکل: ناتوان در ارتباط با کارگزار برای میزبانی یک بازی"
 
-#: src/menu/network_connection_menu.cpp:388
+#: src/menu/network_connection_menu.cpp:385
 #, fuzzy
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr "مشکل: ناتوان در ارتباط با کارگزار برای جستجوی یک بازی اینترنتی"
 
-#: src/menu/network_connection_menu.cpp:505
+#: src/menu/network_connection_menu.cpp:502
 #, fuzzy
 msgid "Error: Unable to start the server"
 msgstr "مشکل: ناتوان در راه‌اندازی یک کارگزار"
 
-#: src/menu/network_connection_menu.cpp:498
+#: src/menu/network_connection_menu.cpp:495
 #: tools/servers/game_server/server.cpp:389
 #, c-format
 msgid ""
@@ -956,12 +961,12 @@ msgstr ""
 msgid "FPS"
 msgstr ""
 
-#: lib/warmux/net/download.cpp:188 lib/warmux/net/download.cpp:229
+#: lib/warmux/net/download.cpp:184 lib/warmux/net/download.cpp:225
 #, c-format
 msgid "Fail to create temporary file: %s"
 msgstr ""
 
-#: lib/warmux/net/download.cpp:195
+#: lib/warmux/net/download.cpp:191
 #, fuzzy, c-format
 msgid "Fail to open temporary file: %s"
 msgstr "ناتوان در بازکردن پرونده‌ی نقشه‌ها (%s)!"
@@ -1145,7 +1150,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "انرژی آغازی"
 
-#: src/weapon/bazooka.cpp:120 src/weapon/cluzooka.cpp:374
+#: src/weapon/bazooka.cpp:120 src/weapon/cluzooka.cpp:355
 #: src/weapon/riot_bomb.cpp:120
 #, fuzzy
 msgid ""
@@ -1158,20 +1163,20 @@ msgstr ""
 "دارید\n"
 "یک بار در هر نوبت"
 
-#: src/game/game.cpp:123
+#: src/game/game.cpp:124
 msgid "Initialisation"
 msgstr "در حال شروع"
 
 #. Load the map
-#: src/game/game.cpp:160
+#: src/game/game.cpp:161
 msgid "Initialise map"
 msgstr "نقشه‌ی آغازین"
 
-#: src/game/game.cpp:171
+#: src/game/game.cpp:172
 msgid "Initialise sounds"
 msgstr "صداهای آغازین"
 
-#: src/game/game.cpp:167
+#: src/game/game.cpp:168
 msgid "Initialise teams"
 msgstr "تیم‌های آغازین"
 
@@ -1189,7 +1194,7 @@ msgstr ""
 msgid "Invalid filename"
 msgstr ""
 
-#: src/game/game.cpp:1041
+#: src/game/game.cpp:1042
 msgid "It's a present!"
 msgstr "این یک هدیه است!"
 
@@ -1293,7 +1298,7 @@ msgstr "نقشه‌ی %s، ساخته‌ای از: "
 msgid "Map author information: name, email, nickname, country"
 msgstr ""
 
-#: src/game/game.cpp:161
+#: src/game/game.cpp:162
 msgid "Maps"
 msgstr "نقشه‌ها"
 
@@ -1427,7 +1432,7 @@ msgstr ""
 msgid "Music?"
 msgstr "موسیقی؟"
 
-#: src/game/game.cpp:184
+#: src/game/game.cpp:185
 #, fuzzy
 msgid "Network"
 msgstr "بازی شبکه‌ای"
@@ -1465,7 +1470,7 @@ msgstr "هیچ عنصر <%s> در پرونده‌ی تنظیم xml پیدا نش
 msgid "No player connected"
 msgstr "بازیکن %i وصل شد"
 
-#: lib/warmux/net/download.cpp:144
+#: lib/warmux/net/download.cpp:140
 msgid "No pointer"
 msgstr ""
 
@@ -1673,17 +1678,17 @@ msgstr ""
 msgid "Random map"
 msgstr "نقشه تصادفی"
 
-#: lib/warmux/net/download.cpp:138
+#: lib/warmux/net/download.cpp:134
 #, fuzzy, c-format
 msgid "Read only %i bytes"
 msgstr "فقط %i تیم وجود دارد."
 
-#: src/game/config.cpp:397
+#: src/game/config.cpp:401
 #, fuzzy
 msgid "Reading the default config file"
 msgstr "درحال خواندن پرونده‌ی تنظیمات پیش‌فرض"
 
-#: src/game/config.cpp:454
+#: src/game/config.cpp:458
 #, fuzzy
 msgid "Reading the personal config file"
 msgstr "درحال خواندن پرونده‌ی تنظیمات شخصی"
@@ -1702,7 +1707,7 @@ msgstr ""
 msgid "Replay info"
 msgstr "حالت کارگیر (کلاینت)"
 
-#: src/game/game.cpp:211
+#: src/game/game.cpp:212
 #, fuzzy
 msgid "Replay mode"
 msgstr "حالت کارگیر (کلاینت)"
@@ -1772,7 +1777,7 @@ msgstr "آدرس کارگزار:"
 msgid "Server available on Internet"
 msgstr "کارگزار حاضر در اینترنت"
 
-#: src/menu/network_menu.cpp:174 src/network/network.cpp:485
+#: src/menu/network_menu.cpp:174 src/network/network.cpp:486
 msgid "Server mode"
 msgstr "حالت کارگزار"
 
@@ -1849,11 +1854,11 @@ msgstr "تفنگ دوربین‌دار"
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:393
+#: src/menu/network_connection_menu.cpp:390
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "شرمنده، در حال حاضر، هیچ بازی منتظر بازیکنان دیگر نیست."
 
-#: src/menu/network_connection_menu.cpp:447
+#: src/menu/network_connection_menu.cpp:444
 #: tools/servers/game_server/server.cpp:374
 #, c-format
 msgid ""
@@ -1875,11 +1880,11 @@ msgid "Sound frequency"
 msgstr "فرکانس صدا"
 
 #. Load teams' sound profiles
-#: src/game/game.cpp:173
+#: src/game/game.cpp:174
 msgid "Sounds"
 msgstr "صداها"
 
-#: src/game/game.cpp:205
+#: src/game/game.cpp:206
 msgid "Starting a new game"
 msgstr "در حال شروع یک بازی جدید"
 
@@ -1932,7 +1937,7 @@ msgid "Team stats"
 msgstr "تیم‌ها"
 
 #. Teams
-#: src/game/game.cpp:168 src/menu/game_menu.cpp:76 src/menu/game_menu.cpp:80
+#: src/game/game.cpp:169 src/menu/game_menu.cpp:76 src/menu/game_menu.cpp:80
 #: src/menu/network_menu.cpp:98 src/menu/network_menu.cpp:102
 #: src/menu/replay_menu.cpp:94
 msgid "Teams"
@@ -2006,7 +2011,7 @@ msgstr "اتصال وصل نشد. بررسی کنید که آیا دیوار آ�
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "نارنجک دیسکو قبل از اینکه عمل کند از زمین رقص خارج شد"
 
-#: src/game/game.cpp:768
+#: src/game/game.cpp:769
 msgid "The game was interrupted because you got disconnected."
 msgstr ""
 
@@ -2025,7 +2030,7 @@ msgstr "بقیه منتظر شما هستند! بجنب دیگه!"
 msgid "The parachute is activated automatically."
 msgstr "بادکنک نجات به صورت اتوماتیم فعال خواهد شد."
 
-#: src/weapon/bazooka.cpp:80 src/weapon/cluzooka.cpp:323
+#: src/weapon/bazooka.cpp:80 src/weapon/cluzooka.cpp:304
 #: src/weapon/riot_bomb.cpp:85
 msgid "The rocket has left the battlefield..."
 msgstr "موشک از زمین جنگ خارج شد..."
@@ -2054,10 +2059,6 @@ msgstr[0] "فقط %i تیم وجود دارد."
 #: src/gui/control_config.cpp:206
 #, c-format
 msgid "This key has already been attributed to '%s'"
-msgstr ""
-
-#: src/menu/network_connection_menu.cpp:313
-msgid "This version was compiled without curl, you can't list public games!"
 msgstr ""
 
 #: src/menu/benchmark_menu.cpp:113 src/menu/results_menu.cpp:339
@@ -2238,12 +2239,12 @@ msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "صبر کنید! بازیکن %i آماده نیست!"
 
-#: src/game/game.cpp:663
+#: src/game/game.cpp:664
 #, c-format
 msgid "Waiting for %s"
 msgstr ""
 
-#: src/game/game.cpp:183
+#: src/game/game.cpp:184
 msgid "Waiting for remote players"
 msgstr ""
 
@@ -2272,7 +2273,7 @@ msgstr "تعداد کاراکترها"
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr ""
 
-#: src/game/game.cpp:164
+#: src/game/game.cpp:165
 msgid "Weapons"
 msgstr "اسلحه‌ها"
 
@@ -2287,12 +2288,12 @@ msgstr "وب‌سایت: "
 msgid "Welcome to %s on %s!"
 msgstr ""
 
-#: src/game/game.cpp:1150
+#: src/game/game.cpp:1151
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr ""
 
-#: src/game/game.cpp:1213
+#: src/game/game.cpp:1214
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "چه افتضاحی، %s با یک اسلحه‌ی ساده کشته شد!"
@@ -2334,7 +2335,7 @@ msgstr ""
 msgid "Wrong team!"
 msgstr ""
 
-#: lib/warmux/net/download.cpp:154
+#: lib/warmux/net/download.cpp:150
 #, c-format
 msgid "Wrote %i/%i bytes"
 msgstr ""
@@ -2358,7 +2359,7 @@ msgstr ""
 msgid "You need at least one valid map!"
 msgstr "شما حداقل یک نقشه‌ که به درستی کار کند نیاز دارید!"
 
-#: src/game/game.cpp:304 src/team/teams_list.cpp:166
+#: src/game/game.cpp:305 src/team/teams_list.cpp:166
 #, fuzzy
 msgid "You need at least two valid teams!"
 msgstr "شما حداقل به ۲ تیم نیاز دارید!"
@@ -2417,16 +2418,16 @@ msgstr ""
 msgid "no configuration file!"
 msgstr "مشکل در بارگذاری پرونده‌ی تنظیمات: %s"
 
-#: src/sound/jukebox.cpp:191
+#: src/sound/jukebox.cpp:192
 msgid "o Loading music"
 msgstr "در حال بارگذاری موسیقی"
 
-#: src/sound/jukebox.cpp:373
+#: src/sound/jukebox.cpp:374
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "در حال بارگذاری پرونده‌ی موسیقی: %s"
 
-#: src/sound/jukebox.cpp:135
+#: src/sound/jukebox.cpp:134
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "صدا با %d هرتز و %d بیت باز شد"

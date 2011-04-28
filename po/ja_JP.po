@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja_JP\n"
 "Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
-"POT-Creation-Date: 2011-04-20 19:52+0200\n"
 "PO-Revision-Date: 2010-02-11 03:47+0900\n"
 "Last-Translator: Akicks <akicks@gmail.com>\n"
 "Language-Team: Japanese (Japan) <akicks@gmail.com>\n"
@@ -63,35 +62,35 @@ msgstr " %s チーム"
 msgid "%s Team - Remote"
 msgstr " %s チーム - 操作"
 
-#: src/game/game.cpp:1171
+#: src/game/game.cpp:1172
 #, fuzzy, c-format
 msgid "%s from %s team committed suicide!"
 msgstr "%s (%s) は自殺した！"
 
 #. Could be modified, but for now, save on translation
-#: src/game/game.cpp:1197 src/game/game.cpp:1216
+#: src/game/game.cpp:1198 src/game/game.cpp:1217
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s (%s) は死んでしまった。"
 
-#: src/game/game.cpp:1163
+#: src/game/game.cpp:1164
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s (%s) は溺れてしまった。"
 
-#: src/game/game.cpp:1157
+#: src/game/game.cpp:1158
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s (%s) は星になった。"
 
-#: src/game/game.cpp:1177
+#: src/game/game.cpp:1178
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s (%s) は地面に叩き付けられた。"
 
 # what about female names?
 #. The playing character killed himself
-#: src/game/game.cpp:1184
+#: src/game/game.cpp:1185
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s (%s) の死因：ヘタクソ！"
@@ -114,7 +113,7 @@ msgstr ""
 msgid "%s has won %u points of energy!"
 msgstr "%s は %u ポイントのライフを獲得した！"
 
-#: src/game/game.cpp:1208
+#: src/game/game.cpp:1209
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s は気が狂ったかのように、味方%sチームのヤツを殺った！"
@@ -127,12 +126,16 @@ msgstr "%s の近くに地雷が！"
 #. For translators: extended in "<nickname> (<host>) just connected
 #: src/include/action_handler.cpp:952
 #, fuzzy, c-format
+#| msgid "%i player connected"
+#| msgid_plural "%i players connected"
 msgid "%s just connected"
 msgstr "%i人のプレイヤーが接続しています"
 
 #. For translators: extended in "<nickname> (<host>) just disconnected
-#: src/include/action_handler.cpp:1068
+#: src/include/action_handler.cpp:1064
 #, fuzzy, c-format
+#| msgid "%i player connected"
+#| msgid_plural "%i players connected"
 msgid "%s just disconnected"
 msgstr "%i人のプレイヤーが接続しています"
 
@@ -158,7 +161,7 @@ msgstr "%s チームの弾薬は %s によって無限だ！"
 msgid "%s team has skipped its turn."
 msgstr "%s チームはターンをスキップした。"
 
-#: src/weapon/cluzooka.cpp:379
+#: src/weapon/cluzooka.cpp:360
 #, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
@@ -389,7 +392,7 @@ msgstr[0] ""
 msgid "%s team was fragged down."
 msgstr "%s チームは降参しました。"
 
-#: src/game/game.cpp:1192 src/game/game.cpp:1204
+#: src/game/game.cpp:1193 src/game/game.cpp:1205
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s は、%s チームのメンバーを道連れにした！"
@@ -697,7 +700,7 @@ msgid ""
 msgstr ""
 
 #. Client Mode
-#: src/menu/network_menu.cpp:167 src/network/network.cpp:455
+#: src/menu/network_menu.cpp:167 src/network/network.cpp:456
 msgid "Client mode"
 msgstr "クライアントモード"
 
@@ -709,7 +712,7 @@ msgstr "不器用"
 msgid "Cluster Bomb"
 msgstr "クラスターボム"
 
-#: src/weapon/cluzooka.cpp:373
+#: src/weapon/cluzooka.cpp:354
 msgid "Cluzooka"
 msgstr "クラスターバズーカ"
 
@@ -751,7 +754,7 @@ msgstr "建設資材"
 msgid "Controlled by: "
 msgstr "コントロール: "
 
-#: lib/warmux/net/download.cpp:203
+#: lib/warmux/net/download.cpp:199
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr "%s から最新版を取得することができませんでした"
@@ -790,6 +793,7 @@ msgstr "デスモード中のターン毎ダメージ"
 #. Date
 #: src/menu/replay_menu.cpp:79
 #, fuzzy
+#| msgid "Dynamite"
 msgid "Date"
 msgstr "ダイナマイト"
 
@@ -836,6 +840,7 @@ msgstr "ドラッグ&ドロップ:カメラの操作"
 #. Duration
 #: src/menu/replay_menu.cpp:84
 #, fuzzy
+#| msgid "Duration of a turn"
 msgid "Duration"
 msgstr "ターンの時間"
 
@@ -852,7 +857,7 @@ msgstr "ターンの時間"
 msgid "Dynamite"
 msgstr "ダイナマイト"
 
-#: src/game/game.cpp:512
+#: src/game/game.cpp:513
 msgid "END OF GAME"
 msgstr "ゲームを終了"
 
@@ -878,7 +883,7 @@ msgstr "チーム読み込みエラー :"
 msgid "Error loading team :"
 msgstr "チーム読み込みエラー :"
 
-#: src/game/config.cpp:586 src/team/custom_team.cpp:155
+#: src/game/config.cpp:592 src/team/custom_team.cpp:155
 #: src/team/custom_team.cpp:166 src/team/custom_team.cpp:177
 #, c-format
 msgid ""
@@ -899,27 +904,27 @@ msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr " \"%s\" ファイル削除エラー: カスタムチームを削除することができません。"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:527
+#: src/menu/network_connection_menu.cpp:524
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "エラー: 接続できません %s:%s"
 
-#: src/menu/network_connection_menu.cpp:477
+#: src/menu/network_connection_menu.cpp:474
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "エラー: ゲームをホストするためにインデックスサーバーに接続できません"
 
-#: src/menu/network_connection_menu.cpp:388
+#: src/menu/network_connection_menu.cpp:385
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
 "エラー: インターネットゲームを検索するためにインデックスサーバーに接続できま"
 "せん"
 
-#: src/menu/network_connection_menu.cpp:505
+#: src/menu/network_connection_menu.cpp:502
 msgid "Error: Unable to start the server"
 msgstr "エラー: サーバーが開始できません"
 
-#: src/menu/network_connection_menu.cpp:498
+#: src/menu/network_connection_menu.cpp:495
 #: tools/servers/game_server/server.cpp:389
 #, c-format
 msgid ""
@@ -959,12 +964,12 @@ msgstr ""
 msgid "FPS"
 msgstr ""
 
-#: lib/warmux/net/download.cpp:188 lib/warmux/net/download.cpp:229
+#: lib/warmux/net/download.cpp:184 lib/warmux/net/download.cpp:225
 #, c-format
 msgid "Fail to create temporary file: %s"
 msgstr ""
 
-#: lib/warmux/net/download.cpp:195
+#: lib/warmux/net/download.cpp:191
 #, fuzzy, c-format
 msgid "Fail to open temporary file: %s"
 msgstr "マップディレクトリが開けません (%s)!"
@@ -975,6 +980,7 @@ msgstr ""
 
 #: src/menu/results_menu.cpp:354
 #, fuzzy
+#| msgid "Game name:"
 msgid "Filename:"
 msgstr "ゲーム名"
 
@@ -1075,6 +1081,7 @@ msgstr "ヘルプ"
 
 #: src/menu/options_menu.cpp:128
 #, fuzzy
+#| msgid "High jump"
 msgid "High"
 msgstr "ハイジャンプ"
 
@@ -1146,7 +1153,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "初期ライフ"
 
-#: src/weapon/bazooka.cpp:120 src/weapon/cluzooka.cpp:374
+#: src/weapon/bazooka.cpp:120 src/weapon/cluzooka.cpp:355
 #: src/weapon/riot_bomb.cpp:120
 #, fuzzy
 msgid ""
@@ -1158,20 +1165,20 @@ msgstr ""
 "砲撃: スペースキーを押し続けて強さを決定\n"
 "ターン毎で1つの弾薬"
 
-#: src/game/game.cpp:123
+#: src/game/game.cpp:124
 msgid "Initialisation"
 msgstr "初期化"
 
 #. Load the map
-#: src/game/game.cpp:160
+#: src/game/game.cpp:161
 msgid "Initialise map"
 msgstr "マップ初期化"
 
-#: src/game/game.cpp:171
+#: src/game/game.cpp:172
 msgid "Initialise sounds"
 msgstr "サウンド初期化"
 
-#: src/game/game.cpp:167
+#: src/game/game.cpp:168
 msgid "Initialise teams"
 msgstr "チーム初期化"
 
@@ -1190,7 +1197,7 @@ msgstr ""
 msgid "Invalid filename"
 msgstr ""
 
-#: src/game/game.cpp:1041
+#: src/game/game.cpp:1042
 msgid "It's a present!"
 msgstr "プレゼントだ！"
 
@@ -1295,7 +1302,7 @@ msgstr "マップ %s, 作者 : "
 msgid "Map author information: name, email, nickname, country"
 msgstr ""
 
-#: src/game/game.cpp:161
+#: src/game/game.cpp:162
 msgid "Maps"
 msgstr "マップ"
 
@@ -1427,7 +1434,7 @@ msgstr "音楽のボリューム:"
 msgid "Music?"
 msgstr "音楽？"
 
-#: src/game/game.cpp:184
+#: src/game/game.cpp:185
 msgid "Network"
 msgstr "ネットワークゲーム"
 
@@ -1462,7 +1469,7 @@ msgstr "xml設定ファイル内に<%s>要素が見つかりません！"
 msgid "No player connected"
 msgstr "%i人のプレイヤーが接続しています"
 
-#: lib/warmux/net/download.cpp:144
+#: lib/warmux/net/download.cpp:140
 msgid "No pointer"
 msgstr ""
 
@@ -1670,16 +1677,16 @@ msgstr ""
 msgid "Random map"
 msgstr "ランダムマップ"
 
-#: lib/warmux/net/download.cpp:138
+#: lib/warmux/net/download.cpp:134
 #, fuzzy, c-format
 msgid "Read only %i bytes"
 msgstr "%i チームがあります。"
 
-#: src/game/config.cpp:397
+#: src/game/config.cpp:401
 msgid "Reading the default config file"
 msgstr "デフォルト構成ファイルの読込中"
 
-#: src/game/config.cpp:454
+#: src/game/config.cpp:458
 msgid "Reading the personal config file"
 msgstr "個人構成ファイルを読込中"
 
@@ -1694,11 +1701,13 @@ msgstr ""
 
 #: src/menu/replay_menu.cpp:69
 #, fuzzy
+#| msgid "Game mode"
 msgid "Replay info"
 msgstr "ゲームモード"
 
-#: src/game/game.cpp:211
+#: src/game/game.cpp:212
 #, fuzzy
+#| msgid "Game mode"
 msgid "Replay mode"
 msgstr "ゲームモード"
 
@@ -1766,7 +1775,7 @@ msgstr "サーバーアドレス"
 msgid "Server available on Internet"
 msgstr "インターネットでサーバーが使用できます"
 
-#: src/menu/network_menu.cpp:174 src/network/network.cpp:485
+#: src/menu/network_menu.cpp:174 src/network/network.cpp:486
 msgid "Server mode"
 msgstr "サーバーモード"
 
@@ -1843,11 +1852,11 @@ msgstr "スナイパーライフル"
 msgid "Someone put a booby trap into the crate!"
 msgstr "誰かが箱に罠を仕掛けたぞ！"
 
-#: src/menu/network_connection_menu.cpp:393
+#: src/menu/network_connection_menu.cpp:390
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "このゲームはプレイヤーを受け付けていません"
 
-#: src/menu/network_connection_menu.cpp:447
+#: src/menu/network_connection_menu.cpp:444
 #: tools/servers/game_server/server.cpp:374
 #, fuzzy, c-format
 msgid ""
@@ -1871,11 +1880,11 @@ msgid "Sound frequency"
 msgstr "サウンド周波数"
 
 #. Load teams' sound profiles
-#: src/game/game.cpp:173
+#: src/game/game.cpp:174
 msgid "Sounds"
 msgstr "サウンド"
 
-#: src/game/game.cpp:205
+#: src/game/game.cpp:206
 msgid "Starting a new game"
 msgstr "ゲームを開始中"
 
@@ -1918,6 +1927,7 @@ msgstr "チームグラフ"
 
 #: src/menu/options_menu.cpp:594
 #, fuzzy
+#| msgid "Team stats"
 msgid "Team saved"
 msgstr "チーム統計"
 
@@ -1926,7 +1936,7 @@ msgid "Team stats"
 msgstr "チーム統計"
 
 #. Teams
-#: src/game/game.cpp:168 src/menu/game_menu.cpp:76 src/menu/game_menu.cpp:80
+#: src/game/game.cpp:169 src/menu/game_menu.cpp:76 src/menu/game_menu.cpp:80
 #: src/menu/network_menu.cpp:98 src/menu/network_menu.cpp:102
 #: src/menu/replay_menu.cpp:94
 msgid "Teams"
@@ -1997,7 +2007,7 @@ msgstr "接続がタイムアウトしました。firewall を確認してくだ
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "ディスコグレネードは、爆発前にダンスフロアから出てしまいました。"
 
-#: src/game/game.cpp:768
+#: src/game/game.cpp:769
 msgid "The game was interrupted because you got disconnected."
 msgstr "あなたが切断されたため、ゲームは中断されました。"
 
@@ -2013,7 +2023,7 @@ msgstr "他の人が待ってるよ！起きて！ :-)"
 msgid "The parachute is activated automatically."
 msgstr "パラシュートは自動で使用されます。"
 
-#: src/weapon/bazooka.cpp:80 src/weapon/cluzooka.cpp:323
+#: src/weapon/bazooka.cpp:80 src/weapon/cluzooka.cpp:304
 #: src/weapon/riot_bomb.cpp:85
 msgid "The rocket has left the battlefield..."
 msgstr "ロケットは、戦場から出てしまいました。"
@@ -2043,10 +2053,6 @@ msgstr[0] "%i チームがあります。"
 #: src/gui/control_config.cpp:206
 #, c-format
 msgid "This key has already been attributed to '%s'"
-msgstr ""
-
-#: src/menu/network_connection_menu.cpp:313
-msgid "This version was compiled without curl, you can't list public games!"
 msgstr ""
 
 #: src/menu/benchmark_menu.cpp:113 src/menu/results_menu.cpp:339
@@ -2227,12 +2233,12 @@ msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "待ってください！ %i はまだ準備ができていません！"
 
-#: src/game/game.cpp:663
+#: src/game/game.cpp:664
 #, c-format
 msgid "Waiting for %s"
 msgstr "%s を待っています"
 
-#: src/game/game.cpp:183
+#: src/game/game.cpp:184
 msgid "Waiting for remote players"
 msgstr "リモートプレイヤーを待っています"
 
@@ -2261,7 +2267,7 @@ msgstr "武器カテゴリを切り替える"
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "武器：攻撃 / ボーナスボックス: 急落下"
 
-#: src/game/game.cpp:164
+#: src/game/game.cpp:165
 msgid "Weapons"
 msgstr "武器"
 
@@ -2276,12 +2282,12 @@ msgstr "Webサイト: "
 msgid "Welcome to %s on %s!"
 msgstr "%s (%s)へようこそ！"
 
-#: src/game/game.cpp:1150
+#: src/game/game.cpp:1151
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr "なんと美しいホームランだろう！%s (%s)は異世界へ..."
 
-#: src/game/game.cpp:1213
+#: src/game/game.cpp:1214
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr " %s はハンドガンごときにやられました...これは恥ずかしい！"
@@ -2325,7 +2331,7 @@ msgstr "名前が間違っているマップです！"
 msgid "Wrong team!"
 msgstr "チームが間違っています！"
 
-#: lib/warmux/net/download.cpp:154
+#: lib/warmux/net/download.cpp:150
 #, c-format
 msgid "Wrote %i/%i bytes"
 msgstr ""
@@ -2347,7 +2353,7 @@ msgstr ""
 msgid "You need at least one valid map!"
 msgstr "最低1つの有効なマップが必要です！"
 
-#: src/game/game.cpp:304 src/team/teams_list.cpp:166
+#: src/game/game.cpp:305 src/team/teams_list.cpp:166
 msgid "You need at least two valid teams!"
 msgstr "最低2つの有効なチームが必要です！"
 
@@ -2405,16 +2411,16 @@ msgstr ""
 msgid "no configuration file!"
 msgstr "構成ファイルがありません！"
 
-#: src/sound/jukebox.cpp:191
+#: src/sound/jukebox.cpp:192
 msgid "o Loading music"
 msgstr "o 音楽を読込中"
 
-#: src/sound/jukebox.cpp:373
+#: src/sound/jukebox.cpp:374
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o 音楽設定を読込中 : %s"
 
-#: src/sound/jukebox.cpp:135
+#: src/sound/jukebox.cpp:134
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o 音楽 %d Hz %d bit"

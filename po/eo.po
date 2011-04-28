@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eo_new\n"
 "Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
-"POT-Creation-Date: 2011-04-20 19:52+0200\n"
 "PO-Revision-Date: 2008-09-02 04:03+0200\n"
 "Last-Translator: Pierre-Marie Pédrot <pedrotpmx@wanadoo.fr>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -63,34 +62,34 @@ msgstr "%s Teamo"
 msgid "%s Team - Remote"
 msgstr "%s Teamo - Defore"
 
-#: src/game/game.cpp:1171
+#: src/game/game.cpp:1172
 #, fuzzy, c-format
 msgid "%s from %s team committed suicide!"
 msgstr "%s (teamo %s) mortigis sin!"
 
 #. Could be modified, but for now, save on translation
-#: src/game/game.cpp:1197 src/game/game.cpp:1216
+#: src/game/game.cpp:1198 src/game/game.cpp:1217
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s (teamo %s) mortis."
 
-#: src/game/game.cpp:1163
+#: src/game/game.cpp:1164
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s (teamo %s) droniĝis!"
 
-#: src/game/game.cpp:1157
+#: src/game/game.cpp:1158
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s (teamo %s) falis el la mapo!"
 
-#: src/game/game.cpp:1177
+#: src/game/game.cpp:1178
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s (teamo %s) grundtrafis tro perforte!"
 
 #. The playing character killed himself
-#: src/game/game.cpp:1184
+#: src/game/game.cpp:1185
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s (teamo %s) estas mortinta pro lia mallerteco."
@@ -112,7 +111,7 @@ msgstr ""
 msgid "%s has won %u points of energy!"
 msgstr "%s gajnis %u energian poenton."
 
-#: src/game/game.cpp:1208
+#: src/game/game.cpp:1209
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s estas psikopatiulo, li mortigas membron el lia teamo: %s!"
@@ -125,12 +124,16 @@ msgstr "%s estas proksima al mino..."
 #. For translators: extended in "<nickname> (<host>) just connected
 #: src/include/action_handler.cpp:952
 #, fuzzy, c-format
+#| msgid "%i player connected"
+#| msgid_plural "%i players connected"
 msgid "%s just connected"
 msgstr "%i ludanto konektiĝis"
 
 #. For translators: extended in "<nickname> (<host>) just disconnected
-#: src/include/action_handler.cpp:1068
+#: src/include/action_handler.cpp:1064
 #, fuzzy, c-format
+#| msgid "%i player connected"
+#| msgid_plural "%i players connected"
 msgid "%s just disconnected"
 msgstr "%i ludanto konektiĝis"
 
@@ -156,7 +159,7 @@ msgstr "%s teamo jam havas senlimajn municiojn por la %s!"
 msgid "%s team has skipped its turn."
 msgstr "%s teamo malhavis lian vicon."
 
-#: src/weapon/cluzooka.cpp:379
+#: src/weapon/cluzooka.cpp:360
 #, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
@@ -429,7 +432,7 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "%s teamo primurditis."
 
-#: src/game/game.cpp:1192 src/game/game.cpp:1204
+#: src/game/game.cpp:1193 src/game/game.cpp:1205
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s entombigis membron de la %s teamo kun li!"
@@ -739,7 +742,7 @@ msgid ""
 msgstr ""
 
 #. Client Mode
-#: src/menu/network_menu.cpp:167 src/network/network.cpp:455
+#: src/menu/network_menu.cpp:167 src/network/network.cpp:456
 msgid "Client mode"
 msgstr "Klientmodo"
 
@@ -751,7 +754,7 @@ msgstr "La plej mallerta"
 msgid "Cluster Bomb"
 msgstr "Disgrenado"
 
-#: src/weapon/cluzooka.cpp:373
+#: src/weapon/cluzooka.cpp:354
 msgid "Cluzooka"
 msgstr "Disbazuko"
 
@@ -794,7 +797,7 @@ msgstr "Konstruilo"
 msgid "Controlled by: "
 msgstr "Stirato per:"
 
-#: lib/warmux/net/download.cpp:203
+#: lib/warmux/net/download.cpp:199
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr "Ne ebli elpreni la lastan version el %s"
@@ -833,6 +836,7 @@ msgstr "Vundo per vico ĉe subitmorta modo"
 #. Date
 #: src/menu/replay_menu.cpp:79
 #, fuzzy
+#| msgid "Dynamite"
 msgid "Date"
 msgstr "Dinamito"
 
@@ -877,6 +881,7 @@ msgstr "Ŝovi&demeti: movi kameraon"
 #. Duration
 #: src/menu/replay_menu.cpp:84
 #, fuzzy
+#| msgid "Duration of a turn"
 msgid "Duration"
 msgstr "Vicdaŭro"
 
@@ -893,7 +898,7 @@ msgstr "Vicdaŭro"
 msgid "Dynamite"
 msgstr "Dinamito"
 
-#: src/game/game.cpp:512
+#: src/game/game.cpp:513
 msgid "END OF GAME"
 msgstr "LUDFINO"
 
@@ -919,7 +924,7 @@ msgstr "Eraro ŝargante teamon:"
 msgid "Error loading team :"
 msgstr "Eraro ŝargante teamon:"
 
-#: src/game/config.cpp:586 src/team/custom_team.cpp:155
+#: src/game/config.cpp:592 src/team/custom_team.cpp:155
 #: src/team/custom_team.cpp:166 src/team/custom_team.cpp:177
 #, c-format
 msgid ""
@@ -940,26 +945,26 @@ msgstr ""
 "Eraro forigante dosierujon \"%s\": ne eblas forigi la dosieron de agordo."
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:527
+#: src/menu/network_connection_menu.cpp:524
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Ne eblas konekti al %s: %s"
 
-#: src/menu/network_connection_menu.cpp:477
+#: src/menu/network_connection_menu.cpp:474
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "Eraro: Ne eblas kontakti la indeksservilon por gastigi ludon"
 
-#: src/menu/network_connection_menu.cpp:388
+#: src/menu/network_connection_menu.cpp:385
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr "Eraro: Ne eblas kontakti la indeksservilon por serĉi interretan ludon"
 
-#: src/menu/network_connection_menu.cpp:505
+#: src/menu/network_connection_menu.cpp:502
 #, fuzzy
 msgid "Error: Unable to start the server"
 msgstr "Eraro: Ne eblas starti servilon"
 
-#: src/menu/network_connection_menu.cpp:498
+#: src/menu/network_connection_menu.cpp:495
 #: tools/servers/game_server/server.cpp:389
 #, fuzzy, c-format
 msgid ""
@@ -999,12 +1004,12 @@ msgstr ""
 msgid "FPS"
 msgstr ""
 
-#: lib/warmux/net/download.cpp:188 lib/warmux/net/download.cpp:229
+#: lib/warmux/net/download.cpp:184 lib/warmux/net/download.cpp:225
 #, c-format
 msgid "Fail to create temporary file: %s"
 msgstr ""
 
-#: lib/warmux/net/download.cpp:195
+#: lib/warmux/net/download.cpp:191
 #, fuzzy, c-format
 msgid "Fail to open temporary file: %s"
 msgstr "Ne eblas malfermi la dosierujon de mapoj (%s)!"
@@ -1015,6 +1020,7 @@ msgstr ""
 
 #: src/menu/results_menu.cpp:354
 #, fuzzy
+#| msgid "Game name:"
 msgid "Filename:"
 msgstr "Ludnomo:"
 
@@ -1116,6 +1122,7 @@ msgstr "Helpo"
 
 #: src/menu/options_menu.cpp:128
 #, fuzzy
+#| msgid "High jump"
 msgid "High"
 msgstr "Supersalti"
 
@@ -1190,7 +1197,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Komenca energio"
 
-#: src/weapon/bazooka.cpp:120 src/weapon/cluzooka.cpp:374
+#: src/weapon/bazooka.cpp:120 src/weapon/cluzooka.cpp:355
 #: src/weapon/riot_bomb.cpp:120
 #, fuzzy
 msgid ""
@@ -1202,20 +1209,20 @@ msgstr ""
 "Pafo: apogu kontinue spacetosignon ĝis la vola forto\n"
 "Unu pafo vice"
 
-#: src/game/game.cpp:123
+#: src/game/game.cpp:124
 msgid "Initialisation"
 msgstr "Preparanto"
 
 #. Load the map
-#: src/game/game.cpp:160
+#: src/game/game.cpp:161
 msgid "Initialise map"
 msgstr "Preparante mapon"
 
-#: src/game/game.cpp:171
+#: src/game/game.cpp:172
 msgid "Initialise sounds"
 msgstr "Preparante sonojn"
 
-#: src/game/game.cpp:167
+#: src/game/game.cpp:168
 msgid "Initialise teams"
 msgstr "Preparante teamon"
 
@@ -1234,7 +1241,7 @@ msgstr ""
 msgid "Invalid filename"
 msgstr ""
 
-#: src/game/game.cpp:1041
+#: src/game/game.cpp:1042
 msgid "It's a present!"
 msgstr "Tio estas donaco!"
 
@@ -1338,7 +1345,7 @@ msgstr "Mapo %s, far:"
 msgid "Map author information: name, email, nickname, country"
 msgstr ""
 
-#: src/game/game.cpp:161
+#: src/game/game.cpp:162
 msgid "Maps"
 msgstr "Mapoj"
 
@@ -1471,7 +1478,7 @@ msgstr "Muzika laŭteco"
 msgid "Music?"
 msgstr "Muziko?"
 
-#: src/game/game.cpp:184
+#: src/game/game.cpp:185
 #, fuzzy
 msgid "Network"
 msgstr "Reta ludo"
@@ -1508,7 +1515,7 @@ msgstr "Neniu ero <%s> trovita en la XML dosiero de agordo!"
 msgid "No player connected"
 msgstr "%i ludanto konektiĝis"
 
-#: lib/warmux/net/download.cpp:144
+#: lib/warmux/net/download.cpp:140
 msgid "No pointer"
 msgstr ""
 
@@ -1716,17 +1723,17 @@ msgstr ""
 msgid "Random map"
 msgstr "Hazarda mapo"
 
-#: lib/warmux/net/download.cpp:138
+#: lib/warmux/net/download.cpp:134
 #, fuzzy, c-format
 msgid "Read only %i bytes"
 msgstr "Estas nur %i teamo."
 
-#: src/game/config.cpp:397
+#: src/game/config.cpp:401
 #, fuzzy
 msgid "Reading the default config file"
 msgstr "Legante norman agordaron"
 
-#: src/game/config.cpp:454
+#: src/game/config.cpp:458
 #, fuzzy
 msgid "Reading the personal config file"
 msgstr "Legante personan agordaron"
@@ -1742,11 +1749,13 @@ msgstr ""
 
 #: src/menu/replay_menu.cpp:69
 #, fuzzy
+#| msgid "Game mode"
 msgid "Replay info"
 msgstr "Ludmodo"
 
-#: src/game/game.cpp:211
+#: src/game/game.cpp:212
 #, fuzzy
+#| msgid "Game mode"
 msgid "Replay mode"
 msgstr "Ludmodo"
 
@@ -1814,7 +1823,7 @@ msgstr "Servila adreso:"
 msgid "Server available on Internet"
 msgstr "Interretebla servilo"
 
-#: src/menu/network_menu.cpp:174 src/network/network.cpp:485
+#: src/menu/network_menu.cpp:174 src/network/network.cpp:486
 msgid "Server mode"
 msgstr "Servila modo"
 
@@ -1892,11 +1901,11 @@ msgstr "Tiraljora fusilo"
 msgid "Someone put a booby trap into the crate!"
 msgstr "Iu metis insidon en la skatolo!"
 
-#: src/menu/network_connection_menu.cpp:393
+#: src/menu/network_connection_menu.cpp:390
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Pardonu, aktuale, neniu ludo atendantas ludantojn"
 
-#: src/menu/network_connection_menu.cpp:447
+#: src/menu/network_connection_menu.cpp:444
 #: tools/servers/game_server/server.cpp:374
 #, fuzzy, c-format
 msgid ""
@@ -1919,11 +1928,11 @@ msgid "Sound frequency"
 msgstr "Sona frekvenco"
 
 #. Load teams' sound profiles
-#: src/game/game.cpp:173
+#: src/game/game.cpp:174
 msgid "Sounds"
 msgstr "Sonoj"
 
-#: src/game/game.cpp:205
+#: src/game/game.cpp:206
 msgid "Starting a new game"
 msgstr "Komencante novan ludon"
 
@@ -1967,6 +1976,7 @@ msgstr "Teamaj grafikaĵoj"
 
 #: src/menu/options_menu.cpp:594
 #, fuzzy
+#| msgid "Team stats"
 msgid "Team saved"
 msgstr "Teamaj statistikoj"
 
@@ -1975,7 +1985,7 @@ msgid "Team stats"
 msgstr "Teamaj statistikoj"
 
 #. Teams
-#: src/game/game.cpp:168 src/menu/game_menu.cpp:76 src/menu/game_menu.cpp:80
+#: src/game/game.cpp:169 src/menu/game_menu.cpp:76 src/menu/game_menu.cpp:80
 #: src/menu/network_menu.cpp:98 src/menu/network_menu.cpp:102
 #: src/menu/replay_menu.cpp:94
 msgid "Teams"
@@ -2050,7 +2060,7 @@ msgstr "La konekto tempolimis. Certiĝu, ke ne estas ie fajroŝirmilo!"
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "La diskogrenado foriris de la diskejo antaŭ ol explodi"
 
-#: src/game/game.cpp:768
+#: src/game/game.cpp:769
 msgid "The game was interrupted because you got disconnected."
 msgstr "La ludo ĉesis pro ke, vi estis malkonektita."
 
@@ -2069,7 +2079,7 @@ msgstr "La alioj estas atendando vin! Vekiĝu:-)"
 msgid "The parachute is activated automatically."
 msgstr "Paraŝuto aŭtomatike uziĝis."
 
-#: src/weapon/bazooka.cpp:80 src/weapon/cluzooka.cpp:323
+#: src/weapon/bazooka.cpp:80 src/weapon/cluzooka.cpp:304
 #: src/weapon/riot_bomb.cpp:85
 msgid "The rocket has left the battlefield..."
 msgstr "La raketo foriris de la batalejo..."
@@ -2098,10 +2108,6 @@ msgstr[1] "Estas nur %i teamoj."
 #: src/gui/control_config.cpp:206
 #, c-format
 msgid "This key has already been attributed to '%s'"
-msgstr ""
-
-#: src/menu/network_connection_menu.cpp:313
-msgid "This version was compiled without curl, you can't list public games!"
 msgstr ""
 
 #: src/menu/benchmark_menu.cpp:113 src/menu/results_menu.cpp:339
@@ -2282,12 +2288,12 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Atendu! %i ludanto ankoraŭ ne pretas!"
 msgstr[1] "Atendu! %i ludantoj ankoraŭ ne pretas!"
 
-#: src/game/game.cpp:663
+#: src/game/game.cpp:664
 #, c-format
 msgid "Waiting for %s"
 msgstr ""
 
-#: src/game/game.cpp:183
+#: src/game/game.cpp:184
 msgid "Waiting for remote players"
 msgstr ""
 
@@ -2317,7 +2323,7 @@ msgstr "Ŝanĝi kategorion de armilo"
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Armilo: Pafi / Bonusa skatolo: falas rapide"
 
-#: src/game/game.cpp:164
+#: src/game/game.cpp:165
 msgid "Weapons"
 msgstr "Armiloj"
 
@@ -2332,12 +2338,12 @@ msgstr "TTT-ejo: "
 msgid "Welcome to %s on %s!"
 msgstr ""
 
-#: src/game/game.cpp:1150
+#: src/game/game.cpp:1151
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr ""
 
-#: src/game/game.cpp:1213
+#: src/game/game.cpp:1214
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kiel honto por %s: li estis mortigita per simpla pafilo!"
@@ -2380,7 +2386,7 @@ msgstr "Malbona mapnomo!"
 msgid "Wrong team!"
 msgstr "Malbona teamo!"
 
-#: lib/warmux/net/download.cpp:154
+#: lib/warmux/net/download.cpp:150
 #, c-format
 msgid "Wrote %i/%i bytes"
 msgstr ""
@@ -2404,7 +2410,7 @@ msgstr ""
 msgid "You need at least one valid map!"
 msgstr "Vi bezonas almenaŭ unu taŭgan mapon!"
 
-#: src/game/game.cpp:304 src/team/teams_list.cpp:166
+#: src/game/game.cpp:305 src/team/teams_list.cpp:166
 #, fuzzy
 msgid "You need at least two valid teams!"
 msgstr "Vi bezonas almenaŭ du teamojn!"
@@ -2462,16 +2468,16 @@ msgstr ""
 msgid "no configuration file!"
 msgstr "neniu agordodosiero!"
 
-#: src/sound/jukebox.cpp:191
+#: src/sound/jukebox.cpp:192
 msgid "o Loading music"
 msgstr "o Legante muzikon"
 
-#: src/sound/jukebox.cpp:373
+#: src/sound/jukebox.cpp:374
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Legante sonan profilon: %s"
 
-#: src/sound/jukebox.cpp:135
+#: src/sound/jukebox.cpp:134
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Malferminte %d Hz %d bit-an sonon"

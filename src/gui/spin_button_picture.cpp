@@ -37,9 +37,7 @@ SpinButtonWithPicture::SpinButtonWithPicture(const std::string& label,
                                              const std::string& resource_id,
                                              const Point2i& _size,
                                              int value, int step,
-                                             int min_value, int max_value,
-                                             Font::font_size_t legend_fsize,
-                                             Font::font_size_t value_fsize)
+                                             int min_value, int max_value)
   : AbstractSpinButton(value, step, min_value, max_value)
 {
   position = Point2i(-1, -1);
@@ -48,11 +46,11 @@ SpinButtonWithPicture::SpinButtonWithPicture(const std::string& label,
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   torus = new TorusCache(res, resource_id, BIG_R, SMALL_R);
 
-  txt_label = new Text(label, dark_gray_color, legend_fsize, Font::FONT_BOLD, false);
+  txt_label = new Text(label, dark_gray_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
   txt_label->SetMaxWidth(GetSizeX());
 
-  txt_value_black = new Text("", black_color, value_fsize, Font::FONT_BOLD, false);
-  txt_value_white = new Text("", white_color, value_fsize, Font::FONT_BOLD, false);
+  txt_value_black = new Text("", black_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
+  txt_value_white = new Text("", white_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
 
   ValueHasChanged();
 }
@@ -83,40 +81,38 @@ void SpinButtonWithPicture::Draw(const Point2i &mousePosition)
   #define IMG_BUTTONS_W 5
   #define IMG_BUTTONS_H 12
 
-  int center = position.x + torus->GetSize().x/2;
+  Point2i center = GetPosition() + torus->GetCenter();
   if (GetValue() > GetMinValue()) {
 
-    if (Contains(mousePosition) && mousePosition.x < center)
+    if (Contains(mousePosition) && mousePosition.x < center.x)
       torus->m_minus->SetCurrentFrame(1);
     else
       torus->m_minus->SetCurrentFrame(0);
 
-    torus->m_minus->Blit(surf, position.x + IMG_BUTTONS_W, GetPosition().y + IMG_BUTTONS_H);
+    torus->m_minus->Blit(surf, GetPosition().x + IMG_BUTTONS_W, GetPosition().y + IMG_BUTTONS_H);
   }
 
   if (GetValue() < GetMaxValue()) {
-    if (Contains(mousePosition) && mousePosition.x > center)
+    if (Contains(mousePosition) && mousePosition.x > center.x)
       torus->m_plus->SetCurrentFrame(1);
     else
       torus->m_plus->SetCurrentFrame(0);
 
-    torus->m_plus->Blit(surf, position.x + size.x - torus->m_plus->GetWidth() - IMG_BUTTONS_W,
-                        position.y + IMG_BUTTONS_H);
+    torus->m_plus->Blit(surf, GetPosition().x + GetSize().x - torus->m_plus->GetWidth() - IMG_BUTTONS_W,
+                        GetPosition().y + IMG_BUTTONS_H);
   }
 
   // 6. add in the value image
-  uint tmp_x = position.x + size.x/2;
-  uint tmp_y = position.y + torus->GetSize().y/2 + IMG_BUTTONS_H;
+  int tmp_x = center.x;
+  int tmp_y = center.y + SMALL_R - 3;
+  uint value_h = Font::GetInstance(Font::FONT_MEDIUM)->GetHeight();
 
-  txt_value_black->DrawCenterTop(Point2i(tmp_x + 1, tmp_y + 1));
-  txt_value_white->DrawCenterTop(Point2i(tmp_x, tmp_y));
-
-  txt_value_black->DrawCenterTop(Point2i(tmp_x + 1, tmp_y + 1));
-  txt_value_white->DrawCenterTop(Point2i(tmp_x, tmp_y));
+  txt_value_black->DrawCenterTop(Point2i(tmp_x + 1, tmp_y + 1 - value_h/2));
+  txt_value_white->DrawCenterTop(Point2i(tmp_x, tmp_y - value_h/2));
 
   // 7. and finally the label image
-  txt_label->DrawCenterTop(Point2i(tmp_x,
-                                   position.y + size.y - txt_label->GetHeight()));
+  txt_label->DrawCenterTop(Point2i(GetPositionX() + GetSizeX()/2,
+                                   GetPositionY() + GetSizeY() - txt_label->GetHeight()));
 }
 
 void SpinButtonWithPicture::RecreateTorus()

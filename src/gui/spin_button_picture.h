@@ -23,7 +23,6 @@
 #define SPIN_BUTTON_PICTURE_H
 
 #include <WARMUX_base.h>
-#include "graphic/font.h"
 #include "graphic/surface.h"
 #include "widget.h"
 #include "abstract_spin_button.h"
@@ -48,9 +47,7 @@ class SpinButtonWithPicture : public AbstractSpinButton
                         const std::string &resource_id,
                         const Point2i &size,
                         int value, int step,
-                        int min_value, int max_value,
-                        Font::font_size_t legend_fsize = Font::FONT_SMALL,
-                        Font::font_size_t value_fsize = Font::FONT_MEDIUM);
+                        int min_value, int max_value);
   virtual ~SpinButtonWithPicture();
 
   // From Widget

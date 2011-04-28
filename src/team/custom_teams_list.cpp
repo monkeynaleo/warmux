@@ -89,9 +89,9 @@ bool CustomTeamsList::LoadOneTeam(const std::string &dir, const std::string &cus
     return true;
   }
 
-  std::cerr << std::endl
-            << Format(_("Error loading team :")) << custom_team_name <<":"<< error
-            << std::endl;
+    std::cerr << std::endl
+              << Format(_("Error loading team :")) << custom_team_name <<":"<< error
+              << std::endl;
   return false;
 }
 

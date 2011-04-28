@@ -64,19 +64,24 @@ OptionMenu::OptionMenu() :
   int window_w = app->video->window.GetWidth();
   int window_h = app->video->window.GetHeight();
 
-  int border = (window_w<640) ? 0.02f*window_w : 0.05f*window_w;
+  Point2i option_size;
+  float   factor;
+
+  if (window_w<640 || window_h<480) {
+    // Everything smaller to try to squeeze it
+    option_size.SetValues(104, 104);
+    factor = 0.02f;
+  } else {
+    option_size.SetValues(130, 130);
+    factor = 0.05f;
+  }
+
+  int border = window_w * factor;
   int max_w  = window_w - 2*border;
-  float   factor = window_w / 640.0f;
-  if (factor > 1.5f) factor = 1.5f;
-  Point2i option_size(130*factor, 134*factor);
-  Font::font_size_t fsmall  = Font::GetFixedSize(Font::FONT_SMALL*factor+0.5f);
-  Font::font_size_t fmedium = Font::GetFixedSize(Font::FONT_MEDIUM*factor+0.5f);
-  Font::font_size_t fadapt  = (fmedium > Font::FONT_BIG) ? Font::FONT_BIG : fmedium;
-  fadapt  = (fadapt < Font::FONT_MEDIUM) ? Font::FONT_MEDIUM : fadapt;
 
   /* Tabs */
   MultiTabs * tabs =
-    new MultiTabs(Point2i(max_w, window_h - actions_buttons->GetSizeY() -border), fadapt);
+    new MultiTabs(Point2i(max_w, window_h - actions_buttons->GetSizeY() -border));
   tabs->SetPosition(border, border);
 
   /* Graphic options */
@@ -85,32 +90,36 @@ OptionMenu::OptionMenu() :
   // Various options
   opt_wind_particles_percentage =
     new SpinButtonWithPicture(_("Wind particles?"), "menu/display_wind_particles",
-                              option_size, 100, 20, 0, 100, fmedium, fmedium);
+                              option_size, 100, 20, 0, 100);
   graphic_options->AddWidget(opt_wind_particles_percentage);
 
 #ifndef HAVE_HANDHELD
   opt_display_multisky =
-    new PictureTextCBox(_("Multi-layer sky?"), "menu/multisky", option_size, true, fmedium);
+    new PictureTextCBox(_("Multi-layer sky?"), "menu/multisky", option_size);
   graphic_options->AddWidget(opt_display_multisky);
 #endif
 
   opt_display_energy =
-    new PictureTextCBox(_("Player energy?"), "menu/display_energy", option_size, true, fmedium);
+    new PictureTextCBox(_("Player energy?"), "menu/display_energy", option_size);
   graphic_options->AddWidget(opt_display_energy);
 
   opt_display_name =
-    new PictureTextCBox(_("Player's name?"), "menu/display_name", option_size, true, fmedium);
+    new PictureTextCBox(_("Player's name?"), "menu/display_name", option_size);
   graphic_options->AddWidget(opt_display_name);
 
 #ifndef HAVE_TOUCHSCREEN
   full_screen =
-    new PictureTextCBox(_("Fullscreen?"), "menu/fullscreen", option_size, true, fmedium);
+    new PictureTextCBox(_("Fullscreen?"), "menu/fullscreen", option_size);
   graphic_options->AddWidget(full_screen);
 #endif
 
   opt_max_fps =
     new SpinButtonWithPicture(_("Maximum FPS"), "menu/fps",
-                              option_size, 30, 5, 20, 60, fmedium, fmedium);
+#ifdef DEBUG
+                              option_size, 30, 5, 20,1000);
+#else
+                              option_size, 30, 5, 20,  60);
+#endif
   graphic_options->AddWidget(opt_max_fps);
   std::vector< std::pair<std::string, std::string> > qualities;
   qualities.push_back(std::pair<std::string, std::string>("0", _("Low memory")));
@@ -119,8 +128,7 @@ OptionMenu::OptionMenu() :
   qualities.push_back(std::pair<std::string, std::string>("2", _("High")));
 #endif
   opt_quality = new ComboBox(_("Quality"), "menu/fps", option_size,
-                             qualities, qualities[config->GetQuality()].first,
-                             fmedium, fmedium);
+                             qualities, qualities[config->GetQuality()].first);
   graphic_options->AddWidget(opt_quality);
 
 #ifndef HAVE_TOUCHSCREEN
@@ -142,7 +150,7 @@ OptionMenu::OptionMenu() :
   }
   cbox_video_mode =
     new ComboBox(_("Resolution"), "menu/resolution", option_size,
-                 video_resolutions, current_resolution, fmedium, fmedium);
+                 video_resolutions, current_resolution);
   graphic_options->AddWidget(cbox_video_mode);
 #endif
 
@@ -171,15 +179,18 @@ OptionMenu::OptionMenu() :
     Box * teams_editor_inf = new VBox(lwidth, true, true, false);
     Box * box_team_name = new HBox(30, false, false, true);
 
-    team_name = new Label(Format("%s:", _("Head commander")), 100, fsmall);
+    team_name = new Label(Format("%s:", _("Head commander")), 100,
+                          Font::FONT_SMALL, Font::FONT_BOLD);
     box_team_name->AddWidget(team_name);
 
-    tbox_team_name = new TextBox("", lwidth - 100 - 40, fsmall);
+    tbox_team_name = new TextBox("", lwidth - 100 - 40,
+                                 Font::FONT_SMALL, Font::FONT_BOLD);
     box_team_name->AddWidget(tbox_team_name);
 
     teams_editor_inf->AddWidget(box_team_name);
 
-    Label* label_ch_names = new Label(_("Character names:"), 0, fsmall);
+    Label* label_ch_names = new Label(_("Character names:"), 0,
+                                      Font::FONT_SMALL, Font::FONT_BOLD);
     teams_editor_inf->AddWidget(label_ch_names);
 
     Box * teams_editor_names = new GridBox(5, 2, 2, false);
@@ -187,8 +198,9 @@ OptionMenu::OptionMenu() :
     for (uint i=0; i < 10; i++) {
       std::ostringstream oss;
       oss << i+1 << ":";
-      tbox_character_name_list.push_back(new TextBox("", lwidth/2 - 40, fsmall));
-      Label * lab = new Label(oss.str(), 30, fsmall);
+      tbox_character_name_list.push_back(new TextBox("", lwidth/2 - 40,
+                                                     Font::FONT_SMALL, Font::FONT_BOLD));
+      Label * lab = new Label(oss.str(), 30, Font::FONT_SMALL, Font::FONT_BOLD);
 
       Box * name_box = new HBox(20, false, false, true);
       name_box->SetNoBorder();
@@ -232,23 +244,23 @@ OptionMenu::OptionMenu() :
 
   opt_updates =
     new PictureTextCBox(_("Check updates online?"),
-                        "menu/ico_update", option_size, true, fmedium);
+                        "menu/ico_update", option_size);
   misc_options->AddWidget(opt_updates);
 
 #ifndef HAVE_TOUCHSCREEN
   opt_lefthanded_mouse =
     new PictureTextCBox(_("Left-handed mouse?"),
-                        "menu/ico_lefthanded_mouse", option_size, true, fmedium);
+                        "menu/ico_lefthanded_mouse", option_size);
   misc_options->AddWidget(opt_lefthanded_mouse);
 
   opt_scroll_on_border =
     new PictureTextCBox(_("Scroll on border"),
-                        "menu/scroll_on_border", option_size, true, fmedium);
+                        "menu/scroll_on_border", option_size);
   misc_options->AddWidget(opt_scroll_on_border);
 
   opt_scroll_border_size =
     new SpinButtonWithPicture(_("Scroll border size"), "menu/scroll_on_border",
-                              option_size, 50, 5, 5, 80, fmedium, fmedium);
+                              option_size, 50, 5, 5, 80);
   misc_options->AddWidget(opt_scroll_border_size);
 #endif
 
@@ -259,25 +271,25 @@ OptionMenu::OptionMenu() :
   Box * sound_options = new GridBox(3, 3, 0, false);
 
   music_cbox =
-    new PictureTextCBox(_("Music?"), "menu/music_enable", option_size, true, fmedium);
+    new PictureTextCBox(_("Music?"), "menu/music_enable", option_size);
   sound_options->AddWidget(music_cbox);
 
   initial_vol_mus = config->GetVolumeMusic();
   volume_music =
     new SpinButtonWithPicture(_("Music volume"), "menu/music_enable",
                               option_size,
-                              fromVolume(initial_vol_mus), 5, 0, 100, fmedium, fmedium);
+                              fromVolume(initial_vol_mus), 5, 0, 100);
   sound_options->AddWidget(volume_music);
 
   effects_cbox =
     new PictureTextCBox(_("Sound effects?"),
-                        "menu/sound_effects_enable", option_size, true, fmedium);
+                        "menu/sound_effects_enable", option_size);
   sound_options->AddWidget(effects_cbox);
 
   initial_vol_eff = config->GetVolumeEffects();
   volume_effects =
     new SpinButtonWithPicture(_("Effects volume"), "menu/sound_effects_enable",
-                              option_size, fromVolume(initial_vol_eff), 5, 0, 100, fmedium, fmedium);
+                              option_size, fromVolume(initial_vol_eff), 5, 0, 100);
   sound_options->AddWidget(volume_effects);
 
   // Generate sound mode list
@@ -297,12 +309,12 @@ OptionMenu::OptionMenu() :
 
 #ifndef HAVE_HANDHELD
   cbox_sound_freq = new ComboBox(_("Sound frequency"), "menu/sound_frequency",
-                                 option_size, sound_freqs, current_sound_freq, fmedium, fmedium);
+                                 option_size, sound_freqs, current_sound_freq);
   sound_options->AddWidget(cbox_sound_freq);
 #endif
 
   warn_cbox = new PictureTextCBox(_("New player warning?"),
-                                  "menu/warn_on_new_player", option_size, true, fmedium);
+                                  "menu/warn_on_new_player", option_size);
   sound_options->AddWidget(warn_cbox);
 
   tabs->AddNewTab("unused", _("Sound"), sound_options);
@@ -324,44 +336,44 @@ OptionMenu::OptionMenu() :
 
 #ifdef ENABLE_NLS
   // Setting language selection
-    AddLanguageItem(_("(system language)"),"", fsmall);
-    AddLanguageItem("Български (bg)",      "bg", fsmall);
-    AddLanguageItem("Bosanski",            "bs", fsmall);
-    AddLanguageItem("Castellano",          "es", fsmall);
-    AddLanguageItem("Català",              "ca", fsmall);
-    AddLanguageItem("čeština (Czech)",     "cs", fsmall);
-    AddLanguageItem("Créole",              "cpf", fsmall);
-    AddLanguageItem("Dansk",               "da", fsmall);
-    AddLanguageItem("Deutsch",             "de", fsmall);
-    AddLanguageItem("Esperanto",           "eo", fsmall);
-    AddLanguageItem("English",             "en", fsmall);
-    AddLanguageItem("Ελληνικά",            "el", fsmall);
-    AddLanguageItem("Eesti keel",          "et", fsmall);
-    AddLanguageItem("ارسی (Farsi)",        "fa", fsmall);
-    AddLanguageItem("Français",            "fr", fsmall);
-    AddLanguageItem("Galego",              "gl", fsmall);
-    AddLanguageItem("עברית (Hebrew)",      "he", fsmall);
-    AddLanguageItem("Magyar",              "hu", fsmall);
-    AddLanguageItem("Italiano",            "it", fsmall);
-    AddLanguageItem("日本語 (japanese)",   "ja_JP", fsmall);
-    AddLanguageItem("Kernewek",            "kw", fsmall);
-    AddLanguageItem("latviešu valoda",     "lv", fsmall);
-    AddLanguageItem("Norsk (bokmål)",      "nb", fsmall);
-    AddLanguageItem("Norsk (nynorsk)",     "nn", fsmall);
-    AddLanguageItem("Nederlands",          "nl", fsmall);
-    AddLanguageItem("Polski",              "pl", fsmall);
-    AddLanguageItem("Português",           "pt", fsmall);
-    AddLanguageItem("Português do Brasil", "pt_BR", fsmall);
-    AddLanguageItem("Română",              "ro", fsmall);
-    AddLanguageItem("Pусский язык (ru)",   "ru", fsmall);
-    AddLanguageItem("Slovenčina",          "sk", fsmall);
-    AddLanguageItem("Slovenščina",         "sl", fsmall);
-    AddLanguageItem("Suomi",               "fi", fsmall);
-    AddLanguageItem("Svenska",             "sv", fsmall);
-    AddLanguageItem("Türkçe",              "tr", fsmall);
-    AddLanguageItem("украї́нська мо́ва",   "uk", fsmall);
-    AddLanguageItem("中文（简体）Simplified Chinese",  "zh_CN", fsmall);
-    AddLanguageItem("中文（正體）Traditional Chinese", "zh_TW", fsmall);
+    AddLanguageItem(_("(system language)"),"");
+    AddLanguageItem("Български (bg)",      "bg");
+    AddLanguageItem("Bosanski",            "bs");
+    AddLanguageItem("Castellano",          "es");
+    AddLanguageItem("Català",              "ca");
+    AddLanguageItem("čeština (Czech)",     "cs");
+    AddLanguageItem("Créole",              "cpf");
+    AddLanguageItem("Dansk",               "da");
+    AddLanguageItem("Deutsch",             "de");
+    AddLanguageItem("Esperanto",           "eo");
+    AddLanguageItem("English",             "en");
+    AddLanguageItem("Ελληνικά",            "el");
+    AddLanguageItem("Eesti keel",          "et");
+    AddLanguageItem("ارسی (Farsi)",        "fa");
+    AddLanguageItem("Français",            "fr");
+    AddLanguageItem("Galego",              "gl");
+    AddLanguageItem("עברית (Hebrew)",      "he");
+    AddLanguageItem("Magyar",              "hu");
+    AddLanguageItem("Italiano",            "it");
+    AddLanguageItem("日本語 (japanese)",   "ja_JP");
+    AddLanguageItem("Kernewek",            "kw");
+    AddLanguageItem("latviešu valoda",     "lv");
+    AddLanguageItem("Norsk (bokmål)",      "nb");
+    AddLanguageItem("Norsk (nynorsk)",     "nn");
+    AddLanguageItem("Nederlands",          "nl");
+    AddLanguageItem("Polski",              "pl");
+    AddLanguageItem("Português",           "pt");
+    AddLanguageItem("Português do Brasil", "pt_BR");
+    AddLanguageItem("Română",              "ro");
+    AddLanguageItem("Pусский язык (ru)",   "ru");
+    AddLanguageItem("Slovenčina",          "sk");
+    AddLanguageItem("Slovenščina",         "sl");
+    AddLanguageItem("Suomi",               "fi");
+    AddLanguageItem("Svenska",             "sv");
+    AddLanguageItem("Türkçe",              "tr");
+    AddLanguageItem("украї́нська мо́ва",   "uk");
+    AddLanguageItem("中文（简体）Simplified Chinese",  "zh_CN");
+    AddLanguageItem("中文（正體）Traditional Chinese", "zh_TW");
 #endif
 
 #if USE_MISC_TAB
@@ -695,12 +707,11 @@ void OptionMenu::SelectTeam()
 }
 
 #ifdef ENABLE_NLS
-void OptionMenu::AddLanguageItem(const char* label, const char* value, uint fsize)
+void OptionMenu::AddLanguageItem(const char* label, const char* value)
 {
   lbox_languages->AddItem(Config::GetConstInstance()->GetLanguage() == value,
-                          new Label(label, 400,
-                                    Font::GetFixedSize(fsize), Font::FONT_BOLD,
-                                    white_color, Text::ALIGN_LEFT_TOP, true),
+                          new Label(label, 400, Font::FONT_MEDIUM,
+                                    Font::FONT_BOLD, white_color, Text::ALIGN_LEFT_TOP, true),
                           value);
 }
 #endif

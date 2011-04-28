@@ -58,14 +58,13 @@ public:
 #define BORDER          2
 #define MARGIN          5
 
-MultiTabs::MultiTabs(const Point2i& size, Font::font_size_t fs)
+MultiTabs::MultiTabs(const Point2i& size)
  : Widget(size)
  , max_visible_tabs(50)
  , current_tab(-1)
  , first_tab(0)
  , nb_visible_tabs(1)
  , tab_header_width(TAB_MIN_WIDTH)
- , fsize(fs)
 {
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml",false);
 
@@ -172,7 +171,7 @@ void MultiTabs::DrawHeader(const Point2i &mousePosition) const
 
     bool is_current = i == current_tab;
     Text tab_title(tabs[i].GetTitle(), is_current ? primary_red_color : dark_gray_color,
-                   fsize, Font::FONT_BOLD, is_current);
+                   Font::FONT_MEDIUM, Font::FONT_BOLD, is_current);
 
     tab_title.DrawCenter(Point2i(pos_x + tab_header_width/2,
                                  position.y + tab_header_height/2));

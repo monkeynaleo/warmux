@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: et\n"
 "Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
-"POT-Creation-Date: 2011-04-20 19:52+0200\n"
 "PO-Revision-Date: 2008-11-23 21:59+0300\n"
 "Last-Translator: Guido Tabbernuk <guido.tabbernuk@mail.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
@@ -63,34 +62,34 @@ msgstr "Meeskond %s"
 msgid "%s Team - Remote"
 msgstr "Meeskond %s - eelmaldet"
 
-#: src/game/game.cpp:1171
+#: src/game/game.cpp:1172
 #, fuzzy, c-format
 msgid "%s from %s team committed suicide!"
 msgstr "%s meestkonnast %s sooritas enesetapu!"
 
 #. Could be modified, but for now, save on translation
-#: src/game/game.cpp:1197 src/game/game.cpp:1216
+#: src/game/game.cpp:1198 src/game/game.cpp:1217
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s meeskonnast %s on kutu."
 
-#: src/game/game.cpp:1163
+#: src/game/game.cpp:1164
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s meeskonnast %s kukkus vette."
 
-#: src/game/game.cpp:1157
+#: src/game/game.cpp:1158
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s meeskonnast %s lendas auti!"
 
-#: src/game/game.cpp:1177
+#: src/game/game.cpp:1178
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s meeskonnast %s prantsatas liiga kõvasti vastu maad!"
 
 #. The playing character killed himself
-#: src/game/game.cpp:1184
+#: src/game/game.cpp:1185
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s meeskonnast %s sai surma omaenda lollusest!"
@@ -112,7 +111,7 @@ msgstr ""
 msgid "%s has won %u points of energy!"
 msgstr "%s võitis %u elupunkti!"
 
-#: src/game/game.cpp:1208
+#: src/game/game.cpp:1209
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s on psühh, sest ta kututas ära meeskonna %s liikme!"
@@ -125,12 +124,16 @@ msgstr "%s seisab miini kõrval!"
 #. For translators: extended in "<nickname> (<host>) just connected
 #: src/include/action_handler.cpp:952
 #, fuzzy, c-format
+#| msgid "%i player connected"
+#| msgid_plural "%i players connected"
 msgid "%s just connected"
 msgstr "%i mängija ühendet"
 
 #. For translators: extended in "<nickname> (<host>) just disconnected
-#: src/include/action_handler.cpp:1068
+#: src/include/action_handler.cpp:1064
 #, fuzzy, c-format
+#| msgid "%i player connected"
+#| msgid_plural "%i players connected"
 msgid "%s just disconnected"
 msgstr "%i mängija ühendet"
 
@@ -156,7 +159,7 @@ msgstr "Meeskonnal %s on nüüd %s jaoks lõputult laskemoona!"
 msgid "%s team has skipped its turn."
 msgstr "Meeskond %s jäi vahele."
 
-#: src/weapon/cluzooka.cpp:379
+#: src/weapon/cluzooka.cpp:360
 #, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
@@ -428,7 +431,7 @@ msgstr[1] ""
 msgid "%s team was fragged down."
 msgstr "Meeskond %s lasti ribadeks."
 
-#: src/game/game.cpp:1192 src/game/game.cpp:1204
+#: src/game/game.cpp:1193 src/game/game.cpp:1205
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s võttis %s meeskonna liikme hauda kaasa!"
@@ -738,7 +741,7 @@ msgid ""
 msgstr ""
 
 #. Client Mode
-#: src/menu/network_menu.cpp:167 src/network/network.cpp:455
+#: src/menu/network_menu.cpp:167 src/network/network.cpp:456
 msgid "Client mode"
 msgstr "Kliendire¸iim"
 
@@ -750,7 +753,7 @@ msgstr "Lollakaim"
 msgid "Cluster Bomb"
 msgstr "Kildgranaat"
 
-#: src/weapon/cluzooka.cpp:373
+#: src/weapon/cluzooka.cpp:354
 msgid "Cluzooka"
 msgstr "Granaadiheitja"
 
@@ -792,7 +795,7 @@ msgstr "Ehitusplokk"
 msgid "Controlled by: "
 msgstr "Pealik:"
 
-#: lib/warmux/net/download.cpp:203
+#: lib/warmux/net/download.cpp:199
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr "Ei suuda alla laadida viimast väljalaset serverist %s"
@@ -831,6 +834,7 @@ msgstr "Kahju käigu kohta surmare¸iimis"
 #. Date
 #: src/menu/replay_menu.cpp:79
 #, fuzzy
+#| msgid "Dynamite"
 msgid "Date"
 msgstr "Dünamiit"
 
@@ -875,6 +879,7 @@ msgstr "Klõpsa ja vea: Liiguta kaamerat"
 #. Duration
 #: src/menu/replay_menu.cpp:84
 #, fuzzy
+#| msgid "Duration of a turn"
 msgid "Duration"
 msgstr "Käigu kestvus"
 
@@ -891,7 +896,7 @@ msgstr "Käigu kestvus"
 msgid "Dynamite"
 msgstr "Dünamiit"
 
-#: src/game/game.cpp:512
+#: src/game/game.cpp:513
 msgid "END OF GAME"
 msgstr "MÄNGU LÕPP"
 
@@ -917,7 +922,7 @@ msgstr "Viga meeskonna laadimisel:"
 msgid "Error loading team :"
 msgstr "Viga meeskonna laadimisel:"
 
-#: src/game/config.cpp:586 src/team/custom_team.cpp:155
+#: src/game/config.cpp:592 src/team/custom_team.cpp:155
 #: src/team/custom_team.cpp:166 src/team/custom_team.cpp:177
 #, c-format
 msgid ""
@@ -937,26 +942,26 @@ msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr "Viga faili \"%s\" kustutamisel. Ei suuda kustutada kohandet meeskonda."
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:527
+#: src/menu/network_connection_menu.cpp:524
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Viga: Ei saa ühenduda serveriga %s:%s"
 
-#: src/menu/network_connection_menu.cpp:477
+#: src/menu/network_connection_menu.cpp:474
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "Viga: Ei saa ühendust indeksserveriga, et mängu üles seada"
 
-#: src/menu/network_connection_menu.cpp:388
+#: src/menu/network_connection_menu.cpp:385
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr "Viga: Ei saa ühendust indeksserveriga, et valida mängu internetis"
 
-#: src/menu/network_connection_menu.cpp:505
+#: src/menu/network_connection_menu.cpp:502
 #, fuzzy
 msgid "Error: Unable to start the server"
 msgstr "Viga: Ei suuda serverit käivitada"
 
-#: src/menu/network_connection_menu.cpp:498
+#: src/menu/network_connection_menu.cpp:495
 #: tools/servers/game_server/server.cpp:389
 #, fuzzy, c-format
 msgid ""
@@ -996,12 +1001,12 @@ msgstr ""
 msgid "FPS"
 msgstr ""
 
-#: lib/warmux/net/download.cpp:188 lib/warmux/net/download.cpp:229
+#: lib/warmux/net/download.cpp:184 lib/warmux/net/download.cpp:225
 #, c-format
 msgid "Fail to create temporary file: %s"
 msgstr ""
 
-#: lib/warmux/net/download.cpp:195
+#: lib/warmux/net/download.cpp:191
 #, fuzzy, c-format
 msgid "Fail to open temporary file: %s"
 msgstr "Ei suuda avada mängväljade kausta (%s)!"
@@ -1012,6 +1017,7 @@ msgstr ""
 
 #: src/menu/results_menu.cpp:354
 #, fuzzy
+#| msgid "Game name:"
 msgid "Filename:"
 msgstr "Mängu nimi:"
 
@@ -1113,6 +1119,7 @@ msgstr "Appi"
 
 #: src/menu/options_menu.cpp:128
 #, fuzzy
+#| msgid "High jump"
 msgid "High"
 msgstr "Kõrgushüpe"
 
@@ -1187,7 +1194,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Elupunkte alguses"
 
-#: src/weapon/bazooka.cpp:120 src/weapon/cluzooka.cpp:374
+#: src/weapon/bazooka.cpp:120 src/weapon/cluzooka.cpp:355
 #: src/weapon/riot_bomb.cpp:120
 #, fuzzy
 msgid ""
@@ -1199,20 +1206,20 @@ msgstr ""
 "Tulistamine: Hoida tühikut all, kuni soovitud võimsuse saavutamiseni\n"
 "üks soru käigu kohta"
 
-#: src/game/game.cpp:123
+#: src/game/game.cpp:124
 msgid "Initialisation"
 msgstr "Sättimine"
 
 #. Load the map
-#: src/game/game.cpp:160
+#: src/game/game.cpp:161
 msgid "Initialise map"
 msgstr "Sätin mänguvälja"
 
-#: src/game/game.cpp:171
+#: src/game/game.cpp:172
 msgid "Initialise sounds"
 msgstr "Sätin helisid"
 
-#: src/game/game.cpp:167
+#: src/game/game.cpp:168
 msgid "Initialise teams"
 msgstr "Sätin meeskondi"
 
@@ -1231,7 +1238,7 @@ msgstr ""
 msgid "Invalid filename"
 msgstr ""
 
-#: src/game/game.cpp:1041
+#: src/game/game.cpp:1042
 msgid "It's a present!"
 msgstr "Teile on pakk!"
 
@@ -1336,7 +1343,7 @@ msgstr "Mänguväli %s, mille on loonud: "
 msgid "Map author information: name, email, nickname, country"
 msgstr ""
 
-#: src/game/game.cpp:161
+#: src/game/game.cpp:162
 msgid "Maps"
 msgstr "Mänguväljad"
 
@@ -1468,7 +1475,7 @@ msgstr "Muusika valjus"
 msgid "Music?"
 msgstr "Muusika?"
 
-#: src/game/game.cpp:184
+#: src/game/game.cpp:185
 #, fuzzy
 msgid "Network"
 msgstr "Võrgumäng"
@@ -1504,7 +1511,7 @@ msgstr "Ei leia elementi <%s> XML-seadistuste säilikust!"
 msgid "No player connected"
 msgstr "Ühtki mängijat pole ühendet"
 
-#: lib/warmux/net/download.cpp:144
+#: lib/warmux/net/download.cpp:140
 msgid "No pointer"
 msgstr ""
 
@@ -1712,17 +1719,17 @@ msgstr ""
 msgid "Random map"
 msgstr "Juhuslik mänguväli"
 
-#: lib/warmux/net/download.cpp:138
+#: lib/warmux/net/download.cpp:134
 #, fuzzy, c-format
 msgid "Read only %i bytes"
 msgstr "On vaid %i meeskond."
 
-#: src/game/config.cpp:397
+#: src/game/config.cpp:401
 #, fuzzy
 msgid "Reading the default config file"
 msgstr "Laadi standardseadistus"
 
-#: src/game/config.cpp:454
+#: src/game/config.cpp:458
 #, fuzzy
 msgid "Reading the personal config file"
 msgstr "Laadi isikik seadistus"
@@ -1738,11 +1745,13 @@ msgstr ""
 
 #: src/menu/replay_menu.cpp:69
 #, fuzzy
+#| msgid "Game mode"
 msgid "Replay info"
 msgstr "Mängure¸iim"
 
-#: src/game/game.cpp:211
+#: src/game/game.cpp:212
 #, fuzzy
+#| msgid "Game mode"
 msgid "Replay mode"
 msgstr "Mängure¸iim"
 
@@ -1810,7 +1819,7 @@ msgstr "Serveriaadress:"
 msgid "Server available on Internet"
 msgstr "Server on saadaval internetis"
 
-#: src/menu/network_menu.cpp:174 src/network/network.cpp:485
+#: src/menu/network_menu.cpp:174 src/network/network.cpp:486
 msgid "Server mode"
 msgstr "Serverire¸iim"
 
@@ -1888,11 +1897,11 @@ msgstr "Täpsuspüss"
 msgid "Someone put a booby trap into the crate!"
 msgstr "Keegi oli na üllatuse kasti pistnud!"
 
-#: src/menu/network_connection_menu.cpp:393
+#: src/menu/network_connection_menu.cpp:390
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Kahjuks ei oota ükski mäng uusi osalejaid"
 
-#: src/menu/network_connection_menu.cpp:447
+#: src/menu/network_connection_menu.cpp:444
 #: tools/servers/game_server/server.cpp:374
 #, fuzzy, c-format
 msgid ""
@@ -1915,11 +1924,11 @@ msgid "Sound frequency"
 msgstr "Helisagedus"
 
 #. Load teams' sound profiles
-#: src/game/game.cpp:173
+#: src/game/game.cpp:174
 msgid "Sounds"
 msgstr "Helid"
 
-#: src/game/game.cpp:205
+#: src/game/game.cpp:206
 msgid "Starting a new game"
 msgstr "Alusta uut mängu"
 
@@ -1963,6 +1972,7 @@ msgstr "Meeskonnagraafikud"
 
 #: src/menu/options_menu.cpp:594
 #, fuzzy
+#| msgid "Team stats"
 msgid "Team saved"
 msgstr "Meeskonnastatistika"
 
@@ -1971,7 +1981,7 @@ msgid "Team stats"
 msgstr "Meeskonnastatistika"
 
 #. Teams
-#: src/game/game.cpp:168 src/menu/game_menu.cpp:76 src/menu/game_menu.cpp:80
+#: src/game/game.cpp:169 src/menu/game_menu.cpp:76 src/menu/game_menu.cpp:80
 #: src/menu/network_menu.cpp:98 src/menu/network_menu.cpp:102
 #: src/menu/replay_menu.cpp:94
 msgid "Teams"
@@ -2046,7 +2056,7 @@ msgstr "Ühenduse ootamise aeg läbi. Kontrolli, ega tulemüüri ees pole!"
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "Diskogranaat lahkus mänguväljalt enne, kui see jõudis plahvatada."
 
-#: src/game/game.cpp:768
+#: src/game/game.cpp:769
 msgid "The game was interrupted because you got disconnected."
 msgstr "Mäng katkestati, sest ühendus kadus ära."
 
@@ -2065,7 +2075,7 @@ msgstr "Teised ootavad sinu järel! Ärka üles!"
 msgid "The parachute is activated automatically."
 msgstr "Langevari avaneb automaatselt."
 
-#: src/weapon/bazooka.cpp:80 src/weapon/cluzooka.cpp:323
+#: src/weapon/bazooka.cpp:80 src/weapon/cluzooka.cpp:304
 #: src/weapon/riot_bomb.cpp:85
 msgid "The rocket has left the battlefield..."
 msgstr "Rakett lahkus mänguväljalt enne, kui see jõudis plahvatada."
@@ -2094,10 +2104,6 @@ msgstr[1] "On vaid %i meeskonda."
 #: src/gui/control_config.cpp:206
 #, c-format
 msgid "This key has already been attributed to '%s'"
-msgstr ""
-
-#: src/menu/network_connection_menu.cpp:313
-msgid "This version was compiled without curl, you can't list public games!"
 msgstr ""
 
 #: src/menu/benchmark_menu.cpp:113 src/menu/results_menu.cpp:339
@@ -2280,12 +2286,12 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Kannatust! %i mängijatest pole veel valmis!"
 msgstr[1] "Kannatust! %i mängijat pole veel valmis!"
 
-#: src/game/game.cpp:663
+#: src/game/game.cpp:664
 #, c-format
 msgid "Waiting for %s"
 msgstr ""
 
-#: src/game/game.cpp:183
+#: src/game/game.cpp:184
 msgid "Waiting for remote players"
 msgstr ""
 
@@ -2315,7 +2321,7 @@ msgstr "Muuda relvatüüpi"
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Relv: Tule/hüve laegas: Kukub kähku"
 
-#: src/game/game.cpp:164
+#: src/game/game.cpp:165
 msgid "Weapons"
 msgstr "Relvad"
 
@@ -2330,12 +2336,12 @@ msgstr "Veebileht:"
 msgid "Welcome to %s on %s!"
 msgstr "%s tervitab!"
 
-#: src/game/game.cpp:1150
+#: src/game/game.cpp:1151
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr ""
 
-#: src/game/game.cpp:1213
+#: src/game/game.cpp:1214
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Häbilugu! %s lasti lihtsalt püstoliga maha!"
@@ -2378,7 +2384,7 @@ msgstr "Vale mänguvälja nimi!"
 msgid "Wrong team!"
 msgstr "Vale meeskond!"
 
-#: lib/warmux/net/download.cpp:154
+#: lib/warmux/net/download.cpp:150
 #, c-format
 msgid "Wrote %i/%i bytes"
 msgstr ""
@@ -2402,7 +2408,7 @@ msgstr ""
 msgid "You need at least one valid map!"
 msgstr "Sul on vaja vähemalt ühte mänguväljat!"
 
-#: src/game/game.cpp:304 src/team/teams_list.cpp:166
+#: src/game/game.cpp:305 src/team/teams_list.cpp:166
 #, fuzzy
 msgid "You need at least two valid teams!"
 msgstr "Sul on vaja vähemalt kahte meeskonda!"
@@ -2460,16 +2466,16 @@ msgstr ""
 msgid "no configuration file!"
 msgstr "seadistusi ei leitud!"
 
-#: src/sound/jukebox.cpp:191
+#: src/sound/jukebox.cpp:192
 msgid "o Loading music"
 msgstr "o Laadin muusikat"
 
-#: src/sound/jukebox.cpp:373
+#: src/sound/jukebox.cpp:374
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Laadin heliprofiili: %s"
 
-#: src/sound/jukebox.cpp:135
+#: src/sound/jukebox.cpp:134
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio sätitud %d Hz ja %d biti peale"

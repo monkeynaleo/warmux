@@ -152,22 +152,18 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
 
   uint max_width = 0.95f*GetMainWindow().GetWidth();
   uint offset    = (GetMainWindow().GetWidth() - max_width)/2;
-  float zoom     = GetMainWindow().GetWidth() / 640.0;
-  uint border    = 5*zoom+0.5f;
-  uint width     = max_width - 2*(border + 5); // 5 is the tab default margin
-  Font::font_size_t fsmall  = Font::GetFixedSize(Font::FONT_SMALL*zoom);
-  Font::font_size_t fmedium = Font::GetFixedSize(Font::FONT_MEDIUM*zoom);
-  Font::font_size_t fadapt  = (fmedium > Font::FONT_BIG) ? Font::FONT_BIG : fmedium;
+  uint width     = max_width - 10;
 
   /* Tabs */
   tabs = new MultiTabs(Point2i(max_width,
-                               GetMainWindow().GetHeight()*0.6f), fadapt);
+                               GetMainWindow().GetHeight()-140));
   tabs->SetPosition(offset, offset);
 
   // #############################
   /* client connection related widgets */
-  Box * cl_connection_box = new VBox(width, false, false, true);
-  cl_connection_box->SetBorder(border);
+  Box * cl_connection_box = new VBox(W_UNDEF, false, false, false);
+  cl_connection_box->SetNoBorder();
+  tabs->AddNewTab(TAB_CLIENT_ID, _("Connect to game"), cl_connection_box);
 
   // Public battles
   Box * cl_tmp_box = new HBox(W_UNDEF, false, false, false);
@@ -177,12 +173,12 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   cl_refresh_net_games = new Button(res, "menu/refresh_small", false);
   cl_tmp_box->AddWidget(cl_refresh_net_games);
   refresh_net_games_label = new Label(_("Public battles"), width - cl_refresh_net_games->GetSizeX(),
-                                      fmedium, Font::FONT_BOLD, c_red,
+                                      Font::FONT_MEDIUM, Font::FONT_BOLD, c_red,
                                       Text::ALIGN_LEFT_TOP, true);
   cl_tmp_box->AddWidget(refresh_net_games_label);
   cl_connection_box->AddWidget(cl_tmp_box);
 
-  cl_net_games_lst = new GameListBox(Point2i(width-2*border, 30*zoom));
+  cl_net_games_lst = new GameListBox(Point2i(width, 30));
   cl_connection_box->AddWidget(cl_net_games_lst);
 
   // Server password
@@ -190,25 +186,35 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   cl_tmp_box->SetMargin(0);
   cl_tmp_box->SetNoBorder();
 
-  cl_tmp_box->AddWidget(new Label(_("Password:"), width/3, fsmall));
-  cl_net_server_pwd = new PasswordBox("", (2*width)/3, fsmall);
+  cl_tmp_box->AddWidget(new Label(_("Password:"), width/4));
+  cl_net_server_pwd = new PasswordBox("", (3*width)/4);
   cl_tmp_box->AddWidget(cl_net_server_pwd);
 
   cl_connection_box->AddWidget(cl_tmp_box);
 
   // #############################
   // Manual connection
-  Box *manual_connection_box = new VBox(W_UNDEF, false, false, false);
-  manual_connection_box->SetBorder(border);
+  Box *manual_connection_box;
+  if (GetMainWindow().GetHeight() < 480) {
+    manual_connection_box = new VBox(W_UNDEF, false, false, false);
+    manual_connection_box->SetNoBorder();
+    tabs->AddNewTab(TAB_MANUAL_ID, _("Manual connection"), manual_connection_box);
+  } else {
+    cl_connection_box->AddWidget(new Label(_("Manual connection"), width,
+                                           Font::FONT_MEDIUM, Font::FONT_BOLD, c_red,
+                                           Text::ALIGN_LEFT_TOP, true));
+    manual_connection_box = cl_connection_box;
+  }
 
   // Server address
   cl_tmp_box = new HBox(W_UNDEF, false, false, false);
   cl_tmp_box->SetMargin(0);
   cl_tmp_box->SetNoBorder();
 
-  cl_tmp_box->AddWidget(new Label(_("Server address:"), width/3, fsmall));
-  cl_server_address = new TextBox(Config::GetInstance()->GetNetworkClientHost(), (2*width)/3, fsmall);
+  cl_tmp_box->AddWidget(new Label(_("Server address:"), width/4));
+  cl_server_address = new TextBox(Config::GetInstance()->GetNetworkClientHost(), (3*width)/4);
   cl_tmp_box->AddWidget(cl_server_address);
+
   manual_connection_box->AddWidget(cl_tmp_box);
 
   // Server port
@@ -216,8 +222,8 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   cl_tmp_box->SetMargin(0);
   cl_tmp_box->SetNoBorder();
 
-  cl_tmp_box->AddWidget(new Label(_("Port:"), width/3, fsmall));
-  cl_port_number = new TextBox(Config::GetInstance()->GetNetworkClientPort(), (2*width)/3, fsmall);
+  cl_tmp_box->AddWidget(new Label(_("Port:"), width/4));
+  cl_port_number = new TextBox(Config::GetInstance()->GetNetworkClientPort(), (3*width)/4);
   cl_tmp_box->AddWidget(cl_port_number);
 
   manual_connection_box->AddWidget(cl_tmp_box);
@@ -227,8 +233,8 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   cl_tmp_box->SetMargin(0);
   cl_tmp_box->SetNoBorder();
 
-  cl_tmp_box->AddWidget(new Label(_("Password:"), width/3, fsmall));
-  cl_server_pwd = new PasswordBox("", (2*width)/3, fsmall);
+  cl_tmp_box->AddWidget(new Label(_("Password:"), width/4));
+  cl_server_pwd = new PasswordBox("", (3*width)/4);
   cl_tmp_box->AddWidget(cl_server_pwd);
 
   manual_connection_box->AddWidget(cl_tmp_box);
@@ -236,15 +242,15 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   // #############################
   /* server connection related widgets */
   Box * srv_connection_box = new VBox(W_UNDEF, false, false, false);
-  srv_connection_box->SetBorder(border);
+  srv_connection_box->SetNoBorder();
 
   // Server port
   Box * srv_tmp_box = new HBox(W_UNDEF, false, false, false);
   srv_tmp_box->SetMargin(0);
   srv_tmp_box->SetNoBorder();
 
-  srv_tmp_box->AddWidget(new Label(_("Port:"), width/3, fsmall));
-  srv_port_number = new TextBox(Config::GetInstance()->GetNetworkServerPort(), (2*width)/3, fsmall);
+  srv_tmp_box->AddWidget(new Label(_("Port:"), width/4));
+  srv_port_number = new TextBox(Config::GetInstance()->GetNetworkServerPort(), (3*width)/4);
   srv_tmp_box->AddWidget(srv_port_number);
 
   srv_connection_box->AddWidget(srv_tmp_box);
@@ -254,8 +260,8 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   srv_tmp_box->SetMargin(0);
   srv_tmp_box->SetNoBorder();
 
-  srv_tmp_box->AddWidget(new Label(_("Game name:"), width/3, fsmall));
-  srv_game_name = new TextBox(Config::GetInstance()->GetNetworkServerGameName(), (2*width)/3, fsmall);
+  srv_tmp_box->AddWidget(new Label(_("Game name:"), width/4));
+  srv_game_name = new TextBox(Config::GetInstance()->GetNetworkServerGameName(), (3*width)/4);
   srv_game_name->SetMaxNbChars(15);
   srv_tmp_box->AddWidget(srv_game_name);
 
@@ -266,8 +272,8 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   srv_tmp_box->SetMargin(0);
   srv_tmp_box->SetNoBorder();
 
-  srv_tmp_box->AddWidget(new Label(_("Password:"), width/3, fsmall));
-  srv_game_pwd = new PasswordBox("", (2*width)/3, fsmall);
+  srv_tmp_box->AddWidget(new Label(_("Password:"), width/4));
+  srv_game_pwd = new PasswordBox("", (3*width)/4);
   srv_game_pwd->SetMaxNbChars(15);
   srv_tmp_box->AddWidget(srv_game_pwd);
 
@@ -275,11 +281,9 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
 
   // Available on internet ?
   srv_internet_server = new CheckBox(_("Server available on Internet"), width,
-                                     Config::GetInstance()->GetNetworkServerPublic(), fsmall);
+                                     Config::GetInstance()->GetNetworkServerPublic());
   srv_connection_box->AddWidget(srv_internet_server);
 
-  tabs->AddNewTab(TAB_MANUAL_ID, _("Manual connection"), manual_connection_box);
-  tabs->AddNewTab(TAB_CLIENT_ID, _("Connect to game"), cl_connection_box);
   tabs->AddNewTab(TAB_SERVER_ID, _("Host a game"), srv_connection_box);
 
   // #############################
@@ -298,16 +302,13 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   Point2i msg_box_size(max_width,
                        GetMainWindow().GetHeight() - 50 - msg_box_pos.y);
 
-  msg_box = new MsgBox(msg_box_size, fsmall, Font::FONT_BOLD);
+  msg_box = new MsgBox(msg_box_size, Font::FONT_SMALL, Font::FONT_BOLD);
   msg_box->SetPosition(msg_box_pos);
 
   widgets.AddWidget(msg_box);
   widgets.Pack();
 
   msg_box->NewMessage(_("Have a good game!"));
-#ifndef HAVE_LIBCURL
-  msg_box->NewMessage(_("This version was compiled without curl, you can't list public games!"));
-#endif
   msg_box->NewMessage(""); // Skip a line
 
   //Double click
@@ -345,13 +346,16 @@ void NetworkConnectionMenu::OnClickUp(const Point2i &mousePosition, int button)
     cl_net_games_lst->Deselect();
 
   //Hack to handle Double click
-  if (w == cl_net_games_lst) {
+  if (w == cl_net_games_lst)
+  {
     if (m_last_click_on_games_lst + m_Double_click_interval > SDL_GetTicks()) {
       if (cl_net_games_lst->GetSelectedItem() == -1) {
         cl_net_games_lst->Select(cl_net_games_lst->MouseIsOnWhichItem(mousePosition));
       }
       signal_ok();
-    } else {
+    }
+    else
+    {
       m_last_click_on_games_lst = SDL_GetTicks();
     }
   }
@@ -383,9 +387,9 @@ void NetworkConnectionMenu::__RefreshList()
   }
 
   if (net_info.lst_games.empty()) {
-    Menu::DisplayError(_("Sorry, currently, no game is waiting for players"));
-    SDL_SemPost(net_info.lock);
-    return;
+      Menu::DisplayError(_("Sorry, currently, no game is waiting for players"));
+      SDL_SemPost(net_info.lock);
+      return;
   }
 
   for (std::list<GameServerInfo>::iterator it = net_info.lst_games.begin();

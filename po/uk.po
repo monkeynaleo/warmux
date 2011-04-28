@@ -8,7 +8,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ua\n"
 "Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
-"POT-Creation-Date: 2011-04-20 19:52+0200\n"
 "PO-Revision-Date: 2010-12-13 00:36+0300\n"
 "Last-Translator: Victor VMC <postvmc@gmail.com>\n"
 "Language-Team: Ukrainian <ua@li.org>\n"
@@ -70,34 +69,34 @@ msgstr "Команда %s"
 msgid "%s Team - Remote"
 msgstr "Команда %s - Віддалено"
 
-#: src/game/game.cpp:1171
+#: src/game/game.cpp:1172
 #, c-format
 msgid "%s from %s team committed suicide!"
 msgstr "Гравець %s з команди %s закінчує життя самогубством !"
 
 #. Could be modified, but for now, save on translation
-#: src/game/game.cpp:1197 src/game/game.cpp:1216
+#: src/game/game.cpp:1198 src/game/game.cpp:1217
 #, c-format
 msgid "%s from %s team has died."
 msgstr "Гравець %s з команди %s загинув."
 
-#: src/game/game.cpp:1163
+#: src/game/game.cpp:1164
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "Гравець %s з команди %s впав у воду."
 
-#: src/game/game.cpp:1157
+#: src/game/game.cpp:1158
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "Гравець %s з команди %s випав з мапи!"
 
-#: src/game/game.cpp:1177
+#: src/game/game.cpp:1178
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "Гравець %s з команди %s дуже сильно вдарився об землю!"
 
 #. The playing character killed himself
-#: src/game/game.cpp:1184
+#: src/game/game.cpp:1185
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "Гравець %s з команди %s загинув, тому що він незграбний!"
@@ -120,7 +119,7 @@ msgstr ""
 msgid "%s has won %u points of energy!"
 msgstr "%s отримав %u одиницю енергії!"
 
-#: src/game/game.cpp:1208
+#: src/game/game.cpp:1209
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s - псих, він вбив члена команди %s!"
@@ -133,12 +132,16 @@ msgstr "%s поруч з міною!"
 #. For translators: extended in "<nickname> (<host>) just connected
 #: src/include/action_handler.cpp:952
 #, fuzzy, c-format
+#| msgid "%i player connected"
+#| msgid_plural "%i players connected"
 msgid "%s just connected"
 msgstr "%i гравець приєднався"
 
 #. For translators: extended in "<nickname> (<host>) just disconnected
-#: src/include/action_handler.cpp:1068
+#: src/include/action_handler.cpp:1064
 #, fuzzy, c-format
+#| msgid "%i player connected"
+#| msgid_plural "%i players connected"
 msgid "%s just disconnected"
 msgstr "%i гравець приєднався"
 
@@ -164,7 +167,7 @@ msgstr "Команда %s вже має нескінченний запас бо
 msgid "%s team has skipped its turn."
 msgstr "Команда %s пропустила свій хід."
 
-#: src/weapon/cluzooka.cpp:379
+#: src/weapon/cluzooka.cpp:360
 #, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
@@ -486,7 +489,7 @@ msgstr[2] ""
 msgid "%s team was fragged down."
 msgstr "Команду %s було знищено"
 
-#: src/game/game.cpp:1192 src/game/game.cpp:1204
+#: src/game/game.cpp:1193 src/game/game.cpp:1205
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s потягнув члена команди %s за собою в могилу!"
@@ -779,7 +782,7 @@ msgid ""
 msgstr ""
 
 #. Client Mode
-#: src/menu/network_menu.cpp:167 src/network/network.cpp:455
+#: src/menu/network_menu.cpp:167 src/network/network.cpp:456
 msgid "Client mode"
 msgstr "Режим клієнта"
 
@@ -791,7 +794,7 @@ msgstr "Найбільш незграбний"
 msgid "Cluster Bomb"
 msgstr "Касетна бомба"
 
-#: src/weapon/cluzooka.cpp:373
+#: src/weapon/cluzooka.cpp:354
 msgid "Cluzooka"
 msgstr "Осколкова базука"
 
@@ -834,7 +837,7 @@ msgstr "Будівництво"
 msgid "Controlled by: "
 msgstr "Провідник: "
 
-#: lib/warmux/net/download.cpp:203
+#: lib/warmux/net/download.cpp:199
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr "Не виходить завантажити останню версію з %s"
@@ -873,6 +876,7 @@ msgstr "Пошкодження за хід під час режиму смерт
 #. Date
 #: src/menu/replay_menu.cpp:79
 #, fuzzy
+#| msgid "Dynamite"
 msgid "Date"
 msgstr "Динаміт"
 
@@ -917,6 +921,7 @@ msgstr "Утримуючи коліщатко мишки: Рухати каме�
 #. Duration
 #: src/menu/replay_menu.cpp:84
 #, fuzzy
+#| msgid "Duration of a turn"
 msgid "Duration"
 msgstr "Тривалість ходу"
 
@@ -933,7 +938,7 @@ msgstr "Тривалість ходу"
 msgid "Dynamite"
 msgstr "Динаміт"
 
-#: src/game/game.cpp:512
+#: src/game/game.cpp:513
 msgid "END OF GAME"
 msgstr "КІНЕЦЬ ГРИ"
 
@@ -959,7 +964,7 @@ msgstr "Помилка при завантаженні команди :"
 msgid "Error loading team :"
 msgstr "Помилка при завантаженні команди :"
 
-#: src/game/config.cpp:586 src/team/custom_team.cpp:155
+#: src/game/config.cpp:592 src/team/custom_team.cpp:155
 #: src/team/custom_team.cpp:166 src/team/custom_team.cpp:177
 #, c-format
 msgid ""
@@ -981,26 +986,26 @@ msgstr ""
 "Помилка при видаленні файлу \"%s\": не вийшло видалити особисту команду."
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:527
+#: src/menu/network_connection_menu.cpp:524
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Помилка: не вийшло підключитись к %s: %s"
 
-#: src/menu/network_connection_menu.cpp:477
+#: src/menu/network_connection_menu.cpp:474
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "Помилка: Не вийшло з'єднатися з сервером, щоб створити гру"
 
-#: src/menu/network_connection_menu.cpp:388
+#: src/menu/network_connection_menu.cpp:385
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
 "Помилка: Не вийшло з'єднатися з вказаним сервером, щоб знайти інтернет-гру"
 
-#: src/menu/network_connection_menu.cpp:505
+#: src/menu/network_connection_menu.cpp:502
 msgid "Error: Unable to start the server"
 msgstr "Помилка: Не вийшло запустити сервер"
 
-#: src/menu/network_connection_menu.cpp:498
+#: src/menu/network_connection_menu.cpp:495
 #: tools/servers/game_server/server.cpp:389
 #, c-format
 msgid ""
@@ -1040,12 +1045,12 @@ msgstr ""
 msgid "FPS"
 msgstr ""
 
-#: lib/warmux/net/download.cpp:188 lib/warmux/net/download.cpp:229
+#: lib/warmux/net/download.cpp:184 lib/warmux/net/download.cpp:225
 #, c-format
 msgid "Fail to create temporary file: %s"
 msgstr ""
 
-#: lib/warmux/net/download.cpp:195
+#: lib/warmux/net/download.cpp:191
 #, c-format
 msgid "Fail to open temporary file: %s"
 msgstr "Неможливо відкрити тимчасовий файл (%s)!"
@@ -1056,6 +1061,7 @@ msgstr ""
 
 #: src/menu/results_menu.cpp:354
 #, fuzzy
+#| msgid "Game name:"
 msgid "Filename:"
 msgstr "Ім'я гри:"
 
@@ -1155,6 +1161,7 @@ msgstr "Довідка"
 
 #: src/menu/options_menu.cpp:128
 #, fuzzy
+#| msgid "High jump"
 msgid "High"
 msgstr "Високий стрибок"
 
@@ -1227,7 +1234,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Початкова енергія"
 
-#: src/weapon/bazooka.cpp:120 src/weapon/cluzooka.cpp:374
+#: src/weapon/bazooka.cpp:120 src/weapon/cluzooka.cpp:355
 #: src/weapon/riot_bomb.cpp:120
 msgid ""
 "Initial fire angle: Up/Down\n"
@@ -1238,20 +1245,20 @@ msgstr ""
 "Стрільба : Утримуйте пробіл до досягнення бажаної сили\n"
 "один патрон за хід"
 
-#: src/game/game.cpp:123
+#: src/game/game.cpp:124
 msgid "Initialisation"
 msgstr "Ініціалізація"
 
 #. Load the map
-#: src/game/game.cpp:160
+#: src/game/game.cpp:161
 msgid "Initialise map"
 msgstr "Ініціалізація мапи"
 
-#: src/game/game.cpp:171
+#: src/game/game.cpp:172
 msgid "Initialise sounds"
 msgstr "Ініціалізація звуків"
 
-#: src/game/game.cpp:167
+#: src/game/game.cpp:168
 msgid "Initialise teams"
 msgstr "Ініціалізація команд"
 
@@ -1269,7 +1276,7 @@ msgstr ""
 msgid "Invalid filename"
 msgstr ""
 
-#: src/game/game.cpp:1041
+#: src/game/game.cpp:1042
 msgid "It's a present!"
 msgstr "Це подарунок!"
 
@@ -1371,7 +1378,7 @@ msgstr "Карту %s створив: "
 msgid "Map author information: name, email, nickname, country"
 msgstr ""
 
-#: src/game/game.cpp:161
+#: src/game/game.cpp:162
 msgid "Maps"
 msgstr "Мапи"
 
@@ -1501,7 +1508,7 @@ msgstr "Гучність музики"
 msgid "Music?"
 msgstr "Музика?"
 
-#: src/game/game.cpp:184
+#: src/game/game.cpp:185
 msgid "Network"
 msgstr "Мережа"
 
@@ -1536,7 +1543,7 @@ msgstr "Елемент <%s> не знайдений в файлі з налаш�
 msgid "No player connected"
 msgstr "%i гравець приєднався"
 
-#: lib/warmux/net/download.cpp:144
+#: lib/warmux/net/download.cpp:140
 msgid "No pointer"
 msgstr ""
 
@@ -1737,16 +1744,16 @@ msgstr ""
 msgid "Random map"
 msgstr "Випадкова мапа"
 
-#: lib/warmux/net/download.cpp:138
+#: lib/warmux/net/download.cpp:134
 #, c-format
 msgid "Read only %i bytes"
 msgstr "Всього %i команда."
 
-#: src/game/config.cpp:397
+#: src/game/config.cpp:401
 msgid "Reading the default config file"
 msgstr "Зчитування налаштувань за замовчанням"
 
-#: src/game/config.cpp:454
+#: src/game/config.cpp:458
 msgid "Reading the personal config file"
 msgstr "Зчитування персональних налаштувань"
 
@@ -1761,11 +1768,13 @@ msgstr ""
 
 #: src/menu/replay_menu.cpp:69
 #, fuzzy
+#| msgid "Game mode"
 msgid "Replay info"
 msgstr "Режим гри"
 
-#: src/game/game.cpp:211
+#: src/game/game.cpp:212
 #, fuzzy
+#| msgid "Game mode"
 msgid "Replay mode"
 msgstr "Режим гри"
 
@@ -1832,7 +1841,7 @@ msgstr "Адреса сервера:"
 msgid "Server available on Internet"
 msgstr "Сервер доступний в інтернеті"
 
-#: src/menu/network_menu.cpp:174 src/network/network.cpp:485
+#: src/menu/network_menu.cpp:174 src/network/network.cpp:486
 msgid "Server mode"
 msgstr "Режим сервера"
 
@@ -1907,11 +1916,11 @@ msgstr "Снайперська гвинтівка"
 msgid "Someone put a booby trap into the crate!"
 msgstr "В контейнері була міна-пастка!"
 
-#: src/menu/network_connection_menu.cpp:393
+#: src/menu/network_connection_menu.cpp:390
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Вибачте, на даний момент немає ігор, що очікують гравців"
 
-#: src/menu/network_connection_menu.cpp:447
+#: src/menu/network_connection_menu.cpp:444
 #: tools/servers/game_server/server.cpp:374
 #, c-format
 msgid ""
@@ -1935,11 +1944,11 @@ msgid "Sound frequency"
 msgstr "Частота звуку"
 
 #. Load teams' sound profiles
-#: src/game/game.cpp:173
+#: src/game/game.cpp:174
 msgid "Sounds"
 msgstr "Звуки"
 
-#: src/game/game.cpp:205
+#: src/game/game.cpp:206
 msgid "Starting a new game"
 msgstr "Починаємо нову гру"
 
@@ -1982,6 +1991,7 @@ msgstr "Графіки команди"
 
 #: src/menu/options_menu.cpp:594
 #, fuzzy
+#| msgid "Team stats"
 msgid "Team saved"
 msgstr "Статистика команди"
 
@@ -1990,7 +2000,7 @@ msgid "Team stats"
 msgstr "Статистика команди"
 
 #. Teams
-#: src/game/game.cpp:168 src/menu/game_menu.cpp:76 src/menu/game_menu.cpp:80
+#: src/game/game.cpp:169 src/menu/game_menu.cpp:76 src/menu/game_menu.cpp:80
 #: src/menu/network_menu.cpp:98 src/menu/network_menu.cpp:102
 #: src/menu/replay_menu.cpp:94
 msgid "Teams"
@@ -2061,7 +2071,7 @@ msgstr "Перевищено час підключення. Перевірте, 
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "Диско-граната вилетіла з поля битви не встигнув вибухнути"
 
-#: src/game/game.cpp:768
+#: src/game/game.cpp:769
 msgid "The game was interrupted because you got disconnected."
 msgstr "Гру було завершено, тому що ви були відключені."
 
@@ -2077,7 +2087,7 @@ msgstr "Всі чекають на тебе! Прокинься :-)"
 msgid "The parachute is activated automatically."
 msgstr "Парашут розкрився автоматично."
 
-#: src/weapon/bazooka.cpp:80 src/weapon/cluzooka.cpp:323
+#: src/weapon/bazooka.cpp:80 src/weapon/cluzooka.cpp:304
 #: src/weapon/riot_bomb.cpp:85
 msgid "The rocket has left the battlefield..."
 msgstr "Ракета вилетіла за межі поля битви..."
@@ -2109,10 +2119,6 @@ msgstr[2] "Всього %i команд"
 #: src/gui/control_config.cpp:206
 #, c-format
 msgid "This key has already been attributed to '%s'"
-msgstr ""
-
-#: src/menu/network_connection_menu.cpp:313
-msgid "This version was compiled without curl, you can't list public games!"
 msgstr ""
 
 #: src/menu/benchmark_menu.cpp:113 src/menu/results_menu.cpp:339
@@ -2287,12 +2293,12 @@ msgstr[0] "Зачекайте! %i-й гравець поки не готовий
 msgstr[1] "Зачекайте! %i гравця поки не готові!"
 msgstr[2] "Зачекайте! %i гравців поки не готові!"
 
-#: src/game/game.cpp:663
+#: src/game/game.cpp:664
 #, c-format
 msgid "Waiting for %s"
 msgstr "Очікування %s"
 
-#: src/game/game.cpp:183
+#: src/game/game.cpp:184
 msgid "Waiting for remote players"
 msgstr "Чекаємо віддалених гравців"
 
@@ -2319,7 +2325,7 @@ msgstr "Змінити вид зброї"
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Зброя: Вогонь/Подарунки: падають швидше"
 
-#: src/game/game.cpp:164
+#: src/game/game.cpp:165
 msgid "Weapons"
 msgstr "Зброя"
 
@@ -2334,12 +2340,12 @@ msgstr "Веб-сайт: "
 msgid "Welcome to %s on %s!"
 msgstr "Ласкаво просимо до %s на %s"
 
-#: src/game/game.cpp:1150
+#: src/game/game.cpp:1151
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr "Яка красива втеча! %s з команди %s вже в іншому світі..."
 
-#: src/game/game.cpp:1213
+#: src/game/game.cpp:1214
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Яка ганьба для %s - його вбили з простого пістолета!"
@@ -2381,7 +2387,7 @@ msgstr "Невірне ім'я карти!"
 msgid "Wrong team!"
 msgstr "Невірна команда!"
 
-#: lib/warmux/net/download.cpp:154
+#: lib/warmux/net/download.cpp:150
 #, c-format
 msgid "Wrote %i/%i bytes"
 msgstr ""
@@ -2403,7 +2409,7 @@ msgstr ""
 msgid "You need at least one valid map!"
 msgstr "Вам потрібна хоча б одна карта !"
 
-#: src/game/game.cpp:304 src/team/teams_list.cpp:166
+#: src/game/game.cpp:305 src/team/teams_list.cpp:166
 msgid "You need at least two valid teams!"
 msgstr "Вам потрібні хоча б дві команди !"
 
@@ -2458,16 +2464,16 @@ msgstr ""
 msgid "no configuration file!"
 msgstr "немає конфігураційного файлу!"
 
-#: src/sound/jukebox.cpp:191
+#: src/sound/jukebox.cpp:192
 msgid "o Loading music"
 msgstr "o Завантаження музики"
 
-#: src/sound/jukebox.cpp:373
+#: src/sound/jukebox.cpp:374
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Завантаження звукового профілю: %s"
 
-#: src/sound/jukebox.cpp:135
+#: src/sound/jukebox.cpp:134
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Відкрито аудіо в %d Hz %d bit"

@@ -76,6 +76,7 @@ class TeamBox : public HBox
   virtual bool Update(const Point2i &mousePosition,
                       const Point2i &lastMousePosition);
 
+  virtual Widget* Click(const Point2i &mousePosition, uint button);
   virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
 
   void SwitchPlayerType();
