@@ -33,23 +33,26 @@ const uint TPS_TOUR_MIN = 10;
 const uint TPS_TOUR_MAX = 240;
 static bool warned = false;
 
-GameModeEditor::GameModeEditor(uint max_line_width, const Point2i& option_size, bool _draw_border) :
-  GridBox(2, 4, 0, _draw_border)
+GameModeEditor::GameModeEditor(const Point2i& size, float zoom, bool _draw_border) :
+  GridBox(2, 4, 10*zoom, _draw_border)
 {
-  (void)max_line_width;
+  Font::font_size_t fmedium = Font::GetFixedSize(Font::FONT_MEDIUM*zoom+0.5f);
+  Point2i option_size = GetDefaultBoxSize(size);
   // ################################################
   // ##  GAME OPTIONS
   // ################################################
   std::string selected_gamemode = Config::GetInstance()->GetGameMode();
 
   opt_game_mode = new ComboBox(_("Game mode"), "menu/game_mode", option_size,
-                               GameMode::ListGameModes(), selected_gamemode);
+                               GameMode::ListGameModes(), selected_gamemode,
+                               fmedium, fmedium);
   AddWidget(opt_game_mode);
 
   opt_duration_turn = new SpinButtonWithPicture(_("Duration of a turn"), "menu/timing_turn",
                                                 option_size,
                                                 TPS_TOUR_MIN, 10,
-                                                TPS_TOUR_MIN, TPS_TOUR_MAX);
+                                                TPS_TOUR_MIN, TPS_TOUR_MAX,
+                                                fmedium, fmedium);
   AddWidget(opt_duration_turn);
 
   std::vector<std::pair<std::string, std::string> > character_selections;
@@ -57,45 +60,35 @@ GameModeEditor::GameModeEditor(uint max_line_width, const Point2i& option_size, 
   character_selections.push_back(std::pair<std::string, std::string>("before_action", _("Before action")));
   character_selections.push_back(std::pair<std::string, std::string>("never", _("Never")));
 
-  opt_allow_character_selection = new ComboBox(_("Character switching"),
-                                               "menu/character_selection",
-                                               option_size,
-                                               character_selections, "always");
+  opt_allow_character_selection = new ComboBox(_("Character switching"), "menu/character_selection",
+                                               option_size, character_selections, "always",
+                                               fmedium, fmedium);
   AddWidget(opt_allow_character_selection);
 
   /* Characters energy */
   opt_energy_ini = new SpinButtonWithPicture(_("Initial energy"), "menu/init_energy",
-                                             option_size,
-                                             10, 10,
-                                             10, 500);
+                                             option_size, 10, 10, 10, 500,
+                                             fmedium, fmedium);
   AddWidget(opt_energy_ini);
 
   opt_energy_max = new SpinButtonWithPicture(_("Max energy"), "menu/max_energy",
-                                             option_size,
-                                             10, 10,
-                                             10, 500);
+                                             option_size, 10, 10, 10, 500,
+                                             fmedium, fmedium);
   AddWidget(opt_energy_max);
-
 
   /* some death mode options */
 
   opt_time_before_death_mode = new SpinButtonWithPicture(_("Duration before death mode"), "menu/timing_death",
-                                                         option_size,
-                                                         200, 50,
-                                                         200, 3000);
+                                                         option_size, 200, 50, 200, 3000,
+                                                         fmedium, fmedium);
   AddWidget(opt_time_before_death_mode);
 
-  opt_damage_during_death_mode = new SpinButtonWithPicture(_("Damage per turn during death mode"),
-                                                           "menu/death_energy",
-                                                           option_size,
-                                                           1, 1,
-                                                           1, 20);
+  opt_damage_during_death_mode = new SpinButtonWithPicture(_("Damage per turn during death mode"), "menu/death_energy",
+                                                           option_size, 1, 1, 1, 20, fmedium, fmedium);
   AddWidget(opt_damage_during_death_mode);
 
   opt_gravity = new SpinButtonWithPicture(_("Gravity"), "menu/gravity",
-                                          option_size,
-                                          10, 5,
-                                          10, 60);
+                                          option_size, 10, 5, 10, 60, fmedium, fmedium);
   AddWidget(opt_gravity);
 
   LoadGameMode();

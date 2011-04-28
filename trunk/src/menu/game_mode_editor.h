@@ -45,7 +45,7 @@ class GameModeEditor : public GridBox
   SpinButtonWithPicture *opt_gravity;
 
 public:
-  GameModeEditor(uint max_line_width, const Point2i& option_size, bool _draw_border=true);
+  GameModeEditor(const Point2i& size, float zoom, bool _draw_border=true);
 
   const ComboBox* GetGameModeComboBox() const { return opt_game_mode; };
 
