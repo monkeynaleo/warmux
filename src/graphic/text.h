@@ -67,10 +67,10 @@ public:
        const Color & fontColor = white_color,
        uint fontSize = (uint)Font::FONT_SMALL,
        Font::font_style_t fontStyle = Font::FONT_BOLD,
-       bool shadowed = true,
+       bool shadowed = false,
        const Color & shadowColor = black_color,
        bool dummy = false,
-       Alignment align = ALIGN_LEFT_TOP);
+       Alignment align = ALIGN_CENTER);
   Text(void);
 
   virtual ~Text() { }

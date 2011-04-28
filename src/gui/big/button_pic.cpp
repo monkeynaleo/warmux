@@ -35,7 +35,7 @@ ButtonPic::ButtonPic(const std::string &label,
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   m_img_normal = GetResourceManager().LoadImage(res, resource_id, true);
 
-  txt_label = new Text(label, dark_gray_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
+  txt_label = new Text(label, dark_gray_color, Font::FONT_SMALL);
   txt_label->SetMaxWidth(size.x);
 }
 
@@ -84,7 +84,7 @@ bool ButtonPic::LoadXMLConfiguration(void)
 
   std::string labelText("No Text");
   xmlFile->ReadStringAttr(widgetNode, "text", labelText);
-  txt_label = new Text(_(labelText.c_str()), dark_gray_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
+  txt_label = new Text(_(labelText.c_str()), dark_gray_color, Font::FONT_SMALL);
   //txt_label->SetMaxWidth(size.x);
 
   return true;

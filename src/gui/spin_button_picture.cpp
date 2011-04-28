@@ -48,11 +48,11 @@ SpinButtonWithPicture::SpinButtonWithPicture(const std::string& label,
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   torus = new TorusCache(res, resource_id, BIG_R, SMALL_R);
 
-  txt_label = new Text(label, dark_gray_color, legend_fsize, Font::FONT_BOLD, false);
+  txt_label = new Text(label, dark_gray_color, legend_fsize);
   txt_label->SetMaxWidth(GetSizeX());
 
-  txt_value_black = new Text("", black_color, value_fsize, Font::FONT_BOLD, false);
-  txt_value_white = new Text("", white_color, value_fsize, Font::FONT_BOLD, false);
+  txt_value_black = new Text("", black_color, value_fsize);
+  txt_value_white = new Text("", white_color, value_fsize);
 
   ValueHasChanged();
 }
@@ -107,9 +107,6 @@ void SpinButtonWithPicture::Draw(const Point2i &mousePosition)
   // 6. add in the value image
   uint tmp_x = position.x + size.x/2;
   uint tmp_y = position.y + torus->GetSize().y/2 + IMG_BUTTONS_H;
-
-  txt_value_black->DrawCenterTop(Point2i(tmp_x + 1, tmp_y + 1));
-  txt_value_white->DrawCenterTop(Point2i(tmp_x, tmp_y));
 
   txt_value_black->DrawCenterTop(Point2i(tmp_x + 1, tmp_y + 1));
   txt_value_white->DrawCenterTop(Point2i(tmp_x, tmp_y));

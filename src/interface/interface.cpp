@@ -107,12 +107,12 @@ void Interface::LoadDataInternal(Profile *res)
   // Labels
   uint fsize = Font::FONT_SMALL*powf(zoom, 0.85f)+0.5f;
   if (fsize < 10) fsize = 10;
-  t_character_name = new Text("None", m_text_color, fsize, Font::FONT_BOLD, false);
-  t_team_name = new Text("None", m_text_color, fsize, Font::FONT_BOLD, false);
-  t_player_name = new Text("None", m_text_color, fsize, Font::FONT_BOLD, false);
-  t_weapon_name = new Text("None", m_text_color, fsize, Font::FONT_BOLD, false);
-  t_weapon_stock = new Text("0", m_text_color, fsize, Font::FONT_BOLD, false);
-  t_character_energy = new Text("Dead", m_energy_text_color, fsize, Font::FONT_BOLD);
+  t_character_name = new Text("None", m_text_color, fsize);
+  t_team_name = new Text("None", m_text_color, fsize);
+  t_player_name = new Text("None", m_text_color, fsize);
+  t_weapon_name = new Text("None", m_text_color, fsize);
+  t_weapon_stock = new Text("0", m_text_color, fsize);
+  t_character_energy = new Text("Dead", m_energy_text_color, fsize, Font::FONT_BOLD, true);
 
   // Replay labels
   if (replay) {
@@ -122,8 +122,8 @@ void Interface::LoadDataInternal(Profile *res)
   }
 
   // Timer
-  global_timer = new Text("0", gray_color, Font::FONT_BIG*zoom+0.5f, Font::FONT_BOLD, false);
-  timer = new Text("0", black_color, Font::FONT_MEDIUM*zoom+0.5f, Font::FONT_BOLD, false);
+  global_timer = new Text("0", gray_color, Font::FONT_BIG*zoom+0.5f);
+  timer = new Text("0", black_color, Font::FONT_MEDIUM*zoom+0.5f);
 
   wind_bar.InitPos(0, 0, 82*zoom-1.5f, 15*zoom-1.5f);
 }
