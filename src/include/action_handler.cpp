@@ -505,6 +505,26 @@ static void _Action_Game_MapList(Action *a)
   }
 }
 
+static void _Action_Game_TeamList(Action *a)
+{
+  int                num        = a->PopInt();
+  TeamsList         *team_list  = TeamsList::GetInstance();
+  // We are going to directly update the DistantComputer map list
+  std::vector<uint>& index_list = a->GetCreator()->GetAvailableMaps();
+
+  index_list.clear();
+  MSG_DEBUG("action_handler.team", "Team list size for %p: %i\n", a->GetCreator(), num);
+  while (num--) {
+    std::string team_name = a->PopString();
+    int index;
+    if (map_list->FindMapById(team_name, index) && index!=-1) {
+      index_list.push_back((uint)index);
+      MSG_DEBUG("action_handler.team", "Adding map %s of index %i (%i left)\n", map_name.c_str(), index, num);
+    } else
+      MSG_DEBUG("action_handler.team", "Rejecting map %s  (%i left)\n", map_name.c_str(), num);
+  }
+}
+
 static void Action_Game_SetMapList(Action *a)
 {
   if (a)
