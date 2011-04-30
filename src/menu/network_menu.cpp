@@ -453,7 +453,7 @@ void NetworkMenu::SetMapsCallback(const std::vector<uint>& list)
   map_box->ChangeMapListCallback(list);
 }
 
-Team * NetworkMenu::FindUnusedTeam(const std::string default_team_id)
+Team * NetworkMenu::FindUnusedTeam(const std::string& default_team_id)
 {
   return team_box->FindUnusedTeam(default_team_id);
 }
