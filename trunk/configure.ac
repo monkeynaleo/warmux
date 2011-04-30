@@ -300,7 +300,7 @@ int main(void)
 }],
   [echo "`cat conftest.out`, OK"],
   [cat conftest.out
-   AC_MSG_ERROR(Please upgrade SDL_gfx)])
+   AC_MSG_WARN(This version of SDL_gfx is outdated and prone to cause crashes, please update it.)])
 
 dnl === Check for curl =====================================================
 
