@@ -517,11 +517,11 @@ static void _Action_Game_TeamList(Action *a)
   while (num--) {
     std::string team_name = a->PopString();
     int index;
-    if (map_list->FindMapById(team_name, index) && index!=-1) {
+    if (team_list->FindById(team_name, index) && index!=-1) {
       index_list.push_back((uint)index);
-      MSG_DEBUG("action_handler.team", "Adding map %s of index %i (%i left)\n", map_name.c_str(), index, num);
+      MSG_DEBUG("action_handler.team", "Adding map %s of index %i (%i left)\n", team_name.c_str(), index, num);
     } else
-      MSG_DEBUG("action_handler.team", "Rejecting map %s  (%i left)\n", map_name.c_str(), num);
+      MSG_DEBUG("action_handler.team", "Rejecting map %s  (%i left)\n", team_name.c_str(), num);
   }
 }
 
