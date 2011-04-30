@@ -80,7 +80,7 @@ public:
   void DelTeamCallback(const std::string& team_id);
   void ChangeMapCallback();
   void SetGameMasterCallback();
-  Team * FindUnusedTeam(const std::string default_team_id);
+  Team * FindUnusedTeam(const std::string& default_team_id);
   bool HasOpenTeamSlot();
 
   void ReceiveMsgCallback(const std::string& msg, const Color& color);
