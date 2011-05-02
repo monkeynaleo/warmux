@@ -44,7 +44,7 @@ public:
           Font::font_size_t font_size,
           Font::font_style_t font_style,
           uint _time) :
-    Text(new_txt, new_color, font_size, font_style),
+    Text(new_txt, new_color, font_size, font_style, true),
     time(_time) {};
 
   uint get_time() { return time; }

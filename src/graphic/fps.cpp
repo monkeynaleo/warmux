@@ -57,8 +57,8 @@ void FramePerSecond::Reset()
   time_in_second = SDL_GetTicks()+1000;
   nb_valid_values = -1;
 
-  if(text == NULL)
-    text = new Text("");
+  if (!text)
+    text = new Text("", white_color, Font::FONT_SMALL, Font::FONT_BOLD, true);
 }
 
 void FramePerSecond::Refresh()
