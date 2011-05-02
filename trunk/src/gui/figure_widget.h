@@ -54,7 +54,7 @@ public:
   FigureWidget(const Point2i & size,
                const std::string & resource_id,
                Font::font_size_t fsize = Font::FONT_BIG,
-               Font::font_style_t fstyle = Font::FONT_BOLD,
+               Font::font_style_t fstyle = Font::FONT_NORMAL,
                const Color& color = dark_gray_color,
                ScalingType type = FIT_SCALING)
     : PictureWidget(size, resource_id, type)
