@@ -338,7 +338,7 @@ void Body::ApplyMovement(Movement * mvt,
 
       // This movement needs to know the position of the member before
       // being applied so it does a second ApplyMovement after being used
-      if (mb_mvt.follow_cursor &&
+      if (mb_mvt.follow_cursor_square_limit &&
           Mouse::GetInstance()->GetVisibility() == Mouse::MOUSE_VISIBLE) {
         ProcessFollowCursor(mb_mvt, mb);
       }
@@ -405,12 +405,10 @@ void Body::ProcessFollowDirection(member_mvt & mb_mvt)
   }
 }
 
-void Body::ProcessFollowCursor(member_mvt & mb_mvt,
-                               Member *     member)
+void Body::ProcessFollowCursor(const member_mvt& mb_mvt, Member* member)
 {
-  member_mvt angle_mvt;
-
   Point2i v = owner->GetPosition() + member->GetPos();
+  Point2i zero(0, 0);
   v += member->GetAnchorPos();
 
   if (DIRECTION_LEFT == owner->GetDirection()) {
@@ -419,13 +417,16 @@ void Body::ProcessFollowCursor(member_mvt & mb_mvt,
   }
   v = Mouse::GetInstance()->GetWorldPosition() - v;
 
-  if (v.Norm() < mb_mvt.follow_cursor_limit) {
-    Double angle = v.ComputeAngle(Point2i(0, 0));
-    angle *= owner->GetDirection();
+  if (v.SquareDistance(zero) < mb_mvt.follow_cursor_square_limit) {
+    Double angle = v.ComputeAngle(zero);
+
     if (owner->GetDirection() == DIRECTION_RIGHT) {
       angle -= PI;
+    } else {
+      angle = -angle;
     }
 
+    member_mvt angle_mvt;
     angle_mvt.SetAngle(angle);
     member->ApplyMovement(angle_mvt);
   }

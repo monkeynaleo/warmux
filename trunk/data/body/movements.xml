@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE movements [
-<!ENTITY pupils-follow_cursor "<member type='pupil-right' follow_cursor='true' follow_cursor_limit='100'/><member type='pupil-left' follow_cursor='true' follow_cursor_limit='100'/>">
+<!ENTITY pupils-follow_cursor "<member type='pupil-right' follow_cursor='true' follow_cursor_square_limit='10000'/><member type='pupil-left' follow_cursor='true' follow_cursor_square_limit='10000'/>">
 
 
 ]>

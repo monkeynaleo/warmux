@@ -85,10 +85,7 @@ Movement::Movement(const xmlNode* xml) : ref_count(1), nb_loops(0), duration_per
       XmlReader::ReadBoolAttr(child, "follow_half_crosshair", mvt.follow_half_crosshair);
       XmlReader::ReadBoolAttr(child, "follow_speed", mvt.follow_speed);
       XmlReader::ReadBoolAttr(child, "follow_direction", mvt.follow_direction);
-
-      if (XmlReader::ReadBoolAttr(child, "follow_cursor", mvt.follow_cursor)
-          && !XmlReader::ReadIntAttr(child, "follow_cursor_limit", mvt.follow_cursor_limit))
-        fprintf(stderr, "Warning ! \"follow_cursor\" flag used while \"follow_cursor_limit\" isn't defined, this won't do anything!\n");
+      XmlReader::ReadIntAttr(child, "follow_cursor_square_limit", mvt.follow_cursor_square_limit);
 
       if (tmp_alpha < ZERO || tmp_alpha > ONE)
         tmp_alpha = 1.0;
@@ -99,7 +96,7 @@ Movement::Movement(const xmlNode* xml) : ref_count(1), nb_loops(0), duration_per
       mvt.alpha = tmp_alpha;
       mvt.scale = Point2d(scale_x, scale_y);
 
-      always_moving |= mvt.follow_cursor;
+      always_moving |= mvt.follow_cursor_square_limit!=0;
       always_moving |= mvt.follow_crosshair;
       always_moving |= mvt.follow_half_crosshair;
       always_moving |= mvt.follow_speed;
