@@ -44,8 +44,7 @@ public:
   /* GetAngle returns radian values */
   const Double &GetAngle() const { return angle_rad; }
   Double alpha;
-  int follow_cursor_limit;
-  bool follow_cursor;
+  int follow_cursor_square_limit;
   bool follow_crosshair;
   bool follow_half_crosshair;
   bool follow_speed;
@@ -53,13 +52,13 @@ public:
   member_mvt(const std::string& name = DUMMY_MEMBER)
     : type(name)
     , angle_rad(ZERO), pos(ZERO, ZERO), scale(ONE, ONE), alpha(ONE)
-    , follow_cursor_limit(0), follow_cursor(false)
+    , follow_cursor_square_limit(0)
     , follow_crosshair(false), follow_half_crosshair(false)
     , follow_speed(false), follow_direction(false)
   { };
   operator const MemberType& () const { return type; }
   bool operator==(const MemberType& other) const { return type == other; }
-  bool operator!=(const MemberType& other) const { return type == other; }
+  bool operator!=(const MemberType& other) const { return type != other; }
 };
 
 class Movement
