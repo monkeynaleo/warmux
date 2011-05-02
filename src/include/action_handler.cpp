@@ -505,6 +505,7 @@ static void _Action_Game_MapList(Action *a)
   }
 }
 
+#if 0
 static void _Action_Game_TeamList(Action *a)
 {
   int                num        = a->PopInt();
@@ -524,6 +525,7 @@ static void _Action_Game_TeamList(Action *a)
       MSG_DEBUG("action_handler.team", "Rejecting map %s  (%i left)\n", team_name.c_str(), num);
   }
 }
+#endif
 
 static void Action_Game_SetMapList(Action *a)
 {
