@@ -270,7 +270,7 @@ void Text::RenderMultiLines()
   for (uint i = 1; i < ret_lines.size(); i++) {
     tmp = font->CreateSurface(ret_lines[i], color);
     int x = (center) ? (size.x-tmp.GetWidth())/2 : 0;
-    surf.Blit(tmp+off, Point2i(x, GetLineHeight(font)*i));
+    surf.Blit(tmp, Point2i(x, GetLineHeight(font)*i));
   }
 
   // Render the shadow !
