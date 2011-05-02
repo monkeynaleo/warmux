@@ -94,7 +94,7 @@ Member::Member(const xmlNode *     xml,
   std::string att_type;
   int         dx = 0;
   int         dy = 0;
-  Point2d     d;     // TODO: Rename !!
+  Point2i     d;     // TODO: Rename !!
   std::string frame_str;
 
   for (; it != itEnd; ++it) {
@@ -126,7 +126,7 @@ Member::Member(const xmlNode *     xml,
 
       if (attached_types.find(type) == attached_types.end()) {
         v_attached rot_spot;
-        rot_spot.resize(spr->GetFrameCount(), Point2d(0.0, 0.0));
+        rot_spot.resize(spr->GetFrameCount(), Point2i(0.0, 0.0));
         attached_types[type] = rot_spot;
       }
       (attached_types.find(type)->second)[frame] = d;

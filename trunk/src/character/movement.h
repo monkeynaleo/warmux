@@ -37,7 +37,7 @@ class member_mvt
   MemberType type;
   Double angle_rad; // angle in radian
 public:
-  Point2d pos;
+  Point2i pos;
   Point2d scale;
   /* SetAngle take radian values */
   void SetAngle(Double angle) { angle_rad = RestrictAngle(angle); }
@@ -51,7 +51,7 @@ public:
   bool follow_direction;
   member_mvt(const std::string& name = DUMMY_MEMBER)
     : type(name)
-    , angle_rad(ZERO), pos(ZERO, ZERO), scale(ONE, ONE), alpha(ONE)
+    , angle_rad(ZERO), pos(0, 0), scale(ONE, ONE), alpha(ONE)
     , follow_cursor_square_limit(0)
     , follow_crosshair(false), follow_half_crosshair(false)
     , follow_speed(false), follow_direction(false)

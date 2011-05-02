@@ -499,7 +499,7 @@ void Body::Build()
   ApplySqueleton();
   ApplyMovement(current_mvt, current_frame);
 
-  Double y_max = ZERO;
+  int y_max = ZERO;
   const std::vector<Member*>& layers = current_clothe->GetNonWeaponLayers();
   for (uint lay=0; lay < layers.size(); lay++) {
     Member *member = layers[lay];
@@ -510,8 +510,8 @@ void Body::Build()
 
     // Move the members to get the lowest member at the bottom
     // of the skin rectangle
-    Double val = member->GetPosFloat().y + member->GetSprite().GetHeightMax()
-               + member->GetSprite().GetRotationPoint().y;
+    int val = member->GetPos().y + member->GetSprite().GetHeightMax()
+            + member->GetSprite().GetRotationPoint().y;
     if (val > y_max && !member->IsGoingThroughGround()) {
         y_max = val;
     }
@@ -519,7 +519,7 @@ void Body::Build()
 
   member_mvt body_mvt;
   body_mvt.pos.y = GetSize().y - y_max + current_mvt->GetTestBottom();
-  body_mvt.pos.x = ONE_HALF*(GetSize().x - skel_lst.front()->member->GetSprite().GetWidth());
+  body_mvt.pos.x = (GetSize().x - skel_lst.front()->member->GetSprite().GetWidth())/2;
   body_mvt.SetAngle(main_rotation_rad);
   skel_lst.front()->member->ApplyMovement(body_mvt);
 
