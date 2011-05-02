@@ -157,7 +157,7 @@ void NetworkTeamsSelectionBox::PrevTeam(uint i)
     if (tmp && !to_continue) {
       SetLocalTeam(i, *tmp);
     }
-  } while (index!=i && to_continue);
+  } while (index!=(int)i && to_continue);
 }
 
 void NetworkTeamsSelectionBox::NextTeam(uint i)
