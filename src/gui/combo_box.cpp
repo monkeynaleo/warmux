@@ -50,11 +50,11 @@ ComboBox::ComboBox (const std::string &label,
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   torus = new TorusCache(res, resource_id, BIG_R, SMALL_R);
 
-  txt_label = new Text(label, dark_gray_color, legend_fsize);
+  txt_label = new Text(label, dark_gray_color, legend_fsize, Font::FONT_NORMAL);
   txt_label->SetMaxWidth(GetSizeX());
 
-  txt_value_black = new Text("", black_color, value_fsize);
-  txt_value_white = new Text("", white_color, value_fsize);
+  txt_value_black = new Text("", black_color, value_fsize, Font::FONT_NORMAL);
+  txt_value_white = new Text("", white_color, value_fsize, Font::FONT_NORMAL);
 
   std::vector<std::string>::size_type index = 0;
   for (std::vector<std::pair<std::string, std::string> >::const_iterator iter
