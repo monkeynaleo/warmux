@@ -76,7 +76,8 @@ OptionMenu::OptionMenu() :
   /* Tabs */
   MultiTabs * tabs =
     new MultiTabs(Point2i(max_w, window_h - actions_buttons->GetSizeY() -border), fadapt);
-  Point2i tabs_size(max_w, window_h - actions_buttons->GetSizeY() - border - tabs->GetHeaderHeight());
+  // The tabs have an internal border of 5
+  Point2i tabs_size(max_w -2*5, window_h - actions_buttons->GetSizeY() - 2*5 -border - tabs->GetHeaderHeight());
   tabs->SetPosition(border, border);
 
   /* Graphic options */
