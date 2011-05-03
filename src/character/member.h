@@ -42,7 +42,6 @@ typedef struct attachment
     Point2d child_delta = point - anchor;
     radius = child_delta.x*child_delta.x + child_delta.y*child_delta.y;
     if (radius) {
-      printf("%i\n", radius);
       radius = sqrt_approx(Double(radius));
       angle = child_delta.ComputeAngle();
     }
