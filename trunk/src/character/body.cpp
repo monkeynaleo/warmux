@@ -438,8 +438,8 @@ void Body::ApplySqueleton()
   std::vector<junction *>::iterator member = skel_lst.begin();
 
   // The first member is the body, we set it to pos:
-  (*member)->member->SetPos(Point2d(0.0, 0.0));
-  (*member)->member->SetAngle(0.0);
+  (*member)->member->SetPos(Point2i(0, 0));
+  (*member)->member->SetAngle(ZERO);
   member++;
 
   for ( ; member != skel_lst.end();
@@ -499,27 +499,28 @@ void Body::Build()
   ApplySqueleton();
   ApplyMovement(current_mvt, current_frame);
 
-  int y_max = ZERO;
+  int y_max = 0;
   const std::vector<Member*>& layers = current_clothe->GetNonWeaponLayers();
   for (uint lay=0; lay < layers.size(); lay++) {
     Member *member = layers[lay];
 
-    // Rotate sprite, because the next part need to know the height
-    // of the sprite once it is rotated
-    member->RotateSprite();
+    if (!member->IsGoingThroughGround()) {
+      // Rotate sprite, because the next part need to know the height
+      // of the sprite once it is rotated
+      member->RotateSprite();
 
-    // Move the members to get the lowest member at the bottom
-    // of the skin rectangle
-    int val = member->GetPos().y + member->GetSprite().GetHeightMax()
-            + member->GetSprite().GetRotationPoint().y;
-    if (val > y_max && !member->IsGoingThroughGround()) {
+      // Move the members to get the lowest member at the bottom
+      // of the skin rectangle
+      int val = member->GetPos().y + member->GetSprite().GetHeightMax()
+              + member->GetSprite().GetRotationPoint().y;
+      if (val > y_max)
         y_max = val;
     }
   }
 
   member_mvt body_mvt;
   body_mvt.pos.y = GetSize().y - y_max + current_mvt->GetTestBottom();
-  body_mvt.pos.x = (GetSize().x - skel_lst.front()->member->GetSprite().GetWidth())/2;
+  body_mvt.pos.x = (GetSize().x - skel_lst.front()->member->GetSprite().GetWidth())>>1;
   body_mvt.SetAngle(main_rotation_rad);
   skel_lst.front()->member->ApplyMovement(body_mvt);
 
