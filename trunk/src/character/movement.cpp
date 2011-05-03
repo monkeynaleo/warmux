@@ -73,7 +73,7 @@ Movement::Movement(const xmlNode* xml) : ref_count(1), nb_loops(0), duration_per
 
       member_mvt mvt(member_type);
       int dx = 0, dy = 0, angle_deg = 0;
-      Double scale_x = 1.0, scale_y = 1.0, tmp_alpha = 1.0;
+      Double scale_x = ONE, scale_y = ONE, tmp_alpha = ONE;
 
       XmlReader::ReadIntAttr(child, "dx", dx);
       XmlReader::ReadIntAttr(child, "dy", dy);
@@ -94,7 +94,8 @@ Movement::Movement(const xmlNode* xml) : ref_count(1), nb_loops(0), duration_per
       mvt.pos.x = dx;
       mvt.pos.y = dy;
       mvt.alpha = tmp_alpha;
-      mvt.scale = Point2d(scale_x, scale_y);
+      mvt.scale.x = scale_x;
+      mvt.scale.y = scale_y;
 
       always_moving |= mvt.follow_cursor_square_limit!=0;
       always_moving |= mvt.follow_crosshair;
