@@ -154,7 +154,7 @@ Character::Character(Team& my_team, const std::string &name, Body *char_body) :
   m_allow_negative_y = true;
   // Name Text object
   if (Config::GetInstance()->GetDisplayNameCharacter())
-    name_text = new Text(character_name, m_team.GetColor());
+    name_text = new Text(character_name, m_team.GetColor(), Font::FONT_SMALL, Font::FONT_BOLD, true);
   else
     name_text = NULL;
 
