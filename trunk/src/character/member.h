@@ -141,7 +141,7 @@ public:
 
   const Point2i & GetPos() const { return pos; }
 
-  const Point2i GetAnchorPos() const { return anchor; }
+  const Point2i& GetAnchorPos() const { return anchor; }
 
   const std::string & GetName() const { return name; }
   const MemberType& GetType() const { return type; }

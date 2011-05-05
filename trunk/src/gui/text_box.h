@@ -63,9 +63,10 @@ public:
   PasswordBox(const std::string & label,
               uint max_width,
               Font::font_size_t fsize = Font::FONT_SMALL,
-              Font::font_style_t fstyle = Font::FONT_BOLD);
-  PasswordBox(Profile * profile,
-              const xmlNode * passwordBoxNode);
+              Font::font_style_t fstyle = Font::FONT_BOLD)
+    : TextBox(label, max_width, fsize, fstyle) { }
+  PasswordBox(Profile * profile, const xmlNode * passwordBoxNode)
+    : TextBox(profile, passwordBoxNode) { }
 
   bool SendKey(const SDL_keysym & key);
   const std::string & GetPassword() const { return clear_text; };

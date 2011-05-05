@@ -36,13 +36,12 @@
 // The Disco Grenade
 class DiscoGrenade : public WeaponProjectile
 {
-private:
   bool have_played_music;
   ParticleEngine smoke_engine;
   SoundSample disco_sound;
 public:
   DiscoGrenade(ExplosiveWeaponConfig& cfg,
-         WeaponLauncher * p_launcher);
+               WeaponLauncher * p_launcher);
   void Refresh();
   void Shoot(Double strength);
 protected:
@@ -76,8 +75,8 @@ void DiscoGrenade::Shoot(Double strength)
 void DiscoGrenade::Explosion()
 {
   const uint star_nbr = 9;
-  const Double cos_angle[] = {1.000000, 0.766044, 0.173648, -0.500000, -0.939693, -0.939693, -0.500000, 0.173648, 0.766044};
-  const Double sin_angle[] = {0.000000, 0.642788, 0.984808, 0.866025, 0.342020, -0.342020, -0.866025, -0.984808, -0.642788};
+  static const Double cos_angle[] = {1.000000, 0.766044, 0.173648, -0.500000, -0.939693, -0.939693, -0.500000, 0.173648, 0.766044};
+  static const Double sin_angle[] = {0.000000, 0.642788, 0.984808, 0.866025, 0.342020, -0.342020, -0.866025, -0.984808, -0.642788};
 
   for(uint i=0;i < star_nbr;i++)
   {
@@ -86,7 +85,7 @@ void DiscoGrenade::Explosion()
     //  sin_angle[i] = sin(angle);
     smoke_engine.AddNow(Point2i(GetX()+(int)(cos_angle[i]*(Double)cfg.explosion_range),
                                 GetY()+(int)(sin_angle[i]*(Double)cfg.explosion_range)),
-                                1,particle_MAGIC_STAR,false,angle,2.5);
+                                1, particle_MAGIC_STAR, false, angle, 2.5);
   }
   disco_sound.Stop();
 
@@ -98,24 +97,23 @@ void DiscoGrenade::Refresh()
   WeaponProjectile::Refresh();
 
 #ifdef HAVE_A_REALLY_BIG_CPU
-  if(IsMoving())
-  {
+  if(IsMoving()) {
     Double norme,angle;
     GetSpeed(norme,angle);
-    for(int i = -3; i<4 ; i++)
-      smoke_engine.AddNow(GetPosition(), 1,particle_MAGIC_STAR, false,angle+(i*QUARTER_PI/3.0)+HALF_PI,2.0);
-  }
-  else
-  {
-      smoke_engine.AddNow(GetPosition(), 1,particle_MAGIC_STAR, false,((Double)(GameTime::GetInstance()->Read()%500)-250.0) * PI / 250.0,3.0);
+    for (int i = -3; i<4 ; i++)
+      smoke_engine.AddNow(GetPosition(), 1, particle_MAGIC_STAR, false,
+                          angle+(i*QUARTER_PI/3.0)+HALF_PI, 2.0);
+  } else {
+      smoke_engine.AddNow(GetPosition(), 1, particle_MAGIC_STAR, false,
+                          ((Double)(GameTime::GetInstance()->Read()%500)-250.0) * PI / 250.0, 3.0);
   }
 #else //  :-P
   smoke_engine.AddPeriodic(GetPosition(), particle_MAGIC_STAR, false);
 #endif //HAVE_A_REALLY_BIG_CPU
 
-  Double tmp = GetMSSinceTimeoutStart();
+  int tmp_time = GetMSSinceTimeoutStart();
   // Ah ! Ah ! Ah ! Staying Alive, staying alive ...
-  if (GetTotalTimeout() >= 2 && tmp > (1000 * GetTotalTimeout() - 2000) && !have_played_music) {
+  if (GetTotalTimeout() >= 2 && tmp_time > (1000 * GetTotalTimeout() - 2000) && !have_played_music) {
     //JukeBox::GetInstance()->Play("default","weapon/alleluia") ;
     have_played_music = true;
   }

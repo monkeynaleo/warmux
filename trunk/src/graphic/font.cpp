@@ -80,7 +80,7 @@ Font::Font(int size):
   surface_text_table(),
   m_font(NULL)
 {
-  const std::string filename = Config::GetConstInstance()->GetTtfFilename();
+  const std::string& filename = Config::GetConstInstance()->GetTtfFilename();
 
   if (DoesFileExist(filename)) {
     m_font = TTF_OpenFont(filename.c_str(), size);
@@ -167,7 +167,7 @@ Surface Font::CreateSurface(const std::string & txt,
     // SDL_ttf or freetype might be missing some feature, report it
     Error(Format("Unable to render text: %s", TTF_GetError()));
   }
-  
+
 #ifdef HAVE_HANDHELD
   return Surface(surf); //.DisplayFormat();
 #else

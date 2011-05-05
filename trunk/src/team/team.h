@@ -31,8 +31,8 @@
 #include "weapon/crosshair.h"
 #include "weapon/weapon.h"
 
-const std::string NO_AI_NAME = "none";
-const std::string DEFAULT_AI_NAME = "default";
+#define NO_AI_NAME  "none"
+#define DEFAULT_AI_NAME  "default"
 
 class AIPlayer;
 class Body;
@@ -190,7 +190,7 @@ public:
 
   void SetRemote(bool value) { remote = value; }
   void SetAIName(const std::string value) { ai_name = value; }
-  const std::string GetAIName() { return ai_name; }
+  const std::string& GetAIName() { return ai_name; }
   void LoadAI();
 
   // reset characters number, type_of_player and player name

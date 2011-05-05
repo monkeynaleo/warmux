@@ -55,7 +55,7 @@ TextBox::TextBox(Profile * profile,
 
 bool TextBox::LoadXMLConfiguration()
 {
-  if (NULL == profile || NULL == widgetNode) {
+  if (!profile || !widgetNode) {
     return false;
   }
 
@@ -147,7 +147,7 @@ Widget * TextBox::ClickUp(const Point2i & mousePosition, uint button)
       BasicSetText(new_txt);
     return used ? this : NULL;
   } else if (button == SDL_BUTTON_LEFT) {
-    const std::string      cur_txt = GetText();
+    const std::string&     cur_txt = GetText();
     const Font*            font    = Font::GetInstance(GetFontSize(), GetFontStyle());
     std::string            txt     = "";
     std::string::size_type pos     = 0;
@@ -169,21 +169,6 @@ Widget * TextBox::ClickUp(const Point2i & mousePosition, uint button)
 
   // Om nom nom
   return this;
-}
-
-
-PasswordBox::PasswordBox(const std::string & label,
-                         uint max_width,
-                         Font::font_size_t fsize,
-                         Font::font_style_t fstyle) :
-  TextBox(label, max_width, fsize, fstyle)
-{
-}
-
-PasswordBox::PasswordBox(Profile * profile,
-                         const xmlNode * passwordBoxNode) :
-  TextBox(profile, passwordBoxNode)
-{
 }
 
 void PasswordBox::BasicSetText(std::string const & new_txt)

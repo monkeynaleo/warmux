@@ -45,10 +45,10 @@ class MapElement
 protected:
   Surface element;
   Point2i position;
- public:
+public:
   MapElement(const Surface & obj, const Point2i & pos) { element = obj; position = pos; };
   Surface & GetElement() { return element; };
-  Point2i & GetPosition() { return position; };
+  const Point2i & GetPosition() const { return position; };
 };
 
 class RandomMap
@@ -86,7 +86,7 @@ protected:
 public:
   RandomMap(Profile *profile, const int width, const int height);
   void SetSize(const int w, const int h) { width = w; height = h; }
-  const Point2i GetSize() const { return Point2i(width, height); };
+  Point2i GetSize() const { return Point2i(width, height); };
   int GetWidth() const { return width; };
   int GetHeight() const { return height; };
   void AddElement(const Surface * object, const Point2i& position)
@@ -102,7 +102,6 @@ public:
   void GeneratePlatforms();
   void GenerateGridElements();
   std::string SaveMap();
-  Surface GetRandomMap() const { return result; };
 };
 
 #endif /* RANDOM_MAP_H */
