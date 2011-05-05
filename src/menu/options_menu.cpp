@@ -164,14 +164,14 @@ OptionMenu::OptionMenu() :
 
   // bug #12193 : Missed assertion in game option (custom team editor) while playing
   if (!GameIsRunning()) {
+    #define DIMENSION   130
     GridBox * teams_editor_names = new GridBox(5, 2, 2, false);
-    Point2i option_size = teams_editor_names->GetDefaultBoxSize(tabs_size);
-    Box * teams_editor = new HBox(option_size.y, false, false, true);
+    Box * teams_editor = new HBox(DIMENSION, false, false, true);
 
-    lbox_teams = new ItemBox(option_size, false);
+    lbox_teams = new ItemBox(Point2i(DIMENSION, DIMENSION), false);
     teams_editor->AddWidget(lbox_teams);
 
-    uint lwidth = max_w - option_size.x - 30;
+    uint lwidth = max_w - DIMENSION - 20;
     Box * teams_editor_inf = new VBox(lwidth, true, true, false);
     Box * box_team_name = new HBox(30, false, false, true);
 
