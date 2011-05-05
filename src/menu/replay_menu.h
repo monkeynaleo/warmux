@@ -31,17 +31,17 @@ class ScrollBox;
 
 class ReplayMenu : public Menu
 {
-  VBox       *file_box;
-  FileListBox    *replay_lbox;
+  VBox              *file_box;
+  FileListBox       *replay_lbox;
   const std::string *selected; // Base filename of the replay
 
   // Display info on selected replay
-  VBox       *info_box;
-  Label      *version_lbl;
-  Label      *date_lbl;
-  Label      *duration_lbl;
-  Label      *comment_lbl;
-  ScrollBox  *teams_lbox;
+  VBox              *info_box;
+  Label             *version_lbl;
+  Label             *date_lbl;
+  Label             *duration_lbl;
+  Label             *comment_lbl;
+  ScrollBox         *teams_lbox;
 
   void ClearReplayInfo();
   void ChangeReplay();
@@ -49,9 +49,8 @@ class ReplayMenu : public Menu
 
   bool signal_ok();
 
- public:
+public:
   ReplayMenu();
-  ~ReplayMenu();
 };
 
 #endif //REPLAY_MENU_H
