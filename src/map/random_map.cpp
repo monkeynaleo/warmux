@@ -37,7 +37,7 @@
 
 Surface * RandomElementList::GetRandomElement()
 {
-  if (size() == 0)
+  if (empty())
     return NULL;
   return (*this)[RandomSync().GetInt(0, size() - 1)];
 }

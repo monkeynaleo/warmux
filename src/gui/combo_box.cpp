@@ -38,7 +38,7 @@ ComboBox::ComboBox (const std::string &label,
                     const std::string &resource_id,
                     const Point2i &_size,
                     const std::vector<std::pair<std::string, std::string> > &choices,
-                    const std::string choice,
+                    const std::string& choice,
                     Font::font_size_t legend_fsize,
                     Font::font_size_t value_fsize)
   : m_choices(choices)

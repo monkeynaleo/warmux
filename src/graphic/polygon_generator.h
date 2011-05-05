@@ -29,24 +29,36 @@
 class Polygon;
 class DecoratedBox;
 
-class PolygonGenerator {
- public:
-   static const int MIN_SPACE_BETWEEN_POINT;
-   static Polygon * GenerateCircle(Double diameter, int nb_point);
-   static Polygon * GenerateDentedCircle(Double diameter, int nb_point, Double rand_offset);
-   static Polygon * GenerateRectangle(Double width, Double height);
-   static Polygon * GenerateRectangle(const Rectanglei & rectangle);
-   static Polygon * GenerateRectangle(const Point2d & orig, const Point2d & size);
-   static Polygon * GenerateRectangle(const Point2i & orig, const Point2i & size);
-   static Polygon * GenerateRoundedRectangle(Double width, Double height, Double edge);
-   static Polygon * GenerateRandomShape();
-   static Polygon * GenerateRandomTrapeze(const Double width, const Double height,
-                                          const Double x_rand_offset, const Double y_rand_offset,
-                                          const Double coef);
-   static Polygon * GeneratePie(Double diameter, int nb_point, Double angle, Double angle_offset = 0.0);
-   static Polygon * GeneratePartialTorus(Double diameter, Double min_diameter, int nb_point,
-                                         Double angle, Double angle_offset = 0.0);
-   static DecoratedBox * GenerateDecoratedBox(Double width, Double height);
+class PolygonGenerator
+{
+public:
+  static const int MIN_SPACE_BETWEEN_POINT = 50;
+  static Polygon * GenerateCircle(const Double& diameter, int nb_point)
+  {
+    return PolygonGenerator::GenerateDentedCircle(diameter, nb_point, ZERO);
+  }
+  static Polygon * GenerateDentedCircle(const Double& diameter, int nb_point, const Double& rand_offset);
+  static Polygon * GenerateRectangle(const Double& width, const Double& height);
+  static Polygon * GenerateRectangle(const Rectanglei & r)
+  {
+    return PolygonGenerator::GenerateRectangle(r.GetPosition(), r.GetSize());
+  }
+  static Polygon * GenerateRectangle(const Point2d & orig, const Point2d & size);
+  static Polygon * GenerateRectangle(const Point2i & orig, const Point2i & size)
+  {
+    return GenerateRectangle(Point2d(orig), Point2d(size));
+  }
+  static Polygon * GenerateRoundedRectangle(const Double& width, const Double& height, const Double& edge);
+  static Polygon * GenerateRandomShape();
+  static Polygon * GenerateRandomTrapeze(const Double& width, const Double& height,
+                                         const Double& x_rand_offset, const Double& y_rand_offset,
+                                         const Double& coef);
+  static Polygon * GeneratePie(const Double& diameter, int nb_point,
+                               const Double& angle, const Double& angle_offset = ZERO);
+  static Polygon * GeneratePartialTorus(Double diameter, Double min_diameter,
+                                        int nb_point, const Double& angle,
+                                        const Double& angle_offset = ZERO);
+  static DecoratedBox * GenerateDecoratedBox(const Double& width, const Double& height);
 };
 
 #endif /* POLYGON_GENERATOR_H */

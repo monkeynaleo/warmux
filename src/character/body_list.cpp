@@ -28,8 +28,6 @@
 #include "tool/resource_manager.h"
 #include "tool/xml_document.h"
 
-const std::string CONFIG_FN = "config.xml";
-
 BodyList::BodyList()
 {
 }
@@ -50,7 +48,7 @@ void BodyList::FreeMem()
 void BodyList::Load(const std::string & name)
 {
   std::string dir = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR + "body" + PATH_SEPARATOR + name + PATH_SEPARATOR;
-  std::string fn = dir + CONFIG_FN;
+  std::string fn = dir + "config.xml";
 
   XmlReader doc;
   if (!doc.Load(fn)) {

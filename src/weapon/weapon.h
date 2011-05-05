@@ -239,7 +239,7 @@ public:
 
   Double GetMaxStrength() const { return max_strength; };
 
-  const Point2i GetGunHolePosition() const;
+  Point2i GetGunHolePosition() const;
 
   // Choose a target.
   virtual void ChooseTarget (Point2i /*mouse_pos*/) { };
