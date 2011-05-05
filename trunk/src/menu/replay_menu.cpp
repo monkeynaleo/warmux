@@ -52,6 +52,7 @@ ReplayMenu::ReplayMenu()
   file_box = new VBox(w);
   file_box->SetPosition(size_x, size_y/20);
 #define ARG_LIST  fsize, Font::FONT_BOLD, primary_red_color, Text::ALIGN_LEFT_TOP, true
+#define ARG_LIST2 Font::FONT_MEDIUM, Font::FONT_BOLD, dark_gray_color, Text::ALIGN_LEFT_TOP, true
   file_box->AddWidget(new Label(_("Select a replay:"), w, ARG_LIST));
 
   replay_lbox = new FileListBox(Point2i(w-20, (9*size_y)/10 - fsize - 3*5));
@@ -69,41 +70,37 @@ ReplayMenu::ReplayMenu()
   info_box->AddWidget(new Label(_("Replay info"), w, ARG_LIST));
   Box *panel = new VBox(w-10);
   panel->SetMargin(0);
-  
+
   // Version
   panel->AddWidget(new Label(_("Version"), w-10, ARG_LIST));
-  version_lbl = new Label(" ", w-10, Font::FONT_MEDIUM);
+  version_lbl = new Label(" ", w-10, ARG_LIST2);
   panel->AddWidget(version_lbl);
 
   // Date
   panel->AddWidget(new Label(_("Date"), w-10, ARG_LIST));
-  date_lbl = new Label(" ", w-10, Font::FONT_MEDIUM);
+  date_lbl = new Label(" ", w-10, ARG_LIST2);
   panel->AddWidget(date_lbl);
-  
+
   // Duration
   panel->AddWidget(new Label(_("Duration"), w-10, ARG_LIST));
-  duration_lbl = new Label(" ", w-20, Font::FONT_MEDIUM);
+  duration_lbl = new Label(" ", w-20, ARG_LIST2);
   panel->AddWidget(duration_lbl);
 
   // Comment
   panel->AddWidget(new Label(_("Comment"), w-10, ARG_LIST));
-  comment_lbl = new Label(" ", w-10, Font::FONT_MEDIUM);
+  comment_lbl = new Label(" ", w-10, ARG_LIST2);
   panel->AddWidget(comment_lbl);
 
   // Teams
   panel->AddWidget(new Label(_("Teams"), w-10, ARG_LIST));
   teams_lbox = new ScrollBox(Point2i(w-10, (9*size_y)/10 - 6*(fsize+Font::FONT_MEDIUM+5)));
   panel->AddWidget(teams_lbox);
-  
+
   // Finish info box
   info_box->AddWidget(panel);
- 
+
   widgets.AddWidget(info_box);
   widgets.Pack();
-}
-
-ReplayMenu::~ReplayMenu()
-{
 }
 
 void ReplayMenu::ClearReplayInfo()
@@ -141,14 +138,14 @@ void ReplayMenu::ChangeReplay()
 
   if (!info)
     return; /* Bad problem */
-  
+
   // Below gets risky to analyze so error out
   if (!info->IsValid()) {
     const std::string& err = info->GetLastError();
 
     // Clean current state
     ClearReplayInfo();
-    
+
     Question question;
     fprintf(stderr, "Error: %s\n", err.c_str());
     question.Set(err, true, 0);
@@ -163,11 +160,11 @@ void ReplayMenu::ChangeReplay()
   version_lbl->SetText(text);
 
   // Date
-  time_t      t    = info->GetDate();
-  text = ctime(&t);
-  if (text.size() > 1)
-    text[text.size()-1] = 0;
-  date_lbl->SetText(text);
+  time_t      t        = info->GetDate();
+  struct tm * timeinfo = localtime(&t);
+  char buffer[20];
+  strftime(buffer, sizeof(buffer), "%Y-%m-%d %HH%Mm%S", timeinfo);
+  date_lbl->SetText(buffer);
 
   // Duration
   Uint32 time = (info->GetMillisecondsDuration()+500)/1000;
