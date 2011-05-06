@@ -45,7 +45,8 @@ Text::Text(const std::string & text,
   shadowColor(_shadowColor),
   font_size((Font::font_size_t)fontSize),
   font_style(fontStyle),
-  offset(0)
+  offset(0),
+  align(align)
 {
   center = (align==ALIGN_CENTER || align==ALIGN_CENTER_TOP || align==ALIGN_CENTER_BOTTOM);
   Init();
@@ -64,7 +65,8 @@ Text::Text() :
   font_size(Font::FONT_SMALL),
   font_style(Font::FONT_NORMAL),
   offset(0),
-  center(false)
+  center(false),
+  align(ALIGN_CENTER)
 {
 }
 
