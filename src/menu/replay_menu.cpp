@@ -42,34 +42,56 @@ ReplayMenu::ReplayMenu()
 {
   // Center the boxes!
   uint h      = GetMainWindow().GetHeight();
-  uint size_x = GetMainWindow().GetWidth()/20;
   uint size_y = h-50;
-  Font::font_size_t fsize = (h<=480) ? Font::FONT_MEDIUM : Font::FONT_BIG;
+  float z     = size_y/430.0;
+  uint border = 5*z;
+  uint size_x = GetMainWindow().GetWidth()/19;
+  uint w      = 8*size_x - 2*border;
+  Font::font_size_t fsize1 = Font::GetFixedSize(z * 18);
+  Font::font_size_t fsize2 = Font::GetFixedSize(z * 16);
 
+#define ARG_LIST  fsize1, Font::FONT_BOLD, primary_red_color, Text::ALIGN_LEFT_TOP, true
+#define ARG_LIST2 fsize2, Font::FONT_BOLD, dark_gray_color, Text::ALIGN_LEFT_TOP, false
 
   //Replay files
-  uint  w = 8*size_x;
-  file_box = new VBox(w);
-  file_box->SetPosition(size_x, size_y/20);
-#define ARG_LIST  fsize, Font::FONT_BOLD, primary_red_color, Text::ALIGN_LEFT_TOP, true
-#define ARG_LIST2 Font::FONT_MEDIUM, Font::FONT_BOLD, dark_gray_color, Text::ALIGN_LEFT_TOP, true
+  VBox *vbox = new VBox(8*size_x, true);
+  vbox->SetPosition(size_x, size_y/20);
+  widgets.AddWidget(vbox);
+
+  file_box = new VBox(w, false);
+  file_box->SetBorder(border);
+  file_box->SetSelfBackgroundColor(transparent_color);
+  vbox->AddWidget(file_box);
   file_box->AddWidget(new Label(_("Select a replay:"), w, ARG_LIST));
 
-  replay_lbox = new FileListBox(Point2i(w-20, (9*size_y)/10 - fsize - 3*5));
+  replay_lbox = new FileListBox(Point2i(w-20, (9*size_y)/10 - fsize1 - 3*5));
   replay_lbox->SetBorder(defaultOptionColorRect, 2);
   // Windows may SFN => uppercase extensions
   replay_lbox->AddExtensionFilter("WRF");
   replay_lbox->AddExtensionFilter("wrf");
   replay_lbox->StartListing();
   file_box->AddWidget(replay_lbox);
-  widgets.AddWidget(file_box);
 
   //Info
-  info_box = new VBox(w);
-  info_box->SetPosition(11*size_x, size_y/20);
+  vbox = new VBox(8*size_x);
+  vbox->SetPosition(10*size_x, size_y/20);
+  widgets.AddWidget(vbox);
+
+  info_box = new VBox(w, false);
+  info_box->SetBorder(border);
+  info_box->SetSelfBackgroundColor(transparent_color);
+  vbox->AddWidget(info_box);
+
   info_box->AddWidget(new Label(_("Replay info"), w, ARG_LIST));
-  Box *panel = new VBox(w-10);
+
+  vbox = new VBox(w-10, true);
+  info_box->AddWidget(vbox);
+
+  Box *panel = new VBox(w-10-2*border, false);
+  panel->SetBorder(border);
+  panel->SetSelfBackgroundColor(transparent_color);
   panel->SetMargin(0);
+  vbox->AddWidget(panel);
 
   // Version
   panel->AddWidget(new Label(_("Version"), w-10, ARG_LIST));
@@ -93,13 +115,9 @@ ReplayMenu::ReplayMenu()
 
   // Teams
   panel->AddWidget(new Label(_("Teams"), w-10, ARG_LIST));
-  teams_lbox = new ScrollBox(Point2i(w-10, (9*size_y)/10 - 6*(fsize+Font::FONT_MEDIUM+5)));
+  teams_lbox = new ScrollBox(Point2i(w-10, (9*size_y)/10 - 6*(fsize1+fsize2)- 4*border -2*5));
   panel->AddWidget(teams_lbox);
 
-  // Finish info box
-  info_box->AddWidget(panel);
-
-  widgets.AddWidget(info_box);
   widgets.Pack();
 }
 
