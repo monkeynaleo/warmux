@@ -29,8 +29,7 @@ Label::Label(const std::string & text,
              Text::Alignment align,
              bool shadowed,
              const Color & shadowColor)
-  : Text(text, fontColor, fontSize, fontStyle, shadowed, shadowColor)
-  , align(align)
+  : Text(text, fontColor, fontSize, fontStyle, shadowed, shadowColor, false, align)
 {
   size.x = maxWidth;
   SetMaxWidth(size.x);
@@ -40,15 +39,15 @@ Label::Label(const std::string & text,
 
 Label::Label(const Point2i & size)
   : Widget(size, false)
-  , align(Text::ALIGN_LEFT_TOP)
 {
+  align = Text::ALIGN_LEFT_TOP;
 }
 
 Label::Label(Profile * profile,
              const xmlNode * labelNode)
   : Widget(profile, labelNode)
-  , align(Text::ALIGN_LEFT_TOP)
 {
+  align = Text::ALIGN_LEFT_TOP;
 }
 
 Label::~Label()

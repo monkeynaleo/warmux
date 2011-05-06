@@ -29,8 +29,6 @@
 
 class Label : public Text, public Widget
 {
-  Text::Alignment align;
-
 public:
   Label(const std::string & label,
         uint max_width,

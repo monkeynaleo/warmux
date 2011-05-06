@@ -38,7 +38,7 @@ class FileListBox : public ItemBox
   bool MatchFilter(const char *name) const;
 
 public:
-  FileListBox(const Point2i &size, bool list_files = true)
+  FileListBox(const Point2i &size, bool list = true)
     : ItemBox(size, false), list_files(list) { }
   ~FileListBox() { Clear(); }
 
