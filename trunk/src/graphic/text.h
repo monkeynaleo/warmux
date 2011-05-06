@@ -57,6 +57,7 @@ protected:
   Font::font_style_t font_style;
   int offset;
   bool center;
+  Alignment align;
 
   virtual void Render();
   static int GetLineHeight(const Font *f) { return (7*f->GetHeight())>>3; }
