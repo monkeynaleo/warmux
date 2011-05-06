@@ -28,17 +28,6 @@
 #include "gui/file_list_box.h"
 #include "tool/ansi_convert.h"
 
-FileListBox::FileListBox(const Point2i &size, bool list)
-  : ItemBox(size, false)
-  , list_files(list)
-{
-}
-
-FileListBox::~FileListBox()
-{
-  Clear();
-}
-
 void FileListBox::Empty()
 {
   for (uint i=0; i<m_values.size(); i++) {

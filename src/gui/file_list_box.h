@@ -38,8 +38,9 @@ class FileListBox : public ItemBox
   bool MatchFilter(const char *name) const;
 
 public:
-  FileListBox(const Point2i &size, bool list_files = true);
-  ~FileListBox();
+  FileListBox(const Point2i &size, bool list_files = true)
+    : ItemBox(size, false), list_files(list) { }
+  ~FileListBox() { Clear(); }
 
   void StartListing(const char* dirname = NULL);
   const std::string& GetCurrentFolder() const { return new_path; }
