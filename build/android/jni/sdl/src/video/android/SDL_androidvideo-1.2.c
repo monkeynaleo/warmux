@@ -47,8 +47,8 @@
 
 #define _THIS	SDL_VideoDevice *this
 
-#define DEBUGOUT(...)
-//#define DEBUGOUT(...) __android_log_print(ANDROID_LOG_INFO, "libSDL", __VA_ARGS__)
+//#define DEBUGOUT(...)
+#define DEBUGOUT(...) __android_log_print(ANDROID_LOG_INFO, "libSDL", __VA_ARGS__)
 
 static int ANDROID_VideoInit(_THIS, SDL_PixelFormat *vformat);
 static SDL_Rect **ANDROID_ListModes(_THIS, SDL_PixelFormat *format, Uint32 flags);
@@ -277,7 +277,7 @@ SDL_Rect **ANDROID_ListModes(_THIS, SDL_PixelFormat *format, Uint32 flags)
 }
 
 SDL_Surface *ANDROID_SetVideoMode(_THIS, SDL_Surface *current,
-				int width, int height, int bpp, Uint32 flags)
+				                          int width, int height, int bpp, Uint32 flags)
 {
 	SDL_PixelFormat format;
 	int bpp1;
@@ -355,7 +355,7 @@ SDL_Surface *ANDROID_SetVideoMode(_THIS, SDL_Surface *current,
 	}
 
 	/* Allocate the new pixel format for the screen */
-    SDL_memset(&format, 0, sizeof(format));
+  SDL_memset(&format, 0, sizeof(format));
 	SDL_PixelFormatEnumToMasks( SDL_PIXELFORMAT_RGB565, &bpp1,
 								&format.Rmask, &format.Gmask,
 								&format.Bmask, &format.Amask );
@@ -387,7 +387,8 @@ void ANDROID_VideoQuit(_THIS)
 
 	if( ! sdl_opengl )
 	{
-		DEBUGOUT("ANDROID_VideoQuit() in HwSurfaceCount %d HwSurfaceList %p", HwSurfaceCount, HwSurfaceList);
+		DEBUGOUT("ANDROID_VideoQuit() in HwSurfaceCount %d HwSurfaceList %p video %p",
+             HwSurfaceCount, HwSurfaceList, SDL_CurrentVideoSurface);
 		HwSurfaceCount = 0;
 		if(HwSurfaceList)
 			SDL_free(HwSurfaceList);
@@ -403,8 +404,9 @@ void ANDROID_VideoQuit(_THIS)
 			SDL_CurrentVideoSurface->pixels = NULL;
 		}
 		SDL_CurrentVideoSurface = NULL;
-		if(SDL_VideoWindow)
-			SDL_DestroyWindow(SDL_VideoWindow);
+
+		//if(SDL_VideoWindow)
+		//	SDL_DestroyWindow(SDL_VideoWindow);
 		SDL_VideoWindow = NULL;
 	}
 
@@ -517,7 +519,14 @@ static void ANDROID_FreeHWSurface(_THIS, SDL_Surface *surface)
 		return;
 	}
 
-	if( !surface->hwdata )
+  if( !HwSurfaceList )
+  {
+	  DEBUGOUT("ANDROID_FreeHWSurface() surface %p w %d h %d with list empty",
+             surface, surface->w, surface->h);
+    return;
+  }
+
+	if( !surface || !surface->hwdata )
 		return;
 	SDL_DestroyTexture((struct SDL_Texture *)surface->hwdata);
 
