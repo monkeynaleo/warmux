@@ -94,26 +94,25 @@ bool NetworkServer::HandShake(WSocket& client_socket,
 
 void NetworkServer::WaitActionSleep()
 {
-  if (server_socket.IsConnected()) {
+  if (!server_socket.IsConnected())
+    return;
 
-    // Check for an incoming connection
-    WSocket* incoming = server_socket.LookForClient();
-    if (incoming) {
-      std::string nickname;
-      uint player_id = NextPlayerId();
+  // Check for an incoming connection
+  WSocket* incoming = server_socket.LookForClient();
+  if (incoming) {
+    std::string nickname;
+    uint player_id = NextPlayerId();
 
-      if (!HandShake(*incoming, nickname, player_id))
-        return;
+    if (!HandShake(*incoming, nickname, player_id))
+      return;
 
-      socket_set->AddSocket(incoming);
+    socket_set->AddSocket(incoming);
 
-      DistantComputer* client = new DistantComputer(incoming, nickname, player_id);
-      AddRemoteHost(client);
-      SendInitialGameInfo(client, player_id);
+    DistantComputer* client = new DistantComputer(incoming, nickname, player_id);
+    AddRemoteHost(client);
 
-      if (GetNbPlayersConnected() >= max_nb_players)
-        RejectIncoming();
-    }
+    if (GetNbPlayersConnected() >= max_nb_players)
+      RejectIncoming();
   }
 }
 
