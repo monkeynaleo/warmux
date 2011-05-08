@@ -33,11 +33,13 @@ class SpinButtonWithPicture;
 class Label;
 class PictureWidget;
 class TextBox;
+class NullWidget;
 
 class TeamBox : public HBox
 {
   std::string previous_player_name; // only for network
   std::string ai_name;
+  uint        group;
 
   Surface player_local_ai_surf;
   Surface player_local_human_surf;
@@ -51,6 +53,7 @@ class TeamBox : public HBox
   Button * next_custom_team;
   Button * previous_custom_team;
   SpinButtonWithPicture * nb_characters;
+  NullWidget *nullw;
 
   std::vector<CustomTeam *> custom_team_list;
   unsigned custom_team_current_id;
@@ -61,7 +64,7 @@ class TeamBox : public HBox
   void UpdatePlayerNameColor();
 
  public:
-  TeamBox(const std::string& player_name, const Point2i &size);
+  TeamBox(const std::string& player_name, const Point2i &size, uint group=0);
 
   void SetTeam(Team& _team, bool read_team_values=false);
   void SetAIName(const std::string name);
@@ -72,6 +75,9 @@ class TeamBox : public HBox
   void ValidOptions() const;
 
   bool IsLocal() const;
+
+  uint GetGroup() const { return group; }
+  void SetGroup(uint group);
 
   virtual bool Update(const Point2i &mousePosition,
                       const Point2i &lastMousePosition);
