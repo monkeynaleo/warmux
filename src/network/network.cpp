@@ -364,36 +364,36 @@ void Network::DisconnectNetwork()
 //-----------------------------------------------------------------------------
 
 // Send Messages
-void Network::SendActionToAll(const Action& a) const
+void Network::SendActionToAll(const Action& a, bool lock) const
 {
   MSG_DEBUG("network.traffic", "Send action %s to all remote computers",
             ActionHandler::GetInstance()->GetActionName(a.GetType()).c_str());
 
-  SendAction(a, NULL, false);
+  SendAction(a, NULL, false, lock);
 }
 
-void Network::SendActionToOne(const Action& a, DistantComputer* client) const
+void Network::SendActionToOne(const Action& a, DistantComputer* client, bool lock) const
 {
   MSG_DEBUG("network.traffic", "Send action %s to %s",
             ActionHandler::GetInstance()->GetActionName(a.GetType()).c_str(),
             client->ToString().c_str());
 
-  SendAction(a, client, true);
+  SendAction(a, client, true, lock);
 }
 
-void Network::SendActionToAllExceptOne(const Action& a, DistantComputer* client) const
+void Network::SendActionToAllExceptOne(const Action& a, DistantComputer* client, bool lock) const
 {
   MSG_DEBUG("network.traffic","Send action %s to all EXCEPT %s",
             ActionHandler::GetInstance()->GetActionName(a.GetType()).c_str(),
             client->ToString().c_str());
 
-  SendAction(a, client, false);
+  SendAction(a, client, false, lock);
 }
 
 // if (client == NULL) sending to every clients
 // if (clt_as_rcver) sending only to client 'client'
 // if (!clt_as_rcver) sending to all EXCEPT client 'client'
-void Network::SendAction(const Action& a, DistantComputer* client, bool clt_as_rcver) const
+void Network::SendAction(const Action& a, DistantComputer* client, bool clt_as_rcver, bool lock) const
 {
   char* packet;
   int size;
@@ -415,7 +415,7 @@ void Network::SendAction(const Action& a, DistantComputer* client, bool clt_as_r
     client->SendData(packet, size);
   } else {
 
-    SDL_LockMutex(cpus_lock);
+    if (lock) SDL_LockMutex(cpus_lock);
     for (std::list<DistantComputer*>::const_iterator it = cpu.begin();
          it != cpu.end(); it++) {
 
@@ -423,7 +423,7 @@ void Network::SendAction(const Action& a, DistantComputer* client, bool clt_as_r
         (*it)->SendData(packet, size);
       }
     }
-    SDL_UnlockMutex(cpus_lock);
+    if (lock) SDL_UnlockMutex(cpus_lock);
   }
 
   free(packet);
@@ -571,19 +571,20 @@ std::vector<uint> Network::GetCommonMaps()
   return list;
 }
 
-
 void Network::SendMapsList()
 {
   MapsList *map_list = MapsList::GetInstance();
-  std::list<DistantComputer*> &list = GetRemoteHosts();
-  if (list.empty())
+  SDL_LockMutex(cpus_lock);
+  if (cpu.empty()) {
+    SDL_UnlockMutex(cpus_lock);
     return;
+  }
 
   if (IsGameMaster()) {
     // We are the game master: the received list must be used to determine
     // the common list and inform *all* distant computers
     // Furthermore, there should be no additional integer for the currently selected
-    std::vector<uint> common_list = GetCommonMaps();
+    std::vector<uint> common_list = DistantComputer::GetCommonMaps(cpu);
     if (common_list.empty()) {
       // No host, create a ful list list for ourselves at least
       common_list.resize(map_list->lst.size());
@@ -608,7 +609,8 @@ void Network::SendMapsList()
       a.Push(map_list->lst[common_list[i]]->GetRawName());
     //map_list->FillActionMenuSetMap(a);
 
-    SendActionToAll(a);
+    SendActionToAll(a, false);
+    SDL_UnlockMutex(cpus_lock); // Done playing with cpus
 
     if (network_menu) {
       // Apply locally: list and current active one
@@ -619,7 +621,7 @@ void Network::SendMapsList()
 
     return;
   }
-  DistantComputer* host = list.front();
+  DistantComputer* host = cpu.front();
   MSG_DEBUG("action_handler.map", "Sending list to %p\n", host);
   Action a(Action::ACTION_GAME_SET_MAP_LIST);
   a.Push(map_list->lst.size());
@@ -627,5 +629,6 @@ void Network::SendMapsList()
     a.Push(map_list->lst[i]->GetRawName());
 
   // We only send to game master, which should be the only one anyway
-  SendActionToOne(a, host);
+  SendActionToOne(a, host, false);
+  SDL_UnlockMutex(cpus_lock); // Done playing with cpus
 }
