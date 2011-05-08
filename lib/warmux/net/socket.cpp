@@ -446,6 +446,11 @@ bool WSocket::SendBuffer_NoLock(const void* data, size_t len)
   if (!IsConnected())
     return false;
 
+  if (!data) {
+    fprintf(stderr, "Not sending a NULL buffer of size %u\n", (uint)len);
+    return false;
+  }
+
   // cast is needed to please SDL that does not use const keyword.
   int size = SDLNet_TCP_Send_noBlocking(socket, (void*)(data), len);
   if (size < int(len)) {
