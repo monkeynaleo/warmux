@@ -29,9 +29,12 @@
 #include "game/game_mode.h"
 #include "graphic/video.h"
 #include "gui/tabs.h"
+#include "gui/question.h"
 #include "gui/combo_box.h"
 #include "include/app.h"
 #include "tool/resource_manager.h"
+#include "team/team.h"
+#include "team/teams_list.h"
 
 static const uint MARGIN_TOP    = 5;
 static const uint MARGIN_SIDE   = 5;
@@ -124,6 +127,36 @@ void GameMenu::SaveOptions()
 bool GameMenu::signal_ok()
 {
   SaveOptions();
+
+  const std::vector<Team*>& playing_list = GetTeamsList().playing_list;
+  std::vector<Team*>::const_iterator it  = playing_list.begin();
+
+  if (playing_list.size() <= 1) {
+    Question q(Question::WARNING);
+    q.Set(Format(ngettext("There is only %u team.",
+                          "There are only %u teams.",
+                          (uint)playing_list.size())), true, 0);
+    q.Ask();
+    return false;
+  }
+
+  bool found       = false;
+  uint first_group = (*it)->GetGroup();
+  for (; it != playing_list.end(); it++) {
+    if ((*it)->GetGroup() != first_group) {
+      found = true;
+      break;
+    }
+  }
+
+
+  if (!found) {
+    Question q(Question::WARNING);
+    q.Set(_("Please select a group different from your opponent!"), true, 0);
+    q.Ask();
+    return false;
+  }
+
   play_ok_sound();
   Game::UpdateGameRules()->Start();
   return true;
