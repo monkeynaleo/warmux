@@ -32,6 +32,7 @@
 #include "team/team.h"
 #include "team/team_energy.h"
 #include "team/teams_list.h"
+#include "tool/ansi_convert.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -106,17 +107,18 @@ bool TeamsList::LoadOneTeam(const std::string &dir, const std::string &team_name
     return false;
 
   // Add the team
+  std::string real_name = ANSIToUTF8(dir, team_name);
   std::string error;
-  Team *team = Team::LoadTeam(dir, team_name, error);
+  Team *team = Team::LoadTeam(dir, real_name, error);
   if (team) {
     full_list.push_back(team);
-    std::cout << ((1<full_list.size())?", ":" ") << team_name;
+    std::cout << ((1<full_list.size())?", ":" ") << real_name;
     std::cout.flush();
     return true;
   }
 
   std::cerr << std::endl
-    << Format(_("Error loading team :")) << team_name <<":"<< error
+    << Format(_("Error loading team :")) << real_name <<":"<< error
     << std::endl;
   return false;
 }
