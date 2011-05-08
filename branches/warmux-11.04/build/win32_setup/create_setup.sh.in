@@ -31,7 +31,7 @@ else
   SEP="\\"
 fi
 
-VIPV="11.04"
+VIPV="11.04.1"
 
 mkdir -p $DEST
 
@@ -52,7 +52,7 @@ cat > $NSIS <<EOF
 
 Name "Warmux"
 ;Version resource
-VIProductVersion        "0.$VIPV.0"
+VIProductVersion        "0.$VIPV"
 VIAddVersionKey         "FileDescription"       "Warmux Installer"
 VIAddVersionKey         "ProductName"           "Warmux"
 VIAddVersionKey         "FileVersion"           "@PACKAGE_VERSION@"
