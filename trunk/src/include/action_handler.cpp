@@ -682,6 +682,7 @@ static void Action_Game_UpdateTeam(Action *a)
   team_cfg.player_name = a->PopString();
   team_cfg.nb_characters = uint(a->PopInt());
   team_cfg.ai = a->PopString();
+  team_cfg.group = a->PopInt();
 
   Team* the_team = GetTeamsList().UpdateTeam(old_team_id, team_cfg);
   ASSERT(the_team != NULL);

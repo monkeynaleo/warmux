@@ -344,6 +344,7 @@ void TeamBox::UpdateTeam(const std::string& old_team_id) const
       a->Push(associated_team->GetPlayerName());
       a->Push(int(associated_team->GetNbCharacters()));
       a->Push(associated_team->GetAIName());
+      a->Push(group);
       associated_team->PushCustomCharactersNamesIntoAction(a);
       ActionHandler::GetInstance()->NewAction(a);
     }
