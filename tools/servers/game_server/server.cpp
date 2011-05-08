@@ -52,7 +52,9 @@ NetworkGame::CloseConnection(std::list<DistantComputer*>::iterator closed)
   std::list<DistantComputer*>::iterator it;
   DistantComputer *host = *closed;
 
-  start_waiting = SDL_GetTicks();
+  if (host == waited)
+    ResetWaiting();
+
   it = cpulist.erase(closed);
 
   DPRINT(INFO, "[Game %s] Client disconnected: %s - total: %zd", game_name.c_str(),
@@ -291,6 +293,26 @@ void NetworkGame::ForwardPacket(const char *buffer, size_t len, DistantComputer*
     }
   }
 }
+
+void NetworkGame::InformDisconnection(DistantComputer *host)
+{
+  Action a(Action::ACTION_INFO_CLIENT_DISCONNECT);
+  a.Push(host->ToString());
+  a.Push(int(host->GetPlayers().size()));
+
+  std::list<Player>::const_iterator player_it;
+  for (player_it = host->GetPlayers().begin(); player_it != host->GetPlayers().end(); player_it++) {
+    a.Push(int(player_it->GetId()));
+  }
+
+  if (host == waited)
+    ResetWaiting();
+
+
+  SendActionToAll(a); // host is already removed from the list
+}
+
+
 
 GameServer::GameServer() :
   game_name("dedicated"),
@@ -598,15 +620,7 @@ void WARMUX_ConnectHost(DistantComputer& host)
 
 void WARMUX_DisconnectHost(DistantComputer& host)
 {
-  Action a(Action::ACTION_INFO_CLIENT_DISCONNECT);
-  a.Push(host.ToString());
-  a.Push(int(host.GetPlayers().size()));
-
-  std::list<Player>::const_iterator player_it;
-  for (player_it = host.GetPlayers().begin(); player_it != host.GetPlayers().end(); player_it++) {
-    a.Push(int(player_it->GetId()));
-  }
-  GameServer::GetInstance()->GetGame(host.GetGameId()).SendActionToAll(a); // host is already removed from the list
+  GameServer::GetInstance()->GetGame(host.GetGameId()).InformDisconnection(&host);
 }
 
 void WARMUX_DisconnectPlayer(Player& /*player*/)
