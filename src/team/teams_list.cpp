@@ -452,7 +452,7 @@ void TeamsList::AddTeam(Team* the_team, int pos, const ConfigTeam &the_team_cfg,
   the_team->SetRemote(!is_local);
   UpdateTeam(the_team, the_team_cfg);
 
-  selection.push_back (pos);
+  selection.push_back(pos);
   playing_list.push_back(the_team);
 
   active_team = playing_list.begin();
@@ -486,6 +486,7 @@ void TeamsList::UpdateTeam(Team* the_team, const ConfigTeam &the_team_cfg)
   the_team->SetPlayerName(the_team_cfg.player_name);
   the_team->SetNbCharacters(the_team_cfg.nb_characters);
   the_team->SetAIName(the_team_cfg.ai);
+  the_team->SetGroup(the_team_cfg.group);
 }
 
 Team* TeamsList::UpdateTeam(const std::string& old_team_id,
@@ -499,8 +500,8 @@ Team* TeamsList::UpdateTeam(const std::string& old_team_id,
   if (old_team_id == the_team_cfg.id) {
     // this is a simple update
 
-    the_team = FindById (the_team_cfg.id, pos);
-    if (the_team != NULL) {
+    the_team = FindById(the_team_cfg.id, pos);
+    if (the_team) {
       UpdateTeam(the_team, the_team_cfg);
     } else {
       Error(Format(_("Can't find team %s!"), the_team_cfg.id.c_str()));
