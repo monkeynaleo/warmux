@@ -117,7 +117,7 @@ void Action::Resize(uint n)
   if (n < m_bufsize)
     return;
   if (m_write) {
-    uint offset = m_write - m_var;
+    uint offset = uint(m_write - m_var);
     m_var = (uint8_t*)realloc(m_var, n);
     m_write = m_var + offset;
   } else {
