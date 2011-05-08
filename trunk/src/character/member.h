@@ -31,7 +31,7 @@
 typedef struct attachment
 {
   Point2i point;
-  int     radius;
+  Double  radius;
   Double  angle;
 
   attachment(const Point2i& val)
@@ -39,11 +39,11 @@ typedef struct attachment
 
   void SetAnchor(const Point2i& anchor)
   {
-    Point2d child_delta = point - anchor;
-    radius = child_delta.x*child_delta.x + child_delta.y*child_delta.y;
-    if (radius) {
-      radius = sqrt_approx(Double(radius));
-      angle = child_delta.ComputeAngle();
+    Point2i child_delta = point - anchor;
+    uint r = child_delta.x*child_delta.x + child_delta.y*child_delta.y;
+    if (r) {
+      radius = sqrt_approx(Double(r));
+      angle  = child_delta.ComputeAngle();
     }
   }
 
