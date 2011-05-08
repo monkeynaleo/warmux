@@ -32,16 +32,6 @@ NetworkGame::NetworkGame(const std::string& _game_name, const std::string& _pass
   ResetWaiting();
 }
 
-const std::string& NetworkGame::GetName() const
-{
-  return game_name;
-}
-
-const std::string& NetworkGame::GetPassword() const
-{
-  return password;
-}
-
 void NetworkGame::AddCpu(DistantComputer* cpu)
 {
   cpulist.push_back(cpu);
