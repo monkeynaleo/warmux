@@ -345,10 +345,8 @@ void LocalTeamsSelectionBox::ValidTeamsSelection()
         int index = -1;
         teams_selections.at(i)->ValidOptions();
         GetTeamsList().FindById(teams_selections.at(i)->GetTeam()->GetId(), index);
-        if (index > -1)
-        {
+        if (index > -1) {
           selection.push_back(uint(index));
-
         }
       }
     }
