@@ -80,6 +80,10 @@ class Network : public Singleton<Network>
   Player player;
   bool turn_master_player;
 
+  void CheckOneHostTeams(Player& player, DistantComputer* new_host,
+                         const std::vector<Team*>& local_list,
+                         const std::vector<uint>& common_list);
+
 protected:
   bool game_master_player;
   WNet::net_game_state_t state;
@@ -161,6 +165,9 @@ public:
 
   std::vector<uint> GetCommonMaps();
   void SendMapsList();
+
+  std::vector<uint> GetCommonTeams();
+  void SendTeamsList();
 };
 
 //-----------------------------------------------------------------------------

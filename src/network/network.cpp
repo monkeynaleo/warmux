@@ -632,3 +632,135 @@ void Network::SendMapsList()
   SendActionToOne(a, host, false);
   SDL_UnlockMutex(cpus_lock); // Done playing with cpus
 }
+
+std::vector<uint> Network::GetCommonTeams()
+{
+  SDL_LockMutex(cpus_lock);
+  std::vector<uint> list = DistantComputer::GetCommonTeams(cpu);
+  SDL_UnlockMutex(cpus_lock);
+
+  return list;
+}
+
+void Network::CheckOneHostTeams(Player& player, DistantComputer* new_host,
+                                const std::vector<Team*>& local_list,
+                                const std::vector<uint>& common_list)
+{
+  const std::list<ConfigTeam>& configs         = player.GetTeams();
+  std::list<ConfigTeam>::const_iterator config = configs.begin();
+
+  // Check current player list of teams
+  while (config != configs.end()) {
+
+    // Search if the common list holds current team
+    bool found = false;
+    for (uint i=0; i<common_list.size(); i++) {
+      if (config->id == local_list[common_list[i]]->GetId()) {
+        found = true;
+        break;
+      }
+    }
+
+    // If not found, remove corresponding team
+    if (!found) {
+      std::string id = config->id;
+      MSG_DEBUG("action_handler.team", "Deleting team %s!\n", id.c_str());
+
+      Action *a = new Action(Action::ACTION_GAME_DEL_TEAM);
+      a->Push(int(player.GetId()));
+      a->Push(id);
+
+      SendActionToAllExceptOne(*a, new_host, false);
+      
+      // We need to immediately remove the team, but this invalidates
+      // the current iterator, so we increment it before the config is removed
+      ++config;
+      player.RemoveTeam(id);
+      GetTeamsList().DelTeam(id);
+      if (network_menu)
+        network_menu->DelTeamCallback(id);
+    } else
+      ++config;
+  }
+}
+
+void Network::SendTeamsList()
+{
+  TeamsList *team_list = TeamsList::GetInstance();
+  SDL_LockMutex(cpus_lock);
+  if (cpu.empty()) {
+    SDL_UnlockMutex(cpus_lock);
+    return;
+  }
+
+  // Build vector of teams
+  std::vector<Team*> local_list;
+  const std::list<Team *>& flist = team_list->full_list; 
+  for (std::list<Team *>::const_iterator it = flist.begin(); it != flist.end(); ++it)
+    local_list.push_back(*it);
+
+  DistantComputer* host = cpu.back();
+  if (IsGameMaster()) {
+    // We are the game master: the received list must be used to determine
+    // the common list and inform *all* distant computers
+    // Furthermore, there should be no additional integer for the currently selected
+    std::vector<uint> common_list = DistantComputer::GetCommonTeams(cpu);
+    bool for_all = common_list.size() == team_list->full_list.size();
+    if (common_list.empty()) {
+      uint nb = team_list->full_list.size();
+      // No host, create a ful list list for ourselves at least
+      common_list.resize(nb);
+      for (uint i=0; i<nb; i++)
+        common_list[i] = i;
+    }
+    MSG_DEBUG("action_handler.team", "Common list has now %u teams\n", common_list.size());
+
+    ActionHandler *ah = ActionHandler::GetInstance();
+
+    // Browse the hosts
+    std::list<DistantComputer*>::iterator it = cpu.begin();
+    for (; it != cpu.end(); it++) {
+      std::list<Player>&          players = (*it)->GetPlayers();
+      std::list<Player>::iterator cur     = players.begin();
+
+      // Check current host' players
+      for (; cur != players.end(); cur++)
+        CheckOneHostTeams(*cur, host, local_list, common_list);
+    }
+
+    // Check also ourselves
+    CheckOneHostTeams(player, host, local_list, common_list);
+
+    // All teams/player removal have been requested, maybe we should run
+    // the action handler now, but we'll do that latter
+
+    if (network_menu)
+      network_menu->SetTeamsCallback(common_list);
+
+    Action a(Action::ACTION_GAME_FORCE_TEAM_LIST);
+
+    a.Push(common_list.size());
+    for (uint i=0; i<common_list.size(); i++)
+      a.Push(local_list[common_list[i]]->GetId());
+
+    SendActionToAll(a, false);
+    int id = host->GetPlayers().back().GetId();
+    SDL_UnlockMutex(cpus_lock); // Done playing with cpus
+    SendInitialGameInfo(host, id);
+
+    return;
+  }
+
+  SDL_UnlockMutex(cpus_lock);
+
+  MSG_DEBUG("action_handler.team", "Sending list of %u elements to %p\n",
+            (uint)local_list.size(), host);
+  Action a(Action::ACTION_GAME_SET_TEAM_LIST);
+  a.Push(local_list.size());
+  for (uint i=0; i<local_list.size(); i++)
+    a.Push(local_list[i]->GetId());
+
+  // We only send to game master, which should be the only one anyway
+  SendActionToOne(a, host, false);
+  SDL_UnlockMutex(cpus_lock); // Done playing with cpus
+}
