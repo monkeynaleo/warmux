@@ -36,6 +36,7 @@
 #include "gui/label.h"
 #include "gui/msg_box.h"
 #include "gui/picture_widget.h"
+#include "gui/question.h"
 #include "gui/spin_button.h"
 #include "gui/tabs.h"
 #include "gui/talk_box.h"
@@ -250,14 +251,40 @@ void NetworkMenu::PrepareForNewGame()
 
 bool NetworkMenu::signal_ok()
 {
+  const std::vector<Team*>& playing_list = GetTeamsList().playing_list;
+  std::vector<Team*>::const_iterator it  = playing_list.begin();
+
+  if (playing_list.size() <= 1) {
+    Question q(Question::WARNING);
+    q.Set(Format(ngettext("There is only %i team.",
+                          "There are only %i teams.",
+                          playing_list.size())), true, 0);
+    q.Ask();
+    goto error;
+  }
+
+  bool found       = false;
+  uint first_group = (*it)->GetGroup();
+  for (; it != playing_list.end(); it++) {
+    if ((*it)->GetGroup() != first_group) {
+      found = true;
+      break;
+    }
+  }
+
+  if (!found) {
+    Question q(Question::WARNING);
+    q.Set(_("Please select a group different from your opponent!"), true, 0);
+    q.Ask();
+    goto error;
+  }
+
   if (!Network::GetInstance()->IsGameMaster()) {
     // Check the user have selected a team:
-    bool found = false;
+    found = false;
 
-    for (std::vector<Team*>::iterator team = GetTeamsList().playing_list.begin();
-         team != GetTeamsList().playing_list.end();
-         team++) {
-      if ((*team)->IsLocalHuman()) {
+    for (it = playing_list.begin(); it != playing_list.end(); it++) {
+      if ((*it)->IsLocalHuman()) {
         found = true;
         break;
       }
@@ -276,13 +303,6 @@ bool NetworkMenu::signal_ok()
     }
 
   } else {
-    if (GetTeamsList().playing_list.size() <= 1) {
-      msg_box->NewMessage(Format(ngettext("There is only %i team.",
-                                          "There are only %i teams.",
-                                          GetTeamsList().playing_list.size()),
-                                 GetTeamsList().playing_list.size()), c_red);
-      goto error;
-    }
     if (Network::GetInstance()->GetNbPlayersConnected() == 0) {
       msg_box->NewMessage(_("You are alone. :-/"), c_red);
       goto error;
