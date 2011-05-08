@@ -189,6 +189,7 @@ NetworkClient::ClientConnect(const std::string &host, const std::string& port)
 
   AddRemoteHost(server);
   SendMapsList();
+  SendTeamsList();
 
   NetworkThread::Start();
   return CONNECTED;
