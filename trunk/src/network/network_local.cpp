@@ -21,12 +21,6 @@
 
 #include "network/network_local.h"
 
-NetworkLocal::NetworkLocal() : Network("-", "") {}
-
-NetworkLocal::~NetworkLocal() {}
-
-void NetworkLocal::SendAction(const Action& /*a*/, DistantComputer* /*client*/, bool /*clt_as_rcver*/) const {}
-
-void NetworkLocal::CloseConnection(std::list<DistantComputer*>::iterator /*closed*/)
+NetworkLocal::NetworkLocal() : Network("-", "")
 {
 }
