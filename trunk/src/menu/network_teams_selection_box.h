@@ -65,5 +65,6 @@ public:
   }
   bool HasOpenTeamSlot();
   void RequestTeam();
+  void ChangeTeamListCallback(const std::vector<uint>& list);
 };
 #endif

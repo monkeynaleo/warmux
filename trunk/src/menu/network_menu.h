@@ -85,6 +85,7 @@ public:
 
   void ReceiveMsgCallback(const std::string& msg, const Color& color);
   void SetMapsCallback(const std::vector<uint>& list);
+  void SetTeamsCallback(const std::vector<uint>& list);
 };
 
 #endif

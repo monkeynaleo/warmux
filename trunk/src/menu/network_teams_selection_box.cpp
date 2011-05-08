@@ -385,3 +385,15 @@ void NetworkTeamsSelectionBox::UpdateNbTeams()
   // screen has been refreshed, because of the callbacks
   list_box->NeedRedrawing();
 }
+
+void NetworkTeamsSelectionBox::ChangeTeamListCallback(const std::vector<uint>& list)
+{
+  team_list.clear();
+  std::vector<Team*> tmp_list;
+  const std::list<Team *>& flist = GetTeamsList().full_list; 
+  for (std::list<Team *>::const_iterator it = flist.begin(); it != flist.end(); ++it)
+    tmp_list.push_back(*it);
+
+  for (uint i=0; i<list.size(); i++)
+    team_list.push_back(tmp_list[list[i]]);
+}
