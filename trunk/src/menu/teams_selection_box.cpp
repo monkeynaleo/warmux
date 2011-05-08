@@ -121,7 +121,7 @@ TeamsSelectionBox::TeamsSelectionBox(const Point2i &_size, bool network, bool w_
     char num_player[4];
     sprintf(num_player, " %d", i+1);
     player_name += num_player;
-    teams_selections.push_back(new TeamBox(player_name, box_size));
+    teams_selections.push_back(new TeamBox(player_name, box_size, i));
   }
 
   // If the intended gridbox would be too big for the intended size,

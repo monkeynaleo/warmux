@@ -203,6 +203,13 @@ void NetworkTeamsSelectionBox::RequestTeam()
   team_config.player_name = GetLocalPlayerName();
   team_config.nb_characters = GameMode::GetInstance()->nb_characters;
   team_config.ai = NO_AI_NAME;
+
+  uint nb_teams = 0;
+  for (uint i=0; i < teams_selections.size(); i++) {
+    if (teams_selections.at(i)->GetTeam())
+      nb_teams++;
+  }
+  team_config.group = nb_teams;
   ActionHandler::GetInstance()->NewRequestTeamAction(team_config);
 }
 
