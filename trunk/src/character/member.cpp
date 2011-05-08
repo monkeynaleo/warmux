@@ -79,8 +79,8 @@ Member::Member(const xmlNode *     xml,
     XmlReader::ReadIntAttr(el, "dx", dx);
     XmlReader::ReadIntAttr(el, "dy", dy);
     MSG_DEBUG("body", "   Member %s has anchor (%i,%i)\n", name.c_str(), dx, dy);
-    anchor = Point2d(dx, dy);
-    spr->SetRotation_HotSpot(Point2i(dx, dy));
+    anchor = Point2i(dx, dy);
+    spr->SetRotation_HotSpot(anchor);
   } else {
     MSG_DEBUG("body", "   Member %s has no anchor\n", name.c_str());
   }
@@ -152,7 +152,7 @@ Member::Member(const Member & m)
   , type(m.type)
   , anchor(m.anchor)
 {
-  spr->SetRotation_HotSpot(Point2i(anchor.x, anchor.y));
+  spr->SetRotation_HotSpot(anchor);
 
   for (AttachTypeMap::const_iterator it = m.attached_types.begin();
        it != m.attached_types.end();
