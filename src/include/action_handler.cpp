@@ -505,28 +505,6 @@ static void _Action_Game_MapList(Action *a)
   }
 }
 
-#if 0
-static void _Action_Game_TeamList(Action *a)
-{
-  int                num        = a->PopInt();
-  TeamsList         *team_list  = TeamsList::GetInstance();
-  // We are going to directly update the DistantComputer map list
-  std::vector<uint>& index_list = a->GetCreator()->GetAvailableMaps();
-
-  index_list.clear();
-  MSG_DEBUG("action_handler.team", "Team list size for %p: %i\n", a->GetCreator(), num);
-  while (num--) {
-    std::string team_name = a->PopString();
-    int index;
-    if (team_list->FindById(team_name, index) && index!=-1) {
-      index_list.push_back((uint)index);
-      MSG_DEBUG("action_handler.team", "Adding map %s of index %i (%i left)\n", team_name.c_str(), index, num);
-    } else
-      MSG_DEBUG("action_handler.team", "Rejecting map %s  (%i left)\n", team_name.c_str(), num);
-  }
-}
-#endif
-
 static void Action_Game_SetMapList(Action *a)
 {
   if (a)
@@ -554,6 +532,51 @@ static void Action_Game_ForceMapList(Action *a)
   //_Action_SelectMap(a);
 }
 
+static void _Action_Game_TeamList(Action *a)
+{
+  int                num        = a->PopInt();
+  TeamsList         *team_list  = TeamsList::GetInstance();
+  // We are going to directly update the DistantComputer team list
+  std::vector<uint>& index_list = a->GetCreator()->GetAvailableTeams();
+
+  index_list.clear();
+  MSG_DEBUG("action_handler.team", "Team list size for %p: %i\n", a->GetCreator(), num);
+  while (num--) {
+    std::string team_name = a->PopString();
+    int index;
+    if (team_list->FindById(team_name, index) && index!=-1) {
+      index_list.push_back((uint)index);
+      MSG_DEBUG("action_handler.team", "Adding team %s of index %i (%i left)\n", team_name.c_str(), index, num);
+    } else
+      MSG_DEBUG("action_handler.team", "Rejecting team %s  (%i left)\n", team_name.c_str(), num);
+  }
+}
+
+static void Action_Game_SetTeamList(Action *a)
+{
+  if (a)
+    _Action_Game_TeamList(a);
+  Network  *net      = Network::GetInstance();
+  if (!net->IsGameMaster()) {
+    MSG_DEBUG("action_handler.team", "Dropping message from %p\n", a->GetCreator());
+    return;
+  }
+
+  // This is NetworkServer being invoked here
+  net->SendTeamsList();
+}
+
+static void Action_Game_ForceTeamList(Action *a)
+{
+  _Action_Game_TeamList(a);
+
+  // This list should be the common list, already a subset of our own
+  // and thus we should apply it
+  Network  *net      = Network::GetInstance();
+  ASSERT(net->network_menu);
+  net->network_menu->SetTeamsCallback(a->GetCreator()->GetAvailableTeams());
+}
+
 static Player* _Action_GetPlayer(Action *a, uint player_id)
 {
   Player *player = NULL;
@@ -571,8 +594,17 @@ static Player* _Action_GetPlayer(Action *a, uint player_id)
   return player;
 }
 
-static void _Action_AddTeam(Action *a, Player* player)
+static void _Action_AddTeam(Action *a, Player* player, bool skip = false)
 {
+  if (skip) {
+    // Just skip the data
+    a->PopString();
+    a->PopString();
+    a->PopInt();
+    a->PopString();
+    return;
+  }
+
   ConfigTeam the_team;
 
   the_team.id = a->PopString();
@@ -607,14 +639,15 @@ static void Action_Game_Info(Action *a)
     uint player_id = a->PopInt();
 
     ASSERT (a->GetCreator() && a->GetCreator()->GetPlayer(player_id) == NULL);
-    ASSERT (player_id != Network::GetInstance()->GetPlayer().GetId());
-    a->GetCreator()->AddPlayer(player_id);
+    bool skip = player_id == Network::GetInstance()->GetPlayer().GetId();
+    if (!skip)
+      a->GetCreator()->AddPlayer(player_id);
 
     uint nb_teams = a->PopInt();
 
     Player* player = _Action_GetPlayer(a, player_id);
     for (uint j = 0; j < nb_teams; j++) {
-      _Action_AddTeam(a, player);
+      _Action_AddTeam(a, player, skip);
     }
   }
 }
@@ -663,6 +696,7 @@ static void Action_Game_UpdateTeam(Action *a)
   }
 }
 
+// If you change this code, don't forget to update Network::SendTeamsList()
 static void _Action_DelTeam(Player *player, const std::string& team_id)
 {
   if (player) {
@@ -1166,6 +1200,8 @@ void Action_Handler_Init()
   ActionHandler::GetInstance()->Register(Action::ACTION_GAME_FORCE_MAP_LIST, "GAME_set_map_list", &Action_Game_ForceMapList);
 
   // Teams selection in network menu
+  ActionHandler::GetInstance()->Register(Action::ACTION_GAME_SET_TEAM_LIST, "GAME_set_map_list", &Action_Game_SetTeamList);
+  ActionHandler::GetInstance()->Register(Action::ACTION_GAME_FORCE_TEAM_LIST, "GAME_set_map_list", &Action_Game_ForceTeamList);
   ActionHandler::GetInstance()->Register(Action::ACTION_GAME_ADD_TEAM, "GAME_add_team", &Action_Game_AddTeam);
   ActionHandler::GetInstance()->Register(Action::ACTION_GAME_DEL_TEAM, "GAME_del_team", &Action_Game_DelTeam);
   ActionHandler::GetInstance()->Register(Action::ACTION_GAME_UPDATE_TEAM, "GAME_update_team", &Action_Game_UpdateTeam);
