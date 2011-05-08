@@ -64,6 +64,7 @@ public:
 
   Player* GetPlayer(uint player_id);
   const std::list<Player>& GetPlayers() const { return players; }
+  std::list<Player>& GetPlayers() { return players; }
 
   uint GetGameId() const { return game_id; } 
 
