@@ -81,6 +81,8 @@ public:
   bool IsGameMaster(std::list<DistantComputer*>::const_iterator& cpu) const { return cpu == cpulist.begin(); }
   bool IsGameMaster(std::list<DistantComputer*>::iterator& cpu) { return cpu == cpulist.begin(); }
   void SendMapsList(DistantComputer *host);
+
+  void InformDisconnection(DistantComputer *host);
 };
 
 class GameServer : public Singleton<GameServer>
