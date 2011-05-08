@@ -23,6 +23,7 @@
 #include "graphic/video.h"
 #include "gui/button.h"
 #include "gui/label.h"
+#include "gui/null_widget.h"
 #include "gui/picture_widget.h"
 #include "gui/spin_button_picture.h"
 #include "gui/text_box.h"
@@ -31,13 +32,15 @@
 #include "include/action_handler.h"
 #include "network/network.h"
 #include "team/team.h"
+#include "team/team_group.h"
 #include "team/custom_team.h"
 #include "team/custom_teams_list.h"
 #include "tool/resource_manager.h"
 
-TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
-  HBox(_size.y, false, false, false),
-  ai_name(NO_AI_NAME)
+TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size, uint g)
+  : HBox(_size.y, false, false, false)
+  , ai_name(NO_AI_NAME)
+  , group(g)
 {
   associated_team = NULL;
 
@@ -51,6 +54,7 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
   Box * tmp_logo_box = new VBox(W_UNDEF, false, false, false);
   tmp_logo_box->SetMargin(1);
   tmp_logo_box->SetNoBorder();
+  AddWidget(tmp_logo_box);
 
   team_logo = new PictureWidget(Point2i(38, 38));
   tmp_logo_box->AddWidget(team_logo);
@@ -64,22 +68,36 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
   player_type->SetSurface(player_local_ai_surf);
   tmp_logo_box->AddWidget(player_type);
 
-  AddWidget(tmp_logo_box);
-
   /********    Center box: team name, commander   *********/
   int width = _size.x - (2*2+(38+2*2)+(110+2*2));
   Box * tmp_player_box = new VBox(_size.y, false, false, false);
   tmp_player_box->SetMargin(0);
   tmp_player_box->SetNoBorder();
+  AddWidget(tmp_player_box);
+
+  /*** Box for commander & custom team  ***/
+  HBox *hbox = new HBox(W_UNDEF, false, false, false);
+  hbox->SetMargin(0);
+  hbox->SetNoBorder();
+  tmp_player_box->AddWidget(hbox);
+  VBox *vbox = new VBox(W_UNDEF, false, false, false);
+  vbox->SetMargin(0);
+  vbox->SetNoBorder();
+  hbox->AddWidget(vbox);
 
   previous_player_name = "team";
-  team_name = new Label(previous_player_name, width,
+  team_name = new Label(previous_player_name, width - 60,
                         Font::FONT_MEDIUM, Font::FONT_BOLD);
-  tmp_player_box->AddWidget(team_name);
+  vbox->AddWidget(team_name);
 
   /********    Names: "Head commander" + text/custom team    *******/
-  tmp_player_box->AddWidget(new Label(_("Head commander"), width,
-                                      Font::FONT_SMALL, Font::FONT_BOLD));
+  vbox->AddWidget(new Label(_("Head commander"), width - 60,
+                            Font::FONT_SMALL, Font::FONT_BOLD));
+
+  /****  Group selection box **/
+  nullw = new NullWidget(Point2i(60, 40));
+  nullw->SetBackgroundColor(TeamGroup::Colors[g]);
+  hbox->AddWidget(nullw);
 
   custom_team_list = GetCustomTeamsList().GetList();
   custom_team_current_id = 0;
@@ -108,8 +126,6 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size) :
     tmp_name_box->AddWidget(next_custom_team);
     tmp_player_box->AddWidget(tmp_name_box);
   }
-  AddWidget(tmp_player_box);
-
 
   /**********     Number of characters        **********/
   nb_characters = new SpinButtonWithPicture(_("Number of characters"), "menu/ico_play",
@@ -195,6 +211,12 @@ Widget* TeamBox::ClickUp(const Point2i &mousePosition, uint button)
     }
     if (w == player_name) {
       return w;
+    }
+    if (w == nullw) {
+      group++;
+      if (group >= MAX_TEAM_GROUPS)
+        group = 0;
+      SetGroup(group);
     }
 
     if (!w) {
@@ -301,6 +323,7 @@ void TeamBox::UpdateTeam(const std::string& old_team_id) const
   associated_team->SetPlayerName(player_name->GetText());
 
   associated_team->SetAIName(ai_name);
+  associated_team->SetGroup(group);
 
   // change only for local teams...
   if (associated_team->IsLocal()) {
@@ -322,7 +345,7 @@ void TeamBox::UpdateTeam(const std::string& old_team_id) const
       a->Push(int(associated_team->GetNbCharacters()));
       a->Push(associated_team->GetAIName());
       associated_team->PushCustomCharactersNamesIntoAction(a);
-      ActionHandler::GetInstance()->NewAction (a);
+      ActionHandler::GetInstance()->NewAction(a);
     }
   }
 }
@@ -350,4 +373,13 @@ void TeamBox::SwitchPlayerType()
   if (Network::GetInstance()->IsConnected()) {
     ValidOptions();
   }
+}
+
+
+void TeamBox::SetGroup(uint g)
+{
+  assert(g < MAX_TEAM_GROUPS);
+
+  group = g;
+  nullw->SetBackgroundColor(TeamGroup::Colors[g]);
 }
