@@ -45,7 +45,7 @@ void RandomGenerator::InitRandom()
     MSG_DEBUG("random.set", "no, unrandom set");
     return;
   }
-  SetRand(time(NULL));
+  SetRand(uint(time(NULL)));
 }
 
 void RandomGenerator::SetRand(uint seed)
