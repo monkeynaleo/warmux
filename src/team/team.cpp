@@ -84,6 +84,7 @@ Team::Team(XmlReader& doc, Profile* res,
   , abandoned(false)
   , team_color(white_color)
   , energy(this)
+  , group(0)
 {
   // Load team color
   team_color = LOAD_RES_COLOR("teamcolor");

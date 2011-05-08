@@ -76,6 +76,7 @@ private:
 
   // Colors
   Color team_color;
+  uint  group;
 
   bool LoadCharacters();
 
@@ -207,6 +208,10 @@ public:
 
   // Color management
   const Color& GetColor() const { return team_color; };
+
+  // Group management
+  uint GetGroup() const { return group; }
+  void SetGroup(uint g) { group = g; }
 };
 
 #endif /* TEAM_H */
