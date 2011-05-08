@@ -313,6 +313,8 @@ warmux_SOURCES = \
         team/team.h \
         team/team_energy.cpp \
         team/team_energy.h \
+        team/team_group.cpp \
+        team/team_group.h \
         team/teams_list.cpp \
         team/teams_list.h \
         tool/affine_transform.cpp \
