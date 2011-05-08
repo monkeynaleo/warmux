@@ -30,16 +30,16 @@ class NetworkLocal : public Network
 protected:
   virtual void HandleAction(Action* /*a*/, DistantComputer* /*sender*/) { ASSERT(false) };
   virtual void WaitActionSleep() { ASSERT(false) };
-  virtual void SendAction(const Action& a, DistantComputer* client, bool clt_as_rcver) const;
+  virtual void SendAction(const Action&, DistantComputer*, bool, bool) const { }
 
 public:
   NetworkLocal();
-  ~NetworkLocal();
+  ~NetworkLocal() { }
 
   virtual bool IsConnected() const { return false; }
   virtual bool IsLocal() const { return true; }
 
-  virtual void CloseConnection(std::list<DistantComputer*>::iterator closed);
+  virtual void CloseConnection(std::list<DistantComputer*>::iterator) { };
   void SendMapsList() { };
 };
 
