@@ -273,7 +273,8 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
   if (third_team)
     DrawTeamOnPodium(*third_team, Point2i(98,52));
 
-  winner_box = new VBox(240, true, true, true);
+  winner_box = new VBox(240, false, true, true);
+  winner_box->SetNoBorder();
   if (first_team) {
     Font::font_size_t title = (small) ? Font::FONT_MEDIUM : Font::FONT_BIG;
     Font::font_size_t txt   = (small) ? Font::FONT_SMALL : Font::FONT_MEDIUM;
@@ -308,6 +309,7 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
   // Create tabs for each team result
   stats = new MultiTabs(tab_size - 2*DEF_BORDER);
   stats->SetMaxVisibleTabs(1);
+  stats->SetNoBorder();
   for (uint i=0; i<v.size(); i++) {
     const Team* team = v[i]->getTeam();
     const std::string name = (team) ? team->GetName() : _("All teams");
