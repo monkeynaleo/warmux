@@ -83,7 +83,7 @@ ReplayInfo *ReplayInfo::ReplayInfoFromFile(FILE *in)
   if (!fscanf(in, "%256[^\n]\n", temp)) return info;
   info->version = temp;
   if (ferror(in)) return info;
-  
+
   // Time
   info->duration_ms = Read32(in);           // Duration
   info->date        = Read32(in);           // Return of time(NULL)
@@ -111,7 +111,7 @@ ReplayInfo *ReplayInfo::ReplayInfoFromFile(FILE *in)
       goto team_error;
     team_cfg.id = std::string(temp);
 
-    // Player name for team No.i 
+    // Player name for team No.i
     if (!fscanf(in, "%256[^\n]\n", temp) || ferror(in))
       goto team_error;
     team_cfg.player_name = std::string(temp);
@@ -159,7 +159,7 @@ team_error:
 ReplayInfo *ReplayInfo::ReplayInfoFromCurrent(uint32_t duration, const char* comment)
 {
   ReplayInfo *info    = new ReplayInfo(time(NULL), duration);
-  
+
   info->version = Constants::WARMUX_VERSION; // Copy ?
   info->comment = (comment) ? comment : _("No comment.");
   info->map_id  = ActiveMap()->GetRawName();
@@ -168,7 +168,8 @@ ReplayInfo *ReplayInfo::ReplayInfoFromCurrent(uint32_t duration, const char* com
   const std::vector<Team*>& plist = GetTeamsList().playing_list;
   for (uint i=0; i<plist.size(); i++) {
     ConfigTeam team_cfg = { plist[i]->GetId(), plist[i]->GetPlayerName(),
-                            plist[i]->GetNbCharacters(), plist[i]->GetAIName() };
+                            plist[i]->GetNbCharacters(), plist[i]->GetAIName(),
+                            plist[i]->GetGroup() };
     info->teams.push_back(team_cfg);
   }
 
@@ -210,7 +211,7 @@ ReplayInfo::DumpToFile(FILE *out)
     fprintf(out, "%s\n", teams[i].ai.c_str());
     fputc(teams[i].group, out);
   }
-  
+
   //Game mode
   Write32(out, mode_info.allow_character_selection);
   Write32(out, mode_info.turn_duration);
