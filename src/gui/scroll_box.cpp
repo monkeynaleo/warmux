@@ -23,6 +23,7 @@
 #include "graphic/colors.h"
 #include <SDL.h>
 #include "gui/button.h"
+#include "gui/horizontal_box.h"
 #include "gui/vertical_box.h"
 #include "gui/scroll_box.h"
 #include "include/app.h"
@@ -33,15 +34,16 @@
 static const Color c_even(0x80, 0x80, 0x80, 0x40);
 static const Color  c_odd(0x80, 0x80, 0x80, 0x20);
 
-ScrollBox::ScrollBox(const Point2i & _size, bool force_widget_size, bool alternate)
+ScrollBox::ScrollBox(const Point2i & _size, bool force, bool alt, bool v)
   : WidgetList(_size)
-  , alternate_colors(alternate)
+  , alternate_colors(alt)
   , m_up(NULL)
   , m_down(NULL)
-  , start_drag_y(NO_DRAG)
+  , start_drag(NO_DRAG)
   , start_drag_offset(NO_DRAG)
   , offset(0)
   , scroll_mode(SCROLL_MODE_NONE)
+  , vertical(v)
 {
   // Load buttons
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
@@ -51,14 +53,15 @@ ScrollBox::ScrollBox(const Point2i & _size, bool force_widget_size, bool alterna
   Widget::SetBorder(white_color, 1);
   Widget::SetBackgroundColor(transparent_color);
 
-  scrollbar_width = m_up->GetSizeX();
+  scrollbar_dim = (v) ? m_up->GetSizeX() : m_up->GetSizeY();
   // Let's consider the scrollbar is not displayed for now.
-  vbox = new VBox(_size.x - 2*border_size - scrollbar_width, false, false, force_widget_size);
-  vbox->SetNoBorder();
-  vbox->SetMargin(0);
-  vbox->SetBackgroundColor(transparent_color);
+  box = (v) ? new VBox(_size.x - 2*border_size - scrollbar_dim, false, false, force)
+            : new VBox(_size.y - 2*border_size - scrollbar_dim, false, false, force);
+  box->SetNoBorder();
+  box->SetMargin(0);
+  box->SetBackgroundColor(transparent_color);
 
-  WidgetList::AddWidget(vbox);
+  WidgetList::AddWidget(box);
   WidgetList::AddWidget(m_up);
   WidgetList::AddWidget(m_down);
 }
@@ -69,16 +72,17 @@ Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
   start_drag_offset = NO_DRAG;
   scroll_mode = SCROLL_MODE_NONE;
 
-  if (!vbox->GetFirstWidget()) {
+  if (!box->GetFirstWidget()) {
     return NULL;
   }
 
   // Handle the click up as a widget click only if we weren't dragging
   // If we click up close to where we clicked down, it will however register
   // as a click and not a scrolling
-  if (vbox->Contains(mousePosition) &&
-      (start_drag_y==NO_DRAG || abs(start_drag_y-mousePosition.y)<4)) {
-    Widget *w = vbox->ClickUp(mousePosition, button);
+  uint motion = (vertical) ? abs(start_drag-mousePosition.y)
+                           : abs(start_drag-mousePosition.x);
+  if (box->Contains(mousePosition) && (start_drag==NO_DRAG || motion<4)) {
+    Widget *w = box->ClickUp(mousePosition, button);
 
     if (w) {
       SetFocusOn(w);
@@ -105,14 +109,20 @@ Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
       new_offset = offset-SCROLL_SPEED;
     } else if (is_click) {
       // Was it released after a drag operation?
-      if (old_mode!=SCROLL_MODE_NONE /*&& start_drag_y != mousePosition.y*/)
+      if (old_mode!=SCROLL_MODE_NONE /*&& start_drag != mousePosition.y*/)
         return this;
       const Rectanglei& scroll_track = GetScrollTrack();
       if (scroll_track.Contains(mousePosition)) {
         // Set this as new scroll thumb position
-        int height = scroll_track.GetSizeY();
-        new_offset = ((mousePosition.y - scroll_track.GetPositionY()) * (size.y+max_offset)
-                      + (height/2)) / scroll_track.GetSizeY();
+        if (vertical) {
+          int height = scroll_track.GetSizeY();
+          new_offset = ((mousePosition.y - scroll_track.GetPositionY()) * (size.y+max_offset)
+                        + (height/2)) / scroll_track.GetSizeY();
+        } else {
+          int width = scroll_track.GetSizeX();
+          new_offset = ((mousePosition.x - scroll_track.GetPositionX()) * (size.x+max_offset)
+                        + (width/2)) / scroll_track.GetSizeX();
+        }
       }
     }
 
@@ -144,20 +154,26 @@ Widget * ScrollBox::Click(const Point2i & mousePosition, uint button)
   scroll_mode = SCROLL_MODE_NONE;
 
   if (HasScrollBar() && Mouse::IS_CLICK_BUTTON(button)) {
-    start_drag_y = mousePosition.y;
+    start_drag = (vertical) ? mousePosition.y : mousePosition.x;
     if (GetScrollThumb().Contains(mousePosition)) {
       if (!offset) {
         // Not yet set, derive from mouse position
         const Rectanglei& scroll_track = GetScrollTrack();
-        int height = scroll_track.GetSizeY();
-        offset = ( (mousePosition.y - scroll_track.GetPositionY()) * (size.y+GetMaxOffset())
-                   + (height/2) ) / height;
+        if (vertical) {
+          int height = scroll_track.GetSizeY();
+          offset = ( (mousePosition.y - scroll_track.GetPositionY()) * (size.y+GetMaxOffset())
+                     + (height/2) ) / height;
+        } else {
+          int width = scroll_track.GetSizeX();
+          offset = ( (mousePosition.x - scroll_track.GetPositionX()) * (size.x+GetMaxOffset())
+                     + (width/2) ) / width;
+        }
       }
 
       start_drag_offset = offset;
       scroll_mode = SCROLL_MODE_THUMB;
-    } else if (vbox->Contains(mousePosition)) {
-      // The click occurred inside the vbox, this means scrolling
+    } else if (box->Contains(mousePosition)) {
+      // The click occurred inside the box, this means scrolling
       scroll_mode = SCROLL_MODE_DRAG;
       start_drag_offset = offset;
     }
@@ -176,14 +192,23 @@ void ScrollBox::__Update(const Point2i & mousePosition,
 
     if (scroll_mode == SCROLL_MODE_THUMB) {
       Point2i track_pos  = GetScrollTrackPos();
-      int     height     = GetTrackHeight();
 
-      new_offset = start_drag_offset +
-                   ((mousePosition.y - start_drag_y) * (size.y+max_offset))/height;
+      if (vertical) {
+        int   height     = GetTrackDimension();
+
+        new_offset = start_drag_offset +
+                     ((mousePosition.y - start_drag) * (size.y+max_offset))/height;
+      } else {
+        int   width      = GetTrackDimension();
+
+        new_offset = start_drag_offset +
+                     ((mousePosition.x - start_drag) * (size.x+max_offset))/width;
+      }
     } else if (scroll_mode == SCROLL_MODE_DRAG) {
       // Act as if the scroll corresponds to bringing the starting point to the
       // current point
-      new_offset = start_drag_offset + start_drag_y - mousePosition.y;
+      new_offset = start_drag_offset + start_drag
+                 - (vertical) ? mousePosition.y : mousePosition.x;
     }
 
     if (new_offset < 0)
@@ -200,37 +225,56 @@ void ScrollBox::__Update(const Point2i & mousePosition,
 
 void ScrollBox::AddWidget(Widget* widget)
 {
-  vbox->AddWidget(widget);
+  box->AddWidget(widget);
   if (alternate_colors) {
-    widget->SetBackgroundColor((vbox->WidgetCount()&1) ? c_odd : c_even);
+    widget->SetBackgroundColor((box->WidgetCount()&1) ? c_odd : c_even);
   }
 }
 
 Point2i ScrollBox::GetScrollTrackPos() const
 {
-  return Point2i(position.x + size.x - border_size - scrollbar_width,
-                 position.y + border_size + m_up->GetSizeY());
+  if (vertical)
+    return Point2i(position.x + size.x - border_size - scrollbar_dim,
+                   position.y + border_size + m_up->GetSizeY());
+  return Point2i(position.x + border_size + m_up->GetSizeX(),
+                 position.y + size.y - border_size - scrollbar_dim);
 }
 
 Rectanglei ScrollBox::GetScrollThumb() const
 {
-  // Height: (part of the vbox that is displayed / vbox size) * scrollbar height
+  // Height: (part of the box that is displayed / box size) * scrollbar height
   const Rectanglei& scroll_track = GetScrollTrack();
-  uint tmp_h = ((size.y - 2*border_size) * scroll_track.GetSizeY())
-             / ((size.y - 2*border_size) + GetMaxOffset());
-  // Start position: from the offset
-  uint h     = size.y + GetMaxOffset();
-  uint tmp_y = scroll_track.GetPositionY()
-             + (offset * scroll_track.GetSizeY() + h/2) / h;
-  if (tmp_h < 6)
-    tmp_h = 6;
-  return Rectanglei(scroll_track.GetPositionX(), tmp_y,
-                    scrollbar_width, tmp_h);
+
+  if (vertical) {
+    uint tmp_h = ((size.y - 2*border_size) * scroll_track.GetSizeY())
+               / ((size.y - 2*border_size) + GetMaxOffset());
+    // Start position: from the offset
+    uint h     = size.y + GetMaxOffset();
+    uint tmp_y = scroll_track.GetPositionY()
+               + (offset * scroll_track.GetSizeY() + h/2) / h;
+    if (tmp_h < 6)
+      tmp_h = 6;
+    return Rectanglei(scroll_track.GetPositionX(), tmp_y,
+                      scrollbar_dim, tmp_h);
+  } else {
+    uint tmp_w = ((size.x - 2*border_size) * scroll_track.GetSizeX())
+               / ((size.x - 2*border_size) + GetMaxOffset());
+    // Start position: from the offset
+    uint w     = size.x + GetMaxOffset();
+    uint tmp_x = scroll_track.GetPositionX()
+               + (offset * scroll_track.GetSizeX() + w/2) / w;
+    if (tmp_w < 6)
+      tmp_w = 6;
+    return Rectanglei(tmp_x, scroll_track.GetPositionY(),
+                      tmp_w, scrollbar_dim);
+  }
 }
 
-int ScrollBox::GetTrackHeight() const
+int ScrollBox::GetTrackDimension() const
 {
-  return size.y - 2*(m_up->GetSizeY()+border_size);
+  if (vertical)
+    return size.y - 2*(m_up->GetSizeY()+border_size);
+  return size.x - 2*(m_up->GetSizeX()+border_size);
 }
 
 bool ScrollBox::Update(const Point2i &mousePosition,
@@ -264,16 +308,29 @@ bool ScrollBox::Update(const Point2i &mousePosition,
 void ScrollBox::Pack()
 {
   // Make a first guess about the box properties
-  vbox->SetPosition(position.x + border_size,
-                    position.y + border_size - offset);
-  vbox->SetSizeX(size.x -2*border_size - scrollbar_width);
-  vbox->Pack();
+  if (vertical) {
+    box->SetPosition(position.x + border_size,
+                     position.y + border_size - offset);
+    box->SetSizeX(size.x -2*border_size - scrollbar_dim);
+    box->Pack();
 
-  //printf("Pack: size=%ix%i max=%i\n", size.x, size.y, GetMaxOffset());
+    //printf("Pack: size=%ix%i max=%i\n", size.x, size.y, GetMaxOffset());
 
-  m_up->SetPosition(position.x + size.x - m_up->GetSizeX() - border_size,
-                    position.y + border_size);
-  m_down->SetPosition(position + size - m_down->GetSize() - border_size);
+    m_up->SetPosition(position.x + size.x - m_up->GetSizeX() - border_size,
+                      position.y + border_size);
+    m_down->SetPosition(position + size - m_down->GetSize() - border_size);
+  } else {
+    box->SetPosition(position.x + border_size - offset,
+                     position.y + border_size);
+    box->SetSizeY(size.y -2*border_size - scrollbar_dim);
+    box->Pack();
+
+    //printf("Pack: size=%ix%i max=%i\n", size.x, size.y, GetMaxOffset());
+
+    m_up->SetPosition(position.x + border_size,
+                      position.y + size.y - m_up->GetSizeY() - border_size);
+    m_down->SetPosition(position + size - m_down->GetSize() - border_size);
+  }
 }
 
 bool ScrollBox::SendKey(const SDL_keysym & key)
@@ -283,10 +340,10 @@ bool ScrollBox::SendKey(const SDL_keysym & key)
     switch(key.sym)
     {
     case SDLK_PAGEUP:
-      new_offset -= size.y;
+      new_offset -= (vertical) ? size.y : size.x;
       break;
     case SDLK_PAGEDOWN:
-      new_offset += size.y;
+      new_offset += (vertical) ? size.y : size.x;
       break;
     default:
       return false;
