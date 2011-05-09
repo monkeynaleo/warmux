@@ -77,7 +77,7 @@ Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
   // If we click up close to where we clicked down, it will however register
   // as a click and not a scrolling
   if (vbox->Contains(mousePosition) &&
-      (start_drag_y==NO_DRAG || abs(start_drag_y-mousePosition.y)<2)) {
+      (start_drag_y==NO_DRAG || abs(start_drag_y-mousePosition.y)<4)) {
     Widget *w = vbox->ClickUp(mousePosition, button);
 
     if (w) {
