@@ -23,11 +23,11 @@
 #define SCROLL_BOX_H
 
 #include "gui/widget_list.h"
-#include "gui/vertical_box.h"
+#include "gui/box.h"
 
 // Forward declaration
 struct SDL_keysym;
-class VBox;
+class Box;
 class Button;
 
 class ScrollBox : public WidgetList
@@ -41,7 +41,7 @@ public:
 
 protected:
   // Internal box
-  VBox *vbox;
+  Box *box;
   bool alternate_colors;
 
   // Buttons
@@ -49,27 +49,37 @@ protected:
   Button * m_down;
 
   // Scroll information
-  int          start_drag_y;
+  int          start_drag;
   int          start_drag_offset;
   int          offset;
-  int          scrollbar_width;
+  int          scrollbar_dim;
   ScrollMode   scroll_mode;
+  bool         vertical;
 
   virtual void __Update(const Point2i & mousePosition,
                         const Point2i & lastMousePosition);
   Rectanglei GetScrollThumb() const;
   Rectanglei GetScrollTrack() const
   {
-    return Rectanglei(GetScrollTrackPos(),
-                      Point2i(scrollbar_width, GetTrackHeight()));
+    Point2i s;
+    if (vertical)
+      s.SetValues(scrollbar_dim, GetTrackDimension());
+    else
+      s.SetValues(GetTrackDimension(), scrollbar_dim);
+    return Rectanglei(GetScrollTrackPos(), s);
   }
   Point2i    GetScrollTrackPos() const;
-  int GetMaxOffset() const { return vbox->GetSizeY() - size.y; }
-  int GetTrackHeight() const;
+  int GetMaxOffset() const
+  { 
+    if (vertical)
+      return box->GetSizeY() - size.y;
+    return box->GetSizeX() - size.x;
+  }
+  int GetTrackDimension() const;
   bool HasScrollBar() const { return GetMaxOffset() > 0; }
 
 public:
-  ScrollBox(const Point2i & size, bool force = true, bool alternate = false);
+  ScrollBox(const Point2i & size, bool force = true, bool alternate = false, bool vertical=true);
   virtual ~ScrollBox() { };
 
   // No need for a Draw method: the additional stuff drawn is made by Update
@@ -86,17 +96,17 @@ public:
     return scroll_mode != SCROLL_MODE_NONE || Widget::Contains(point);
   }
   virtual void AddWidget(Widget* widget);
-  virtual void RemoveWidget(Widget* w) { vbox->RemoveWidget(w); }
+  virtual void RemoveWidget(Widget* w) { box->RemoveWidget(w); }
   virtual void RemoveFirstWidget()
   {
-    Widget *w = vbox->GetFirstWidget();
+    Widget *w = box->GetFirstWidget();
     if (w) {
       RemoveWidget(w);
     }
   }
-  virtual size_t WidgetCount() const { return vbox->WidgetCount(); }
-  virtual void Empty() { offset = 0; vbox->Empty(); }
-  virtual void Clear() { offset = 0; vbox->Clear(); }
+  virtual size_t WidgetCount() const { return box->WidgetCount(); }
+  virtual void Empty() { offset = 0; box->Empty(); }
+  virtual void Clear() { offset = 0; box->Clear(); }
 };
 
 #endif  //SCROLL_BOX_H
