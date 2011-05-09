@@ -362,7 +362,7 @@ void TeamBox::ValidOptions() const
 
 bool TeamBox::IsLocal() const
 {
-  if (associated_team != NULL && associated_team->IsLocal()) {
+  if (associated_team && associated_team->IsLocal()) {
     return true;
   }
 
