@@ -213,7 +213,7 @@ Widget* TeamBox::ClickUp(const Point2i &mousePosition, uint button)
       return w;
     }
     if (w == nullw) {
-      if (button == Mouse::BUTTON_LEFT) {
+      if (button == Mouse::BUTTON_LEFT()) {
         if (group == MAX_TEAM_GROUPS-1) group = 0;
         else                            group++;
       } else {

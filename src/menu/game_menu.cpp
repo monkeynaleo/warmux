@@ -149,7 +149,6 @@ bool GameMenu::signal_ok()
     }
   }
 
-
   if (!found) {
     Question q(Question::WARNING);
     q.Set(_("Please select a group different from your opponent!"), true, 0);

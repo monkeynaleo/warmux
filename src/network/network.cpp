@@ -671,7 +671,7 @@ void Network::CheckOneHostTeams(Player& player, DistantComputer* new_host,
       a->Push(id);
 
       SendActionToAllExceptOne(*a, new_host, false);
-      
+
       // We need to immediately remove the team, but this invalidates
       // the current iterator, so we increment it before the config is removed
       ++config;
@@ -695,7 +695,7 @@ void Network::SendTeamsList()
 
   // Build vector of teams
   std::vector<Team*> local_list;
-  const std::list<Team *>& flist = team_list->full_list; 
+  const std::list<Team *>& flist = team_list->full_list;
   for (std::list<Team *>::const_iterator it = flist.begin(); it != flist.end(); ++it)
     local_list.push_back(*it);
 
@@ -705,7 +705,6 @@ void Network::SendTeamsList()
     // the common list and inform *all* distant computers
     // Furthermore, there should be no additional integer for the currently selected
     std::vector<uint> common_list = DistantComputer::GetCommonTeams(cpu);
-    bool for_all = common_list.size() == team_list->full_list.size();
     if (common_list.empty()) {
       uint nb = team_list->full_list.size();
       // No host, create a ful list list for ourselves at least
@@ -714,8 +713,6 @@ void Network::SendTeamsList()
         common_list[i] = i;
     }
     MSG_DEBUG("action_handler.team", "Common list has now %u teams\n", common_list.size());
-
-    ActionHandler *ah = ActionHandler::GetInstance();
 
     // Browse the hosts
     std::list<DistantComputer*>::iterator it = cpu.begin();
