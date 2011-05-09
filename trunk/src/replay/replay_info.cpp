@@ -125,6 +125,10 @@ ReplayInfo *ReplayInfo::ReplayInfoFromFile(FILE *in)
       goto team_error;
     team_cfg.ai = std::string(temp);
 
+    team_cfg.group = fgetc(in);
+    if (ferror(in))
+      goto team_error;
+
     info->teams.push_back(team_cfg);
     num_teams--;
     continue;
@@ -204,6 +208,7 @@ ReplayInfo::DumpToFile(FILE *out)
     fprintf(out, "%s\n", teams[i].player_name.c_str());
     Write32(out, teams[i].nb_characters);
     fprintf(out, "%s\n", teams[i].ai.c_str());
+    fputc(teams[i].group, out);
   }
   
   //Game mode
