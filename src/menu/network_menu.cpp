@@ -253,6 +253,8 @@ bool NetworkMenu::signal_ok()
 {
   const std::vector<Team*>& playing_list = GetTeamsList().playing_list;
   std::vector<Team*>::const_iterator it  = playing_list.begin();
+  bool found       = false;
+  uint first_group;
 
   if (playing_list.size() <= 1) {
     Question q(Question::WARNING);
@@ -263,8 +265,7 @@ bool NetworkMenu::signal_ok()
     goto error;
   }
 
-  bool found       = false;
-  uint first_group = (*it)->GetGroup();
+  first_group = (*it)->GetGroup();
   for (; it != playing_list.end(); it++) {
     if ((*it)->GetGroup() != first_group) {
       found = true;
