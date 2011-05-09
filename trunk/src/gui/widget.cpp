@@ -102,7 +102,7 @@ void Widget::RedrawBackground(const Rectanglei& rect) const
 
 void Widget::RedrawForeground() const
 {
-  if (!visible)
+  if (!visible || !border_size)
     return;
 
   Surface& surf = GetMainWindow();
@@ -115,9 +115,9 @@ void Widget::RedrawForeground() const
 
 void Widget::ParseXMLMisc(void)
 {
-  if (!profile || !widgetNode) {
+  if (!profile || !widgetNode)
     return;
-  }
+
   XmlReader * xmlFile = profile->GetXMLDocument();
 
   xmlFile->ReadStringAttr(widgetNode, "action", actionName);
@@ -125,9 +125,9 @@ void Widget::ParseXMLMisc(void)
 
 void Widget::ParseXMLBorder(void)
 {
-  if (!profile || !widgetNode) {
+  if (!profile || !widgetNode)
     return;
-  }
+
   XmlReader * xmlFile = profile->GetXMLDocument();
 
   int borderSize = 0;
@@ -139,9 +139,9 @@ void Widget::ParseXMLBorder(void)
 
 void Widget::ParseXMLBackground(void)
 {
-  if (!profile || !widgetNode) {
+  if (!profile || !widgetNode)
     return;
-  }
+
   XmlReader * xmlFile = profile->GetXMLDocument();
 
   Color backgroundColor = defaultOptionColorBox;
@@ -168,9 +168,8 @@ int Widget::ParseHorizontalTypeAttribut(const std::string & attributName,
 {
   int finalValue = defaultValue;
 
-  if (!profile || !widgetNode) {
+  if (!profile || !widgetNode)
     return finalValue;
-  }
 
   XmlReader * xmlFile = profile->GetXMLDocument();
   float tmpValue;
@@ -188,9 +187,8 @@ int Widget::ParseVerticalTypeAttribut(const std::string & attributName,
 {
   int finalValue = defaultValue;
 
-  if (!profile || !widgetNode) {
+  if (!profile || !widgetNode)
     return finalValue;
-  }
 
   XmlReader * xmlFile = profile->GetXMLDocument();
   float tmpValue;
