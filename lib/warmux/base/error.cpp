@@ -60,7 +60,7 @@ void MissedAssertion(const char *filename, unsigned int line,
 static std::string FormatError(const char *filename, unsigned int line,
                                const std::string &txt)
 {
-  return Format(_("Error in %s:%lu (Warmux %s) : %s"),
+  return Format(_("Error in %s:%u (Warmux %s) : %s"),
                 filename, line, WARMUX_VERSION.c_str(), txt.c_str());
 }
 

@@ -133,9 +133,9 @@ bool GameMenu::signal_ok()
 
   if (playing_list.size() <= 1) {
     Question q(Question::WARNING);
-    q.Set(Format(ngettext("There is only %u team.",
-                          "There are only %u teams.",
-                          (uint)playing_list.size())), true, 0);
+    uint num = playing_list.size();
+    q.Set(Format(ngettext("There is only %u team.", "There are only %u teams.", num),
+                 num), true, 0);
     q.Ask();
     return false;
   }
