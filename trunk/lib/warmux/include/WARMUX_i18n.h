@@ -41,6 +41,16 @@ char * localization(const char * buffer);
 #  define ngettext(sing_, plur_, val) ((val<2) ? (sing_) : (plur_))
 #endif /* ENABLE_NLS aka gettext */
 
-std::string Format (const char *format, ...);
+#if defined(__GNUC__)
+#  ifdef WIN32
+#    define ATTRIBUTE_FORMAT(fun, fmt, params) __attribute__((format(ms_ ## fun, fmt, params)))
+#  else
+#    define ATTRIBUTE_FORMAT(fun, fmt, params) __attribute__((format(fun, fmt, params)))
+#  endif
+#else
+#  define ATTRIBUTE_FORMAT(fun, fmt, params)
+#endif
+
+std::string Format (const char *format, ...) ATTRIBUTE_FORMAT(printf, 1, 2);
 
 #endif /* FORMAT_H */
