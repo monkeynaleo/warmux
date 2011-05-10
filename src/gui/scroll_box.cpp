@@ -79,9 +79,7 @@ Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
   // Handle the click up as a widget click only if we weren't dragging
   // If we click up close to where we clicked down, it will however register
   // as a click and not a scrolling
-  uint motion = (vertical) ? abs(start_drag-mousePosition.y)
-                           : abs(start_drag-mousePosition.x);
-  if (box->Contains(mousePosition) && (start_drag==NO_DRAG || motion<4)) {
+  if (box->Contains(mousePosition) && (start_drag==NO_DRAG || LargeDrag(mousePosition))) {
     Widget *w = box->ClickUp(mousePosition, button);
 
     if (w) {

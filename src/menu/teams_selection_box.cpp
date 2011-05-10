@@ -50,7 +50,7 @@ TeamScrollBox::TeamScrollBox(const std::vector<TeamBox*>& teams, const Point2i &
 TeamScrollBox::~TeamScrollBox()
 {
   // Don't let the vbox delete the items, we're doing it ourselves
-  vbox->Empty();
+  box->Empty();
 
   // Destroy widgets
   for (uint i=0; i<teams.size() ; i++)
@@ -63,7 +63,7 @@ void TeamScrollBox::SetNbTeams(uint nb)
 {
   // Reset the list and readd the widget
   count = 0;
-  vbox->Empty();
+  box->Empty();
 
   for (uint i = 0; count < nb; i++) {
     ASSERT(i < teams.size());
