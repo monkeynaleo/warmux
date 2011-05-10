@@ -70,7 +70,7 @@ protected:
   }
   Point2i    GetScrollTrackPos() const;
   int GetMaxOffset() const
-  { 
+  {
     if (vertical)
       return box->GetSizeY() - size.y;
     return box->GetSizeX() - size.x;
@@ -107,6 +107,11 @@ public:
   virtual size_t WidgetCount() const { return box->WidgetCount(); }
   virtual void Empty() { offset = 0; box->Empty(); }
   virtual void Clear() { offset = 0; box->Clear(); }
+
+  bool LargeDrag(const Point2i& mousePos) const
+  {
+    return abs(start_drag- (vertical) ? mousePos.x : mousePos.y) < 4;
+  }
 };
 
 #endif  //SCROLL_BOX_H
