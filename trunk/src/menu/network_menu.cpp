@@ -93,7 +93,7 @@ NetworkMenu::NetworkMenu()
   team_box = new NetworkTeamsSelectionBox(Point2i(multitabsWidth-4, team_box_height), multitabs);
 
   map_box = new MapSelectionBox(Point2i(multitabsWidth, mapsHeight),
-				 multitabs, !Network::GetInstance()->IsGameMaster());
+         multitabs, !Network::GetInstance()->IsGameMaster());
 
   if (!multitabs) {
     tabs->AddNewTab("TAB_Team", _("Teams"), team_box);
@@ -128,7 +128,7 @@ NetworkMenu::NetworkMenu()
   play_in_loop = new CheckBox(_("Play several times"), W_UNDEF, true);
   options_box->AddWidget(play_in_loop);
 
-  connected_players = new Label(Format(ngettext("%i player connected", "%i players connected", 0), 0),
+  connected_players = new Label(Format(_("%i player connected"), 0),
                                 0, Font::FONT_SMALL, Font::FONT_BOLD);
   options_box->AddWidget(connected_players);
 
@@ -192,7 +192,7 @@ void NetworkMenu::AddGameModeTab()
   // Using the game mode editor but currently we are not able to send
   // custom parameters to client
   opt_game_mode = new ComboBox(_("Game mode"), "menu/game_mode", option_size,
-				 GameMode::ListGameModes(), selected_gamemode);
+         GameMode::ListGameModes(), selected_gamemode);
   box->AddWidget(opt_game_mode);
 
   tabs->AddNewTab("TAB_Game", _("Game"), box);
@@ -258,9 +258,9 @@ bool NetworkMenu::signal_ok()
 
   if (playing_list.size() <= 1) {
     Question q(Question::WARNING);
-    q.Set(Format(ngettext("There is only %i team.",
-                          "There are only %i teams.",
-                          playing_list.size())), true, 0);
+    uint num = playing_list.size();
+    q.Set(Format(ngettext("There is only %u team.", "There are only %u teams.", num),
+                 num), true, 0);
     q.Ask();
     goto error;
   }
