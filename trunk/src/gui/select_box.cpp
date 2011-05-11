@@ -21,11 +21,11 @@
 
 #include "graphic/video.h"
 #include "gui/select_box.h"
-#include "gui/vertical_box.h"
 #include "include/app.h"
 
-SelectBox::SelectBox(const Point2i& size, bool always, bool force, bool alt)
-  : ScrollBox(size, force, alt)
+SelectBox::SelectBox(const Point2i& size, bool always,
+                     bool force, bool vertical)
+  : ScrollBox(size, force, vertical, vertical)
   , selected_item_color(defaultListColor2)
   , default_item_color(defaultListColor3)
   , always_one_selected(always)

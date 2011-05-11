@@ -42,7 +42,7 @@ public:
   SelectBox(const Point2i& size,
             bool always_one_selected = true,
             bool force_widget_size = true,
-            bool alternate_colors = true);
+            bool vertical = true);
 
   // No need for a Draw method: the additional stuff drawn is made by Update
   virtual bool Update(const Point2i& mousePosition,
@@ -80,8 +80,9 @@ protected:
   std::vector<const void*> m_values;
 
 public:
-  ItemBox(const Point2i& size, bool always = false, bool force = true)
-    : SelectBox(size, always, force, true) { };
+  ItemBox(const Point2i& size, bool always = false,
+          bool force = true, bool vertical = true)
+    : SelectBox(size, always, force, vertical) { };
   // Should not be used and thus prevents its use!
   void AddItem(bool select, Widget* w);
   void AddItem(bool select, Widget* w, const void* value);
