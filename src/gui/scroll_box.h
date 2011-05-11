@@ -107,6 +107,7 @@ public:
   virtual size_t WidgetCount() const { return box->WidgetCount(); }
   virtual void Empty() { offset = 0; box->Empty(); }
   virtual void Clear() { offset = 0; box->Clear(); }
+  void SetMargin(uint margin) { box->SetMargin(margin); }
 
   bool LargeDrag(const Point2i& mousePos) const
   {
