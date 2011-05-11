@@ -55,8 +55,10 @@ ScrollBox::ScrollBox(const Point2i & _size, bool force, bool alt, bool v)
 
   scrollbar_dim = (v) ? m_up->GetSizeX() : m_up->GetSizeY();
   // Let's consider the scrollbar is not displayed for now.
-  box = (v) ? new VBox(_size.x - 2*border_size - scrollbar_dim, false, false, force)
-            : new VBox(_size.y - 2*border_size - scrollbar_dim, false, false, force);
+  if (v)
+    box = new VBox(size.x - 2*border_size - scrollbar_dim, false, false, force);
+  else
+    box = new HBox(size.y - 2*border_size - scrollbar_dim, false, false, force);
   box->SetNoBorder();
   box->SetMargin(0);
   box->SetBackgroundColor(transparent_color);
