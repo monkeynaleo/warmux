@@ -114,8 +114,10 @@ void SelectBox::Clear()
 void SelectBox::Select(uint index)
 {
   ASSERT(index < m_items.size());
+  if (selected_item == index)
+    return;
   if (selected_item != -1)
-    Deselect();
+    m_items[selected_item]->SetHighlighted(false);
   selected_item = index;
   m_items[index]->SetHighlightBgColor(selected_item_color);
   m_items[index]->SetHighlighted(true);
