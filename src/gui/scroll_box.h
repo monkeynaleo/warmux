@@ -45,8 +45,8 @@ protected:
   bool alternate_colors;
 
   // Buttons
-  Button * m_up;
-  Button * m_down;
+  Button * m_dec;
+  Button * m_inc;
 
   // Scroll information
   int          start_drag;

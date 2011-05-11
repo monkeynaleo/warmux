@@ -37,8 +37,8 @@ static const Color  c_odd(0x80, 0x80, 0x80, 0x20);
 ScrollBox::ScrollBox(const Point2i & _size, bool force, bool alt, bool v)
   : WidgetList(_size)
   , alternate_colors(alt)
-  , m_up(NULL)
-  , m_down(NULL)
+  , m_dec(NULL)
+  , m_inc(NULL)
   , start_drag(NO_DRAG)
   , start_drag_offset(NO_DRAG)
   , offset(0)
@@ -47,13 +47,18 @@ ScrollBox::ScrollBox(const Point2i & _size, bool force, bool alt, bool v)
 {
   // Load buttons
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
-  m_up = new Button(res, "menu/up");
-  m_down = new Button(res, "menu/down");
+  if (v) {
+    m_dec = new Button(res, "menu/up");
+    m_inc = new Button(res, "menu/down");
+  } else {
+    m_dec = new Button(res, "menu/big_minus");
+    m_inc = new Button(res, "menu/big_plus");
+  }
 
   Widget::SetBorder(white_color, 1);
   Widget::SetBackgroundColor(transparent_color);
 
-  scrollbar_dim = (v) ? m_up->GetSizeX() : m_up->GetSizeY();
+  scrollbar_dim = (v) ? m_dec->GetSizeX() : m_dec->GetSizeY();
   // Let's consider the scrollbar is not displayed for now.
   if (v)
     box = new VBox(size.x - 2*border_size - scrollbar_dim, false, false, force);
@@ -64,8 +69,8 @@ ScrollBox::ScrollBox(const Point2i & _size, bool force, bool alt, bool v)
   box->SetBackgroundColor(transparent_color);
 
   WidgetList::AddWidget(box);
-  WidgetList::AddWidget(m_up);
-  WidgetList::AddWidget(m_down);
+  WidgetList::AddWidget(m_dec);
+  WidgetList::AddWidget(m_inc);
 }
 
 Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
@@ -98,12 +103,12 @@ Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
 
     // The event involves the scrollbar or its buttons
     if ((button == SDL_BUTTON_WHEELDOWN && Contains(mousePosition)) ||
-        (is_click && m_down->Contains(mousePosition))) {
+        (is_click && m_inc->Contains(mousePosition))) {
 
       // bottom button
       new_offset = offset+SCROLL_SPEED;
     } else if ((button == SDL_BUTTON_WHEELUP && Contains(mousePosition)) ||
-               (is_click && m_up->Contains(mousePosition))) {
+               (is_click && m_dec->Contains(mousePosition))) {
 
       // top button
       new_offset = offset-SCROLL_SPEED;
@@ -235,8 +240,8 @@ Point2i ScrollBox::GetScrollTrackPos() const
 {
   if (vertical)
     return Point2i(position.x + size.x - border_size - scrollbar_dim,
-                   position.y + border_size + m_up->GetSizeY());
-  return Point2i(position.x + border_size + m_up->GetSizeX(),
+                   position.y + border_size + m_dec->GetSizeY());
+  return Point2i(position.x + border_size + m_dec->GetSizeX(),
                  position.y + size.y - border_size - scrollbar_dim);
 }
 
@@ -273,8 +278,8 @@ Rectanglei ScrollBox::GetScrollThumb() const
 int ScrollBox::GetTrackDimension() const
 {
   if (vertical)
-    return size.y - 2*(m_up->GetSizeY()+border_size);
-  return size.x - 2*(m_up->GetSizeX()+border_size);
+    return size.y - 2*(m_dec->GetSizeY()+border_size);
+  return size.x - 2*(m_dec->GetSizeX()+border_size);
 }
 
 bool ScrollBox::Update(const Point2i &mousePosition,
@@ -290,8 +295,8 @@ bool ScrollBox::Update(const Point2i &mousePosition,
   need_redrawing = redraw;
 
   bool has_scrollbar = HasScrollBar();
-  m_up->SetVisible(has_scrollbar);
-  m_down->SetVisible(has_scrollbar);
+  m_dec->SetVisible(has_scrollbar);
+  m_inc->SetVisible(has_scrollbar);
 
   updated |= WidgetList::Update(mousePosition, lastMousePosition);
 
@@ -316,9 +321,9 @@ void ScrollBox::Pack()
 
     //printf("Pack: size=%ix%i max=%i\n", size.x, size.y, GetMaxOffset());
 
-    m_up->SetPosition(position.x + size.x - m_up->GetSizeX() - border_size,
+    m_dec->SetPosition(position.x + size.x - m_dec->GetSizeX() - border_size,
                       position.y + border_size);
-    m_down->SetPosition(position + size - m_down->GetSize() - border_size);
+    m_inc->SetPosition(position + size - m_inc->GetSize() - border_size);
   } else {
     box->SetPosition(position.x + border_size - offset,
                      position.y + border_size);
@@ -327,9 +332,9 @@ void ScrollBox::Pack()
 
     //printf("Pack: size=%ix%i max=%i\n", size.x, size.y, GetMaxOffset());
 
-    m_up->SetPosition(position.x + border_size,
-                      position.y + size.y - m_up->GetSizeY() - border_size);
-    m_down->SetPosition(position + size - m_down->GetSize() - border_size);
+    m_dec->SetPosition(position.x + border_size,
+                      position.y + size.y - m_dec->GetSizeY() - border_size);
+    m_inc->SetPosition(position + size - m_inc->GetSize() - border_size);
   }
 }
 
