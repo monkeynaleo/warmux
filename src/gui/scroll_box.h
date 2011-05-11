@@ -110,7 +110,8 @@ public:
 
   bool LargeDrag(const Point2i& mousePos) const
   {
-    return abs(start_drag- (vertical) ? mousePos.x : mousePos.y) < 4;
+    int pos = (vertical) ? mousePos.y : mousePos.x;
+    return abs(start_drag-pos) < 2;
   }
 };
 
