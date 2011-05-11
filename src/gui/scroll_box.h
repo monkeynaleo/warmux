@@ -75,8 +75,12 @@ protected:
       return box->GetSizeY() - size.y;
     return box->GetSizeX() - size.x;
   }
-  int GetTrackDimension() const;
   bool HasScrollBar() const { return GetMaxOffset() > 0; }
+  bool LargeDrag(const Point2i& mousePos) const
+  {
+    int pos = (vertical) ? mousePos.y : mousePos.x;
+    return abs(start_drag-pos) < 2;
+  }
 
 public:
   ScrollBox(const Point2i & size, bool force = true, bool alternate = false, bool vertical=true);
@@ -108,12 +112,7 @@ public:
   virtual void Empty() { offset = 0; box->Empty(); }
   virtual void Clear() { offset = 0; box->Clear(); }
   void SetMargin(uint margin) { box->SetMargin(margin); }
-
-  bool LargeDrag(const Point2i& mousePos) const
-  {
-    int pos = (vertical) ? mousePos.y : mousePos.x;
-    return abs(start_drag-pos) < 2;
-  }
+  int GetTrackDimension() const;
 };
 
 #endif  //SCROLL_BOX_H
