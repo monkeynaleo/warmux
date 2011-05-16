@@ -20,6 +20,7 @@
  *****************************************************************************/
 
 #include <iostream>
+
 #include <SDL_mutex.h>
 
 #include <WARMUX_action_handler.h>
@@ -27,10 +28,10 @@
 #include <WARMUX_debug.h>
 #include <WARMUX_error.h>
 
-WActionHandler::WActionHandler():
-  handler(),
-  action_name(),
-  queue()
+WActionHandler::callback_t WActionHandler::handlers[Action::NUM_ACTIONS];
+std::string WActionHandler::action_names[Action::NUM_ACTIONS];
+
+WActionHandler::WActionHandler()
 {
   mutex = SDL_CreateMutex();
   SDL_LockMutex(mutex);
@@ -80,41 +81,3 @@ void WActionHandler::NewAction(Action* a)
   //  std::cout << "  queue_size " << queue.size() << std::endl;
   UnLock();
 }
-
-// To call when locked
-void WActionHandler::Register (Action::Action_t action,
-                              const std::string &name,
-                              callback_t fct)
-{
-  handler[action] = fct;
-  action_name[action] = name;
-}
-
-void WActionHandler::Exec(Action *a)
-{
-#ifdef WMX_LOG
-  int id=rand();
-#endif
-
-  MSG_DEBUG("action_handler", "-> (%d) Executing action %s", id, GetActionName(a->GetType()).c_str());
-  handler_it it=handler.find(a->GetType());
-  NET_ASSERT(it != handler.end())
-  {
-    if(a->GetCreator()) a->GetCreator()->ForceDisconnection();
-    return;
-  }
-  (*it->second) (a);
-  MSG_DEBUG("action_handler", "<- (%d) Executing action %s", id, GetActionName(a->GetType()).c_str());
-}
-
-const std::string &WActionHandler::GetActionName (Action::Action_t action) const
-{
-  ASSERT(mutex!=NULL);
-  SDL_LockMutex(mutex);
-  name_it it=action_name.find(action);
-  ASSERT(it != action_name.end());
-  SDL_UnlockMutex(mutex);
-  return it->second;
-}
-
-

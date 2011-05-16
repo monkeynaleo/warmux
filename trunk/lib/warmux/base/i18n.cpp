@@ -29,7 +29,6 @@
 
 #ifdef USE_FRIBIDI
 # include <fribidi/fribidi.h>
-# include <cstring>
 
 FriBidiCharType pbase_dir = FRIBIDI_TYPE_ON;
 FriBidiChar unicode_buffer[2048];

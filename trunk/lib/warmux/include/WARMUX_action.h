@@ -134,7 +134,9 @@ public:
     ACTION_NETWORK_VERIFY_RANDOM_SYNC,
     ACTION_TIME_VERIFY_SYNC,
     // ########################################################
+    ACTION_END_ENUM
   } Action_t;
+  static const uint NUM_ACTIONS = ACTION_END_ENUM;
 
 #pragma pack(push)  /* push current alignment to stack */
 #pragma pack(1)     /* set alignment to 1 byte boundary */
