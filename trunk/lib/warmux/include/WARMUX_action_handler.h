@@ -24,6 +24,8 @@
 //-----------------------------------------------------------------------------
 #include <map>
 #include <list>
+#include <SDL_mutex.h>
+
 #include <WARMUX_action.h>
 #include <WARMUX_types.h>
 //-----------------------------------------------------------------------------
@@ -57,8 +59,8 @@ public:
   void Flush();
   void ExecActions();
 
-  inline void Lock();
-  inline void UnLock();
+  void Lock() { SDL_LockMutex(mutex); }
+  inline void UnLock() { SDL_UnlockMutex(mutex); }
 
   // To call when locked
   void Register(Action::Action_t action, const std::string &name, callback_t fct)

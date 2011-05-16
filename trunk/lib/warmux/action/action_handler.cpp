@@ -21,8 +21,6 @@
 
 #include <iostream>
 
-#include <SDL_mutex.h>
-
 #include <WARMUX_action_handler.h>
 #include <WARMUX_distant_cpu.h>
 #include <WARMUX_debug.h>
@@ -46,25 +44,14 @@ WActionHandler::~WActionHandler()
     SDL_DestroyMutex(mutex);
 }
 
-void WActionHandler::Lock()
-{
-  SDL_LockMutex(mutex);
-}
-
-void WActionHandler::UnLock()
-{
-  SDL_UnlockMutex(mutex);
-}
-
 void WActionHandler::Flush()
 {
   std::list<Action*>::iterator it;
   Lock();
-  MSG_DEBUG("action_handler","remove all actions");
+  MSG_DEBUG("action_handler", "remove all actions");
 
-  for (it = queue.begin(); it != queue.end() ;)
-  {
-    MSG_DEBUG("action_handler","remove action %s", GetActionName((*it)->GetType()).c_str());
+  for (it = queue.begin(); it != queue.end() ;) {
+    MSG_DEBUG("action_handler", "remove action %s", GetActionName((*it)->GetType()).c_str());
     delete *it;
     it = queue.erase(it);
   }
@@ -75,7 +62,7 @@ void WActionHandler::NewAction(Action* a)
 {
   ASSERT(mutex!=NULL);
   Lock();
-  MSG_DEBUG("action_handler","New action : %s", GetActionName(a->GetType()).c_str());
+  MSG_DEBUG("action_handler", "New action : %s", GetActionName(a->GetType()).c_str());
   //  std::cout << "New action " << a->GetType() << std::endl ;
   queue.push_back(a);
   //  std::cout << "  queue_size " << queue.size() << std::endl;
