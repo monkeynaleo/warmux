@@ -33,17 +33,15 @@ struct SDL_mutex;
 
 class WActionHandler
 {
-  // Mutex needed to be thread safe for the network
+  // Mutex needed to handle action queue in a thread-safe way (network etc)
   SDL_mutex* mutex;
 
   // Handler for each action
   typedef void (*callback_t) (Action *a);
-  std::map<Action::Action_t, callback_t> handler;
-  typedef std::map<Action::Action_t, callback_t>::const_iterator handler_it;
+  static callback_t handlers[Action::NUM_ACTIONS];
 
   // Action strings
-  std::map<Action::Action_t, std::string> action_name;
-  typedef std::map<Action::Action_t, std::string>::const_iterator name_it;
+  static std::string action_names[Action::NUM_ACTIONS];
 
 protected:
   WActionHandler();
@@ -52,20 +50,24 @@ protected:
   // Action queue
   std::list<Action*> queue;
 
-  void Exec(Action *a);
+  void Exec(Action *a) { handlers[a->GetType()](a); }
   void NewAction(Action* a);
 
 public:
   void Flush();
   void ExecActions();
 
-  void Lock();
-  void UnLock();
+  inline void Lock();
+  inline void UnLock();
 
   // To call when locked
-  void Register(Action::Action_t action, const std::string &name, callback_t fct);
+  void Register(Action::Action_t action, const std::string &name, callback_t fct)
+  {
+    handlers[action] = fct;
+    action_names[action] = name;
+  }
 
-  const std::string &GetActionName(Action::Action_t action) const;
+  const std::string& GetActionName(Action::Action_t a) const { return action_names[a]; }
 
   bool IsEmpty() const { return queue.empty(); }
 };
