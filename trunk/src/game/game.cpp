@@ -296,6 +296,7 @@ void Game::InitMap()
 {
   GetWorld().Reset();
   ObjectsList::GetRef().PlaceBarrels();
+  Wind::GetRef().ChooseRandomVal();
 }
 
 void Game::InitTeams()

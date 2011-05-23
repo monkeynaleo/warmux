@@ -64,8 +64,9 @@ class Wind : public Singleton<Wind>
 public:
   Double GetStrength() const { return m_nv_val * WIND_STRENGTH / 100.0; }
   void ChooseRandomVal();
+  void UpdateStrength();
 
-  void SetVal(int val) { m_nv_val = val; }
+  void SetVal(int val);
   void Refresh();
   void Reset();
   void DrawParticles();
