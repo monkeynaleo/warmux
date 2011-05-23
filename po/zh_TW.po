@@ -1,15 +1,15 @@
 # Chinese (Taiwan) translation for Warmux
 # Copyright (C) 2011 Warmux Development Team
 # This file is distributed under the same license as the warmux package.
-# <pspeter9931@xxxxxxxxx>, 2011.
+# <pspeter9931@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: zh_TW\n"
-"Report-Msgid-Bugs-To: warmux-dev@xxxxxxx\n"
+"Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
 "POT-Creation-Date: 2011-04-28 22:16+0300\n"
 "PO-Revision-Date: 2011-05-22 12:24+0800\n"
-"Last-Translator: Pin-hsien Li <pspeter9931@xxxxxxxxx>\n"
-"Language-Team: Chinese (Taiwan) <chinese-l10n@xxxxxxxxxxxxxxxx>\n"
+"Last-Translator: Pin-hsien Li <pspeter9931@gmail.com>\n"
+"Language-Team: Chinese (Taiwan) <chinese-l10n@googlegroups.com>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -59,8 +59,7 @@ msgstr "%s <%s> 從 %s"
 msgid "%s Team"
 msgstr "%s 隊伍"
 
-#. translators: this is the team listing and will expand in a context like 
-"OOo team - Remote"
+#. translators: this is the team listing and will expand in a context like "OOo team - Remote"
 #: src/menu/team_box.cpp:246
 #, c-format
 msgid "%s Team - Remote"
@@ -106,8 +105,7 @@ msgstr "%s 的位址 %s"
 
 #: src/weapon/polecat.cpp:117
 #, c-format
-msgid "%s has done something for the environment, he has not ordered the 
-polecat to fart."
+msgid "%s has done something for the environment, he has not ordered the polecat to fart."
 msgstr "%s 是個環境殺手，明明沒有叫那隻臭鼬放響屁！"
 
 #: src/object/medkit.cpp:73
@@ -182,10 +180,8 @@ msgstr[1] "%s 隊得到了 %u 發空襲！"
 
 #: src/weapon/airhammer.cpp:167
 #, c-format
-msgid "%s team has won %u airhammer! Don't make too much noise with it! 
-Thanks, your neighbours."
-msgid_plural "%s team has won %u airhammers! Don't make too much noise with 
-them! Thanks, your neighbours."
+msgid "%s team has won %u airhammer! Don't make too much noise with it! Thanks, your neighbours."
+msgid_plural "%s team has won %u airhammers! Don't make too much noise with them! Thanks, your neighbours."
 msgstr[0] "%s 隊得到了 %u 台氣動鎚！不要製造噪音，謝謝！您的鄰居敬上。"
 msgstr[1] "%s 隊得到了 %u 台氣動鎚！不要製造噪音，謝謝！您的鄰居敬上。"
 
@@ -219,10 +215,8 @@ msgstr[1] "%s 隊得到了 %u 發火箭筒！"
 
 #: src/weapon/blowtorch.cpp:154
 #, c-format
-msgid "%s team has won %u blowtorch! If you're under 18, ask your parents to 
-use it."
-msgid_plural "%s team has won %u blowtorchs! If you're under 18, ask your 
-parents to use it."
+msgid "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
+msgid_plural "%s team has won %u blowtorchs! If you're under 18, ask your parents to use it."
 msgstr[0] "%s 隊得到了 %u 把噴火槍！未滿十八歲者，請向父母請教。"
 msgstr[1] "%s 隊得到了 %u 把噴火槍！未滿十八歲者，請向父母請教。"
 
@@ -250,8 +244,7 @@ msgstr[1] "%s 隊得到了 %u 組建築武器！戴好安全帽。"
 #: src/weapon/disco_grenade.cpp:168
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
-msgid_plural "%s team has won %u disco grenades! Shake your body when 
-throwing them!"
+msgid_plural "%s team has won %u disco grenades! Shake your body when throwing them!"
 msgstr[0] "%s 隊得到了 %u 顆夜總會手榴彈！擺動一下身子，扔出去吧！"
 msgstr[1] "%s 隊得到了 %u 顆夜總會手榴彈！擺動一下身子，扔出去吧！"
 
@@ -306,10 +299,8 @@ msgstr[1] "%s 隊得到了 %u 個噴射背包！帥呆了！"
 
 #: src/weapon/lowgrav.cpp:83
 #, c-format
-msgid "%s team has won %u lowgrav! Small step for man, giant leap for free 
-software!"
-msgid_plural "%s team has won %u lowgravs! Small step for man, giant leap for 
-free software!"
+msgid "%s team has won %u lowgrav! Small step for man, giant leap for free software!"
+msgid_plural "%s team has won %u lowgravs! Small step for man, giant leap for free software!"
 msgstr[0] "%s 隊得到了 %u 組低重力！人類的一小步，卻是自由軟體的一大步！"
 msgstr[1] "%s 隊得到了 %u 組低重力！人類的一小步，卻是自由軟體的一大步！"
 
@@ -365,8 +356,7 @@ msgstr[1] "%s 隊得到了 %u 個巴掌！躲躲看啊！"
 #: src/weapon/snipe_rifle.cpp:259
 #, c-format
 msgid "%s team has won %u sniper rifle! Aim and shoot between the eyes!"
-msgid_plural "%s team has won %u sniper rifles! Aim and shoot between the 
-eyes!"
+msgid_plural "%s team has won %u sniper rifles! Aim and shoot between the eyes!"
 msgstr[0] "%s 隊得到了 %u 把狙擊步槍！瞄準眉心，射擊！"
 msgstr[1] "%s 隊得到了 %u 把狙擊步槍！瞄準眉心，射擊！"
 
@@ -477,8 +467,7 @@ msgstr "(無限)"
 
 #: src/menu/options_menu.cpp:536
 #, c-format
-msgid "A new version %s is available, while your version is %s. You may want 
-to check whether an update is available for your OS!"
+msgid "A new version %s is available, while your version is %s. You may want to check whether an update is available for your OS!"
 msgstr "有新版本 %s 可以取得，您目前的版本為 %s。或許您想檢查一下，該更新是否支援您的作業系統！"
 
 #. Action name
@@ -687,8 +676,7 @@ msgstr "一般"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:58
-msgid "Click on either side of the central (selected) map or use wheelmouse 
-to change the selected map."
+msgid "Click on either side of the central (selected) map or use wheelmouse to change the selected map."
 msgstr "點擊中間(選取的)地圖兩側，或是使用滾輪改變要選取的地圖。"
 
 #: src/weapon/teleportation.cpp:51
@@ -709,8 +697,7 @@ msgstr ""
 "用上下鍵來改變方向。"
 
 #: src/menu/help_menu.cpp:56
-msgid "Click to let a player handle the team instead of the AI, and vice 
-versa"
+msgid "Click to let a player handle the team instead of the AI, and vice versa"
 msgstr ""
 "點它來讓玩家代替電腦掌控隊伍，\n"
 "反之亦同"
@@ -919,20 +906,17 @@ msgstr "載入隊伍時發生錯誤："
 #: src/team/custom_team.cpp:166
 #: src/team/custom_team.cpp:177
 #, c-format
-msgid "Error while creating directory \"%s\": unable to store configuration 
-file."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "建立目錄「%s」時發生錯誤：無法儲存設定檔案。"
 
 #: src/team/custom_team.cpp:134
 #, c-format
-msgid "Error while deleting the directory \"%s\". Unable to delete the custom 
-team."
+msgid "Error while deleting the directory \"%s\". Unable to delete the custom team."
 msgstr "刪除目錄「%s」時發生錯誤。無法刪除自訂隊伍。"
 
 #: src/team/custom_team.cpp:125
 #, c-format
-msgid "Error while deleting the file \"%s\". Unable to delete the custom 
-team."
+msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr "刪除檔案「%s」時發生錯誤。無法刪除自訂隊伍。"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
@@ -946,8 +930,7 @@ msgid "Error: Unable to contact the index server to host a game"
 msgstr "錯誤：無法連接至索引伺服器來主辦遊戲"
 
 #: src/menu/network_connection_menu.cpp:385
-msgid "Error: Unable to contact the index server to search for an internet 
-game"
+msgid "Error: Unable to contact the index server to search for an internet game"
 msgstr "錯誤：無法連接至索引伺服器來搜索線上遊戲"
 
 #: src/menu/network_connection_menu.cpp:502
@@ -957,12 +940,8 @@ msgstr "錯誤：無法啟動伺服器"
 #: src/menu/network_connection_menu.cpp:495
 #: tools/servers/game_server/server.cpp:389
 #, c-format
-msgid "Error: Your server is not reachable from the internet. Check your 
-firewall configuration: TCP Port %s must accept connections from the outside. 
-If you are not directly connected to the internet, check your router 
-configuration: TCP Port %s must be forwarded on your computer."
-msgstr "錯誤：你的伺服器無法從網路存取。檢查防火牆配置：TCP 埠 %s 
-必須可接受外來連線。如果你不是直接連接到網路上的話，檢查路由器配置：TCP 埠 %s 必須導向你的電腦。"
+msgid "Error: Your server is not reachable from the internet. Check your firewall configuration: TCP Port %s must accept connections from the outside. If you are not directly connected to the internet, check your router configuration: TCP Port %s must be forwarded on your computer."
+msgstr "錯誤：你的伺服器無法從網路存取。檢查防火牆配置：TCP 埠 %s 必須可接受外來連線。如果你不是直接連接到網路上的話，檢查路由器配置：TCP 埠 %s 必須導向你的電腦。"
 
 #: src/team/team.cpp:161
 #, c-format
@@ -1027,12 +1006,8 @@ msgid "Game"
 msgstr "遊戲"
 
 #: src/include/action_handler.cpp:921
-msgid "Game is not synchronized anymore! This is BAD, the network game will 
-be interrupted, sorry. Please, report the bug to the Warmux Team by mail or 
-through the forum. Precise your computer configuration and attach the bug.wrf 
-file that has just been created in your home folder."
-msgstr "遊戲不再同步！太糟糕了，很抱歉，網路遊戲將會被中斷。請透過郵件或論壇向 Warmux 團隊提報 
-bug。詳細說明你的電腦配置，並附帶剛才在你的家目錄下建立的 bug.wrf 檔案。"
+msgid "Game is not synchronized anymore! This is BAD, the network game will be interrupted, sorry. Please, report the bug to the Warmux Team by mail or through the forum. Precise your computer configuration and attach the bug.wrf file that has just been created in your home folder."
+msgstr "遊戲不再同步！太糟糕了，很抱歉，網路遊戲將會被中斷。請透過郵件或論壇向 Warmux 團隊提報 bug。詳細說明你的電腦配置，並附帶剛才在你的家目錄下建立的 bug.wrf 檔案。"
 
 #: src/menu/help_menu.cpp:59
 msgid "Game menu"
@@ -1134,8 +1109,7 @@ msgid "I like WarMUX :)"
 msgstr "我喜歡 WarMUX :)"
 
 #: src/main.cpp:290
-msgid "If you found a bug or have a feature request send us an email (in 
-english, please):"
+msgid "If you found a bug or have a feature request send us an email (in english, please):"
 msgstr "如果您發現了 bug，或是想要什麼新功能的話，請寄電郵給我們 (請使用英文)："
 
 #. TRANSLATORS: please be imaginative and keep it short!
@@ -1477,8 +1451,7 @@ msgstr "網路遊戲"
 msgid "Never"
 msgstr "絕不"
 
-#. TRANSLATORS: after this string there will be a time stamp or the string 
-'(unknown time)'
+#. TRANSLATORS: after this string there will be a time stamp or the string '(unknown time)'
 #: src/network/chatlogger.cpp:46
 msgid "New network game at "
 msgstr "新的網路遊戲於"
@@ -1927,11 +1900,8 @@ msgstr "抱歉，目前沒有任何遊戲有空缺"
 #: src/menu/network_connection_menu.cpp:444
 #: tools/servers/game_server/server.cpp:374
 #, c-format
-msgid "Sorry, your version is not supported anymore. Supported versions are 
-%s. You can download an updated version from 
-http://www.warmux.org/wiki/download.php";
-msgstr "抱歉，你的版本已不再被支援。支援的版本為 %s。你可以從 http://www.warmux.org/wiki/download.php 
-下載更新的版本"
+msgid "Sorry, your version is not supported anymore. Supported versions are %s. You can download an updated version from http://www.warmux.org/wiki/download.php"
+msgstr "抱歉，你的版本已不再被支援。支援的版本為 %s。你可以從 http://www.warmux.org/wiki/download.php 下載更新的版本"
 
 #: src/menu/options_menu.cpp:320
 msgid "Sound"
@@ -2054,8 +2024,7 @@ msgid "The bigger the faster you'll fall!"
 msgstr "該值愈大，摔得也越快！"
 
 #: src/menu/game_mode_editor.cpp:132
-msgid "The blitz mode does not reset the time between each team turn. A team 
-looses when it has no players left or its time has ran out."
+msgid "The blitz mode does not reset the time between each team turn. A team looses when it has no players left or its time has ran out."
 msgstr ""
 "閃電戰模式並不會在每隊回合之間\n"
 "重設時間。當沒有任何玩家存活，\n"
@@ -2063,8 +2032,7 @@ msgstr ""
 
 #: src/network/network_client.cpp:99
 #, c-format
-msgid "The client and server versions are incompatible (local=%s, server=%s). 
-Please try another server."
+msgid "The client and server versions are incompatible (local=%s, server=%s). Please try another server."
 msgstr "客戶端和伺服器的版本並不相容 (本地=%s，伺服器=%s)。請嘗試另一個伺服器。"
 
 #: src/network/net_error_msg.cpp:34
@@ -2107,8 +2075,7 @@ msgstr "伺服器拒絕連線：密碼錯誤！"
 
 #: src/weapon/weapon.cpp:652
 #, c-format
-msgid "The weapon %s has infinite ammo, but bonus boxes might contain ammo 
-for it!"
+msgid "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
 msgstr "武器 %s 有無限多發，但是獎勵箱可能裝有它的彈藥！"
 
 #: src/menu/network_menu.cpp:280
@@ -2190,16 +2157,14 @@ msgstr "觸摸控制"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:96
-msgid "Touch/click the left or right arrows to move respectively left or 
-right"
+msgid "Touch/click the left or right arrows to move respectively left or right"
 msgstr ""
 "觸碰/點擊左右箭頭，\n"
 "向左或向右移動"
 
 #. TRANSLATORS: please be imaginative and keep it short!
 #: src/menu/help_menu.cpp:97
-msgid "Touch/click the left or right arrows to respectively raise or lower 
-the aim"
+msgid "Touch/click the left or right arrows to respectively raise or lower the aim"
 msgstr ""
 "觸碰/點擊左右箭頭，\n"
 "向上或向下瞄準"
@@ -2418,8 +2383,7 @@ msgid "You are alone. :-/"
 msgstr "只有你一個人。:-/"
 
 #: src/menu/network_menu.cpp:442
-msgid "You are the new turn master! Learn about your new powers by typing 
-/help"
+msgid "You are the new turn master! Learn about your new powers by typing /help"
 msgstr "你是新回合的主人！輸入 /help 來了解你的新招數"
 
 #: src/menu/options_menu.cpp:583
@@ -2499,3 +2463,4 @@ msgstr "o 載入聲音資料：%s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o 開啟音樂：%d Hz %d bit"
+
