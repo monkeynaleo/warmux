@@ -98,8 +98,9 @@ bool AIStupidPlayer::CompareIdeaMaxRating(const AIItem& i1, const AIItem& i2)
   return i1.first->GetMaxRating(false) > i2.first->GetMaxRating(false);
 }
 
-AIStupidPlayer::AIStupidPlayer(Team * team)
+AIStupidPlayer::AIStupidPlayer(Team * team, float accuracy)
   : team(team)
+  , accuracy(accuracy)
   , item_iterator(items.begin())
   , command(NULL)
   , best_strategy(NULL)
@@ -226,7 +227,7 @@ void AIStupidPlayer::CheckNextIdea()
   }
 
   Stopwatch stopwatch;
-  AIStrategy * strategy = idea->CreateStrategy();
+  AIStrategy * strategy = idea->CreateStrategy(accuracy);
   (*item_iterator).second->AddTiming(stopwatch.GetValue());
   if (strategy) {
     AIStrategy::CompareResult compare_result = strategy->CompareRatingWith(best_strategy);

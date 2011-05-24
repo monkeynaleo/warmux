@@ -19,6 +19,7 @@
  * A factory for AI strategies. It contains no turn specfic data.
  *****************************************************************************/
 
+#include <WARMUX_random.h>
 #include "ai/ai_idea.h"
 #include "ai/trajectory.h"
 #include "character/character.h"
@@ -118,7 +119,7 @@ float AIIdea::RateExplosion(const Character & shooter, const Point2i& position,
   return rating;
 }
 
-AIStrategy * SkipTurnIdea::CreateStrategy() const
+AIStrategy * SkipTurnIdea::CreateStrategy(float) const
 {
   const WeaponsList * weapons_list = Game::GetInstance()->GetWeaponsList();
   const Weapon * weapon = weapons_list->GetWeapon(Weapon::WEAPON_SKIP_TURN);
@@ -127,7 +128,7 @@ AIStrategy * SkipTurnIdea::CreateStrategy() const
   return new SkipTurnStrategy();
 }
 
-AIStrategy * WasteAmmoUnitsIdea::CreateStrategy() const
+AIStrategy * WasteAmmoUnitsIdea::CreateStrategy(float) const
 {
   if (ActiveTeam().GetWeapon().CanChangeWeapon())
     return NULL;
@@ -283,7 +284,7 @@ static bool ShotMisses(const Character *shooter, const Character *enemy,
   return false;
 }
 
-AIStrategy * ShootDirectlyAtEnemyIdea::CreateStrategy() const {
+AIStrategy * ShootDirectlyAtEnemyIdea::CreateStrategy(float accuracy) const {
   if (enemy.IsDead())
     return NULL;
 
@@ -330,6 +331,16 @@ AIStrategy * ShootDirectlyAtEnemyIdea::CreateStrategy() const {
 
   float rating = RateDamageDoneToEnemy(damage, enemy);
   rating = rating * weapons_weighting.GetFactor(weapon_type);
+
+  // Apply our accuracy
+  if (accuracy>0.0f && accuracy<1.0f) {
+    // stddev is 0 for accuracy and increases when it decreases
+    shoot_angle += RandomLocal().GetGaussianfloat(0.0f, M_PI*(1-accuracy)/10);
+    // Revalidate value
+    if (!weapon->IsAngleValid(shoot_angle))
+      return NULL;
+  }
+
   return new ShootWithGunStrategy(rating, shooter, weapon_type, direction,
                                   shoot_angle, used_ammo_units);
 }
@@ -378,7 +389,7 @@ static const Point2i GetFirstContact(const Character & character_to_ignore,
   return pos;
 }
 
-AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy() const
+AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy(float accuracy) const
 {
   if (enemy.IsDead())
     return NULL;
@@ -434,5 +445,15 @@ AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy() const
     return NULL;
   }
   rating = rating * weapons_weighting.GetFactor(weapon_type);
+
+  // Apply our accuracy
+  if (accuracy>0.0f && accuracy<1.0f) {
+    // stddev is 0 for accuracy and increases when it decreases
+    shoot_angle += RandomLocal().GetGaussianfloat(0.0f, M_PI*(1-accuracy)/10);
+    // Revalidate value
+    if (!weapon->IsAngleValid(shoot_angle))
+      return NULL;
+  }
+
   return new LoadAndFireStrategy(rating, shooter, weapon_type, direction, shoot_angle, strength, timeout);
 }

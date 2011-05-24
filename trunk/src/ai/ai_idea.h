@@ -41,7 +41,7 @@ protected:
                              const ExplosiveWeaponConfig & cfg,
                              const float& expected_additional_distance);
 public:
-  virtual AIStrategy * CreateStrategy() const = 0;
+  virtual AIStrategy * CreateStrategy(float accuracy) const = 0;
   virtual ~AIIdea() {}
   virtual bool NoLongerPossible() const { return false; }
   virtual float GetMaxRating(bool) const { return 0.0f; }
@@ -50,13 +50,13 @@ public:
 class SkipTurnIdea : public AIIdea
 {
 public:
-  virtual AIStrategy * CreateStrategy() const;
+  virtual AIStrategy * CreateStrategy(float accuracy) const;
 };
 
 class WasteAmmoUnitsIdea : public AIIdea
 {
 public:
-  virtual AIStrategy * CreateStrategy() const;
+  virtual AIStrategy * CreateStrategy(float accuracy) const;
 };
 
 class AIShootIdea : public AIIdea
@@ -83,7 +83,7 @@ public:
   ShootDirectlyAtEnemyIdea(const WeaponsWeighting & weapons_weighting,
                            const Character & shooter, const Character & enemy,
                            Weapon::Weapon_type weapon_type, int max_distance);
-  virtual AIStrategy * CreateStrategy() const;
+  virtual AIStrategy * CreateStrategy(float accuracy) const;
 };
 
 class FireMissileWithFixedDurationIdea : public AIShootIdea
@@ -95,7 +95,7 @@ public:
                                    const Character & shooter, const Character & enemy,
                                    Weapon::Weapon_type weapon_type,
                                    float duration, int timeout = -1);
-  virtual AIStrategy * CreateStrategy() const;
+  virtual AIStrategy * CreateStrategy(float accuracy) const;
 };
 
 #endif
