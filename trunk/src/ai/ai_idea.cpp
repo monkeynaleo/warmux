@@ -449,6 +449,7 @@ AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy(float accuracy) co
   // Apply our accuracy
   if (accuracy>0.0f && accuracy<1.0f) {
     // stddev is 0 for accuracy and increases when it decreases
+    // stddev smaller compared to straight shot because it can more easily fail
     shoot_angle += RandomLocal().GetGaussianfloat(0.0f, M_PI*(1-accuracy)/10);
     // Revalidate value
     if (!weapon->IsAngleValid(shoot_angle))
