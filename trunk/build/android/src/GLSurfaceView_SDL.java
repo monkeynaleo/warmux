@@ -905,6 +905,7 @@ public class GLSurfaceView_SDL extends SurfaceView implements SurfaceHolder.Call
                 mNeedStart = true;
                 mSizeChanged = true;
                 SwapBuffers();
+                DrawLogo();
                 SwapBuffers();
 
                 mRenderer.onDrawFrame(mGL);
@@ -930,7 +931,6 @@ public class GLSurfaceView_SDL extends SurfaceView implements SurfaceHolder.Call
              * This is our main activity thread's loop, we go until
              * asked to quit.
              */
-            try {
 
                 /*
                  *  Update the asynchronous state (window size)
@@ -955,7 +955,9 @@ public class GLSurfaceView_SDL extends SurfaceView implements SurfaceHolder.Call
                     }
                     while (needToWait()) {
                         //Log.v("SDL", "GLSurfaceView_SDL::run(): paused");
-                        wait();
+                        try {
+                            wait(500);
+                        } catch(Exception e) { }
                     }
                     if (mDone) {
                         return false;
@@ -997,10 +999,6 @@ public class GLSurfaceView_SDL extends SurfaceView implements SurfaceHolder.Call
                 if( Globals.NonBlockingSwapBuffers )
                     return false;
               }
-
-            } catch (java.lang.InterruptedException e) {
-               return false;
-            }
         }
 
         private boolean needToWait() {
@@ -1114,6 +1112,14 @@ public class GLSurfaceView_SDL extends SurfaceView implements SurfaceHolder.Call
 
             }
             return null;
+        }
+
+        private void DrawLogo() {
+            // TODO: draw some logo instead of making screen non-black
+            mGL.glClearColor(0.0f, 0.5f, 0.7f, 1.0f);
+            mGL.glClear(mGL.GL_COLOR_BUFFER_BIT | mGL.GL_DEPTH_BUFFER_BIT);
+            mGL.glFlush();
+            mGL.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         }
 
         private boolean mDone;
