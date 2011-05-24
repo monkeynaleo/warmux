@@ -105,6 +105,20 @@ float RandomGenerator::Getfloat()
   return GetRand()/(WARMUX_RAND_MAX + 1.0f);
 }
 
+float RandomGenerator::GetGaussianfloat(float mean, float stddev)
+{
+  static const float FACTOR = 1.0f/16384;
+  static const uint NUM_INPUTS = 6;
+  uint sum = 0;
+  // Do we really need a Box-Muller transform?
+  for (uint i=0; i<NUM_INPUTS; i++)
+    sum += GetRand();
+  // To do as if values were randomly between -16384 and 16383
+  sum -= 16384*NUM_INPUTS;
+
+  return sum * stddev * FACTOR + mean;
+}
+
 /**
  * Return a random point in the given rectangle.
  *
