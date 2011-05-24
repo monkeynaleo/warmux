@@ -301,9 +301,10 @@ AIStrategy * ShootDirectlyAtEnemyIdea::CreateStrategy(float accuracy) const {
   // which will be select.
   // TODO: Please find an alternative to solve this tempory solution
   Point2i departure = shooter.GetCenter();
-  Point2i arrival = enemy.GetCenter();
+  Point2i arrival   = enemy.GetCenter();
+  int     sq_dist   = departure.SquareDistance(arrival);
 
-  if (departure.SquareDistance(arrival) > max_sq_distance)
+  if (sq_dist > max_sq_distance)
     return NULL;
 
   float original_angle = departure.ComputeAngleFloat(arrival);
@@ -329,7 +330,8 @@ AIStrategy * ShootDirectlyAtEnemyIdea::CreateStrategy(float accuracy) const {
   int damage = used_ammo_units * damage_per_ammo_unit;
 
   float rating = RateDamageDoneToEnemy(damage, enemy);
-  rating = rating * weapons_weighting.GetFactor(weapon_type);
+  float confidence = sqrtf((max_sq_distance - sq_dist) / (float)max_sq_distance);
+  rating *= confidence * weapons_weighting.GetFactor(weapon_type);
 
   // Apply our accuracy
   if (accuracy>0.0f && accuracy<1.0f) {
@@ -353,7 +355,7 @@ FireMissileWithFixedDurationIdea::FireMissileWithFixedDurationIdea(const Weapons
   , timeout(timeout)
 {
   // Weight for the rating according to distance/flight duration
-  confidence = (duration > 1.0f) ? 1.0f / sqrtf(duration) : 1.0f;
+  confidence = (duration > 1.0f) ? 1.0f / duration : 1.0f;
 }
 
 static bool IsPositionEmpty(const Character & character_to_ignore,
