@@ -28,8 +28,7 @@
 
 class RandomGenerator
 {
-private:
-  uint next;
+  uint32_t next;
   bool initialized;
 
 protected:
@@ -43,7 +42,7 @@ public:
   virtual void InitRandom();
 
   void UnRandom();
-  uint GetSeed();
+  uint GetSeed() const { return next; }
   void SetSeed(uint seed);
 
   bool GetBool();

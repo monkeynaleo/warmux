@@ -68,11 +68,6 @@ void RandomGenerator::SetSeed(uint seed)
   SetRand(seed);
 }
 
-uint RandomGenerator::GetSeed()
-{
-  return next;
-}
-
 /******************************************************************************
  * From "man 3 rand"
  * POSIX.1-2001  gives the following example of an implementation of rand() and
@@ -86,7 +81,7 @@ uint RandomGenerator::GetRand()
   ASSERT(initialized == true);
 
   next = next * 1103515245 + 12345;
-  return((uint)(next/65536) % 32768);
+  return (next>>16) & 0x7FFF;
 }
 
 #define WARMUX_RAND_MAX 32767
