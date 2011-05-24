@@ -164,7 +164,6 @@ ShootDirectlyAtEnemyIdea::ShootDirectlyAtEnemyIdea(const WeaponsWeighting & weap
   : AIShootIdea(weapons_weighting, shooter, enemy, weapon_type)
   , max_sq_distance(max_distance*max_distance)
 {
-  // do nothing
 }
 
 static const PhysicalObj* GetObjectAt(const Point2i & pos)
@@ -353,7 +352,8 @@ FireMissileWithFixedDurationIdea::FireMissileWithFixedDurationIdea(const Weapons
   , duration(duration)
   , timeout(timeout)
 {
-  // do nothing
+  // Weight for the rating according to distance/flight duration
+  confidence = (duration > 1.0f) ? 1.0f / sqrtf(duration) : 1.0f;
 }
 
 static bool IsPositionEmpty(const Character & character_to_ignore,
@@ -444,7 +444,7 @@ AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy(float accuracy) co
   } else {
     return NULL;
   }
-  rating = rating * weapons_weighting.GetFactor(weapon_type);
+  rating *= confidence * weapons_weighting.GetFactor(weapon_type);
 
   // Apply our accuracy
   if (accuracy>0.0f && accuracy<1.0f) {
