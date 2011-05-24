@@ -89,7 +89,8 @@ public:
 class FireMissileWithFixedDurationIdea : public AIShootIdea
 {
   float duration;
-  int timeout; // if positive the character will set it to the specified value.
+  int   timeout; // if positive the character will set it to the specified value.
+  float confidence;
 public:
   FireMissileWithFixedDurationIdea(const WeaponsWeighting & weapons_weighting,
                                    const Character & shooter, const Character & enemy,
