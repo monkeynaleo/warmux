@@ -37,6 +37,7 @@ class AIStats;
 class AIStupidPlayer : public AIPlayer
 {
   Team * team;
+  float  accuracy;
 
   typedef std::pair<AIIdea*, AIStats*> AIItem;
   std::list<AIItem> items;
@@ -53,7 +54,7 @@ class AIStupidPlayer : public AIPlayer
 
   static bool CompareIdeaMaxRating(const AIItem& i1, const AIItem& i2);
 public:
-  AIStupidPlayer(Team * team);
+  AIStupidPlayer(Team * team, float accuracy = 1.0f);
   virtual ~AIStupidPlayer();
   virtual void PrepareTurn();
   virtual void Refresh();
