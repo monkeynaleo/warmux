@@ -40,6 +40,7 @@
 
 // Forward declarations
 class ObjectConfig;
+class XmlWriter;
 typedef struct _xmlNode xmlNode;
 
 //-----------------------------------------------------------------------------
@@ -245,6 +246,8 @@ private:
   bool DoLoading(void);
   void LoadDefaultValue();
   void LoadXml(const xmlNode* xml);
+  void ReadTeams(std::list<ConfigTeam>& l, const xmlNode* xml);
+  void WriteTeams(const std::list<ConfigTeam>& l, XmlWriter& doc, xmlNode* xml);
 
   /* this is mutable in order to be able to load config on fly when calling
    * GetObjectConfig() witch is not supposed to modify the object itself */

@@ -450,6 +450,30 @@ void Config::LoadDefaultValue()
   GetResourceManager().UnLoadXMLProfile(res);
 }
 
+void Config::ReadTeams(std::list<ConfigTeam>& teams, const xmlNode* elem)
+{
+  uint i = 0;
+  const xmlNode *team;
+
+  while ((team = XmlReader::GetMarker(elem, "team_" + int2str(i)))) {
+    ConfigTeam one_team;
+    XmlReader::ReadString(team, "id", one_team.id);
+    XmlReader::ReadString(team, "player_name", one_team.player_name);
+    XmlReader::ReadUint(team, "nb_characters", one_team.nb_characters);
+    // The ai element needs a defaut as it has been added afterwards:
+    if (!XmlReader::ReadString(team, "ai", one_team.ai)) {
+      one_team.ai = (i == 1) ? DEFAULT_AI_NAME : NO_AI_NAME;
+    }
+    if (!XmlReader::ReadUint(team, "group", one_team.group))
+      one_team.group = i;
+
+    teams.push_back(one_team);
+
+    // get next team
+    i++;
+  }
+}
+
 // Read personal config file
 void Config::LoadXml(const xmlNode *xml)
 {
@@ -467,27 +491,8 @@ void Config::LoadXml(const xmlNode *xml)
 #endif
 
   //=== Teams ===
-  if ((elem = XmlReader::GetMarker(xml, "teams"))) {
-    int i = 0;
-
-    const xmlNode *team;
-
-    while ((team = XmlReader::GetMarker(elem, "team_" + int2str(i)))) {
-      ConfigTeam one_team;
-      XmlReader::ReadString(team, "id", one_team.id);
-      XmlReader::ReadString(team, "player_name", one_team.player_name);
-      XmlReader::ReadUint(team, "nb_characters", one_team.nb_characters);
-      // The ai element needs a defaut as it has been added afterwards:
-      if (!XmlReader::ReadString(team, "ai", one_team.ai)) {
-        one_team.ai = (i == 1) ? DEFAULT_AI_NAME : NO_AI_NAME;
-      }
-
-      teams.push_back(one_team);
-
-      // get next team
-      i++;
-    }
-  }
+  if ((elem = XmlReader::GetMarker(xml, "teams")))
+    ReadTeams(teams, elem);
 
   //=== Video ===
   if ((elem = XmlReader::GetMarker(xml, "video"))) {
@@ -510,8 +515,8 @@ void Config::LoadXml(const xmlNode *xml)
 
     uint qual;
     if (XmlReader::ReadUint(elem, "quality", qual)) {
-	if (qual>QUALITY_MAX-1) qual=QUALITY_MAX-1;
-	quality = (Quality)qual;
+	    if (qual>QUALITY_MAX-1) qual=QUALITY_MAX-1;
+	    quality = (Quality)qual;
     }
   }
 
@@ -541,26 +546,8 @@ void Config::LoadXml(const xmlNode *xml)
     }
 
     //=== personal teams used in last network game ===
-    if ((sub_elem = XmlReader::GetMarker(elem, "local_teams"))) {
-      int i = 0;
-      const xmlNode *team;
-
-      while ((team = XmlReader::GetMarker(sub_elem, "team_" + int2str(i)))) {
-        ConfigTeam one_team;
-        XmlReader::ReadString(team, "id", one_team.id);
-        XmlReader::ReadString(team, "player_name", one_team.player_name);
-        XmlReader::ReadUint(team, "nb_characters", one_team.nb_characters);
-        // The ai element needs a defaut as it has been added afterwards:
-        if (!XmlReader::ReadString(team, "ai", one_team.ai)) {
-          one_team.ai = NO_AI_NAME;
-        }
-
-        network_local_teams.push_back(one_team);
-
-        // get next team
-        i++;
-      }
-    }
+    if ((sub_elem = XmlReader::GetMarker(elem, "local_teams")))
+      ReadTeams(network_local_teams, sub_elem);
   }
 
   //=== misc ===
@@ -599,6 +586,24 @@ bool Config::Save(bool save_current_teams)
   return SaveXml(save_current_teams);
 }
 
+void Config::WriteTeams(const std::list<ConfigTeam>& teams, XmlWriter& doc, xmlNode* xml)
+{
+  std::list<ConfigTeam>::const_iterator
+    it = teams.begin(),
+    end = teams.end();
+
+  for (uint i=0; it!=end; ++it, i++) {
+    std::string name = "team_"+uint2str(i);
+    xmlNode* a_team = xmlAddChild(xml,
+                                  xmlNewNode(NULL /* empty prefix */, (const xmlChar*)name.c_str()));
+    doc.WriteElement(a_team, "id", (*it).id);
+    doc.WriteElement(a_team, "player_name", (*it).player_name);
+    doc.WriteElement(a_team, "nb_characters", uint2str((*it).nb_characters));
+    doc.WriteElement(a_team, "ai", (*it).ai);
+    doc.WriteElement(a_team, "group", uint2str((*it).group));
+  }
+}
+
 bool Config::SaveXml(bool save_current_teams)
 {
   XmlWriter doc;
@@ -633,24 +638,13 @@ bool Config::SaveXml(bool save_current_teams)
         config.player_name = (**it).GetPlayerName();
         config.nb_characters = (**it).GetNbCharacters();
         config.ai = (**it).GetAIName();
+        config.group = (**it).GetGroup();
 
         teams.push_back(config);
       }
     }
 
-    std::list<ConfigTeam>::iterator
-      it = teams.begin(),
-      end = teams.end();
-
-    for (int i=0; it!=end; ++it, i++) {
-       std::string name = "team_"+int2str(i);
-       xmlNode* a_team = xmlAddChild(team_elements,
-                                     xmlNewNode(NULL /* empty prefix */, (const xmlChar*)name.c_str()));
-       doc.WriteElement(a_team, "id", (*it).id);
-       doc.WriteElement(a_team, "player_name", (*it).player_name);
-       doc.WriteElement(a_team, "nb_characters", uint2str((*it).nb_characters));
-       doc.WriteElement(a_team, "ai", (*it).ai);
-    }
+    WriteTeams(teams, doc, team_elements);
   }
 
   //=== Video ===
@@ -696,19 +690,7 @@ bool Config::SaveXml(bool save_current_teams)
 
   // personal teams used durint last network game
   xmlNode *net_teams = xmlAddChild(net_node, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"local_teams"));
-  std::list<ConfigTeam>::iterator
-    it = network_local_teams.begin(),
-    end = network_local_teams.end();
-
-  for (int i=0; it != end; ++it, i++) {
-    std::string name = "team_"+int2str(i);
-    xmlNode* a_team = xmlAddChild(net_teams,
-                                  xmlNewNode(NULL /* empty prefix */, (const xmlChar*)name.c_str()));
-    doc.WriteElement(a_team, "id", (*it).id);
-    doc.WriteElement(a_team, "player_name", (*it).player_name);
-    doc.WriteElement(a_team, "nb_characters", uint2str((*it).nb_characters));
-    doc.WriteElement(a_team, "ai", (*it).ai);
-  }
+  WriteTeams(network_local_teams, doc, net_teams);
 
   //=== Misc ===
   xmlNode *misc_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"misc"));
@@ -780,6 +762,7 @@ void Config::SetNetworkLocalTeams()
       config.player_name = (**it).GetPlayerName();
       config.nb_characters = (**it).GetNbCharacters();
       config.ai = (**it).GetAIName();
+      config.group = (**it).GetGroup();
       network_local_teams.push_back(config);
     }
   }
