@@ -221,6 +221,7 @@ Widget* TeamBox::ClickUp(const Point2i &mousePosition, uint button)
         else            group--;
       }
       SetGroup(group);
+      UpdateTeam(associated_team->GetId());
     }
 
     if (!w) {
@@ -281,6 +282,9 @@ void TeamBox::SetTeam(Team& _team, bool read_team_values)
   }
   UpdatePlayerType();
   team_logo->SetSurface(_team.GetFlag());
+
+  // Update group
+  SetGroup(_team.GetGroup());
 
   if (read_team_values) {
     player_name->SetText(_team.GetPlayerName());
