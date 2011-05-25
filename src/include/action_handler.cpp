@@ -611,6 +611,7 @@ static void _Action_AddTeam(Action *a, Player* player, bool skip = false)
   the_team.player_name = a->PopString();
   the_team.nb_characters = uint(a->PopInt());
   the_team.ai = a->PopString();
+  the_team.group = uint(a->PopInt());
 
   MSG_DEBUG("action_handler.menu", "+ %s", the_team.id.c_str());
 
@@ -682,7 +683,7 @@ static void Action_Game_UpdateTeam(Action *a)
   team_cfg.player_name = a->PopString();
   team_cfg.nb_characters = uint(a->PopInt());
   team_cfg.ai = a->PopString();
-  team_cfg.group = a->PopInt();
+  team_cfg.group = uint(a->PopInt());
 
   Team* the_team = GetTeamsList().UpdateTeam(old_team_id, team_cfg);
   ASSERT(the_team != NULL);
@@ -730,6 +731,7 @@ static inline void add_team_config_to_action(Action& a, const ConfigTeam& team)
   a.Push(team.player_name);
   a.Push(int(team.nb_characters));
   a.Push(team.ai);
+  a.Push(int(team.group));
 }
 
 void ActionHandler::NewRequestTeamAction(const ConfigTeam & team)
@@ -754,6 +756,7 @@ static void Action_Game_RequestTeam(Action *a)
   const std::string player_name = a->PopString();
   int nb_characters = a->PopInt();
   const std::string ai = a->PopString();
+  int group = a->PopInt();
 
   Player * player = Network::GetInstance()->LockRemoteHostsAndGetPlayer(player_id);
   if (player) {
@@ -765,6 +768,7 @@ static void Action_Game_RequestTeam(Action *a)
       action_to_send.Push(player_name);
       action_to_send.Push(nb_characters);
       action_to_send.Push(ai);
+      action_to_send.Push(group);
 
       Network::GetInstance()->SendActionToAll(action_to_send);
       // Add the team before progressing further actions,
