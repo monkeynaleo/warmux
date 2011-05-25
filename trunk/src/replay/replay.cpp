@@ -205,11 +205,8 @@ void Replay::StoreAction(const Action* a)
       // 16 bits is sufficient, around 22 minutes without other actions
       SDLNet_Write16(count, ptr); ptr += 2;
     }
-#ifdef WMX_LOG
-    const ActionHandler *ah = ActionHandler::GetConstInstance();
     MSG_DEBUG("replay", "Storing action %s: type=%i length=%i\n",
-              ah->GetActionName(type).c_str(), type, size);
-#endif
+              ActionHandler::GetActionName(type).c_str(), type, size);
     a->Write((char*)ptr);
     ptr += size;
     count = 0;
@@ -380,11 +377,8 @@ Action* Replay::GetAction()
   }
   ptr += size;
 
-#ifdef WMX_LOG
-  const ActionHandler *ah = ActionHandler::GetConstInstance();
   MSG_DEBUG("replay", "Read action %s: type=%u length=%i frameless=%i\n",
-            ah->GetActionName(type).c_str(), type, size, a->IsFrameLess());
-#endif
+            ActionHandler::GetActionName(type).c_str(), type, size, a->IsFrameLess());
 
   return a;
 }
