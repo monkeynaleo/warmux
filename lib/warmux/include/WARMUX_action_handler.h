@@ -69,7 +69,7 @@ public:
     action_names[action] = name;
   }
 
-  const std::string& GetActionName(Action::Action_t a) const { return action_names[a]; }
+  static const std::string& GetActionName(Action::Action_t a) { return action_names[a]; }
 
   bool IsEmpty() const { return queue.empty(); }
 };

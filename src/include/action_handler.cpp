@@ -75,7 +75,7 @@
 static void FAIL_IF_GAMEMASTER(Action *a)
 {
   if (!a->GetCreator()) {
-    fprintf(stderr, "%s", ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
+    fprintf(stderr, "%s", ActionHandler::GetActionName(a->GetType()).c_str());
   }
 
   ASSERT(a->GetCreator());
@@ -84,7 +84,7 @@ static void FAIL_IF_GAMEMASTER(Action *a)
     fprintf(stderr,
             "Game Master received an action (%s) that is normally sent only by the game master only to a client,"
             " we are going to force disconnection of evil client: %s",
-            ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str(),
+            ActionHandler::GetActionName(a->GetType()).c_str(),
             a->GetCreator()->ToString().c_str());
 
     a->GetCreator()->ForceDisconnection();

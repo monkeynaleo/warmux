@@ -193,7 +193,7 @@ void NetworkThread::ReceiveActions()
         free(buffer);
 
         MSG_DEBUG("network.traffic", "Received action %s",
-                  ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
+                  ActionHandler::GetActionName(a->GetType()).c_str());
         net->HandleAction(a, *dst_cpu);
       }
     }
@@ -367,7 +367,7 @@ void Network::DisconnectNetwork()
 void Network::SendActionToAll(const Action& a, bool lock) const
 {
   MSG_DEBUG("network.traffic", "Send action %s to all remote computers",
-            ActionHandler::GetInstance()->GetActionName(a.GetType()).c_str());
+            ActionHandler::GetActionName(a.GetType()).c_str());
 
   SendAction(a, NULL, false, lock);
 }
@@ -375,7 +375,7 @@ void Network::SendActionToAll(const Action& a, bool lock) const
 void Network::SendActionToOne(const Action& a, DistantComputer* client, bool lock) const
 {
   MSG_DEBUG("network.traffic", "Send action %s to %s",
-            ActionHandler::GetInstance()->GetActionName(a.GetType()).c_str(),
+            ActionHandler::GetActionName(a.GetType()).c_str(),
             client->ToString().c_str());
 
   SendAction(a, client, true, lock);
@@ -384,7 +384,7 @@ void Network::SendActionToOne(const Action& a, DistantComputer* client, bool loc
 void Network::SendActionToAllExceptOne(const Action& a, DistantComputer* client, bool lock) const
 {
   MSG_DEBUG("network.traffic","Send action %s to all EXCEPT %s",
-            ActionHandler::GetInstance()->GetActionName(a.GetType()).c_str(),
+            ActionHandler::GetActionName(a.GetType()).c_str(),
             client->ToString().c_str());
 
   SendAction(a, client, false, lock);
