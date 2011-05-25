@@ -116,7 +116,7 @@ ReplayInfo *ReplayInfo::ReplayInfoFromFile(FILE *in)
       goto team_error;
     team_cfg.player_name = std::string(temp);
 
-    team_cfg.nb_characters = Read32(in);
+    team_cfg.nb_characters = fgetc(in);
     if (ferror(in))
       goto team_error;
 
@@ -207,7 +207,7 @@ ReplayInfo::DumpToFile(FILE *out)
   for (uint i=0; i<teams.size(); i++) {     // Team No.i
     fprintf(out, "%s\n", teams[i].id.c_str());
     fprintf(out, "%s\n", teams[i].player_name.c_str());
-    Write32(out, teams[i].nb_characters);
+    fputc(teams[i].nb_characters, out);
     fprintf(out, "%s\n", teams[i].ai.c_str());
     fputc(teams[i].group, out);
   }
