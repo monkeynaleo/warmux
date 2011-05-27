@@ -177,8 +177,12 @@
 
   <surface name="player_local_human" file="menu/player_local_human.png" />
   <surface name="player_local_ai" file="menu/player_local_ai.png" />
+  <surface name="player_local_ai_dumb" file="menu/player_local_ai_dumb.png" />
+  <surface name="player_local_ai_strong" file="menu/player_local_ai_strong.png" />
   <surface name="player_remote_human" file="menu/player_remote_human.png" />
   <surface name="player_remote_ai" file="menu/player_remote_ai.png" />
+  <surface name="player_remote_dumb" file="menu/player_remote_dumb.png" />
+  <surface name="player_remote_strong" file="menu/player_remote_strong.png" />
 
   <!-- Key binding options -->
   <surface name="key_ctrl" file="menu/key_ctrl.png" />
