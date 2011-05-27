@@ -35,8 +35,6 @@ struct SDL_mutex;
 
 class WActionHandler
 {
-  // Mutex needed to handle action queue in a thread-safe way (network etc)
-  SDL_mutex* mutex;
 
   // Handler for each action
   typedef void (*callback_t) (Action *a);
@@ -51,6 +49,9 @@ protected:
 
   // Action queue
   std::list<Action*> queue;
+
+  // Mutex needed to handle action queue in a thread-safe way (network etc)
+  SDL_mutex* mutex;
 
   void Exec(Action *a) { handlers[a->GetType()](a); }
   void NewAction(Action* a);
