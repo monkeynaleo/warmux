@@ -162,6 +162,38 @@ Widget* TeamsSelectionBox::Click(const Point2i &mousePosition, uint button)
   return (list_box) ? list_box->Click(mousePosition, button) : NULL;
 }
 
+Widget* TeamsSelectionBox::DefaultClickUp(const Point2i &mousePosition, uint button)
+{
+  Widget *w = (list_box) ? list_box->ClickUp(mousePosition, button)
+                          : WidgetList::ClickUp(mousePosition, button);
+
+  for (uint i=0; i<teams_selections.size() ; i++) {
+
+    if (teams_selections[i]->Contains(mousePosition) &&
+        teams_selections[i]->IsLocal()) {
+      TeamBox * at = teams_selections[i];
+
+      if (at->IsTeamSwitcherAt(mousePosition)) {
+        if (button == Mouse::BUTTON_LEFT() || button == SDL_BUTTON_WHEELDOWN) {
+          NextTeam(i);
+        } else if (button == Mouse::BUTTON_RIGHT() || button == SDL_BUTTON_WHEELUP) {
+          PrevTeam(i);
+        }
+        return at;
+      }
+        
+      if (at->IsAISwitcherAt(mousePosition)) {
+        at->SwitchPlayerType();
+        return at;
+      }
+
+      return w;
+    }
+  }
+
+  return w;
+}
+
 // =============================================================================
 
 LocalTeamsSelectionBox::LocalTeamsSelectionBox(const Point2i &size, bool border) :
@@ -193,54 +225,24 @@ Widget* LocalTeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint butto
   if (!Contains(mousePosition))
     return NULL;
 
-  if (local_teams_nb->ClickUp(mousePosition, button)) {
+  if (local_teams_nb->ClickUp(mousePosition, button))
     SetNbTeams(local_teams_nb->GetValue());
-  } else {
-    Widget *w = (list_box) ? list_box->ClickUp(mousePosition, button)
-                           : WidgetList::ClickUp(mousePosition, button);
-
-    for (uint i=0; i<teams_selections.size() ; i++) {
-
-      if (teams_selections[i]->Contains(mousePosition)) {
-        Widget * at = teams_selections[i];
-        Rectanglei r(at->GetPosition(), Point2i(38, 38));
-
-        // Validate where the click really landed
-        if (r.Contains(mousePosition)) {
-          if (button == Mouse::BUTTON_LEFT() || button == SDL_BUTTON_WHEELDOWN) {
-            NextTeam(i);
-          } else if (button == Mouse::BUTTON_RIGHT() || button == SDL_BUTTON_WHEELUP) {
-            PrevTeam(i);
-          }
-          return at;
-        } else {
-          Rectanglei r2(at->GetPositionX(), at->GetPositionY() + 39,
-                        38, 30);
-          if (r2.Contains(mousePosition)) {
-            teams_selections[i]->SwitchPlayerType();
-            return at;
-          }
-        }
-
-        return w;
-      }
-    }
-
-    return w;
-  }
+  else
+    return DefaultClickUp(mousePosition, button);
 
   return NULL;
 }
 
-void LocalTeamsSelectionBox::PrevTeam(int i)
+void LocalTeamsSelectionBox::PrevTeam(uint i)
 {
-  if (!teams_selections.at(i)->GetTeam())
+  TeamBox *at = teams_selections[i];
+  if (!at->GetTeam())
     return;
 
   bool stop;
   int  previous_index = -1, index;
 
-  GetTeamsList().FindById(teams_selections.at(i)->GetTeam()->GetId(), previous_index);
+  GetTeamsList().FindById(at->GetTeam()->GetId(), previous_index);
 
   index = previous_index-1;
 
@@ -255,8 +257,8 @@ void LocalTeamsSelectionBox::PrevTeam(int i)
     Team *tmp = GetTeamsList().FindByIndex(index);
 
     // Check if that team is already selected
-    for (int j = 0; j < local_teams_nb->GetValue(); j++) {
-      if (j!= i && tmp == teams_selections.at(j)->GetTeam()) {
+    for (uint j = 0; j < (uint)local_teams_nb->GetValue(); j++) {
+      if (j!= i && tmp == teams_selections[j]->GetTeam()) {
         index--;
         stop = false;
         break;
@@ -265,20 +267,21 @@ void LocalTeamsSelectionBox::PrevTeam(int i)
 
     // We have found a team which is not selected
     if (tmp && stop)
-      teams_selections.at(i)->SetTeam(*tmp);
+      at->SetTeam(*tmp);
   } while (index != previous_index && !stop);
 }
 
-void LocalTeamsSelectionBox::NextTeam(int i)
+void LocalTeamsSelectionBox::NextTeam(uint i)
 {
-  if (!teams_selections.at(i)->GetTeam())
+  TeamBox *at = teams_selections[i];
+  if (!at->GetTeam())
     return;
 
   bool to_continue;
   Team* tmp;
   int previous_index = -1, index;
 
-  GetTeamsList().FindById(teams_selections.at(i)->GetTeam()->GetId(), previous_index);
+  GetTeamsList().FindById(at->GetTeam()->GetId(), previous_index);
 
   index = previous_index+1;
 
@@ -293,8 +296,8 @@ void LocalTeamsSelectionBox::NextTeam(int i)
     tmp = GetTeamsList().FindByIndex(index);
 
     // Check if that team is already selected
-    for (int j = 0; j < local_teams_nb->GetValue(); j++) {
-      if (j!= i && tmp == teams_selections.at(j)->GetTeam()) {
+    for (uint j = 0; j < (uint)local_teams_nb->GetValue(); j++) {
+      if (j!= i && tmp == teams_selections[j]->GetTeam()) {
         index++;
         to_continue = true;
         break;
@@ -302,8 +305,8 @@ void LocalTeamsSelectionBox::NextTeam(int i)
     }
 
     // We have found a team which is not selected
-    if (tmp != NULL && !to_continue)
-      teams_selections.at(i)->SetTeam(*tmp);
+    if (tmp && !to_continue)
+      at->SetTeam(*tmp);
   } while (index != previous_index && to_continue);
 }
 
@@ -315,9 +318,9 @@ void LocalTeamsSelectionBox::SetNbTeams(uint nb_teams)
   }
 
   for (uint i=0; i<nb_teams;i++) {
-    if (!teams_selections.at(i)->GetTeam()) {
+    if (!teams_selections[i]->GetTeam()) {
       // we should find an available team
-      teams_selections.at(i)->SetTeam(*(GetTeamsList().FindByIndex(i)));
+      teams_selections[i]->SetTeam(*(GetTeamsList().FindByIndex(i)));
       NextTeam(i);
     }
   }
@@ -330,21 +333,20 @@ void LocalTeamsSelectionBox::ValidTeamsSelection()
 {
   uint nb_teams=0;
   for (uint i=0; i < teams_selections.size(); i++) {
-    if (teams_selections.at(i)->GetTeam() != NULL) {
+    if (teams_selections[i]->GetTeam())
       nb_teams++;
-    }
   }
 
   if (nb_teams >= 2) {
     std::list<uint> selection;
 
     for (uint i=0; i < teams_selections.size(); i++) {
-
-      if (teams_selections.at(i)->GetTeam() != NULL) {
+      TeamBox *at = teams_selections[i];
+      if (at->GetTeam()) {
 
         int index = -1;
-        teams_selections.at(i)->ValidOptions();
-        GetTeamsList().FindById(teams_selections.at(i)->GetTeam()->GetId(), index);
+        at->ValidOptions();
+        GetTeamsList().FindById(at->GetTeam()->GetId(), index);
         if (index > -1) {
           selection.push_back(uint(index));
         }

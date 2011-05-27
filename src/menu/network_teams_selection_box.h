@@ -37,13 +37,14 @@ class NetworkTeamsSelectionBox : public TeamsSelectionBox
 
   const std::string GetLocalPlayerName();
 
-  void PrevTeam(uint i);
-  void NextTeam(uint i);
-
   bool IsSelected(Team * team);
 
   void RequestTeamRemoval();
   void UpdateNbTeams();
+
+protected:
+  virtual void PrevTeam(uint i);
+  virtual void NextTeam(uint i);
 
 public:
   NetworkTeamsSelectionBox(const Point2i &size, bool w_border);

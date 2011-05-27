@@ -63,7 +63,7 @@ class TeamBox : public HBox
 
   void UpdatePlayerNameColor();
 
- public:
+public:
   TeamBox(const std::string& player_name, const Point2i &size, uint group=0);
 
   void SetTeam(Team& _team, bool read_team_values=false);
@@ -85,6 +85,9 @@ class TeamBox : public HBox
   virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
 
   void SwitchPlayerType();
+
+  bool IsTeamSwitcherAt(const Point2i &mousePosition) const;
+  bool IsAISwitcherAt(const Point2i &mousePosition) const;
 };
 
 #endif

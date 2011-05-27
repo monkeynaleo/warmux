@@ -54,6 +54,10 @@ protected:
   SpinButtonWithPicture *local_teams_nb;
   std::vector<TeamBox*> teams_selections;
 
+  Widget* DefaultClickUp(const Point2i &mousePosition, uint button);
+  virtual void PrevTeam(uint i) = 0;
+  virtual void NextTeam(uint i) = 0;
+
 public:
   TeamsSelectionBox(const Point2i &size, bool network, bool w_border);
 
@@ -66,10 +70,11 @@ public:
 
 class LocalTeamsSelectionBox : public TeamsSelectionBox
 {
-private:
-  void PrevTeam(int i);
-  void NextTeam(int i);
   void SetNbTeams(uint nb_teams);
+
+protected:
+  virtual void PrevTeam(uint i);
+  virtual void NextTeam(uint i);
 
 public:
   LocalTeamsSelectionBox(const Point2i &size, bool border);
