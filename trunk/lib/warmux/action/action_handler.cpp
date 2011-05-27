@@ -33,8 +33,6 @@ WActionHandler::WActionHandler()
 {
   mutex = SDL_CreateMutex();
   SDL_LockMutex(mutex);
-
-
   SDL_UnlockMutex(mutex);
 }
 
@@ -60,7 +58,7 @@ void WActionHandler::Flush()
 
 void WActionHandler::NewAction(Action* a)
 {
-  ASSERT(mutex!=NULL);
+  ASSERT(mutex);
   Lock();
   MSG_DEBUG("action_handler", "New action : %s", GetActionName(a->GetType()).c_str());
   //  std::cout << "New action " << a->GetType() << std::endl ;
