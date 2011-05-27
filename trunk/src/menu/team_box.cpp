@@ -384,11 +384,20 @@ void TeamBox::SwitchPlayerType()
   }
 }
 
-
 void TeamBox::SetGroup(uint g)
 {
   assert(g < MAX_TEAM_GROUPS);
 
   group = g;
   nullw->SetBackgroundColor(TeamGroup::Colors[g]);
+}
+
+bool TeamBox::IsTeamSwitcherAt(const Point2i& mousePosition) const
+{
+  return team_logo->Contains(mousePosition);
+}
+
+bool TeamBox::IsAISwitcherAt(const Point2i& mousePosition) const
+{
+  return player_type->Contains(mousePosition);
 }
