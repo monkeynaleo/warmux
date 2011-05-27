@@ -37,6 +37,8 @@
 #include "team/custom_teams_list.h"
 #include "tool/resource_manager.h"
 
+#define CHAR_COUNT_WIDGET_SIZE  120
+
 TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size, uint g)
   : HBox(_size.y, false, false, false)
   , ai_name(NO_AI_NAME)
@@ -45,56 +47,55 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size, uint g)
   associated_team = NULL;
 
   SetMargin(2);
-  SetNoBorder();
+  SetBorder(transparent_color, 4);
   Widget::SetBackgroundColor(transparent_color);
 
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
-
-  /********        Logos: team mascott, player type icon      ********/
-  Box * tmp_logo_box = new VBox(W_UNDEF, false, false, false);
-  tmp_logo_box->SetMargin(1);
-  tmp_logo_box->SetNoBorder();
-  AddWidget(tmp_logo_box);
-
-  team_logo = new PictureWidget(Point2i(38, 38));
-  tmp_logo_box->AddWidget(team_logo);
 
   player_local_ai_surf = GetResourceManager().LoadImage(res, "menu/player_local_ai");
   player_local_human_surf = GetResourceManager().LoadImage(res, "menu/player_local_human");
   player_remote_ai_surf = GetResourceManager().LoadImage(res, "menu/player_remote_ai");
   player_remote_human_surf = GetResourceManager().LoadImage(res, "menu/player_remote_human");
 
-  player_type =  new PictureWidget(Point2i(38, 30));
-  player_type->SetSurface(player_local_ai_surf);
-  tmp_logo_box->AddWidget(player_type);
-
-  /********    Center box: team name, commander   *********/
-  int width = _size.x - (2*2+(38+2*2)+(110+2*2));
-  Box * tmp_player_box = new VBox(_size.y, false, false, false);
-  tmp_player_box->SetMargin(0);
+  int width = _size.x - (CHAR_COUNT_WIDGET_SIZE+2*margin+2*border_size);
+  Box * tmp_player_box = new VBox(_size.y-2*border_size, false, false, false);
+  tmp_player_box->SetMargin(4);
   tmp_player_box->SetNoBorder();
   AddWidget(tmp_player_box);
 
-  /*** Box for commander & custom team  ***/
+  tmp_player_box->AddWidget(new NullWidget(Point2i(width, 20)));
+
+  /********   Box for team logo, commander, custom team, ai & group  *******/
   HBox *hbox = new HBox(W_UNDEF, false, false, false);
   hbox->SetMargin(0);
   hbox->SetNoBorder();
   tmp_player_box->AddWidget(hbox);
+
+  /****    AI    ****/
+  player_type =  new PictureWidget(Point2i(40, 40));
+  player_type->SetSurface(player_local_ai_surf);
+  hbox->AddWidget(player_type);
+
+  /****    Team Logo    ****/
+  team_logo = new PictureWidget(Point2i(40, 40));
+  hbox->AddWidget(team_logo);
+
+  /****     Team name/commander    ****/
   VBox *vbox = new VBox(W_UNDEF, false, false, false);
   vbox->SetMargin(0);
   vbox->SetNoBorder();
   hbox->AddWidget(vbox);
 
   previous_player_name = "team";
-  team_name = new Label(previous_player_name, width - 60,
+  team_name = new Label(previous_player_name, width - (40*2 + 60),
                         Font::FONT_MEDIUM, Font::FONT_BOLD);
   vbox->AddWidget(team_name);
 
-  /********    Names: "Head commander" + text/custom team    *******/
-  vbox->AddWidget(new Label(_("Head commander"), width - 60,
+  /****    Names: "Head commander" + text/custom team    ****/
+  vbox->AddWidget(new Label(_("Head commander"), width - (40*2 + 60),
                             Font::FONT_SMALL, Font::FONT_BOLD));
 
-  /****  Group selection box **/
+  /****  Group selection box ****/
   nullw = new NullWidget(Point2i(60, 40));
   nullw->SetBackgroundColor(TeamGroup::Colors[g]);
   hbox->AddWidget(nullw);
@@ -129,8 +130,9 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size, uint g)
 
   /**********     Number of characters        **********/
   nb_characters = new SpinButtonWithPicture(_("Number of characters"), "menu/ico_play",
-                                            Point2i(110, 120), 6, 1, 1, 10);
+                                            Point2i(CHAR_COUNT_WIDGET_SIZE, 110), 6, 1, 1, 10);
   AddWidget(nb_characters);
+  Pack();
 }
 
 void TeamBox::ClearTeam()
