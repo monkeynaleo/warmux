@@ -24,25 +24,25 @@
 
 SingletonList singletons;
 
-SDL_mutex* BaseSingleton::mutex = NULL;
+SDL_mutex* BaseSingleton::singleton_mutex = NULL;
 
 BaseSingleton::BaseSingleton()
 {
   // Usually the game loading makes the first calls to this constructor serial.
-  if (!mutex) mutex = SDL_CreateMutex();
+  if (!singleton_mutex) singleton_mutex = SDL_CreateMutex();
 
-  SDL_LockMutex(mutex);
+  SDL_LockMutex(singleton_mutex);
   singletons.push_back(this);
-  SDL_UnlockMutex(mutex);
+  SDL_UnlockMutex(singleton_mutex);
 
   MSG_DBG_RTTI("singleton", "Added singleton %p", this);
 }
 
 BaseSingleton::~BaseSingleton()
 {
-  SDL_LockMutex(mutex);
+  SDL_LockMutex(singleton_mutex);
   singletons.remove(this);
-  SDL_UnlockMutex(mutex);
+  SDL_UnlockMutex(singleton_mutex);
 
   MSG_DBG_RTTI("singleton", "Removed singleton %p", this);
 }
@@ -57,8 +57,8 @@ void BaseSingleton::ReleaseSingletons()
     it = singletons.begin();
   }
 
-  if (mutex)
-    SDL_DestroyMutex(mutex);
-  mutex = NULL;
+  if (singleton_mutex)
+    SDL_DestroyMutex(singleton_mutex);
+  singleton_mutex = NULL;
 }
 

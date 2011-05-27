@@ -35,7 +35,7 @@ extern SingletonList singletons;
 
 class BaseSingleton
 {
-  static SDL_mutex* mutex;
+  static SDL_mutex* singleton_mutex;
 protected:
   BaseSingleton();
   virtual ~BaseSingleton();
