@@ -118,6 +118,14 @@ bool JukeBox::OpenDevice()
     std::cerr << "* Couldn't initialize SDL: "<< SDL_GetError() << std::endl;
     return false;
   }
+
+#if SDL_MIXER_MAJOR_VERSION*1000 + SDL_MIXER_MINOR_VERSION*100 + SDL_MIXER_PATCHLEVEL > 1209
+  if (Mix_Init(MIX_INIT_OGG) ^ MIX_INIT_OGG) {
+    std::cerr << "* Couldn't initialize SDL_mixer: "<< SDL_GetError() << std::endl;
+    SDL_QuitSubSystem(SDL_INIT_AUDIO);
+    return false;
+  }
+#endif
   m_init = true;
 
   Uint16 audio_format = MIX_DEFAULT_FORMAT;
@@ -146,6 +154,10 @@ void JukeBox::CloseDevice()
     return;
 
   Mix_CloseAudio();
+
+#if SDL_MIXER_MAJOR_VERSION*1000 + SDL_MIXER_MINOR_VERSION*100 + SDL_MIXER_PATCHLEVEL > 1209
+  Mix_Quit();
+#endif
 
   if (SDL_WasInit(SDL_INIT_AUDIO))
     SDL_QuitSubSystem(SDL_INIT_AUDIO);
