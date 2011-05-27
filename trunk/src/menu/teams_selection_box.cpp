@@ -213,7 +213,7 @@ LocalTeamsSelectionBox::LocalTeamsSelectionBox(const Point2i &size, bool border)
   if (j < 2) {
     SetNbTeams(2);
     local_teams_nb->SetValue(2);
-    teams_selections.at(1)->SetAIName(DEFAULT_AI_NAME);
+    teams_selections.at(1)->SetAILevel(1);
   } else {
     SetNbTeams(j);
     local_teams_nb->SetValue(j);

@@ -392,10 +392,14 @@ void Team::UnloadGamingData()
 void Team::LoadAI()
 {
   ASSERT(IsLocalAI());
-  if (ai) {
+  if (ai)
     delete ai;
-  }
-  ai = new AIStupidPlayer(this);
+
+  float accuracy;
+  if (ai_name == DEFAULT_AI_NAME) accuracy = 0.9f;
+  if (ai_name == DUMB_AI_NAME)    accuracy = 0.8f;
+  if (ai_name == STRONG_AI_NAME)  accuracy = 0.95f;
+  ai = new AIStupidPlayer(this, accuracy);
 }
 
 void Team::RefreshAI()
