@@ -78,7 +78,7 @@ public:
 
 class ShootDirectlyAtEnemyIdea : public AIShootIdea
 {
-  int max_sq_distance;
+  const int max_sq_distance;
 public:
   ShootDirectlyAtEnemyIdea(const WeaponsWeighting & weapons_weighting,
                            const Character & shooter, const Character & enemy,
@@ -88,9 +88,9 @@ public:
 
 class FireMissileWithFixedDurationIdea : public AIShootIdea
 {
-  float duration;
-  int   timeout; // if positive the character will set it to the specified value.
-  float confidence;
+  const float duration;
+  const int   timeout; // if positive the character will set it to the specified value.
+  const float confidence;
 public:
   FireMissileWithFixedDurationIdea(const WeaponsWeighting & weapons_weighting,
                                    const Character & shooter, const Character & enemy,
