@@ -39,9 +39,12 @@
 
 #define CHAR_COUNT_WIDGET_SIZE  120
 
+static const std::string ai_names[] = { NO_AI_NAME, DEFAULT_AI_NAME, DUMB_AI_NAME, STRONG_AI_NAME };
+
+
 TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size, uint g)
   : HBox(_size.y, false, false, false)
-  , ai_name(NO_AI_NAME)
+  , ai_level(0)
   , group(g)
 {
   associated_team = NULL;
@@ -52,10 +55,15 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size, uint g)
 
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
 
-  player_local_ai_surf = GetResourceManager().LoadImage(res, "menu/player_local_ai");
-  player_local_human_surf = GetResourceManager().LoadImage(res, "menu/player_local_human");
-  player_remote_ai_surf = GetResourceManager().LoadImage(res, "menu/player_remote_ai");
-  player_remote_human_surf = GetResourceManager().LoadImage(res, "menu/player_remote_human");
+  player_local[0] = LOAD_RES_IMAGE("menu/player_local_human");
+  player_local[1] = LOAD_RES_IMAGE("menu/player_local_ai");
+  player_local[2] = LOAD_RES_IMAGE("menu/player_local_ai_dumb");
+  player_local[3] = LOAD_RES_IMAGE("menu/player_local_ai_strong");
+
+  player_remote[0] = LOAD_RES_IMAGE("menu/player_remote_human");
+  player_remote[1] = LOAD_RES_IMAGE("menu/player_remote_ai");
+  player_remote[2] = LOAD_RES_IMAGE("menu/player_remote_ai_dumb");
+  player_remote[3] = LOAD_RES_IMAGE("menu/player_remote_ai_strong");
 
   int width = _size.x - (CHAR_COUNT_WIDGET_SIZE+2*margin+2*border_size);
   Box * tmp_player_box = new VBox(_size.y-2*border_size, false, false, false);
@@ -73,7 +81,7 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size, uint g)
 
   /****    AI    ****/
   player_type =  new PictureWidget(Point2i(40, 40));
-  player_type->SetSurface(player_local_ai_surf);
+  player_type->SetSurface(player_local[ai_level]);
   hbox->AddWidget(player_type);
 
   /****    Team Logo    ****/
@@ -138,7 +146,7 @@ TeamBox::TeamBox(const std::string& _player_name, const Point2i& _size, uint g)
 void TeamBox::ClearTeam()
 {
   associated_team = NULL;
-  ai_name = NO_AI_NAME;
+  ai_level = 0;
 
   NeedRedrawing();
 }
@@ -291,7 +299,12 @@ void TeamBox::SetTeam(Team& _team, bool read_team_values)
   if (read_team_values) {
     player_name->SetText(_team.GetPlayerName());
     nb_characters->SetValue(_team.GetNbCharacters());
-    SetAIName(_team.GetAIName());
+    for (uint i=0; i<4; i++) {
+      if (ai_names[i] == _team.GetAIName()) {
+        SetAILevel(i);
+        break;
+      }
+    }
   } else if (old_team) {
     UpdateTeam(old_team->GetId());
   }
@@ -300,28 +313,10 @@ void TeamBox::SetTeam(Team& _team, bool read_team_values)
   NeedRedrawing();
 }
 
-void TeamBox::SetAIName(const std::string name)
-{
-  ai_name = name;
-  UpdatePlayerType();
-}
-
 void TeamBox::UpdatePlayerType()
 {
-  bool is_human = ai_name == NO_AI_NAME;
-  if (associated_team->IsLocal()) {
-    if (is_human) {
-      player_type->SetSurface(player_local_human_surf);
-    } else {
-      player_type->SetSurface(player_local_ai_surf);
-    }
-  } else {
-    if (is_human) {
-      player_type->SetSurface(player_remote_human_surf);
-    } else {
-      player_type->SetSurface(player_remote_ai_surf);
-    }
-  }
+  Surface *icons = (associated_team->IsLocal()) ? player_local : player_remote;
+  player_type->SetSurface(icons[ai_level]);
 }
 
 void TeamBox::UpdateTeam(const std::string& old_team_id) const
@@ -332,7 +327,7 @@ void TeamBox::UpdateTeam(const std::string& old_team_id) const
   // set the player name
   associated_team->SetPlayerName(player_name->GetText());
 
-  associated_team->SetAIName(ai_name);
+  associated_team->SetAIName(ai_names[ai_level]);
   associated_team->SetGroup(group);
 
   // change only for local teams...
@@ -380,7 +375,10 @@ void TeamBox::SwitchPlayerType()
   if (!associated_team)
     return;
 
-  SetAIName((ai_name == NO_AI_NAME) ? DEFAULT_AI_NAME : NO_AI_NAME);
+  ai_level++;
+  if (ai_level > 3)
+    ai_level = 0;
+  UpdatePlayerType();
   if (Network::GetInstance()->IsConnected()) {
     ValidOptions();
   }

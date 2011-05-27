@@ -31,8 +31,10 @@
 #include "weapon/crosshair.h"
 #include "weapon/weapon.h"
 
-#define NO_AI_NAME  "none"
+#define NO_AI_NAME       "none"
 #define DEFAULT_AI_NAME  "default"
+#define DUMB_AI_NAME     "dumb"
+#define STRONG_AI_NAME   "strong"
 
 class AIPlayer;
 class Body;

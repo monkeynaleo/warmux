@@ -38,13 +38,11 @@ class NullWidget;
 class TeamBox : public HBox
 {
   std::string previous_player_name; // only for network
-  std::string ai_name;
+  int         ai_level;
   uint        group;
 
-  Surface player_local_ai_surf;
-  Surface player_local_human_surf;
-  Surface player_remote_ai_surf;
-  Surface player_remote_human_surf;
+  Surface player_local[4];
+  Surface player_remote[4];
 
   Team * associated_team;
   PictureWidget *team_logo, *player_type;
@@ -67,7 +65,7 @@ public:
   TeamBox(const std::string& player_name, const Point2i &size, uint group=0);
 
   void SetTeam(Team& _team, bool read_team_values=false);
-  void SetAIName(const std::string name);
+  void SetAILevel(uint i) { ai_level = i; UpdatePlayerType(); }
   void UpdatePlayerType();
   void ClearTeam();
   Team* GetTeam() const { return associated_team; }
