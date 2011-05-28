@@ -19,14 +19,16 @@
  * Team handling
  *****************************************************************************/
 
-#include "game/config.h"
-#include "team/custom_teams_list.h"
-#include "team/custom_team.h"
-#include <WARMUX_file_tools.h>
-
 #include <iostream>
 #include <cstdio>
 #include <algorithm>
+
+#include <WARMUX_file_tools.h>
+
+#include "game/config.h"
+#include "team/custom_teams_list.h"
+#include "team/custom_team.h"
+#include "tool/ansi_convert.h"
 
 void CustomTeamsList::Clear()
 {
@@ -52,7 +54,7 @@ void CustomTeamsList::LoadList()
   const Config *config = Config::GetInstance();
 
   // Load personal custom teams
-  std::string dirname = config->GetPersonalConfigDir() + "custom_team";
+  std::string dirname = config->GetPersonalConfigDir() + "custom_team" + PATH_SEPARATOR;
   FolderSearch *f = OpenFolder(dirname);
 
   if (f) {
@@ -82,15 +84,16 @@ bool CustomTeamsList::LoadOneTeam(const std::string &dir, const std::string &cus
     return false;
 
   // Add the team
+  std::string real_name = ANSIToUTF8(dir, custom_team_name);
   std::string error;
-  CustomTeam *team = CustomTeam::LoadCustomTeam(dir, custom_team_name, error);
+  CustomTeam *team = CustomTeam::LoadCustomTeam(dir, real_name, error);
   if (team) {
     full_list.push_back(team);
     return true;
   }
 
   std::cerr << std::endl
-            << Format(_("Error loading team :")) << custom_team_name <<":"<< error
+            << Format(_("Error loading team :")) << real_name <<":"<< error
             << std::endl;
   return false;
 }
