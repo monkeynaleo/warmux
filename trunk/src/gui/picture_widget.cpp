@@ -142,12 +142,10 @@ void PictureWidget::ApplyScaling(ScalingType t)
   type = t;
 }
 
-void PictureWidget::SetSurface(const Surface & s,
-                               ScalingType type_)
+void PictureWidget::SetSurface(const Surface & s, ScalingType type_)
 {
-  if (NULL != spr) {
+  if (spr)
     delete spr;
-  }
 
   picture_size = s.GetSize();
   spr = new Sprite(s);
@@ -161,9 +159,8 @@ void PictureWidget::SetNoSurface()
 {
   NeedRedrawing();
 
-  if (NULL != spr) {
+  if (spr)
     delete spr;
-  }
   spr = NULL;
 }
 
@@ -179,9 +176,8 @@ void PictureWidget::Draw(const Point2i &/*mousePosition*/)
     ApplyScaling(type);
   }
 
-  if (NULL == spr) {
+  if (!spr)
     return;
-  }
 
   Surface & surf = GetMainWindow();
   Point2i pos = GetPicturePosition();

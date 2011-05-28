@@ -32,33 +32,29 @@
 #include "gui/vertical_box.h"
 
 // Forward declarations
-class Button;
 class Label;
 class PictureWidget;
 class InfoMap;
+class ItemBox;
 
 class MapSelectionBox : public VBox
 {
+  ItemBox *box;
   uint selected_map_index;
   bool display_only;
-
-  PictureWidget *map_preview_selected;
-  PictureWidget *map_preview_before, *map_preview_before2;
-  PictureWidget *map_preview_after, *map_preview_after2;
+  bool selectable;
 
   Label *map_name_label;
   Label *map_author_label;
-  Button *bt_map_plus, *bt_map_minus;
   Surface random_map_preview;
 
+  void RefreshBox();
   void ChangeMap(uint index);
-  void UpdateMapInfo(PictureWidget * widget, uint index, bool selected);
-  void UpdateRandomMapInfo(PictureWidget * widget, bool selected);
+  void UpdateMapInfo();
 
   std::vector<InfoMap*> common;
 
  public:
-  void ChangeMapDelta(int delta_index);
   MapSelectionBox(const Point2i &size, bool show_border, bool _display_only = false);
 
   void ValidMapSelection();
@@ -66,7 +62,6 @@ class MapSelectionBox : public VBox
   void ChangeMapListCallback(const std::vector<uint>& list);
   void AllowSelection();
 
-  virtual Widget* Click(const Point2i &mousePosition, uint button);
   virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
   virtual void Pack();
 };

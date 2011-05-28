@@ -44,8 +44,6 @@ class GameMenu : public Menu
   void OnClickUp(const Point2i &mousePosition, int button);
 
   bool signal_ok();
-  void key_left();
-  void key_right();
 
 public:
   GameMenu();

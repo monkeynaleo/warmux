@@ -160,13 +160,3 @@ bool GameMenu::signal_ok()
   Game::UpdateGameRules()->Start();
   return true;
 }
-
-void GameMenu::key_left()
-{
-  map_box->ChangeMapDelta(-1);
-}
-
-void GameMenu::key_right()
-{
-  map_box->ChangeMapDelta(1);
-}

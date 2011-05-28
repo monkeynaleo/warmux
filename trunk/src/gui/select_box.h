@@ -72,6 +72,7 @@ public:
     int index = MouseIsOnWhichItem(mousePosition);
     return (index==-1) ? NULL : m_items[selected_item];
   }
+  const std::vector<Widget*>& GetWidgets() { return m_items; }
 };
 
 class ItemBox : public SelectBox
