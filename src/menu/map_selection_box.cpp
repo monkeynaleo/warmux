@@ -29,78 +29,33 @@
 #include "gui/picture_widget.h"
 #include "gui/question.h"
 #include "gui/horizontal_box.h"
+#include "gui/select_box.h"
 #include "include/action_handler.h"
 #include "map/maps_list.h"
 #include "network/network.h"
 #include "tool/resource_manager.h"
 
 MapSelectionBox::MapSelectionBox(const Point2i &_size, bool show_border, bool _display_only)
-  : VBox(_size.GetX(), show_border, false)
+  : VBox(_size.x, show_border, false)
   , selected_map_index(0)
+  , display_only(_display_only)
+  , selectable(true)
   , common(MapsList::GetInstance()->lst) // Created with an already initialized list
 {
-  display_only = _display_only;
-
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml",false);
 
-  // PreviousMap/NextMap buttons
-  bt_map_plus = new Button(res, "menu/big_plus", false);
-  bt_map_minus = new Button(res, "menu/big_minus", false);
-
   // random map
-  random_map_preview = GetResourceManager().LoadImage(res, "menu/random_map");
+  random_map_preview = LOAD_RES_IMAGE("menu/random_map");
 
   // compute margin width between previews
-  uint map_preview_height = _size.GetY() -2*10 -40;
+  Point2i preview_size(_size.x - 2*5, _size.y -2*10 -40);
 
   // Previews
-  Box* previews_box = new HBox(map_preview_height+10, false, false);
-  previews_box->SetNoBorder();
-
-   // compute margin width between previews
-  uint map_preview_width = map_preview_height*4/3;
-  uint total_width_previews = map_preview_width + map_preview_width*3;
-
-  uint margin = 0;
-
-  if (uint(size.x) > uint(total_width_previews + bt_map_plus->GetSizeX()
-                          + bt_map_minus->GetSizeX() + border_size)) {
-    margin = ( size.x - (total_width_previews + bt_map_plus->GetSizeX() +
-                         bt_map_minus->GetSizeX() + border_size) ) / 6;
-  }
-
-  if (margin < 5) {
-    margin = 5;
-    uint total_size_wo_margin = size.x - 6*margin - bt_map_plus->GetSizeX()
-                              - bt_map_minus->GetSizeX() - border_size;
-    map_preview_width = (total_size_wo_margin)/4; // <= total = w + 4*(3/4)w
-    map_preview_height = 3/4 * map_preview_width;
-  }
-
-  previews_box->SetMargin(margin);
-
-  previews_box->AddWidget(bt_map_minus);
-
-  map_preview_before2 = new PictureWidget(Point2i(map_preview_width *3/4,
-                                                  map_preview_height*3/4));
-  previews_box->AddWidget(map_preview_before2);
-
-  map_preview_before = new PictureWidget(Point2i(map_preview_width *3/4, map_preview_height*3/4));
-  previews_box->AddWidget(map_preview_before);
-
-  // Selected map...
-  map_preview_selected = new PictureWidget(Point2i(map_preview_width, map_preview_height));
-  previews_box->AddWidget(map_preview_selected);
-
-  map_preview_after = new PictureWidget(Point2i(map_preview_width *3/4, map_preview_height*3/4));
-  previews_box->AddWidget(map_preview_after);
-
-  map_preview_after2 = new PictureWidget(Point2i(map_preview_width *3/4, map_preview_height*3/4));
-  previews_box->AddWidget(map_preview_after2);
-
-  previews_box->AddWidget(bt_map_plus);
-
-  AddWidget(previews_box);
+  box = new ItemBox(preview_size, true, true, false);
+  box->SetNoBorder();
+  box->SetMargin(5);
+  AddWidget(box);
+  RefreshBox();
 
   // Map information
   map_name_label = new Label("Map", W_UNDEF, Font::FONT_SMALL,
@@ -112,29 +67,12 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool show_border, bool _d
                                Font::FONT_BOLD, dark_gray_color,
                                Text::ALIGN_CENTER_TOP, false);
   AddWidget(map_author_label);
-
-  if (display_only) {
-    bt_map_minus->SetVisible(false);
-    bt_map_plus->SetVisible(false);
-  }
-}
-
-void MapSelectionBox::ChangeMapDelta(int delta_index)
-{
-  ASSERT(!display_only);
-
-  int tmp = selected_map_index + delta_index;
-
-  // +1 is for random map!
-  tmp = (tmp < 0 ? tmp + common.size() + 1 : tmp) % (common.size() + 1);
-
-  ChangeMap(tmp);
 }
 
 void MapSelectionBox::ChangeMap(uint index)
 {
-  int tmp;
-  if (index > common.size()+1) return;
+  if (index > common.size()+1 || selected_map_index == index)
+    return;
 
   // Callback other network players
   if (Network::GetInstance()->IsGameMaster()) {
@@ -154,112 +92,47 @@ void MapSelectionBox::ChangeMap(uint index)
     Network::GetInstance()->SendActionToAll(a);
   } else {
     selected_map_index = index;
+    box->Select(index);
   }
 
   // Set Map information
-  UpdateMapInfo(map_preview_selected, index, true);
-
-  // Set previews
-  tmp = index - 1;
-  tmp = (tmp < 0 ? tmp + common.size() + 1: tmp);
-  UpdateMapInfo(map_preview_before, tmp, false);
-
-  tmp = index - 2;
-  tmp = (tmp < 0 ? tmp + common.size() + 1: tmp);
-  UpdateMapInfo(map_preview_before2, tmp, false);
-
-  UpdateMapInfo(map_preview_after,  (index + 1) % (common.size() +1), false);
-  UpdateMapInfo(map_preview_after2, (index + 2) % (common.size() +1), false);
+  UpdateMapInfo();
 }
 
-void MapSelectionBox::UpdateMapInfo(PictureWidget * widget, uint index, bool selected)
+void MapSelectionBox::UpdateMapInfo()
 {
-  if (index == common.size()) {
-    UpdateRandomMapInfo(widget, selected);
-    return;
-  }
+  InfoMap* info = (InfoMap*)box->GetSelectedValue();
 
-  InfoMapBasicAccessor* basic = NULL;
-
-  basic = common[index]->LoadBasicInfo();
-  if (!basic) {
-    // Error already reported by LoadBasicInfo()
-    MapsList *map_list = MapsList::GetInstance();
-
-    // Crude
-    MapsList::iterator it = map_list->lst.begin()
-                          + map_list->FindMapById(common[index]->GetRawName());
-    delete *it;
-    map_list->lst.erase(it);
-
-    // Inform network if need be - will call back up to this very function
-    Network::GetInstance()->SendMapsList();
-    return;
-  }
-
-  widget->SetSurface(basic->ReadPreview(), PictureWidget::FIT_SCALING);
-  widget->Pack();
-
-  if (display_only && !selected)
-    widget->Disable();
-  else
-    widget->Enable();
-
-  // If selected update general information
-  if (selected) {
-    map_name_label->SetText(basic->ReadFullMapName());
-    map_author_label->SetText(basic->ReadAuthorInfo());
-  }
-}
-
-void MapSelectionBox::UpdateRandomMapInfo(PictureWidget * widget, bool selected)
-{
-  widget->SetSurface(random_map_preview, PictureWidget::FIT_SCALING);
-  widget->Pack();
-  if ((display_only && !selected))
-    widget->Disable();
-  else
-    widget->Enable();
-
-  // If selected update general information
-  if (selected) {
+  if (!info) {
+    // Random map selected
     map_name_label->SetText(_("Random map"));
     map_author_label->SetText(_("Choose randomly between the different maps"));
+    return;
   }
-}
 
+  InfoMapBasicAccessor* basic = info->LoadBasicInfo();
+  //PictureWidget *pw = (PictureWidget *)box->GetSelectedWidget();
+  //pw->SetSurface(basic->ReadPreview(), PictureWidget::NO_SCALING);
+
+  map_name_label->SetText(basic->ReadFullMapName());
+  map_author_label->SetText(basic->ReadAuthorInfo());
+}
 
 Widget* MapSelectionBox::ClickUp(const Point2i &mousePosition, uint button)
 {
   if (display_only)
     return NULL;
-
-  if (!Contains(mousePosition))
-    return NULL;
-
-  bool is_click = Mouse::IS_CLICK_BUTTON(button);
-  if (is_click && bt_map_minus->Contains(mousePosition)) {
-    ChangeMapDelta(-3);
-  } else if (is_click && map_preview_before2->Contains(mousePosition)) {
-    ChangeMapDelta(-2);
-  } else if ((is_click && map_preview_before->Contains(mousePosition))
-             || button==SDL_BUTTON_WHEELUP) {
-    ChangeMapDelta(-1);
-  } else if ((is_click && map_preview_after->Contains(mousePosition))
-             || button==SDL_BUTTON_WHEELDOWN) {
-    ChangeMapDelta(+1);
-  } else if (is_click && map_preview_after2->Contains(mousePosition)) {
-    ChangeMapDelta(+2);
-  } else if (is_click && bt_map_plus->Contains(mousePosition)) {
-    ChangeMapDelta(+3);
+  Widget *w = WidgetList::ClickUp(mousePosition, button);
+  if (w == box) {
+    uint i = box->GetSelectedItem();
+    if (i != selected_map_index) {
+      Pack();
+      NeedRedrawing();
+    }
+    selected_map_index = i;
+    UpdateMapInfo();
   }
-
-  return NULL;
-}
-
-Widget* MapSelectionBox::Click(const Point2i &/*mousePosition*/, uint /*button*/)
-{
-  return NULL;
+  return w;
 }
 
 void MapSelectionBox::ValidMapSelection()
@@ -308,17 +181,65 @@ void MapSelectionBox::ChangeMapListCallback(const std::vector<uint>& index_list)
 void MapSelectionBox::AllowSelection()
 {
   display_only = false;
-  bt_map_minus->SetVisible(true);
-  bt_map_plus->SetVisible(true);
-  map_preview_before2->Enable();
-  map_preview_before->Enable();
-  map_preview_after->Enable();
-  map_preview_after2->Enable();
+  //map_preview_after2->Enable();
   NeedRedrawing();
 }
 
 void MapSelectionBox::Pack()
 {
+  uint h = size.y/3;
+  uint w = (h<<2)/3;
+  const std::vector<Widget*>& wlist = box->GetWidgets();
+  for (uint i=0; i<wlist.size(); i++) {
+#if 0 // Cause some refresh problems
+    if (wlist[i] == box->GetSelectedWidget())
+      wlist[i]->SetSize((size.y<<1)/3, size.y>>1);
+    else
+#endif
+      wlist[i]->SetSize(w, h);
+  }
   VBox::Pack();
   ChangeMapCallback();
+}
+
+void MapSelectionBox::RefreshBox()
+{
+  // Remove all internal boxes, and delete them
+  box->Clear();
+
+  uint h = 100;
+  Point2i img_size((4*h)/3, h);
+
+  PictureWidget *pw;
+  bool error = false;
+  for (uint i=0; i<common.size(); i++) {
+    pw = new PictureWidget(img_size);
+    InfoMapBasicAccessor* info = common[i]->LoadBasicInfo();
+    if (!info) {
+      // Error already reported by LoadBasicInfo()
+      MapsList *map_list = MapsList::GetInstance();
+
+      // Crude
+      MapsList::iterator it = map_list->lst.begin()
+                            + map_list->FindMapById(common[i]->GetRawName());
+      delete *it;
+      map_list->lst.erase(it);
+      error = true;
+    } else {
+      pw->SetSurface(info->ReadPreview(), PictureWidget::FIT_SCALING);
+      pw->Pack();
+      box->AddItem(selected_map_index==i, pw, common[i]);
+    }
+  }
+
+  // Also add random map
+  pw = new PictureWidget(img_size);
+  pw->SetSurface(random_map_preview, PictureWidget::FIT_SCALING);
+  pw->Pack();
+  box->AddItem(selected_map_index==common.size(), pw, NULL);
+
+  if (error) {
+    // Inform network if need be - will call back up to this very function
+    Network::GetInstance()->SendMapsList();
+  }
 }
