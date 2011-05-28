@@ -334,10 +334,9 @@ AIStrategy * ShootDirectlyAtEnemyIdea::CreateStrategy(float accuracy) const {
   rating *= confidence * weapons_weighting.GetFactor(weapon_type);
 
   // Apply our accuracy
-  float acc = (accuracy+confidence)*0.5f;
-  if (acc>0.0f && acc<1.0f) {
+  if (accuracy>0.0f && accuracy<1.0f) {
     // stddev is 0 for accuracy and increases when it decreases
-    shoot_angle += RandomLocal().GetGaussianfloat(0.0f, (1-acc)*M_PI*0.1f);
+    shoot_angle += RandomLocal().GetGaussianfloat(0.0f, (1-accuracy)*M_PI*0.1f);
     // Revalidate value
     if (!weapon->IsAngleValid(shoot_angle))
       return NULL;
@@ -450,11 +449,10 @@ AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy(float accuracy) co
   rating *= confidence * weapons_weighting.GetFactor(weapon_type);
 
   // Apply our accuracy
-  float acc = (accuracy + confidence)*0.5f;
-  if (acc>0.0f && acc<1.0f) {
+  if (accuracy>0.0f && accuracy<1.0f) {
     // stddev is 0 for accuracy and increases when it decreases
     // stddev smaller compared to straight shot because it can more easily fail
-    shoot_angle += RandomLocal().GetGaussianfloat(0.0f, (1-acc)*M_PI*0.1f);
+    shoot_angle += RandomLocal().GetGaussianfloat(0.0f, (1-accuracy)*M_PI*0.1f);
     // Revalidate value
     if (!weapon->IsAngleValid(shoot_angle))
       return NULL;
