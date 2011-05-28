@@ -71,7 +71,7 @@ GameMenu::GameMenu() :
   // ##  TEAM AND MAP SELECTION
   // ################################################
 
-  team_box = new LocalTeamsSelectionBox(Point2i(multitabsWidth, team_box_height), multitabs);
+  team_box = new LocalTeamsSelectionBox(Point2i(multitabsWidth-4, team_box_height), multitabs);
 
   map_box = new MapSelectionBox(Point2i(multitabsWidth-4, mapsHeight), multitabs);
 
@@ -91,8 +91,8 @@ GameMenu::GameMenu() :
   // ################################################
   // ##  GAME OPTIONS
   // ################################################
-  game_options = new GameModeEditor(Point2i(mainBoxWidth, mainBoxHeight-tabs->GetHeaderHeight()),
-                                    mainBoxWidth/640.0f, false);
+  game_options = new GameModeEditor(Point2i(multitabsWidth-8, mainBoxHeight-tabs->GetHeaderHeight()-4),
+                                    (multitabsWidth-8)/640.0f, false);
   tabs->AddNewTab("TAB_Game", _("Game"), game_options);
 
   tabs->SetPosition(MARGIN_SIDE, MARGIN_TOP);
