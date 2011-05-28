@@ -94,9 +94,9 @@ void GameTime::SetWaitingForNetwork(bool value)
   waiting_for_network = value;
   if (waiting_for_network) {
     network_wait_time_stopwatch.Reset();
-    MSG_DEBUG("time.waiting","Start waiting for network.");
+    MSG_DEBUG("time.waiting", "Start waiting for network.");
   } else {
-    MSG_DEBUG("time.waiting","Waited %d ms for network.", network_wait_time_stopwatch.GetValue());
+    MSG_DEBUG("time.waiting", "Waited %d ms for network.", network_wait_time_stopwatch.GetValue());
   }
   stopwatch.SetPause(IsWaiting());
 }
@@ -109,7 +109,6 @@ uint GameTime::GetMSWaitingForNetwork()
     return 0;
 }
 
-
 std::string GameTime::GetString() const
 {
   std::ostringstream ss;
@@ -118,8 +117,8 @@ std::string GameTime::GetString() const
   return ss.str();
 }
 
- void GameTime::SetSpeed(const Double& speed)
- {
-   MSG_DEBUG("time", ">>> Speed from %.1f to %.1f", stopwatch.GetSpeed().tofloat(), speed.tofloat());
-   stopwatch.SetSpeed(speed);
- }
+void GameTime::SetSpeed(const Double& speed)
+{
+  MSG_DEBUG("time", ">>> Speed from %.1f to %.1f", stopwatch.GetSpeed().tofloat(), speed.tofloat());
+  stopwatch.SetSpeed(speed);
+}
