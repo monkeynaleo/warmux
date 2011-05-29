@@ -69,7 +69,7 @@
 // DON'T USE THIS IF YOU INTEND TO PLAY NETWORKED GAMES!
 bool force_refresh = false;
 
-#define MAX_WAIT_TIME_WITHOUT_MESSAGE_IN_MS   500
+#define MAX_WAIT_TIME_WITHOUT_MESSAGE_IN_MS   1000
 
 std::string Game::current_rules = "none";
 
@@ -793,8 +793,11 @@ void Game::MessageEndOfGame() const
 
 void Game::MainLoop()
 {
-  static bool draw = true;
-  GameTime *time = GameTime::GetInstance();
+  static bool    draw   = true;
+  GameTime      *time   = GameTime::GetInstance();
+  Replay        *replay = Replay::GetInstance();
+  ActionHandler *ah     = ActionHandler::GetInstance();
+  Network       *net    = Network::GetInstance();
 
   // One time honouring of the pause request - check GameTime::IsPaused to get the state
   if (request_pause == START_PAUSE) {
@@ -839,9 +842,9 @@ void Game::MainLoop()
         character->GetBody()->RefreshSprites();
       }
 
-      ActionHandler::GetInstance()->ExecFrameLessActions();
+      ah->ExecFrameLessActions();
 
-      bool actions_executed = ActionHandler::GetInstance()->ExecActionsForOneFrame();
+      bool actions_executed = ah->ExecActionsForOneFrame();
       ASSERT(actions_executed);
 
       if (actions_executed) {
@@ -874,7 +877,7 @@ void Game::MainLoop()
   }
 
   // Generally linked to replay: do minimal refresh
-  if (Replay::GetConstInstance()->IsPlaying() && time->IsPaused()) {
+  if (replay->IsPlaying() && time->IsPaused()) {
     RefreshInput();
     if (time_of_next_frame < SDL_GetTicks()) {
       //printf("Drawing as %u < %u\n", time_of_next_frame, SDL_GetTicks());
@@ -911,7 +914,7 @@ void Game::MainLoop()
         character->GetBody()->RefreshSprites();
       }
 
-      if (Network::GetInstance()->IsTurnMaster() && !Replay::GetConstInstance()->IsPlaying()) {
+      if (!replay->IsPlaying() && net->IsTurnMaster()) {
         // The action which verifies the random seed must be the first action scheduled!
         // Otherwise the following could happen:
         // 1. Action C gets scheduled which draws values from the random source.
@@ -921,13 +924,11 @@ void Game::MainLoop()
         RandomSync().Verify();
 
 #ifdef DEBUG
-        Action* action = new Action(Action::ACTION_TIME_VERIFY_SYNC);
-        action->Push((int)time->Read());
-        ActionHandler::GetInstance()->NewAction(action);
+        ah->NewAction( new Action(Action::ACTION_TIME_VERIFY_SYNC, time->Read()) );
 #endif
       }
 
-      if (time->Read() % 1000 == 20 && Network::GetInstance()->IsGameMaster())
+      if (time->Read() % 4096 == 20 && net->IsGameMaster())
         PingClient();
     }
     StatStart("Game:RefreshInput()");
@@ -935,15 +936,15 @@ void Game::MainLoop()
     StatStop("Game:RefreshInput()");
     if (draw)
       ActiveTeam().RefreshAI();
-    ActionHandler::GetInstance()->ExecFrameLessActions();
+    ah->ExecFrameLessActions();
 
-    bool is_turn_master = Network::GetInstance()->IsTurnMaster();
+    bool is_turn_master = net->IsTurnMaster();
     if (is_turn_master) {
       time->SetWaitingForNetwork(false);
       Action *a = new Action(Action::ACTION_GAME_CALCULATE_FRAME);
-      ActionHandler::GetInstance()->NewAction(a);
+      ah->NewAction(a);
     }
-    bool actions_executed = ActionHandler::GetInstance()->ExecActionsForOneFrame();
+    bool actions_executed = ah->ExecActionsForOneFrame();
     ASSERT(actions_executed || !is_turn_master);
     time->SetWaitingForNetwork(!actions_executed);
 
@@ -967,8 +968,8 @@ void Game::MainLoop()
       if (ActiveTeam().IsAbandoned()) {
         const std::string & team_id = ActiveTeam().GetId();
         GetTeamsList().DelTeam(team_id);
-        if (Network::GetInstance()->network_menu)
-          Network::GetInstance()->network_menu->DelTeamCallback(team_id);
+        if (net->network_menu)
+          net->network_menu->DelTeamCallback(team_id);
       }
     }
 
