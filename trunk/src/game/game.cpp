@@ -915,17 +915,19 @@ void Game::MainLoop()
       }
 
       if (!replay->IsPlaying() && net->IsTurnMaster()) {
+        if (!net->HasPendingFrames()) {
         // The action which verifies the random seed must be the first action scheduled!
         // Otherwise the following could happen:
         // 1. Action C gets scheduled which draws values from the random source.
         // 2. Action V gets scheduled which verifies that random seed is X.
         // 3. Action C gets executed: As a result the random seed has changed to another value Y.
         // 4. Action V gets executed: It fails as the random seed is no longer X but Y.
-        RandomSync().Verify();
+          RandomSync().Verify();
 
-#ifdef DEBUG
-        ah->NewAction( new Action(Action::ACTION_TIME_VERIFY_SYNC, time->Read()) );
-#endif
+  #ifdef DEBUG
+          ah->NewAction( new Action(Action::ACTION_TIME_VERIFY_SYNC, time->Read()) );
+  #endif
+        }
       }
 
       if (time->Read() % 4096 == 20 && net->IsGameMaster())

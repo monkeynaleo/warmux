@@ -70,6 +70,7 @@ public:
 class Network : public Singleton<Network>
 {
   static int num_objects;
+  static uint frames;
 
   std::list<DistantComputer*> cpu; // list of the connected computer
   SDL_mutex *cpus_lock;
@@ -168,6 +169,8 @@ public:
 
   std::vector<uint> GetCommonTeams();
   void SendTeamsList();
+
+  bool HasPendingFrames() const { return frames; }
 };
 
 //-----------------------------------------------------------------------------

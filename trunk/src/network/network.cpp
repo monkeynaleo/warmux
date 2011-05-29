@@ -203,6 +203,7 @@ void NetworkThread::ReceiveActions()
 //-----------------------------------------------------------------------------
 
 int  Network::num_objects = 0;
+uint Network::frames      = 0;
 
 Network * Network::GetInstance()
 {
@@ -319,6 +320,8 @@ Player * Network::LockRemoteHostsAndGetPlayer(uint player_id)
 // Static method
 void Network::Disconnect()
 {
+  frames = 0;
+
   // restore Windows title
   AppWarmux::GetInstance()->video->SetWindowCaption(std::string("WarMUX ") + Constants::WARMUX_VERSION);
 
@@ -366,6 +369,36 @@ void Network::DisconnectNetwork()
 // Send Messages
 void Network::SendActionToAll(const Action& a, bool lock) const
 {
+  if (0) {
+  if (a.GetType() == Action::ACTION_GAME_CALCULATE_FRAME) {
+    frames++;
+    if (frames == Action::MAX_FRAMES) {
+      Action b(Action::ACTION_GAME_PACK_CALCULATED_FRAMES, Action::MAX_FRAMES);
+      SendAction(b, NULL, false, lock);
+      printf("Sending pack for %u frames\n", Action::MAX_FRAMES);
+      frames = 0;
+    }
+    return;
+  }
+  
+  if (frames>0 && !a.IsFrameLess()) {
+    // This should have arrived here
+    assert(a.GetType()!=Action::ACTION_TIME_VERIFY_SYNC ||
+           a.GetType()!=Action::ACTION_NETWORK_VERIFY_RANDOM_SYNC);
+
+    // The clients must have seen all previous frames for this to occur
+    Action b(Action::ACTION_GAME_PACK_CALCULATED_FRAMES, frames);
+    SendAction(b, NULL, false, lock);
+    printf("Sending pack for %u frames because of action '%s'\n",
+           frames, ActionHandler::GetActionName(a.GetType()).c_str());
+    frames = 0;
+  }
+
+  if (a.GetType()==Action::ACTION_TIME_VERIFY_SYNC ||
+      a.GetType()==Action::ACTION_NETWORK_VERIFY_RANDOM_SYNC)
+    printf("Sending %u\n", (uint)a.GetType());
+  }
+
   MSG_DEBUG("network.traffic", "Send action %s to all remote computers",
             ActionHandler::GetActionName(a.GetType()).c_str());
 
