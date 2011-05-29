@@ -212,8 +212,11 @@ void ScrollBox::__Update(const Point2i & mousePosition,
     } else if (scroll_mode == SCROLL_MODE_DRAG) {
       // Act as if the scroll corresponds to bringing the starting point to the
       // current point
-      new_offset = start_drag_offset + start_drag
-                 - (vertical) ? mousePosition.y : mousePosition.x;
+      new_offset = start_drag_offset + start_drag;
+      if (vertical)
+        new_offset -= mousePosition.y;
+      else
+        new_offset -= mousePosition.x;
     }
 
     if (new_offset < 0)
