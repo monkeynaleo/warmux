@@ -1374,14 +1374,14 @@ void ActionHandler::AddActionsFrames(uint nb, DistantComputer* cpu)
 {
   ASSERT(mutex);
   printf("Adding %u frame actions\n", nb);
-  Lock();
+
+  // We are not locking queue because the only caller already locked it!
   while (nb) {
     Action *a = new Action(Action::ACTION_GAME_CALCULATE_FRAME);
     a->SetCreator(cpu);
     queue.push_back(a);
     nb--;
   }
-  UnLock();
 }
 
 void ActionHandler::NewActionActiveCharacter(int index)
