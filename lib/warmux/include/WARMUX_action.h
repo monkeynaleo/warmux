@@ -81,6 +81,7 @@ public:
     // Other interactions
     ACTION_INFO_CLIENT_CONNECT,
     ACTION_INFO_CLIENT_DISCONNECT,
+    ACTION_GAME_PACK_CALCULATED_FRAMES,
 
     ACTION_NETWORK_RANDOM_INIT,
     LAST_FRAME_LESS_ACTION = ACTION_NETWORK_RANDOM_INIT,
@@ -137,6 +138,7 @@ public:
     ACTION_END_ENUM
   } Action_t;
   static const uint NUM_ACTIONS = ACTION_END_ENUM;
+  static const uint MAX_FRAMES  = 10;
 
 #pragma pack(push)  /* push current alignment to stack */
 #pragma pack(1)     /* set alignment to 1 byte boundary */
@@ -202,6 +204,7 @@ public:
   void WriteToPacket(char* & packet, int & size) const;
 
   DistantComputer* GetCreator() const { return m_creator; }
+  void SetCreator(DistantComputer* creator) { m_creator = creator; }
   Action_t GetType() const { return (Action_t)m_header.type; }
   bool IsFrameLess() const { return m_header.type <= LAST_FRAME_LESS_ACTION; }
 
