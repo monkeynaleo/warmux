@@ -50,6 +50,7 @@ public:
 
   void ExecFrameLessActions();
   bool ExecActionsForOneFrame();
+  void AddActionsFrames(uint nb, DistantComputer* cpu);
 };
 
 void Action_Handler_Init();
