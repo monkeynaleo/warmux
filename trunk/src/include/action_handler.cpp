@@ -343,6 +343,21 @@ static void Action_Player_ChangeCharacter(Action *a)
   Camera::GetInstance()->FollowObject(&ActiveCharacter(),true);
 }
 
+static void Action_Game_Unpack(Action *a)
+{
+  int nb = a->PopInt();
+  NET_ASSERT(nb>0 && nb<=Action::MAX_FRAMES)
+  {
+    if (a->GetCreator())
+      a->GetCreator()->ForceDisconnection();
+    return;
+  }
+
+  // We received actions, act as if 
+  GameTime::GetInstance()->SetWaitingForNetwork(false);
+  ActionHandler::GetInstance()->AddActionsFrames(nb, a->GetCreator());
+}
+
 static void Action_Game_CalculateFrame(Action */*a*/)
 {
   // Nothing to do here:
@@ -977,6 +992,9 @@ static void Action_Network_VerifyRandomSync(Action *a)
   MSG_DEBUG("random.verify", "Verify seed: %d (local) == %d (remote)", local_seed, remote_seed);
 
   if (local_seed != remote_seed) {
+    Replay *replay = Replay::GetInstance();
+    if (replay->IsRecording())
+      replay->SaveReplay(GetHome() + "bug.wrf", "I'm bugged");
 
     Question question(Question::WARNING);
     question.Set(_("Game is not synchronized anymore! This is BAD, the network game will be "
@@ -986,9 +1004,6 @@ static void Action_Network_VerifyRandomSync(Action *a)
                    true, 0);
     question.Ask();
     DisconnectOnError(WRONG_SYNC);
-    Replay *replay = Replay::GetInstance();
-    if (replay->IsRecording())
-      replay->SaveReplay(GetHome() + "bug.wrf", "I'm bugged");
   }
 }
 
@@ -996,7 +1011,7 @@ static void Action_Time_VerifySync(Action *a)
 {
   uint local_time = GameTime::GetInstance()->Read();
   uint remote_time = (uint)a->PopInt();
-  MSG_DEBUG("time.verify","Verify time: %d (local) == %d (remote)", local_time, remote_time);
+  MSG_DEBUG("time.verify", "Verify time: %d (local) == %d (remote)", local_time, remote_time);
   ASSERT(local_time == remote_time);
 }
 
@@ -1184,6 +1199,7 @@ void Action_Handler_Init()
   ah->Register(Action::ACTION_CHAT_MENU_MESSAGE, "menu_chat_message", Action_ChatMessage);
 
   // ########################################################
+  ah->Register(Action::ACTION_GAME_PACK_CALCULATED_FRAMES, "GAME_unpack_frames", &Action_Game_Unpack);
   ah->Register(Action::ACTION_GAME_CALCULATE_FRAME, "GAME_calculate_frame", &Action_Game_CalculateFrame);
   ah->Register(Action::ACTION_PLAYER_CHANGE_WEAPON, "PLAYER_change_weapon", &Action_Player_ChangeWeapon);
   ah->Register(Action::ACTION_PLAYER_CHANGE_CHARACTER, "PLAYER_change_character", &Action_Player_ChangeCharacter);
@@ -1352,6 +1368,20 @@ void ActionHandler::NewAction(Action* a, bool repeat_to_network)
   // To make action executed even if the menu is waiting in SDL_WaitEvent
   // One new event will be needed (see ExecActions).
   Menu::WakeUpOnCallback();
+}
+
+void ActionHandler::AddActionsFrames(uint nb, DistantComputer* cpu)
+{
+  ASSERT(mutex);
+  printf("Adding %u frame actions\n", nb);
+  Lock();
+  while (nb) {
+    Action *a = new Action(Action::ACTION_GAME_CALCULATE_FRAME);
+    a->SetCreator(cpu);
+    queue.push_back(a);
+    nb--;
+  }
+  UnLock();
 }
 
 void ActionHandler::NewActionActiveCharacter(int index)
