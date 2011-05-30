@@ -22,18 +22,25 @@
 #ifndef GAME_MODE_EDITOR_H
 #define GAME_MODE_EDITOR_H
 
-#include "gui/grid_box.h"
+#include "gui/horizontal_box.h"
 
 // Forward declarations
 class SpinButtonWithPicture;
 class ComboBox;
 class CheckBox;
+class ScrollBox;
+class TextBox;
+class ItemBox;
+class Button;
 
-class GameModeEditor : public GridBox
+class GameModeEditor : public HBox
 {
-  ComboBox *opt_game_mode;
+  ItemBox               *opt_game_mode;
+  std::vector<std::pair<std::string, std::string> > game_modes;
+  TextBox               *filename;
+  Button                *save;
 
-  ComboBox *opt_allow_character_selection;
+  ComboBox              *opt_allow_character_selection;
 
   SpinButtonWithPicture *opt_duration_turn;
 
@@ -44,12 +51,14 @@ class GameModeEditor : public GridBox
   SpinButtonWithPicture *opt_damage_during_death_mode;
   SpinButtonWithPicture *opt_gravity;
 
+  ScrollBox             *opt_weapons_cfg;
+
+  void LoadGameMode(bool force = false);
+
 public:
   GameModeEditor(const Point2i& size, float zoom, bool _draw_border=true);
 
-  const ComboBox* GetGameModeComboBox() const { return opt_game_mode; };
-
-  void LoadGameMode();
+  Widget *ClickUp(const Point2i & mousePosition, uint button);
   void ValidGameMode() const;
 };
 
