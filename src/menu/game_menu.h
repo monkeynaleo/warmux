@@ -41,7 +41,6 @@ class GameMenu : public Menu
   GameModeEditor * game_options;
 
   void SaveOptions();
-  void OnClickUp(const Point2i &mousePosition, int button);
 
   bool signal_ok();
 

@@ -101,15 +101,6 @@ GameMenu::GameMenu() :
   widgets.Pack();
 }
 
-void GameMenu::OnClickUp(const Point2i &mousePosition, int button)
-{
-  Widget *w = widgets.ClickUp(mousePosition, button);
-
-  if (w == game_options->GetGameModeComboBox()) {
-    game_options->LoadGameMode();
-  }
-}
-
 void GameMenu::SaveOptions()
 {
   // Map
