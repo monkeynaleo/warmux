@@ -323,7 +323,7 @@ void WeaponsMenu::RefreshWeaponList()
   tools_menu->ClearItem(false);
   // Reinserting weapon
   WeaponsList * weapons_list = Game::GetInstance()->GetWeaponsList();
-  for (WeaponsList::weapons_list_it it=weapons_list->GetList().begin();
+  for (WeaponsList::iterator it=weapons_list->GetList().begin();
        it != weapons_list->GetList().end();
        ++it)
     AddWeapon(*it);

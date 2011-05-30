@@ -38,7 +38,7 @@
 
 WeaponsList::~WeaponsList()
 {
-  weapons_list_it it=m_weapons_list.begin(), end=m_weapons_list.end();
+  iterator it=m_weapons_list.begin(), end=m_weapons_list.end();
   for (; it != end; ++it)
     delete *it;
 
@@ -113,7 +113,7 @@ WeaponsList::WeaponsList(const xmlNode* weapons_xml)
 
 void WeaponsList::UpdateTranslation()
 {
-  weapons_list_it it;
+  iterator it;
   for (it = m_weapons_list.begin(); it != m_weapons_list.end(); it++) {
     (*it)->UpdateTranslationStrings();
   }
@@ -123,7 +123,7 @@ void WeaponsList::UpdateTranslation()
 
 bool WeaponsList::GetWeaponBySort(Weapon::category_t sort, Weapon::Weapon_type &type)
 {
-  weapons_list_it it, end=m_weapons_list.end();
+  iterator it, end=m_weapons_list.end();
   bool open = ActiveMap()->LoadedData()->IsOpened();
 
   /* find the current position */
@@ -218,7 +218,7 @@ class test_weapon_type {
 
 Weapon* WeaponsList::GetWeapon (Weapon::Weapon_type type) const
 {
-  weapons_list_it it;
+  iterator it;
   it = std::find_if(m_weapons_list.begin(), m_weapons_list.end(), test_weapon_type(type));
   ASSERT (it != m_weapons_list.end());
   return *it;
@@ -226,7 +226,7 @@ Weapon* WeaponsList::GetWeapon (Weapon::Weapon_type type) const
 
 WeaponLauncher* WeaponsList::GetWeaponLauncher(Weapon::Weapon_type type) const
 {
-  launcher_weapons_list_it it;
+  launcher_iterator it;
   it = std::find_if(m_launcher_weapons_list.begin(), m_launcher_weapons_list.end(), test_weapon_type(type));
   ASSERT (it != m_launcher_weapons_list.end());
   return *it;
