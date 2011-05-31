@@ -2159,16 +2159,16 @@ static void Blit2to2Key(SDL_BlitInfo *info)
 {
 	int width = info->d_width;
 	int height = info->d_height;
-	Uint16 *srcp = (Uint16 *)info->s_pixels;
+	const Uint16 * __restrict__  srcp = (Uint16 *)info->s_pixels;
 	int srcskip = info->s_skip;
-	Uint16 *dstp = (Uint16 *)info->d_pixels;
+	Uint16 * __restrict__  dstp = (Uint16 *)info->d_pixels;
 	int dstskip = info->d_skip;
 	Uint16 ckey = info->src->colorkey;
 	//Uint32 rgbmask = ~info->src->Amask;
 
 	/* Set up some basic variables */
-  srcskip >>= 1;
-  dstskip >>= 1;
+    srcskip >>= 1;
+    dstskip >>= 1;
 	//ckey &= rgbmask;
 
 	while ( height-- ) {
