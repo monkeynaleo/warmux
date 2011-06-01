@@ -21,16 +21,16 @@
   <nb_characters>6</nb_characters>
 
   <character>
-    <energy initial="1" maximum="200" />
+    <energy initial="31" maximum="200" />
     <jump strength="8" angle="-60" />
     <super_jump strength="11" angle="-80" />
     <back_jump strength="9" angle="-100" />
     <death_explosion>
-      <damage>10000</damage>
+      <damage>100</damage>
       <explosion_range>50</explosion_range>
       <particle_range>55</particle_range>
-      <blast_force>150000</blast_force>
-      <blast_range>50000</blast_range>
+      <blast_force>1000</blast_force>
+      <blast_range>1000</blast_range>
     </death_explosion>
     <walking_pause>15</walking_pause>
   </character>
@@ -309,7 +309,7 @@
       <max_angle>89</max_angle>
       <explosion_range>75</explosion_range>
       <particle_range>80</particle_range>
-      <blast_range>75</blast_range>
+      <blast_range>1000</blast_range>
       <blast_force>1000</blast_force>
       <timeout>3</timeout>
       <allow_change_timeout>1</allow_change_timeout>
