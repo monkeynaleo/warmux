@@ -22,21 +22,20 @@
 #include "character/character.h"
 #include "game/game_time.h"
 #include "graphic/sprite.h"
-#include "graphic/surface.h"
-#include "graphic/video.h"
-#include "include/app.h"
-#include "interface/game_msg.h"
-#include "interface/mouse.h"
-#include "map/camera.h"
-#include "map/map.h"
-#include "map/wind.h"
-#include "network/network.h"
-#include "object/objects_list.h"
+//#include "graphic/surface.h"
+//#include "graphic/video.h"
+//#include "include/app.h"
+//#include "interface/game_msg.h"
+//#include "interface/mouse.h"
+//#include "map/camera.h"
+//#include "map/map.h"
+//#include "map/wind.h"
+//#include "network/network.h"
+//#include "object/objects_list.h"
 #include "team/team.h"
 #include "team/teams_list.h"
-#include "tool/math_tools.h"
-#include "tool/resource_manager.h"
 #include "tool/xml_document.h"
+//#include "tool/math_tools.h"
 #include "weapon/auto_bazooka.h"
 #include "weapon/explosion.h"
 #include "weapon/weapon_cfg.h"
@@ -67,12 +66,11 @@ protected:
   Double m_force;
   uint m_lastrefresh;
 public:
-  RPG(AutomaticBazookaConfig& cfg,
-      WeaponLauncher * p_launcher);
+  RPG(AutomaticBazookaConfig& cfg, WeaponLauncher * p_launcher);
   void Refresh();
   void Shoot(Double strength);
   void Explosion();
-  void SetTarget (int x,int y);
+  void SetTarget(const Point2i& pos) { m_targetPoint = pos; }
 
 protected:
   void SignalOutOfMap();
@@ -99,7 +97,7 @@ void RPG::Shoot(Double strength)
   flying_sound.Play("default","weapon/automatic_rocket_flying", -1);
 
   WeaponProjectile::Shoot(strength);
-  angle_local=ActiveCharacter().GetFiringAngle();
+  angle_local = ActiveCharacter().GetFiringAngle();
 }
 
 void RPG::Refresh()
@@ -178,13 +176,6 @@ void RPG::SignalOutOfMap()
   flying_sound.Stop();
 }
 
-// Set the coordinate of the target
-void RPG::SetTarget(int x, int y)
-{
-  m_targetPoint.x = x;
-  m_targetPoint.y = y;
-}
-
 void RPG::Explosion()
 {
   WeaponProjectile::Explosion();
@@ -193,25 +184,12 @@ void RPG::Explosion()
 }
 
 //-----------------------------------------------------------------------------
-
-struct target_t
-{
-  Point2i pos;
-  bool selected;
-  Surface image;
-};
-
 AutomaticBazooka::AutomaticBazooka() :
-  WeaponLauncher(WEAPON_AUTOMATIC_BAZOOKA, "automatic_bazooka", new AutomaticBazookaConfig())
+  TargetLauncher(WEAPON_AUTOMATIC_BAZOOKA, "automatic_bazooka", new AutomaticBazookaConfig())
 {
   UpdateTranslationStrings();
-
   m_category = HEAVY;
-  mouse_character_selection = false;
   m_allow_change_timeout = true;
-  m_target = new target_t;
-  m_target->selected = false;
-  m_target->image = GetResourceManager().LoadImage(weapons_res_profile, "baz_cible");
   ReloadLauncher();
 }
 
@@ -222,80 +200,15 @@ void AutomaticBazooka::UpdateTranslationStrings()
              "Firing: keep the space key pressed until the desired strength\nOne ammo per turn");
 }
 
-AutomaticBazooka::~AutomaticBazooka()
-{
-  if (m_target)
-    delete m_target;
-}
-
 WeaponProjectile * AutomaticBazooka::GetProjectileInstance()
 {
   return new RPG(cfg(), this);
 }
 
-void AutomaticBazooka::Draw()
-{
-  WeaponLauncher::Draw();
-  DrawTarget();
-}
-
-void AutomaticBazooka::Refresh()
-{
-  DrawTarget();
-  WeaponLauncher::Refresh();
-}
-
-void AutomaticBazooka::p_Select()
-{
-  WeaponLauncher::p_Select();
-  m_target->selected = false;
-
-  if (Network::GetInstance()->IsTurnMaster())
-    Mouse::GetInstance()->SetPointer(Mouse::POINTER_AIM);
-}
-
-void AutomaticBazooka::p_Deselect()
-{
-  WeaponLauncher::p_Deselect();
-  if (m_target->selected) {
-    // need to clear the old target
-    GetWorld().ToRedrawOnMap(Rectanglei(m_target->pos - (m_target->image.GetSize()>>1),
-                                        m_target->image.GetSize()));
-  }
-}
-
 void AutomaticBazooka::ChooseTarget(Point2i mouse_pos)
 {
-  if (m_target->selected) {
-    // need to clear the old target
-    GetWorld().ToRedrawOnMap(Rectanglei(m_target->pos - (m_target->image.GetSize()>>1),
-                                        m_target->image.GetSize()));
-  }
-
-  m_target->pos = mouse_pos;
-  m_target->selected = true;
-
-  if (!ActiveTeam().IsLocalHuman())
-    Camera::GetInstance()->SetXYabs(mouse_pos - Camera::GetInstance()->GetSize()/2);
-  DrawTarget();
-  static_cast<RPG *>(projectile)->SetTarget(m_target->pos.x, m_target->pos.y);
-}
-
-void AutomaticBazooka::DrawTarget() const
-{
-  if (!m_target->selected) return;
-
-  GetMainWindow().Blit(m_target->image,
-                       m_target->pos - (m_target->image.GetSize()>>1)
-                       - Camera::GetInstance()->GetPosition());
-
-  GetWorld().ToRedrawOnMap(Rectanglei(m_target->pos - (m_target->image.GetSize()>>1),
-                                      m_target->image.GetSize()));
-}
-
-bool AutomaticBazooka::IsReady() const
-{
-  return (EnoughAmmo() && m_target->selected);
+  TargetLauncher::ChooseTarget(mouse_pos);
+  static_cast<RPG *>(projectile)->SetTarget(m_target.pos);
 }
 
 AutomaticBazookaConfig &AutomaticBazooka::cfg()
