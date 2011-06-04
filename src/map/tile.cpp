@@ -134,8 +134,8 @@ void Tile::Dig(const Point2i &center, const uint radius)
   Point2i position  = center - Point2i(radius + EXPLOSION_BORDER_SIZE,
                                        radius + EXPLOSION_BORDER_SIZE);
 
-  Point2i  firstCell = Clamp(position/CELL_SIZE);
-  Point2i  lastCell  = Clamp((position+size)/CELL_SIZE);
+  Point2i  firstCell = Clamp(position>>CELL_BITS);
+  Point2i  lastCell  = Clamp((position+size)>>CELL_BITS);
   uint     index     = firstCell.y*nbCells.x;
 
   m_preview->Lock();
@@ -196,8 +196,8 @@ TileItem_NonEmpty* Tile::CreateNonEmpty(uint8_t *ptr, int stride)
 {
   Uint32 *pix = (Uint32 *)ptr;
 
-  for (int y=0; y<CELL_SIZE.y; y++) {
-    for (int x=0; x<CELL_SIZE.x; x++) {
+  for (int y=0; y<CELL_DIM; y++) {
+    for (int x=0; x<CELL_DIM; x++) {
       if (pix[x]) {
         if (m_use_alpha)
           return new TileItem_AlphaSoftware(ptr, stride, m_alpha_threshold);
@@ -212,9 +212,9 @@ TileItem_NonEmpty* Tile::CreateNonEmpty(uint8_t *ptr, int stride)
 
 void Tile::PutSprite(const Point2i& pos, Sprite* spr)
 {
-  Point2i    firstCell = Clamp(pos/CELL_SIZE);
+  Point2i    firstCell = Clamp(pos>>CELL_BITS);
   Surface&   s         = spr->GetSurface();
-  Point2i    lastCell  = Clamp((pos + s.GetSize())/CELL_SIZE);
+  Point2i    lastCell  = Clamp((pos + s.GetSize())>>CELL_BITS);
   Rectanglei rec(pos, s.GetSize());
 
   m_preview->Lock();
@@ -239,10 +239,10 @@ void Tile::PutSprite(const Point2i& pos, Sprite* spr)
         src.SetPositionY(0);
 
       src.SetSize(rec.GetPosition() + rec.GetSize() - cell_pos - src.GetPosition());
-      if (src.GetSizeX() + src.GetPositionX() > CELL_SIZE.x)
-        src.SetSizeX(CELL_SIZE.x - src.GetPositionX());
-      if (src.GetSizeY() + src.GetPositionY() > CELL_SIZE.y)
-        src.SetSizeY(CELL_SIZE.y - src.GetPositionY());
+      if (src.GetSizeX() + src.GetPositionX() > CELL_DIM)
+        src.SetSizeX(CELL_DIM - src.GetPositionX());
+      if (src.GetSizeY() + src.GetPositionY() > CELL_DIM)
+        src.SetSizeY(CELL_DIM - src.GetPositionY());
 
       dst.SetPosition(cell_pos - rec.GetPosition());
       if (dst.GetPositionX() < 0)
@@ -281,8 +281,8 @@ void Tile::PutSprite(const Point2i& pos, Sprite* spr)
 
 void Tile::MergeSprite(const Point2i &position, Surface& surf)
 {
-  Point2i  firstCell = Clamp(position/CELL_SIZE);
-  Point2i  lastCell  = Clamp((position + surf.GetSize())/CELL_SIZE);
+  Point2i  firstCell = Clamp(position>>CELL_BITS);
+  Point2i  lastCell  = Clamp((position + surf.GetSize())>>CELL_BITS);
 
   m_preview->Lock();
 
@@ -392,7 +392,7 @@ void Tile::SetPreviewSizeDelta(int delta)
     return;
 
   // Preview too small
-  if (1<<(m_shift+delta) > CELL_SIZE.x)
+  if (m_shift+delta > CELL_BITS)
     return;
 
   m_shift += delta;
@@ -501,13 +501,13 @@ bool Tile::LoadImage(const std::string& filename,
       memset(buffer, 0, stride<<CELL_BITS);
       // Only some lines are to be loaded
       read_png_rows(png_ptr, buffer + offsetx + offsety*stride,
-                    CELL_SIZE.y - offsety, stride);
+                    CELL_DIM - offsety, stride);
     } else if (i.y == endCell.y-1) {
       memset(buffer, 0, stride<<CELL_BITS);
       // Only some lines are to be loaded
       read_png_rows(png_ptr, buffer + offsetx, endoffy, stride);
     } else {
-      read_png_rows(png_ptr, buffer + offsetx, CELL_SIZE.y, stride);
+      read_png_rows(png_ptr, buffer + offsetx, CELL_DIM, stride);
     }
 
     for (; i.x < endCell.x; i.x++) {
@@ -593,13 +593,14 @@ void Tile::DrawTile_Clipped(const Rectanglei & worldClip) const
   Point2i c;
 
   for (c.y = firstCell.y; c.y <= lastCell.y; c.y++) {
+    uint index = c.y*nbCells.x;
     for (c.x = firstCell.x; c.x <= lastCell.x; c.x++) {
-      if (item[c.y*nbCells.x + c.x]->IsTotallyEmpty())
+      if (item[index + c.x]->IsTotallyEmpty())
         continue;
-      TileItem_NonEmpty *tin = static_cast<TileItem_NonEmpty*>(item[c.y*nbCells.x + c.x]);
+      TileItem_NonEmpty *tin = static_cast<TileItem_NonEmpty*>(item[index + c.x]);
 
       // For all selected items, clip source and destination blitting rectangles
-      Rectanglei destRect(c<<CELL_BITS, CELL_SIZE);
+      Rectanglei destRect(c<<CELL_BITS, Point2i(CELL_DIM, CELL_DIM));
 
       destRect.Clip(worldClip);
       Point2i ptDest = destRect.GetPosition() - cam_pos;
@@ -631,13 +632,14 @@ Surface Tile::GetPart(const Rectanglei& rec)
   bool    force_copy = SDL_GetVideoInfo()->vfmt->BytesPerPixel>2;
 
   for (i.y = firstCell.y; i.y <= lastCell.y; i.y++) {
+    uint index = i.y*nbCells.x;
     for (i.x = firstCell.x; i.x <= lastCell.x; i.x++) {
-      TileItem *ti = item[i.y*nbCells.x + i.x];
+      TileItem *ti = item[index + i.x];
       if (ti->IsTotallyEmpty())
         continue;
       TileItem_NonEmpty *tin = static_cast<TileItem_NonEmpty*>(ti);
 
-      Point2i cell_pos = i * CELL_SIZE;
+      Point2i cell_pos = i<<CELL_BITS;
       Rectanglei src;
       Point2i dst;
       src.SetPosition(rec.GetPosition() - cell_pos);
@@ -645,10 +647,10 @@ Surface Tile::GetPart(const Rectanglei& rec)
       if (src.GetPositionY() < 0) src.SetPositionY(0);
 
       src.SetSize(rec.GetPosition() + rec.GetSize() - cell_pos - src.GetPosition());
-      if (src.GetSizeX() + src.GetPositionX() > CELL_SIZE.x)
-        src.SetSizeX(CELL_SIZE.x - src.GetPositionX());
-      if (src.GetSizeY() + src.GetPositionY() > CELL_SIZE.y)
-        src.SetSizeY(CELL_SIZE.y - src.GetPositionY());
+      if (src.GetSizeX() + src.GetPositionX() > CELL_DIM)
+        src.SetSizeX(CELL_DIM - src.GetPositionX());
+      if (src.GetSizeY() + src.GetPositionY() > CELL_DIM)
+        src.SetSizeY(CELL_DIM - src.GetPositionY());
 
       dst =  cell_pos - rec.GetPosition();
       if (dst.x < 0) dst.x = 0;
