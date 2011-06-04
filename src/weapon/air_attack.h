@@ -29,57 +29,56 @@ class Sprite;
 
 class Obus : public WeaponProjectile
 {
-  private:
-    SoundSample falling_sound;
-  public:
-    Obus(AirAttackConfig& cfg);
-    virtual ~Obus();
+  SoundSample falling_sound;
+public:
+  Obus(AirAttackConfig& cfg);
+  virtual ~Obus();
 };
 
 class Plane : public PhysicalObj
 {
-  private:
-    static Obus * last_dropped_bomb;
-    friend Obus::~Obus();
+  static Obus * last_dropped_bomb;
+  friend Obus::~Obus();
 
-    uint nb_dropped_bombs;
+  uint nb_dropped_bombs;
 
-    SoundSample flying_sound;
+  SoundSample flying_sound;
 
-    int obus_dx, obus_dy;
-    Sprite *image;
-    int next_height;
-    int cible_x;
-    int distance_to_release;
-    AirAttackConfig &cfg;
+  int obus_dx, obus_dy;
+  Sprite *image;
+  int next_height;
+  int cible_x;
+  int distance_to_release;
+  AirAttackConfig &cfg;
 
-    bool OnTopOfTarget() const;
-    int GetDirection() const;
-    void DropBomb();
-  public:
-    Plane(AirAttackConfig& cfg);
-    virtual ~Plane();
-    void Shoot(Double speed, const Point2i& target);
-    void Draw();
-    void Refresh();
+  bool OnTopOfTarget() const;
+  int GetDirection() const;
+  void DropBomb();
+public:
+  Plane(AirAttackConfig& cfg);
+  virtual ~Plane();
+  void Shoot(Double speed, const Point2i& target);
+  void Draw();
+  void Refresh();
 };
 
 class AirAttack : public Weapon
 {
-  private:
-    Point2i target;
-    bool target_chosen;
-  protected:
-    bool p_Shoot();
-    void p_Select();
-    void Refresh() { };
-  public:
-    AirAttack();
-    void ChooseTarget (Point2i mouse_pos);
-    void UpdateTranslationStrings();
-    std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
-  private:
-    AirAttackConfig& cfg();
+  Point2i target;
+  bool target_chosen;
+
+  AirAttackConfig& cfg();
+
+protected:
+  bool p_Shoot();
+  void p_Select();
+  void Refresh() { };
+
+public:
+  AirAttack();
+  void ChooseTarget(Point2i mouse_pos);
+  void UpdateTranslationStrings();
+  std::string GetWeaponWinString(const char *TeamName, uint items_count) const;
 };
 
 #endif /* AIR_ATTACK_H */
