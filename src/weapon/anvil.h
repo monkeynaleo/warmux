@@ -27,19 +27,18 @@
 
 class AnvilLauncher : public WeaponLauncher
 {
-  private:
-    Point2i target;
-    bool target_chosen;
-  public:
-    AnvilLauncher();
-    void ChooseTarget (Point2i mouse_pos);
-    void UpdateTranslationStrings();
-    std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
-  protected:
-    WeaponProjectile * GetProjectileInstance();
-    virtual bool p_Shoot();
-    virtual void p_Select();
-    virtual bool ShouldBeDrawn();
+  Point2i target;
+  bool target_chosen;
+public:
+  AnvilLauncher();
+  void ChooseTarget(Point2i mouse_pos);
+  void UpdateTranslationStrings();
+  std::string GetWeaponWinString(const char *TeamName, uint items_count) const;
+protected:
+  WeaponProjectile * GetProjectileInstance();
+  virtual bool p_Shoot();
+  virtual void p_Select();
+  virtual bool ShouldBeDrawn() { return !IsOnCooldownFromShot(); }
 };
 
 #endif /* ANVIL_H */
