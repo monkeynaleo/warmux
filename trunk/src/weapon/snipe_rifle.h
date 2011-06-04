@@ -55,9 +55,6 @@ public:
   void SignalProjectileGhostState();
   void DrawBeam();
   void Draw();  // In order to draw the laser beam / and the contact point.
-
-  // Implement those!
-  virtual std::string GetWeaponWinString(const char *TeamName, uint items_count ) const = 0;
 };
 
 class SnipeRifle : public BaseSnipeRifle
