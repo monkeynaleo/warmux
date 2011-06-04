@@ -22,30 +22,21 @@
 #ifndef AUTO_BAZOOKA_H
 #define AUTO_BAZOOKA_H
 
-#include "weapon/weapon_launcher.h"
 #include <WARMUX_base.h>
+#include "weapon/target_launcher.h"
 
 class AutomaticBazookaConfig;
-struct target_t;
 
-class AutomaticBazooka : public WeaponLauncher
+class AutomaticBazooka : public TargetLauncher
 {
-target_t       *m_target;
 public:
   AutomaticBazooka();
-  ~AutomaticBazooka();
-  void Draw ();
-  bool IsReady() const;
-  virtual void ChooseTarget(Point2i mouse_pos);
   AutomaticBazookaConfig &cfg();
   void UpdateTranslationStrings();
   std::string GetWeaponWinString(const char *TeamName, uint items_count ) const;
-protected:
-  void Refresh();
-  void p_Select();
-  void p_Deselect();
 
-  void DrawTarget() const;
+protected:
+  virtual void ChooseTarget(Point2i mouse_pos);
 
   WeaponProjectile * GetProjectileInstance();
 };

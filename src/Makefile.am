@@ -408,6 +408,8 @@ warmux_SOURCES = \
         weapon/supertux.h \
         weapon/syringe.cpp \
         weapon/syringe.h \
+        weapon/target_launcher.cpp \
+        weapon/target_launcher.h \
         weapon/teleportation.cpp \
         weapon/teleportation.h \
         weapon/weapon.cpp \
