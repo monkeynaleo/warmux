@@ -27,7 +27,6 @@
 #define  CELL_BITS         6
 #define  CELL_DIM          (1<<CELL_BITS)
 #define  CELL_MASK         (CELL_DIM-1)
-static const Point2i CELL_SIZE(CELL_DIM, CELL_DIM);
 
 class TileItem
 {
@@ -97,7 +96,7 @@ public:
   bool IsEmpty(const Point2i &pos) const
   {
     ASSERT(!m_need_check_empty);
-    return m_empty_bitfield[(pos.y*CELL_SIZE.x + pos.x)>>3] & (1 << (pos.x&7));
+    return m_empty_bitfield[((pos.y<<CELL_BITS) + pos.x)>>3] & (1 << (pos.x&7));
   }
 
   uint16_t GetChecksum() const;

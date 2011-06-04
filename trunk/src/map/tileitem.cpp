@@ -34,14 +34,14 @@ TileItem_NonEmpty::TileItem_NonEmpty(uint8_t alpha_threshold)
   : TileItem()
   , m_alpha_threshold(alpha_threshold)
 {
-  m_empty_bitfield = new uint8_t[(CELL_SIZE.x>>3) * CELL_SIZE.y];
+  m_empty_bitfield = new uint8_t[1<<(2*CELL_BITS-3)];
   ForceRecheck();
 }
 
 void TileItem_NonEmpty::Draw(const Point2i &pos)
 {
   GetMainWindow().Blit(m_surface,
-                       pos * CELL_SIZE - Camera::GetInstance()->GetPosition());
+                       (pos<<CELL_BITS) - Camera::GetInstance()->GetPosition());
 }
 
 void TileItem_NonEmpty::Dig(const Point2i &center, const uint radius)
@@ -54,13 +54,13 @@ void TileItem_NonEmpty::Dig(const Point2i &center, const uint radius)
   if (y < 0)
     y = 0;
   int endy = center.y + radius + EXPLOSION_BORDER_SIZE + 1;
-  if (endy >= CELL_SIZE.y)
-    endy = CELL_SIZE.y;
+  if (endy >= CELL_DIM)
+    endy = CELL_DIM;
 
   buf += y * line_size;
 
   //Empties each line of the tile horizontaly that are in the circle
-  int maxx = 0, minx = CELL_SIZE.x;
+  int maxx = 0, minx = CELL_DIM;
   for (; y < endy; buf += line_size, y++) {
     //Abscisse distance from the center of the circle to the circle
     int dac = center.y - y;
@@ -93,8 +93,8 @@ void TileItem_NonEmpty::Dig(const Point2i &center, const uint radius)
 
   if (minx < 0)
     minx = 0;
-  if (maxx > CELL_SIZE.x)
-    maxx = CELL_SIZE.x;
+  if (maxx > CELL_DIM)
+    maxx = CELL_DIM;
 
   y = center.y - r;
   m_start_check.SetValues(minx, y>0 ? y : 0);
@@ -108,7 +108,7 @@ uint16_t TileItem_NonEmpty::GetChecksum() const
 {
   uint16_t        crc = 0xFFFF;
   const uint8_t  *ptr = m_empty_bitfield;
-  int             i   = (CELL_SIZE.y*CELL_SIZE.x)>>3;
+  int             i   = 1<<(2*CELL_BITS-3);
   // Some tiles completely empty are not deleted because of some pixel data
   // being actually displayed. The 16bpp rendering however doesn't keep them
   // as it can't differenciate such pixel data, and really delete the tiles.
@@ -164,7 +164,7 @@ void TileItem_NonEmpty::CheckEmptyField()
 
   m_need_check_empty = false;
 
-  for (int i=0; i<(CELL_SIZE.y*CELL_SIZE.x)>>(3+2); i++, ptr++) {
+  for (int i=0; i<1<<(2*CELL_BITS-3-2); i++, ptr++) {
     if (*ptr != 0xFFFFFFFF) {
       m_is_empty = false;
       return;
@@ -176,7 +176,7 @@ void TileItem_NonEmpty::CheckEmptyField()
 void TileItem_NonEmpty::ForceRecheck()
 {
   m_start_check.SetValues(0, 0);
-  m_end_check.SetValues(CELL_SIZE);
+  m_end_check.SetValues(CELL_DIM, CELL_DIM);
   m_need_check_empty = true;
   m_is_empty = true;
   m_need_resynch = true;
@@ -184,7 +184,7 @@ void TileItem_NonEmpty::ForceRecheck()
 
 void TileItem_NonEmpty::ForceEmpty()
 {
-  memset(m_empty_bitfield, 0xFF, (CELL_SIZE.x>>3)*CELL_SIZE.y);
+  memset(m_empty_bitfield, 0xFF, 1<<(2*CELL_BITS-3));
   m_is_empty = true;
   m_need_check_empty = false;
 }
@@ -199,8 +199,7 @@ TileItem_BaseColorKey::TileItem_BaseColorKey(uint8_t bpp, uint8_t alpha_threshol
   : TileItem_NonEmpty(alpha_threshold)
 {
   SDL_Surface     *surf = SDL_CreateRGBSurface(SDL_SWSURFACE|SDL_SRCCOLORKEY,
-                                               CELL_SIZE.x, CELL_SIZE.y, bpp,
-                                               0, 0, 0, 0);
+                                               CELL_DIM, CELL_DIM, bpp, 0, 0, 0, 0);
   m_surface = Surface(SDL_DisplayFormat(surf));
   SDL_FreeSurface(surf);
   MapColorKey();
@@ -246,7 +245,7 @@ bool TileItem_BaseColorKey::CheckEmpty()
   m_is_empty = true;
   m_need_resynch = true;
 
-  buf += (m_start_check.y*CELL_SIZE.x)>>3;
+  buf += m_start_check.y<<(CELL_BITS-3);
   for (int py=m_start_check.y; py<m_end_check.y; py++) {
     for (int px=sx; px<ex; px+=8) {
       uint8_t empty_mask = 0;
@@ -261,7 +260,7 @@ bool TileItem_BaseColorKey::CheckEmpty()
       buf[px>>3] = empty_mask;
     }
 
-    buf += CELL_SIZE.x>>3;
+    buf += CELL_DIM>>3;
   }
 
   // Make sure it is empty
@@ -323,17 +322,17 @@ TileItem_ColorKey16::TileItem_ColorKey16(void *pixels, int pitch, uint8_t thresh
 #endif
                         };
   m_surface = Surface::DisplayFormatColorKey((uint32_t *)pixels, &fmt,
-                                             CELL_SIZE.x, CELL_SIZE.y, pitch, threshold);
+                                             CELL_DIM, CELL_DIM, pitch, threshold);
 
   MapColorKey();
 }
 
 void TileItem_ColorKey16::Darken(int start_x, int end_x, uint8_t* buf)
 {
-  if (start_x < CELL_SIZE.x && end_x >= 0) {
+  if (start_x < CELL_DIM && end_x >= 0) {
     //Clamp the value to empty only the in this tile
-    start_x = (start_x < 0) ? 0 : (start_x >= CELL_SIZE.x) ? CELL_SIZE.x - 1 : start_x;
-    end_x = (end_x >= CELL_SIZE.x) ? CELL_SIZE.x - start_x : end_x - start_x + 1;
+    start_x = (start_x < 0) ? 0 : (start_x >= CELL_DIM) ? CELL_DIM - 1 : start_x;
+    end_x = (end_x >= CELL_DIM) ? CELL_DIM - start_x : end_x - start_x + 1;
 
     uint16_t *ptr = (uint16_t*)buf;
     ptr += start_x;
@@ -348,10 +347,10 @@ void TileItem_ColorKey16::Darken(int start_x, int end_x, uint8_t* buf)
 
 void TileItem_ColorKey16::Empty(int start_x, int end_x, uint8_t* buf)
 {
-  if (start_x < CELL_SIZE.x && end_x >= 0) {
+  if (start_x < CELL_DIM && end_x >= 0) {
     //Clamp the value to empty only the in this tile
-    start_x = (start_x < 0) ? 0 : (start_x >= CELL_SIZE.x) ? CELL_SIZE.x - 1 : start_x;
-    end_x = (end_x >= CELL_SIZE.x) ? CELL_SIZE.x - start_x : end_x - start_x + 1;
+    start_x = (start_x < 0) ? 0 : (start_x >= CELL_DIM) ? CELL_DIM - 1 : start_x;
+    end_x = (end_x >= CELL_DIM) ? CELL_DIM - start_x : end_x - start_x + 1;
 
     uint16_t *ptr = (uint16_t*)buf;
     uint16_t ckey = color_key;
@@ -416,14 +415,14 @@ TileItem_ColorKey24::TileItem_ColorKey24(void *pixels, int pitch, uint8_t thresh
   int      x, y;
 
   // Set pixels considered as transparent as colorkey
-  for (y=0; y<CELL_SIZE.y; y++) {
-    for (x=0; x<CELL_SIZE.x; x++)
+  for (y=0; y<CELL_DIM; y++) {
+    for (x=0; x<CELL_DIM; x++)
       if (ptr[x*4 + ALPHA_OFFSET] == SDL_ALPHA_TRANSPARENT)
         *((Uint32*)(ptr + x*4)) = COLOR_KEY;
     ptr += pitch;
   }
 
-  SDL_Surface *surf = SDL_CreateRGBSurfaceFrom(pixels, CELL_SIZE.x, CELL_SIZE.y, 32, pitch,
+  SDL_Surface *surf = SDL_CreateRGBSurfaceFrom(pixels, CELL_DIM, CELL_DIM, 32, pitch,
                                                0xFF0000, 0xFF00, 0xFF, 0xFF000000);
   SDL_SetAlpha(surf, 0, 0);
   SDL_PixelFormat fmt;
@@ -436,10 +435,10 @@ TileItem_ColorKey24::TileItem_ColorKey24(void *pixels, int pitch, uint8_t thresh
 
 void TileItem_ColorKey24::Darken(int start_x, int end_x, uint8_t* buf)
 {
-  if( start_x < CELL_SIZE.x && end_x >= 0) {
+  if( start_x < CELL_DIM && end_x >= 0) {
     //Clamp the value to empty only the in this tile
-    start_x = (start_x < 0) ? 0 : (start_x >= CELL_SIZE.x) ? CELL_SIZE.x - 1 : start_x;
-    end_x = (end_x >= CELL_SIZE.x) ? CELL_SIZE.x - start_x : end_x - start_x + 1;
+    start_x = (start_x < 0) ? 0 : (start_x >= CELL_DIM) ? CELL_DIM - 1 : start_x;
+    end_x = (end_x >= CELL_DIM) ? CELL_DIM - start_x : end_x - start_x + 1;
 
     buf += 3*start_x;
     while(end_x--) {
@@ -455,10 +454,10 @@ void TileItem_ColorKey24::Darken(int start_x, int end_x, uint8_t* buf)
 
 void TileItem_ColorKey24::Empty(int start_x, int end_x, uint8_t* buf)
 {
-  if( start_x < CELL_SIZE.x && end_x >= 0) {
+  if( start_x < CELL_DIM && end_x >= 0) {
     //Clamp the value to empty only the in this tile
-    start_x = (start_x < 0) ? 0 : (start_x >= CELL_SIZE.x) ? CELL_SIZE.x - 1 : start_x;
-    end_x = (end_x >= CELL_SIZE.x) ? CELL_SIZE.x - start_x : end_x - start_x + 1;
+    start_x = (start_x < 0) ? 0 : (start_x >= CELL_DIM) ? CELL_DIM - 1 : start_x;
+    end_x = (end_x >= CELL_DIM) ? CELL_DIM - start_x : end_x - start_x + 1;
 
     buf += 3*start_x;
     while (end_x--) {
@@ -528,7 +527,7 @@ TileItem_AlphaSoftware::TileItem_AlphaSoftware(uint8_t alpha_threshold)
   : TileItem_NonEmpty(alpha_threshold)
 {
   // Calls NewSurface, which properly sets to display format alpha
-  m_surface = Surface(CELL_SIZE, SDL_SWSURFACE|SDL_SRCALPHA, true);
+  m_surface = Surface(Point2i(CELL_DIM, CELL_DIM), SDL_SWSURFACE|SDL_SRCALPHA, true);
 }
 
 void TileItem_AlphaSoftware::ForceEmpty()
@@ -541,7 +540,7 @@ void TileItem_AlphaSoftware::ForceEmpty()
 TileItem_AlphaSoftware::TileItem_AlphaSoftware(void *pixels, int pitch, uint8_t alpha_threshold)
   : TileItem_NonEmpty(alpha_threshold)
 {
-  SDL_Surface *surf = SDL_CreateRGBSurfaceFrom(pixels, CELL_SIZE.x, CELL_SIZE.y, 32, pitch,
+  SDL_Surface *surf = SDL_CreateRGBSurfaceFrom(pixels, CELL_DIM, CELL_DIM, 32, pitch,
                                                0xFF0000, 0xFF00, 0xFF, 0xFF000000);
   // Required to have a copy of the area
   m_surface = Surface(SDL_DisplayFormatAlpha(surf));
@@ -549,8 +548,8 @@ TileItem_AlphaSoftware::TileItem_AlphaSoftware(void *pixels, int pitch, uint8_t 
 
   // Check if the tile is in fact transparent (ie even if empty, must not be deleted)
   const Uint32 *ptr = (Uint32*)pixels;
-  for (int y=0; y<CELL_SIZE.y; y++) {
-    for (int x=0; x<CELL_SIZE.x; x++) {
+  for (int y=0; y<CELL_DIM; y++) {
+    for (int x=0; x<CELL_DIM; x++) {
       Uint32 pix = ptr[x];
       // Does the pixel have data but is considered empty?
       if (pix&0xFFFFFF && (pix>>24)<alpha_threshold) {
@@ -610,10 +609,10 @@ void TileItem_AlphaSoftware::ScalePreview(uint8_t *odata, int x, uint opitch, ui
 
 void TileItem_AlphaSoftware::Empty(int start_x, int end_x, uint8_t* buf)
 {
-  if (start_x < CELL_SIZE.x && end_x >= 0) {
+  if (start_x < CELL_DIM && end_x >= 0) {
     //Clamp the value to empty only the in this tile
-    start_x = (start_x < 0) ? 0 : (start_x >= CELL_SIZE.x) ? CELL_SIZE.x - 1 : start_x;
-    end_x = (end_x >= CELL_SIZE.x) ? CELL_SIZE.x - start_x : end_x - start_x + 1;
+    start_x = (start_x < 0) ? 0 : (start_x >= CELL_DIM) ? CELL_DIM - 1 : start_x;
+    end_x = (end_x >= CELL_DIM) ? CELL_DIM - start_x : end_x - start_x + 1;
 
     buf += start_x * 4;
     memset(buf, 0 , 4 * end_x);
@@ -643,10 +642,10 @@ void TileItem_AlphaSoftware::Dig(const Point2i &position, const Surface& dig)
 
 void TileItem_AlphaSoftware::Darken(int start_x, int end_x, uint8_t* buf)
 {
-  if (start_x < CELL_SIZE.x && end_x >= 0) {
+  if (start_x < CELL_DIM && end_x >= 0) {
     //Clamp the value to empty only the in this tile
-    start_x = (start_x < 0) ? 0 : (start_x >= CELL_SIZE.x) ? CELL_SIZE.x - 1 : start_x;
-    end_x = (end_x >= CELL_SIZE.x) ? CELL_SIZE.x - start_x : end_x - start_x + 1;
+    start_x = (start_x < 0) ? 0 : (start_x >= CELL_DIM) ? CELL_DIM - 1 : start_x;
+    end_x = (end_x >= CELL_DIM) ? CELL_DIM - start_x : end_x - start_x + 1;
 
     uint32_t *ptr = (uint32_t*)buf;
     ptr += start_x;
@@ -673,7 +672,7 @@ bool TileItem_AlphaSoftware::CheckEmpty()
   m_need_resynch = true;
 
   ptr += m_start_check.y*pitch;
-  buf += (m_start_check.y*CELL_SIZE.x)>>3;
+  buf += m_start_check.y<<(CELL_BITS-3);
   for (int py=m_start_check.y; py<m_end_check.y; py++) {
     for (int px=sx; px<ex; px+=8) {
       uint8_t mask_empty = 0;
@@ -689,7 +688,7 @@ bool TileItem_AlphaSoftware::CheckEmpty()
     }
 
     ptr += pitch;
-    buf += CELL_SIZE.x>>3;
+    buf += CELL_DIM>>3;
   }
 
   // Make sure it is empty
