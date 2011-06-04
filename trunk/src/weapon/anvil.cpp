@@ -42,24 +42,23 @@
 
 class Anvil : public WeaponProjectile
 {
-  private:
-    uint merge_time;
-    SoundSample falling_sound;
-  public:
-    Anvil(ExplosiveWeaponConfig& cfg,
-          WeaponLauncher * p_launcher);
-    ~Anvil();
-    void Refresh();
+  uint merge_time;
+  SoundSample falling_sound;
+public:
+  Anvil(ExplosiveWeaponConfig& cfg,
+        WeaponLauncher * p_launcher);
+  ~Anvil();
+  void Refresh();
 
-    void PlayFallSound();
-    void PlayCollisionSound();
-    void SetEnergyDelta(int /*delta*/, bool /*do_report = true*/) { };
-  protected:
-    virtual void SignalGroundCollision(const Point2d& /* speed_before */, const Double& /*contactAngle*/);
-    virtual void SignalObjectCollision(const Point2d& /* my_speed_before */,
-               PhysicalObj * obj,
-               const Point2d& /* obj_speed_before */);
-    virtual void SignalOutOfMap();
+  void PlayFallSound();
+  void PlayCollisionSound();
+  void SetEnergyDelta(int /*delta*/, bool /*do_report = true*/) { };
+protected:
+  virtual void SignalGroundCollision(const Point2d& /* speed_before */, const Double& /*contactAngle*/);
+  virtual void SignalObjectCollision(const Point2d& /* my_speed_before */,
+              PhysicalObj * obj,
+              const Point2d& /* obj_speed_before */);
+  virtual void SignalOutOfMap();
 };
 
 Anvil::Anvil(ExplosiveWeaponConfig& cfg,
@@ -103,7 +102,7 @@ void Anvil::SignalOutOfMap()
 
 void Anvil::Refresh()
 {
-  if(merge_time != 0 && merge_time < GameTime::GetInstance()->Read()) {
+  if (merge_time && merge_time < GameTime::GetInstance()->Read()) {
     GetWorld().MergeSprite(GetPosition(), image);
     Ghost();
   } else {
@@ -158,7 +157,7 @@ void AnvilLauncher::ChooseTarget(Point2i mouse_pos)
   Shoot();
 }
 
-bool AnvilLauncher::p_Shoot ()
+bool AnvilLauncher::p_Shoot()
 {
   if (!target_chosen)
     return false;
@@ -191,13 +190,7 @@ WeaponProjectile * AnvilLauncher::GetProjectileInstance()
 
 std::string AnvilLauncher::GetWeaponWinString(const char *TeamName, uint items_count ) const
 {
-  return Format(ngettext(
-            "%s team has won %u anvil! Splat them all!",
-            "%s team has won %u anvils! Splat them all!",
-            items_count), TeamName, items_count);
-}
-
-bool AnvilLauncher::ShouldBeDrawn()
-{
-  return !IsOnCooldownFromShot();
+  return Format(ngettext("%s team has won %u anvil! Splat them all!",
+                         "%s team has won %u anvils! Splat them all!",
+                         items_count), TeamName, items_count);
 }
