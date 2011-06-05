@@ -187,7 +187,8 @@ void MapSelectionBox::AllowSelection()
 
 void MapSelectionBox::Pack()
 {
-  uint h = size.y/3;
+  uint h = (3*(box->GetSizeY()-20))>>2;
+  if (h > 225) h = 225;
   uint w = (h<<2)/3;
   const std::vector<Widget*>& wlist = box->GetWidgets();
   for (uint i=0; i<wlist.size(); i++) {
