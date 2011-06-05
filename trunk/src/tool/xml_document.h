@@ -1,7 +1,3 @@
-/*
- * Exemple d'utilisation de la librairie libxml++ version 1.0.
- */
-
 #ifndef XML_DOCUMENT_H
 #define XML_DOCUMENT_H
 
@@ -173,7 +169,7 @@ public:
   const char *m_name;
   bool        m_important;
 
-  virtual bool Read(const xmlNode* father) { return true; };
+  virtual bool Read(const xmlNode* father) = 0;
   virtual void Write(XmlWriter& writer, xmlNode* elem) const { };
 
 protected:
@@ -234,10 +230,10 @@ public:
     : ConfigElement(TYPE_UINT, n, false) { m_val = v; *v = m_def = d; }
   UintConfigElement(const char *n, uint *v, uint d, uint mi, uint ma)
     : ConfigElement(TYPE_UINT, n, true) { m_val = v; *v = m_def = d; m_min = mi, m_max = ma; ASSERT(d >= mi && d <= ma); }
-  bool Read(XmlReader& reader, const xmlNode* father)
+  bool Read(const xmlNode* father)
   {
     int val;
-    if (!reader.ReadInt(father, m_name, val) || val<0) {
+    if (!XmlReader::ReadInt(father, m_name, val) || val<0) {
       *m_val = m_def;
       return false;
     }
