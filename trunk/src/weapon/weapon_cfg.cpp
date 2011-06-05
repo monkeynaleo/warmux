@@ -44,7 +44,7 @@ void EmptyWeaponConfig::SaveXml(XmlWriter& writer, xmlNode* elem)
 
 WeaponConfig::WeaponConfig()
 {
-  push_back(new UintConfigElement("damage", &damage, 10, 0, 100));
+  push_back(new UintConfigElement("damage", &damage, 10, 0, 250));
 }
 
 //-----------------------------------------------------------------------------
