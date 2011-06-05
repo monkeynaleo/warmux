@@ -42,40 +42,44 @@ const uint animation_deltat = 50;
 
 class SuperTuxWeaponConfig : public ExplosiveWeaponConfig
 {
-  public:
-    uint speed;
-    SuperTuxWeaponConfig();
-    virtual void LoadXml(const xmlNode* elem);
+public:
+  uint speed;
+  SuperTuxWeaponConfig() { speed = 2; }
+  virtual void LoadXml(const xmlNode* elem)
+  {
+    ExplosiveWeaponConfig::LoadXml(elem);
+    XmlReader::ReadUint(elem, "speed", speed);
+  }
 };
+
 //-----------------------------------------------------------------------------
 
 class SuperTux : public WeaponProjectile
 {
-  private:
-    bool swimming; // Supertux is not in the air, it is swimming!
-    ParticleEngine particle_engine;
-    Double angle_rad;
-    SoundSample flying_sound;
+  bool swimming; // Supertux is not in the air, it is swimming!
+  ParticleEngine particle_engine;
+  Double angle_rad;
+  SoundSample flying_sound;
 
-  public:
-    uint speed;
-    uint time_now;
-    uint time_next_action;
-    uint last_move;
+public:
+  uint speed;
+  uint time_now;
+  uint time_next_action;
+  uint last_move;
 
-    SuperTux(SuperTuxWeaponConfig& cfg,
-             WeaponLauncher * p_launcher);
-    void Refresh();
+  SuperTux(SuperTuxWeaponConfig& cfg,
+            WeaponLauncher * p_launcher);
+  void Refresh();
 
-    inline void SetAngle(Double angle) {angle_rad = angle;}
-    void turn_left();
-    void turn_right();
-    void Shoot(Double strength);
-    virtual void Explosion();
-    virtual void SignalDrowning();
-    virtual void SignalGoingOutOfWater();
-  protected:
-    void SignalOutOfMap();
+  inline void SetAngle(Double angle) {angle_rad = angle;}
+  void turn_left();
+  void turn_right();
+  void Shoot(Double strength);
+  virtual void Explosion();
+  virtual void SignalDrowning();
+  virtual void SignalGoingOutOfWater();
+protected:
+  void SignalOutOfMap();
 };
 
 //-----------------------------------------------------------------------------
@@ -139,21 +143,19 @@ void SuperTux::Refresh()
 void SuperTux::turn_left()
 {
   time_now = GameTime::GetInstance()->Read();
-  if (time_next_action<time_now)
-    {
-      time_next_action=time_now + time_delta;
-      angle_rad = angle_rad - PI / 12;
-    }
+  if (time_next_action<time_now) {
+    time_next_action=time_now + time_delta;
+    angle_rad = angle_rad - PI / 12;
+  }
 }
 
 void SuperTux::turn_right()
 {
   time_now = GameTime::GetInstance()->Read();
-  if (time_next_action<time_now)
-    {
-      time_next_action=time_now + time_delta;
-      angle_rad = angle_rad + PI / 12;
-    }
+  if (time_next_action<time_now) {
+    time_next_action=time_now + time_delta;
+    angle_rad = angle_rad + PI / 12;
+  }
 }
 
 void SuperTux::SignalDrowning()
@@ -189,21 +191,8 @@ void SuperTux::Explosion()
 
 //-----------------------------------------------------------------------------
 
-SuperTuxWeaponConfig::SuperTuxWeaponConfig()
-{
-  speed = 2;
-}
-
-void SuperTuxWeaponConfig::LoadXml(const xmlNode* elem)
-{
-  ExplosiveWeaponConfig::LoadXml (elem);
-  XmlReader::ReadUint(elem, "speed", speed);
-}
-
-//-----------------------------------------------------------------------------
-
-TuxLauncher::TuxLauncher() :
-  WeaponLauncher(WEAPON_SUPERTUX, "tux", new SuperTuxWeaponConfig())
+TuxLauncher::TuxLauncher()
+  : WeaponLauncher(WEAPON_SUPERTUX, "tux", new SuperTuxWeaponConfig())
 {
   UpdateTranslationStrings();
 
