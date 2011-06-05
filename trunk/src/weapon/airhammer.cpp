@@ -50,7 +50,6 @@ class AirhammerConfig : public WeaponConfig
 public:
   uint range;
   AirhammerConfig();
-  void LoadXml(const xmlNode* elem);
 };
 
 //-----------------------------------------------------------------------------
@@ -181,12 +180,5 @@ AirhammerConfig& Airhammer::cfg()
 
 AirhammerConfig::AirhammerConfig()
 {
-  range =  30;
-}
-
-//-----------------------------------------------------------------------------
-
-void AirhammerConfig::LoadXml(const xmlNode* elem){
-  WeaponConfig::LoadXml(elem);
-  XmlReader::ReadUint(elem, "range", range);
+  push_back(new UintConfigElement("range", &range, 30, 1, 50));
 }

@@ -39,8 +39,10 @@ class ClusterBombConfig : public ExplosiveWeaponConfig
 {
 public:
   uint nb_fragments;
-  ClusterBombConfig();
-  virtual void LoadXml(const xmlNode* elem);
+  ClusterBombConfig()
+  {
+    push_back(new UintConfigElement("nb_fragments", &nb_fragments, 5, 2, 10));
+  }
 };
 
 class Cluster : public WeaponProjectile
@@ -103,8 +105,8 @@ void Cluster::Refresh()
 
 void Cluster::Draw()
 {
-    // custom Draw() is needed to avoid drawing timeout on top of clusters
-    image->Draw(GetPosition());
+  // custom Draw() is needed to avoid drawing timeout on top of clusters
+  image->Draw(GetPosition());
 };
 
 void Cluster::SignalOutOfMap()
@@ -114,7 +116,7 @@ void Cluster::SignalOutOfMap()
 
 void Cluster::DoExplosion()
 {
-  ApplyExplosion (GetPosition(), cfg, "weapon/explosion", false, ParticleEngine::LittleESmoke);
+  ApplyExplosion(GetPosition(), cfg, "weapon/explosion", false, ParticleEngine::LittleESmoke);
 }
 
 void Cluster::SetEnergyDelta(int /* delta */, bool /* do_report */){};
@@ -204,17 +206,4 @@ std::string ClusterLauncher::GetWeaponWinString(const char *TeamName, uint items
             "%s team has won %u cluster bomb!",
             "%s team has won %u cluster bombs!",
             items_count), TeamName, items_count);
-}
-//-----------------------------------------------------------------------------
-
-ClusterBombConfig::ClusterBombConfig() :
-  ExplosiveWeaponConfig()
-{
-  nb_fragments = 5;
-}
-
-void ClusterBombConfig::LoadXml(const xmlNode* elem)
-{
-  ExplosiveWeaponConfig::LoadXml(elem);
-  XmlReader::ReadUint(elem, "nb_fragments", nb_fragments);
 }

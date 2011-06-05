@@ -35,11 +35,10 @@
 
 class BaseballConfig : public WeaponConfig
 {
-  public:
-    Double range;
-    Double strength;
-    BaseballConfig();
-    void LoadXml(const xmlNode* elem);
+public:
+  uint range;
+  uint strength;
+  BaseballConfig();
 };
 
 Baseball::Baseball() : Weapon(WEAPON_BASEBALL, "baseball", new BaseballConfig())
@@ -65,30 +64,26 @@ bool Baseball::p_Shoot()
 
   JukeBox::GetInstance()->Play ("default","weapon/baseball");
 
-  do
-  {
+  Double limit = cfg().range;
+  do {
     // Did we have finished the computation
     rayon += ONE;
-    if (cfg().range < rayon)
-    {
-      rayon = cfg().range;
+    if (limit < rayon) {
+      rayon = limit;
       end = true;
     }
 
     // Compute point coordinates
-    Point2i relative_pos(static_cast<int>(rayon * cos(angle)),
-                         static_cast<int>(rayon * sin(angle)) );
+    Point2i relative_pos(rayon * cos(angle), rayon * sin(angle) );
 
     Point2i hand_position;
     ActiveCharacter().GetHandPosition(hand_position);
     Point2i pos_to_check = hand_position + relative_pos;
 
     FOR_ALL_LIVING_CHARACTERS(team, character)
-    if (&(*character) != &ActiveCharacter())
-    {
+    if (&(*character) != &ActiveCharacter()) {
       // Did we touch somebody ?
-      if( character->Contain(pos_to_check) )
-      {
+      if( character->Contain(pos_to_check) ) {
         // Apply damage (*ver).SetEnergyDelta (-cfg().damage);
         character->SetSpeed(cfg().strength / character->GetMass(), angle);
         character->SetMovement("fly");
@@ -114,16 +109,10 @@ std::string Baseball::GetWeaponWinString(const char *TeamName, uint items_count 
             items_count), TeamName, items_count);
 }
 
+//-------------------------------------------------------------------
 
 BaseballConfig::BaseballConfig()
 {
-  range =  70;
-  strength = 250;
-}
-
-void BaseballConfig::LoadXml(const xmlNode* elem)
-{
-  WeaponConfig::LoadXml(elem);
-  XmlReader::ReadDouble(elem, "range", range);
-  XmlReader::ReadDouble(elem, "strength", strength);
+  push_back(new UintConfigElement("range", &range, 70));
+  push_back(new UintConfigElement("strength", &strength, 70, 1, 100));
 }

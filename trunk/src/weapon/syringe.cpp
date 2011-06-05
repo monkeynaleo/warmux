@@ -32,30 +32,18 @@
 
 class SyringeConfig : public WeaponConfig
 {
-  public:
-    Double range;
-    uint damage;
-    uint turns;
-    SyringeConfig();
-    void LoadXml(const xmlNode* elem);
+public:
+  Double range;
+  uint damage;
+  uint turns;
+  SyringeConfig()
+  {
+    push_back(new DoubleConfigElement("range", &range, 45, 0, 100));
+    push_back(new UintConfigElement("turns", &turns, 10, 1, 50));
+  }
 };
 
-SyringeConfig& Syringe::cfg() {
-  return static_cast<SyringeConfig&>(*extra_params);
-}
-
-SyringeConfig::SyringeConfig(){
-  range =  45;
-  turns = 10;
-  damage = 10;
-}
-
-void SyringeConfig::LoadXml(const xmlNode* elem){
-  WeaponConfig::LoadXml(elem);
-  XmlReader::ReadDouble(elem, "range", range);
-  XmlReader::ReadUint(elem, "turns", turns);
-  XmlReader::ReadUint(elem, "damage", damage);
-}
+//--------------------------------------------------------------------------
 
 Syringe::Syringe() : Weapon(WEAPON_SYRINGE, "syringe", new SyringeConfig())
 {
@@ -120,4 +108,8 @@ std::string Syringe::GetWeaponWinString(const char *TeamName, uint items_count )
             "%s team has won %u syringe!",
             "%s team has won %u syringes!",
             items_count), TeamName, items_count);
+}
+
+SyringeConfig& Syringe::cfg() {
+  return static_cast<SyringeConfig&>(*extra_params);
 }

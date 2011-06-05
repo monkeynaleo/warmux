@@ -131,11 +131,10 @@ public:
   int push_force;
 
 public:
-  GrappleConfig() : max_rope_length(450), push_force(10) { }
-  void LoadXml(const xmlNode* elem)
+  GrappleConfig()
   {
-    XmlReader::ReadUint(elem, "max_rope_length", max_rope_length);
-    XmlReader::ReadInt(elem, "push_force", push_force);
+    push_back(new UintConfigElement("max_rope_length", &max_rope_length, 450, 200, 800));
+    push_back(new IntConfigElement("push_force", &push_force, 10));
   }
 };
 

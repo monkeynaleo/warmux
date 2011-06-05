@@ -71,8 +71,6 @@ public:
   Double speed_detection;
 private:
   MineConfig();
-public:
-  virtual void LoadXml(const xmlNode* elem);
 };
 
 class Mine : public WeaponLauncher
