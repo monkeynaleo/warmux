@@ -346,7 +346,7 @@ static void Action_Player_ChangeCharacter(Action *a)
 static void Action_Game_Unpack(Action *a)
 {
   int nb = a->PopInt();
-  NET_ASSERT(nb>0 && nb<=Action::MAX_FRAMES)
+  NET_ASSERT(nb>0 && (uint)nb<=Action::MAX_FRAMES)
   {
     if (a->GetCreator())
       a->GetCreator()->ForceDisconnection();
