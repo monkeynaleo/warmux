@@ -19,78 +19,43 @@
  * Base classes for weapons configuration.
  *****************************************************************************/
 
-#include "weapon/weapon_cfg.h"
 #include <iostream>
-#include "tool/xml_document.h"
+#include "weapon/weapon_cfg.h"
+
+EmptyWeaponConfig::~EmptyWeaponConfig()
+{
+  for (iterator it = begin(); it != end(); ++it)
+    delete (*it);
+}
+
+void EmptyWeaponConfig::LoadXml(const xmlNode* elem)
+{
+  for (iterator it = begin(); it != end(); ++it)
+    (*it)->Read(elem);
+}
+
+void EmptyWeaponConfig::SaveXml(XmlWriter& writer, xmlNode* elem)
+{
+  for (const_iterator it = begin(); it != end(); ++it)
+    (*it)->Write(writer, elem);
+}
 
 //-----------------------------------------------------------------------------
 
 WeaponConfig::WeaponConfig()
-{ damage = 10; }
-
-void WeaponConfig::LoadXml(const xmlNode* elem)
 {
-  bool r;
-
-  r = XmlReader::ReadUint(elem, "damage", damage);
-  if (!r)
-    damage = 10;
+  push_back(new UintConfigElement("damage", &damage, 10, 0, 100));
 }
 
 //-----------------------------------------------------------------------------
 
 ExplosiveWeaponConfig::ExplosiveWeaponConfig()
 {
-  timeout = 0;
-  allow_change_timeout = false;
-  explosion_range = 0 ;
-  particle_range = explosion_range;
-  blast_range = 0 ;
-  blast_force = 0 ;
-  speed_on_hit = 0 ;
+  push_back(new UintConfigElement("timeout", &timeout, 0));
+  push_back(new BoolConfigElement("allow_change_timeout", &allow_change_timeout, false));
+  push_back(new DoubleConfigElement("explosion_range", &explosion_range, 0, 0, 200));
+  push_back(new DoubleConfigElement("particule_range", &particle_range, 0));
+  push_back(new DoubleConfigElement("blast_range", &blast_range, 0));
+  push_back(new DoubleConfigElement("blast_force", &blast_force, 0));
+  push_back(new DoubleConfigElement("speed_on_hit", &speed_on_hit, 0));
 }
-
-void ExplosiveWeaponConfig::LoadXml(const xmlNode* elem)
-{
-  bool r;
-
-  WeaponConfig::LoadXml (elem);
-  r = XmlReader::ReadUint(elem, "timeout", timeout);
-  if (!r)
-    timeout = 0;
-
-  r = XmlReader::ReadBool(elem, "allow_change_timeout", allow_change_timeout);
-  if (!r)
-    allow_change_timeout = false;
-
-  r = XmlReader::ReadDouble(elem, "explosion_range", explosion_range);
-  if (!r)
-    explosion_range = 0;
-
-  r = XmlReader::ReadDouble(elem, "particle_range", particle_range);
-  if (!r)
-    particle_range = 0;
-
-  r = XmlReader::ReadDouble(elem, "blast_range", blast_range);
-  if (!r)
-    blast_range = 0;
-
-  r = XmlReader::ReadDouble(elem, "blast_force", blast_force);
-  if (!r)
-    blast_force = 0;
-
-  r = XmlReader::ReadDouble(elem, "speed_on_hit", speed_on_hit);
-  if (!r)
-    speed_on_hit = 0;
-}
-
-//-----------------------------------------------------------------------------
-
-// timeout before explosion
-// max_strength
-// min_angle, max_angle
-// coeff rebond ?
-// nb_replay
-// can_change_weapon
-// force, longueur (baseball)
-// nbr_obus

@@ -24,14 +24,18 @@
 //-----------------------------------------------------------------------------
 #include <list>
 #include <WARMUX_base.h>
-typedef struct _xmlNode xmlNode;
+#include "tool/xml_document.h"
 
 //-----------------------------------------------------------------------------
-class EmptyWeaponConfig
+class EmptyWeaponConfig : public std::list<ConfigElement*>
 {
 public:
-  virtual ~EmptyWeaponConfig() {};
-  virtual void LoadXml(const xmlNode* elem) = 0;
+  typedef std::list<ConfigElement*>::iterator iterator;
+  typedef std::list<ConfigElement*>::const_iterator const_iterator;
+
+  virtual ~EmptyWeaponConfig();
+  void LoadXml(const xmlNode* elem);
+  void SaveXml(XmlWriter& writer, xmlNode* elem);
 };
 
 //-----------------------------------------------------------------------------
@@ -44,7 +48,6 @@ public:
 public:
   WeaponConfig();
   virtual ~WeaponConfig() {};
-  virtual void LoadXml(const xmlNode* elem);
 };
 
 //-----------------------------------------------------------------------------
@@ -63,7 +66,6 @@ public:
 public:
   ExplosiveWeaponConfig();
   virtual ~ExplosiveWeaponConfig() {};
-  virtual void LoadXml(const xmlNode* elem);
 };
 
 //-----------------------------------------------------------------------------
