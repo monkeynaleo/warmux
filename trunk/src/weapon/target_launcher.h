@@ -45,7 +45,7 @@ public:
   TargetLauncher(Weapon_type type,
                  const std::string &id,
                  EmptyWeaponConfig * params);
-  void Draw ();
+  void Draw();
   bool IsReady() const;
   virtual void ChooseTarget(Point2i mouse_pos);
 };

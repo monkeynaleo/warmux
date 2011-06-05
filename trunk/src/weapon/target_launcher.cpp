@@ -21,11 +21,9 @@
 
 #include "graphic/video.h"
 #include "include/app.h"
-//#include "interface/game_msg.h"
 #include "interface/mouse.h"
 #include "map/camera.h"
 #include "map/map.h"
-//#include "map/wind.h"
 #include "network/network.h"
 #include "team/team.h"
 #include "team/teams_list.h"
@@ -93,7 +91,8 @@ void TargetLauncher::ChooseTarget(Point2i mouse_pos)
 
 void TargetLauncher::DrawTarget() const
 {
-  if (!m_target.selected) return;
+  if (!m_target.selected)
+    return;
 
   GetMainWindow().Blit(m_target.image,
                        m_target.pos - (m_target.image.GetSize()>>1)
