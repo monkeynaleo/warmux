@@ -47,7 +47,6 @@ public:
 
 public:
   WeaponConfig();
-  virtual ~WeaponConfig() {};
 };
 
 //-----------------------------------------------------------------------------
@@ -65,7 +64,6 @@ public:
 
 public:
   ExplosiveWeaponConfig();
-  virtual ~ExplosiveWeaponConfig() {};
 };
 
 //-----------------------------------------------------------------------------
