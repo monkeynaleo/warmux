@@ -51,7 +51,8 @@ GameModeEditor::GameModeEditor(const Point2i& size, float zoom, bool _draw_borde
   Font::font_size_t fmedium = Font::GetFixedSize(Font::FONT_MEDIUM*zoom+0.5f);
   Font::font_size_t fsmall  = Font::GetFixedSize(Font::FONT_SMALL*zoom+0.5f);
   zoom = fsmall * 1.0 / Font::FONT_SMALL;
-  static const Point2i option_size(110, 120*zoom);
+  if (zoom > 1) zoom = sqrtf(zoom);
+  Point2i option_size(110, 120*zoom);
   // ################################################
   // ##  GAME OPTIONS
   // ################################################
