@@ -34,13 +34,16 @@
 
 Sprite* Medkit::icon = NULL;
 int Medkit::icon_ref = 0;
+int Medkit::nbr_health = 24;
+ConfigElementList Medkit::settings;
 
 Medkit::Medkit()
-  : ObjBox("medkit") {
+  : ObjBox("medkit")
+{
   SetTestRect (29, 29, 63, 6);
 
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
-  anim = GetResourceManager().LoadSprite(res, "object/medkit");
+  anim = LOAD_RES_SPRITE("object/medkit");
 
   SetSize(anim->GetSize());
   anim->animation.SetLoopMode(false);
@@ -50,6 +53,9 @@ Medkit::Medkit()
     icon = CreateIcon();
   }
   icon_ref++;
+
+  settings.push_back(new IntConfigElement("life_points", &start_life_points, 41));
+  settings.push_back(new IntConfigElement("energy_boost", &nbr_health, 24));
 }
 
 Medkit::~Medkit()
@@ -76,23 +82,6 @@ void Medkit::ApplyMedkit(Team &team, Character &player) const
   if (player.IsDiseased())
     player.Cure();
   GameMessages::GetInstance()->Add(txt, team.GetColor());
-}
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-// Static methods
-int Medkit::nbr_health = 24;
-
-void Medkit::LoadXml(const xmlNode*  object)
-{
-  bool r;
-  r = XmlReader::ReadInt(object, "life_points", start_life_points);
-  if (!r)
-    start_life_points = 41;
-
-  r = XmlReader::ReadInt(object, "energy_boost", nbr_health);
-  if (!r)
-    nbr_health = 24;
 }
 
 const Surface* Medkit::GetIcon() const
