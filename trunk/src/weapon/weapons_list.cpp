@@ -82,7 +82,6 @@ WeaponsList::WeaponsList(const xmlNode* weapons_xml)
                         m_launcher_weapons_list.begin(),
                         m_launcher_weapons_list.end());
 
-
   // Add other weapons
   m_weapons_list.push_back(new Baseball);
   m_weapons_list.push_back(new AirAttack);
@@ -99,22 +98,20 @@ WeaponsList::WeaponsList(const xmlNode* weapons_xml)
   m_weapons_list.push_back(new Blowtorch);
   m_weapons_list.push_back(new Syringe);
 
-  std::list<Weapon*>::iterator
-    itw = m_weapons_list.begin(),
-    end = m_weapons_list.end();
-
-  for (; itw != end ; ++itw) {
-    (*itw)->LoadXml(weapons_xml);
-  }
+  Init(weapons_xml);
 }
 
+void WeaponsList::Init(const xmlNode* weapons_xml) const
+{
+  for (iterator it = m_weapons_list.begin(); it != m_weapons_list.end(); it++)
+    (*it)->LoadXml(weapons_xml);
+}
 
 //-----------------------------------------------------------------------------
 
-void WeaponsList::UpdateTranslation()
+void WeaponsList::UpdateTranslation() const
 {
-  iterator it;
-  for (it = m_weapons_list.begin(); it != m_weapons_list.end(); it++)
+  for (iterator it = m_weapons_list.begin(); it != m_weapons_list.end(); it++)
     (*it)->UpdateTranslationStrings();
 }
 

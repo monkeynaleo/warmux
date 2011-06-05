@@ -288,8 +288,9 @@ void GameModeEditor::LoadGameMode(bool force)
   // Refill weapon list
   opt_weapons_cfg->Clear();
   if (!weapons)
-    delete weapons; // previous instance has served its purpose
-  weapons = new WeaponsList(game_mode->GetWeaponsXml());
+    weapons = new WeaponsList(game_mode->GetWeaponsXml());
+  else
+    weapons->Init(game_mode->GetWeaponsXml());
   const WeaponsList::weapons_list_type& wlist = weapons->GetList();
   for (WeaponsList::iterator it = wlist.begin(); it != wlist.end(); ++it) {
     opt_weapons_cfg->AddWidget(new WeaponCfgBox(*it, 100));
