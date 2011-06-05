@@ -164,6 +164,8 @@ public:
   typedef enum
   {
     TYPE_INT,
+    TYPE_UINT,
+    TYPE_BOOL,
     TYPE_DOUBLE
   } Type;
 
@@ -171,8 +173,8 @@ public:
   const char *m_name;
   bool        m_important;
 
-  virtual bool Read(XmlReader& reader, const xmlNode* father) = 0;
-  virtual void Write(XmlWriter& writer, xmlNode* elem) const = 0;
+  virtual bool Read(const xmlNode* father) { return true; };
+  virtual void Write(XmlWriter& writer, xmlNode* elem) const { };
 
 protected:
   ConfigElement(Type t, const char *n, bool imp = false)
@@ -183,47 +185,92 @@ protected:
 
 class IntConfigElement : public ConfigElement
 {
-  int       m_val, m_def, m_min, m_max;
 public:
-  IntConfigElement(const char *n, int v, int d, int mi, int ma, bool imp = false)
-    : ConfigElement(TYPE_INT, n, imp)
+  int       *m_val, m_def, m_min, m_max;
+  IntConfigElement(const char *n, int *v, int d)
+    : ConfigElement(TYPE_INT, n, false) {  m_val = v; *v = m_def = d; }
+  IntConfigElement(const char *n, int *v, int d, int mi, int ma)
+    : ConfigElement(TYPE_INT, n, true) { m_val = v; *v = m_def = d; m_min = mi, m_max = ma; ASSERT(d >= mi && d <= ma); }
+  bool Read(const xmlNode* father)
   {
-    m_val = v; m_def = d; m_min = mi, m_max = ma;
+    if (!XmlReader::ReadInt(father, m_name, *m_val)) {
+      *m_val = m_def;
+      return false;
+    }
+    ASSERT(!m_important || (*m_val >= m_min && *m_val <= m_max));
+    return true;
   }
-  bool Read(XmlReader& reader, const xmlNode* father)
+  void Write(XmlWriter& writer, xmlNode* father) const
   {
-    if (!reader.ReadInt(father, m_name, m_val)) {
-      m_val = m_def;
+    writer.WriteElement(father, m_name, int2str(*m_val));
+  }
+};
+
+class BoolConfigElement : public ConfigElement
+{
+public:
+  bool       *m_val, m_def;
+  BoolConfigElement(const char *n, bool *v, bool d, bool imp = false)
+    : ConfigElement(TYPE_BOOL, n, imp) { m_val = v; *v = m_def = d; }
+  bool Read(const xmlNode* father)
+  {
+    if (!XmlReader::ReadBool(father, m_name, *m_val)) {
+      *m_val = m_def;
       return false;
     }
     return true;
   }
   void Write(XmlWriter& writer, xmlNode* father) const
   {
-    writer.WriteElement(father, m_name, int2str(m_val));
+    writer.WriteElement(father, m_name, bool2str(*m_val));
+  }
+};
+
+class UintConfigElement : public ConfigElement
+{
+public:
+  uint       *m_val, m_def, m_min, m_max;
+  UintConfigElement(const char *n, uint *v, uint d)
+    : ConfigElement(TYPE_UINT, n, false) { m_val = v; *v = m_def = d; }
+  UintConfigElement(const char *n, uint *v, uint d, uint mi, uint ma)
+    : ConfigElement(TYPE_UINT, n, true) { m_val = v; *v = m_def = d; m_min = mi, m_max = ma; ASSERT(d >= mi && d <= ma); }
+  bool Read(XmlReader& reader, const xmlNode* father)
+  {
+    int val;
+    if (!reader.ReadInt(father, m_name, val) || val<0) {
+      *m_val = m_def;
+      return false;
+    }
+    ASSERT(!m_important || (*m_val >= m_min && *m_val <= m_max));
+    *m_val = val;
+    return true;
+  }
+  void Write(XmlWriter& writer, xmlNode* father) const
+  {
+    writer.WriteElement(father, m_name, uint2str(*m_val));
   }
 };
 
 class DoubleConfigElement : public ConfigElement
 {
-  Double       m_val, m_def, m_min, m_max;
 public:
-  DoubleConfigElement(const char *n, Double v, Double d, Double mi, Double ma, bool imp = false)
-    : ConfigElement(TYPE_DOUBLE, n, imp)
+  Double       *m_val, m_def, m_min, m_max;
+  DoubleConfigElement(const char *n, Double* v, Double d)
+    : ConfigElement(TYPE_DOUBLE, n, false) { m_val = v; *v = m_def = d; }
+  DoubleConfigElement(const char *n, Double* v, Double d, Double mi, Double ma)
+    : ConfigElement(TYPE_DOUBLE, n, true) { m_val = v; *v = m_def = d; m_min = mi, m_max = ma; ASSERT(d >= mi && d <= ma); }
+  bool Read(const xmlNode* father)
   {
-    m_val = v; m_def = d; m_min = mi, m_max = ma;
-  }
-  bool Read(XmlReader& reader, const xmlNode* father)
-  {
-    if (!reader.ReadDouble(father, m_name, m_val)) {
-      m_val = m_def;
+    if (!XmlReader::ReadDouble(father, m_name, *m_val)) {
+      *m_val = m_def;
       return false;
     }
+    ASSERT(!m_important || (*m_val >= m_min && *m_val <= m_max));
     return true;
   }
   void Write(XmlWriter& writer, xmlNode* father) const
   {
-    writer.WriteElement(father, m_name, Double2str(m_val));
+    writer.WriteElement(father, m_name, Double2str(*m_val));
   }
 };
 
