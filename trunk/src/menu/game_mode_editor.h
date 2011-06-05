@@ -22,7 +22,7 @@
 #ifndef GAME_MODE_EDITOR_H
 #define GAME_MODE_EDITOR_H
 
-#include "gui/horizontal_box.h"
+#include "gui/vertical_box.h"
 
 // Forward declarations
 class SpinButtonWithPicture;
@@ -32,8 +32,9 @@ class ScrollBox;
 class TextBox;
 class ItemBox;
 class Button;
+class WeaponsList;
 
-class GameModeEditor : public HBox
+class GameModeEditor : public VBox
 {
   ItemBox               *opt_game_mode;
   std::vector<std::pair<std::string, std::string> > game_modes;
@@ -52,11 +53,13 @@ class GameModeEditor : public HBox
   SpinButtonWithPicture *opt_gravity;
 
   ScrollBox             *opt_weapons_cfg;
+  WeaponsList           *weapons;
 
   void LoadGameMode(bool force = false);
 
 public:
   GameModeEditor(const Point2i& size, float zoom, bool _draw_border=true);
+  ~GameModeEditor();
 
   Widget *ClickUp(const Point2i & mousePosition, uint button);
   void ValidGameMode() const;
