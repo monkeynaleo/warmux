@@ -167,6 +167,12 @@ Widget *GameModeEditor::ClickUp(const Point2i & mousePosition, uint button)
   return w;
 }
 
+static int FindStep(int val)
+{
+  val *= 2;
+  return (val<11) ? 1 : (val<25) ? 2 : (val<101) ? 5 : (val < 251) ? 10 : (val < 501) ? 25 : 50;
+}
+
 class WeaponCfgBox : public HBox
 {
   Weapon                *weapon;
@@ -209,10 +215,10 @@ public:
         case ConfigElement::TYPE_DOUBLE:
           {
             DoubleConfigElement* element = static_cast<DoubleConfigElement*>(*it);
+            int val = *element->m_val;
             SpinButtonWithPicture *tmp =
-              new SpinButtonWithPicture(element->m_name, "menu/ico_help",
-                                        Point2i(100, 100), (int)*element->m_val, 1,
-                                        (int)element->m_min, (int)element->m_max);
+              new SpinButtonWithPicture(element->m_name, "menu/ico_help", Point2i(100, 100),
+                                        val, FindStep(val), element->m_min, (val) ? 2*val : 10);
             AddWidget(tmp);
             values.push_back(std::make_pair(tmp, *it));
             break;
@@ -220,10 +226,10 @@ public:
         case ConfigElement::TYPE_INT:
           {
             IntConfigElement* element = static_cast<IntConfigElement*>(*it);
+            int val = *element->m_val;
             SpinButtonWithPicture *tmp =
-              new SpinButtonWithPicture(element->m_name, "menu/ico_help",
-                                        Point2i(100, 100), *element->m_val, 1,
-                                        element->m_min, element->m_max);
+              new SpinButtonWithPicture(element->m_name, "menu/ico_help", Point2i(100, 100),
+                                        val, FindStep(val), element->m_min, (val) ? 2*val : 10);
             AddWidget(tmp);
             values.push_back(std::make_pair(tmp, *it));
             break;
@@ -231,10 +237,10 @@ public:
         case ConfigElement::TYPE_UINT:
           {
             UintConfigElement* element = static_cast<UintConfigElement*>(*it);
+            int val = *element->m_val;
             SpinButtonWithPicture *tmp =
-              new SpinButtonWithPicture(element->m_name, "menu/ico_help",
-                                        Point2i(100, 100), (int)*element->m_val, 1,
-                                        (int)element->m_min, (int)element->m_max);
+              new SpinButtonWithPicture(element->m_name, "menu/ico_help", Point2i(100, 100),
+                                        val, FindStep(val), element->m_min, (val) ? 2*val : 10);
             AddWidget(tmp);
             values.push_back(std::make_pair(tmp, *it));
             break;
