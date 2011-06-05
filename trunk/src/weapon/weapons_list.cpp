@@ -114,9 +114,8 @@ WeaponsList::WeaponsList(const xmlNode* weapons_xml)
 void WeaponsList::UpdateTranslation()
 {
   iterator it;
-  for (it = m_weapons_list.begin(); it != m_weapons_list.end(); it++) {
+  for (it = m_weapons_list.begin(); it != m_weapons_list.end(); it++)
     (*it)->UpdateTranslationStrings();
-  }
 }
 
 //-----------------------------------------------------------------------------
@@ -132,24 +131,21 @@ bool WeaponsList::GetWeaponBySort(Weapon::category_t sort, Weapon::Weapon_type &
                  &ActiveTeam().GetWeapon());
 
   /* if the current weapon match the criteria */
-  if (it != end && ActiveTeam().GetWeapon().Category() == sort)
-    {
-      /* try to find the next weapon matching our criteria */
-      do {
-        ++it;
-      } while(it != end
-              && ((*it)->Category() != sort
-                  || ActiveTeam().ReadNbAmmos((*it)->GetType()) == 0
-                  || (!((*it)->CanBeUsedOnClosedMap()) && !open))
-              );
+  if (it != end && ActiveTeam().GetWeapon().Category() == sort) {
+    /* try to find the next weapon matching our criteria */
+    do {
+      ++it;
+    } while( it != end
+             && ((*it)->Category() != sort
+                 || ActiveTeam().ReadNbAmmos((*it)->GetType()) == 0
+                 || (!((*it)->CanBeUsedOnClosedMap()) && !open)) );
 
-      /* Ok, a weapon was found let's return it */
-      if (it != end && (*it)->Category() == sort)
-        {
-          type = (*it)->GetType();
-          return true;
-        }
+    /* Ok, a weapon was found let's return it */
+    if (it != end && (*it)->Category() == sort) {
+      type = (*it)->GetType();
+      return true;
     }
+  }
   /* we didn't find a valid weapon after the current one ; lets wrap:
    * restart from the begining and try to find the first one matching
    * our criteria */
@@ -163,17 +159,16 @@ bool WeaponsList::GetWeaponBySort(Weapon::category_t sort, Weapon::Weapon_type &
 
   /* try to find the next weapon matching our criteria */
   while(it != end
-      && ((*it)->Category() != sort
-        || ActiveTeam().ReadNbAmmos((*it)->GetType()) == 0
+        && ((*it)->Category() != sort
+            || ActiveTeam().ReadNbAmmos((*it)->GetType()) == 0
             || (!(*it)->CanBeUsedOnClosedMap() && open)))
     ++it;
 
   /* Ok, a weapon was found let's return it if it is not the one active */
-  if (it != end && (*it)->Category() == sort && (*it) != &ActiveTeam().GetWeapon())
-    {
-      type = (*it)->GetType();
-      return true;
-    }
+  if (it != end && (*it)->Category() == sort && (*it) != &ActiveTeam().GetWeapon()) {
+    type = (*it)->GetType();
+    return true;
+  }
 
   /* we definitly found nothing... */
   return false;
@@ -208,15 +203,15 @@ Weapon * WeaponsList::GetRandomWeaponToDrop()
 
 //-----------------------------------------------------------------------------
 
-class test_weapon_type {
-  private:
-    Weapon::Weapon_type m_type;
-  public:
-    test_weapon_type(const Weapon::Weapon_type &type) :  m_type(type){ }
-    bool operator() (const Weapon* w) const { return w->GetType()==m_type; }
+class test_weapon_type
+{
+  Weapon::Weapon_type m_type;
+public:
+  test_weapon_type(const Weapon::Weapon_type &type) : m_type(type){ }
+  bool operator() (const Weapon* w) const { return w->GetType()==m_type; }
 };
 
-Weapon* WeaponsList::GetWeapon (Weapon::Weapon_type type) const
+Weapon* WeaponsList::GetWeapon(Weapon::Weapon_type type) const
 {
   iterator it;
   it = std::find_if(m_weapons_list.begin(), m_weapons_list.end(), test_weapon_type(type));
