@@ -54,9 +54,9 @@ public:
   WeaponsList(const xmlNode* weapons_xml);
   ~WeaponsList();
 
-  void Init();
+  void Init(const xmlNode* weapons_xml) const;
 
-  void UpdateTranslation();
+  void UpdateTranslation() const;
 
   // Return a list of  weapons
   const weapons_list_type& GetList() const { return m_weapons_list; };
