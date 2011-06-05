@@ -44,32 +44,40 @@ const uint TPS_TOUR_MAX = 240;
 static bool warned = false;
 
 GameModeEditor::GameModeEditor(const Point2i& size, float zoom, bool _draw_border)
-  : HBox(size.y, _draw_border)
+  : VBox(size.x, _draw_border)
+  , weapons(NULL)
 {
   Profile *res  = GetResourceManager().LoadXMLProfile("graphism.xml", false);
-  static const Point2i option_size(110, 120);
   Font::font_size_t fmedium = Font::GetFixedSize(Font::FONT_MEDIUM*zoom+0.5f);
   Font::font_size_t fsmall  = Font::GetFixedSize(Font::FONT_SMALL*zoom+0.5f);
+  zoom = fsmall * 1.0 / Font::FONT_SMALL;
+  static const Point2i option_size(110, 120*zoom);
   // ################################################
   // ##  GAME OPTIONS
   // ################################################
   std::string selected_gamemode = Config::GetInstance()->GetGameMode();
 
+  // High enough for 4 borders, 1 horizontal listbox containing buttons and 1 label
+  uint height = option_size.y + 18 + 4*4 + 2*fsmall;
+  HBox *hbox = new HBox(height, false);
+  hbox->SetNoBorder();
+  AddWidget(hbox);
+
   VBox *vbox = new VBox(fsmall*10+2*4, false);
-  vbox->SetBorder(transparent_color, 4);
-  vbox->SetSelfBackgroundColor(transparent_color);
-  AddWidget(vbox);
+  vbox->SetNoBorder();
+  hbox->AddWidget(vbox);
 
   vbox->AddWidget(new Label(_("Game mode"), fsmall*10, fmedium, Font::FONT_BOLD, c_red));
-  opt_game_mode = new ItemBox(Point2i(fsmall*10, size.y - 4*4 - 2*border_size - 2*fmedium - fsmall - 86));
+  opt_game_mode = new ItemBox(Point2i(fsmall*10, 4*fsmall + 18));
   game_modes = GameMode::ListGameModes();
   for (uint i=0; i<game_modes.size(); i++) {
-    opt_game_mode->AddLabelItem(game_modes[i].first==selected_gamemode,
-                                game_modes[i].second, &game_modes[i].first, fsmall);
+    if (game_modes[i].first != "skin_viewer")
+      opt_game_mode->AddLabelItem(game_modes[i].first==selected_gamemode,
+                                  game_modes[i].second, &game_modes[i].first, fsmall);
   }
   vbox->AddWidget(opt_game_mode);
 
-  vbox->AddWidget(new Label(_("Filename"), fsmall*10, fmedium, Font::FONT_BOLD, c_red));
+  //vbox->AddWidget(new Label(_("Filename"), fsmall*10, fmedium, Font::FONT_BOLD, c_red));
 
   filename = new TextBox("", fsmall*10, fsmall);
   vbox->AddWidget(filename);
@@ -79,10 +87,10 @@ GameModeEditor::GameModeEditor(const Point2i& size, float zoom, bool _draw_borde
 
   uint width = size.x - (fsmall*10 + 4*4 + 2*border_size);
   vbox = new VBox(width, false);
-  vbox->SetBorder(transparent_color, 4);
+  vbox->SetNoBorder();
   vbox->SetSelfBackgroundColor(transparent_color);
   vbox->SetMargin(4);
-  AddWidget(vbox);
+  hbox->AddWidget(vbox);
 
   vbox->AddWidget(new Label(_("Settings"), fsmall*10, fmedium, Font::FONT_BOLD, c_red));
 
@@ -132,17 +140,28 @@ GameModeEditor::GameModeEditor(const Point2i& size, float zoom, bool _draw_borde
                                           option_size, 10, 5, 10, 60, fmedium, fmedium);
   sbox->AddWidget(opt_gravity);
 
-  vbox->AddWidget(new Label(_("Weapons"), width - 4*4, fmedium, Font::FONT_BOLD, c_red));
+  /** Weapons **/
+  //vbox = new VBox(size.y - 4*4 - height, false);
+  //AddWidget(vbox);
+  //vbox->AddWidget(new Label(_("Weapons"), width - 4*4, fmedium, Font::FONT_BOLD, c_red));
 
-  opt_weapons_cfg = new ScrollBox(Point2i(width - 4*4, size.y - 9*4 - sbox->GetSizeY() - 2*fmedium));
-  vbox->AddWidget(opt_weapons_cfg);
+  opt_weapons_cfg = new ScrollBox(Point2i(size.x - 4*4, size.y - 4*4 - height));
+  AddWidget(opt_weapons_cfg);
+
+  SetBackgroundColor(transparent_color);
 
   LoadGameMode(true);
 }
 
+GameModeEditor::~GameModeEditor()
+{
+  if (weapons)
+    delete weapons;
+}
+
 Widget *GameModeEditor::ClickUp(const Point2i & mousePosition, uint button)
 {
-  Widget *w = HBox::ClickUp(mousePosition, button);
+  Widget *w = VBox::ClickUp(mousePosition, button);
   if (opt_game_mode->Contains(mousePosition))
     LoadGameMode();
   return w;
@@ -150,9 +169,10 @@ Widget *GameModeEditor::ClickUp(const Point2i & mousePosition, uint button)
 
 class WeaponCfgBox : public HBox
 {
-  Weapon        *weapon;
-  PictureWidget *pw;
+  Weapon                *weapon;
+  PictureWidget         *pw;
   SpinButtonWithPicture *ammo;
+  std::list< std::pair<Widget*, ConfigElement*> > values;
 
 public:
   WeaponCfgBox(Weapon *w, uint height)
@@ -177,9 +197,61 @@ public:
                               dark_gray_color, Text::ALIGN_CENTER));
 
     int count = weapon->ReadInitialNbAmmo();
-    ammo = new SpinButtonWithPicture(_("Ammos"), "menu/music_enable", s,
+    ammo = new SpinButtonWithPicture(_("Ammos"), "menu/sound_effects_enable", s,
                                      count, 1, -1, (count>10) ? count : 10);
     AddWidget(ammo);
+
+    // List config values and add the important ones
+    EmptyWeaponConfig* cfg = w->GetConfig();
+    for (EmptyWeaponConfig::iterator it = cfg->begin(); it != cfg->end(); ++it) {
+      if ((*it)->m_important) {
+        switch ((*it)->m_type) {
+        case ConfigElement::TYPE_DOUBLE:
+          {
+            DoubleConfigElement* element = static_cast<DoubleConfigElement*>(*it);
+            SpinButtonWithPicture *tmp =
+              new SpinButtonWithPicture(element->m_name, "menu/ico_help",
+                                        Point2i(100, 100), (int)*element->m_val, 1,
+                                        (int)element->m_min, (int)element->m_max);
+            AddWidget(tmp);
+            values.push_back(std::make_pair(tmp, *it));
+            break;
+          }
+        case ConfigElement::TYPE_INT:
+          {
+            IntConfigElement* element = static_cast<IntConfigElement*>(*it);
+            SpinButtonWithPicture *tmp =
+              new SpinButtonWithPicture(element->m_name, "menu/ico_help",
+                                        Point2i(100, 100), *element->m_val, 1,
+                                        element->m_min, element->m_max);
+            AddWidget(tmp);
+            values.push_back(std::make_pair(tmp, *it));
+            break;
+          }
+        case ConfigElement::TYPE_UINT:
+          {
+            UintConfigElement* element = static_cast<UintConfigElement*>(*it);
+            SpinButtonWithPicture *tmp =
+              new SpinButtonWithPicture(element->m_name, "menu/ico_help",
+                                        Point2i(100, 100), (int)*element->m_val, 1,
+                                        (int)element->m_min, (int)element->m_max);
+            AddWidget(tmp);
+            values.push_back(std::make_pair(tmp, *it));
+            break;
+          }
+        case ConfigElement::TYPE_BOOL:
+          {
+            BoolConfigElement* element = static_cast<BoolConfigElement*>(*it);
+            SpinButtonWithPicture *tmp =
+              new SpinButtonWithPicture(element->m_name, "menu/ico_help",
+                                        Point2i(100, 100), (int)*element->m_val, 1, 0, 1);
+            AddWidget(tmp);
+            values.push_back(std::make_pair(tmp, *it));
+            break;
+          }
+        }
+      }
+    }
 
     SetBackgroundColor(transparent_color);
     Pack();
@@ -215,8 +287,10 @@ void GameModeEditor::LoadGameMode(bool force)
 
   // Refill weapon list
   opt_weapons_cfg->Clear();
-  WeaponsList tmp(game_mode->GetWeaponsXml());
-  const WeaponsList::weapons_list_type& wlist = tmp.GetList();
+  if (!weapons)
+    delete weapons; // previous instance has served its purpose
+  weapons = new WeaponsList(game_mode->GetWeaponsXml());
+  const WeaponsList::weapons_list_type& wlist = weapons->GetList();
   for (WeaponsList::iterator it = wlist.begin(); it != wlist.end(); ++it) {
     opt_weapons_cfg->AddWidget(new WeaponCfgBox(*it, 100));
   }
