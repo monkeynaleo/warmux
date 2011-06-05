@@ -22,24 +22,12 @@
 #include "character/character.h"
 #include "game/game_time.h"
 #include "graphic/sprite.h"
-//#include "graphic/surface.h"
-//#include "graphic/video.h"
-//#include "include/app.h"
-//#include "interface/game_msg.h"
-//#include "interface/mouse.h"
-//#include "map/camera.h"
-//#include "map/map.h"
-//#include "map/wind.h"
-//#include "network/network.h"
-//#include "object/objects_list.h"
 #include "team/team.h"
 #include "team/teams_list.h"
 #include "tool/xml_document.h"
-//#include "tool/math_tools.h"
 #include "weapon/auto_bazooka.h"
 #include "weapon/explosion.h"
 #include "weapon/weapon_cfg.h"
-
 
 class AutomaticBazookaConfig : public ExplosiveWeaponConfig
 {
