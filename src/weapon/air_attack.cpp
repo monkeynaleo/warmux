@@ -52,8 +52,11 @@ class AirAttackConfig : public ExplosiveWeaponConfig
 public:
   Double speed;
   uint nbr_obus;
-  AirAttackConfig();
-  virtual void LoadXml(const xmlNode* elem);
+  AirAttackConfig()
+  {
+    push_back(new UintConfigElement("nbr_obus", &nbr_obus, 3, 1, 8));
+    push_back(new DoubleConfigElement("speed", &speed, 3));
+  }
 };
 
 Obus::Obus(AirAttackConfig& cfg) :
@@ -254,20 +257,4 @@ std::string AirAttack::GetWeaponWinString(const char *TeamName, uint items_count
   return Format(ngettext("%s team has won %u air attack!",
                          "%s team has won %u air attacks!",
                          items_count), TeamName, items_count);
-}
-
-
-//-----------------------------------------------------------------------------
-
-AirAttackConfig::AirAttackConfig()
-{
-  nbr_obus = 3;
-  speed = 7;
-}
-
-void AirAttackConfig::LoadXml(const xmlNode* elem)
-{
-  ExplosiveWeaponConfig::LoadXml(elem);
-  XmlReader::ReadUint(elem, "nbr_obus", nbr_obus);
-  XmlReader::ReadDouble(elem, "speed", speed);
 }

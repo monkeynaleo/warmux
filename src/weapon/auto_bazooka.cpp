@@ -36,8 +36,13 @@ public:
   Double max_controlled_turn_speed;
   Double fuel_time;
   Double rocket_force;
-  AutomaticBazookaConfig();
-  void LoadXml(const xmlNode* elem);
+  AutomaticBazookaConfig()
+  {
+    push_back(new DoubleConfigElement("uncontrolled_turn_speed", &uncontrolled_turn_speed, PI*8));
+    push_back(new DoubleConfigElement("max_controlled_turn_speed", &max_controlled_turn_speed, PI*4));
+    push_back(new DoubleConfigElement("fuel_time", &fuel_time, 10));
+    push_back(new DoubleConfigElement("rocket_force", &rocket_force, 2500));
+  }
 };
 
 class RPG : public WeaponProjectile
@@ -202,23 +207,6 @@ void AutomaticBazooka::ChooseTarget(Point2i mouse_pos)
 AutomaticBazookaConfig &AutomaticBazooka::cfg()
 {
   return static_cast<AutomaticBazookaConfig &>(*extra_params);
-}
-
-AutomaticBazookaConfig::AutomaticBazookaConfig()
-{
-  uncontrolled_turn_speed = PI*8;
-  max_controlled_turn_speed = PI*4;
-  fuel_time = 10;
-  rocket_force = 2500;
-}
-
-void AutomaticBazookaConfig::LoadXml(const xmlNode* elem)
-{
-  ExplosiveWeaponConfig::LoadXml(elem);
-  XmlReader::ReadDouble(elem, "uncontrolled_turn_speed", uncontrolled_turn_speed);
-  XmlReader::ReadDouble(elem, "max_controlled_turn_speed", max_controlled_turn_speed);
-  XmlReader::ReadDouble(elem, "fuel_time", fuel_time);
-  XmlReader::ReadDouble(elem, "rocket_force", rocket_force);
 }
 
 std::string AutomaticBazooka::GetWeaponWinString(const char *TeamName, uint items_count) const

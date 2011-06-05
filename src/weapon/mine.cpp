@@ -45,9 +45,8 @@
 // XXX Not used
 //const Double DEPART_FONCTIONNEMENT = 5;
 
-ObjMine::ObjMine(MineConfig& cfg,
-                 WeaponLauncher * p_launcher) :
-  WeaponProjectile("mine", cfg, p_launcher)
+ObjMine::ObjMine(MineConfig& cfg, WeaponLauncher * p_launcher)
+  : WeaponProjectile("mine", cfg, p_launcher)
 {
   m_allow_negative_y = true;
   animation = false;
@@ -251,26 +250,17 @@ std::string Mine::GetWeaponWinString(const char *TeamName, uint items_count ) co
                          items_count), TeamName, items_count);
 }
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-
 MineConfig& Mine::cfg()
 {
   return static_cast<MineConfig&>(*extra_params);
 }
 
+//-----------------------------------------------------------
+
 MineConfig::MineConfig()
 {
-  detection_range = 1;
-  speed_detection = 2;
-  timeout = 2;
-  escape_time = 2;
-}
-
-void MineConfig::LoadXml(const xmlNode* elem)
-{
-  ExplosiveWeaponConfig::LoadXml (elem);
-  XmlReader::ReadUint(elem, "escape_time", escape_time);
-  XmlReader::ReadDouble(elem, "detection_range", detection_range);
-  XmlReader::ReadDouble(elem, "speed_detection", speed_detection);
+  push_back(new DoubleConfigElement("detection_range", &detection_range, 1));
+  push_back(new DoubleConfigElement("speed_detection", &speed_detection, 2));
+  push_back(new UintConfigElement("timeout", &timeout, 2));
+  push_back(new UintConfigElement("escape_time", &escape_time, 2, 1, 4));
 }

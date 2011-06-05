@@ -39,11 +39,12 @@ static const uint MIN_TIME_BETWEEN_DIG = 200;        // milliseconds
 
 class BlowtorchConfig : public WeaponConfig
 {
-  public:
-    BlowtorchConfig();
-    virtual void LoadXml(const xmlNode* elem);
-
-    uint range;
+public:
+  BlowtorchConfig()
+  {
+    push_back(new UintConfigElement("range", &range, 2, 1, 10));
+  }
+  uint range;
 };
 
 Blowtorch::Blowtorch() :
@@ -130,28 +131,15 @@ void Blowtorch::Refresh()
   }
 }
 
-//-------------------------------------------------------------------------------------
-
-BlowtorchConfig::BlowtorchConfig()
-{
-  range = 2;
-}
-
-BlowtorchConfig& Blowtorch::cfg()
-{
-  return static_cast<BlowtorchConfig&>(*extra_params);
-}
-
-void BlowtorchConfig::LoadXml(const xmlNode* elem)
-{
-  WeaponConfig::LoadXml(elem);
-  XmlReader::ReadUint(elem, "range", range);
-}
-
 std::string Blowtorch::GetWeaponWinString(const char *TeamName, uint items_count) const
 {
   return Format(ngettext(
             "%s team has won %u blowtorch! If you're under 18, ask your parents to use it.",
             "%s team has won %u blowtorchs! If you're under 18, ask your parents to use it.",
             items_count), TeamName, items_count);
+}
+
+BlowtorchConfig& Blowtorch::cfg()
+{
+  return static_cast<BlowtorchConfig&>(*extra_params);
 }

@@ -47,8 +47,8 @@ protected:
   virtual ~ClusterSpawner() {};
 
   virtual void SpawnClusters( uint fragments, uint recursion_depth,
-     const Point2i pos, Double speed, Double angle, Double angle_range,
-      ExplosiveWeaponConfig& cfg, WeaponLauncher * p_launcher )
+                              const Point2i pos, Double speed, Double angle, Double angle_range,
+                              ExplosiveWeaponConfig& cfg, WeaponLauncher * p_launcher )
   {
 #ifndef CLUSTERS_SPAWN_CLUSTERS
     ASSERT(recursion_depth == 0);
@@ -78,23 +78,12 @@ public:
   uint m_fragments;
   uint m_angle_dispersion;
 
-  CluzookaConfig();
-  virtual void LoadXml(const xmlNode *elem);
+  CluzookaConfig()
+  {
+    push_back(new UintConfigElement("nb_fragments", &m_fragments, 5, 2, 10));
+    push_back(new UintConfigElement("nb_angle_dispersion", &m_angle_dispersion, 45));
+  }
 };
-
-CluzookaConfig::CluzookaConfig() :
-  ExplosiveWeaponConfig(),
-  m_fragments(5),
-  m_angle_dispersion(45)
-{
-}
-
-void CluzookaConfig::LoadXml(const xmlNode *elem)
-{
-  ExplosiveWeaponConfig::LoadXml(elem);
-  XmlReader::ReadUint(elem, "nb_fragments", m_fragments);
-  XmlReader::ReadUint(elem, "nb_angle_dispersion", m_angle_dispersion);
-}
 
 class CluzookaCluster : public WeaponProjectile, public ClusterSpawner< CluzookaCluster >
 {

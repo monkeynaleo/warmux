@@ -35,30 +35,20 @@
 
 class SlapConfig : public WeaponConfig
 {
-  public:
-    Double range;
-    uint damage;
-    uint strength;
-    SlapConfig();
-    void LoadXml(const xmlNode* elem);
+public:
+  Double range;
+  uint damage;
+  uint strength;
+  SlapConfig();
 };
 
-SlapConfig& Slap::cfg() {
-  return static_cast<SlapConfig&>(*extra_params);
+SlapConfig::SlapConfig()
+{
+  push_back(new DoubleConfigElement("range", &range, 20, 1, 50));
+  push_back(new UintConfigElement("strength", &strength, 10, 1, 20));
 }
 
-SlapConfig::SlapConfig(){
-  range = 20;
-  damage = 5;
-  strength = 10;
-}
-
-void SlapConfig::LoadXml(const xmlNode* elem){
-  WeaponConfig::LoadXml(elem);
-  XmlReader::ReadDouble(elem, "range", range);
-  XmlReader::ReadUint(elem, "damage", damage);
-  XmlReader::ReadUint(elem, "strength", strength);
-}
+//-----------------------------------------------------------------
 
 Slap::Slap() : Weapon(WEAPON_SLAP, "slap", new SlapConfig())
 {
@@ -123,3 +113,9 @@ bool Slap::p_Shoot (){
 
   return true;
 }
+
+SlapConfig& Slap::cfg()
+{
+  return static_cast<SlapConfig&>(*extra_params);
+}
+

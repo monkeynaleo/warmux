@@ -43,8 +43,14 @@ public:
   Double nb_min_speed;
   Double nb_max_speed;
 
-  FootBombConfig();
-  virtual void LoadXml(const xmlNode *elem);
+  FootBombConfig()
+  {
+    push_back(new UintConfigElement("nb_fragments", &nb_fragments, 2, 1, 4));
+    push_back(new UintConfigElement("nb_recursions", &nb_recursions, 2));
+    push_back(new DoubleConfigElement("nb_angle_dispersion", &nb_angle_dispersion, 0));
+    push_back(new DoubleConfigElement("nb_min_speed", &nb_min_speed, 0));
+    push_back(new DoubleConfigElement("nb_max_speed", &nb_max_speed, 0));
+  }
 };
 
 class FootBomb : public WeaponProjectile
@@ -167,22 +173,4 @@ std::string FootBombLauncher::GetWeaponWinString(const char *TeamName, uint item
   return Format(ngettext("%s team has won %u football bomb!",
                          "%s team has won %u football bombs!",
                          items_count), TeamName, items_count);
-}
-//-----------------------------------------------------------------------------
-
-FootBombConfig::FootBombConfig() :
-  ExplosiveWeaponConfig()
-{
-  nb_fragments = 2;
-  nb_recursions = 2;
-}
-
-void FootBombConfig::LoadXml(const xmlNode *elem)
-{
-  ExplosiveWeaponConfig::LoadXml(elem);
-  XmlReader::ReadUint(elem, "nb_fragments", nb_fragments);
-  XmlReader::ReadUint(elem, "nb_recursions", nb_recursions);
-  XmlReader::ReadDouble(elem, "nb_angle_dispersion", nb_angle_dispersion);
-  XmlReader::ReadDouble(elem, "nb_min_speed", nb_min_speed);
-  XmlReader::ReadDouble(elem, "nb_max_speed", nb_max_speed);
 }

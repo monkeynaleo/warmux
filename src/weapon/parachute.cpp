@@ -44,9 +44,16 @@ public:
   Double air_resist_factor;
   Double force_side_displacement;
   ParachuteConfig();
-  void LoadXml(const xmlNode* elem);
 };
 
+ParachuteConfig::ParachuteConfig()
+{
+  push_back(new DoubleConfigElement("wind_factor", &wind_factor, 10));
+  push_back(new DoubleConfigElement("air_resist_factor", &air_resist_factor, 140));
+  push_back(new DoubleConfigElement("force_side_displacement", &wind_factor, 2000));
+}
+
+//------------------------------------------------------------------------------
 
 Parachute::Parachute() : Weapon(WEAPON_PARACHUTE, "parachute", new ParachuteConfig(), false)
 {
@@ -191,19 +198,4 @@ void Parachute::StartShooting()
 ParachuteConfig& Parachute::cfg()
 {
   return static_cast<ParachuteConfig&>(*extra_params);
-}
-
-ParachuteConfig::ParachuteConfig()
-{
-  wind_factor = 10.0;
-  air_resist_factor = 140.0;
-  force_side_displacement = 2000.0;
-}
-
-void ParachuteConfig::LoadXml(const xmlNode* elem)
-{
-  WeaponConfig::LoadXml(elem);
-  XmlReader::ReadDouble(elem, "wind_factor", wind_factor);
-  XmlReader::ReadDouble(elem, "air_resist_factor", air_resist_factor);
-  XmlReader::ReadDouble(elem, "force_side_displacement", force_side_displacement);
 }
