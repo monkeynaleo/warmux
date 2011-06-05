@@ -39,14 +39,13 @@ public:
   Double range;
   uint damage;
   uint strength;
-  SlapConfig();
+  SlapConfig()
+  {
+    push_back(new DoubleConfigElement("range", &range, 20, 1, 50));
+    push_back(new UintConfigElement("strength", &strength, 300, 100, 500));
+  }
 };
 
-SlapConfig::SlapConfig()
-{
-  push_back(new DoubleConfigElement("range", &range, 20, 1, 50));
-  push_back(new UintConfigElement("strength", &strength, 10, 1, 20));
-}
 
 //-----------------------------------------------------------------
 

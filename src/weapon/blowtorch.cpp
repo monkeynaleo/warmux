@@ -40,11 +40,11 @@ static const uint MIN_TIME_BETWEEN_DIG = 200;        // milliseconds
 class BlowtorchConfig : public WeaponConfig
 {
 public:
+  uint range;
   BlowtorchConfig()
   {
-    push_back(new UintConfigElement("range", &range, 2, 1, 10));
+    push_back(new UintConfigElement("range", &range, 20, 10, 30));
   }
-  uint range;
 };
 
 Blowtorch::Blowtorch() :
