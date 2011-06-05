@@ -22,10 +22,6 @@
 #include "weapon/weapon_cfg.h"
 #include <iostream>
 #include "tool/xml_document.h"
-//-----------------------------------------------------------------------------
-
-void EmptyWeaponConfig::LoadXml(const xmlNode* /*elem*/)
-{}
 
 //-----------------------------------------------------------------------------
 
