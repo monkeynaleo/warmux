@@ -29,11 +29,14 @@
 #include <WARMUX_base.h>
 #include "weapon/weapon_cfg.h"
 #include "tool/xml_document.h"
+#include "tool/config_element.h"
 
 typedef struct _xmlNode xmlNode;
 
 class GameMode : public Singleton<GameMode>
 {
+  ConfigElementList  main_settings;
+  ConfigElementList  char_settings, energy, jump, super_jump, back_jump;
 public:
   std::string rules;
 

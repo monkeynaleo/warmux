@@ -30,13 +30,43 @@
 #include "object/bonus_box.h"
 #include "weapon/weapons_list.h"
 
+static std::string txt;
+
 GameMode::GameMode():
   doc_objects(NULL),
   weapons_xml(NULL)
 {
   m_current = "classic";
 
-  LoadDefaultValues();
+  main_settings.push_back(new StringConfigElement("rules", &rules, "none"));
+  main_settings.push_back(new BoolConfigElement("auto_change_character", &auto_change_character, true));
+  main_settings.push_back(new StringConfigElement("allow_character_selection", &txt, "always"));
+  main_settings.push_back(new UintConfigElement("duration_turn", &duration_turn, 60));
+  main_settings.push_back(new UintConfigElement("duration_move_player", &duration_move_player, 3));
+  main_settings.push_back(new UintConfigElement("duration_exchange_player", &duration_exchange_player, 2));
+  main_settings.push_back(new UintConfigElement("duration_before_death_mode", &duration_before_death_mode, 20 * 60));
+  main_settings.push_back(new UintConfigElement("damage_per_turn_during_death_mode", &damage_per_turn_during_death_mode, 5));
+  main_settings.push_back(new UintConfigElement("max_teams", &max_teams, 8));
+  main_settings.push_back(new UintConfigElement("nb_characters", &nb_characters, 6));
+  main_settings.push_back(new DoubleConfigElement("gravity", &gravity, 9.81));
+  main_settings.push_back(new DoubleConfigElement("safe_fall", &safe_fall, 10));
+  main_settings.push_back(new DoubleConfigElement("damage_per_fall_unit", &damage_per_fall_unit, 7));
+
+  char_settings.push_back(new UintConfigElement("mass", &character.mass, 100));
+  char_settings.push_back(new DoubleConfigElement("air_resist_factor", &character.air_resist_factor, 1.0));
+  char_settings.push_back(new UintConfigElement("walking_pause", &character.walking_pause, 50));
+
+  energy.push_back(new UintConfigElement("initial", &character.init_energy, 100, 1, 200));
+  energy.push_back(new UintConfigElement("maximum", &character.max_energy, 100, 1, 200));
+
+  jump.push_back(new DoubleConfigElement("strength", &character.jump_strength, 8));
+  jump.push_back(new DoubleConfigElement("angle", &character.jump_angle, -60 * 180/PI));
+
+  super_jump.push_back(new DoubleConfigElement("strength", &character.super_jump_strength, 11));
+  super_jump.push_back(new DoubleConfigElement("angle", &character.super_jump_angle, -80 * 180/PI));
+
+  back_jump.push_back(new DoubleConfigElement("strength", &character.back_jump_strength, 9));
+  back_jump.push_back(new DoubleConfigElement("angle", &character.back_jump_angle, -100 * 180/PI));
 }
 
 void GameMode::LoadDefaultValues()
@@ -83,86 +113,37 @@ GameMode::~GameMode()
 // Load data options from the selected game_mode
 bool GameMode::LoadXml(const xmlNode* xml)
 {
-  bool r;
-
-  r = XmlReader::ReadString(xml, "rules", rules);
-  if (!r) {
-    fprintf(stderr, "Game mode: missing <rules>\n");
-    return false;
-  }
-
-  XmlReader::ReadBool(xml, "auto_change_character", auto_change_character);
-
-  std::string txt;
-  if (XmlReader::ReadString(xml, "allow_character_selection", txt))
-  {
-    if (txt == "always")
-      allow_character_selection = ALWAYS;
-    else if (txt == "never")
-      allow_character_selection = NEVER;
-    else if (txt == "before_first_action")
-      allow_character_selection = BEFORE_FIRST_ACTION;
-    else
-      fprintf(stderr, "%s is not a valid option for \"allow_character_selection\"\n", txt.c_str());
-  }
-
-  XmlReader::ReadUint(xml, "duration_turn", duration_turn);
-  XmlReader::ReadUint(xml, "duration_move_player", duration_move_player);
-  XmlReader::ReadUint(xml, "duration_exchange_player", duration_exchange_player);
-  XmlReader::ReadUint(xml, "duration_before_death_mode", duration_before_death_mode);
-  XmlReader::ReadUint(xml, "damage_per_turn_during_death_mode", damage_per_turn_during_death_mode);
-  XmlReader::ReadUint(xml, "max_teams", max_teams);
-  XmlReader::ReadUint(xml, "nb_characters", nb_characters);
-  XmlReader::ReadDouble(xml, "gravity", gravity);
-  XmlReader::ReadDouble(xml, "safe_fall", safe_fall);
-  XmlReader::ReadDouble(xml, "damage_per_fall_unit", damage_per_fall_unit);
+  main_settings.LoadXml(xml);
+  if (txt == "always")
+    allow_character_selection = ALWAYS;
+  else if (txt == "never")
+    allow_character_selection = NEVER;
+  else if (txt == "before_first_action")
+    allow_character_selection = BEFORE_FIRST_ACTION;
+  else
+    fprintf(stderr, "%s is not a valid option for \"allow_character_selection\"\n", txt.c_str());
 
   // Character options
   const xmlNode* character_xml = XmlReader::GetMarker(xml, "character");
   if (character_xml) {
-    const xmlNode* item = XmlReader::GetMarker(character_xml, "energy");
-    if (item) {
-      XmlReader::ReadUintAttr(item, "initial", character.init_energy);
-      XmlReader::ReadUintAttr(item, "maximum", character.max_energy);
-      if (character.init_energy==0) character.init_energy = 1;
-      if (character.max_energy==0) character.max_energy = 1;
-    }
-    XmlReader::ReadUint(character_xml, "mass", character.mass);
-    XmlReader::ReadDouble(character_xml, "air_resist_factor", character.air_resist_factor);
-    item = XmlReader::GetMarker(character_xml, "jump");
-    if (item) {
-      Double angle_deg;
-      XmlReader::ReadDoubleAttr(item, "strength", character.jump_strength);
-      XmlReader::ReadDoubleAttr(item, "angle", angle_deg);
-      character.jump_angle = static_cast<Double>(angle_deg) * PI / 180;
-    }
+    char_settings.LoadXml(character_xml);
+    energy.LoadXml( XmlReader::GetMarker(character_xml, "energy") );
+ 
+    jump.LoadXml( XmlReader::GetMarker(character_xml, "jump") );
+    character.jump_angle *= PI / 180;
 
-    item = XmlReader::GetMarker(character_xml, "super_jump");
-    if (item) {
-      Double angle_deg;
-      XmlReader::ReadDoubleAttr(item, "strength", character.super_jump_strength);
-      XmlReader::ReadDoubleAttr(item, "angle", angle_deg);
-      character.super_jump_angle = static_cast<Double>(angle_deg) * PI / 180;
-    }
-    item = XmlReader::GetMarker(character_xml, "back_jump");
-    if (item) {
-      Double angle_deg;
-      XmlReader::ReadDoubleAttr(item, "strength", character.back_jump_strength);
-      XmlReader::ReadDoubleAttr(item, "angle", angle_deg);
-      character.back_jump_angle = static_cast<Double>(angle_deg) * PI / 180;
-    }
-    XmlReader::ReadUint(character_xml, "walking_pause", character.walking_pause);
-    const xmlNode* explosion = XmlReader::GetMarker(character_xml, "death_explosion");
-    if (explosion)
-      death_explosion_cfg.LoadXml(explosion);
+    super_jump.LoadXml( XmlReader::GetMarker(character_xml, "super_jump") );
+    character.super_jump_angle *= PI / 180;
+
+    back_jump.LoadXml( XmlReader::GetMarker(character_xml, "back_jump") );
+    character.back_jump_angle *= PI / 180;
+    death_explosion_cfg.LoadXml( XmlReader::GetMarker(character_xml, "death_explosion") );
   }
 
   // Barrel explosion
   const xmlNode* barrel_xml = XmlReader::GetMarker(xml, "barrel");
   if (barrel_xml) {
-    const xmlNode* barrel_explosion = XmlReader::GetMarker(barrel_xml, "explosion");
-    if (barrel_explosion)
-      barrel_explosion_cfg.LoadXml(barrel_explosion);
+    barrel_explosion_cfg.LoadXml( XmlReader::GetMarker(barrel_xml, "explosion") );
   }
 
   //=== Weapons ===
@@ -173,16 +154,11 @@ bool GameMode::LoadXml(const xmlNode* xml)
   if (bonus_box_xml) {
     BonusBox::LoadXml(bonus_box_xml);
 
-    const xmlNode* bonus_box_explosion = XmlReader::GetMarker(bonus_box_xml, "explosion");
-    if (bonus_box_explosion)
-      bonus_box_explosion_cfg.LoadXml(bonus_box_explosion);
+    bonus_box_explosion_cfg.LoadXml( XmlReader::GetMarker(bonus_box_xml, "explosion") );
   }
 
   // Medkit - reuses the bonus_box explosion.
-  const xmlNode* medkit_xml = XmlReader::GetMarker(xml, "medkit");
-  if (medkit_xml) {
-    Medkit::LoadXml(medkit_xml);
-  }
+  Medkit::LoadXml( XmlReader::GetMarker(xml, "medkit") );
 
   return true;
 }
@@ -261,16 +237,14 @@ bool GameMode::ExportToString(std::string& mode,
 
 bool GameMode::AllowCharacterSelection() const
 {
-  switch (allow_character_selection)
-  {
-  case GameMode::ALWAYS:
-    break;
+  switch (allow_character_selection) {
+  case GameMode::ALWAYS: break;
 
   case GameMode::BEFORE_FIRST_ACTION:
-    return (Game::GetInstance()->ReadState() == Game::PLAYING) && !Game::GetInstance()->IsCharacterAlreadyChosen();
+    return (Game::GetInstance()->ReadState() == Game::PLAYING) &&
+            !Game::GetInstance()->IsCharacterAlreadyChosen();
 
-  case GameMode::NEVER:
-    return false;
+  case GameMode::NEVER: return false;
   }
 
   return true;
@@ -280,8 +254,7 @@ std::string GameMode::GetFilename() const
 {
   Config * config = Config::GetInstance();
   std::string filename = std::string("game_mode" PATH_SEPARATOR)
-    + m_current
-    + std::string(".xml");
+                       + m_current + std::string(".xml");
 
   std::string fullname = config->GetPersonalDataDir() + filename;
 
@@ -306,8 +279,7 @@ std::string GameMode::GetObjectsFilename() const
 {
   Config * config = Config::GetInstance();
   std::string filename = std::string("game_mode" PATH_SEPARATOR)
-    + m_current
-    + std::string("_objects.xml");
+                       + m_current + std::string("_objects.xml");
 
   std::string fullname = config->GetPersonalDataDir() + filename;
 
