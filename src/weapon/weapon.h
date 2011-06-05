@@ -316,7 +316,8 @@ public:
   const std::string& GetName() const { return m_name; }
   const std::string& GetID() const { return m_id; }
   const std::string& GetHelp() const { return m_help; }
-  Weapon_type GetType() const { return m_type; };
+  Weapon_type GetType() const { return m_type; }
+  EmptyWeaponConfig* GetConfig() { return extra_params; }
 
   // For localization purposes, called when changing language
   virtual void UpdateTranslationStrings() = 0;
