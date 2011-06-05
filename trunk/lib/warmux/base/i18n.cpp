@@ -26,6 +26,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdlib.h>
+#include <string.h>
 
 #ifdef USE_FRIBIDI
 # include <fribidi/fribidi.h>
