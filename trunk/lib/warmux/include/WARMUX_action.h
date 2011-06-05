@@ -81,8 +81,7 @@ public:
     // Other interactions
     ACTION_INFO_CLIENT_CONNECT,
     ACTION_INFO_CLIENT_DISCONNECT,
-    ACTION_GAME_PACK_CALCULATED_FRAMES,
-
+ 
     ACTION_NETWORK_RANDOM_INIT,
     LAST_FRAME_LESS_ACTION = ACTION_NETWORK_RANDOM_INIT,
 
@@ -90,6 +89,7 @@ public:
     // ########################################################
     // ########################################################
     ACTION_GAME_CALCULATE_FRAME,
+    ACTION_GAME_PACK_CALCULATED_FRAMES,
     ACTION_PLAYER_CHANGE_WEAPON,
     ACTION_PLAYER_CHANGE_CHARACTER,
 
