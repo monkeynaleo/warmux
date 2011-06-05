@@ -22,24 +22,6 @@
 #include <iostream>
 #include "weapon/weapon_cfg.h"
 
-EmptyWeaponConfig::~EmptyWeaponConfig()
-{
-  for (iterator it = begin(); it != end(); ++it)
-    delete (*it);
-}
-
-void EmptyWeaponConfig::LoadXml(const xmlNode* elem)
-{
-  for (iterator it = begin(); it != end(); ++it)
-    (*it)->Read(elem);
-}
-
-void EmptyWeaponConfig::SaveXml(XmlWriter& writer, xmlNode* elem)
-{
-  for (const_iterator it = begin(); it != end(); ++it)
-    (*it)->Write(writer, elem);
-}
-
 //-----------------------------------------------------------------------------
 
 WeaponConfig::WeaponConfig()

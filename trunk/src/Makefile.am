@@ -321,6 +321,8 @@ warmux_SOURCES = \
         tool/affine_transform.h \
         tool/ansi_convert.cpp \
         tool/ansi_convert.h \
+        tool/config_element.cpp \
+        tool/config_element.h \
         tool/copynpaste.cpp \
         tool/copynpaste.h \
         tool/isnan.h \

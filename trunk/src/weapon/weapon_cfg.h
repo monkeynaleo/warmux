@@ -25,17 +25,11 @@
 #include <list>
 #include <WARMUX_base.h>
 #include "tool/xml_document.h"
+#include "tool/config_element.h"
 
 //-----------------------------------------------------------------------------
-class EmptyWeaponConfig : public std::list<ConfigElement*>
+class EmptyWeaponConfig : public ConfigElementList
 {
-public:
-  typedef std::list<ConfigElement*>::iterator iterator;
-  typedef std::list<ConfigElement*>::const_iterator const_iterator;
-
-  virtual ~EmptyWeaponConfig();
-  void LoadXml(const xmlNode* elem);
-  void SaveXml(XmlWriter& writer, xmlNode* elem);
 };
 
 //-----------------------------------------------------------------------------
