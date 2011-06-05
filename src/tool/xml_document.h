@@ -5,9 +5,11 @@
 #ifndef XML_DOCUMENT_H
 #define XML_DOCUMENT_H
 
-#include <WARMUX_base.h>
 #include <string>
 #include <vector>
+
+#include <WARMUX_base.h>
+#include "tool/string_tools.h"
 
 // Forward declaration
 typedef struct _xmlNode xmlNode;
@@ -156,4 +158,73 @@ public:
   std::string SaveToString() const;
 };
 
-#endif /* XML_DOCUMENT_H */
+class ConfigElement
+{
+public:
+  typedef enum
+  {
+    TYPE_INT,
+    TYPE_DOUBLE
+  } Type;
+
+  Type        m_type;
+  const char *m_name;
+  bool        m_important;
+
+  virtual bool Read(XmlReader& reader, const xmlNode* father) = 0;
+  virtual void Write(XmlWriter& writer, xmlNode* elem) const = 0;
+
+protected:
+  ConfigElement(Type t, const char *n, bool imp = false)
+  {
+    m_type = t; m_name = n; m_important = imp;
+  }
+};
+
+class IntConfigElement : public ConfigElement
+{
+  int       m_val, m_def, m_min, m_max;
+public:
+  IntConfigElement(const char *n, int v, int d, int mi, int ma, bool imp = false)
+    : ConfigElement(TYPE_INT, n, imp)
+  {
+    m_val = v; m_def = d; m_min = mi, m_max = ma;
+  }
+  bool Read(XmlReader& reader, const xmlNode* father)
+  {
+    if (!reader.ReadInt(father, m_name, m_val)) {
+      m_val = m_def;
+      return false;
+    }
+    return true;
+  }
+  void Write(XmlWriter& writer, xmlNode* father) const
+  {
+    writer.WriteElement(father, m_name, int2str(m_val));
+  }
+};
+
+class DoubleConfigElement : public ConfigElement
+{
+  Double       m_val, m_def, m_min, m_max;
+public:
+  DoubleConfigElement(const char *n, Double v, Double d, Double mi, Double ma, bool imp = false)
+    : ConfigElement(TYPE_DOUBLE, n, imp)
+  {
+    m_val = v; m_def = d; m_min = mi, m_max = ma;
+  }
+  bool Read(XmlReader& reader, const xmlNode* father)
+  {
+    if (!reader.ReadDouble(father, m_name, m_val)) {
+      m_val = m_def;
+      return false;
+    }
+    return true;
+  }
+  void Write(XmlWriter& writer, xmlNode* father) const
+  {
+    writer.WriteElement(father, m_name, Double2str(m_val));
+  }
+};
+
+#endif // XML_DOCUMENT_H

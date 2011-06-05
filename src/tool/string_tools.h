@@ -20,7 +20,7 @@
  *****************************************************************************/
 
 #ifndef STRING_TOOLS_H
-#define STRING_TOOLS__H
+#define STRING_TOOLS_H
 
 #include <WARMUX_base.h>
 #include <string>
@@ -45,4 +45,4 @@ std::string bool2str(bool x);
 char* LocaleToUTF8(const char* orig);
 #endif
 
-#endif
+#endif // STRING_TOOLS_H
