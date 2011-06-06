@@ -3,7 +3,9 @@
 
 bool IntConfigElement::Read(const xmlNode* father) const
 {
-  if (!XmlReader::ReadInt(father, m_name, *m_val)) {
+  bool ok = (m_attribute) ? XmlReader::ReadIntAttr(father, m_name, *m_val)
+                          : XmlReader::ReadInt(father, m_name, *m_val);
+  if (!ok) {
     *m_val = m_def;
     return false;
   }
@@ -19,7 +21,9 @@ void IntConfigElement::Write(XmlWriter& writer, xmlNode* father) const
 
 bool BoolConfigElement::Read(const xmlNode* father) const
 {
-  if (!XmlReader::ReadBool(father, m_name, *m_val)) {
+  bool ok = (m_attribute) ? XmlReader::ReadBoolAttr(father, m_name, *m_val)
+                          : XmlReader::ReadBool(father, m_name, *m_val);
+  if (!ok) {
     *m_val = m_def;
     return false;
   }
@@ -36,12 +40,14 @@ void BoolConfigElement::Write(XmlWriter& writer, xmlNode* father) const
 bool UintConfigElement::Read(const xmlNode* father) const
 {
   int val;
-  if (!XmlReader::ReadInt(father, m_name, val) || val<0) {
+  bool ok = (m_attribute) ? XmlReader::ReadIntAttr(father, m_name, val)
+                          : XmlReader::ReadInt(father, m_name, val);
+  if (!ok || val<0) {
     *m_val = m_def;
     return false;
   }
-  ASSERT(!m_important || (*m_val >= m_min && *m_val <= m_max));
   *m_val = val;
+  ASSERT(!m_important || (*m_val >= m_min && *m_val <= m_max));
   return true;
 }
 void UintConfigElement::Write(XmlWriter& writer, xmlNode* father) const
@@ -53,7 +59,9 @@ void UintConfigElement::Write(XmlWriter& writer, xmlNode* father) const
 
 bool DoubleConfigElement::Read(const xmlNode* father) const
 {
-  if (!XmlReader::ReadDouble(father, m_name, *m_val)) {
+  bool ok = (m_attribute) ? XmlReader::ReadDoubleAttr(father, m_name, *m_val)
+                          : XmlReader::ReadDouble(father, m_name, *m_val);
+  if (!ok) {
     *m_val = m_def;
     return false;
   }
@@ -71,7 +79,9 @@ const Double AngleConfigElement::ToRad = PI/180;
 
 bool AngleConfigElement::Read(const xmlNode* father) const
 {
-  if (!XmlReader::ReadDouble(father, m_name, *m_val)) {
+  bool ok = (m_attribute) ? XmlReader::ReadDoubleAttr(father, m_name, *m_val)
+                          : XmlReader::ReadDouble(father, m_name, *m_val);
+  if (!ok) {
     *m_val = m_def;
     return false;
   }
@@ -88,7 +98,9 @@ void AngleConfigElement::Write(XmlWriter& writer, xmlNode* father) const
 
 bool StringConfigElement::Read(const xmlNode* father) const
 {
-  if (!XmlReader::ReadString(father, m_name, *m_val)) {
+  bool ok = (m_attribute) ? XmlReader::ReadStringAttr(father, m_name, *m_val)
+                          : XmlReader::ReadString(father, m_name, *m_val);
+  if (!ok) {
     *m_val = m_def;
     return false;
   }
@@ -109,28 +121,30 @@ ConfigElementList::~ConfigElementList()
 
 void ConfigElementList::LoadXml(const xmlNode* elem) const
 {
-  std::list<ConfigElementList*>::const_iterator itc = children.begin();
-  for (; itc != children.end(); ++itc)
-    (*itc)->LoadXml(elem);
-
   if (node && elem)
     elem = XmlReader::GetMarker(elem, node);
   if (!elem)
     return;
+
+  std::list<ConfigElementList*>::const_iterator itc = children.begin();
+  for (; itc != children.end(); ++itc)
+    (*itc)->LoadXml(elem);
+
   for (const_iterator it = begin(); it != end(); ++it)
     (*it)->Read(elem);
 }
 
 xmlNode* ConfigElementList::SaveXml(XmlWriter& writer, xmlNode* elem) const
 {
-  std::list<ConfigElementList*>::const_iterator itc = children.begin();
-  for (; itc != children.end(); ++itc)
-    (*itc)->SaveXml(writer, elem);
-
   if (node && elem)
     elem = XmlWriter::AddNode(elem, node);
   if (!elem)
     return NULL;
+
+  std::list<ConfigElementList*>::const_iterator itc = children.begin();
+  for (; itc != children.end(); ++itc)
+    (*itc)->SaveXml(writer, elem);
+
   for (const_iterator it = begin(); it != end(); ++it)
     (*it)->Write(writer, elem);
   return elem;
