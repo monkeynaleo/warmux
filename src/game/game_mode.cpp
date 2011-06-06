@@ -124,10 +124,11 @@ GameMode::~GameMode()
 }
 
 // Load data options from the selected game_mode
-bool GameMode::LoadXml(const xmlNode* xml)
+bool GameMode::LoadXml()
 {
+  const xmlNode *root = doc.GetRoot();
   // Load all elements
-  main_settings.LoadXml(xml);
+  main_settings.LoadXml(root);
 
   if (txt == "always")
     allow_character_selection = ALWAYS;
@@ -139,7 +140,7 @@ bool GameMode::LoadXml(const xmlNode* xml)
     fprintf(stderr, "%s is not a valid option for \"allow_character_selection\"\n", txt.c_str());
 
   //=== Weapons ===
-  weapons_xml = XmlReader::GetMarker(xml, "weapons");
+  weapons_xml = XmlReader::GetMarker(root, "weapons");
 
   return true;
 }
@@ -157,7 +158,7 @@ bool GameMode::Load(void)
 
   if (!doc.Load(GetFilename()))
     return false;
-  if (!LoadXml(doc.GetRoot()))
+  if (!LoadXml())
     return false;
 
   return true;
@@ -176,7 +177,7 @@ bool GameMode::LoadFromString(const std::string& game_mode_name,
 
   if (!doc.LoadFromString(game_mode_contents))
     return false;
-  if (!LoadXml(doc.GetRoot()))
+  if (!LoadXml())
     return false;
 
   MSG_DEBUG("game_mode", "OK\n");
