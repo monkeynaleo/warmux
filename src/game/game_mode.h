@@ -37,6 +37,7 @@ class GameMode : public Singleton<GameMode>
 {
   ConfigElementList  main_settings;
   ConfigElementList  char_settings, energy, jump, super_jump, back_jump;
+  ConfigElementList  barrel, bonus_box, medkit;
 public:
   std::string rules;
 
