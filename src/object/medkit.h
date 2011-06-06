@@ -29,6 +29,8 @@
 class Team;
 class Character;
 class Action;
+class XmlWriter;
+
 //-----------------------------------------------------------------------------
 
 class Medkit : public ObjBox
@@ -44,6 +46,7 @@ public:
   ~Medkit();
 
   static void LoadXml(const xmlNode * object) { settings.LoadXml(object); }
+  static void SaveXml(XmlWriter& w, xmlNode * node, const char* name) { settings.SaveXml(w, node, name); }
   void ApplyBonus(Character *);
   const Surface* GetIcon() const;
 };
