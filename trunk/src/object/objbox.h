@@ -31,6 +31,7 @@ class Sprite;
 class Surface;
 typedef struct _xmlNode xmlNode;
 class Action;
+class XmlWriter;
 
 class ObjBox : public PhysicalObj //it would be nice to name this "Box", but that was already taken...
 {
@@ -45,6 +46,7 @@ public:
 
   void DropBox();
   static void LoadXml(const xmlNode*  /*object*/){};
+  static void SaveXml(XmlWriter&, xmlNode*){};
 
   void Draw();
   virtual void Refresh();
