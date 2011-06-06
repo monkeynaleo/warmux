@@ -22,20 +22,20 @@
 #ifndef BARREL_H
 #define BARREL_H
 
-#include "physical_obj.h"
+#include "object/physical_obj.h"
 
 class Sprite;
 
 class PetrolBarrel : public PhysicalObj
 {
   Sprite* img;
-  public:
-    PetrolBarrel();
-    ~PetrolBarrel();
-    void Draw();
-    void Refresh() { };
-  protected:
-    void SignalGhostState(bool was_already_dead);
+public:
+  PetrolBarrel();
+  ~PetrolBarrel();
+  void Draw();
+  void Refresh() { };
+protected:
+  void SignalGhostState(bool was_already_dead);
 };
 
 #endif /* BARREL_H */
