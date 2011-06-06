@@ -62,7 +62,7 @@ public:
   ~GameModeEditor();
 
   Widget *ClickUp(const Point2i & mousePosition, uint button);
-  void ValidGameMode() const;
+  void ValidGameMode();
 };
 
 #endif
