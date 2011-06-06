@@ -89,7 +89,7 @@ private:
 
   void LoadDefaultValues();
 
-  bool LoadXml(const xmlNode* xml);
+  bool LoadXml();
   bool ExportFileToString(const std::string& filename, std::string& contents) const;
 
   std::string GetFilename() const;
