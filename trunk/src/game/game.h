@@ -113,7 +113,7 @@ private:
   void EndInitGameData_NetGameMaster();
   void EndInitGameData_NetClient();
   void InitMap();
-  //void InitWeapons();
+  void InitWeapons();
   void InitTeams();
   void InitSounds();
   void InitData();
@@ -159,7 +159,6 @@ public:
   uint GetCurrentTurn();
   WeaponsList * GetWeaponsList() const { return weapons_list; }
   void UpdateTranslation();
-  void InitWeapons();
 
   Chat                chatsession;
 
