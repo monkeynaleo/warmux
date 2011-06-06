@@ -156,8 +156,10 @@ GameModeEditor::GameModeEditor(const Point2i& size, float zoom, bool _draw_borde
 
 GameModeEditor::~GameModeEditor()
 {
-  if (weapons)
+  if (weapons) {
     delete weapons;
+    weapons = NULL;
+  }
 }
 
 Widget *GameModeEditor::ClickUp(const Point2i & mousePosition, uint button)
@@ -316,8 +318,13 @@ void GameModeEditor::LoadGameMode(bool force)
   }
 }
 
-void GameModeEditor::ValidGameMode() const
+void GameModeEditor::ValidGameMode()
 {
+  if (weapons) {
+    delete weapons;
+    weapons = NULL;
+  }
+
   GameMode * game_mode = GameMode::GetInstance();
   game_mode->Load();
 
