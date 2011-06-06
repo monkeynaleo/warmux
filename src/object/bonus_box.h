@@ -23,7 +23,7 @@
 #define BONUS_BOX_H
 //-----------------------------------------------------------------------------
 #include <WARMUX_base.h>
-#include "objbox.h"
+#include "object/objbox.h"
 
 // Forward declarations
 class Character;

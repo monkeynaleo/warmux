@@ -45,8 +45,6 @@ public:
   ~ObjBox();
 
   void DropBox();
-  static void LoadXml(const xmlNode*  /*object*/){};
-  static void SaveXml(XmlWriter&, xmlNode*){};
 
   void Draw();
   virtual void Refresh();
