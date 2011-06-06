@@ -55,18 +55,31 @@ GameMode::GameMode():
   char_settings.push_back(new UintConfigElement("mass", &character.mass, 100));
   char_settings.push_back(new DoubleConfigElement("air_resist_factor", &character.air_resist_factor, 1.0));
   char_settings.push_back(new UintConfigElement("walking_pause", &character.walking_pause, 50));
+  main_settings.LinkList(&char_settings, "character");
 
   energy.push_back(new UintConfigElement("initial", &character.init_energy, 100, 1, 200));
   energy.push_back(new UintConfigElement("maximum", &character.max_energy, 100, 1, 200));
+  char_settings.LinkList(&energy, "energy");
 
   jump.push_back(new DoubleConfigElement("strength", &character.jump_strength, 8));
-  jump.push_back(new DoubleConfigElement("angle", &character.jump_angle, -60 * 180/PI));
+  jump.push_back(new AngleConfigElement("angle", &character.jump_angle, -60));
+  char_settings.LinkList(&jump, "jump");
 
   super_jump.push_back(new DoubleConfigElement("strength", &character.super_jump_strength, 11));
-  super_jump.push_back(new DoubleConfigElement("angle", &character.super_jump_angle, -80 * 180/PI));
+  super_jump.push_back(new AngleConfigElement("angle", &character.super_jump_angle, -80));
+  char_settings.LinkList(&super_jump, "super_jump");
 
   back_jump.push_back(new DoubleConfigElement("strength", &character.back_jump_strength, 9));
-  back_jump.push_back(new DoubleConfigElement("angle", &character.back_jump_angle, -100 * 180/PI));
+  back_jump.push_back(new AngleConfigElement("angle", &character.back_jump_angle, -100));
+  char_settings.LinkList(&back_jump, "back_jump");
+
+  barrel.LinkList(&barrel_explosion_cfg, "explosion");
+  main_settings.LinkList(&barrel, "barrel");
+
+  bonus_box.LinkList(&bonus_box_explosion_cfg, "explosion");
+  main_settings.LinkList(&bonus_box, "bonus_box");
+
+  main_settings.LinkList(Medkit::GetConfigList(), "medkit");
 }
 
 void GameMode::LoadDefaultValues()
@@ -113,7 +126,9 @@ GameMode::~GameMode()
 // Load data options from the selected game_mode
 bool GameMode::LoadXml(const xmlNode* xml)
 {
+  // Load all elements
   main_settings.LoadXml(xml);
+
   if (txt == "always")
     allow_character_selection = ALWAYS;
   else if (txt == "never")
@@ -123,42 +138,8 @@ bool GameMode::LoadXml(const xmlNode* xml)
   else
     fprintf(stderr, "%s is not a valid option for \"allow_character_selection\"\n", txt.c_str());
 
-  // Character options
-  const xmlNode* character_xml = XmlReader::GetMarker(xml, "character");
-  if (character_xml) {
-    char_settings.LoadXml(character_xml);
-    energy.LoadXml(character_xml, "energy");
- 
-    jump.LoadXml(character_xml, "jump");
-    character.jump_angle *= PI / 180;
-
-    super_jump.LoadXml(character_xml, "super_jump");
-    character.super_jump_angle *= PI / 180;
-
-    back_jump.LoadXml(character_xml, "back_jump");
-    character.back_jump_angle *= PI / 180;
-    death_explosion_cfg.LoadXml(character_xml, "death_explosion");
-  }
-
-  // Barrel explosion
-  const xmlNode* barrel_xml = XmlReader::GetMarker(xml, "barrel");
-  if (barrel_xml) {
-    barrel_explosion_cfg.LoadXml(barrel_xml, "explosion");
-  }
-
   //=== Weapons ===
   weapons_xml = XmlReader::GetMarker(xml, "weapons");
-
-  // Bonus box explosion - must be loaded after the weapons.
-  const xmlNode* bonus_box_xml = XmlReader::GetMarker(xml, "bonus_box");
-  if (bonus_box_xml) {
-    BonusBox::LoadXml(bonus_box_xml);
-
-    bonus_box_explosion_cfg.LoadXml(bonus_box_xml, "explosion");
-  }
-
-  // Medkit - reuses the bonus_box explosion.
-  Medkit::LoadXml( XmlReader::GetMarker(xml, "medkit") );
 
   return true;
 }
@@ -279,36 +260,8 @@ bool GameMode::ExportToFile(const std::string& game_mode_name)
   xmlNode *root = out.GetRoot();
   main_settings.SaveXml(out, root);
 
-  // Character options
-  xmlNode *character_xml = char_settings.SaveXml(out, root, "character");
-  xmlNode *item = energy.SaveXml(out, character_xml, "energy");
-  character.jump_angle *= 180/PI;
-  jump.SaveXml(out, character_xml, "jump");
-  character.jump_angle *= PI / 180;
-
-  character.super_jump_angle *= 180/PI;
-  jump.SaveXml(out, character_xml, "super_jump");
-  character.super_jump_angle *= PI / 180;
- 
-  character.back_jump_angle *= 180/PI;
-  jump.SaveXml(out, character_xml, "back_jump");
-  character.back_jump_angle *= PI / 180;
- 
-  // Barrel explosion
-  barrel_explosion_cfg.SaveXml(out, root, "explosion");
-
-  //=== Weapons ===
-  weapons_xml = XmlReader::GetMarker(root, "weapons");
-
-  // Bonus box explosion - must be loaded after the weapons.
-  xmlNode* bonus_box_xml = XmlWriter::AddNode(root, "bonus_box");
-  BonusBox::SaveXml(out, bonus_box_xml);
-  bonus_box_explosion_cfg.SaveXml(out, bonus_box_xml, "explosion");
-
-  // Medkit - reuses the bonus_box explosion.
-  Medkit::SaveXml(out, root, "medkit");
-
-  return true;}
+  return true;
+}
 
 
 std::string GameMode::GetDefaultObjectsFilename() const
