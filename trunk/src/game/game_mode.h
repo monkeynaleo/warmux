@@ -88,7 +88,7 @@ private:
 
   void LoadDefaultValues();
 
-  bool LoadXml (const xmlNode* xml);
+  bool LoadXml(const xmlNode* xml);
   bool ExportFileToString(const std::string& filename, std::string& contents) const;
 
   std::string GetFilename() const;
@@ -109,6 +109,8 @@ public:
   bool LoadFromString(const std::string& game_mode_name,
                       const std::string& mode,
                       const std::string& mode_objects);
+
+  bool ExportToFile(const std::string& game_mode_name);
 
   bool ExportToString(std::string& mode,
                       std::string& mode_objects) const;
