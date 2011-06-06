@@ -142,6 +142,8 @@ public:
 
   xmlNode *GetRoot() const;
 
+  static xmlNode *AddNode(xmlNode* x, const char* name);
+
   xmlNode *WriteElement(xmlNode* x,
                         const std::string &name,
                         const std::string &value);

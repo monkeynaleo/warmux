@@ -589,12 +589,16 @@ XmlWriter::~XmlWriter()
   Reset();
 }
 
+xmlNode *XmlWriter::AddNode(xmlNode* x, const char* name)
+{
+  return xmlAddChild(x, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)name));
+}
+
 xmlNode *XmlWriter::WriteElement(xmlNode* x,
                                  const std::string &name,
                                  const std::string &value)
 {
-  xmlNode *node = xmlAddChild(x, xmlNewNode(NULL /* empty prefix */,
-                                            (const xmlChar*)name.c_str()));
+  xmlNode *node = AddNode(x, name.c_str());
   xmlNode *text = xmlNewText((const xmlChar*)value.c_str());
   xmlAddChild(node, text);
   m_save = false;
