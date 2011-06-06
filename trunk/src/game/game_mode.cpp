@@ -57,20 +57,20 @@ GameMode::GameMode():
   char_settings.push_back(new UintConfigElement("walking_pause", &character.walking_pause, 50));
   main_settings.LinkList(&char_settings, "character");
 
-  energy.push_back(new UintConfigElement("initial", &character.init_energy, 100, 1, 200));
-  energy.push_back(new UintConfigElement("maximum", &character.max_energy, 100, 1, 200));
+  energy.push_back(new UintConfigElement("initial", &character.init_energy, 100, 1, 200, true));
+  energy.push_back(new UintConfigElement("maximum", &character.max_energy, 100, 1, 200, true));
   char_settings.LinkList(&energy, "energy");
 
-  jump.push_back(new DoubleConfigElement("strength", &character.jump_strength, 8));
-  jump.push_back(new AngleConfigElement("angle", &character.jump_angle, -60));
+  jump.push_back(new DoubleConfigElement("strength", &character.jump_strength, 8, true));
+  jump.push_back(new AngleConfigElement("angle", &character.jump_angle, -60, true));
   char_settings.LinkList(&jump, "jump");
 
-  super_jump.push_back(new DoubleConfigElement("strength", &character.super_jump_strength, 11));
-  super_jump.push_back(new AngleConfigElement("angle", &character.super_jump_angle, -80));
+  super_jump.push_back(new DoubleConfigElement("strength", &character.super_jump_strength, 11, true));
+  super_jump.push_back(new AngleConfigElement("angle", &character.super_jump_angle, -80, true));
   char_settings.LinkList(&super_jump, "super_jump");
 
-  back_jump.push_back(new DoubleConfigElement("strength", &character.back_jump_strength, 9));
-  back_jump.push_back(new AngleConfigElement("angle", &character.back_jump_angle, -100));
+  back_jump.push_back(new DoubleConfigElement("strength", &character.back_jump_strength, 9, true));
+  back_jump.push_back(new AngleConfigElement("angle", &character.back_jump_angle, -100, true));
   char_settings.LinkList(&back_jump, "back_jump");
 
   barrel.LinkList(&barrel_explosion_cfg, "explosion");
