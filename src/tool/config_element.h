@@ -24,7 +24,7 @@ public:
   const char *m_name;
   bool        m_important;
 
-  virtual bool Read(const xmlNode* father) = 0;
+  virtual bool Read(const xmlNode* father) const = 0;
   virtual void Write(XmlWriter& writer, xmlNode* elem) const = 0;
 
 protected:
@@ -42,7 +42,7 @@ public:
     : ConfigElement(TYPE_INT, n, false) {  m_val = v; *v = m_def = d; }
   IntConfigElement(const char *n, int *v, int d, int mi, int ma)
     : ConfigElement(TYPE_INT, n, true) { m_val = v; *v = m_def = d; m_min = mi, m_max = ma; ASSERT(d >= mi && d <= ma); }
-  bool Read(const xmlNode* father);
+  bool Read(const xmlNode* father) const;
   void Write(XmlWriter& writer, xmlNode* father) const;
 };
 
@@ -52,7 +52,7 @@ public:
   bool       *m_val, m_def;
   BoolConfigElement(const char *n, bool *v, bool d, bool imp = false)
     : ConfigElement(TYPE_BOOL, n, imp) { m_val = v; *v = m_def = d; }
-  bool Read(const xmlNode* father);
+  bool Read(const xmlNode* father) const;
   void Write(XmlWriter& writer, xmlNode* father) const;
 };
 
@@ -64,7 +64,7 @@ public:
     : ConfigElement(TYPE_UINT, n, false) { m_val = v; *v = m_def = d; }
   UintConfigElement(const char *n, uint *v, uint d, uint mi, uint ma)
     : ConfigElement(TYPE_UINT, n, true) { m_val = v; *v = m_def = d; m_min = mi, m_max = ma; ASSERT(d >= mi && d <= ma); }
-  bool Read(const xmlNode* father);
+  bool Read(const xmlNode* father) const;
   void Write(XmlWriter& writer, xmlNode* father) const;
 };
 
@@ -76,8 +76,20 @@ public:
     : ConfigElement(TYPE_DOUBLE, n, false) { m_val = v; *v = m_def = d; }
   DoubleConfigElement(const char *n, Double* v, Double d, Double mi, Double ma)
     : ConfigElement(TYPE_DOUBLE, n, true) { m_val = v; *v = m_def = d; m_min = mi, m_max = ma; ASSERT(d >= mi && d <= ma); }
-  bool Read(const xmlNode* father);
-  void Write(XmlWriter& writer, xmlNode* father) const;
+  virtual bool Read(const xmlNode* father) const;
+  virtual void Write(XmlWriter& writer, xmlNode* father) const;
+};
+
+class AngleConfigElement : public DoubleConfigElement
+{
+  static const Double ToDegree;
+  static const Double ToRad;
+public:
+  AngleConfigElement(const char *n, Double* v, Double d) : DoubleConfigElement(n, v, false) { }
+  AngleConfigElement(const char *n, Double* v, Double d, Double mi, Double ma)
+    : DoubleConfigElement(n, v, d*ToRad, mi*ToRad, ma*ToRad) { }
+  virtual bool Read(const xmlNode* father) const;
+  virtual void Write(XmlWriter& writer, xmlNode* father) const;
 };
 
 class StringConfigElement : public ConfigElement
@@ -86,19 +98,30 @@ public:
   std::string       *m_val, m_def;
   StringConfigElement(const char *n, std::string *v, const std::string& d, bool imp = false)
     : ConfigElement(TYPE_BOOL, n, imp) { m_val = v; *v = m_def = d; }
-  bool Read(const xmlNode* father);
+  bool Read(const xmlNode* father) const;
   void Write(XmlWriter& writer, xmlNode* father) const;
 };
 
 class ConfigElementList : public std::list<ConfigElement*>
 {
+  std::list<ConfigElementList*>  children;
+  const char                    *node;
+
 public:
+  ConfigElementList() : node(NULL) { }
+  virtual ~ConfigElementList();
+
   typedef std::list<ConfigElement*>::iterator iterator;
   typedef std::list<ConfigElement*>::const_iterator const_iterator;
 
-  virtual ~ConfigElementList();
-  void LoadXml(const xmlNode* elem, const char* node = NULL);
-  xmlNode *SaveXml(XmlWriter& writer, xmlNode* elem, const char* node = NULL);
+  void LoadXml(const xmlNode* elem) const;
+  xmlNode *SaveXml(XmlWriter& writer, xmlNode* elem) const;
+
+  void LinkList(ConfigElementList* child, const char *name)
+  {
+    child->node = name;
+    children.push_back(child);
+  }
 };
 
 #endif // CONFIG_ELEMENT_H
