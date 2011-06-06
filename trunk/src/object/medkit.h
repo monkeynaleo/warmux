@@ -45,8 +45,7 @@ public:
   Medkit();
   ~Medkit();
 
-  static void LoadXml(const xmlNode * object) { settings.LoadXml(object); }
-  static void SaveXml(XmlWriter& w, xmlNode * node, const char* name) { settings.SaveXml(w, node, name); }
+  static ConfigElementList* GetConfigList() { return &settings; }
   void ApplyBonus(Character *);
   const Surface* GetIcon() const;
 };
