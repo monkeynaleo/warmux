@@ -127,23 +127,23 @@ bool GameMode::LoadXml(const xmlNode* xml)
   const xmlNode* character_xml = XmlReader::GetMarker(xml, "character");
   if (character_xml) {
     char_settings.LoadXml(character_xml);
-    energy.LoadXml( XmlReader::GetMarker(character_xml, "energy") );
+    energy.LoadXml(character_xml, "energy");
  
-    jump.LoadXml( XmlReader::GetMarker(character_xml, "jump") );
+    jump.LoadXml(character_xml, "jump");
     character.jump_angle *= PI / 180;
 
-    super_jump.LoadXml( XmlReader::GetMarker(character_xml, "super_jump") );
+    super_jump.LoadXml(character_xml, "super_jump");
     character.super_jump_angle *= PI / 180;
 
-    back_jump.LoadXml( XmlReader::GetMarker(character_xml, "back_jump") );
+    back_jump.LoadXml(character_xml, "back_jump");
     character.back_jump_angle *= PI / 180;
-    death_explosion_cfg.LoadXml( XmlReader::GetMarker(character_xml, "death_explosion") );
+    death_explosion_cfg.LoadXml(character_xml, "death_explosion");
   }
 
   // Barrel explosion
   const xmlNode* barrel_xml = XmlReader::GetMarker(xml, "barrel");
   if (barrel_xml) {
-    barrel_explosion_cfg.LoadXml( XmlReader::GetMarker(barrel_xml, "explosion") );
+    barrel_explosion_cfg.LoadXml(barrel_xml, "explosion");
   }
 
   //=== Weapons ===
@@ -154,7 +154,7 @@ bool GameMode::LoadXml(const xmlNode* xml)
   if (bonus_box_xml) {
     BonusBox::LoadXml(bonus_box_xml);
 
-    bonus_box_explosion_cfg.LoadXml( XmlReader::GetMarker(bonus_box_xml, "explosion") );
+    bonus_box_explosion_cfg.LoadXml(bonus_box_xml, "explosion");
   }
 
   // Medkit - reuses the bonus_box explosion.
@@ -173,7 +173,6 @@ bool GameMode::Load(void)
   // Game mode objects configuration file
   if (!doc_objects->Load(GetObjectsFilename()))
     return false;
-
 
   if (!doc.Load(GetFilename()))
     return false;
@@ -267,6 +266,50 @@ std::string GameMode::GetFilename() const
 
   return fullname;
 }
+
+bool GameMode::ExportToFile(const std::string& game_mode_name)
+{
+  Config * config = Config::GetInstance();
+  std::string filename = std::string("game_mode" PATH_SEPARATOR)
+                       + game_mode_name + std::string(".xml");
+
+  std::string fullname = config->GetPersonalDataDir() + filename;
+  XmlWriter out;
+  out.Create(fullname, "game_mode", "1.0", "utf-8");
+  xmlNode *root = out.GetRoot();
+  main_settings.SaveXml(out, root);
+
+  // Character options
+  xmlNode *character_xml = char_settings.SaveXml(out, root, "character");
+  xmlNode *item = energy.SaveXml(out, character_xml, "energy");
+  character.jump_angle *= 180/PI;
+  jump.SaveXml(out, character_xml, "jump");
+  character.jump_angle *= PI / 180;
+
+  character.super_jump_angle *= 180/PI;
+  jump.SaveXml(out, character_xml, "super_jump");
+  character.super_jump_angle *= PI / 180;
+ 
+  character.back_jump_angle *= 180/PI;
+  jump.SaveXml(out, character_xml, "back_jump");
+  character.back_jump_angle *= PI / 180;
+ 
+  // Barrel explosion
+  barrel_explosion_cfg.SaveXml(out, root, "explosion");
+
+  //=== Weapons ===
+  weapons_xml = XmlReader::GetMarker(root, "weapons");
+
+  // Bonus box explosion - must be loaded after the weapons.
+  xmlNode* bonus_box_xml = XmlWriter::AddNode(root, "bonus_box");
+  BonusBox::SaveXml(out, bonus_box_xml);
+  bonus_box_explosion_cfg.SaveXml(out, bonus_box_xml, "explosion");
+
+  // Medkit - reuses the bonus_box explosion.
+  Medkit::SaveXml(out, root, "medkit");
+
+  return true;}
+
 
 std::string GameMode::GetDefaultObjectsFilename() const
 {
