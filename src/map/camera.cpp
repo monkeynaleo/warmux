@@ -181,6 +181,17 @@ void Camera::AutoCrop()
     acceleration.y *= (1 + SPEED_REACTIVITY * ((int)abs(m_speed.y) - SPEED_REACTIVITY_CEIL));
   }
 
+  //Stop camera oscillation when near target
+  if (position.x - target.x == 0) {
+    acceleration.x = 0.0f;
+    m_speed.x = 0.0f;
+  }
+
+  if (position.y - target.y == 0) {
+    acceleration.y = 0.0f;
+    m_speed.y = 0.0f;
+  }
+
   //printf("speed=(%.2f,%.2f)  target=(%i,%i)\n", m_speed.x, m_speed.y, target.x, target.y);
   if (stop) {
     m_speed = m_speed/2;
