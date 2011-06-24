@@ -32,6 +32,10 @@
 
 typedef struct _xmlNode xmlNode;
 
+#define SHIFT_BIT   0x1
+#define ALT_BIT     0x2
+#define CONTROL_BIT 0x4
+
 class Keyboard : public Singleton<Keyboard>, public ManMachineInterface
 {
 private:
@@ -58,6 +62,7 @@ public:
   bool SaveKeyEvent(Key_t at, int raw_key_code,
                     bool control, bool alt, bool shift);
   static bool IsModifier(int raw_key_code);
+  static int  GetModifierBits();
 };
 
 //-----------------------------------------------------------------------------

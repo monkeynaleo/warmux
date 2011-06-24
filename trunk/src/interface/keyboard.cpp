@@ -31,9 +31,6 @@
 #include <libxml/tree.h>
 
 #define MODIFIER_OFFSET (SDLK_LAST + 1)
-#define SHIFT_BIT 0x1
-#define ALT_BIT 0x2
-#define CONTROL_BIT 0x4
 #define SHIFT_OFFSET (MODIFIER_OFFSET * SHIFT_BIT)
 #define CONTROL_OFFSET (MODIFIER_OFFSET * CONTROL_BIT)
 #define ALT_OFFSET (MODIFIER_OFFSET * ALT_BIT)
@@ -235,7 +232,8 @@ void Keyboard::HandleKeyComboEvent(int key_code, Key_Event_t event_type)
   }
 }
 
-static int GetModifierBitsFromSDL() {
+int Keyboard::GetModifierBits()
+{
   SDLMod sdl_modifier_bits = SDL_GetModState();
   int result = 0;
   if (sdl_modifier_bits & KMOD_SHIFT)
@@ -295,7 +293,7 @@ bool Keyboard::HandleKeyEvent(const SDL_Event& evnt)
 
   // Also ignore real key code of a modifier, fix bug #15238
   if (IsModifier(basic_key_code)) {
-    int modifier_changed = modifier_only_bits ^ GetModifierBitsFromSDL();
+    int modifier_changed = modifier_only_bits ^ GetModifierBits();
     if (event_type == KEY_RELEASED) {
       for (std::set<SDLKey>::const_iterator it = pressed_keys.begin(); it != pressed_keys.end(); it++ ) {
         int key_code = *it + MODIFIER_OFFSET * modifier_changed;
@@ -307,7 +305,7 @@ bool Keyboard::HandleKeyEvent(const SDL_Event& evnt)
         HandleKeyComboEvent(key_code, KEY_RELEASED);
       }
     }
-    modifier_only_bits = GetModifierBitsFromSDL();
+    modifier_only_bits = GetModifierBits();
     return false;
   }
 #ifdef MAEMO
@@ -319,7 +317,7 @@ bool Keyboard::HandleKeyEvent(const SDL_Event& evnt)
 
   int key_code;
   int previous_modifier_bits = modifier_bits;
-  modifier_bits = GetModifierBitsFromSDL();
+  modifier_bits = GetModifierBits();
 
   if (modifier_bits != previous_modifier_bits) {
     std::set<SDLKey>::const_iterator it = pressed_keys.find(basic_key_code);
