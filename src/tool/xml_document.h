@@ -146,7 +146,7 @@ public:
 
   xmlNode *WriteElement(xmlNode* x,
                         const std::string &name,
-                        const std::string &value);
+                        const std::string &value, bool attr=false);
 
   void WriteComment(xmlNode* x,
                     const std::string& comment);
