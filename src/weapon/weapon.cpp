@@ -692,12 +692,12 @@ bool Weapon::LoadXml(const xmlNode*  weapon)
   return true;
 }
 
-bool Weapon::SaveXml(XmlWriter& writer, xmlNode*  weapon) const
+xmlNode* Weapon::SaveXml(XmlWriter& writer, xmlNode*  weapon) const
 {
   xmlNode* elem = XmlWriter::AddNode(weapon, m_id.c_str());
   if (!elem) {
     fprintf(stderr, "Couldn't save weapon config for %s\n", m_id.c_str());
-    return false;
+    return NULL;
   }
 
   writer.WriteElement(elem, "available_after_turn", int2str(m_available_after_turn));
@@ -721,9 +721,9 @@ bool Weapon::SaveXml(XmlWriter& writer, xmlNode*  weapon) const
   // angle of weapon when drawing
   // if (min_angle == max_angle) no cross_hair !
   // between -90 to 90 degrees
-  if (min_angle.IsNotZero() || max_angle.IsNotZero()) {
-    int min_angle_deg = min_angle * PI /180;
-    int max_angle_deg = max_angle * PI /180;
+  int min_angle_deg = ONE_HALF + min_angle * PI /180;
+  int max_angle_deg = ONE_HALF + max_angle * PI /180;
+  if (min_angle_deg || max_angle_deg) {
     writer.WriteElement(elem, "min_angle", int2str(min_angle_deg));
     writer.WriteElement(elem, "max_angle", int2str(max_angle_deg));
   }
@@ -732,7 +732,7 @@ bool Weapon::SaveXml(XmlWriter& writer, xmlNode*  weapon) const
   if (extra_params)
     extra_params->SaveXml(writer, elem);
 
-  return writer.IsOk();
+  return elem;
 }
 
 // Handle keyboard events
