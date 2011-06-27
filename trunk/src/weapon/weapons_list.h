@@ -31,6 +31,7 @@
 //-----------------------------------------------------------------------------
 
 class WeaponLauncher;
+class XmlWriter;
 
 // Classe de gestion des armes
 class WeaponsList
@@ -55,6 +56,7 @@ public:
   ~WeaponsList();
 
   void Init(const xmlNode* weapons_xml) const;
+  bool Save(XmlWriter& writer, xmlNode* weapons_xml) const;
 
   void UpdateTranslation() const;
 
