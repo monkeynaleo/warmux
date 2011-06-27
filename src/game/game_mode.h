@@ -32,6 +32,7 @@
 #include "tool/config_element.h"
 
 typedef struct _xmlNode xmlNode;
+class WeaponsList;
 
 class GameMode : public Singleton<GameMode>
 {
@@ -111,7 +112,7 @@ public:
                       const std::string& mode,
                       const std::string& mode_objects);
 
-  bool ExportToFile(const std::string& game_mode_name);
+  bool ExportToFile(const std::string& game_mode_name, WeaponsList& wlist);
 
   bool ExportToString(std::string& mode,
                       std::string& mode_objects) const;

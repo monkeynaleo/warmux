@@ -249,7 +249,7 @@ std::string GameMode::GetFilename() const
   return fullname;
 }
 
-bool GameMode::ExportToFile(const std::string& game_mode_name)
+bool GameMode::ExportToFile(const std::string& game_mode_name, WeaponsList& wlist)
 {
   Config * config = Config::GetInstance();
   std::string filename = std::string("game_mode" PATH_SEPARATOR)
@@ -257,13 +257,15 @@ bool GameMode::ExportToFile(const std::string& game_mode_name)
 
   std::string fullname = config->GetPersonalDataDir() + filename;
   XmlWriter out;
-  out.Create(fullname, "game_mode", "1.0", "utf-8");
-  xmlNode *root = out.GetRoot();
-  main_settings.SaveXml(out, root);
+  if (!out.Create(fullname, "game_mode", "1.0", "utf-8"))
+    return false;
 
-  return true;
+  xmlNode *node = out.GetRoot();
+  main_settings.SaveXml(out, node);
+
+  node = XmlWriter::AddNode(node, "weapons");
+  wlist.Save(out, node);
 }
-
 
 std::string GameMode::GetDefaultObjectsFilename() const
 {
