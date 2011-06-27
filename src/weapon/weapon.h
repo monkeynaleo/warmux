@@ -32,6 +32,7 @@ class Character;
 class Sprite;
 class EmptyWeaponConfig;
 typedef struct _xmlNode xmlNode;
+class XmlWriter;
 
 // Infinite ammos constant
 extern const int INFINITE_AMMO;
@@ -308,6 +309,7 @@ public:
   // Load parameters from the xml config file
   // Return true if xml has been succesfully load
   bool LoadXml(const xmlNode*  weapon);
+  bool SaveXml(XmlWriter& writer, xmlNode*  weapon) const;
 
   // return the strength of the weapon
   Double ReadStrength() const { return m_strength; };
