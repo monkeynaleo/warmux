@@ -167,6 +167,11 @@ Widget *GameModeEditor::ClickUp(const Point2i & mousePosition, uint button)
   Widget *w = VBox::ClickUp(mousePosition, button);
   if (opt_game_mode->Contains(mousePosition))
     LoadGameMode();
+  else if (w == save) {
+    const std::string& mode = filename->GetText();
+    GameMode * game_mode = GameMode::GetInstance();
+    bool ok = game_mode->ExportToFile(mode, *weapons);
+  }
   return w;
 }
 
