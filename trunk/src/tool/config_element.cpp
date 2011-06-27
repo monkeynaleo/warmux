@@ -14,7 +14,7 @@ bool IntConfigElement::Read(const xmlNode* father) const
 }
 void IntConfigElement::Write(XmlWriter& writer, xmlNode* father) const
 {
-  writer.WriteElement(father, m_name, int2str(*m_val));
+  writer.WriteElement(father, m_name, int2str(*m_val), m_attribute);
 }
 
 //----------------------------------------------------------------------
@@ -32,7 +32,7 @@ bool BoolConfigElement::Read(const xmlNode* father) const
 
 void BoolConfigElement::Write(XmlWriter& writer, xmlNode* father) const
 {
-  writer.WriteElement(father, m_name, bool2str(*m_val));
+  writer.WriteElement(father, m_name, bool2str(*m_val), m_attribute);
 }
 
 //----------------------------------------------------------------------
@@ -52,7 +52,7 @@ bool UintConfigElement::Read(const xmlNode* father) const
 }
 void UintConfigElement::Write(XmlWriter& writer, xmlNode* father) const
 {
-  writer.WriteElement(father, m_name, uint2str(*m_val));
+  writer.WriteElement(father, m_name, uint2str(*m_val), m_attribute);
 }
 
 //----------------------------------------------------------------------
@@ -70,7 +70,7 @@ bool DoubleConfigElement::Read(const xmlNode* father) const
 }
 void DoubleConfigElement::Write(XmlWriter& writer, xmlNode* father) const
 {
-  writer.WriteElement(father, m_name, Double2str(*m_val));
+  writer.WriteElement(father, m_name, Double2str(*m_val), m_attribute);
 }
 
 //----------------------------------------------------------------------
@@ -91,7 +91,7 @@ bool AngleConfigElement::Read(const xmlNode* father) const
 }
 void AngleConfigElement::Write(XmlWriter& writer, xmlNode* father) const
 {
-  writer.WriteElement(father, m_name, Double2str(ToDegree*(*m_val)));
+  writer.WriteElement(father, m_name, Double2str(ToDegree*(*m_val)), m_attribute);
 }
 
 //----------------------------------------------------------------------
@@ -108,7 +108,7 @@ bool StringConfigElement::Read(const xmlNode* father) const
 }
 void StringConfigElement::Write(XmlWriter& writer, xmlNode* father) const
 {
-  writer.WriteElement(father, m_name, *m_val);
+  writer.WriteElement(father, m_name, *m_val, m_attribute);
 }
 
 //---------------------------------------------------------------------
