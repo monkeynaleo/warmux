@@ -596,12 +596,18 @@ xmlNode *XmlWriter::AddNode(xmlNode* x, const char* name)
 
 xmlNode *XmlWriter::WriteElement(xmlNode* x,
                                  const std::string &name,
-                                 const std::string &value)
+                                 const std::string &value,
+                                 bool attr)
 {
+  m_save = false;
+  if (attr) {
+    xmlSetProp(x, (const xmlChar*)name.c_str(), (const xmlChar*)value.c_str());
+    return x;
+  }
+
   xmlNode *node = AddNode(x, name.c_str());
   xmlNode *text = xmlNewText((const xmlChar*)value.c_str());
   xmlAddChild(node, text);
-  m_save = false;
   return node;
 }
 
