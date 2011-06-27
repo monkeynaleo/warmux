@@ -107,6 +107,16 @@ void WeaponsList::Init(const xmlNode* weapons_xml) const
     (*it)->LoadXml(weapons_xml);
 }
 
+bool WeaponsList::Save(XmlWriter& writer, xmlNode* weapons_xml) const
+{
+  for (iterator it = m_weapons_list.begin(); it != m_weapons_list.end(); it++) {
+    if (!(*it)->SaveXml(writer, weapons_xml))
+      return false;
+  }
+
+  return true;
+}
+
 //-----------------------------------------------------------------------------
 
 void WeaponsList::UpdateTranslation() const
