@@ -281,14 +281,12 @@ void Game::EndInitGameData_NetClient()
 void Game::InitWeapons()
 {
   if (current_mode != GameMode::GetRef().GetName()) {
-    delete weapons_list;
     weapons_list = NULL;
     current_mode = GameMode::GetRef().GetName();
   }
 
   if (!weapons_list) {
-    weapons_list = new WeaponsList(GameMode::GetInstance()->GetWeaponsXml());
-    //weapons_list->UpdateTranslation();
+    weapons_list = GameMode::GetInstance()->GetWeaponsList();
   }
 }
 
@@ -480,8 +478,6 @@ Game::~Game()
 {
   if (fps)
     delete fps;
-  if (weapons_list)
-    delete weapons_list;
 }
 
 // ####################################################################

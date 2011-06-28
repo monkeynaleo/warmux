@@ -39,6 +39,8 @@ class GameMode : public Singleton<GameMode>
   ConfigElementList  main_settings;
   ConfigElementList  char_settings, energy, jump, super_jump, back_jump;
   ConfigElementList  barrel, bonus_box, medkit;
+  WeaponsList       *weapons_list;
+
 public:
   std::string rules;
 
@@ -86,7 +88,6 @@ private:
   std::string m_current;
 
   XmlReader* doc_objects;
-  const xmlNode* weapons_xml;
 
   void LoadDefaultValues();
 
@@ -101,7 +102,7 @@ private:
 public:
   const std::string& GetName() const { return m_current; }
 
-  const xmlNode* GetWeaponsXml() { return weapons_xml; }
+  WeaponsList* GetWeaponsList() { return weapons_list; }
   int GetMaxTeamsPerNetworkPlayer() { return max_teams -1; }
 
   bool Load(void);
@@ -112,7 +113,7 @@ public:
                       const std::string& mode,
                       const std::string& mode_objects);
 
-  bool ExportToFile(const std::string& game_mode_name, WeaponsList& wlist);
+  bool ExportToFile(const std::string& game_mode_name);
 
   bool ExportToString(std::string& mode,
                       std::string& mode_objects) const;

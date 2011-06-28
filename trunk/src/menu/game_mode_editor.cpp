@@ -45,7 +45,6 @@ static bool warned = false;
 
 GameModeEditor::GameModeEditor(const Point2i& size, float zoom, bool _draw_border)
   : VBox(size.x, _draw_border)
-  , weapons(NULL)
 {
   Profile *res  = GetResourceManager().LoadXMLProfile("graphism.xml", false);
   Font::font_size_t fmedium = Font::GetFixedSize(Font::FONT_MEDIUM*zoom+0.5f);
@@ -154,14 +153,6 @@ GameModeEditor::GameModeEditor(const Point2i& size, float zoom, bool _draw_borde
   LoadGameMode(true);
 }
 
-GameModeEditor::~GameModeEditor()
-{
-  if (weapons) {
-    delete weapons;
-    weapons = NULL;
-  }
-}
-
 Widget *GameModeEditor::ClickUp(const Point2i & mousePosition, uint button)
 {
   Widget *w = VBox::ClickUp(mousePosition, button);
@@ -171,7 +162,7 @@ Widget *GameModeEditor::ClickUp(const Point2i & mousePosition, uint button)
     const std::string& mode = filename->GetText();
     GameMode * game_mode = GameMode::GetInstance();
     ValidGameMode();
-    bool ok = game_mode->ExportToFile(mode, *weapons);
+    bool ok = game_mode->ExportToFile(mode);
   }
   return w;
 }
@@ -339,11 +330,7 @@ void GameModeEditor::LoadGameMode(bool force)
   // Refill weapon list
   opt_weapons_cfg->Clear();
   weapon_cfg_list.clear(); // Widgets already deleted above
-  if (!weapons)
-    weapons = new WeaponsList(game_mode->GetWeaponsXml());
-  else
-    weapons->Init(game_mode->GetWeaponsXml());
-  const WeaponsList::weapons_list_type& wlist = weapons->GetList();
+  const WeaponsList::weapons_list_type& wlist = game_mode->GetWeaponsList()->GetList();
   for (WeaponsList::iterator it = wlist.begin(); it != wlist.end(); ++it) {
     WeaponCfgBox *w = new WeaponCfgBox(*it, 100);
     opt_weapons_cfg->AddWidget(w);

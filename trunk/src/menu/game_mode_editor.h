@@ -55,13 +55,12 @@ class GameModeEditor : public VBox
 
   ScrollBox             *opt_weapons_cfg;
   std::list<WeaponCfgBox*> weapon_cfg_list;
-  WeaponsList           *weapons;
 
   void LoadGameMode(bool force = false);
+  void Apply();
 
 public:
   GameModeEditor(const Point2i& size, float zoom, bool _draw_border=true);
-  ~GameModeEditor();
 
   Widget *ClickUp(const Point2i & mousePosition, uint button);
   void ValidGameMode();
