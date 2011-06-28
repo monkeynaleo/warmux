@@ -265,6 +265,8 @@ bool GameMode::ExportToFile(const std::string& game_mode_name, WeaponsList& wlis
 
   node = XmlWriter::AddNode(node, "weapons");
   wlist.Save(out, node);
+
+  return true;
 }
 
 std::string GameMode::GetDefaultObjectsFilename() const
