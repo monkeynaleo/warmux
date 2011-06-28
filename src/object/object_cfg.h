@@ -61,7 +61,6 @@ public:
 
   void LoadXml(const std::string & obj_name, 
                const std::string & config_file);
-  void SaveXmlInternal(XmlWriter& writer, xmlNode *node);
 };
 
 #endif // OBJECT_CFG_H

@@ -193,8 +193,6 @@ public:
 
   // Implemeting a method that would otherwise have required RTTI
   void SetProjectileTimeOut(int timeout) { projectile->SetTimeOut(timeout); }
-
-  virtual xmlNode* SaveXml(XmlWriter& writer, xmlNode*  weapon) const;
 };
 
 #endif /* WEAPON_LAUNCHER_H */
