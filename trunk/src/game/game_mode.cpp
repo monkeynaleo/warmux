@@ -49,8 +49,8 @@ GameMode::GameMode():
   main_settings.push_back(new UintConfigElement("max_teams", &max_teams, 8));
   main_settings.push_back(new UintConfigElement("nb_characters", &nb_characters, 6));
   main_settings.push_back(new DoubleConfigElement("gravity", &gravity, 9.81));
-  main_settings.push_back(new DoubleConfigElement("safe_fall", &safe_fall, 10));
-  main_settings.push_back(new DoubleConfigElement("damage_per_fall_unit", &damage_per_fall_unit, 7));
+  main_settings.push_back(new IntConfigElement("safe_fall", &safe_fall, 10));
+  main_settings.push_back(new UintConfigElement("damage_per_fall_unit", &damage_per_fall_unit, 7));
 
   char_settings.push_back(new UintConfigElement("mass", &character.mass, 100));
   char_settings.push_back(new DoubleConfigElement("air_resist_factor", &character.air_resist_factor, 1.0));
@@ -61,15 +61,15 @@ GameMode::GameMode():
   energy.push_back(new UintConfigElement("maximum", &character.max_energy, 100, 1, 200, true));
   char_settings.LinkList(&energy, "energy");
 
-  jump.push_back(new DoubleConfigElement("strength", &character.jump_strength, 8, true));
+  jump.push_back(new IntConfigElement("strength", &character.jump_strength, 8, true));
   jump.push_back(new AngleConfigElement("angle", &character.jump_angle, -60, true));
   char_settings.LinkList(&jump, "jump");
 
-  super_jump.push_back(new DoubleConfigElement("strength", &character.super_jump_strength, 11, true));
+  super_jump.push_back(new IntConfigElement("strength", &character.super_jump_strength, 11, true));
   super_jump.push_back(new AngleConfigElement("angle", &character.super_jump_angle, -80, true));
   char_settings.LinkList(&super_jump, "super_jump");
 
-  back_jump.push_back(new DoubleConfigElement("strength", &character.back_jump_strength, 9, true));
+  back_jump.push_back(new IntConfigElement("strength", &character.back_jump_strength, 9, true));
   back_jump.push_back(new AngleConfigElement("angle", &character.back_jump_angle, -100, true));
   char_settings.LinkList(&back_jump, "back_jump");
 

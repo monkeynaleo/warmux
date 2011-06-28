@@ -50,8 +50,8 @@ public:
   uint duration_before_death_mode;
   uint damage_per_turn_during_death_mode;
   Double gravity;
-  Double safe_fall ;
-  Double damage_per_fall_unit ;
+  int safe_fall;
+  uint damage_per_fall_unit;
   ExplosiveWeaponConfig death_explosion_cfg;
   ExplosiveWeaponConfig barrel_explosion_cfg;
   ExplosiveWeaponConfig bonus_box_explosion_cfg;
@@ -62,11 +62,11 @@ public:
     uint max_energy;
     uint mass;
     Double air_resist_factor;
-    Double jump_strength;
+    int jump_strength;
     Double jump_angle;
-    Double super_jump_strength;
+    int super_jump_strength;
     Double super_jump_angle;
-    Double back_jump_strength;
+    int back_jump_strength;
     Double back_jump_angle;
     uint walking_pause;
   } character;
