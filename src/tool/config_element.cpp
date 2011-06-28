@@ -75,19 +75,22 @@ const Double AngleConfigElement::ToRad = PI/180;
 
 bool AngleConfigElement::Read(const xmlNode* father) const
 {
-  bool ok = (m_attribute) ? XmlReader::ReadDoubleAttr(father, m_name, *m_val)
-                          : XmlReader::ReadDouble(father, m_name, *m_val);
+  int val;
+  bool ok = (m_attribute) ? XmlReader::ReadIntAttr(father, m_name, val)
+                          : XmlReader::ReadInt(father, m_name, val);
   if (!ok)
     return false;
 
-  *m_val *= ToRad;
+  *m_val = val*ToRad;
   ASSERT(!m_important || (*m_val >= m_min && *m_val <= m_max));
   return true;
 }
 void AngleConfigElement::Write(XmlWriter& writer, xmlNode* father) const
 {
-  if (*m_val != m_def)
-    writer.WriteElement(father, m_name, Double2str(ToDegree*(*m_val)), m_attribute);
+  if (*m_val != m_def) {
+    int val = round(ToDegree*(*m_val));
+    writer.WriteElement(father, m_name, int2str(val), m_attribute);
+  }
 }
 
 //----------------------------------------------------------------------
