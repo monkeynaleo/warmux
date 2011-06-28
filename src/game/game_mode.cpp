@@ -32,9 +32,9 @@
 
 static std::string txt;
 
-GameMode::GameMode():
-  doc_objects(NULL),
-  weapons_xml(NULL)
+GameMode::GameMode()
+  : doc_objects(NULL)
+  , weapons_list(NULL)
 {
   m_current = "classic";
 
@@ -58,7 +58,7 @@ GameMode::GameMode():
   main_settings.LinkList(&char_settings, "character");
 
   energy.push_back(new UintConfigElement("initial", &character.init_energy, 100, 1, 200, true));
-  energy.push_back(new UintConfigElement("maximum", &character.max_energy, 100, 1, 200, true));
+  energy.push_back(new UintConfigElement("maximum", &character.max_energy, 200, 1, 200, true));
   char_settings.LinkList(&energy, "energy");
 
   jump.push_back(new IntConfigElement("strength", &character.jump_strength, 8, true));
@@ -121,14 +121,15 @@ void GameMode::LoadDefaultValues()
 GameMode::~GameMode()
 {
   delete doc_objects;
+  delete weapons_list;
 }
 
 // Load data options from the selected game_mode
 bool GameMode::LoadXml()
 {
-  const xmlNode *root = doc.GetRoot();
+  const xmlNode *elem = doc.GetRoot();
   // Load all elements
-  main_settings.LoadXml(root);
+  main_settings.LoadXml(elem);
 
   if (txt == "always")
     allow_character_selection = ALWAYS;
@@ -140,9 +141,15 @@ bool GameMode::LoadXml()
     fprintf(stderr, "%s is not a valid option for \"allow_character_selection\"\n", txt.c_str());
 
   //=== Weapons ===
-  weapons_xml = XmlReader::GetMarker(root, "weapons");
+  elem = XmlReader::GetMarker(elem, "weapons");
+  if (!elem)
+    return false;
+  if (weapons_list)
+    weapons_list->Init(elem);
+  else
+    weapons_list = new WeaponsList(elem);
 
-  return true;
+  return weapons_list;
 }
 
 bool GameMode::Load(void)
@@ -249,7 +256,7 @@ std::string GameMode::GetFilename() const
   return fullname;
 }
 
-bool GameMode::ExportToFile(const std::string& game_mode_name, WeaponsList& wlist)
+bool GameMode::ExportToFile(const std::string& game_mode_name)
 {
   Config * config = Config::GetInstance();
   std::string filename = std::string("game_mode" PATH_SEPARATOR)
@@ -264,7 +271,7 @@ bool GameMode::ExportToFile(const std::string& game_mode_name, WeaponsList& wlis
   main_settings.SaveXml(out, node);
 
   node = XmlWriter::AddNode(node, "weapons");
-  wlist.Save(out, node);
+  weapons_list->Save(out, node);
 
   return true;
 }
