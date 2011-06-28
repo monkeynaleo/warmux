@@ -33,6 +33,7 @@ class TextBox;
 class ItemBox;
 class Button;
 class WeaponsList;
+class WeaponCfgBox;
 
 class GameModeEditor : public VBox
 {
@@ -53,6 +54,7 @@ class GameModeEditor : public VBox
   SpinButtonWithPicture *opt_gravity;
 
   ScrollBox             *opt_weapons_cfg;
+  std::list<WeaponCfgBox*> weapon_cfg_list;
   WeaponsList           *weapons;
 
   void LoadGameMode(bool force = false);

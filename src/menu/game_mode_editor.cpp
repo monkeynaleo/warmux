@@ -170,6 +170,7 @@ Widget *GameModeEditor::ClickUp(const Point2i & mousePosition, uint button)
   else if (w == save) {
     const std::string& mode = filename->GetText();
     GameMode * game_mode = GameMode::GetInstance();
+    ValidGameMode();
     bool ok = game_mode->ExportToFile(mode, *weapons);
   }
   return w;
@@ -186,7 +187,7 @@ class WeaponCfgBox : public HBox
   Weapon                *weapon;
   PictureWidget         *pw;
   SpinButtonWithPicture *ammo;
-  std::list< std::pair<Widget*, ConfigElement*> > values;
+  std::list< std::pair<SpinButtonWithPicture*, ConfigElement*> > values;
 
 public:
   WeaponCfgBox(Weapon *w, uint height)
@@ -270,6 +271,42 @@ public:
     SetBackgroundColor(transparent_color);
     Pack();
   }
+
+  void Apply() const
+  {
+    weapon->WriteInitialNbAmmo(ammo->GetValue());
+
+    std::list< std::pair<SpinButtonWithPicture*, ConfigElement*> >::const_iterator it = values.begin();
+    for (; it != values.end(); ++it) {
+      ConfigElement *elem = it->second;
+      switch (elem->m_type) {
+        case ConfigElement::TYPE_DOUBLE:
+          {
+            DoubleConfigElement* element = static_cast<DoubleConfigElement*>(elem);
+            *element->m_val = it->first->GetValue();
+            break;
+          }
+        case ConfigElement::TYPE_INT:
+          {
+            IntConfigElement* element = static_cast<IntConfigElement*>(elem);
+            *element->m_val = it->first->GetValue();
+            break;
+          }
+        case ConfigElement::TYPE_UINT:
+          {
+            UintConfigElement* element = static_cast<UintConfigElement*>(elem);
+            *element->m_val = it->first->GetValue();
+            break;
+          }
+        case ConfigElement::TYPE_BOOL:
+          {
+            BoolConfigElement* element = static_cast<BoolConfigElement*>(elem);
+            *element->m_val = it->first->GetValue();
+            break;
+          }
+      }
+    }
+  }
 };
 
 void GameModeEditor::LoadGameMode(bool force)
@@ -301,13 +338,16 @@ void GameModeEditor::LoadGameMode(bool force)
 
   // Refill weapon list
   opt_weapons_cfg->Clear();
+  weapon_cfg_list.clear(); // Widgets already deleted above
   if (!weapons)
     weapons = new WeaponsList(game_mode->GetWeaponsXml());
   else
     weapons->Init(game_mode->GetWeaponsXml());
   const WeaponsList::weapons_list_type& wlist = weapons->GetList();
   for (WeaponsList::iterator it = wlist.begin(); it != wlist.end(); ++it) {
-    opt_weapons_cfg->AddWidget(new WeaponCfgBox(*it, 100));
+    WeaponCfgBox *w = new WeaponCfgBox(*it, 100);
+    opt_weapons_cfg->AddWidget(w);
+    weapon_cfg_list.push_back(w);
   }
   opt_weapons_cfg->Pack();
 
@@ -325,14 +365,7 @@ void GameModeEditor::LoadGameMode(bool force)
 
 void GameModeEditor::ValidGameMode()
 {
-  if (weapons) {
-    delete weapons;
-    weapons = NULL;
-  }
-
   GameMode * game_mode = GameMode::GetInstance();
-  game_mode->Load();
-
   if (opt_allow_character_selection->GetValue() == "always") {
     game_mode->allow_character_selection = GameMode::ALWAYS;
   } else if (opt_allow_character_selection->GetValue() == "before_action") {
@@ -349,4 +382,8 @@ void GameModeEditor::ValidGameMode()
   game_mode->duration_before_death_mode = opt_time_before_death_mode->GetValue();
   game_mode->damage_per_turn_during_death_mode = opt_damage_during_death_mode->GetValue();
   game_mode->gravity = opt_gravity->GetValue();
+
+  std::list<WeaponCfgBox*>::const_iterator it = weapon_cfg_list.begin();
+  for (; it !=weapon_cfg_list.end(); ++it)
+    (*it)->Apply();
 }
