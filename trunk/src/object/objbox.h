@@ -57,7 +57,6 @@ public:
 protected:
   bool parachute;
   Sprite *anim;
-  static int start_life_points;
   void Explode();
 
   virtual void SignalGroundCollision(const Point2d& my_speed_before, const Double& contactAngle);
