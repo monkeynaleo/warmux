@@ -33,11 +33,11 @@
 static const Double DEFAULT_WATER_RESIST_FACTOR = 40;
 
 ObjectConfig::ObjectConfig(void):
-  m_mass(1.0),
-  m_wind_factor(1.0),
-  m_air_resist_factor(1.0),
+  m_mass(ONE),
+  m_wind_factor(ONE),
+  m_air_resist_factor(ONE),
   m_water_resist_factor(DEFAULT_WATER_RESIST_FACTOR),
-  m_gravity_factor(1.0),
+  m_gravity_factor(ONE),
   m_rebounding(false),
   m_rebound_factor(0.01),
   m_align_particle_state(false)
@@ -75,4 +75,25 @@ void ObjectConfig::LoadXml(const std::string & obj_name,
   XmlReader::ReadDouble(elem, "rebound_factor",      m_rebound_factor);
   XmlReader::ReadBool(elem,   "rebounding",          m_rebounding);
   XmlReader::ReadBool(elem,   "auto_align_particle", m_align_particle_state);
+}
+
+void ObjectConfig::SaveXmlInternal(XmlWriter& writer, xmlNode *node)
+{
+  if (m_mass != ONE)
+    writer.WriteElement(node, "mass", int2str(m_mass+ONE_HALF));
+  if (m_wind_factor != ONE)
+    writer.WriteElement(node, "wind_factor", int2str(m_wind_factor+ONE_HALF));
+  if (m_air_resist_factor != ONE)
+    writer.WriteElement(node, "air_resist_factor", int2str(m_air_resist_factor+ONE_HALF));
+
+#if 0 // Never present in the game mode xml files...
+  if (m_water_resist_factor != ONE)
+    writer.WriteElement(node, "water_resist_factor", int2str(m_water_resist_factor+ONE_HALF));
+  if (m_rebound_factor != ONE)
+    writer.WriteElement(node, "rebound_factor", int2str(m_rebound_factor+ONE_HALF));
+  if (m_rebounding)
+    writer.WriteElement(node, "mass", bool2str(m_rebounding));
+  if (m_align_particle_state)
+    writer.WriteElement(node, "auto_align_particle", bool2str(m_align_particle_state));
+#endif
 }
