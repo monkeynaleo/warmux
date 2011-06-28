@@ -32,13 +32,23 @@ class Action;
 class XmlWriter;
 
 //-----------------------------------------------------------------------------
+class MedkitSettings : public ConfigElementList
+{
+public:
+  int nbr_health;
+  int start_points;
+  MedkitSettings()
+  {
+    push_back(new IntConfigElement("life_points", &start_points, 41));
+    push_back(new IntConfigElement("energy_boost", &nbr_health, 24));
+  }
+};
 
 class Medkit : public ObjBox
 {
-  static int nbr_health;
   static Sprite* icon;
   static int icon_ref;
-  static ConfigElementList settings;
+  static MedkitSettings settings;
 
   void ApplyMedkit(Team &team, Character &character) const;
 public:

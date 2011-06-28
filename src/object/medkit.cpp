@@ -34,8 +34,7 @@
 
 Sprite* Medkit::icon = NULL;
 int Medkit::icon_ref = 0;
-int Medkit::nbr_health = 24;
-ConfigElementList Medkit::settings;
+MedkitSettings Medkit::settings;
 
 Medkit::Medkit()
   : ObjBox("medkit")
@@ -54,8 +53,7 @@ Medkit::Medkit()
   }
   icon_ref++;
 
-  settings.push_back(new IntConfigElement("life_points", &start_life_points, 41));
-  settings.push_back(new IntConfigElement("energy_boost", &nbr_health, 24));
+  m_energy = settings.start_points;
 }
 
 Medkit::~Medkit()
@@ -77,8 +75,8 @@ void Medkit::ApplyBonus(Character * c)
 void Medkit::ApplyMedkit(Team &team, Character &player) const
 {
   std::string txt = Format(_("%s has won %u points of energy!"),
-                           player.GetName().c_str(), nbr_health);
-  player.SetEnergyDelta(nbr_health, &player);
+                           player.GetName().c_str(), settings.nbr_health);
+  player.SetEnergyDelta(settings.nbr_health, &player);
   if (player.IsDiseased())
     player.Cure();
   GameMessages::GetInstance()->Add(txt, team.GetColor());
