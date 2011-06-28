@@ -92,7 +92,7 @@ void ObjectConfig::SaveXmlInternal(XmlWriter& writer, xmlNode *node)
   if (m_rebound_factor != ONE)
     writer.WriteElement(node, "rebound_factor", int2str(m_rebound_factor+ONE_HALF));
   if (m_rebounding)
-    writer.WriteElement(node, "mass", bool2str(m_rebounding));
+    writer.WriteElement(node, "rebounding", bool2str(m_rebounding));
   if (m_align_particle_state)
     writer.WriteElement(node, "auto_align_particle", bool2str(m_align_particle_state));
 #endif
