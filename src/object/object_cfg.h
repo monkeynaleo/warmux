@@ -26,6 +26,9 @@
 #include <WARMUX_types.h>
 //-----------------------------------------------------------------------------
 
+typedef struct _xmlNode xmlNode;
+class XmlWriter;
+
 class ObjectConfig
 {
 public:
@@ -58,6 +61,7 @@ public:
 
   void LoadXml(const std::string & obj_name, 
                const std::string & config_file);
+  void SaveXmlInternal(XmlWriter& writer, xmlNode *node);
 };
 
 #endif // OBJECT_CFG_H
