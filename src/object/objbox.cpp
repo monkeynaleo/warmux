@@ -57,7 +57,7 @@ ObjBox::ObjBox(const std::string &name)
 
   parachute = true;
 
-  m_energy = start_life_points;
+  m_energy = 41;
 
   SetSpeed(SPEED, HALF_PI);
   SetCollisionModel(true, false, true);
@@ -168,6 +168,3 @@ Sprite* ObjBox::CreateIcon()
   icon->FixParameters();
   return icon;
 }
-
-// Static methods
-int ObjBox::start_life_points = 41;
