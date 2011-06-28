@@ -66,7 +66,6 @@
       <nb_ammo>1</nb_ammo>
       <nbr_obus>4</nbr_obus>
       <damage>30</damage>
-      <mass>300</mass>
       <speed>10</speed>
       <explosion_range>80</explosion_range>
       <particle_range>80</particle_range>
@@ -80,8 +79,6 @@
       <available_after_turn>6</available_after_turn>
       <nb_ammo>1</nb_ammo>
       <damage>200</damage>
-      <mass>1000</mass>
-      <speed>0</speed>
       <drop_probability>0.7</drop_probability>
       <ammo_per_drop>1</ammo_per_drop>
     </anvil_launcher>
@@ -440,7 +437,6 @@
       <range>25</range>
       <strength>300</strength>
       <display_crosshair>0</display_crosshair>
-      <speed_on_hit>1000</speed_on_hit>
       <drop_probability>0.0</drop_probability>
       <ammo_per_drop>1</ammo_per_drop>
     </slap>
