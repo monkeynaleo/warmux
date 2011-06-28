@@ -37,7 +37,6 @@ class SlapConfig : public WeaponConfig
 {
 public:
   Double range;
-  uint damage;
   uint strength;
   SlapConfig()
   {
