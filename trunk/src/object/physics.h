@@ -169,8 +169,6 @@ public:
   // The object is falling ?
   bool IsFalling() const { return (m_motion_type==FreeFall) && (m_pos_y.x1 > MIN_FALL_SPEED); };
 
-  void SaveXml(XmlWriter& writer, xmlNode *node) { ObjectConfig::SaveXmlInternal(writer, node); }
-
 protected:
   // Compute current (x,y) position
   Point2d ComputeNextXY(Double delta_t);

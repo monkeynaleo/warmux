@@ -562,11 +562,3 @@ ExplosiveWeaponConfig& WeaponLauncher::cfg() const
 {
   return static_cast<ExplosiveWeaponConfig&>(*extra_params);
 }
-
-xmlNode* WeaponLauncher::SaveXml(XmlWriter& writer, xmlNode*  weapon) const
-{
-  xmlNode* elem = Weapon::SaveXml(writer, weapon);
-  if (elem && projectile)
-    projectile->SaveXml(writer, elem);
-  return elem;
-}
