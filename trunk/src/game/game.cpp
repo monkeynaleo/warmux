@@ -1247,12 +1247,20 @@ void Game::ApplyDiseaseDamage() const
   }
 }
 
-int Game::NbrRemainingTeams() const
+uint Game::RemainingGroups() const
 {
   uint nbr = 0;
+  const TeamsList::GroupList& glist = TeamsList::GetConstInstance()->GetGroupList();
+  for (TeamsList::GroupList::const_iterator git = glist.begin(); git != glist.end(); ++git) {
+    bool has = false;
+    for (Group::const_iterator it = git->second.begin(); it != git->second.end(); ++it) {
+      if ((*it)->NbAliveCharacter()) {
+        has = true;
+        break;
+      }
+    }
 
-  FOR_EACH_TEAM(team) {
-    if ((*team)->NbAliveCharacter() > 0)
+    if (has)
       nbr++;
   }
 

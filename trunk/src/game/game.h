@@ -60,7 +60,7 @@ protected:
   bool IsAnythingMoving() const;
   void MainLoop();
   void ApplyDiseaseDamage() const;
-  int  NbrRemainingTeams() const;
+  uint RemainingGroups() const;
   bool MenuQuitPause();
   void MenuHelpPause();
 
