@@ -108,6 +108,8 @@ public:
   {
     playing_list = list;
   }
+
+  const GroupList& GetGroupList() const { return groups; }
 };
 
 inline TeamsList &GetTeamsList(void) { return TeamsList::GetRef(); };

@@ -209,5 +209,5 @@ void GameClassic::ApplyDeathMode () const
 
 bool GameClassic::IsGameFinished() const
 {
-  return (NbrRemainingTeams() <= 1);
+  return (RemainingGroups() <= 1);
 }
