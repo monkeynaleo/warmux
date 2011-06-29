@@ -24,6 +24,7 @@
 //-----------------------------------------------------------------------------
 #include <list>
 #include <vector>
+#include <map>
 #include <WARMUX_singleton.h>
 //-----------------------------------------------------------------------------
 
@@ -33,18 +34,27 @@ class ConfigTeam;
 class Character;
 class WeaponsList;
 
+class Group : public std::vector<Team*>
+{
+public:
+  typedef std::vector<Team *>::iterator iterator;
+  iterator active_team;
+};
+
 class TeamsList : public Singleton<TeamsList>
 {
 public:
   typedef std::list<Team *>::iterator full_iterator;
   typedef std::vector<Team *>::iterator iterator;
+  typedef std::map<uint, Group> GroupList;
   std::list<Team *> full_list;
   std::vector<Team*> playing_list;
 
 private:
   typedef std::list<uint>::iterator selection_iterator;
   std::list<uint> selection;
-  std::vector<Team*>::iterator active_team;
+  GroupList groups;
+  GroupList::iterator active_group;
 
   bool LoadOneTeam(const std::string &dir, const std::string &file);
   void LoadList();
@@ -97,7 +107,6 @@ public:
   void SetPlayingList(const std::vector<Team*>& list)
   {
     playing_list = list;
-    active_team = playing_list.begin();
   }
 };
 

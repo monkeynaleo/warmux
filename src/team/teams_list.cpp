@@ -41,7 +41,8 @@ TeamsList::TeamsList():
   full_list(),
   playing_list(),
   selection(),
-  active_team(playing_list.end())
+  groups(),
+  active_group(groups.end())
 {
   LoadList();
 }
@@ -53,6 +54,7 @@ TeamsList::~TeamsList()
   for (full_iterator it = full_list.begin(); it != full_list.end(); ++it)
     delete (*it);
   full_list.clear();
+  groups.clear();
 }
 
 //-----------------------------------------------------------------------------
@@ -64,7 +66,7 @@ void TeamsList::NextTeam()
   Team* next = GetNextTeam();
   SetActive(next->GetId());
 
-  ActiveTeam().NextCharacter(true);
+  next->NextCharacter(true);
 
   printf("\nPlaying character : %i %s\n", ActiveCharacter().GetCharacterIndex(), ActiveCharacter().GetName().c_str());
   printf("Playing team : %i %s\n", ActiveCharacter().GetTeamIndex(), ActiveTeam().GetName().c_str());
@@ -75,13 +77,23 @@ void TeamsList::NextTeam()
 
 Team* TeamsList::GetNextTeam()
 {
-  // Next team
-  std::vector<Team*>::iterator it=active_team;
+  // Next group
+  GroupList::iterator git = active_group;
+  std::vector<Team*>::iterator it;
+
   do {
-    ++it;
-    if (it == playing_list.end())
-      it = playing_list.begin();
-  } while ((**it).NbAliveCharacter() == 0);
+    ++git;
+    if (git == groups.end())
+      git = groups.begin();
+
+    it = git->second.active_team;
+    do {
+      ++it;
+      if (it == git->second.end())
+        it = git->second.begin();
+    } while (!(*it)->NbAliveCharacter() && it != git->second.active_team);
+  } while (git != active_group && !(*it)->NbAliveCharacter());
+  
   return (*it);
 }
 
@@ -90,8 +102,7 @@ Team* TeamsList::GetNextTeam()
 
 Team& TeamsList::ActiveTeam()
 {
-  ASSERT (active_team != playing_list.end());
-  return **active_team;
+  return **(active_group->second.active_team);
 }
 
 //-----------------------------------------------------------------------------
@@ -143,7 +154,7 @@ void TeamsList::LoadList()
       LoadOneTeam(dirname, name);
     CloseFolder(f);
   } else {
-    Error (Format(_("Cannot open teams directory (%s)!"), dirname.c_str()));
+    Error(Format(_("Cannot open teams directory (%s)!"), dirname.c_str()));
   }
 
   // Load personal teams
@@ -181,35 +192,46 @@ void TeamsList::LoadList()
 
 void TeamsList::LoadGamingData(WeaponsList * weapons_list)
 {
-  std::sort(playing_list.begin(), playing_list.end(), compareTeams); // needed to fix bug #9820
-  active_team = playing_list.begin();
+  //std::sort(playing_list.begin(), playing_list.end(), compareTeams); // needed to fix bug #9820
 
   iterator it=playing_list.begin(), end=playing_list.end();
 
   // Load the data of all teams
   for (; it != end; ++it) {
-    (**it).LoadGamingData(weapons_list);
+    (*it)->LoadGamingData(weapons_list);
   }
+
+  groups.clear();
   for (it=playing_list.begin(); it != end; ++it) {
+    groups[ (*it)->GetGroup() ].push_back(*it);
     if ((*it)->IsLocalAI())
       (*it)->LoadAI();
   }
-
 }
 
 void TeamsList::RandomizeFirstPlayer()
 {
-  active_team = playing_list.begin();
   MSG_DEBUG("random.get", "TeamList::RandomizeFirstPlayer()");
-  int skip = RandomSync().GetInt(0, playing_list.size() - 1);
-  for (int i = 0; i < skip; i++)
-    active_team++;
+  int skip = RandomSync().GetInt(0, groups.size()-1);
+
+  for (GroupList::iterator git = groups.begin(); git != groups.end(); ++git) {
+    if (!(skip--))
+      active_group = git;
+
+    Group& g = git->second;
+    int skip2 = RandomSync().GetInt(1, g.size());
+    g.active_team = g.begin();
+    while (--skip2)
+     g.active_team++;
+  }
 }
 
 //-----------------------------------------------------------------------------
 
 void TeamsList::UnloadGamingData()
 {
+  groups.clear();
+
   // Iterate over all teams not just he playing ones
   // in order to unload leaver teams.
   full_iterator it=full_list.begin(), end = full_list.end();
@@ -281,7 +303,6 @@ void TeamsList::InitList(const std::list<ConfigTeam> &lst)
   std::list<ConfigTeam>::const_iterator it=lst.begin(), end=lst.end();
   for (; it != end; ++it)
     AddTeam(*it, true, false);
-  active_team = playing_list.begin();
 }
 
 //-----------------------------------------------------------------------------
@@ -431,7 +452,6 @@ void TeamsList::ChangeSelection(const std::list<uint>& nv_selection)
   playing_list.clear();
   for (; it != end; ++it)
     playing_list.push_back(FindByIndex(*it));
-  active_team = playing_list.begin();
 }
 
 //-----------------------------------------------------------------------------
@@ -454,8 +474,6 @@ void TeamsList::AddTeam(Team* the_team, int pos, const ConfigTeam &the_team_cfg,
 
   selection.push_back(pos);
   playing_list.push_back(the_team);
-
-  active_team = playing_list.begin();
 }
 
 void TeamsList::AddTeam(const ConfigTeam &the_team_cfg, bool is_local,
@@ -552,14 +570,12 @@ void TeamsList::DelTeam(Team* the_team)
 
   if (playing_it != playing_list.end())
     playing_list.erase(playing_it);
-
-  active_team = playing_list.begin();
 }
 
 void TeamsList::DelTeam(const std::string &id)
 {
   int pos;
-  Team *the_team = FindById (id, pos);
+  Team *the_team = FindById(id, pos);
 
   DelTeam(the_team);
 }
@@ -568,15 +584,17 @@ void TeamsList::DelTeam(const std::string &id)
 
 void TeamsList::SetActive(const std::string &id)
 {
-  iterator it = playing_list.begin(), end = playing_list.end();
-  for (; it != end; ++it) {
-    Team &team = **it;
-    if (team.GetId() == id) {
-      active_team = it;
-      ActiveTeam().PrepareTurn();
-      return;
+  for (GroupList::iterator git = groups.begin(); git != groups.end(); ++git) {
+    for (Group::iterator it = git->second.begin(); it != git->second.end(); ++it) {
+      if ((*it)->GetId() == id) {
+        active_group = git;
+        git->second.active_team = it;
+        (*it)->PrepareTurn();
+        return;
+      }
     }
   }
+
   Error(Format(_("Can't find team %s!"), id.c_str()));
 }
 
