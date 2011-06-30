@@ -97,6 +97,13 @@ GameModeEditor::GameModeEditor(const Point2i& size, float zoom, bool _draw_borde
   ScrollBox *sbox = new ScrollBox(Point2i(width - 2*4, option_size.y + 2*4 + 24), true, false, false);
   vbox->AddWidget(sbox);
 
+  std::vector<std::pair<std::string, std::string> > rules;
+  rules.push_back(std::make_pair("classic", _("Classic")));
+  rules.push_back(std::make_pair("blitz", _("Blitz")));
+  opt_rules = new ComboBox(_("Rules"), "menu/character_selection",
+                           option_size, rules, "classic", fmedium, fmedium);
+  sbox->AddWidget(opt_rules);
+
   opt_duration_turn = new SpinButtonWithPicture(_("Duration of a turn"), "menu/timing_turn",
                                                 option_size,
                                                 TPS_TOUR_MIN, 10,
@@ -105,9 +112,9 @@ GameModeEditor::GameModeEditor(const Point2i& size, float zoom, bool _draw_borde
   sbox->AddWidget(opt_duration_turn);
 
   std::vector<std::pair<std::string, std::string> > character_selections;
-  character_selections.push_back(std::pair<std::string, std::string>("always", _("Always")));
-  character_selections.push_back(std::pair<std::string, std::string>("before_action", _("Before action")));
-  character_selections.push_back(std::pair<std::string, std::string>("never", _("Never")));
+  character_selections.push_back(std::make_pair("always", _("Always")));
+  character_selections.push_back(std::make_pair("before_action", _("Before action")));
+  character_selections.push_back(std::make_pair("never", _("Never")));
 
   opt_allow_character_selection = new ComboBox(_("Character switching"), "menu/character_selection",
                                                option_size, character_selections, "always",
@@ -163,7 +170,8 @@ Widget *GameModeEditor::ClickUp(const Point2i & mousePosition, uint button)
     GameMode * game_mode = GameMode::GetInstance();
     ValidGameMode();
     bool ok = game_mode->ExportToFile(mode);
-  }
+  } else if (w == opt_rules && opt_rules->GetValue() == "blitz")
+    WarnBlitz();
   return w;
 }
 
@@ -300,6 +308,18 @@ public:
   }
 };
 
+void GameModeEditor::WarnBlitz()
+{
+  if (!warned) {
+    Question puppy_attention_span(Question::WARNING);
+    puppy_attention_span.Set(_("The blitz mode does not reset the time between each team turn. "
+                               "A team looses when it has no players left or its time has ran out."),
+                             true, 0);
+    puppy_attention_span.Ask();
+    warned = true;
+  }
+}
+
 void GameModeEditor::LoadGameMode(bool force)
 {
   std::string* mode = (std::string*)opt_game_mode->GetSelectedValue();
@@ -309,6 +329,11 @@ void GameModeEditor::LoadGameMode(bool force)
   filename->SetText(*mode);
   GameMode * game_mode = GameMode::GetInstance();
   game_mode->Load();
+
+  if (game_mode->rules == "classic")
+    opt_rules->SetChoice(0);
+  else if (game_mode->rules == "blitz")
+    opt_rules->SetChoice(1);
 
   if (game_mode->allow_character_selection == GameMode::ALWAYS) {
     opt_allow_character_selection->SetChoice(0); // "always"
@@ -340,19 +365,16 @@ void GameModeEditor::LoadGameMode(bool force)
 
   NeedRedrawing();
 
-  if (!warned && *mode == "blitz") {
-    Question puppy_attention_span(Question::WARNING);
-    puppy_attention_span.Set(_("The blitz mode does not reset the time between each team turn. "
-                               "A team looses when it has no players left or its time has ran out."),
-                             true, 0);
-    puppy_attention_span.Ask();
-    warned = true;
-  }
+  if (game_mode->rules == "blitz")
+    WarnBlitz();
 }
 
 void GameModeEditor::ValidGameMode()
 {
   GameMode * game_mode = GameMode::GetInstance();
+
+  game_mode->rules = opt_rules->GetValue();
+
   if (opt_allow_character_selection->GetValue() == "always") {
     game_mode->allow_character_selection = GameMode::ALWAYS;
   } else if (opt_allow_character_selection->GetValue() == "before_action") {

@@ -42,6 +42,7 @@ class GameModeEditor : public VBox
   TextBox               *filename;
   Button                *save;
 
+  ComboBox              *opt_rules;
   ComboBox              *opt_allow_character_selection;
 
   SpinButtonWithPicture *opt_duration_turn;
@@ -58,6 +59,7 @@ class GameModeEditor : public VBox
 
   void LoadGameMode(bool force = false);
   void Apply();
+  void WarnBlitz();
 
 public:
   GameModeEditor(const Point2i& size, float zoom, bool _draw_border=true);
