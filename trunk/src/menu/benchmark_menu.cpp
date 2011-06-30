@@ -151,11 +151,12 @@ bool BenchmarkMenu::Launch(BenchItem *b)
 
       // Backup and set team configuration - make it quick ;)
       std::vector<Team*>& list = GetTeamsList().GetPlayingList();
-      for (std::vector<Team*>::iterator it = list.begin(); it != list.end(); ++it) {
-        printf("Setting %s\n", (*it)->GetName().c_str());
-        (*it)->SetPlayerName("CPU");
-        (*it)->SetNbCharacters(10);
-        (*it)->SetAIName(DEFAULT_AI_NAME);
+      for (uint i=0; i<list.size(); i++) {
+        printf("Setting %s\n", list[i]->GetName().c_str());
+        list[i]->SetPlayerName("CPU");
+        list[i]->SetNbCharacters(10);
+        list[i]->SetAIName(STRONG_AI_NAME);
+        list[i]->SetGroup(i);
       }
 
       // Backup and set game mode
