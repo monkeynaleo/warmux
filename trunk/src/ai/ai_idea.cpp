@@ -404,7 +404,7 @@ AIStrategy * FireMissileWithFixedDurationIdea::CreateStrategy(float accuracy) co
 
   if (!CanUseWeapon(weapon))
     return NULL;
-  float g = GameMode::GetInstance()->gravity.tofloat();
+  float g = GameMode::GetInstance()->gravity;
   float wind_factor = weapon->GetWindFactor().tofloat();
   float mass = weapon->GetMass().tofloat();
   Point2f f(Wind::GetRef().GetStrength().tofloat() * wind_factor, g * mass);
