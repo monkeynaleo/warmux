@@ -137,6 +137,8 @@ bool GameMode::LoadXml()
     allow_character_selection = NEVER;
   else if (txt == "before_first_action")
     allow_character_selection = BEFORE_FIRST_ACTION;
+  else if (txt == "on_same_group")
+    allow_character_selection = ON_SAME_GROUP;
   else
     fprintf(stderr, "%s is not a valid option for \"allow_character_selection\"\n", txt.c_str());
 
