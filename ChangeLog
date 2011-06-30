@@ -1,3 +1,20 @@
+> next release
+  - Detect buggy versions of SDL_gfx and warn about them on different
+    occasions
+  - Misc. improvements on Symbian: display, keyboard, s60v5/s3 support
+  - Try to better scale menus depending on resolution
+  - Handle network games with players having different teams
+  - Fix incorrect handling of idle game masters on the game servers
+  - Team group play: L vs M vs ... games now possible; click on the
+    color flag to set your group
+  - Improve wind behaviour
+  - Android: fix resume from sleep
+  - Add accuracy, self-confidence and randomness to the AI tactics
+  - Improved game mode editor: you can now configure weapons and save
+    the current one
+  - Make the benchmark closer to an actual game
+  - Fix camera behaviour (no oscillation)
+
 > 2011/04/18 - 11.04 release
   - Replay functionality! Still a bit unstable and version-specific
     (thanks mylad for the help image)
