@@ -71,7 +71,7 @@ void DamageStatistics::MadeDamage(const int Dmg, const Character &other)
   if (Dmg < 0) // the character have win energy with a bonus box for instance
     return;
 
-  if (owner.GetTeam().IsSameAs(other.GetTeam())) {
+  if (owner.GetTeam().GetGroup() == other.GetTeam().GetGroup()) {
     if (owner.IsSameAs(other))
       damage_itself += Dmg;
     else
