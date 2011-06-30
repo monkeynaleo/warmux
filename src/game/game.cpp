@@ -1253,7 +1253,7 @@ uint Game::RemainingGroups() const
   const TeamsList::GroupList& glist = TeamsList::GetConstInstance()->GetGroupList();
   for (TeamsList::GroupList::const_iterator git = glist.begin(); git != glist.end(); ++git) {
     bool has = false;
-    for (Group::const_iterator it = git->second.begin(); it != git->second.end(); ++it) {
+    for (TeamGroup::const_iterator it = git->second.begin(); it != git->second.end(); ++it) {
       if ((*it)->NbAliveCharacter()) {
         has = true;
         break;
