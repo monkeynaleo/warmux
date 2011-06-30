@@ -48,7 +48,7 @@ GameMode::GameMode()
   main_settings.push_back(new UintConfigElement("damage_per_turn_during_death_mode", &damage_per_turn_during_death_mode, 5));
   main_settings.push_back(new UintConfigElement("max_teams", &max_teams, 8));
   main_settings.push_back(new UintConfigElement("nb_characters", &nb_characters, 6));
-  main_settings.push_back(new DoubleConfigElement("gravity", &gravity, 9.81));
+  main_settings.push_back(new UintConfigElement("gravity", &gravity, 30));
   main_settings.push_back(new IntConfigElement("safe_fall", &safe_fall, 10));
   main_settings.push_back(new UintConfigElement("damage_per_fall_unit", &damage_per_fall_unit, 7));
 

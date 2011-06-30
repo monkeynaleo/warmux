@@ -51,7 +51,7 @@ public:
   uint duration_exchange_player;
   uint duration_before_death_mode;
   uint damage_per_turn_during_death_mode;
-  Double gravity;
+  uint gravity;
   int safe_fall;
   uint damage_per_fall_unit;
   ExplosiveWeaponConfig death_explosion_cfg;
