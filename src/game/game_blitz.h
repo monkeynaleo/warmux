@@ -30,7 +30,7 @@ class Team;
 class GameBlitz : public Game
 {
 public:
-  typedef std::map<Team*, uint>::iterator  time_iterator;
+  typedef std::map<uint, uint>::iterator  time_iterator;
   uint    counter;
 
   GameBlitz();
@@ -44,7 +44,7 @@ public:
   void EndOfGame();
 
 private:
-  std::map<Team*, uint> times;
+  std::map<uint, uint> times;
 
   void RefreshClock();
   void __SetState_PLAYING();
@@ -52,7 +52,7 @@ private:
   void __SetState_END_TURN();
 
   time_iterator GetCurrentTeam();
-  time_iterator KillTeam(time_iterator cur);
+  time_iterator KillGroup(time_iterator cur);
 };
 
 #endif // GAME_BLITZ_H

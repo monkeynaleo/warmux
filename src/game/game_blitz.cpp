@@ -54,18 +54,20 @@ void GameBlitz::EndOfGame()
 
 GameBlitz::time_iterator GameBlitz::GetCurrentTeam()
 {
-  time_iterator cur = times.find(&ActiveTeam());
+  time_iterator cur = times.find(ActiveTeam().GetGroup());
   ASSERT(cur != times.end());
   return cur;
 }
 
-GameBlitz::time_iterator GameBlitz::KillTeam(GameBlitz::time_iterator cur)
+GameBlitz::time_iterator GameBlitz::KillGroup(GameBlitz::time_iterator cur)
 {
-  FOR_EACH_LIVING_CHARACTER(cur->first, character) {
-    character->Die(NULL);
+  TeamGroup& group = TeamsList::GetInstance()->GetGroupList()[cur->first];
+  for (TeamGroup::iterator it = group.begin(); it != group.end(); ++it) {
+    FOR_EACH_LIVING_CHARACTER((*it), character)
+      character->Die(NULL);
   }
-  GameMessages::GetInstance()->Add(Format(_("%s team was fragged down."), cur->first->GetName().c_str()),
-                                   cur->first->GetColor());
+  GameMessages::GetInstance()->Add(Format(_("Group %u was fragged down."), cur->first),
+                                   TeamGroup::Colors[cur->first]);
   cur->second = 0;
   times.erase(cur);
   return times.end();
@@ -75,9 +77,9 @@ bool GameBlitz::Run()
 {
   // Make sure map is empty
   times.clear();
-  FOR_EACH_TEAM(team) {
-    times[*team] = GameMode::GetInstance()->duration_turn;
-  }
+  const TeamsList::GroupList& glist = TeamsList::GetInstance()->GetGroupList();
+  for (TeamsList::GroupList::const_iterator git = glist.begin(); git != glist.end(); ++git)
+    times[git->first] = GameMode::GetInstance()->duration_turn;
 
   counter = 0;
   return Game::Run();
@@ -102,7 +104,7 @@ void GameBlitz::RefreshClock()
       case PLAYING:
         if (duration <= 1) {
           JukeBox::GetInstance()->Play("default", "end_turn");
-          cur = KillTeam(cur);
+          cur = KillGroup(cur);
           SetState(END_TURN);
         } else {
           duration--;
@@ -121,7 +123,7 @@ void GameBlitz::RefreshClock()
 
       case HAS_PLAYED:
         if (duration <= 1) {
-          cur = KillTeam(cur);
+          cur = KillGroup(cur);
         } else {
           duration--;
           Interface::GetInstance()->UpdateTimer(duration, false, false);
@@ -157,7 +159,7 @@ void GameBlitz::RefreshClock()
 
 uint GameBlitz::GetRemainingTime() const
 {
-  return times.find(&ActiveTeam())->second;
+  return times.find(ActiveTeam().GetGroup())->second;
 }
 
 // Beginning of a new turn
@@ -170,7 +172,7 @@ void GameBlitz::__SetState_PLAYING()
   SetCharacterChosen(false);
 
   // Prepare each character for a new turn
-  FOR_ALL_LIVING_CHARACTERS(team,character)
+  FOR_ALL_LIVING_CHARACTERS(team, character)
     character->PrepareTurn();
 
   // Select the next team
@@ -213,11 +215,11 @@ bool GameBlitz::IsGameFinished() const
 {
   uint num = 0;
 
-  for (std::map<Team*, uint>::const_iterator it = times.begin(); it != times.end(); ++it) {
-    if (it->second != 0 && it->first->NbAliveCharacter())
+  for (std::map<uint, uint>::const_iterator it = times.begin(); it != times.end(); ++it) {
+    if (it->second) //!= 0 && it->first->NbAliveCharacter())
       num++;
   }
 
-  // If more than one team with time left > 0 and alive character, game not finished
+  // If more than one group with time left > 0 and alive character, game not finished
   return (num < 2);
 }

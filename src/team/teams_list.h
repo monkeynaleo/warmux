@@ -105,7 +105,7 @@ public:
     playing_list = list;
   }
 
-  const GroupList& GetGroupList() const { return groups; }
+  GroupList& GetGroupList() { return groups; }
 };
 
 inline TeamsList &GetTeamsList(void) { return TeamsList::GetRef(); };
