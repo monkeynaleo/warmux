@@ -33,10 +33,7 @@ class TeamGroup : public std::vector<Team*>
 {
 public:
   static const Color Colors[MAX_TEAM_GROUPS];
-};
-
-class TeamGroupList : public std::vector<TeamGroup>
-{
+  iterator active_team;
 };
 
 #endif // TEAM_GROUP_H

@@ -25,7 +25,10 @@
 #include <list>
 #include <vector>
 #include <map>
+
 #include <WARMUX_singleton.h>
+
+#include "team/team_group.h"
 //-----------------------------------------------------------------------------
 
 // Forward declarations
@@ -34,19 +37,12 @@ class ConfigTeam;
 class Character;
 class WeaponsList;
 
-class Group : public std::vector<Team*>
-{
-public:
-  typedef std::vector<Team *>::iterator iterator;
-  iterator active_team;
-};
-
 class TeamsList : public Singleton<TeamsList>
 {
 public:
   typedef std::list<Team *>::iterator full_iterator;
   typedef std::vector<Team *>::iterator iterator;
-  typedef std::map<uint, Group> GroupList;
+  typedef std::map<uint, TeamGroup> GroupList;
   std::list<Team *> full_list;
   std::vector<Team*> playing_list;
 

@@ -218,7 +218,7 @@ void TeamsList::RandomizeFirstPlayer()
     if (!(skip--))
       active_group = git;
 
-    Group& g = git->second;
+    TeamGroup& g = git->second;
     int skip2 = RandomSync().GetInt(1, g.size());
     g.active_team = g.begin();
     while (--skip2)
@@ -585,7 +585,7 @@ void TeamsList::DelTeam(const std::string &id)
 void TeamsList::SetActive(const std::string &id)
 {
   for (GroupList::iterator git = groups.begin(); git != groups.end(); ++git) {
-    for (Group::iterator it = git->second.begin(); it != git->second.end(); ++it) {
+    for (TeamGroup::iterator it = git->second.begin(); it != git->second.end(); ++it) {
       if ((*it)->GetId() == id) {
         active_group = git;
         git->second.active_team = it;
