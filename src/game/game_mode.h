@@ -78,6 +78,7 @@ public:
   typedef enum {
     ALWAYS = 0,
     BEFORE_FIRST_ACTION,
+    ON_SAME_GROUP,
     NEVER
   } manual_change_character_t;
 
