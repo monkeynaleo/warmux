@@ -51,7 +51,7 @@ public:
   uint duration_exchange_player;
   uint duration_before_death_mode;
   uint damage_per_turn_during_death_mode;
-  uint gravity;
+  int gravity;
   int safe_fall;
   uint damage_per_fall_unit;
   ExplosiveWeaponConfig death_explosion_cfg;
@@ -77,8 +77,8 @@ public:
 
   typedef enum {
     ALWAYS = 0,
+    WITHIN_GROUP,
     BEFORE_FIRST_ACTION,
-    ON_SAME_GROUP,
     NEVER
   } manual_change_character_t;
 
@@ -122,6 +122,7 @@ public:
   const XmlReader* GetXmlObjects() const { return doc_objects; }
 
   bool AllowCharacterSelection() const;
+  bool AllowGroupTeamChange() const { return allow_character_selection <= WITHIN_GROUP; }
 
   static std::vector<std::pair<std::string, std::string> > ListGameModes();
 
