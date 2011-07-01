@@ -203,7 +203,7 @@ uint Team::ReadEnergy() const
   return total_energy;
 }
 
-void Team::SelectCharacter(const Character * c)
+void Team::SelectCharacter(Character * c)
 {
   ASSERT(c != NULL);
 
@@ -211,7 +211,7 @@ void Team::SelectCharacter(const Character * c)
     ActiveCharacter().StopPlaying();
 
     active_character = characters.begin();
-    while (!c->IsActiveCharacter() && active_character != characters.end())
+    while (c != &(*active_character) && active_character != characters.end())
       active_character++;
 
     ASSERT(active_character != characters.end());
@@ -219,7 +219,7 @@ void Team::SelectCharacter(const Character * c)
 
   // StartPlaying (if needed) even if c was already ActiveCharacter() thanks to
   // the team change...
-  ActiveCharacter().StartPlaying();
+  c->StartPlaying();
 }
 
 void Team::NextCharacter(bool newturn)

@@ -38,6 +38,7 @@
 #include "replay/replay.h"
 #include "team/macro.h"
 #include "team/team.h"
+#include "team/teams_list.h"
 #include "tool/resource_manager.h"
 #include "weapon/weapon.h"
 
@@ -112,37 +113,48 @@ bool Mouse::HasFocus() const
   return false;
 }
 
+static bool FindCharacter(const Point2i& pos, Team* team)
+{
+  bool             character_found = false;
+  Team::iterator   it              = team->begin();
+  const Character* active_char     = &ActiveCharacter();
+
+  for (; it != team->end(); ++it) {
+    if (&(*it) != active_char && !it->IsDead() && it->GetRect().Contains(pos)) {
+      // Warning! team may not yet be the active team...
+      team->SelectCharacter(&(*it));
+      return true;
+    }
+  }
+
+  return false;
+}
 void Mouse::ActionLeftClick(bool /*shift*/) const
 {
-  const Point2i pos_monde = GetWorldPosition();
+  const Point2i& pos    = GetWorldPosition();
+  Team*          active = &ActiveTeam();
 
   //Change character by mouse click only if the choosen weapon allows it
-  if (GameMode::GetConstInstance()->AllowCharacterSelection() &&
-      ActiveTeam().GetWeapon().mouse_character_selection) {
+  if (active->GetWeapon().mouse_character_selection) {
+    if (GameMode::GetConstInstance()->AllowCharacterSelection()) {
+      TeamGroup& tlist = TeamsList::GetInstance()->GetGroupList()[ActiveTeam().GetGroup()];
 
-    // Choose a character of our own team
-    bool character_found = false;
-    Team::iterator it    = ActiveTeam().begin(),
-                   end   = ActiveTeam().end();
-
-    for (; it != end; ++it) {
-      if (&(*it) != &ActiveCharacter()
-          && !it -> IsDead()
-          && it->GetRect().Contains(pos_monde)) {
-
-        character_found = true;
-        break;
+      for (TeamGroup::iterator it = tlist.begin(); it != tlist.end(); ++it) {
+        if (FindCharacter(pos, *it)) {
+          tlist.active_team = it;
+          ActionHandler::GetInstance()->NewActionActiveCharacter(*it);
+          return;
+        }
+      }
+    } else if (GameMode::GetConstInstance()->AllowChangeWithinTeam()) {
+      // Choose a character of our own team
+      if (FindCharacter(pos, active)) {
+        ActionHandler::GetInstance()->NewActionActiveCharacter();
+        return;
       }
     }
 
-    if (character_found) {
-      ActiveTeam().SelectCharacter(&(*it));
-      ActionHandler::GetInstance()->NewActionActiveCharacter();
-
-      return;
-    }
-
-    if (ActiveCharacter().GetRect().Contains(pos_monde)) {
+    if (ActiveCharacter().GetRect().Contains(pos)) {
       CharacterCursor::GetInstance()->FollowActiveCharacter();
       return;
     }
@@ -153,7 +165,7 @@ void Mouse::ActionLeftClick(bool /*shift*/) const
   // - Choose a target but don't fire
   // - Choose a target and fire it !
   Action* a = new Action(Action::ACTION_WEAPON_SET_TARGET);
-  a->Push(GetWorldPosition());
+  a->Push(pos);
   ActionHandler::GetInstance()->NewAction (a);
 }
 

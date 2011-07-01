@@ -77,7 +77,7 @@ public:
 
   typedef enum {
     ALWAYS = 0,
-    WITHIN_GROUP,
+    WITHIN_TEAM,
     BEFORE_FIRST_ACTION,
     NEVER
   } manual_change_character_t;
@@ -122,7 +122,7 @@ public:
   const XmlReader* GetXmlObjects() const { return doc_objects; }
 
   bool AllowCharacterSelection() const;
-  bool AllowGroupTeamChange() const { return allow_character_selection <= WITHIN_GROUP; }
+  bool AllowChangeWithinTeam() const { return allow_character_selection <= WITHIN_TEAM; }
 
   static std::vector<std::pair<std::string, std::string> > ListGameModes();
 

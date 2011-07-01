@@ -114,7 +114,7 @@ public:
   // Switch to next worm.
   void NextCharacter(bool new_turn = false);
   void PreviousCharacter();
-  void SelectCharacter(const Character * c);
+  void SelectCharacter(Character * c);
 
   // Prepare turn.
   void PrepareTurn();
