@@ -137,8 +137,8 @@ bool GameMode::LoadXml()
     allow_character_selection = NEVER;
   else if (txt == "before_first_action")
     allow_character_selection = BEFORE_FIRST_ACTION;
-  else if (txt == "within_group")
-    allow_character_selection = WITHIN_GROUP;
+  else if (txt == "within_team")
+    allow_character_selection = WITHIN_TEAM;
   else
     fprintf(stderr, "%s is not a valid option for \"allow_character_selection\"\n", txt.c_str());
 
@@ -235,7 +235,7 @@ bool GameMode::AllowCharacterSelection() const
             !Game::GetInstance()->IsCharacterAlreadyChosen();
 
   case GameMode::NEVER:
-  case GameMode::WITHIN_GROUP:
+  case GameMode::WITHIN_TEAM:
   default:
     return false;
   }

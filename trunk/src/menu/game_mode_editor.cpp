@@ -113,8 +113,8 @@ GameModeEditor::GameModeEditor(const Point2i& size, float zoom, bool _draw_borde
 
   std::vector<std::pair<std::string, std::string> > char_sel;
   char_sel.push_back(std::make_pair("always", _("Always")));
+  char_sel.push_back(std::make_pair("within_team", _("Within team")));
   char_sel.push_back(std::make_pair("before_action", _("Before action")));
-  char_sel.push_back(std::make_pair("on_same_group", _("On same group")));
   char_sel.push_back(std::make_pair("never", _("Never")));
 
   opt_allow_character_selection = new ComboBox(_("Character switching"), "menu/character_selection",

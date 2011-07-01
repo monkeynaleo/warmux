@@ -253,7 +253,7 @@ bool SelectCharacterCommand::Execute()
 {
   if (character->IsActiveCharacter())
     return true;
-  ActionHandler::GetInstance()->NewActionActiveCharacter(character->GetCharacterIndex());
+  ActionHandler::GetInstance()->NewActionActiveCharacter(&character->GetTeam(), character->GetCharacterIndex());
   return true;
 }
 

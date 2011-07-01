@@ -337,10 +337,13 @@ static void Action_Player_ChangeWeapon(Action *a)
 static void Action_Player_ChangeCharacter(Action *a)
 {
   JukeBox::GetInstance()->Play("default", "character/change_in_same_team");
+  std::string id = a->PopString();
+  if (id != "")
+    TeamsList::GetInstance()->SetActive(id);
   int char_no = a->PopInt();
   Character * c = ActiveTeam().FindByIndex(char_no);
   ActiveTeam().SelectCharacter(c);
-  Camera::GetInstance()->FollowObject(&ActiveCharacter(),true);
+  Camera::GetInstance()->FollowObject(c, true);
 }
 
 static void Action_Game_Unpack(Action *a)
@@ -1384,9 +1387,10 @@ void ActionHandler::AddActionsFrames(uint nb, DistantComputer* cpu)
   }
 }
 
-void ActionHandler::NewActionActiveCharacter(int index)
+void ActionHandler::NewActionActiveCharacter(const Team* team, int index)
 {
   Action * next_character = new Action(Action::ACTION_PLAYER_CHANGE_CHARACTER);
+  next_character->Push((team) ? team->GetId() : "");
   uint next_character_index = (index<0) ? ActiveCharacter().GetCharacterIndex() : index;
   next_character->Push((int)next_character_index);
   NewAction(next_character);
