@@ -48,7 +48,7 @@ GameMode::GameMode()
   main_settings.push_back(new UintConfigElement("damage_per_turn_during_death_mode", &damage_per_turn_during_death_mode, 5));
   main_settings.push_back(new UintConfigElement("max_teams", &max_teams, 8));
   main_settings.push_back(new UintConfigElement("nb_characters", &nb_characters, 6));
-  main_settings.push_back(new UintConfigElement("gravity", &gravity, 30));
+  main_settings.push_back(new IntConfigElement("gravity", &gravity, 30));
   main_settings.push_back(new IntConfigElement("safe_fall", &safe_fall, 10));
   main_settings.push_back(new UintConfigElement("damage_per_fall_unit", &damage_per_fall_unit, 7));
 
@@ -137,8 +137,8 @@ bool GameMode::LoadXml()
     allow_character_selection = NEVER;
   else if (txt == "before_first_action")
     allow_character_selection = BEFORE_FIRST_ACTION;
-  else if (txt == "on_same_group")
-    allow_character_selection = ON_SAME_GROUP;
+  else if (txt == "within_group")
+    allow_character_selection = WITHIN_GROUP;
   else
     fprintf(stderr, "%s is not a valid option for \"allow_character_selection\"\n", txt.c_str());
 
@@ -234,7 +234,10 @@ bool GameMode::AllowCharacterSelection() const
     return (Game::GetInstance()->ReadState() == Game::PLAYING) &&
             !Game::GetInstance()->IsCharacterAlreadyChosen();
 
-  case GameMode::NEVER: return false;
+  case GameMode::NEVER:
+  case GameMode::WITHIN_GROUP:
+  default:
+    return false;
   }
 
   return true;
