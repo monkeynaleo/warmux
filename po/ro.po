@@ -8,14 +8,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
-"POT-Creation-Date: 2011-04-20 19:52+0200\n"
 "PO-Revision-Date: 2009-09-08 14:34+0300\n"
 "Last-Translator: Eddy Petrișor <eddy.petrisor@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
+"Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ro\n"
 "Plural-Forms:  nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
 "X-Generator: KBabel 1.11.4\n"
@@ -33,7 +32,7 @@ msgstr "! Harta %s nu a fost găsită :-("
 msgid "%.1f fps"
 msgstr "%.1f C/S"
 
-#: src/menu/network_menu.cpp:130 src/menu/network_menu.cpp:359
+#: src/menu/network_menu.cpp:131 src/menu/network_menu.cpp:376
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
@@ -41,7 +40,7 @@ msgstr[0] "%i jucător conectat"
 msgstr[1] "%i jucători conectați"
 msgstr[2] "%i de jucători conectați"
 
-#: src/menu/network_menu.cpp:134 src/menu/network_menu.cpp:369
+#: src/menu/network_menu.cpp:135 src/menu/network_menu.cpp:386
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -59,46 +58,46 @@ msgstr "%s <%s> cunoscut și ca %s din %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> din %s"
 
-#: src/menu/team_box.cpp:254
+#: src/menu/team_box.cpp:286
 #, c-format
 msgid "%s Team"
 msgstr "Echipa %s"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:246
+#: src/menu/team_box.cpp:278
 #, c-format
 msgid "%s Team - Remote"
 msgstr "Echipa %s - la distanță"
 
-#: src/game/game.cpp:1171
+#: src/game/game.cpp:1172
 #, fuzzy, c-format
 msgid "%s from %s team committed suicide!"
 msgstr "%s din echipa %s s-a sinucis !"
 
 #. Could be modified, but for now, save on translation
-#: src/game/game.cpp:1197 src/game/game.cpp:1216
+#: src/game/game.cpp:1198 src/game/game.cpp:1217
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s din echipa %s a murit."
 
-#: src/game/game.cpp:1163
+#: src/game/game.cpp:1164
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s din echipa %s a căzut în apă!"
 
-#: src/game/game.cpp:1157
+#: src/game/game.cpp:1158
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s din echipa %s a căzut în afara hărții!"
 
-#: src/game/game.cpp:1177
+#: src/game/game.cpp:1178
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s din echipa %s a lovit prea tare pământul!"
 
 # what about female names?
 #. The playing character killed himself
-#: src/game/game.cpp:1184
+#: src/game/game.cpp:1185
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s din echipa %s decedat prin propria stângăcie!"
@@ -116,29 +115,29 @@ msgid ""
 msgstr ""
 "%s a făcut ceva pentru mediu, a ordonat sconcsului să nu tragă vânturi."
 
-#: src/object/medkit.cpp:73
+#: src/object/medkit.cpp:77
 #, fuzzy, c-format
 msgid "%s has won %u points of energy!"
 msgstr "%s a câștigat %u punct de energie!"
 
-#: src/game/game.cpp:1208
+#: src/game/game.cpp:1209
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "Psihopatia sălășluiește în %s, a omorât un membru al echipei %s!"
 
-#: src/weapon/mine.cpp:121
+#: src/weapon/mine.cpp:120
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s e lângă o mină!"
 
 #. For translators: extended in "<nickname> (<host>) just connected
-#: src/include/action_handler.cpp:952
+#: src/include/action_handler.cpp:1031
 #, fuzzy, c-format
 msgid "%s just connected"
 msgstr "%i jucător conectat"
 
 #. For translators: extended in "<nickname> (<host>) just disconnected
-#: src/include/action_handler.cpp:1068
+#: src/include/action_handler.cpp:1143
 #, fuzzy, c-format
 msgid "%s just disconnected"
 msgstr "%i jucător conectat"
@@ -148,7 +147,7 @@ msgstr "%i jucător conectat"
 msgid "%s kicked from game"
 msgstr ""
 
-#: src/include/action_handler.cpp:468
+#: src/include/action_handler.cpp:486
 #, c-format
 msgid "%s needs a pause."
 msgstr ""
@@ -172,7 +171,7 @@ msgstr "Echipa %s a sărit peste tură."
 # XXX: example: "mină" "mine" "de mine"
 # XXX: Also, I can't insert the plural termination in there which can be different depending on gender and word.
 # XXX[ro]: workaround the problem by a kludgy translation
-#: src/weapon/cluzooka.cpp:379
+#: src/weapon/cluzooka.cpp:368
 #, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
@@ -188,7 +187,7 @@ msgstr[0] "Echipa %s a câștigat %u antilopă gnu! Rade-i pe toți!"
 msgstr[1] "Echipa %s a câștigat %u antilope gnu! Rade-i pe toți!"
 msgstr[2] "Echipa %s a câștigat %u de antilope gnu! Rade-i pe toți!"
 
-#: src/weapon/air_attack.cpp:256
+#: src/weapon/air_attack.cpp:257
 #, c-format
 msgid "%s team has won %u air attack!"
 msgid_plural "%s team has won %u air attacks!"
@@ -196,7 +195,7 @@ msgstr[0] "'%s a câștigat %u atac aerian"
 msgstr[1] "'%s a câștigat %u atacuri aeriene"
 msgstr[2] "'%s a câștigat %u de atacuri aeriene"
 
-#: src/weapon/airhammer.cpp:167
+#: src/weapon/airhammer.cpp:166
 #, c-format
 msgid ""
 "%s team has won %u airhammer! Don't make too much noise with it! Thanks, "
@@ -214,7 +213,7 @@ msgstr[2] ""
 "Echipa %s a câștigat %u de ciocane pneumatice! Nu face prea mult zgomot cu "
 "ele! Îți mulțumim, vecinii tăi."
 
-#: src/weapon/anvil.cpp:195
+#: src/weapon/anvil.cpp:183
 #, c-format
 msgid "%s team has won %u anvil! Splat them all!"
 msgid_plural "%s team has won %u anvils! Splat them all!"
@@ -222,7 +221,7 @@ msgstr[0] "Echipa %s a câștigat %u nicovală! Storcește tot cu ea!"
 msgstr[1] "Echipa %s a câștigat %u nicovale! Storcește tot cu ele!"
 msgstr[2] "Echipa %s a câștigat %u de nicovale! Storcește tot cu ele!"
 
-#: src/weapon/auto_bazooka.cpp:325
+#: src/weapon/auto_bazooka.cpp:214
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -230,7 +229,7 @@ msgstr[0] "Echipa %s a câștigat %u rachetă automată!"
 msgstr[1] "Echipa %s a câștigat %u rachete automate!"
 msgstr[2] "Echipa %s a câștigat %u de rachete automate!"
 
-#: src/weapon/baseball.cpp:112
+#: src/weapon/baseball.cpp:107
 #, c-format
 msgid "%s team has won %u baseball bat!"
 msgid_plural "%s team has won %u baseball bats!"
@@ -252,7 +251,7 @@ msgstr[0] "Echipa %s a câștigat %u rachetă!"
 msgstr[1] "Echipa %s a câștigat %u rachete!"
 msgstr[2] "Echipa %s a câștigat %u de rachete!"
 
-#: src/weapon/blowtorch.cpp:154
+#: src/weapon/blowtorch.cpp:137
 #, c-format
 msgid ""
 "%s team has won %u blowtorch! If you're under 18, ask your parents to use it."
@@ -283,7 +282,7 @@ msgstr[2] "Echipa %s a câștigat %u de mingii săltărețe! Boing!"
 # XXX: example: "mină" "mine" "de mine"
 # XXX: Also, I can't insert the plural termination in there which can be different depending on gender and word.
 # XXX[ro]: workaround the problem by a kludgy translation
-#: src/weapon/cluster_bomb.cpp:204
+#: src/weapon/cluster_bomb.cpp:206
 #, c-format
 msgid "%s team has won %u cluster bomb!"
 msgid_plural "%s team has won %u cluster bombs!"
@@ -311,7 +310,7 @@ msgstr[2] "Echipa %s a câștigat %u de construcții! Nu-ți uita casca."
 # XXX: example: "mină" "mine" "de mine"
 # XXX: Also, I can't insert the plural termination in there which can be different depending on gender and word.
 # XXX[ro]: workaround the problem by a kludgy translation
-#: src/weapon/disco_grenade.cpp:168
+#: src/weapon/disco_grenade.cpp:166
 #, c-format
 msgid "%s team has won %u disco grenade! Shake your body when throwing it!"
 msgid_plural ""
@@ -343,7 +342,7 @@ msgstr[2] "Echipa %s a câștigat %u de aruncătoare de flăcări!"
 # XXX: example: "mină" "mine" "de mine"
 # XXX: Also, I can't insert the plural termination in there which can be different depending on gender and word.
 # XXX[ro]: workaround the problem by a kludgy translation
-#: src/weapon/footbomb.cpp:167
+#: src/weapon/footbomb.cpp:173
 #, c-format
 msgid "%s team has won %u football bomb!"
 msgid_plural "%s team has won %u football bombs!"
@@ -357,7 +356,7 @@ msgstr[2] "Echipa %s a câștigat %u de mingii de fotbal american!"
 # XXX: example: "mină" "mine" "de mine"
 # XXX: Also, I can't insert the plural termination in there which can be different depending on gender and word.
 # XXX[ro]: workaround the problem by a kludgy translation
-#: src/weapon/grapple.cpp:713
+#: src/weapon/grapple.cpp:716
 #, c-format
 msgid "%s team has won %u grapple!"
 msgid_plural "%s team has won %u grapples!"
@@ -430,7 +429,7 @@ msgstr[2] ""
 # XXX: example: "mină" "mine" "de mine"
 # XXX: Also, I can't insert the plural termination in there which can be different depending on gender and word.
 # XXX[ro]: workaround the problem by a kludgy translation
-#: src/weapon/mine.cpp:249
+#: src/weapon/mine.cpp:248
 #, c-format
 msgid "%s team has won %u mine!"
 msgid_plural "%s team has won %u mines!"
@@ -444,7 +443,7 @@ msgstr[2] "Echipa %s a câștigat %u de mine!"
 # XXX: example: "mină" "mine" "de mine"
 # XXX: Also, I can't insert the plural termination in there which can be different depending on gender and word.
 # XXX[ro]: workaround the problem by a kludgy translation
-#: src/weapon/parachute.cpp:174
+#: src/weapon/parachute.cpp:181
 #, c-format
 msgid "%s team has won %u parachute!"
 msgid_plural "%s team has won %u parachutes!"
@@ -514,7 +513,7 @@ msgstr[2] "Echipa %s a câștigat %u de puști!"
 # XXX: example: "mină" "mine" "de mine"
 # XXX: Also, I can't insert the plural termination in there which can be different depending on gender and word.
 # XXX[ro]: workaround the problem by a kludgy translation
-#: src/weapon/slap.cpp:79
+#: src/weapon/slap.cpp:67
 #, c-format
 msgid "%s team has won %u slap!"
 msgid_plural "%s team has won %u slaps! Dodge this!"
@@ -575,7 +574,7 @@ msgstr[2] "Echipa %s a câștigat %u de suiciduri!"
 # XXX: example: "mină" "mine" "de mine"
 # XXX: Also, I can't insert the plural termination in there which can be different depending on gender and word.
 # XXX[ro]: workaround the problem by a kludgy translation
-#: src/weapon/syringe.cpp:120
+#: src/weapon/syringe.cpp:108
 #, c-format
 msgid "%s team has won %u syringe!"
 msgid_plural "%s team has won %u syringes!"
@@ -611,7 +610,7 @@ msgstr[2] "Echipa %s a câștigat %u de salturi de tură! Sigur o să-ți placă
 # XXX: example: "mină" "mine" "de mine"
 # XXX: Also, I can't insert the plural termination in there which can be different depending on gender and word.
 # XXX[ro]: workaround the problem by a kludgy translation
-#: src/weapon/supertux.cpp:291
+#: src/weapon/supertux.cpp:278
 #, c-format
 msgid "%s team has won %u tux launcher! Never seen a flying penguin?"
 msgid_plural "%s team has won %u tux launchers! Never seen a flying penguin?"
@@ -624,12 +623,7 @@ msgstr[2] ""
 "Echipa %s a câștigat %u de lansatoare de tux! N-ai mai văzut un pinguin "
 "zburător?"
 
-#: src/game/game_blitz.cpp:67
-#, c-format
-msgid "%s team was fragged down."
-msgstr "Echipa %s a fost nimicită."
-
-#: src/game/game.cpp:1192 src/game/game.cpp:1204
+#: src/game/game.cpp:1193 src/game/game.cpp:1205
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s a luat cu el în mormânt un membru al echipei %s!"
@@ -674,12 +668,12 @@ msgstr "Schimbă categoria armei"
 msgid "'Tool' weapon category"
 msgstr "Schimbă categoria armei"
 
-#: src/interface/interface.cpp:291
+#: src/interface/interface.cpp:292
 msgid "(dead)"
 msgstr "(mort)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:339
+#: src/menu/options_menu.cpp:331
 msgid "(system language)"
 msgstr "(limba sistemului)"
 
@@ -688,11 +682,11 @@ msgid "(unknown time)"
 msgstr "(un moment necunoscut)"
 
 #. Display number of ammo
-#: src/interface/interface.cpp:314
+#: src/interface/interface.cpp:315
 msgid "(unlimited)"
 msgstr "(infinit)"
 
-#: src/menu/options_menu.cpp:536
+#: src/menu/options_menu.cpp:528
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s. You may want to "
@@ -709,27 +703,31 @@ msgstr ""
 msgid "Action"
 msgstr "fiecare deconectare!"
 
-#: src/weapon/air_attack.cpp:213
+#: src/weapon/air_attack.cpp:215
 msgid "Air Attack"
 msgstr "Atac aerian"
 
-#: src/weapon/airhammer.cpp:76
+#: src/weapon/airhammer.cpp:75
 msgid "Airhammer"
 msgstr "Ciocan pneumatic"
 
-#: src/menu/results_menu.cpp:313
+#: src/menu/results_menu.cpp:315
 msgid "All teams"
 msgstr "Toate echipele"
 
-#: src/menu/game_mode_editor.cpp:56
+#: src/menu/game_mode_editor.cpp:115
 msgid "Always"
 msgstr "Întotdeauna"
+
+#: src/menu/game_mode_editor.cpp:214
+msgid "Ammos"
+msgstr ""
 
 #: src/game/game_blitz.cpp:48 src/game/game_classic.cpp:54
 msgid "And the winner is..."
 msgstr "Iar câștigătorul este..."
 
-#: src/weapon/baseball.cpp:56
+#: src/weapon/baseball.cpp:55
 #, fuzzy
 msgid ""
 "Angle: Up/Down\n"
@@ -740,7 +738,7 @@ msgstr ""
 "Foc : tasta spațiu\n"
 "o lovitură per rundă"
 
-#: src/weapon/anvil.cpp:141
+#: src/weapon/anvil.cpp:137
 msgid "Anvil"
 msgstr "Nicovală"
 
@@ -748,11 +746,11 @@ msgstr "Nicovală"
 msgid "Area currently displayed"
 msgstr ""
 
-#: src/main.cpp:358
+#: src/main.cpp:362
 msgid "Authors:"
 msgstr "Autori:"
 
-#: src/weapon/auto_bazooka.cpp:220
+#: src/weapon/auto_bazooka.cpp:191
 msgid "Automatic Bazooka"
 msgstr "Rachetă automată"
 
@@ -769,7 +767,7 @@ msgstr "Înapoi pe câmpul de bătălie"
 msgid "Bad socket ..."
 msgstr "Socket greșit ..."
 
-#: src/weapon/baseball.cpp:55
+#: src/weapon/baseball.cpp:54
 msgid "Baseball Bat"
 msgstr "Bâtă de basebal"
 
@@ -777,7 +775,7 @@ msgstr "Bâtă de basebal"
 msgid "Bazooka"
 msgstr "Proiectil reactiv"
 
-#: src/menu/game_mode_editor.cpp:57
+#: src/menu/game_mode_editor.cpp:117
 msgid "Before action"
 msgstr "Înaintea acțiunii"
 
@@ -785,11 +783,11 @@ msgstr "Înaintea acțiunii"
 msgid "Benchmark"
 msgstr ""
 
-#: src/game/game_mode.cpp:336
+#: src/game/game_mode.cpp:321 src/menu/game_mode_editor.cpp:102
 msgid "Blitz"
 msgstr "Bliț"
 
-#: src/weapon/blowtorch.cpp:63
+#: src/weapon/blowtorch.cpp:64
 msgid "Blowtorch"
 msgstr "Lampă de sudură"
 
@@ -801,24 +799,24 @@ msgstr "Minge săltăreață"
 msgid "Bye bye Tux..."
 msgstr "Pa pa Tux..."
 
-#: src/team/teams_list.cpp:469 src/team/teams_list.cpp:504
-#: src/team/teams_list.cpp:513 src/team/teams_list.cpp:519
-#: src/team/teams_list.cpp:577
+#: src/team/teams_list.cpp:489 src/team/teams_list.cpp:525
+#: src/team/teams_list.cpp:534 src/team/teams_list.cpp:540
+#: src/team/teams_list.cpp:598
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Echipa %s nu poate fi găsită!"
 
-#: src/team/teams_list.cpp:158
+#: src/team/teams_list.cpp:171
 #, c-format
 msgid "Cannot open personal teams directory (%s)!"
 msgstr "Directorul personal cu echipe nu poate fi deschis (%s)!"
 
-#: src/team/teams_list.cpp:144
+#: src/team/teams_list.cpp:157
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Directorul cu echipe nu poate fi deschis (%s)!"
 
-#: src/team/custom_teams_list.cpp:66
+#: src/team/custom_teams_list.cpp:68
 #, c-format
 msgid "Cannot open the custom teams directory (%s)!"
 msgstr "Directorul cu echipe particularizate nu poate fi deschis (%s)!"
@@ -884,11 +882,11 @@ msgid ""
 "Team name."
 msgstr ""
 
-#: src/menu/options_menu.cpp:192
+#: src/menu/options_menu.cpp:186
 msgid "Character names:"
 msgstr "Numele personajelor:"
 
-#: src/menu/game_mode_editor.cpp:60
+#: src/menu/game_mode_editor.cpp:120
 msgid "Character switching"
 msgstr "Schimb de personaje"
 
@@ -896,15 +894,15 @@ msgstr "Schimb de personaje"
 msgid "Chat"
 msgstr ""
 
-#: src/menu/options_menu.cpp:246
+#: src/menu/options_menu.cpp:237
 msgid "Check updates online?"
 msgstr "Se verifică actualizările online?"
 
-#: src/menu/map_selection_box.cpp:227
+#: src/menu/map_selection_box.cpp:109
 msgid "Choose randomly between the different maps"
 msgstr "Alege la întâmplare una din diferitele hărți"
 
-#: src/game/game_mode.cpp:334
+#: src/game/game_mode.cpp:319 src/menu/game_mode_editor.cpp:101
 msgid "Classic"
 msgstr "Clasic"
 
@@ -940,7 +938,7 @@ msgid ""
 msgstr ""
 
 #. Client Mode
-#: src/menu/network_menu.cpp:167 src/network/network.cpp:455
+#: src/menu/network_menu.cpp:168 src/network/network.cpp:489
 msgid "Client mode"
 msgstr "Mod client"
 
@@ -948,20 +946,20 @@ msgstr "Mod client"
 msgid "Clumsiest"
 msgstr "Cel mai stângaci"
 
-#: src/weapon/cluster_bomb.cpp:187
+#: src/weapon/cluster_bomb.cpp:189
 msgid "Cluster Bomb"
 msgstr "Bombă cu schije"
 
-#: src/weapon/cluzooka.cpp:373
+#: src/weapon/cluzooka.cpp:362
 msgid "Cluzooka"
 msgstr "Proiectil reactiv cu schije"
 
 #. Comment
-#: src/menu/replay_menu.cpp:89
+#: src/menu/replay_menu.cpp:112
 msgid "Comment"
 msgstr ""
 
-#: src/menu/results_menu.cpp:366
+#: src/menu/results_menu.cpp:368
 msgid "Comment:"
 msgstr ""
 
@@ -974,7 +972,7 @@ msgstr "Comite suicid"
 msgid "Configuration menu"
 msgstr "Meniu de configurare"
 
-#: src/menu/network_connection_menu.cpp:166
+#: src/menu/network_connection_menu.cpp:282
 msgid "Connect to game"
 msgstr "Conectare la joc"
 
@@ -990,7 +988,7 @@ msgstr "Jucători conectați: "
 msgid "Construct"
 msgstr "Construiește"
 
-#: src/menu/results_menu.cpp:292
+#: src/menu/results_menu.cpp:293
 msgid "Controlled by: "
 msgstr "Controlat de: "
 
@@ -1026,12 +1024,12 @@ msgid ""
 "Click to open selection menu."
 msgstr ""
 
-#: src/menu/game_mode_editor.cpp:88
+#: src/menu/game_mode_editor.cpp:142
 msgid "Damage per turn during death mode"
 msgstr "Sănătatea pierdută la fiecare tură în modul mortal"
 
 #. Date
-#: src/menu/replay_menu.cpp:79
+#: src/menu/replay_menu.cpp:102
 #, fuzzy
 msgid "Date"
 msgstr "Dinamită"
@@ -1048,7 +1046,7 @@ msgstr ""
 msgid "Decrease sound volume"
 msgstr ""
 
-#: src/weapon/disco_grenade.cpp:157
+#: src/weapon/disco_grenade.cpp:155
 msgid "Disco Grenade"
 msgstr "Grenadă disco"
 
@@ -1056,7 +1054,7 @@ msgstr "Grenadă disco"
 msgid "Displays this message"
 msgstr "Afișează acest mesaj"
 
-#: src/menu/network_menu.cpp:169
+#: src/menu/network_menu.cpp:170
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr ""
 
@@ -1076,17 +1074,17 @@ msgid "Drag&drop: Move camera"
 msgstr "Tragere cu mausul: Mută camera"
 
 #. Duration
-#: src/menu/replay_menu.cpp:84
+#: src/menu/replay_menu.cpp:107
 #, fuzzy
 msgid "Duration"
 msgstr "Durata unei ture"
 
 #. some death mode options
-#: src/menu/game_mode_editor.cpp:82
+#: src/menu/game_mode_editor.cpp:137
 msgid "Duration before death mode"
 msgstr "Durata până la modul mortal"
 
-#: src/menu/game_mode_editor.cpp:49
+#: src/menu/game_mode_editor.cpp:107
 msgid "Duration of a turn"
 msgstr "Durata unei ture"
 
@@ -1094,15 +1092,15 @@ msgstr "Durata unei ture"
 msgid "Dynamite"
 msgstr "Dinamită"
 
-#: src/game/game.cpp:512
+#: src/game/game.cpp:510
 msgid "END OF GAME"
 msgstr "SFÂRȘITUL JOCULUI"
 
-#: src/menu/options_menu.cpp:291
+#: src/menu/options_menu.cpp:283
 msgid "Effects volume"
 msgstr "Volumul efectelor"
 
-#: src/menu/results_menu.cpp:339
+#: src/menu/results_menu.cpp:341
 msgid "Energy"
 msgstr "Energie"
 
@@ -1116,11 +1114,11 @@ msgstr "Eroare de inițializare a rețelei: Clientul %s nu este de acord!! - %s"
 msgid "Error loading ground"
 msgstr "Eroare la încărcarea echipei:"
 
-#: src/team/custom_teams_list.cpp:93 src/team/teams_list.cpp:119
+#: src/team/custom_teams_list.cpp:96 src/team/teams_list.cpp:132
 msgid "Error loading team :"
 msgstr "Eroare la încărcarea echipei:"
 
-#: src/game/config.cpp:586 src/team/custom_team.cpp:155
+#: src/game/config.cpp:579 src/team/custom_team.cpp:155
 #: src/team/custom_team.cpp:166 src/team/custom_team.cpp:177
 #, c-format
 msgid ""
@@ -1145,30 +1143,30 @@ msgstr ""
 "fi ștearsă."
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:527
+#: src/menu/network_connection_menu.cpp:520
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Nu a fost posibilă conectarea la %s:%s"
 
-#: src/menu/network_connection_menu.cpp:477
+#: src/menu/network_connection_menu.cpp:470
 msgid "Error: Unable to contact the index server to host a game"
 msgstr ""
 "Eroare: Nu a fost posibilă contactarea la serverul index pentru a găzdui un "
 "joc"
 
-#: src/menu/network_connection_menu.cpp:388
+#: src/menu/network_connection_menu.cpp:381
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
 "Eroare: Nu a fost posibilă contactarea la serverul index pentru a căuta un "
 "joc pe internet"
 
-#: src/menu/network_connection_menu.cpp:505
+#: src/menu/network_connection_menu.cpp:498
 msgid "Error: Unable to start the server"
 msgstr "Eroare: Nu a fost posibilă pornirea server-ului"
 
-#: src/menu/network_connection_menu.cpp:498
-#: tools/servers/game_server/server.cpp:389
+#: src/menu/network_connection_menu.cpp:491
+#: tools/servers/game_server/server.cpp:401
 #, c-format
 msgid ""
 "Error: Your server is not reachable from the internet. Check your firewall "
@@ -1181,7 +1179,7 @@ msgstr ""
 "Dacă nu ai conexiune directă la internet, verifică configurația router-ului: "
 "Portul TCP %s trebuie să fie redirectat către calculatorul tău."
 
-#: src/team/team.cpp:161
+#: src/team/team.cpp:162
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Eroare: corpul „%s” pentru echipa „%s” nu poate fi găsit."
@@ -1217,11 +1215,11 @@ msgstr "Nu a fost posibilă deschiderea directorului cu hărți (%s)!"
 msgid "Fail to open temporary file: %s"
 msgstr "Nu a fost posibilă deschiderea directorului cu hărți (%s)!"
 
-#: src/menu/results_menu.cpp:434
+#: src/menu/results_menu.cpp:436
 msgid "Failed to save replay"
 msgstr ""
 
-#: src/menu/results_menu.cpp:354
+#: src/menu/results_menu.cpp:356
 #, fuzzy
 msgid "Filename:"
 msgstr "Numele jocului:"
@@ -1230,19 +1228,19 @@ msgstr "Numele jocului:"
 msgid "Flame Thrower"
 msgstr "Aruncător de flăcări"
 
-#: src/weapon/footbomb.cpp:151
+#: src/weapon/footbomb.cpp:157
 msgid "Football Bomb"
 msgstr "Bombă-minge de fotbal"
 
-#: src/menu/options_menu.cpp:112
+#: src/menu/options_menu.cpp:109
 msgid "Fullscreen?"
 msgstr "Tot ecranul?"
 
-#: src/menu/game_menu.cpp:94 src/menu/network_menu.cpp:197
+#: src/menu/game_menu.cpp:96 src/menu/network_menu.cpp:198
 msgid "Game"
 msgstr "Joc"
 
-#: src/include/action_handler.cpp:921
+#: src/include/action_handler.cpp:1003
 msgid ""
 "Game is not synchronized anymore! This is BAD, the network game will be "
 "interrupted, sorry. Please, report the bug to the Warmux Team by mail or "
@@ -1258,12 +1256,12 @@ msgstr "Modul jocului"
 #. TRANSLATORS: please be imaginative and keep it short!
 #. Using the game mode editor but currently we are not able to send
 #. custom parameters to client
-#: src/menu/game_mode_editor.cpp:45 src/menu/help_menu.cpp:73
-#: src/menu/network_menu.cpp:193
+#: src/menu/game_mode_editor.cpp:70 src/menu/help_menu.cpp:73
+#: src/menu/network_menu.cpp:194
 msgid "Game mode"
 msgstr "Modul jocului"
 
-#: src/menu/network_connection_menu.cpp:263
+#: src/menu/network_connection_menu.cpp:257
 msgid "Game name:"
 msgstr "Numele jocului:"
 
@@ -1275,22 +1273,22 @@ msgstr ""
 msgid "Gnu Launcher"
 msgstr "Lansator de antilope gnu"
 
-#: src/weapon/syringe.cpp:70
+#: src/weapon/syringe.cpp:58
 msgid ""
 "Go to player\n"
 "Press space to inject\n"
 "Will cure your teammate or slowly kill your opponent"
 msgstr ""
 
-#: src/menu/benchmark_menu.cpp:112 src/menu/options_menu.cpp:157
+#: src/menu/benchmark_menu.cpp:112 src/menu/options_menu.cpp:151
 msgid "Graphics"
 msgstr "Grafică"
 
-#: src/weapon/grapple.cpp:164
+#: src/weapon/grapple.cpp:167
 msgid "Grapple"
 msgstr "Ghiară de agățare"
 
-#: src/menu/game_mode_editor.cpp:95
+#: src/menu/game_mode_editor.cpp:146
 msgid "Gravity"
 msgstr "Gravitație"
 
@@ -1302,17 +1300,23 @@ msgstr "Grenadă"
 msgid "Ground initialization..."
 msgstr "Inițializare teren..."
 
+#: src/game/game_blitz.cpp:69
+#, fuzzy, c-format
+#| msgid "%s team was fragged down."
+msgid "Group %u was fragged down."
+msgstr "Echipa %s a fost nimicită."
+
 #: src/weapon/gun.cpp:72
 msgid "Gun"
 msgstr "Pistol"
 
-#: src/menu/network_connection_menu.cpp:311
+#: src/menu/network_connection_menu.cpp:307
 msgid "Have a good game!"
 msgstr "Distracție plăcută!"
 
-#. *******    Names: "Head commander" + text/custom team    ******
-#: src/interface/interface.cpp:280 src/menu/options_menu.cpp:182
-#: src/menu/team_box.cpp:81
+#. ***    Names: "Head commander" + text/custom team    ***
+#: src/interface/interface.cpp:281 src/menu/options_menu.cpp:178
+#: src/menu/team_box.cpp:103
 msgid "Head commander"
 msgstr "Comandant șef"
 
@@ -1321,7 +1325,7 @@ msgstr "Comandant șef"
 msgid "Help"
 msgstr "Ajutor"
 
-#: src/menu/options_menu.cpp:128
+#: src/menu/options_menu.cpp:121
 #, fuzzy
 msgid "High"
 msgstr "Salt înalt"
@@ -1331,7 +1335,7 @@ msgstr "Salt înalt"
 msgid "High jump"
 msgstr "Salt înalt"
 
-#: src/menu/network_connection_menu.cpp:287
+#: src/menu/network_connection_menu.cpp:283
 msgid "Host a game"
 msgstr "Găzduiește un joc"
 
@@ -1339,11 +1343,11 @@ msgstr "Găzduiește un joc"
 msgid "Hurry up, you are too slow !!"
 msgstr "Grăbește-te te miști prea încet!!"
 
-#: src/menu/results_menu.cpp:367
+#: src/menu/results_menu.cpp:369
 msgid "I like WarMUX :)"
 msgstr ""
 
-#: src/main.cpp:290
+#: src/main.cpp:294
 msgid ""
 "If you found a bug or have a feature request send us an email (in english, "
 "please):"
@@ -1392,11 +1396,11 @@ msgid "Ingame display"
 msgstr ""
 
 #. Characters energy
-#: src/menu/game_mode_editor.cpp:67
+#: src/menu/game_mode_editor.cpp:125
 msgid "Initial energy"
 msgstr "Energie inițială"
 
-#: src/weapon/bazooka.cpp:120 src/weapon/cluzooka.cpp:374
+#: src/weapon/bazooka.cpp:120 src/weapon/cluzooka.cpp:363
 #: src/weapon/riot_bomb.cpp:120
 #, fuzzy
 msgid ""
@@ -1408,20 +1412,20 @@ msgstr ""
 "Foc : țineți tasta spațiu apăsată până la puterea dorită\n"
 "un proiectil per rundă"
 
-#: src/game/game.cpp:123
+#: src/game/game.cpp:124
 msgid "Initialisation"
 msgstr "Inițializare"
 
 #. Load the map
-#: src/game/game.cpp:160
+#: src/game/game.cpp:161
 msgid "Initialise map"
 msgstr "Inițializare hartă"
 
-#: src/game/game.cpp:171
+#: src/game/game.cpp:172
 msgid "Initialise sounds"
 msgstr "Inițializare sunete"
 
-#: src/game/game.cpp:167
+#: src/game/game.cpp:168
 msgid "Initialise teams"
 msgstr "Inițializare echipe"
 
@@ -1436,11 +1440,11 @@ msgstr "Arată/ascunde interfața"
 msgid "Interface and touch controls, more details in other tabs"
 msgstr ""
 
-#: src/menu/results_menu.cpp:422
+#: src/menu/results_menu.cpp:424
 msgid "Invalid filename"
 msgstr ""
 
-#: src/game/game.cpp:1041
+#: src/game/game.cpp:1042
 msgid "It's a present!"
 msgstr "E un cadou!"
 
@@ -1457,7 +1461,7 @@ msgstr "Salt"
 msgid "Jump backwards"
 msgstr "Salt înapoi"
 
-#: src/weapon/blowtorch.cpp:64
+#: src/weapon/blowtorch.cpp:65
 #, fuzzy
 msgid ""
 "Keep the space key pressed\n"
@@ -1473,7 +1477,7 @@ msgstr ""
 msgid "Key"
 msgstr ""
 
-#: src/menu/options_menu.cpp:167
+#: src/menu/options_menu.cpp:161
 msgid "Key bindings"
 msgstr ""
 
@@ -1487,11 +1491,11 @@ msgstr ""
 msgid "Kicks the player designated by <nickname> out of the game"
 msgstr "Aruncă afară din joc jucătorii indicați de <nickname>"
 
-#: src/menu/options_menu.cpp:162
+#: src/menu/options_menu.cpp:156
 msgid "Language"
 msgstr "Limba"
 
-#: src/menu/options_menu.cpp:252
+#: src/menu/options_menu.cpp:243
 msgid "Left-handed mouse?"
 msgstr "Maus pentru stângaci?"
 
@@ -1504,7 +1508,7 @@ msgstr "Afișează jucătorii conectați"
 msgid "Load maps:"
 msgstr "Încărcare hărți:"
 
-#: src/team/teams_list.cpp:130
+#: src/team/teams_list.cpp:143
 msgid "Load teams:"
 msgstr "Încărcare echipe:"
 
@@ -1512,7 +1516,7 @@ msgstr "Încărcare echipe:"
 msgid "Local teams:"
 msgstr "Echipe locale:"
 
-#: src/menu/options_menu.cpp:125
+#: src/menu/options_menu.cpp:118
 msgid "Low memory"
 msgstr ""
 
@@ -1521,13 +1525,12 @@ msgid "LowGrav"
 msgstr "Gravitație scăzută"
 
 # URM1-2
-#: src/menu/network_connection_menu.cpp:201
-#: src/menu/network_connection_menu.cpp:203
+#: src/menu/network_connection_menu.cpp:281
 msgid "Manual connection"
 msgstr "Conectare manuală"
 
-#: src/menu/game_menu.cpp:77 src/menu/game_menu.cpp:81
-#: src/menu/network_menu.cpp:99 src/menu/network_menu.cpp:103
+#: src/menu/game_menu.cpp:80 src/menu/game_menu.cpp:84
+#: src/menu/network_menu.cpp:100 src/menu/network_menu.cpp:104
 msgid "Map"
 msgstr "Hartă"
 
@@ -1546,23 +1549,23 @@ msgstr "Harta %s, o creație a lui: "
 msgid "Map author information: name, email, nickname, country"
 msgstr ""
 
-#: src/game/game.cpp:161
+#: src/game/game.cpp:162
 msgid "Maps"
 msgstr "Hărți"
 
-#: src/menu/network_menu.cpp:429 src/menu/network_menu.cpp:431
+#: src/menu/network_menu.cpp:446 src/menu/network_menu.cpp:448
 msgid "Master mode"
 msgstr "Modul server"
 
-#: src/menu/game_mode_editor.cpp:73
+#: src/menu/game_mode_editor.cpp:130
 msgid "Max energy"
 msgstr "Energie maximă"
 
-#: src/menu/options_menu.cpp:117
+#: src/menu/options_menu.cpp:114
 msgid "Maximum FPS"
 msgstr "Numărul maxim de C/S"
 
-#: src/menu/options_menu.cpp:126
+#: src/menu/options_menu.cpp:119
 #, fuzzy
 msgid "Medium"
 msgstr "Mină"
@@ -1572,7 +1575,7 @@ msgstr "Mină"
 msgid "Menu"
 msgstr "Mină"
 
-#: src/weapon/mine.cpp:208
+#: src/weapon/mine.cpp:207
 msgid "Mine"
 msgstr "Mină"
 
@@ -1586,7 +1589,7 @@ msgstr "Hartă"
 msgid "Minimap, more details in another tab"
 msgstr ""
 
-#: src/menu/options_menu.cpp:267
+#: src/menu/options_menu.cpp:258
 msgid "Misc"
 msgstr "Diverse"
 
@@ -1668,19 +1671,19 @@ msgstr ""
 msgid "Move right slowly"
 msgstr ""
 
-#: src/menu/options_menu.cpp:98
+#: src/menu/options_menu.cpp:95
 msgid "Multi-layer sky?"
 msgstr "Cer cu mai multe straturi?"
 
-#: src/menu/options_menu.cpp:279
+#: src/menu/options_menu.cpp:272
 msgid "Music volume"
 msgstr "Volumul muzicii"
 
-#: src/menu/options_menu.cpp:274
+#: src/menu/options_menu.cpp:266
 msgid "Music?"
 msgstr "Muzică?"
 
-#: src/game/game.cpp:184
+#: src/game/game.cpp:185
 #, fuzzy
 msgid "Network"
 msgstr "Joc în rețea"
@@ -1689,7 +1692,7 @@ msgstr "Joc în rețea"
 msgid "Network Game"
 msgstr "Joc în rețea"
 
-#: src/menu/game_mode_editor.cpp:58
+#: src/menu/game_mode_editor.cpp:118
 msgid "Never"
 msgstr "Niciodată"
 
@@ -1698,7 +1701,7 @@ msgstr "Niciodată"
 msgid "New network game at "
 msgstr "Un nou joc în rețea pornit la "
 
-#: src/menu/options_menu.cpp:316
+#: src/menu/options_menu.cpp:308
 msgid "New player warning?"
 msgstr "Avertisment la jucător nou?"
 
@@ -1707,7 +1710,7 @@ msgstr "Avertisment la jucător nou?"
 msgid "Next character"
 msgstr "Mută personajul"
 
-#: src/weapon/weapon.cpp:640
+#: src/weapon/weapon.cpp:643
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nu a fost găsit nici un element <%s> în fișierul xml de configurare!"
@@ -1731,7 +1734,7 @@ msgid "None"
 msgstr "finalizat"
 
 #. *********     Number of characters        *********
-#: src/menu/team_box.cpp:115
+#: src/menu/team_box.cpp:140
 msgid "Number of characters"
 msgstr "Numărul de personaje"
 
@@ -1766,20 +1769,20 @@ msgstr "Opțiuni"
 msgid "Options menu"
 msgstr "Meniul de opțiuni"
 
-#: src/weapon/parachute.cpp:64
+#: src/weapon/parachute.cpp:71
 msgid "Parachute"
 msgstr "Parașută"
 
-#: src/weapon/parachute.cpp:65
+#: src/weapon/parachute.cpp:72
 msgid ""
 "Parachute avoids hitting the ground too hard\n"
 "Opens automatically\n"
 "Use left/right to change direction"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:189
-#: src/menu/network_connection_menu.cpp:236
-#: src/menu/network_connection_menu.cpp:275
+#: src/menu/network_connection_menu.cpp:193
+#: src/menu/network_connection_menu.cpp:230
+#: src/menu/network_connection_menu.cpp:269
 msgid "Password:"
 msgstr "Parola:"
 
@@ -1787,7 +1790,7 @@ msgstr "Parola:"
 msgid "Pause"
 msgstr "Pauză"
 
-#: src/weapon/mine.cpp:209
+#: src/weapon/mine.cpp:208
 msgid ""
 "Place mine by pressing space\n"
 "Mine explodes when someone steps onto it\n"
@@ -1798,7 +1801,7 @@ msgstr ""
 msgid "Play"
 msgstr "Pornește jocul"
 
-#: src/menu/network_menu.cpp:127
+#: src/menu/network_menu.cpp:128
 msgid "Play several times"
 msgstr "Joacă de câteva ori"
 
@@ -1806,15 +1809,19 @@ msgstr "Joacă de câteva ori"
 msgid "Player"
 msgstr "Jucător"
 
-#: src/menu/options_menu.cpp:103
+#: src/menu/options_menu.cpp:100
 msgid "Player energy?"
 msgstr "Energia jucătorului?"
 
-#: src/menu/options_menu.cpp:107
+#: src/menu/options_menu.cpp:104
 msgid "Player's name?"
 msgstr "Numele jucătorului?"
 
-#: src/menu/results_menu.cpp:305
+#: src/menu/game_menu.cpp:145 src/menu/network_menu.cpp:274
+msgid "Please select a group different from your opponent!"
+msgstr ""
+
+#: src/menu/results_menu.cpp:306
 msgid "Podium"
 msgstr ""
 
@@ -1822,8 +1829,8 @@ msgstr ""
 msgid "Polecat Launcher"
 msgstr "Lansator de sconcși"
 
-#: src/menu/network_connection_menu.cpp:225
-#: src/menu/network_connection_menu.cpp:252
+#: src/menu/network_connection_menu.cpp:219
+#: src/menu/network_connection_menu.cpp:246
 msgid "Port:"
 msgstr "Port:"
 
@@ -1845,7 +1852,7 @@ msgstr "Schimbă personajul activ"
 msgid "Press space to commit suicide"
 msgstr "%s din echipa %s s-a sinucis !"
 
-#: src/weapon/airhammer.cpp:77
+#: src/weapon/airhammer.cpp:76
 msgid ""
 "Press space to dig\n"
 "Ammo is used when counter reaches zero\n"
@@ -1872,7 +1879,7 @@ msgid ""
 "Change angle while shooting"
 msgstr ""
 
-#: src/weapon/grapple.cpp:165
+#: src/weapon/grapple.cpp:168
 msgid ""
 "Press space to shoot grapple\n"
 "Use left/right to swing\n"
@@ -1892,11 +1899,11 @@ msgid ""
 "Ends when selecting another weapon"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:175
+#: src/menu/network_connection_menu.cpp:179
 msgid "Public battles"
 msgstr "Bătălii publice"
 
-#: src/menu/options_menu.cpp:130
+#: src/menu/options_menu.cpp:123
 msgid "Quality"
 msgstr ""
 
@@ -1909,7 +1916,7 @@ msgstr ""
 msgid "Quit"
 msgstr "Ieșire"
 
-#: src/main.cpp:279
+#: src/main.cpp:283
 #, fuzzy
 msgid "Quit Warmux"
 msgstr "Ieșire din Warmux"
@@ -1922,7 +1929,8 @@ msgstr "Părăsește jocul"
 msgid "Rail Gun"
 msgstr ""
 
-#: src/menu/map_selection_box.cpp:226
+#. Random map selected
+#: src/menu/map_selection_box.cpp:108
 msgid "Random map"
 msgstr "Hartă aleatoare"
 
@@ -1931,11 +1939,11 @@ msgstr "Hartă aleatoare"
 msgid "Read only %i bytes"
 msgstr "Există doar o echipă."
 
-#: src/game/config.cpp:397
+#: src/game/config.cpp:401
 msgid "Reading the default config file"
 msgstr "Se citește fișierul implicit de configurare"
 
-#: src/game/config.cpp:454
+#: src/game/config.cpp:482
 msgid "Reading the personal config file"
 msgstr "Se citește fișierul personal de configurare"
 
@@ -1948,12 +1956,12 @@ msgstr ""
 msgid "Replay controls"
 msgstr ""
 
-#: src/menu/replay_menu.cpp:69
+#: src/menu/replay_menu.cpp:85
 #, fuzzy
 msgid "Replay info"
 msgstr "Modul jocului"
 
-#: src/game/game.cpp:211
+#: src/game/game.cpp:212
 #, fuzzy
 msgid "Replay mode"
 msgstr "Modul jocului"
@@ -1965,11 +1973,11 @@ msgid ""
 "Short click for a +30s jump, long for +60s jump."
 msgstr ""
 
-#: src/menu/results_menu.cpp:441
+#: src/menu/results_menu.cpp:443
 msgid "Replay saved"
 msgstr ""
 
-#: src/menu/options_menu.cpp:152
+#: src/menu/options_menu.cpp:146
 msgid "Resolution"
 msgstr "Rezoluție"
 
@@ -1984,11 +1992,15 @@ msgstr ""
 msgid "Riot Bomb"
 msgstr "Cocktail Molotov"
 
-#: src/main.cpp:89
+#: src/menu/game_mode_editor.cpp:103
+msgid "Rules"
+msgstr ""
+
+#: src/main.cpp:93
 msgid "Run game"
 msgstr "Rulează jocul"
 
-#: src/menu/results_menu.cpp:379
+#: src/menu/results_menu.cpp:381
 msgid "Save replay?"
 msgstr ""
 
@@ -1996,15 +2008,15 @@ msgstr ""
 msgid "Say: "
 msgstr "Spune: "
 
-#: src/menu/options_menu.cpp:262
+#: src/menu/options_menu.cpp:253
 msgid "Scroll border size"
 msgstr "Dimensiunea marginii de derulare"
 
-#: src/menu/options_menu.cpp:257
+#: src/menu/options_menu.cpp:248
 msgid "Scroll on border"
 msgstr "Derulare la margine"
 
-#: src/menu/replay_menu.cpp:55
+#: src/menu/replay_menu.cpp:65
 #, fuzzy
 msgid "Select a replay:"
 msgstr "Selectați lumea:"
@@ -2014,20 +2026,20 @@ msgstr "Selectați lumea:"
 msgid "Select number of playing teams"
 msgstr "Număr maxim de jucători:"
 
-#: src/menu/network_connection_menu.cpp:214
+#: src/menu/network_connection_menu.cpp:209
 msgid "Server address:"
 msgstr "Adresa serverului:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:283
+#: src/menu/network_connection_menu.cpp:277
 msgid "Server available on Internet"
 msgstr "Server disponibil în internet"
 
-#: src/menu/network_menu.cpp:174 src/network/network.cpp:485
+#: src/menu/network_menu.cpp:175 src/network/network.cpp:519
 msgid "Server mode"
 msgstr "Mod server"
 
-#: src/weapon/supertux.cpp:225
+#: src/weapon/supertux.cpp:212
 msgid ""
 "Set initial direction with up/down\n"
 "Press space to launch\n"
@@ -2045,6 +2057,10 @@ msgstr ""
 msgid ""
 "Set timer 1-6 using +/- or 1-6 keys\n"
 "Space to place dynamite"
+msgstr ""
+
+#: src/menu/game_mode_editor.cpp:95
+msgid "Settings"
 msgstr ""
 
 #: src/interface/man_machine_interface.cpp:1175
@@ -2080,11 +2096,11 @@ msgstr ""
 msgid "Skip turn"
 msgstr "Sare rândul"
 
-#: src/weapon/slap.cpp:72
+#: src/weapon/slap.cpp:60
 msgid "Slap"
 msgstr "Plesneală"
 
-#: src/weapon/slap.cpp:73
+#: src/weapon/slap.cpp:61
 msgid "Slap the enemy to make him jump a bit."
 msgstr "Plesnește inamicul să sară un pic."
 
@@ -2101,43 +2117,43 @@ msgstr "Pușcă cu lunetă"
 msgid "Someone put a booby trap into the crate!"
 msgstr "Cineva a pus o capcană în cutie!"
 
-#: src/menu/network_connection_menu.cpp:393
+#: src/menu/network_connection_menu.cpp:386
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Din păcate, acum nu există nici un joc în așteptare de jucători"
 
-#: src/menu/network_connection_menu.cpp:447
-#: tools/servers/game_server/server.cpp:374
+#: src/menu/network_connection_menu.cpp:440
+#: tools/servers/game_server/server.cpp:386
 #, fuzzy, c-format
 msgid ""
 "Sorry, your version is not supported anymore. Supported versions are %s. You "
 "can download an updated version from http://www.warmux.org/wiki/download.php"
 msgstr ""
-"Ne pare rău, versiunea ta nu mai este suportată. Versiunile suportate sunt %"
-"s. Poți descărca o versiune actualizată de la http://www.warmux.org/wiki/"
+"Ne pare rău, versiunea ta nu mai este suportată. Versiunile suportate sunt "
+"%s. Poți descărca o versiune actualizată de la http://www.warmux.org/wiki/"
 "download.php"
 
-#: src/menu/options_menu.cpp:320
+#: src/menu/options_menu.cpp:312
 msgid "Sound"
 msgstr "Sunet"
 
-#: src/menu/options_menu.cpp:285
+#: src/menu/options_menu.cpp:277
 msgid "Sound effects?"
 msgstr "Efecte sonore?"
 
-#: src/menu/options_menu.cpp:311
+#: src/menu/options_menu.cpp:303
 msgid "Sound frequency"
 msgstr "Frecvența sunetului"
 
 #. Load teams' sound profiles
-#: src/game/game.cpp:173
+#: src/game/game.cpp:174
 msgid "Sounds"
 msgstr "Sunete"
 
-#: src/game/game.cpp:205
+#: src/game/game.cpp:206
 msgid "Starting a new game"
 msgstr "Se începe un nou joc"
 
-#: src/interface/interface.cpp:315
+#: src/interface/interface.cpp:316
 msgid "Stock:"
 msgstr "Stoc:"
 
@@ -2145,7 +2161,7 @@ msgstr "Stoc:"
 msgid "Submachine Gun"
 msgstr "Mitralieră semiautomată"
 
-#: src/weapon/supertux.cpp:224
+#: src/weapon/supertux.cpp:211
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -2153,7 +2169,7 @@ msgstr "SuperTux"
 msgid "Switch between classical and replay interface"
 msgstr ""
 
-#: src/weapon/syringe.cpp:69
+#: src/weapon/syringe.cpp:57
 msgid "Syringe"
 msgstr "Seringă"
 
@@ -2166,31 +2182,31 @@ msgstr ""
 msgid "Talk in network battles"
 msgstr "Discuție în bătăliile în rețea"
 
-#: src/menu/options_menu.cpp:614
+#: src/menu/options_menu.cpp:606
 msgid "Team deleted"
 msgstr ""
 
-#: src/menu/results_menu.cpp:338
+#: src/menu/results_menu.cpp:340
 msgid "Team graphs"
 msgstr "Grafice echipe"
 
-#: src/menu/options_menu.cpp:594
+#: src/menu/options_menu.cpp:586
 #, fuzzy
 msgid "Team saved"
 msgstr "Statistici echipe"
 
-#: src/menu/results_menu.cpp:316
+#: src/menu/results_menu.cpp:318
 msgid "Team stats"
 msgstr "Statistici echipe"
 
 #. Teams
-#: src/game/game.cpp:168 src/menu/game_menu.cpp:76 src/menu/game_menu.cpp:80
-#: src/menu/network_menu.cpp:98 src/menu/network_menu.cpp:102
-#: src/menu/replay_menu.cpp:94
+#: src/game/game.cpp:169 src/menu/game_menu.cpp:79 src/menu/game_menu.cpp:83
+#: src/menu/network_menu.cpp:99 src/menu/network_menu.cpp:103
+#: src/menu/replay_menu.cpp:117
 msgid "Teams"
 msgstr "Echipe"
 
-#: src/menu/options_menu.cpp:229
+#: src/menu/options_menu.cpp:219
 msgid "Teams editor"
 msgstr "Editor de echipe"
 
@@ -2203,11 +2219,11 @@ msgstr ""
 msgid "Teleportation"
 msgstr "Teleportare"
 
-#: src/weapon/cluster_bomb.cpp:145
+#: src/weapon/cluster_bomb.cpp:147
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr "Bomba cu schije a părăsit câmpul de luptă înainte de a exploda."
 
-#: src/weapon/footbomb.cpp:107
+#: src/weapon/footbomb.cpp:113
 msgid "The Football Bomb has left the battlefield before it could explode."
 msgstr "Bomba-minge a părăsit câmpul de luptă înainte de a exploda."
 
@@ -2219,7 +2235,7 @@ msgstr "Antilopa gnu a părăsit câmpul de luptă înainte de a exploda!"
 msgid "The Polecat left the battlefield before exploding!"
 msgstr "Sconcsul a părăsit câmpul de luptă înainte de a exploda!"
 
-#: src/weapon/auto_bazooka.cpp:175
+#: src/weapon/auto_bazooka.cpp:166
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Racheta automată a părăsit câmpul de luptă ..."
 
@@ -2232,7 +2248,7 @@ msgstr "Mingea a părăsit câmpul de luptă înainte de a exploda!"
 msgid "The bigger the faster you'll fall!"
 msgstr ""
 
-#: src/menu/game_mode_editor.cpp:132
+#: src/menu/game_mode_editor.cpp:315
 msgid ""
 "The blitz mode does not reset the time between each team turn. A team looses "
 "when it has no players left or its time has ran out."
@@ -2253,11 +2269,11 @@ msgstr ""
 "Timpul de așteptare la conectare a expirat. Verificați dacă există vreun "
 "firewall undeva pe parcurs!"
 
-#: src/weapon/disco_grenade.cpp:127
+#: src/weapon/disco_grenade.cpp:125
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "Grenada disco a părăsit ringul de dans înainte de a exploda!"
 
-#: src/game/game.cpp:768
+#: src/game/game.cpp:766
 msgid "The game was interrupted because you got disconnected."
 msgstr "Jocul s-a întrerupt pentru că v-ați deconectat."
 
@@ -2265,15 +2281,15 @@ msgstr "Jocul s-a întrerupt pentru că v-ați deconectat."
 msgid "The grenade left the battlefield before exploding!"
 msgstr "Grenada a părăsit câmpul de luptă înainte de a exploda!"
 
-#: src/menu/network_menu.cpp:375
+#: src/menu/network_menu.cpp:392
 msgid "The others are waiting for you! Wake up! :-)"
 msgstr "Ceilalți te-așteaptă! Trezește-te! :-)"
 
-#: src/weapon/parachute.cpp:92
+#: src/weapon/parachute.cpp:99
 msgid "The parachute is activated automatically."
 msgstr "Parașuta se activează automat."
 
-#: src/weapon/bazooka.cpp:80 src/weapon/cluzooka.cpp:323
+#: src/weapon/bazooka.cpp:80 src/weapon/cluzooka.cpp:312
 #: src/weapon/riot_bomb.cpp:85
 msgid "The rocket has left the battlefield..."
 msgstr "Racheta a părăsit câmpul de luptă..."
@@ -2286,16 +2302,18 @@ msgstr "Serverul a refuzat conexiunea."
 msgid "The server rejected the connection: wrong password!"
 msgstr "Serverul a refuzat conexiunea: parolă greșită!"
 
-#: src/weapon/weapon.cpp:652
+#: src/weapon/weapon.cpp:655
 #, c-format
 msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:280
-#, c-format
-msgid "There is only %i team."
-msgid_plural "There are only %i teams."
+#: src/menu/game_menu.cpp:128 src/menu/network_menu.cpp:258
+#, fuzzy, c-format
+#| msgid "There is only %i team."
+#| msgid_plural "There are only %i teams."
+msgid "There is only %u team."
+msgid_plural "There are only %u teams."
 msgstr[0] "Există doar %i echipă."
 msgstr[1] "Există doar %i echipe."
 msgstr[2] "Există doar %i de echipe."
@@ -2305,11 +2323,11 @@ msgstr[2] "Există doar %i de echipe."
 msgid "This key has already been attributed to '%s'"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:313
+#: src/menu/network_connection_menu.cpp:309
 msgid "This version was compiled without curl, you can't list public games!"
 msgstr ""
 
-#: src/menu/benchmark_menu.cpp:113 src/menu/results_menu.cpp:339
+#: src/menu/benchmark_menu.cpp:113 src/menu/results_menu.cpp:341
 msgid "Time"
 msgstr "Timp"
 
@@ -2320,7 +2338,7 @@ msgid ""
 "Click to pause"
 msgstr ""
 
-#: src/weapon/cluster_bomb.cpp:188 src/weapon/footbomb.cpp:152
+#: src/weapon/cluster_bomb.cpp:190 src/weapon/footbomb.cpp:158
 #, fuzzy
 msgid ""
 "Timeout: Mouse wheel or Page Up/Down\n"
@@ -2429,7 +2447,7 @@ msgstr "Comandă necunoscută"
 msgid "Unknown command of type %i"
 msgstr "Comandă necunoscută"
 
-#: src/game/game_mode.cpp:335
+#: src/game/game_mode.cpp:320
 msgid "Unlimited"
 msgstr "nelimitat"
 
@@ -2441,14 +2459,14 @@ msgstr ""
 msgid "Up slowly"
 msgstr ""
 
-#: src/weapon/disco_grenade.cpp:158 src/weapon/grenade.cpp:77
+#: src/weapon/disco_grenade.cpp:156 src/weapon/grenade.cpp:77
 msgid ""
 "Up/Down: Set direction\n"
 "Set timer 1-6 using +/- or 1-6 keys\n"
 "Press space till desired strength"
 msgstr ""
 
-#: src/weapon/anvil.cpp:142
+#: src/weapon/anvil.cpp:138
 #, fuzzy
 msgid ""
 "Usage: left click on the target\n"
@@ -2458,7 +2476,7 @@ msgstr ""
 "Cum se folosește : clic stânga pe țintă\n"
 "un proiectil per rundă"
 
-#: src/weapon/auto_bazooka.cpp:221
+#: src/weapon/auto_bazooka.cpp:192
 #, fuzzy
 msgid ""
 "Usage: left click on the target\n"
@@ -2472,20 +2490,20 @@ msgstr ""
 "un proiectil per rundă"
 
 #. Version
-#: src/main.cpp:206 src/menu/main_menu.cpp:90 src/menu/replay_menu.cpp:74
+#: src/main.cpp:210 src/menu/main_menu.cpp:90 src/menu/replay_menu.cpp:97
 msgid "Version"
 msgstr "Versiunea"
 
-#: src/menu/options_menu.cpp:543
+#: src/menu/options_menu.cpp:535
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr "Verificarea versiunii a eșuat pentru că: %s"
 
-#: src/menu/network_menu.cpp:443
+#: src/menu/network_menu.cpp:460
 msgid "Wait until some opponent(s) connect!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:292
+#: src/menu/network_menu.cpp:309
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -2493,26 +2511,26 @@ msgstr[0] "Așteaptă! %i jucător nu e gata încă!"
 msgstr[1] "Așteaptă! %i jucători nu sunt gata încă!"
 msgstr[2] "Așteaptă! %i de jucători nu sunt gata încă!"
 
-#: src/game/game.cpp:663
+#: src/game/game.cpp:661
 #, fuzzy, c-format
 msgid "Waiting for %s"
 msgstr "Se așteaptă harta"
 
-#: src/game/game.cpp:183
+#: src/game/game.cpp:184
 #, fuzzy
 msgid "Waiting for remote players"
 msgstr "Se așteaptă harta"
 
-#: src/menu/network_menu.cpp:514
+#: src/menu/network_menu.cpp:536
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Se așteaptă serverul. Tot ce puteți face e să anulați sau să vorbiți!"
 
-#: src/main.cpp:217
+#: src/main.cpp:221
 #, fuzzy
 msgid "Warmux launching..."
 msgstr "Se lansează Warmux..."
 
-#: src/main.cpp:357
+#: src/main.cpp:361
 #, fuzzy
 msgid "Warmux version "
 msgstr "Versiunea Warmux "
@@ -2528,27 +2546,27 @@ msgstr "Schimbă categoria armei"
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Armă: Foc / Cutie cu bonus: cadere rapidă"
 
-#: src/game/game.cpp:164
+#: src/game/game.cpp:165
 msgid "Weapons"
 msgstr "Arme"
 
-#: src/main.cpp:367
+#: src/main.cpp:371
 msgid "Website: "
 msgstr "Saitul web: "
 
 #. First %s will be replaced with the name of the network game,
 #. second %s by the server hostname
-#: src/menu/network_menu.cpp:159
+#: src/menu/network_menu.cpp:160
 #, fuzzy, c-format
 msgid "Welcome to %s on %s!"
 msgstr "Bine ați venit la %s!"
 
-#: src/game/game.cpp:1150
+#: src/game/game.cpp:1151
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr "Ce lovitură până în tribune! %s din echipa %s este într-o altă lume..."
 
-#: src/game/game.cpp:1213
+#: src/game/game.cpp:1214
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Ce umilire pentru %s - a fost ucis cu un simplu pistol!"
@@ -2559,7 +2577,7 @@ msgstr "Ce umilire pentru %s - a fost ucis cu un simplu pistol!"
 msgid "When a character can be switched"
 msgstr "Pe un personaj: Îl selectează"
 
-#: src/menu/options_menu.cpp:92
+#: src/menu/options_menu.cpp:89
 msgid "Wind particles?"
 msgstr "Particulele de vânt?"
 
@@ -2570,9 +2588,15 @@ msgid ""
 msgstr ""
 
 #
-#: src/menu/results_menu.cpp:284
+#: src/menu/results_menu.cpp:285
 msgid "Winner"
 msgstr "Câștigător"
+
+#: src/menu/game_mode_editor.cpp:116
+#, fuzzy
+#| msgid "Wrong team!"
+msgid "Within team"
+msgstr "Echipa e greșită!"
 
 #. The shot efficiency was improved by having more than one target hit
 #: src/weapon/rail_gun.cpp:124
@@ -2597,16 +2621,16 @@ msgstr "Echipa e greșită!"
 msgid "Wrote %i/%i bytes"
 msgstr ""
 
-#: src/menu/network_menu.cpp:287 src/menu/network_menu.cpp:379
+#: src/menu/network_menu.cpp:304 src/menu/network_menu.cpp:396
 msgid "You are alone. :-/"
 msgstr "Ești singur. :-/"
 
-#: src/menu/network_menu.cpp:442
+#: src/menu/network_menu.cpp:459
 msgid ""
 "You are the new turn master! Learn about your new powers by typing /help"
 msgstr ""
 
-#: src/menu/options_menu.cpp:583
+#: src/menu/options_menu.cpp:575
 msgid "You must fill Head Commander and all player names"
 msgstr ""
 
@@ -2614,11 +2638,11 @@ msgstr ""
 msgid "You need at least one valid map!"
 msgstr "Ai nevoie de cel puțin o hartă validă!"
 
-#: src/game/game.cpp:304 src/team/teams_list.cpp:166
+#: src/game/game.cpp:304 src/team/teams_list.cpp:179
 msgid "You need at least two valid teams!"
 msgstr "Ai nevoie de cel puțin două echipe valide!"
 
-#: src/menu/network_menu.cpp:267
+#: src/menu/network_menu.cpp:291
 msgid "You won't be able to play before selecting a team!"
 msgstr "Nu vei putea să joci dacă nu selectezi o echipă!"
 
@@ -2631,7 +2655,7 @@ msgstr "Focul dvs. a fost tras în aer!"
 msgid "aka"
 msgstr "zis"
 
-#: src/weapon/air_attack.cpp:214
+#: src/weapon/air_attack.cpp:216
 #, fuzzy
 msgid ""
 "attack direction: Left/Right\n"
@@ -2672,16 +2696,16 @@ msgstr ""
 msgid "no configuration file!"
 msgstr "nu există nici un fișier de configurare!"
 
-#: src/sound/jukebox.cpp:191
+#: src/sound/jukebox.cpp:204
 msgid "o Loading music"
 msgstr "o Se încarcă muzica"
 
-#: src/sound/jukebox.cpp:373
+#: src/sound/jukebox.cpp:386
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Se încarcă profilul de sunet: %s"
 
-#: src/sound/jukebox.cpp:135
+#: src/sound/jukebox.cpp:142
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Se deschide canalul adio la %d Hz %d biți"
@@ -3212,8 +3236,8 @@ msgstr "o Se deschide canalul adio la %d Hz %d biți"
 #~ "You can download a updated version on http://www.warmux.org/wiki/download."
 #~ "php"
 #~ msgstr ""
-#~ "Ne pare rău, versiunea ta nu mai este suportată. Versiuni suportate sunt %"
-#~ "s. Poți descărca o versiune actualizată de la http://www.warmux.org/wiki/"
+#~ "Ne pare rău, versiunea ta nu mai este suportată. Versiuni suportate sunt "
+#~ "%s. Poți descărca o versiune actualizată de la http://www.warmux.org/wiki/"
 #~ "download.php"
 
 #~ msgid "Team %s results:\n"
