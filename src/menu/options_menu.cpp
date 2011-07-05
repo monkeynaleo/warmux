@@ -66,7 +66,7 @@ OptionMenu::OptionMenu() :
 
   int border = (window_w<640) ? 0.02f*window_w : 0.05f*window_w;
   int max_w  = window_w - 2*border;
-  float   factor = window_w / 640.0f;
+  float   factor = window_h / 420.0f;
   if (factor > 1.5f) factor = 1.5f;
   Font::font_size_t fsmall  = Font::GetFixedSize(Font::FONT_SMALL*factor+0.5f);
   Font::font_size_t fmedium = Font::GetFixedSize(Font::FONT_MEDIUM*factor+0.5f);
@@ -168,29 +168,30 @@ OptionMenu::OptionMenu() :
     GridBox * teams_editor_names = new GridBox(5, 2, 2, false);
     Box * teams_editor = new HBox(DIMENSION, false, false, true);
 
-    lbox_teams = new ItemBox(Point2i(DIMENSION, DIMENSION), false);
+    lbox_teams = new ItemBox(Point2i(DIMENSION, tabs->GetSizeY()), false);
     teams_editor->AddWidget(lbox_teams);
 
     uint lwidth = max_w - DIMENSION - 20;
     Box * teams_editor_inf = new VBox(lwidth, true, true, false);
-    Box * box_team_name = new HBox(30, false, false, true);
+    Box * box_team_name = new HBox(30, false, false);
 
-    team_name = new Label(Format("%s:", _("Head commander")), 100, fsmall);
+    uint twidth = (120 * fmedium) / Font::FONT_MEDIUM;
+    team_name = new Label(Format("%s:", _("Head commander")), twidth, fmedium);
     box_team_name->AddWidget(team_name);
 
-    tbox_team_name = new TextBox("", lwidth - 100 - 40, fsmall);
+    tbox_team_name = new TextBox("", lwidth - twidth - 20, fmedium);
     box_team_name->AddWidget(tbox_team_name);
 
     teams_editor_inf->AddWidget(box_team_name);
 
-    Label* label_ch_names = new Label(_("Character names:"), 0, fsmall);
+    Label* label_ch_names = new Label(_("Character names:"), 0, fmedium);
     teams_editor_inf->AddWidget(label_ch_names);
 
     for (uint i=0; i < 10; i++) {
       std::ostringstream oss;
       oss << i+1 << ":";
-      tbox_character_name_list.push_back(new TextBox("", lwidth/2 - 40, fsmall));
-      Label * lab = new Label(oss.str(), 30, fsmall);
+      tbox_character_name_list.push_back(new TextBox("", lwidth/2 - 40, fmedium));
+      Label * lab = new Label(oss.str(), 30, fmedium);
 
       Box * name_box = new HBox(20, false, false, true);
       name_box->SetNoBorder();
