@@ -30,11 +30,12 @@
 CheckBox::CheckBox(const std::string & label,
                    uint width,
                    bool value,
-                   Font::font_size_t fsize):
+                   Font::font_size_t fsize,
+                   Font::font_style_t font_style) :
   Text(label,
        dark_gray_color,
        fsize,
-       Font::FONT_NORMAL,
+       font_style,
        false,
        black_color),
   m_value(value),
