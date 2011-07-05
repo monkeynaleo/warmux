@@ -41,7 +41,8 @@ public:
   CheckBox(const std::string & label,
            uint width,
            bool value = true,
-           Font::font_size_t fsize = Font::FONT_SMALL);
+           Font::font_size_t fsize = Font::FONT_SMALL,
+           Font::font_style_t font_style = Font::FONT_BOLD);
   CheckBox(Profile * profile,
            const xmlNode * checkBoxNode);
   virtual ~CheckBox();
