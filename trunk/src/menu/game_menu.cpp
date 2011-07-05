@@ -92,7 +92,7 @@ GameMenu::GameMenu() :
   // ##  GAME OPTIONS
   // ################################################
   game_options = new GameModeEditor(Point2i(multitabsWidth-8, mainBoxHeight-tabs->GetHeaderHeight()-4),
-                                    (multitabsWidth-8)/640.0f, false);
+                                    (mainBoxHeight-8)/420.0f, false);
   tabs->AddNewTab("TAB_Game", _("Game"), game_options);
 
   tabs->SetPosition(MARGIN_SIDE, MARGIN_TOP);
