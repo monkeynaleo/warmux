@@ -642,6 +642,7 @@ xmlNode* XmlWriter::GetRoot() const
 
 bool XmlWriter::Save()
 {
+  if (m_filename == "") return false;
   if (m_save) return true;
   m_save = true;
   int result = xmlSaveFormatFileEnc(m_filename.c_str(), m_doc,
