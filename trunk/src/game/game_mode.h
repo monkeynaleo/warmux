@@ -93,7 +93,7 @@ private:
   void LoadDefaultValues();
 
   bool LoadXml();
-  bool ExportFileToString(const std::string& filename, std::string& contents) const;
+  XmlWriter* SaveXml(const std::string& game_mode_name, const std::string& file_name = "") const;
 
   std::string GetFilename() const;
 

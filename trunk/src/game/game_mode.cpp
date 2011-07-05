@@ -120,8 +120,14 @@ void GameMode::LoadDefaultValues()
 
 GameMode::~GameMode()
 {
-  delete doc_objects;
-  delete weapons_list;
+  if (doc_objects) {
+    delete doc_objects;
+    doc_objects = NULL;
+  }
+  if (weapons_list) {
+    delete weapons_list;
+    weapons_list = NULL;
+  }
 }
 
 // Load data options from the selected game_mode
@@ -180,6 +186,7 @@ bool GameMode::LoadFromString(const std::string& game_mode_name,
 {
   m_current = game_mode_name;
   MSG_DEBUG("game_mode", "Loading %s from network: ", m_current.c_str());
+  LoadDefaultValues();
 
   if (!doc_objects->LoadFromString(game_mode_objects_contents))
     return false;
@@ -193,36 +200,14 @@ bool GameMode::LoadFromString(const std::string& game_mode_name,
   return true;
 }
 
-bool GameMode::ExportFileToString(const std::string& filename, std::string& contents) const
-{
-  contents = "";
-
-  XmlReader doc;
-  if (!doc.Load(filename))
-    return false;
-
-  contents = doc.ExportToString();
-
-  return true;
-}
-
 bool GameMode::ExportToString(std::string& mode,
                               std::string& mode_objects) const
 {
-#if 0
-  bool r;
-
-  r = ExportFileToString(GetFilename(), mode);
-  if (r) {
-    r = ExportFileToString(GetObjectsFilename(), mode_objects);
-  }
-
-  return r;
-#else
   mode_objects = doc_objects->ExportToString();
-  mode = doc.ExportToString();
+  XmlWriter *out = SaveXml(m_current);
+  mode = out->SaveToString();
+  delete out;
   return !mode_objects.empty() && mode.empty();
-#endif
 }
 
 bool GameMode::AllowCharacterSelection() const
@@ -261,6 +246,21 @@ std::string GameMode::GetFilename() const
   return fullname;
 }
 
+XmlWriter* GameMode::SaveXml(const std::string& game_mode_name, const std::string& file_name) const
+{
+  XmlWriter *out = new XmlWriter();
+  if (!out->Create(file_name, "game_mode", "1.0", "utf-8"))
+    return NULL;
+
+  xmlNode *node = out->GetRoot();
+  main_settings.SaveXml(*out, node);
+
+  node = XmlWriter::AddNode(node, "weapons");
+  weapons_list->Save(*out, node);
+
+  return out;
+}
+
 bool GameMode::ExportToFile(const std::string& game_mode_name)
 {
   Config * config = Config::GetInstance();
@@ -268,17 +268,13 @@ bool GameMode::ExportToFile(const std::string& game_mode_name)
                        + game_mode_name + std::string(".xml");
 
   std::string fullname = config->GetPersonalDataDir() + filename;
-  XmlWriter out;
-  if (!out.Create(fullname, "game_mode", "1.0", "utf-8"))
+  XmlWriter *out = SaveXml(game_mode_name, fullname);
+  if (!out)
     return false;
 
-  xmlNode *node = out.GetRoot();
-  main_settings.SaveXml(out, node);
-
-  node = XmlWriter::AddNode(node, "weapons");
-  weapons_list->Save(out, node);
-
-  return true;
+  bool ok = out->Save();
+  delete out;
+  return ok;
 }
 
 std::string GameMode::GetDefaultObjectsFilename() const
