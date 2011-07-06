@@ -658,8 +658,7 @@ std::string XmlWriter::SaveToString() const
   xmlDocDumpFormatMemoryEnc(m_doc, &buffer, &length, NULL, 0);
   ASSERT(buffer);
 
-  std::string ret;
-  ret.copy((char *)buffer, length);
+  std::string ret((char *)buffer, length);
   xmlFree(buffer);
   return ret;
 }
