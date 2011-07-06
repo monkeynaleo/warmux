@@ -88,7 +88,7 @@ bool AngleConfigElement::Read(const xmlNode* father) const
 void AngleConfigElement::Write(XmlWriter& writer, xmlNode* father) const
 {
   if (*m_val != m_def) {
-    int val = round(ToDegree*(*m_val));
+    int val = uround(ToDegree*(*m_val));
     writer.WriteElement(father, m_name, int2str(val), m_attribute);
   }
 }
