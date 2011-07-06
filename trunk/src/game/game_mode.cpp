@@ -92,12 +92,12 @@ void GameMode::LoadDefaultValues()
   duration_exchange_player = 2;
   duration_before_death_mode = 20 * 60;
   damage_per_turn_during_death_mode = 5;
-  gravity = 9.81;
+  gravity = 30;
   safe_fall = 10;
   damage_per_fall_unit = 7;
 
   character.init_energy = 100;
-  character.max_energy = 100;
+  character.max_energy = 200;
   character.mass = 100;
   character.air_resist_factor = 1.0;
   character.jump_strength = 8;
@@ -207,7 +207,7 @@ bool GameMode::ExportToString(std::string& mode,
   XmlWriter *out = SaveXml(m_current);
   mode = out->SaveToString();
   delete out;
-  return !mode_objects.empty() && mode.empty();
+  return !mode_objects.empty() && !mode.empty();
 }
 
 bool GameMode::AllowCharacterSelection() const
