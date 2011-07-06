@@ -115,9 +115,8 @@ bool Mouse::HasFocus() const
 
 static bool FindCharacter(const Point2i& pos, Team* team)
 {
-  bool             character_found = false;
-  Team::iterator   it              = team->begin();
-  const Character* active_char     = &ActiveCharacter();
+  Team::iterator   it          = team->begin();
+  const Character* active_char = &ActiveCharacter();
 
   for (; it != team->end(); ++it) {
     if (&(*it) != active_char && !it->IsDead() && it->GetRect().Contains(pos)) {

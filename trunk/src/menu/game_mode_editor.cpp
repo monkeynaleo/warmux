@@ -169,7 +169,11 @@ Widget *GameModeEditor::ClickUp(const Point2i & mousePosition, uint button)
     const std::string& mode = filename->GetText();
     GameMode * game_mode = GameMode::GetInstance();
     ValidGameMode();
-    bool ok = game_mode->ExportToFile(mode);
+    if (game_mode->ExportToFile(mode)) {
+      // Report success
+    } else {
+      // Report failure
+    }
   } else if (w == opt_rules && opt_rules->GetValue() == "blitz")
     WarnBlitz();
   return w;
