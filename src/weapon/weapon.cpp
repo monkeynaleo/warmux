@@ -721,8 +721,8 @@ xmlNode* Weapon::SaveXml(XmlWriter& writer, xmlNode*  weapon) const
   // angle of weapon when drawing
   // if (min_angle == max_angle) no cross_hair !
   // between -90 to 90 degrees
-  int min_angle_deg = ONE_HALF + min_angle * PI /180;
-  int max_angle_deg = ONE_HALF + max_angle * PI /180;
+  int min_angle_deg = uround(min_angle * 180 / PI);
+  int max_angle_deg = uround(max_angle * 180 / PI);
   if (min_angle_deg || max_angle_deg) {
     writer.WriteElement(elem, "min_angle", int2str(min_angle_deg));
     writer.WriteElement(elem, "max_angle", int2str(max_angle_deg));
