@@ -33,8 +33,8 @@
 static std::string txt;
 
 GameMode::GameMode()
-  : doc_objects(NULL)
-  , weapons_list(NULL)
+  : weapons_list(NULL)
+  , doc_objects(NULL)
 {
   m_current = "classic";
 
@@ -246,7 +246,7 @@ std::string GameMode::GetFilename() const
   return fullname;
 }
 
-XmlWriter* GameMode::SaveXml(const std::string& game_mode_name, const std::string& file_name) const
+XmlWriter* GameMode::SaveXml(const std::string&, const std::string& file_name) const
 {
   XmlWriter *out = new XmlWriter();
   if (!out->Create(file_name, "game_mode", "1.0", "utf-8"))

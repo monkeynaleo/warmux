@@ -68,7 +68,6 @@ OptionMenu::OptionMenu() :
   int max_w  = window_w - 2*border;
   float   factor = window_h / 420.0f;
   if (factor > 1.5f) factor = 1.5f;
-  Font::font_size_t fsmall  = Font::GetFixedSize(Font::FONT_SMALL*factor+0.5f);
   Font::font_size_t fmedium = Font::GetFixedSize(Font::FONT_MEDIUM*factor+0.5f);
   Font::font_size_t fadapt  = (fmedium > Font::FONT_BIG) ? Font::FONT_BIG : fmedium;
   fadapt  = (fadapt < Font::FONT_MEDIUM) ? Font::FONT_MEDIUM : fadapt;
