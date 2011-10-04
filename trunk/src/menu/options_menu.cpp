@@ -172,7 +172,7 @@ OptionMenu::OptionMenu() :
 
     uint lwidth = max_w - DIMENSION - 20;
     Box * teams_editor_inf = new VBox(lwidth, true, true, false);
-    Box * box_team_name = new HBox(30, false, false);
+    Box * box_team_name = new HBox(30, false, false, false);
 
     uint twidth = (120 * fmedium) / Font::FONT_MEDIUM;
     team_name = new Label(Format("%s:", _("Head commander")), twidth, fmedium);
@@ -189,10 +189,10 @@ OptionMenu::OptionMenu() :
     for (uint i=0; i < 10; i++) {
       std::ostringstream oss;
       oss << i+1 << ":";
-      tbox_character_name_list.push_back(new TextBox("", lwidth/2 - 40, fmedium));
-      Label * lab = new Label(oss.str(), 30, fmedium);
+      tbox_character_name_list.push_back(new TextBox("", lwidth/2 - 40*factor - 10, fmedium));
+      Label * lab = new Label(oss.str(), 40*factor, fmedium);
 
-      Box * name_box = new HBox(20, false, false, true);
+      Box * name_box = new HBox(20, false, false, false);
       name_box->SetNoBorder();
 
       name_box->AddWidget(lab);
