@@ -278,8 +278,8 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
                                      Config::GetInstance()->GetNetworkServerPublic(), fsmall);
   srv_connection_box->AddWidget(srv_internet_server);
 
-  tabs->AddNewTab(TAB_MANUAL_ID, _("Manual connection"), manual_connection_box);
   tabs->AddNewTab(TAB_CLIENT_ID, _("Connect to game"), cl_connection_box);
+  tabs->AddNewTab(TAB_MANUAL_ID, _("Manual connection"), manual_connection_box);
   tabs->AddNewTab(TAB_SERVER_ID, _("Host a game"), srv_connection_box);
 
   // #############################
