@@ -39,6 +39,7 @@
 #include "network/randomsync.h"
 #include "particles/particle.h"
 #include "particles/fading_text.h"
+#include "replay/replay.h"
 #include "sound/jukebox.h"
 #include "team/team.h"
 #include "team/custom_team.h"
@@ -886,6 +887,8 @@ void Character::StartPlaying()
   ActiveTeam().crosshair.Draw();
  // SetRebounding(false);
   ShowGameInterface();
+  if (!Replay::GetConstInstance()->IsPlaying())
+    Interface::GetInstance()->SetMode(ActiveTeam().IsLocalHuman() ? Interface::MODE_CONTROL : Interface::MODE_NORMAL);
   m_team.crosshair.Refresh(GetFiringAngle());
 }
 
