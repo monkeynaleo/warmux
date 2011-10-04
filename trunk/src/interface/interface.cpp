@@ -1120,6 +1120,8 @@ bool Interface::ActionClickUp(const Point2i &mouse_pos, const Point2i &old_click
       ActiveCharacter().HandleKeyReleased_MoveRight(false);
       ActiveCharacter().HandleKeyReleased_Up(false);
       ActiveCharacter().HandleKeyReleased_Down(false);
+      if (weapon_strength_bar.IsVisible())
+        ActiveTeam().AccessWeapon().HandleKeyReleased_Shoot();
     }
 
     Rectanglei menu_button(Point2i(), default_toolbar.GetSize());
