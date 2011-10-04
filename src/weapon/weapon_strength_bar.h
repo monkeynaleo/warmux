@@ -40,6 +40,7 @@ public:
   virtual void DrawXY(const Point2i &pos);
   virtual void InitPos (uint x, uint y, uint larg, uint haut);
   Color ComputeValueColor(int val) const;
+  bool IsVisible() { return visible; }
 };
 
 #endif // WEAPON_STRENGTH_BAR_H

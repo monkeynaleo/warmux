@@ -38,6 +38,7 @@
 
 WeaponStrengthBar::WeaponStrengthBar() :
   ProgressBar(),
+  visible(false),
   m_box(NULL),
   last_fire(NULL),
   m_item_last_fire(NULL)
