@@ -26,13 +26,13 @@ msgstr "نقشه‌ی %s پیدا نشد."
 msgid "%.1f fps"
 msgstr "%.1f فریم بر ثانیه"
 
-#: src/menu/network_menu.cpp:131 src/menu/network_menu.cpp:376
+#: src/menu/network_menu.cpp:137 src/menu/network_menu.cpp:372
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "بازیکن %i وصل شد"
 
-#: src/menu/network_menu.cpp:135 src/menu/network_menu.cpp:386
+#: src/menu/network_menu.cpp:141 src/menu/network_menu.cpp:382
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -477,7 +477,7 @@ msgstr "همه‌ی تیمها"
 msgid "Always"
 msgstr "شروع"
 
-#: src/menu/game_mode_editor.cpp:214
+#: src/menu/game_mode_editor.cpp:218
 msgid "Ammos"
 msgstr ""
 
@@ -541,7 +541,7 @@ msgstr "جابجایی"
 msgid "Benchmark"
 msgstr ""
 
-#: src/game/game_mode.cpp:321 src/menu/game_mode_editor.cpp:102
+#: src/game/game_mode.cpp:317 src/menu/game_mode_editor.cpp:102
 msgid "Blitz"
 msgstr ""
 
@@ -661,7 +661,7 @@ msgstr ""
 msgid "Choose randomly between the different maps"
 msgstr "به صورت تصادفی یک نقشه از بین نقشه‌های مختلف انتخاب کن"
 
-#: src/game/game_mode.cpp:319 src/menu/game_mode_editor.cpp:101
+#: src/game/game_mode.cpp:315 src/menu/game_mode_editor.cpp:101
 msgid "Classic"
 msgstr ""
 
@@ -697,7 +697,7 @@ msgid ""
 msgstr ""
 
 #. Client Mode
-#: src/menu/network_menu.cpp:168 src/network/network.cpp:489
+#: src/menu/network_menu.cpp:174 src/network/network.cpp:489
 msgid "Client mode"
 msgstr "حالت کارگیر (کلاینت)"
 
@@ -733,7 +733,7 @@ msgstr "خودکشی"
 msgid "Configuration menu"
 msgstr "مشکل در بارگذاری پرونده‌ی تنظیمات: %s"
 
-#: src/menu/network_connection_menu.cpp:282
+#: src/menu/network_connection_menu.cpp:281
 msgid "Connect to game"
 msgstr "اتصال به بازی"
 
@@ -816,7 +816,7 @@ msgstr "نارنجک دیسکو"
 msgid "Displays this message"
 msgstr ""
 
-#: src/menu/network_menu.cpp:170
+#: src/menu/network_menu.cpp:176
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr ""
 
@@ -981,11 +981,11 @@ msgstr "اسلحه‌ی آتیشی"
 msgid "Football Bomb"
 msgstr "بمب تخریبی"
 
-#: src/menu/options_menu.cpp:109
+#: src/menu/options_menu.cpp:108
 msgid "Fullscreen?"
 msgstr "تمام صفحه؟"
 
-#: src/menu/game_menu.cpp:96 src/menu/network_menu.cpp:198
+#: src/menu/game_menu.cpp:96 src/menu/network_menu.cpp:194
 msgid "Game"
 msgstr ""
 
@@ -1003,10 +1003,7 @@ msgid "Game menu"
 msgstr "حالت کارگیر (کلاینت)"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#. Using the game mode editor but currently we are not able to send
-#. custom parameters to client
 #: src/menu/game_mode_editor.cpp:70 src/menu/help_menu.cpp:73
-#: src/menu/network_menu.cpp:194
 #, fuzzy
 msgid "Game mode"
 msgstr "حالت کارگیر (کلاینت)"
@@ -1030,7 +1027,7 @@ msgid ""
 "Will cure your teammate or slowly kill your opponent"
 msgstr ""
 
-#: src/menu/benchmark_menu.cpp:112 src/menu/options_menu.cpp:151
+#: src/menu/benchmark_menu.cpp:112 src/menu/options_menu.cpp:150
 msgid "Graphics"
 msgstr ""
 
@@ -1074,7 +1071,7 @@ msgstr "رئیس ارتش"
 msgid "Help"
 msgstr ""
 
-#: src/menu/options_menu.cpp:121
+#: src/menu/options_menu.cpp:120
 msgid "High"
 msgstr ""
 
@@ -1224,7 +1221,7 @@ msgstr ""
 msgid "Key"
 msgstr ""
 
-#: src/menu/options_menu.cpp:161
+#: src/menu/options_menu.cpp:160
 msgid "Key bindings"
 msgstr ""
 
@@ -1237,7 +1234,7 @@ msgstr ""
 msgid "Kicks the player designated by <nickname> out of the game"
 msgstr ""
 
-#: src/menu/options_menu.cpp:156
+#: src/menu/options_menu.cpp:155
 msgid "Language"
 msgstr "زبان"
 
@@ -1262,7 +1259,7 @@ msgstr "بارگذاری تیم‌ها: "
 msgid "Local teams:"
 msgstr "تیم‌های محلی: "
 
-#: src/menu/options_menu.cpp:118
+#: src/menu/options_menu.cpp:117
 msgid "Low memory"
 msgstr ""
 
@@ -1270,12 +1267,12 @@ msgstr ""
 msgid "LowGrav"
 msgstr "ضد جاذبه"
 
-#: src/menu/network_connection_menu.cpp:281
+#: src/menu/network_connection_menu.cpp:282
 msgid "Manual connection"
 msgstr ""
 
 #: src/menu/game_menu.cpp:80 src/menu/game_menu.cpp:84
-#: src/menu/network_menu.cpp:100 src/menu/network_menu.cpp:104
+#: src/menu/network_menu.cpp:106 src/menu/network_menu.cpp:110
 #, fuzzy
 msgid "Map"
 msgstr "نقشه‌ها"
@@ -1299,7 +1296,7 @@ msgstr ""
 msgid "Maps"
 msgstr "نقشه‌ها"
 
-#: src/menu/network_menu.cpp:446 src/menu/network_menu.cpp:448
+#: src/menu/network_menu.cpp:442 src/menu/network_menu.cpp:444
 #, fuzzy
 msgid "Master mode"
 msgstr "حالت کارگیر (کلاینت)"
@@ -1309,11 +1306,11 @@ msgstr "حالت کارگیر (کلاینت)"
 msgid "Max energy"
 msgstr "انرژی آغازی"
 
-#: src/menu/options_menu.cpp:114
+#: src/menu/options_menu.cpp:113
 msgid "Maximum FPS"
 msgstr "حداکثر فریم بر ثانیه"
 
-#: src/menu/options_menu.cpp:119
+#: src/menu/options_menu.cpp:118
 msgid "Medium"
 msgstr ""
 
@@ -1417,7 +1414,7 @@ msgstr ""
 msgid "Move right slowly"
 msgstr ""
 
-#: src/menu/options_menu.cpp:95
+#: src/menu/options_menu.cpp:94
 msgid "Multi-layer sky?"
 msgstr ""
 
@@ -1546,7 +1543,7 @@ msgstr ""
 msgid "Play"
 msgstr "شروع"
 
-#: src/menu/network_menu.cpp:128
+#: src/menu/network_menu.cpp:134
 msgid "Play several times"
 msgstr ""
 
@@ -1554,15 +1551,15 @@ msgstr ""
 msgid "Player"
 msgstr "بازیکن"
 
-#: src/menu/options_menu.cpp:100
+#: src/menu/options_menu.cpp:99
 msgid "Player energy?"
 msgstr "انرژی بازیکن؟"
 
-#: src/menu/options_menu.cpp:104
+#: src/menu/options_menu.cpp:103
 msgid "Player's name?"
 msgstr "نام بازیکن؟"
 
-#: src/menu/game_menu.cpp:145 src/menu/network_menu.cpp:274
+#: src/menu/game_menu.cpp:145 src/menu/network_menu.cpp:270
 msgid "Please select a group different from your opponent!"
 msgstr ""
 
@@ -1648,7 +1645,7 @@ msgstr ""
 msgid "Public battles"
 msgstr ""
 
-#: src/menu/options_menu.cpp:123
+#: src/menu/options_menu.cpp:122
 msgid "Quality"
 msgstr ""
 
@@ -1725,7 +1722,7 @@ msgstr ""
 msgid "Replay saved"
 msgstr ""
 
-#: src/menu/options_menu.cpp:146
+#: src/menu/options_menu.cpp:145
 msgid "Resolution"
 msgstr "رزولوشن"
 
@@ -1783,7 +1780,8 @@ msgstr "آدرس کارگزار:"
 msgid "Server available on Internet"
 msgstr "کارگزار حاضر در اینترنت"
 
-#: src/menu/network_menu.cpp:175 src/network/network.cpp:519
+#. Server Mode
+#: src/menu/network_menu.cpp:180 src/network/network.cpp:519
 msgid "Server mode"
 msgstr "حالت کارگزار"
 
@@ -1948,7 +1946,7 @@ msgstr "تیم‌ها"
 
 #. Teams
 #: src/game/game.cpp:169 src/menu/game_menu.cpp:79 src/menu/game_menu.cpp:83
-#: src/menu/network_menu.cpp:99 src/menu/network_menu.cpp:103
+#: src/menu/network_menu.cpp:105 src/menu/network_menu.cpp:109
 #: src/menu/replay_menu.cpp:117
 msgid "Teams"
 msgstr "تیم‌ها"
@@ -1999,7 +1997,7 @@ msgstr "شیطونک قبل از اینکه عمل کند از زمین جنگ �
 msgid "The bigger the faster you'll fall!"
 msgstr ""
 
-#: src/menu/game_mode_editor.cpp:315
+#: src/menu/game_mode_editor.cpp:319
 msgid ""
 "The blitz mode does not reset the time between each team turn. A team looses "
 "when it has no players left or its time has ran out."
@@ -2030,7 +2028,7 @@ msgstr ""
 msgid "The grenade left the battlefield before exploding!"
 msgstr "نارنجک قبل از اینکه عمل کند از زمین جنگ خارج شد"
 
-#: src/menu/network_menu.cpp:392
+#: src/menu/network_menu.cpp:388
 #, fuzzy
 msgid "The others are waiting for you! Wake up! :-)"
 msgstr "بقیه منتظر شما هستند! بجنب دیگه!"
@@ -2060,7 +2058,7 @@ msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
 msgstr ""
 
-#: src/menu/game_menu.cpp:128 src/menu/network_menu.cpp:258
+#: src/menu/game_menu.cpp:128 src/menu/network_menu.cpp:254
 #, fuzzy, c-format
 #| msgid "There is only %i team."
 #| msgid_plural "There are only %i teams."
@@ -2191,7 +2189,7 @@ msgstr ""
 msgid "Unknown command of type %i"
 msgstr ""
 
-#: src/game/game_mode.cpp:320
+#: src/game/game_mode.cpp:316
 #, fuzzy
 msgid "Unlimited"
 msgstr "(بی‌نهایت)"
@@ -2245,11 +2243,11 @@ msgstr "نسخه"
 msgid "Version verification failed because: %s"
 msgstr ""
 
-#: src/menu/network_menu.cpp:460
+#: src/menu/network_menu.cpp:456
 msgid "Wait until some opponent(s) connect!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:309
+#: src/menu/network_menu.cpp:305
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -2264,7 +2262,7 @@ msgstr ""
 msgid "Waiting for remote players"
 msgstr ""
 
-#: src/menu/network_menu.cpp:536
+#: src/menu/network_menu.cpp:532
 #, fuzzy
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "در انتظار کارگزار، شما فقط می‌توانید رد کنید و یا گپ بزنید!"
@@ -2299,7 +2297,7 @@ msgstr "وب‌سایت: "
 
 #. First %s will be replaced with the name of the network game,
 #. second %s by the server hostname
-#: src/menu/network_menu.cpp:160
+#: src/menu/network_menu.cpp:166
 #, c-format
 msgid "Welcome to %s on %s!"
 msgstr ""
@@ -2319,7 +2317,7 @@ msgstr "چه افتضاحی، %s با یک اسلحه‌ی ساده کشته ش�
 msgid "When a character can be switched"
 msgstr ""
 
-#: src/menu/options_menu.cpp:89
+#: src/menu/options_menu.cpp:88
 msgid "Wind particles?"
 msgstr "باد؟"
 
@@ -2360,12 +2358,12 @@ msgstr ""
 msgid "Wrote %i/%i bytes"
 msgstr ""
 
-#: src/menu/network_menu.cpp:304 src/menu/network_menu.cpp:396
+#: src/menu/network_menu.cpp:300 src/menu/network_menu.cpp:392
 #, fuzzy
 msgid "You are alone. :-/"
 msgstr "شما تنهایید!"
 
-#: src/menu/network_menu.cpp:459
+#: src/menu/network_menu.cpp:455
 msgid ""
 "You are the new turn master! Learn about your new powers by typing /help"
 msgstr ""
@@ -2384,7 +2382,7 @@ msgstr "شما حداقل یک نقشه‌ که به درستی کار کند ن
 msgid "You need at least two valid teams!"
 msgstr "شما حداقل به ۲ تیم نیاز دارید!"
 
-#: src/menu/network_menu.cpp:291
+#: src/menu/network_menu.cpp:287
 #, fuzzy
 msgid "You won't be able to play before selecting a team!"
 msgstr "شما قبل از اینکه تیمی انتخاب کنید نمی‌توانید بازی کنید!"

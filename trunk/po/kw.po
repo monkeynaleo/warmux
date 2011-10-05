@@ -25,7 +25,7 @@ msgstr "Ny gavas mappa %s :-("
 msgid "%.1f fps"
 msgstr "%.1f imaj/s"
 
-#: src/menu/network_menu.cpp:131 src/menu/network_menu.cpp:376
+#: src/menu/network_menu.cpp:137 src/menu/network_menu.cpp:372
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
@@ -34,7 +34,7 @@ msgstr[1] "%i warier re omjunyas"
 msgstr[2] "%i gwarier re omjunyas"
 msgstr[3] "%i gwarier re omjunyas"
 
-#: src/menu/network_menu.cpp:135 src/menu/network_menu.cpp:386
+#: src/menu/network_menu.cpp:141 src/menu/network_menu.cpp:382
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -609,7 +609,7 @@ msgstr "Pub para"
 msgid "Always"
 msgstr "Pup-prys"
 
-#: src/menu/game_mode_editor.cpp:214
+#: src/menu/game_mode_editor.cpp:218
 msgid "Ammos"
 msgstr ""
 
@@ -672,7 +672,7 @@ msgstr "Kyns gwrians"
 msgid "Benchmark"
 msgstr ""
 
-#: src/game/game_mode.cpp:321 src/menu/game_mode_editor.cpp:102
+#: src/game/game_mode.cpp:317 src/menu/game_mode_editor.cpp:102
 msgid "Blitz"
 msgstr "Blitz"
 
@@ -792,7 +792,7 @@ msgstr "Checkya nowedhansow warlinen?"
 msgid "Choose randomly between the different maps"
 msgstr "Dewis dre hap ynter an mappaow dyffrans"
 
-#: src/game/game_mode.cpp:319 src/menu/game_mode_editor.cpp:101
+#: src/game/game_mode.cpp:315 src/menu/game_mode_editor.cpp:101
 msgid "Classic"
 msgstr "Klassek"
 
@@ -828,7 +828,7 @@ msgid ""
 msgstr ""
 
 #. Client Mode
-#: src/menu/network_menu.cpp:168 src/network/network.cpp:489
+#: src/menu/network_menu.cpp:174 src/network/network.cpp:489
 msgid "Client mode"
 msgstr "Modh omajer"
 
@@ -862,7 +862,7 @@ msgstr "Omladha"
 msgid "Configuration menu"
 msgstr "Dewisel restrans"
 
-#: src/menu/network_connection_menu.cpp:282
+#: src/menu/network_connection_menu.cpp:281
 msgid "Connect to game"
 msgstr "Omjunya dhe'n gwari"
 
@@ -944,7 +944,7 @@ msgstr "Pinaval Tardhus Disco"
 msgid "Displays this message"
 msgstr "A dhisplet an messach ma"
 
-#: src/menu/network_menu.cpp:170
+#: src/menu/network_menu.cpp:176
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr ""
 
@@ -1115,11 +1115,11 @@ msgstr "Stifeller-Tan"
 msgid "Football Bomb"
 msgstr "Tanbellen Peldroos"
 
-#: src/menu/options_menu.cpp:109
+#: src/menu/options_menu.cpp:108
 msgid "Fullscreen?"
 msgstr "Skrin leun?"
 
-#: src/menu/game_menu.cpp:96 src/menu/network_menu.cpp:198
+#: src/menu/game_menu.cpp:96 src/menu/network_menu.cpp:194
 msgid "Game"
 msgstr "Gwari"
 
@@ -1137,10 +1137,7 @@ msgid "Game menu"
 msgstr "Modh gwari"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#. Using the game mode editor but currently we are not able to send
-#. custom parameters to client
 #: src/menu/game_mode_editor.cpp:70 src/menu/help_menu.cpp:73
-#: src/menu/network_menu.cpp:194
 msgid "Game mode"
 msgstr "Modh gwari"
 
@@ -1163,7 +1160,7 @@ msgid ""
 "Will cure your teammate or slowly kill your opponent"
 msgstr ""
 
-#: src/menu/benchmark_menu.cpp:112 src/menu/options_menu.cpp:151
+#: src/menu/benchmark_menu.cpp:112 src/menu/options_menu.cpp:150
 #, fuzzy
 msgid "Graphics"
 msgstr "Grafek"
@@ -1209,7 +1206,7 @@ msgstr "Penn an para"
 msgid "Help"
 msgstr "Gweres"
 
-#: src/menu/options_menu.cpp:121
+#: src/menu/options_menu.cpp:120
 #, fuzzy
 msgid "High"
 msgstr "Lamma yn uhel"
@@ -1363,7 +1360,7 @@ msgstr ""
 msgid "Key"
 msgstr ""
 
-#: src/menu/options_menu.cpp:161
+#: src/menu/options_menu.cpp:160
 msgid "Key bindings"
 msgstr ""
 
@@ -1377,7 +1374,7 @@ msgstr ""
 msgid "Kicks the player designated by <nickname> out of the game"
 msgstr "Defendya an warioryon leshenwys <nickname> dhe-ves a'n gwari."
 
-#: src/menu/options_menu.cpp:156
+#: src/menu/options_menu.cpp:155
 msgid "Language"
 msgstr "Yeth"
 
@@ -1402,7 +1399,7 @@ msgstr "Karga paraow:"
 msgid "Local teams:"
 msgstr "Paraow leel:"
 
-#: src/menu/options_menu.cpp:118
+#: src/menu/options_menu.cpp:117
 msgid "Low memory"
 msgstr ""
 
@@ -1410,12 +1407,12 @@ msgstr ""
 msgid "LowGrav"
 msgstr "Gravedh Isel"
 
-#: src/menu/network_connection_menu.cpp:281
+#: src/menu/network_connection_menu.cpp:282
 msgid "Manual connection"
 msgstr "Junyans dre dhorn"
 
 #: src/menu/game_menu.cpp:80 src/menu/game_menu.cpp:84
-#: src/menu/network_menu.cpp:100 src/menu/network_menu.cpp:104
+#: src/menu/network_menu.cpp:106 src/menu/network_menu.cpp:110
 msgid "Map"
 msgstr "Mappa"
 
@@ -1438,7 +1435,7 @@ msgstr ""
 msgid "Maps"
 msgstr "Mappaow"
 
-#: src/menu/network_menu.cpp:446 src/menu/network_menu.cpp:448
+#: src/menu/network_menu.cpp:442 src/menu/network_menu.cpp:444
 msgid "Master mode"
 msgstr "Modh arludh"
 
@@ -1446,11 +1443,11 @@ msgstr "Modh arludh"
 msgid "Max energy"
 msgstr "Brassa nerth"
 
-#: src/menu/options_menu.cpp:114
+#: src/menu/options_menu.cpp:113
 msgid "Maximum FPS"
 msgstr "Brassa niver a skeusennow orth an eylen"
 
-#: src/menu/options_menu.cpp:119
+#: src/menu/options_menu.cpp:118
 msgid "Medium"
 msgstr ""
 
@@ -1554,7 +1551,7 @@ msgstr ""
 msgid "Move right slowly"
 msgstr ""
 
-#: src/menu/options_menu.cpp:95
+#: src/menu/options_menu.cpp:94
 msgid "Multi-layer sky?"
 msgstr ""
 
@@ -1682,7 +1679,7 @@ msgstr ""
 msgid "Play"
 msgstr "Gwari"
 
-#: src/menu/network_menu.cpp:128
+#: src/menu/network_menu.cpp:134
 msgid "Play several times"
 msgstr "Gwari lieskweyth"
 
@@ -1690,15 +1687,15 @@ msgstr "Gwari lieskweyth"
 msgid "Player"
 msgstr "Gwarier"
 
-#: src/menu/options_menu.cpp:100
+#: src/menu/options_menu.cpp:99
 msgid "Player energy?"
 msgstr "Nerth an warioryon?"
 
-#: src/menu/options_menu.cpp:104
+#: src/menu/options_menu.cpp:103
 msgid "Player's name?"
 msgstr "Hanow an gwarier?"
 
-#: src/menu/game_menu.cpp:145 src/menu/network_menu.cpp:274
+#: src/menu/game_menu.cpp:145 src/menu/network_menu.cpp:270
 msgid "Please select a group different from your opponent!"
 msgstr ""
 
@@ -1784,7 +1781,7 @@ msgstr ""
 msgid "Public battles"
 msgstr "Kasow poblek"
 
-#: src/menu/options_menu.cpp:123
+#: src/menu/options_menu.cpp:122
 msgid "Quality"
 msgstr ""
 
@@ -1860,7 +1857,7 @@ msgstr ""
 msgid "Replay saved"
 msgstr ""
 
-#: src/menu/options_menu.cpp:146
+#: src/menu/options_menu.cpp:145
 msgid "Resolution"
 msgstr "Klerder"
 
@@ -1917,7 +1914,8 @@ msgstr "Trigva servyer:"
 msgid "Server available on Internet"
 msgstr "Servyer kavadow y'n Gesrosweyth"
 
-#: src/menu/network_menu.cpp:175 src/network/network.cpp:519
+#. Server Mode
+#: src/menu/network_menu.cpp:180 src/network/network.cpp:519
 msgid "Server mode"
 msgstr "Modh servyer"
 
@@ -2084,7 +2082,7 @@ msgstr "Stats an paraow"
 
 #. Teams
 #: src/game/game.cpp:169 src/menu/game_menu.cpp:79 src/menu/game_menu.cpp:83
-#: src/menu/network_menu.cpp:99 src/menu/network_menu.cpp:103
+#: src/menu/network_menu.cpp:105 src/menu/network_menu.cpp:109
 #: src/menu/replay_menu.cpp:117
 msgid "Teams"
 msgstr "Paraow"
@@ -2134,7 +2132,7 @@ msgstr "An bel a asas an gaslan kyns omdardha."
 msgid "The bigger the faster you'll fall!"
 msgstr ""
 
-#: src/menu/game_mode_editor.cpp:315
+#: src/menu/game_mode_editor.cpp:319
 msgid ""
 "The blitz mode does not reset the time between each team turn. A team looses "
 "when it has no players left or its time has ran out."
@@ -2167,7 +2165,7 @@ msgstr "Goderrys veu an gwari drefen dha vos disjunys."
 msgid "The grenade left the battlefield before exploding!"
 msgstr "An pinaval tardhus re asas an gaslan kyns omdardha."
 
-#: src/menu/network_menu.cpp:392
+#: src/menu/network_menu.cpp:388
 #, fuzzy
 msgid "The others are waiting for you! Wake up! :-)"
 msgstr "An re erel usi orth dha wortos! Difun! :-)"
@@ -2196,7 +2194,7 @@ msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
 msgstr ""
 
-#: src/menu/game_menu.cpp:128 src/menu/network_menu.cpp:258
+#: src/menu/game_menu.cpp:128 src/menu/network_menu.cpp:254
 #, fuzzy, c-format
 #| msgid "There is only %i team."
 #| msgid_plural "There are only %i teams."
@@ -2334,7 +2332,7 @@ msgstr "Gorhemmyn ankoth"
 msgid "Unknown command of type %i"
 msgstr "Gorhemmyn ankoth"
 
-#: src/game/game_mode.cpp:320
+#: src/game/game_mode.cpp:316
 msgid "Unlimited"
 msgstr "Heb finwedh"
 
@@ -2387,11 +2385,11 @@ msgstr "Versyon"
 msgid "Version verification failed because: %s"
 msgstr "Gwiryans an versyon a fyllys rag: %s\n"
 
-#: src/menu/network_menu.cpp:460
+#: src/menu/network_menu.cpp:456
 msgid "Wait until some opponent(s) connect!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:309
+#: src/menu/network_menu.cpp:305
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -2409,7 +2407,7 @@ msgstr ""
 msgid "Waiting for remote players"
 msgstr ""
 
-#: src/menu/network_menu.cpp:536
+#: src/menu/network_menu.cpp:532
 #, fuzzy
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Ow kortos an servyer, ny yl'ta saw hedhi po klappya!"
@@ -2445,7 +2443,7 @@ msgstr "Gwiasva: "
 
 #. First %s will be replaced with the name of the network game,
 #. second %s by the server hostname
-#: src/menu/network_menu.cpp:160
+#: src/menu/network_menu.cpp:166
 #, fuzzy, c-format
 msgid "Welcome to %s on %s!"
 msgstr "Dynnargh dhe %s!"
@@ -2466,7 +2464,7 @@ msgstr "Soweth rag %s: ledhys veu gans gonn sempel!"
 msgid "When a character can be switched"
 msgstr "War neb person: Rag chanjya an onan a-lemmyn"
 
-#: src/menu/options_menu.cpp:89
+#: src/menu/options_menu.cpp:88
 msgid "Wind particles?"
 msgstr "Manylyon gwyns?"
 
@@ -2509,12 +2507,12 @@ msgstr "Para kamm!"
 msgid "Wrote %i/%i bytes"
 msgstr ""
 
-#: src/menu/network_menu.cpp:304 src/menu/network_menu.cpp:396
+#: src/menu/network_menu.cpp:300 src/menu/network_menu.cpp:392
 #, fuzzy
 msgid "You are alone. :-/"
 msgstr "Genes dha honan th esos :-/"
 
-#: src/menu/network_menu.cpp:459
+#: src/menu/network_menu.cpp:455
 msgid ""
 "You are the new turn master! Learn about your new powers by typing /help"
 msgstr ""
@@ -2533,7 +2531,7 @@ msgstr "Res yw bos dhe'n leha unn mappa da!"
 msgid "You need at least two valid teams!"
 msgstr "Res yw bos dhe'n leha dew bara da!"
 
-#: src/menu/network_menu.cpp:291
+#: src/menu/network_menu.cpp:287
 #, fuzzy
 msgid "You won't be able to play before selecting a team!"
 msgstr "Ny yllydh gwari kyns dewis para!"

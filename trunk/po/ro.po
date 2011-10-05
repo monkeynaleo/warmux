@@ -32,7 +32,7 @@ msgstr "! Harta %s nu a fost găsită :-("
 msgid "%.1f fps"
 msgstr "%.1f C/S"
 
-#: src/menu/network_menu.cpp:131 src/menu/network_menu.cpp:376
+#: src/menu/network_menu.cpp:137 src/menu/network_menu.cpp:372
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
@@ -40,7 +40,7 @@ msgstr[0] "%i jucător conectat"
 msgstr[1] "%i jucători conectați"
 msgstr[2] "%i de jucători conectați"
 
-#: src/menu/network_menu.cpp:135 src/menu/network_menu.cpp:386
+#: src/menu/network_menu.cpp:141 src/menu/network_menu.cpp:382
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -719,7 +719,7 @@ msgstr "Toate echipele"
 msgid "Always"
 msgstr "Întotdeauna"
 
-#: src/menu/game_mode_editor.cpp:214
+#: src/menu/game_mode_editor.cpp:218
 msgid "Ammos"
 msgstr ""
 
@@ -783,7 +783,7 @@ msgstr "Înaintea acțiunii"
 msgid "Benchmark"
 msgstr ""
 
-#: src/game/game_mode.cpp:321 src/menu/game_mode_editor.cpp:102
+#: src/game/game_mode.cpp:317 src/menu/game_mode_editor.cpp:102
 msgid "Blitz"
 msgstr "Bliț"
 
@@ -902,7 +902,7 @@ msgstr "Se verifică actualizările online?"
 msgid "Choose randomly between the different maps"
 msgstr "Alege la întâmplare una din diferitele hărți"
 
-#: src/game/game_mode.cpp:319 src/menu/game_mode_editor.cpp:101
+#: src/game/game_mode.cpp:315 src/menu/game_mode_editor.cpp:101
 msgid "Classic"
 msgstr "Clasic"
 
@@ -938,7 +938,7 @@ msgid ""
 msgstr ""
 
 #. Client Mode
-#: src/menu/network_menu.cpp:168 src/network/network.cpp:489
+#: src/menu/network_menu.cpp:174 src/network/network.cpp:489
 msgid "Client mode"
 msgstr "Mod client"
 
@@ -972,7 +972,7 @@ msgstr "Comite suicid"
 msgid "Configuration menu"
 msgstr "Meniu de configurare"
 
-#: src/menu/network_connection_menu.cpp:282
+#: src/menu/network_connection_menu.cpp:281
 msgid "Connect to game"
 msgstr "Conectare la joc"
 
@@ -1054,7 +1054,7 @@ msgstr "Grenadă disco"
 msgid "Displays this message"
 msgstr "Afișează acest mesaj"
 
-#: src/menu/network_menu.cpp:170
+#: src/menu/network_menu.cpp:176
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr ""
 
@@ -1232,11 +1232,11 @@ msgstr "Aruncător de flăcări"
 msgid "Football Bomb"
 msgstr "Bombă-minge de fotbal"
 
-#: src/menu/options_menu.cpp:109
+#: src/menu/options_menu.cpp:108
 msgid "Fullscreen?"
 msgstr "Tot ecranul?"
 
-#: src/menu/game_menu.cpp:96 src/menu/network_menu.cpp:198
+#: src/menu/game_menu.cpp:96 src/menu/network_menu.cpp:194
 msgid "Game"
 msgstr "Joc"
 
@@ -1254,10 +1254,7 @@ msgid "Game menu"
 msgstr "Modul jocului"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#. Using the game mode editor but currently we are not able to send
-#. custom parameters to client
 #: src/menu/game_mode_editor.cpp:70 src/menu/help_menu.cpp:73
-#: src/menu/network_menu.cpp:194
 msgid "Game mode"
 msgstr "Modul jocului"
 
@@ -1280,7 +1277,7 @@ msgid ""
 "Will cure your teammate or slowly kill your opponent"
 msgstr ""
 
-#: src/menu/benchmark_menu.cpp:112 src/menu/options_menu.cpp:151
+#: src/menu/benchmark_menu.cpp:112 src/menu/options_menu.cpp:150
 msgid "Graphics"
 msgstr "Grafică"
 
@@ -1325,7 +1322,7 @@ msgstr "Comandant șef"
 msgid "Help"
 msgstr "Ajutor"
 
-#: src/menu/options_menu.cpp:121
+#: src/menu/options_menu.cpp:120
 #, fuzzy
 msgid "High"
 msgstr "Salt înalt"
@@ -1477,7 +1474,7 @@ msgstr ""
 msgid "Key"
 msgstr ""
 
-#: src/menu/options_menu.cpp:161
+#: src/menu/options_menu.cpp:160
 msgid "Key bindings"
 msgstr ""
 
@@ -1491,7 +1488,7 @@ msgstr ""
 msgid "Kicks the player designated by <nickname> out of the game"
 msgstr "Aruncă afară din joc jucătorii indicați de <nickname>"
 
-#: src/menu/options_menu.cpp:156
+#: src/menu/options_menu.cpp:155
 msgid "Language"
 msgstr "Limba"
 
@@ -1516,7 +1513,7 @@ msgstr "Încărcare echipe:"
 msgid "Local teams:"
 msgstr "Echipe locale:"
 
-#: src/menu/options_menu.cpp:118
+#: src/menu/options_menu.cpp:117
 msgid "Low memory"
 msgstr ""
 
@@ -1525,12 +1522,12 @@ msgid "LowGrav"
 msgstr "Gravitație scăzută"
 
 # URM1-2
-#: src/menu/network_connection_menu.cpp:281
+#: src/menu/network_connection_menu.cpp:282
 msgid "Manual connection"
 msgstr "Conectare manuală"
 
 #: src/menu/game_menu.cpp:80 src/menu/game_menu.cpp:84
-#: src/menu/network_menu.cpp:100 src/menu/network_menu.cpp:104
+#: src/menu/network_menu.cpp:106 src/menu/network_menu.cpp:110
 msgid "Map"
 msgstr "Hartă"
 
@@ -1553,7 +1550,7 @@ msgstr ""
 msgid "Maps"
 msgstr "Hărți"
 
-#: src/menu/network_menu.cpp:446 src/menu/network_menu.cpp:448
+#: src/menu/network_menu.cpp:442 src/menu/network_menu.cpp:444
 msgid "Master mode"
 msgstr "Modul server"
 
@@ -1561,11 +1558,11 @@ msgstr "Modul server"
 msgid "Max energy"
 msgstr "Energie maximă"
 
-#: src/menu/options_menu.cpp:114
+#: src/menu/options_menu.cpp:113
 msgid "Maximum FPS"
 msgstr "Numărul maxim de C/S"
 
-#: src/menu/options_menu.cpp:119
+#: src/menu/options_menu.cpp:118
 #, fuzzy
 msgid "Medium"
 msgstr "Mină"
@@ -1671,7 +1668,7 @@ msgstr ""
 msgid "Move right slowly"
 msgstr ""
 
-#: src/menu/options_menu.cpp:95
+#: src/menu/options_menu.cpp:94
 msgid "Multi-layer sky?"
 msgstr "Cer cu mai multe straturi?"
 
@@ -1801,7 +1798,7 @@ msgstr ""
 msgid "Play"
 msgstr "Pornește jocul"
 
-#: src/menu/network_menu.cpp:128
+#: src/menu/network_menu.cpp:134
 msgid "Play several times"
 msgstr "Joacă de câteva ori"
 
@@ -1809,15 +1806,15 @@ msgstr "Joacă de câteva ori"
 msgid "Player"
 msgstr "Jucător"
 
-#: src/menu/options_menu.cpp:100
+#: src/menu/options_menu.cpp:99
 msgid "Player energy?"
 msgstr "Energia jucătorului?"
 
-#: src/menu/options_menu.cpp:104
+#: src/menu/options_menu.cpp:103
 msgid "Player's name?"
 msgstr "Numele jucătorului?"
 
-#: src/menu/game_menu.cpp:145 src/menu/network_menu.cpp:274
+#: src/menu/game_menu.cpp:145 src/menu/network_menu.cpp:270
 msgid "Please select a group different from your opponent!"
 msgstr ""
 
@@ -1903,7 +1900,7 @@ msgstr ""
 msgid "Public battles"
 msgstr "Bătălii publice"
 
-#: src/menu/options_menu.cpp:123
+#: src/menu/options_menu.cpp:122
 msgid "Quality"
 msgstr ""
 
@@ -1977,7 +1974,7 @@ msgstr ""
 msgid "Replay saved"
 msgstr ""
 
-#: src/menu/options_menu.cpp:146
+#: src/menu/options_menu.cpp:145
 msgid "Resolution"
 msgstr "Rezoluție"
 
@@ -2035,7 +2032,8 @@ msgstr "Adresa serverului:"
 msgid "Server available on Internet"
 msgstr "Server disponibil în internet"
 
-#: src/menu/network_menu.cpp:175 src/network/network.cpp:519
+#. Server Mode
+#: src/menu/network_menu.cpp:180 src/network/network.cpp:519
 msgid "Server mode"
 msgstr "Mod server"
 
@@ -2201,7 +2199,7 @@ msgstr "Statistici echipe"
 
 #. Teams
 #: src/game/game.cpp:169 src/menu/game_menu.cpp:79 src/menu/game_menu.cpp:83
-#: src/menu/network_menu.cpp:99 src/menu/network_menu.cpp:103
+#: src/menu/network_menu.cpp:105 src/menu/network_menu.cpp:109
 #: src/menu/replay_menu.cpp:117
 msgid "Teams"
 msgstr "Echipe"
@@ -2248,7 +2246,7 @@ msgstr "Mingea a părăsit câmpul de luptă înainte de a exploda!"
 msgid "The bigger the faster you'll fall!"
 msgstr ""
 
-#: src/menu/game_mode_editor.cpp:315
+#: src/menu/game_mode_editor.cpp:319
 msgid ""
 "The blitz mode does not reset the time between each team turn. A team looses "
 "when it has no players left or its time has ran out."
@@ -2281,7 +2279,7 @@ msgstr "Jocul s-a întrerupt pentru că v-ați deconectat."
 msgid "The grenade left the battlefield before exploding!"
 msgstr "Grenada a părăsit câmpul de luptă înainte de a exploda!"
 
-#: src/menu/network_menu.cpp:392
+#: src/menu/network_menu.cpp:388
 msgid "The others are waiting for you! Wake up! :-)"
 msgstr "Ceilalți te-așteaptă! Trezește-te! :-)"
 
@@ -2308,7 +2306,7 @@ msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
 msgstr ""
 
-#: src/menu/game_menu.cpp:128 src/menu/network_menu.cpp:258
+#: src/menu/game_menu.cpp:128 src/menu/network_menu.cpp:254
 #, fuzzy, c-format
 #| msgid "There is only %i team."
 #| msgid_plural "There are only %i teams."
@@ -2447,7 +2445,7 @@ msgstr "Comandă necunoscută"
 msgid "Unknown command of type %i"
 msgstr "Comandă necunoscută"
 
-#: src/game/game_mode.cpp:320
+#: src/game/game_mode.cpp:316
 msgid "Unlimited"
 msgstr "nelimitat"
 
@@ -2499,11 +2497,11 @@ msgstr "Versiunea"
 msgid "Version verification failed because: %s"
 msgstr "Verificarea versiunii a eșuat pentru că: %s"
 
-#: src/menu/network_menu.cpp:460
+#: src/menu/network_menu.cpp:456
 msgid "Wait until some opponent(s) connect!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:309
+#: src/menu/network_menu.cpp:305
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -2521,7 +2519,7 @@ msgstr "Se așteaptă harta"
 msgid "Waiting for remote players"
 msgstr "Se așteaptă harta"
 
-#: src/menu/network_menu.cpp:536
+#: src/menu/network_menu.cpp:532
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Se așteaptă serverul. Tot ce puteți face e să anulați sau să vorbiți!"
 
@@ -2556,7 +2554,7 @@ msgstr "Saitul web: "
 
 #. First %s will be replaced with the name of the network game,
 #. second %s by the server hostname
-#: src/menu/network_menu.cpp:160
+#: src/menu/network_menu.cpp:166
 #, fuzzy, c-format
 msgid "Welcome to %s on %s!"
 msgstr "Bine ați venit la %s!"
@@ -2577,7 +2575,7 @@ msgstr "Ce umilire pentru %s - a fost ucis cu un simplu pistol!"
 msgid "When a character can be switched"
 msgstr "Pe un personaj: Îl selectează"
 
-#: src/menu/options_menu.cpp:89
+#: src/menu/options_menu.cpp:88
 msgid "Wind particles?"
 msgstr "Particulele de vânt?"
 
@@ -2621,11 +2619,11 @@ msgstr "Echipa e greșită!"
 msgid "Wrote %i/%i bytes"
 msgstr ""
 
-#: src/menu/network_menu.cpp:304 src/menu/network_menu.cpp:396
+#: src/menu/network_menu.cpp:300 src/menu/network_menu.cpp:392
 msgid "You are alone. :-/"
 msgstr "Ești singur. :-/"
 
-#: src/menu/network_menu.cpp:459
+#: src/menu/network_menu.cpp:455
 msgid ""
 "You are the new turn master! Learn about your new powers by typing /help"
 msgstr ""
@@ -2642,7 +2640,7 @@ msgstr "Ai nevoie de cel puțin o hartă validă!"
 msgid "You need at least two valid teams!"
 msgstr "Ai nevoie de cel puțin două echipe valide!"
 
-#: src/menu/network_menu.cpp:291
+#: src/menu/network_menu.cpp:287
 msgid "You won't be able to play before selecting a team!"
 msgstr "Nu vei putea să joci dacă nu selectezi o echipă!"
 

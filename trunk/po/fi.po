@@ -32,14 +32,14 @@ msgstr "! Karttaa %s ei löydy :-("
 msgid "%.1f fps"
 msgstr "%.1f fps"
 
-#: src/menu/network_menu.cpp:131 src/menu/network_menu.cpp:376
+#: src/menu/network_menu.cpp:137 src/menu/network_menu.cpp:372
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i pelaaja liittyneenä"
 msgstr[1] "%i pelaajaa liittyneenä"
 
-#: src/menu/network_menu.cpp:135 src/menu/network_menu.cpp:386
+#: src/menu/network_menu.cpp:141 src/menu/network_menu.cpp:382
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -522,7 +522,7 @@ msgstr "Kaikki joukkueet"
 msgid "Always"
 msgstr "Aina"
 
-#: src/menu/game_mode_editor.cpp:214
+#: src/menu/game_mode_editor.cpp:218
 msgid "Ammos"
 msgstr ""
 
@@ -584,7 +584,7 @@ msgstr "Ennen toimintoa"
 msgid "Benchmark"
 msgstr "Suorituskyky"
 
-#: src/game/game_mode.cpp:321 src/menu/game_mode_editor.cpp:102
+#: src/game/game_mode.cpp:317 src/menu/game_mode_editor.cpp:102
 msgid "Blitz"
 msgstr "Salamasota"
 
@@ -700,7 +700,7 @@ msgstr "Tarkista päivitykset"
 msgid "Choose randomly between the different maps"
 msgstr "Valitse sattumanvaraisesti eri karttojen välillä"
 
-#: src/game/game_mode.cpp:319 src/menu/game_mode_editor.cpp:101
+#: src/game/game_mode.cpp:315 src/menu/game_mode_editor.cpp:101
 msgid "Classic"
 msgstr "Klassinen"
 
@@ -743,7 +743,7 @@ msgstr ""
 "Saman joukkueen voi valita vain kerran."
 
 #. Client Mode
-#: src/menu/network_menu.cpp:168 src/network/network.cpp:489
+#: src/menu/network_menu.cpp:174 src/network/network.cpp:489
 msgid "Client mode"
 msgstr "Asiakastila"
 
@@ -778,7 +778,7 @@ msgstr "Itsemurhaisku"
 msgid "Configuration menu"
 msgstr "Asetusvalikko"
 
-#: src/menu/network_connection_menu.cpp:282
+#: src/menu/network_connection_menu.cpp:281
 msgid "Connect to game"
 msgstr "Yhdistä peliin"
 
@@ -864,7 +864,7 @@ msgstr "Diskokranaatti"
 msgid "Displays this message"
 msgstr "Näyttää tämän viestin"
 
-#: src/menu/network_menu.cpp:170
+#: src/menu/network_menu.cpp:176
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr "Älä unohda tarkistaa oikeellisuutta valittuasi tiimisi!"
 
@@ -1033,11 +1033,11 @@ msgstr "Liekinheitin"
 msgid "Football Bomb"
 msgstr "Jalkapallopommi"
 
-#: src/menu/options_menu.cpp:109
+#: src/menu/options_menu.cpp:108
 msgid "Fullscreen?"
 msgstr "Kokoruutu"
 
-#: src/menu/game_menu.cpp:96 src/menu/network_menu.cpp:198
+#: src/menu/game_menu.cpp:96 src/menu/network_menu.cpp:194
 msgid "Game"
 msgstr "Peli"
 
@@ -1058,10 +1058,7 @@ msgid "Game menu"
 msgstr "Pelivalikko"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#. Using the game mode editor but currently we are not able to send
-#. custom parameters to client
 #: src/menu/game_mode_editor.cpp:70 src/menu/help_menu.cpp:73
-#: src/menu/network_menu.cpp:194
 msgid "Game mode"
 msgstr "Pelitila"
 
@@ -1087,7 +1084,7 @@ msgstr ""
 "Pistä pelaajaa\n"
 "Parantaa hitaasti joukkuetoveria tai tappaa hitaasti vastustajan"
 
-#: src/menu/benchmark_menu.cpp:112 src/menu/options_menu.cpp:151
+#: src/menu/benchmark_menu.cpp:112 src/menu/options_menu.cpp:150
 msgid "Graphics"
 msgstr "Grafiikka"
 
@@ -1132,7 +1129,7 @@ msgstr "Ylikomentaja"
 msgid "Help"
 msgstr "Ohje"
 
-#: src/menu/options_menu.cpp:121
+#: src/menu/options_menu.cpp:120
 msgid "High"
 msgstr "Korkea"
 
@@ -1281,7 +1278,7 @@ msgstr ""
 msgid "Key"
 msgstr "Näppäin"
 
-#: src/menu/options_menu.cpp:161
+#: src/menu/options_menu.cpp:160
 msgid "Key bindings"
 msgstr "Näppäinasetukset"
 
@@ -1294,7 +1291,7 @@ msgstr "Näppäimistö"
 msgid "Kicks the player designated by <nickname> out of the game"
 msgstr "Potkaisee <nickname>-nimiset pelaajat ulos pelistä"
 
-#: src/menu/options_menu.cpp:156
+#: src/menu/options_menu.cpp:155
 msgid "Language"
 msgstr "Kieli"
 
@@ -1318,7 +1315,7 @@ msgstr "Lataa joukkueet:"
 msgid "Local teams:"
 msgstr "Paikalliset joukkueet:"
 
-#: src/menu/options_menu.cpp:118
+#: src/menu/options_menu.cpp:117
 msgid "Low memory"
 msgstr "Muistia säästävä"
 
@@ -1326,12 +1323,12 @@ msgstr "Muistia säästävä"
 msgid "LowGrav"
 msgstr "Painottomuus"
 
-#: src/menu/network_connection_menu.cpp:281
+#: src/menu/network_connection_menu.cpp:282
 msgid "Manual connection"
 msgstr "Manuaalinen yhteys"
 
 #: src/menu/game_menu.cpp:80 src/menu/game_menu.cpp:84
-#: src/menu/network_menu.cpp:100 src/menu/network_menu.cpp:104
+#: src/menu/network_menu.cpp:106 src/menu/network_menu.cpp:110
 msgid "Map"
 msgstr "Kartta"
 
@@ -1354,7 +1351,7 @@ msgstr "Tietoja kartan tekijästä"
 msgid "Maps"
 msgstr "Kartat"
 
-#: src/menu/network_menu.cpp:446 src/menu/network_menu.cpp:448
+#: src/menu/network_menu.cpp:442 src/menu/network_menu.cpp:444
 msgid "Master mode"
 msgstr "Mestaritila"
 
@@ -1362,11 +1359,11 @@ msgstr "Mestaritila"
 msgid "Max energy"
 msgstr "Maksimivoima"
 
-#: src/menu/options_menu.cpp:114
+#: src/menu/options_menu.cpp:113
 msgid "Maximum FPS"
 msgstr "Maksimi FPS"
 
-#: src/menu/options_menu.cpp:119
+#: src/menu/options_menu.cpp:118
 msgid "Medium"
 msgstr "Keskilaatu"
 
@@ -1463,7 +1460,7 @@ msgstr "Siirry oikealle"
 msgid "Move right slowly"
 msgstr "Siirry hitaasti oikealle"
 
-#: src/menu/options_menu.cpp:95
+#: src/menu/options_menu.cpp:94
 msgid "Multi-layer sky?"
 msgstr "Monitasoinen taivas?"
 
@@ -1591,7 +1588,7 @@ msgstr ""
 msgid "Play"
 msgstr "Pelaa"
 
-#: src/menu/network_menu.cpp:128
+#: src/menu/network_menu.cpp:134
 msgid "Play several times"
 msgstr "Pelaa useita kertoja"
 
@@ -1599,15 +1596,15 @@ msgstr "Pelaa useita kertoja"
 msgid "Player"
 msgstr "Pelaaja"
 
-#: src/menu/options_menu.cpp:100
+#: src/menu/options_menu.cpp:99
 msgid "Player energy?"
 msgstr "Näytä voimat"
 
-#: src/menu/options_menu.cpp:104
+#: src/menu/options_menu.cpp:103
 msgid "Player's name?"
 msgstr "Näytä nimi"
 
-#: src/menu/game_menu.cpp:145 src/menu/network_menu.cpp:274
+#: src/menu/game_menu.cpp:145 src/menu/network_menu.cpp:270
 msgid "Please select a group different from your opponent!"
 msgstr ""
 
@@ -1711,7 +1708,7 @@ msgstr ""
 msgid "Public battles"
 msgstr "Julkiset taistelut"
 
-#: src/menu/options_menu.cpp:123
+#: src/menu/options_menu.cpp:122
 msgid "Quality"
 msgstr "Laatu"
 
@@ -1785,7 +1782,7 @@ msgstr ""
 msgid "Replay saved"
 msgstr "Tallenne kirjoitettu"
 
-#: src/menu/options_menu.cpp:146
+#: src/menu/options_menu.cpp:145
 msgid "Resolution"
 msgstr "Tarkkuus"
 
@@ -1844,7 +1841,8 @@ msgstr "Palvelimen osoite:"
 msgid "Server available on Internet"
 msgstr "Palvelimelle on pääsy internetistä"
 
-#: src/menu/network_menu.cpp:175 src/network/network.cpp:519
+#. Server Mode
+#: src/menu/network_menu.cpp:180 src/network/network.cpp:519
 msgid "Server mode"
 msgstr "Palvelimen tila"
 
@@ -2014,7 +2012,7 @@ msgstr "Joukkueen tilastot"
 
 #. Teams
 #: src/game/game.cpp:169 src/menu/game_menu.cpp:79 src/menu/game_menu.cpp:83
-#: src/menu/network_menu.cpp:99 src/menu/network_menu.cpp:103
+#: src/menu/network_menu.cpp:105 src/menu/network_menu.cpp:109
 #: src/menu/replay_menu.cpp:117
 msgid "Teams"
 msgstr "Joukkueet"
@@ -2061,7 +2059,7 @@ msgstr "Pallo poistui taistelukentältä ennen räjähtämistä!"
 msgid "The bigger the faster you'll fall!"
 msgstr "Mitä suurempi, sitä kovemmin putoat!"
 
-#: src/menu/game_mode_editor.cpp:315
+#: src/menu/game_mode_editor.cpp:319
 msgid ""
 "The blitz mode does not reset the time between each team turn. A team looses "
 "when it has no players left or its time has ran out."
@@ -2094,7 +2092,7 @@ msgstr "Peli keskeytyi koska yhteytesi katkesi."
 msgid "The grenade left the battlefield before exploding!"
 msgstr "Kranaatti poistui taistelukentältä ennen räjähtämistä!"
 
-#: src/menu/network_menu.cpp:392
+#: src/menu/network_menu.cpp:388
 msgid "The others are waiting for you! Wake up! :-)"
 msgstr "Muut odottavat sinua! Herätys! :-)"
 
@@ -2123,7 +2121,7 @@ msgstr ""
 "Aseella %s on loppumattomat ammukset, mutta bonuslaatikot saattavat sisältää "
 "ammuksia sille!"
 
-#: src/menu/game_menu.cpp:128 src/menu/network_menu.cpp:258
+#: src/menu/game_menu.cpp:128 src/menu/network_menu.cpp:254
 #, fuzzy, c-format
 #| msgid "There is only %i team."
 #| msgid_plural "There are only %i teams."
@@ -2254,7 +2252,7 @@ msgstr "Tuntematon komento"
 msgid "Unknown command of type %i"
 msgstr "Tuntematon komento %i"
 
-#: src/game/game_mode.cpp:320
+#: src/game/game_mode.cpp:316
 msgid "Unlimited"
 msgstr "Rajaton"
 
@@ -2307,11 +2305,11 @@ msgstr "Versio"
 msgid "Version verification failed because: %s"
 msgstr "Version tarkistus epäonnistui koska: %s"
 
-#: src/menu/network_menu.cpp:460
+#: src/menu/network_menu.cpp:456
 msgid "Wait until some opponent(s) connect!"
 msgstr "Odota vähintään yhden vastustajan liittymistä!"
 
-#: src/menu/network_menu.cpp:309
+#: src/menu/network_menu.cpp:305
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -2327,7 +2325,7 @@ msgstr "Odotetaan henkilöä %s"
 msgid "Waiting for remote players"
 msgstr "Odotetaan etäpelaajia"
 
-#: src/menu/network_menu.cpp:536
+#: src/menu/network_menu.cpp:532
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Odotetaan palvelinta. Voit ainoastaan keskeyttää tai jutella!"
 
@@ -2358,7 +2356,7 @@ msgstr "Verkkosivu:"
 
 #. First %s will be replaced with the name of the network game,
 #. second %s by the server hostname
-#: src/menu/network_menu.cpp:160
+#: src/menu/network_menu.cpp:166
 #, c-format
 msgid "Welcome to %s on %s!"
 msgstr "Tervetuloa kohteeseen %s paikassa %s!"
@@ -2378,7 +2376,7 @@ msgstr "Mikä harmi, %s kuoli pikku pyssyn luodista!"
 msgid "When a character can be switched"
 msgstr "Milloin hahmon vaihto on sallittu"
 
-#: src/menu/options_menu.cpp:89
+#: src/menu/options_menu.cpp:88
 msgid "Wind particles?"
 msgstr "Näytä tuuli"
 
@@ -2423,11 +2421,11 @@ msgstr "Väärä joukkue!"
 msgid "Wrote %i/%i bytes"
 msgstr "Kirjoitettiin %i/%i tavua"
 
-#: src/menu/network_menu.cpp:304 src/menu/network_menu.cpp:396
+#: src/menu/network_menu.cpp:300 src/menu/network_menu.cpp:392
 msgid "You are alone. :-/"
 msgstr "Olet yksin :-/"
 
-#: src/menu/network_menu.cpp:459
+#: src/menu/network_menu.cpp:455
 msgid ""
 "You are the new turn master! Learn about your new powers by typing /help"
 msgstr "Olet uusi vuoromestari! Opi uusista kyvyistä kirjoittamalla /help"
@@ -2444,7 +2442,7 @@ msgstr "Tarvitset ainakin yhden kunnollisen kartan !"
 msgid "You need at least two valid teams!"
 msgstr "Tarvitset ainakin kaksi kelvollista joukkuetta!"
 
-#: src/menu/network_menu.cpp:291
+#: src/menu/network_menu.cpp:287
 msgid "You won't be able to play before selecting a team!"
 msgstr "Et voi aloittaa peliä ennen kuin olet olet valinnut joukkueen!"
 

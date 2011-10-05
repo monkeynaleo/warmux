@@ -27,14 +27,14 @@ msgstr "! Banen %s blev ikke fundet :-("
 msgid "%.1f fps"
 msgstr "%.1f FPS"
 
-#: src/menu/network_menu.cpp:131 src/menu/network_menu.cpp:376
+#: src/menu/network_menu.cpp:137 src/menu/network_menu.cpp:372
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "Spiller %i er forbundet"
 msgstr[1] "Spillere %i er forbundet"
 
-#: src/menu/network_menu.cpp:135 src/menu/network_menu.cpp:386
+#: src/menu/network_menu.cpp:141 src/menu/network_menu.cpp:382
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -511,7 +511,7 @@ msgstr "Alle hold"
 msgid "Always"
 msgstr "Altid"
 
-#: src/menu/game_mode_editor.cpp:214
+#: src/menu/game_mode_editor.cpp:218
 msgid "Ammos"
 msgstr ""
 
@@ -573,7 +573,7 @@ msgstr "Før action"
 msgid "Benchmark"
 msgstr "Benchmark"
 
-#: src/game/game_mode.cpp:321 src/menu/game_mode_editor.cpp:102
+#: src/game/game_mode.cpp:317 src/menu/game_mode_editor.cpp:102
 msgid "Blitz"
 msgstr "Blitz"
 
@@ -689,7 +689,7 @@ msgstr "Check for opdateringer på nettet?"
 msgid "Choose randomly between the different maps"
 msgstr "Skift tilfældigt rundt mellem de forskellige baner"
 
-#: src/game/game_mode.cpp:319 src/menu/game_mode_editor.cpp:101
+#: src/game/game_mode.cpp:315 src/menu/game_mode_editor.cpp:101
 msgid "Classic"
 msgstr "Klassisk"
 
@@ -734,7 +734,7 @@ msgstr ""
 "Du kan ikke vælge samme hold flere gange."
 
 #. Client Mode
-#: src/menu/network_menu.cpp:168 src/network/network.cpp:489
+#: src/menu/network_menu.cpp:174 src/network/network.cpp:489
 msgid "Client mode"
 msgstr "Klientmodus"
 
@@ -769,7 +769,7 @@ msgstr "Begå selvmord"
 msgid "Configuration menu"
 msgstr "Konfigurationsmenu"
 
-#: src/menu/network_connection_menu.cpp:282
+#: src/menu/network_connection_menu.cpp:281
 msgid "Connect to game"
 msgstr "Forbind til spil"
 
@@ -855,7 +855,7 @@ msgstr "Diskogranat"
 msgid "Displays this message"
 msgstr "Vis denne meddelelse"
 
-#: src/menu/network_menu.cpp:170
+#: src/menu/network_menu.cpp:176
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr "Glem ikke at verificere når du har valgt dit/dine hold!"
 
@@ -1025,11 +1025,11 @@ msgstr "Flammekaster"
 msgid "Football Bomb"
 msgstr "Fodboldbombe"
 
-#: src/menu/options_menu.cpp:109
+#: src/menu/options_menu.cpp:108
 msgid "Fullscreen?"
 msgstr "Fuld skærm?"
 
-#: src/menu/game_menu.cpp:96 src/menu/network_menu.cpp:198
+#: src/menu/game_menu.cpp:96 src/menu/network_menu.cpp:194
 msgid "Game"
 msgstr "Spil"
 
@@ -1051,10 +1051,7 @@ msgid "Game menu"
 msgstr "Spillets menu"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#. Using the game mode editor but currently we are not able to send
-#. custom parameters to client
 #: src/menu/game_mode_editor.cpp:70 src/menu/help_menu.cpp:73
-#: src/menu/network_menu.cpp:194
 msgid "Game mode"
 msgstr "Spilmodus"
 
@@ -1080,7 +1077,7 @@ msgstr ""
 "Tryk mellemrum for at indsprøjte\n"
 "Vil henholdsvis kurere/dræbe (langsomt) din holdkammerat eller fjende."
 
-#: src/menu/benchmark_menu.cpp:112 src/menu/options_menu.cpp:151
+#: src/menu/benchmark_menu.cpp:112 src/menu/options_menu.cpp:150
 msgid "Graphics"
 msgstr "Grafik"
 
@@ -1125,7 +1122,7 @@ msgstr "Hovedkommandør"
 msgid "Help"
 msgstr "Hjælp"
 
-#: src/menu/options_menu.cpp:121
+#: src/menu/options_menu.cpp:120
 msgid "High"
 msgstr "Høj"
 
@@ -1276,7 +1273,7 @@ msgstr ""
 msgid "Key"
 msgstr "Nøgle"
 
-#: src/menu/options_menu.cpp:161
+#: src/menu/options_menu.cpp:160
 msgid "Key bindings"
 msgstr "Tastebindinger"
 
@@ -1289,7 +1286,7 @@ msgstr "Tastatur"
 msgid "Kicks the player designated by <nickname> out of the game"
 msgstr "Fjerner spilleren under navnet <nickname> fra spillet"
 
-#: src/menu/options_menu.cpp:156
+#: src/menu/options_menu.cpp:155
 msgid "Language"
 msgstr "Sprog"
 
@@ -1313,7 +1310,7 @@ msgstr "Indlæser hold:"
 msgid "Local teams:"
 msgstr "Lokale hold:"
 
-#: src/menu/options_menu.cpp:118
+#: src/menu/options_menu.cpp:117
 msgid "Low memory"
 msgstr "Lidt hukommelse"
 
@@ -1321,12 +1318,12 @@ msgstr "Lidt hukommelse"
 msgid "LowGrav"
 msgstr "Svag tyngdekraft"
 
-#: src/menu/network_connection_menu.cpp:281
+#: src/menu/network_connection_menu.cpp:282
 msgid "Manual connection"
 msgstr "Manuel forbindelse"
 
 #: src/menu/game_menu.cpp:80 src/menu/game_menu.cpp:84
-#: src/menu/network_menu.cpp:100 src/menu/network_menu.cpp:104
+#: src/menu/network_menu.cpp:106 src/menu/network_menu.cpp:110
 msgid "Map"
 msgstr "Bane"
 
@@ -1349,7 +1346,7 @@ msgstr "Banens skaber: navn, e-mail, øgenavn, land"
 msgid "Maps"
 msgstr "Baner"
 
-#: src/menu/network_menu.cpp:446 src/menu/network_menu.cpp:448
+#: src/menu/network_menu.cpp:442 src/menu/network_menu.cpp:444
 msgid "Master mode"
 msgstr "Administratormodus"
 
@@ -1357,11 +1354,11 @@ msgstr "Administratormodus"
 msgid "Max energy"
 msgstr "Maksimum energi"
 
-#: src/menu/options_menu.cpp:114
+#: src/menu/options_menu.cpp:113
 msgid "Maximum FPS"
 msgstr "Maksimum FPS"
 
-#: src/menu/options_menu.cpp:119
+#: src/menu/options_menu.cpp:118
 msgid "Medium"
 msgstr "Mellem"
 
@@ -1458,7 +1455,7 @@ msgstr "Flyt til højre"
 msgid "Move right slowly"
 msgstr "Flyt langsomt til højre"
 
-#: src/menu/options_menu.cpp:95
+#: src/menu/options_menu.cpp:94
 msgid "Multi-layer sky?"
 msgstr "Fler-lags himmel?"
 
@@ -1585,7 +1582,7 @@ msgstr ""
 msgid "Play"
 msgstr "Spil"
 
-#: src/menu/network_menu.cpp:128
+#: src/menu/network_menu.cpp:134
 msgid "Play several times"
 msgstr "Spil flere gange"
 
@@ -1593,15 +1590,15 @@ msgstr "Spil flere gange"
 msgid "Player"
 msgstr "Spiller"
 
-#: src/menu/options_menu.cpp:100
+#: src/menu/options_menu.cpp:99
 msgid "Player energy?"
 msgstr "Vis krigernes energi?"
 
-#: src/menu/options_menu.cpp:104
+#: src/menu/options_menu.cpp:103
 msgid "Player's name?"
 msgstr "Vis krigernes navne?"
 
-#: src/menu/game_menu.cpp:145 src/menu/network_menu.cpp:274
+#: src/menu/game_menu.cpp:145 src/menu/network_menu.cpp:270
 msgid "Please select a group different from your opponent!"
 msgstr ""
 
@@ -1704,7 +1701,7 @@ msgstr ""
 msgid "Public battles"
 msgstr "Offentlige kampe"
 
-#: src/menu/options_menu.cpp:123
+#: src/menu/options_menu.cpp:122
 msgid "Quality"
 msgstr "Kvalitet"
 
@@ -1778,7 +1775,7 @@ msgstr ""
 msgid "Replay saved"
 msgstr "Gengivelse gemt"
 
-#: src/menu/options_menu.cpp:146
+#: src/menu/options_menu.cpp:145
 msgid "Resolution"
 msgstr "Opløsning"
 
@@ -1837,7 +1834,8 @@ msgstr "Serveradresse:"
 msgid "Server available on Internet"
 msgstr "Server tilgængelig på internettet"
 
-#: src/menu/network_menu.cpp:175 src/network/network.cpp:519
+#. Server Mode
+#: src/menu/network_menu.cpp:180 src/network/network.cpp:519
 msgid "Server mode"
 msgstr "Servermodus"
 
@@ -2007,7 +2005,7 @@ msgstr "Hold-statistik"
 
 #. Teams
 #: src/game/game.cpp:169 src/menu/game_menu.cpp:79 src/menu/game_menu.cpp:83
-#: src/menu/network_menu.cpp:99 src/menu/network_menu.cpp:103
+#: src/menu/network_menu.cpp:105 src/menu/network_menu.cpp:109
 #: src/menu/replay_menu.cpp:117
 msgid "Teams"
 msgstr "Hold"
@@ -2054,7 +2052,7 @@ msgstr "Bolden forlod slagmarken før den eksploderede"
 msgid "The bigger the faster you'll fall!"
 msgstr "Kraftig tyndgekraft får dig til at falde hurtigere."
 
-#: src/menu/game_mode_editor.cpp:315
+#: src/menu/game_mode_editor.cpp:319
 msgid ""
 "The blitz mode does not reset the time between each team turn. A team looses "
 "when it has no players left or its time has ran out."
@@ -2087,7 +2085,7 @@ msgstr "Spillet blev afbrudt fordi din forbindelse blev brudt."
 msgid "The grenade left the battlefield before exploding!"
 msgstr "Granaten forlod slagmarken før den eksploderede"
 
-#: src/menu/network_menu.cpp:392
+#: src/menu/network_menu.cpp:388
 msgid "The others are waiting for you! Wake up! :-)"
 msgstr "De andre venter på dig! Vågn op :-)"
 
@@ -2116,7 +2114,7 @@ msgstr ""
 "Våbenet %s har ubegrænset ammunition, men bonuskasser kan indeholde "
 "ammunition til det alligevel."
 
-#: src/menu/game_menu.cpp:128 src/menu/network_menu.cpp:258
+#: src/menu/game_menu.cpp:128 src/menu/network_menu.cpp:254
 #, fuzzy, c-format
 #| msgid "There is only %i team."
 #| msgid_plural "There are only %i teams."
@@ -2250,7 +2248,7 @@ msgstr "Ukendt kommando"
 msgid "Unknown command of type %i"
 msgstr "Ukendt kommando af typen %i"
 
-#: src/game/game_mode.cpp:320
+#: src/game/game_mode.cpp:316
 msgid "Unlimited"
 msgstr "Ubegrænset"
 
@@ -2304,11 +2302,11 @@ msgstr "Version"
 msgid "Version verification failed because: %s"
 msgstr "Version-verifikation fejlede fordi: %s"
 
-#: src/menu/network_menu.cpp:460
+#: src/menu/network_menu.cpp:456
 msgid "Wait until some opponent(s) connect!"
 msgstr "Vent på at modstandere forbinder..."
 
-#: src/menu/network_menu.cpp:309
+#: src/menu/network_menu.cpp:305
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -2324,7 +2322,7 @@ msgstr "Venter på %s"
 msgid "Waiting for remote players"
 msgstr "Venter på forbundne spillere"
 
-#: src/menu/network_menu.cpp:536
+#: src/menu/network_menu.cpp:532
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Venter på serveren; det eneste du kan gøre er at afbryde eller chatte!"
 
@@ -2355,7 +2353,7 @@ msgstr "Hjemmeside: "
 
 #. First %s will be replaced with the name of the network game,
 #. second %s by the server hostname
-#: src/menu/network_menu.cpp:160
+#: src/menu/network_menu.cpp:166
 #, c-format
 msgid "Welcome to %s on %s!"
 msgstr "Velkommen til %s på %s!"
@@ -2375,7 +2373,7 @@ msgstr "Hvilken skam for %s – han blev dræbt af en simpel pistol!"
 msgid "When a character can be switched"
 msgstr "Når en spiller kan skiftes"
 
-#: src/menu/options_menu.cpp:89
+#: src/menu/options_menu.cpp:88
 msgid "Wind particles?"
 msgstr "Vindpartikler?"
 
@@ -2420,11 +2418,11 @@ msgstr "Ugyldigt hold!"
 msgid "Wrote %i/%i bytes"
 msgstr "Skrev %i/%i bytes"
 
-#: src/menu/network_menu.cpp:304 src/menu/network_menu.cpp:396
+#: src/menu/network_menu.cpp:300 src/menu/network_menu.cpp:392
 msgid "You are alone. :-/"
 msgstr "Du er alene :-/"
 
-#: src/menu/network_menu.cpp:459
+#: src/menu/network_menu.cpp:455
 msgid ""
 "You are the new turn master! Learn about your new powers by typing /help"
 msgstr "Du er den nye tur-fører! Lær om dine nye kræfter ved at skrive /help"
@@ -2441,7 +2439,7 @@ msgstr "Du skal vælge mindst én gyldig bane!"
 msgid "You need at least two valid teams!"
 msgstr "Du skal vælge mindst to gyldige hold!"
 
-#: src/menu/network_menu.cpp:291
+#: src/menu/network_menu.cpp:287
 msgid "You won't be able to play before selecting a team!"
 msgstr "Du kan ikke spille før du har valgt et hold!"
 
