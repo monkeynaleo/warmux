@@ -27,14 +27,14 @@ msgstr "! Mapo %s ne troveblas:-("
 msgid "%.1f fps"
 msgstr "%.1f bildoj po sekundo (fps)"
 
-#: src/menu/network_menu.cpp:131 src/menu/network_menu.cpp:376
+#: src/menu/network_menu.cpp:137 src/menu/network_menu.cpp:372
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i ludanto konektiĝis"
 msgstr[1] "%i ludantoj konektiĝis"
 
-#: src/menu/network_menu.cpp:135 src/menu/network_menu.cpp:386
+#: src/menu/network_menu.cpp:141 src/menu/network_menu.cpp:382
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -517,7 +517,7 @@ msgstr "Ĉiuj teamoj"
 msgid "Always"
 msgstr "Ĉiam"
 
-#: src/menu/game_mode_editor.cpp:214
+#: src/menu/game_mode_editor.cpp:218
 msgid "Ammos"
 msgstr ""
 
@@ -580,7 +580,7 @@ msgstr "Antaŭ ago"
 msgid "Benchmark"
 msgstr ""
 
-#: src/game/game_mode.cpp:321 src/menu/game_mode_editor.cpp:102
+#: src/game/game_mode.cpp:317 src/menu/game_mode_editor.cpp:102
 msgid "Blitz"
 msgstr ""
 
@@ -701,7 +701,7 @@ msgstr "Ĉu kontroli la ĝisdatigaĵoj enrete?"
 msgid "Choose randomly between the different maps"
 msgstr "Elekti hazarde el la malsamaj mapoj"
 
-#: src/game/game_mode.cpp:319 src/menu/game_mode_editor.cpp:101
+#: src/game/game_mode.cpp:315 src/menu/game_mode_editor.cpp:101
 msgid "Classic"
 msgstr ""
 
@@ -737,7 +737,7 @@ msgid ""
 msgstr ""
 
 #. Client Mode
-#: src/menu/network_menu.cpp:168 src/network/network.cpp:489
+#: src/menu/network_menu.cpp:174 src/network/network.cpp:489
 msgid "Client mode"
 msgstr "Klientmodo"
 
@@ -771,7 +771,7 @@ msgstr "Sinmortigi"
 msgid "Configuration menu"
 msgstr "Agordmenuo"
 
-#: src/menu/network_connection_menu.cpp:282
+#: src/menu/network_connection_menu.cpp:281
 msgid "Connect to game"
 msgstr "Konekti al ludo"
 
@@ -854,7 +854,7 @@ msgstr "Diskogrenado"
 msgid "Displays this message"
 msgstr "Montri tiun mesaĝon"
 
-#: src/menu/network_menu.cpp:170
+#: src/menu/network_menu.cpp:176
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr ""
 
@@ -1024,11 +1024,11 @@ msgstr "Flamĵetilo"
 msgid "Football Bomb"
 msgstr "Futbalbombo"
 
-#: src/menu/options_menu.cpp:109
+#: src/menu/options_menu.cpp:108
 msgid "Fullscreen?"
 msgstr "Plenekrane?"
 
-#: src/menu/game_menu.cpp:96 src/menu/network_menu.cpp:198
+#: src/menu/game_menu.cpp:96 src/menu/network_menu.cpp:194
 msgid "Game"
 msgstr "Ludo"
 
@@ -1046,10 +1046,7 @@ msgid "Game menu"
 msgstr "Ludmodo"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#. Using the game mode editor but currently we are not able to send
-#. custom parameters to client
 #: src/menu/game_mode_editor.cpp:70 src/menu/help_menu.cpp:73
-#: src/menu/network_menu.cpp:194
 msgid "Game mode"
 msgstr "Ludmodo"
 
@@ -1072,7 +1069,7 @@ msgid ""
 "Will cure your teammate or slowly kill your opponent"
 msgstr ""
 
-#: src/menu/benchmark_menu.cpp:112 src/menu/options_menu.cpp:151
+#: src/menu/benchmark_menu.cpp:112 src/menu/options_menu.cpp:150
 #, fuzzy
 msgid "Graphics"
 msgstr "Grafikoj"
@@ -1118,7 +1115,7 @@ msgstr "Ĉefkomandoro"
 msgid "Help"
 msgstr "Helpo"
 
-#: src/menu/options_menu.cpp:121
+#: src/menu/options_menu.cpp:120
 #, fuzzy
 msgid "High"
 msgstr "Supersalti"
@@ -1270,7 +1267,7 @@ msgstr ""
 msgid "Key"
 msgstr ""
 
-#: src/menu/options_menu.cpp:161
+#: src/menu/options_menu.cpp:160
 msgid "Key bindings"
 msgstr ""
 
@@ -1284,7 +1281,7 @@ msgstr ""
 msgid "Kicks the player designated by <nickname> out of the game"
 msgstr "Forĵetas la ludantojn nomitajn kiel <nickname> el la ludo"
 
-#: src/menu/options_menu.cpp:156
+#: src/menu/options_menu.cpp:155
 msgid "Language"
 msgstr "Lingvo"
 
@@ -1309,7 +1306,7 @@ msgstr "Muntas la teamojn:"
 msgid "Local teams:"
 msgstr "Lokaj teamoj:"
 
-#: src/menu/options_menu.cpp:118
+#: src/menu/options_menu.cpp:117
 msgid "Low memory"
 msgstr ""
 
@@ -1317,12 +1314,12 @@ msgstr ""
 msgid "LowGrav"
 msgstr "Malpezigilo"
 
-#: src/menu/network_connection_menu.cpp:281
+#: src/menu/network_connection_menu.cpp:282
 msgid "Manual connection"
 msgstr "Manuma konekto"
 
 #: src/menu/game_menu.cpp:80 src/menu/game_menu.cpp:84
-#: src/menu/network_menu.cpp:100 src/menu/network_menu.cpp:104
+#: src/menu/network_menu.cpp:106 src/menu/network_menu.cpp:110
 msgid "Map"
 msgstr "Mapo"
 
@@ -1345,7 +1342,7 @@ msgstr ""
 msgid "Maps"
 msgstr "Mapoj"
 
-#: src/menu/network_menu.cpp:446 src/menu/network_menu.cpp:448
+#: src/menu/network_menu.cpp:442 src/menu/network_menu.cpp:444
 #, fuzzy
 msgid "Master mode"
 msgstr "Ludmodo"
@@ -1354,11 +1351,11 @@ msgstr "Ludmodo"
 msgid "Max energy"
 msgstr "Maks energio"
 
-#: src/menu/options_menu.cpp:114
+#: src/menu/options_menu.cpp:113
 msgid "Maximum FPS"
 msgstr "Maksimumaj bildoj po sekundo (fps)"
 
-#: src/menu/options_menu.cpp:119
+#: src/menu/options_menu.cpp:118
 msgid "Medium"
 msgstr ""
 
@@ -1462,7 +1459,7 @@ msgstr ""
 msgid "Move right slowly"
 msgstr ""
 
-#: src/menu/options_menu.cpp:95
+#: src/menu/options_menu.cpp:94
 msgid "Multi-layer sky?"
 msgstr ""
 
@@ -1591,7 +1588,7 @@ msgstr ""
 msgid "Play"
 msgstr "Ludi"
 
-#: src/menu/network_menu.cpp:128
+#: src/menu/network_menu.cpp:134
 msgid "Play several times"
 msgstr "Ludi plurfoje"
 
@@ -1599,15 +1596,15 @@ msgstr "Ludi plurfoje"
 msgid "Player"
 msgstr "Ludanto"
 
-#: src/menu/options_menu.cpp:100
+#: src/menu/options_menu.cpp:99
 msgid "Player energy?"
 msgstr "Energio de ludanto?"
 
-#: src/menu/options_menu.cpp:104
+#: src/menu/options_menu.cpp:103
 msgid "Player's name?"
 msgstr "Nomo de ludanto?"
 
-#: src/menu/game_menu.cpp:145 src/menu/network_menu.cpp:274
+#: src/menu/game_menu.cpp:145 src/menu/network_menu.cpp:270
 msgid "Please select a group different from your opponent!"
 msgstr ""
 
@@ -1693,7 +1690,7 @@ msgstr ""
 msgid "Public battles"
 msgstr "Publikaj bataloj"
 
-#: src/menu/options_menu.cpp:123
+#: src/menu/options_menu.cpp:122
 msgid "Quality"
 msgstr ""
 
@@ -1769,7 +1766,7 @@ msgstr ""
 msgid "Replay saved"
 msgstr ""
 
-#: src/menu/options_menu.cpp:146
+#: src/menu/options_menu.cpp:145
 msgid "Resolution"
 msgstr "Difino"
 
@@ -1826,7 +1823,8 @@ msgstr "Servila adreso:"
 msgid "Server available on Internet"
 msgstr "Interretebla servilo"
 
-#: src/menu/network_menu.cpp:175 src/network/network.cpp:519
+#. Server Mode
+#: src/menu/network_menu.cpp:180 src/network/network.cpp:519
 msgid "Server mode"
 msgstr "Servila modo"
 
@@ -1992,7 +1990,7 @@ msgstr "Teamaj statistikoj"
 
 #. Teams
 #: src/game/game.cpp:169 src/menu/game_menu.cpp:79 src/menu/game_menu.cpp:83
-#: src/menu/network_menu.cpp:99 src/menu/network_menu.cpp:103
+#: src/menu/network_menu.cpp:105 src/menu/network_menu.cpp:109
 #: src/menu/replay_menu.cpp:117
 msgid "Teams"
 msgstr "Teamoj"
@@ -2042,7 +2040,7 @@ msgstr "La pilko foriris de la batalejo antaŭ ol explodi."
 msgid "The bigger the faster you'll fall!"
 msgstr ""
 
-#: src/menu/game_mode_editor.cpp:315
+#: src/menu/game_mode_editor.cpp:319
 msgid ""
 "The blitz mode does not reset the time between each team turn. A team looses "
 "when it has no players left or its time has ran out."
@@ -2075,7 +2073,7 @@ msgstr "La ludo ĉesis pro ke, vi estis malkonektita."
 msgid "The grenade left the battlefield before exploding!"
 msgstr "La grenado foriris de la batalejo antaŭ ol explodi"
 
-#: src/menu/network_menu.cpp:392
+#: src/menu/network_menu.cpp:388
 #, fuzzy
 msgid "The others are waiting for you! Wake up! :-)"
 msgstr "La alioj estas atendando vin! Vekiĝu:-)"
@@ -2104,7 +2102,7 @@ msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
 msgstr ""
 
-#: src/menu/game_menu.cpp:128 src/menu/network_menu.cpp:258
+#: src/menu/game_menu.cpp:128 src/menu/network_menu.cpp:254
 #, fuzzy, c-format
 #| msgid "There is only %i team."
 #| msgid_plural "There are only %i teams."
@@ -2237,7 +2235,7 @@ msgstr "Nekonata komando"
 msgid "Unknown command of type %i"
 msgstr "Nekonata komando"
 
-#: src/game/game_mode.cpp:320
+#: src/game/game_mode.cpp:316
 #, fuzzy
 msgid "Unlimited"
 msgstr "(senlimaj)"
@@ -2289,11 +2287,11 @@ msgstr "Versio"
 msgid "Version verification failed because: %s"
 msgstr "Versiokontrolo fiaskis pro: %s\n"
 
-#: src/menu/network_menu.cpp:460
+#: src/menu/network_menu.cpp:456
 msgid "Wait until some opponent(s) connect!"
 msgstr ""
 
-#: src/menu/network_menu.cpp:309
+#: src/menu/network_menu.cpp:305
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -2309,7 +2307,7 @@ msgstr ""
 msgid "Waiting for remote players"
 msgstr ""
 
-#: src/menu/network_menu.cpp:536
+#: src/menu/network_menu.cpp:532
 #, fuzzy
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Atende servilon, vi povas nur rezigni aŭ babili!"
@@ -2345,7 +2343,7 @@ msgstr "TTT-ejo: "
 
 #. First %s will be replaced with the name of the network game,
 #. second %s by the server hostname
-#: src/menu/network_menu.cpp:160
+#: src/menu/network_menu.cpp:166
 #, c-format
 msgid "Welcome to %s on %s!"
 msgstr ""
@@ -2366,7 +2364,7 @@ msgstr "Kiel honto por %s: li estis mortigita per simpla pafilo!"
 msgid "When a character can be switched"
 msgstr "Sur ulo: ŝanĝi la aktiva ulon"
 
-#: src/menu/options_menu.cpp:89
+#: src/menu/options_menu.cpp:88
 msgid "Wind particles?"
 msgstr "Venterojn?"
 
@@ -2409,12 +2407,12 @@ msgstr "Malbona teamo!"
 msgid "Wrote %i/%i bytes"
 msgstr ""
 
-#: src/menu/network_menu.cpp:304 src/menu/network_menu.cpp:396
+#: src/menu/network_menu.cpp:300 src/menu/network_menu.cpp:392
 #, fuzzy
 msgid "You are alone. :-/"
 msgstr "Vi estas sola:-/"
 
-#: src/menu/network_menu.cpp:459
+#: src/menu/network_menu.cpp:455
 msgid ""
 "You are the new turn master! Learn about your new powers by typing /help"
 msgstr ""
@@ -2433,7 +2431,7 @@ msgstr "Vi bezonas almenaŭ unu taŭgan mapon!"
 msgid "You need at least two valid teams!"
 msgstr "Vi bezonas almenaŭ du teamojn!"
 
-#: src/menu/network_menu.cpp:291
+#: src/menu/network_menu.cpp:287
 #, fuzzy
 msgid "You won't be able to play before selecting a team!"
 msgstr "Vi ne ludeblos, antaŭ ol elekti teamon!"

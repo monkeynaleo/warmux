@@ -27,14 +27,14 @@ msgstr "Le terrain %s est introuvable :-("
 msgid "%.1f fps"
 msgstr "%.1f img/s"
 
-#: src/menu/network_menu.cpp:131 src/menu/network_menu.cpp:376
+#: src/menu/network_menu.cpp:137 src/menu/network_menu.cpp:372
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i joueur connecté"
 msgstr[1] "%i joueurs connectés"
 
-#: src/menu/network_menu.cpp:135 src/menu/network_menu.cpp:386
+#: src/menu/network_menu.cpp:141 src/menu/network_menu.cpp:382
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -527,7 +527,7 @@ msgstr "Toutes les équipes"
 msgid "Always"
 msgstr "Toujours"
 
-#: src/menu/game_mode_editor.cpp:214
+#: src/menu/game_mode_editor.cpp:218
 msgid "Ammos"
 msgstr ""
 
@@ -589,7 +589,7 @@ msgstr "Avant l'action"
 msgid "Benchmark"
 msgstr "Mesures de performance"
 
-#: src/game/game_mode.cpp:321 src/menu/game_mode_editor.cpp:102
+#: src/game/game_mode.cpp:317 src/menu/game_mode_editor.cpp:102
 msgid "Blitz"
 msgstr "Partie éclair"
 
@@ -705,7 +705,7 @@ msgstr "Vérifier les mises à jour ?"
 msgid "Choose randomly between the different maps"
 msgstr "Choisir aléatoirement parmi les différents terrains"
 
-#: src/game/game_mode.cpp:319 src/menu/game_mode_editor.cpp:101
+#: src/game/game_mode.cpp:315 src/menu/game_mode_editor.cpp:101
 msgid "Classic"
 msgstr "Classique"
 
@@ -750,7 +750,7 @@ msgstr ""
 "Une équipe ne peut être choisie plusieurs fois."
 
 #. Client Mode
-#: src/menu/network_menu.cpp:168 src/network/network.cpp:489
+#: src/menu/network_menu.cpp:174 src/network/network.cpp:489
 msgid "Client mode"
 msgstr "Mode client"
 
@@ -785,7 +785,7 @@ msgstr "Suicide"
 msgid "Configuration menu"
 msgstr "Menu de configuration"
 
-#: src/menu/network_connection_menu.cpp:282
+#: src/menu/network_connection_menu.cpp:281
 msgid "Connect to game"
 msgstr "Se connecter"
 
@@ -871,7 +871,7 @@ msgstr "Grenade Disco"
 msgid "Displays this message"
 msgstr "Afficher ce message"
 
-#: src/menu/network_menu.cpp:170
+#: src/menu/network_menu.cpp:176
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr ""
 "N'oubliez pas de valider, une fois que vous avez sélectionné votre/vos "
@@ -1050,11 +1050,11 @@ msgstr "Lance-Flammes"
 msgid "Football Bomb"
 msgstr "Ballon Explosif"
 
-#: src/menu/options_menu.cpp:109
+#: src/menu/options_menu.cpp:108
 msgid "Fullscreen?"
 msgstr "Plein écran ?"
 
-#: src/menu/game_menu.cpp:96 src/menu/network_menu.cpp:198
+#: src/menu/game_menu.cpp:96 src/menu/network_menu.cpp:194
 msgid "Game"
 msgstr "Partie"
 
@@ -1076,10 +1076,7 @@ msgid "Game menu"
 msgstr "Menu de jeu"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#. Using the game mode editor but currently we are not able to send
-#. custom parameters to client
 #: src/menu/game_mode_editor.cpp:70 src/menu/help_menu.cpp:73
-#: src/menu/network_menu.cpp:194
 msgid "Game mode"
 msgstr "Mode de jeu"
 
@@ -1105,7 +1102,7 @@ msgstr ""
 "Pressez espace pour injecter\n"
 "Soignera votre équipier ou tuera lentement votre adversaire"
 
-#: src/menu/benchmark_menu.cpp:112 src/menu/options_menu.cpp:151
+#: src/menu/benchmark_menu.cpp:112 src/menu/options_menu.cpp:150
 msgid "Graphics"
 msgstr "Graphismes"
 
@@ -1150,7 +1147,7 @@ msgstr "Commandant"
 msgid "Help"
 msgstr "Aide"
 
-#: src/menu/options_menu.cpp:121
+#: src/menu/options_menu.cpp:120
 msgid "High"
 msgstr "Haute"
 
@@ -1299,7 +1296,7 @@ msgstr ""
 msgid "Key"
 msgstr "Touche"
 
-#: src/menu/options_menu.cpp:161
+#: src/menu/options_menu.cpp:160
 msgid "Key bindings"
 msgstr "Touches"
 
@@ -1312,7 +1309,7 @@ msgstr "Clavier"
 msgid "Kicks the player designated by <nickname> out of the game"
 msgstr "Expulse le joueur désigné par <nickname>."
 
-#: src/menu/options_menu.cpp:156
+#: src/menu/options_menu.cpp:155
 msgid "Language"
 msgstr "Langue"
 
@@ -1336,7 +1333,7 @@ msgstr "Chargement des équipes :"
 msgid "Local teams:"
 msgstr "Équipes locales :"
 
-#: src/menu/options_menu.cpp:118
+#: src/menu/options_menu.cpp:117
 msgid "Low memory"
 msgstr "Peu de mémoire"
 
@@ -1344,12 +1341,12 @@ msgstr "Peu de mémoire"
 msgid "LowGrav"
 msgstr "Anti-Gravité"
 
-#: src/menu/network_connection_menu.cpp:281
+#: src/menu/network_connection_menu.cpp:282
 msgid "Manual connection"
 msgstr "Connexion manuelle"
 
 #: src/menu/game_menu.cpp:80 src/menu/game_menu.cpp:84
-#: src/menu/network_menu.cpp:100 src/menu/network_menu.cpp:104
+#: src/menu/network_menu.cpp:106 src/menu/network_menu.cpp:110
 msgid "Map"
 msgstr "Terrain"
 
@@ -1372,7 +1369,7 @@ msgstr "Information sur l'auteur de la carte: nom, email, surnom, pays"
 msgid "Maps"
 msgstr "Terrains"
 
-#: src/menu/network_menu.cpp:446 src/menu/network_menu.cpp:448
+#: src/menu/network_menu.cpp:442 src/menu/network_menu.cpp:444
 msgid "Master mode"
 msgstr "Mode joueur principal"
 
@@ -1380,11 +1377,11 @@ msgstr "Mode joueur principal"
 msgid "Max energy"
 msgstr "Énergie maximale"
 
-#: src/menu/options_menu.cpp:114
+#: src/menu/options_menu.cpp:113
 msgid "Maximum FPS"
 msgstr "Nbr. max. d'img/s"
 
-#: src/menu/options_menu.cpp:119
+#: src/menu/options_menu.cpp:118
 msgid "Medium"
 msgstr "Moyenne"
 
@@ -1481,7 +1478,7 @@ msgstr "Va à droite"
 msgid "Move right slowly"
 msgstr "Va lentement à droite"
 
-#: src/menu/options_menu.cpp:95
+#: src/menu/options_menu.cpp:94
 msgid "Multi-layer sky?"
 msgstr "Ciel multi-couche ?"
 
@@ -1610,7 +1607,7 @@ msgstr ""
 msgid "Play"
 msgstr "Jouer"
 
-#: src/menu/network_menu.cpp:128
+#: src/menu/network_menu.cpp:134
 msgid "Play several times"
 msgstr "Jouer plusieurs fois"
 
@@ -1618,15 +1615,15 @@ msgstr "Jouer plusieurs fois"
 msgid "Player"
 msgstr "Joueur"
 
-#: src/menu/options_menu.cpp:100
+#: src/menu/options_menu.cpp:99
 msgid "Player energy?"
 msgstr "Énergie des joueurs ?"
 
-#: src/menu/options_menu.cpp:104
+#: src/menu/options_menu.cpp:103
 msgid "Player's name?"
 msgstr "Nom des joueurs ?"
 
-#: src/menu/game_menu.cpp:145 src/menu/network_menu.cpp:274
+#: src/menu/game_menu.cpp:145 src/menu/network_menu.cpp:270
 msgid "Please select a group different from your opponent!"
 msgstr ""
 
@@ -1728,7 +1725,7 @@ msgstr ""
 msgid "Public battles"
 msgstr "Batailles Publiques"
 
-#: src/menu/options_menu.cpp:123
+#: src/menu/options_menu.cpp:122
 msgid "Quality"
 msgstr "Qualité"
 
@@ -1802,7 +1799,7 @@ msgstr ""
 msgid "Replay saved"
 msgstr "Replay enregistré"
 
-#: src/menu/options_menu.cpp:146
+#: src/menu/options_menu.cpp:145
 msgid "Resolution"
 msgstr "Résolution"
 
@@ -1863,7 +1860,8 @@ msgstr "Adresse du serveur :"
 msgid "Server available on Internet"
 msgstr "Serveur disponible sur Internet"
 
-#: src/menu/network_menu.cpp:175 src/network/network.cpp:519
+#. Server Mode
+#: src/menu/network_menu.cpp:180 src/network/network.cpp:519
 msgid "Server mode"
 msgstr "Mode serveur"
 
@@ -2033,7 +2031,7 @@ msgstr "Statistiques"
 
 #. Teams
 #: src/game/game.cpp:169 src/menu/game_menu.cpp:79 src/menu/game_menu.cpp:83
-#: src/menu/network_menu.cpp:99 src/menu/network_menu.cpp:103
+#: src/menu/network_menu.cpp:105 src/menu/network_menu.cpp:109
 #: src/menu/replay_menu.cpp:117
 msgid "Teams"
 msgstr "Équipes"
@@ -2081,7 +2079,7 @@ msgstr "La Balle a quitté le champ de bataille avant d'exploser."
 msgid "The bigger the faster you'll fall!"
 msgstr "Plus c'est grand, plus dure sera la chute!"
 
-#: src/menu/game_mode_editor.cpp:315
+#: src/menu/game_mode_editor.cpp:319
 msgid ""
 "The blitz mode does not reset the time between each team turn. A team looses "
 "when it has no players left or its time has ran out."
@@ -2115,7 +2113,7 @@ msgstr "La partie s'est terminée en raison d'une déconnexion."
 msgid "The grenade left the battlefield before exploding!"
 msgstr "La Grenade a quitté le champ de bataille avant d'exploser."
 
-#: src/menu/network_menu.cpp:392
+#: src/menu/network_menu.cpp:388
 msgid "The others are waiting for you! Wake up! :-)"
 msgstr "Les autres t'attendent! Réveille-toi :-)"
 
@@ -2144,7 +2142,7 @@ msgstr ""
 "L'arme %s a les munitions infinies, mais les boîtes de bonus pourraient "
 "contenir des munitions pour elle!"
 
-#: src/menu/game_menu.cpp:128 src/menu/network_menu.cpp:258
+#: src/menu/game_menu.cpp:128 src/menu/network_menu.cpp:254
 #, fuzzy, c-format
 #| msgid "There is only %i team."
 #| msgid_plural "There are only %i teams."
@@ -2274,7 +2272,7 @@ msgstr "Commande inconnue"
 msgid "Unknown command of type %i"
 msgstr "Commande inconnue de type %i"
 
-#: src/game/game_mode.cpp:320
+#: src/game/game_mode.cpp:316
 msgid "Unlimited"
 msgstr "Illimité"
 
@@ -2328,11 +2326,11 @@ msgstr "Version"
 msgid "Version verification failed because: %s"
 msgstr "La vérification de la version a échoué : %s"
 
-#: src/menu/network_menu.cpp:460
+#: src/menu/network_menu.cpp:456
 msgid "Wait until some opponent(s) connect!"
 msgstr "Attendez que d'autres adversaire(s) se connecte(nt)!"
 
-#: src/menu/network_menu.cpp:309
+#: src/menu/network_menu.cpp:305
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -2348,7 +2346,7 @@ msgstr "En attente de %s"
 msgid "Waiting for remote players"
 msgstr "En attente de joueurs distants"
 
-#: src/menu/network_menu.cpp:536
+#: src/menu/network_menu.cpp:532
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "Attente du serveur, vous pouvez seulement annuler ou discuter !"
 
@@ -2379,7 +2377,7 @@ msgstr "Site web : "
 
 #. First %s will be replaced with the name of the network game,
 #. second %s by the server hostname
-#: src/menu/network_menu.cpp:160
+#: src/menu/network_menu.cpp:166
 #, c-format
 msgid "Welcome to %s on %s!"
 msgstr "Bienvenue dans la partie %s du serveur %s!"
@@ -2399,7 +2397,7 @@ msgstr "Trop la honte pour %s : il a été tué par un simple pistolet !"
 msgid "When a character can be switched"
 msgstr "Quand un personnage peut être sélectionné"
 
-#: src/menu/options_menu.cpp:89
+#: src/menu/options_menu.cpp:88
 msgid "Wind particles?"
 msgstr "Particules du vent ?"
 
@@ -2444,11 +2442,11 @@ msgstr "Equipe erronée !"
 msgid "Wrote %i/%i bytes"
 msgstr "Seulement %i/%i octets écrits"
 
-#: src/menu/network_menu.cpp:304 src/menu/network_menu.cpp:396
+#: src/menu/network_menu.cpp:300 src/menu/network_menu.cpp:392
 msgid "You are alone. :-/"
 msgstr "T'es tout seul :-/"
 
-#: src/menu/network_menu.cpp:459
+#: src/menu/network_menu.cpp:455
 msgid ""
 "You are the new turn master! Learn about your new powers by typing /help"
 msgstr ""
@@ -2467,7 +2465,7 @@ msgstr "Il faut au minimum un terrain valide !"
 msgid "You need at least two valid teams!"
 msgstr "Il faut au minimum deux équipes valides !"
 
-#: src/menu/network_menu.cpp:291
+#: src/menu/network_menu.cpp:287
 msgid "You won't be able to play before selecting a team!"
 msgstr "Vous ne pourrez jouer sans sélectionner d'équipe !"
 

@@ -29,13 +29,13 @@ msgstr "！地图 %s未找到 :-("
 msgid "%.1f fps"
 msgstr "%.1f 帧fps"
 
-#: src/menu/network_menu.cpp:131 src/menu/network_menu.cpp:376
+#: src/menu/network_menu.cpp:137 src/menu/network_menu.cpp:372
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i 玩家已连接"
 
-#: src/menu/network_menu.cpp:135 src/menu/network_menu.cpp:386
+#: src/menu/network_menu.cpp:141 src/menu/network_menu.cpp:382
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -463,7 +463,7 @@ msgstr "全部的队伍"
 msgid "Always"
 msgstr "总是"
 
-#: src/menu/game_mode_editor.cpp:214
+#: src/menu/game_mode_editor.cpp:218
 msgid "Ammos"
 msgstr ""
 
@@ -525,7 +525,7 @@ msgstr "行动之前"
 msgid "Benchmark"
 msgstr "评测"
 
-#: src/game/game_mode.cpp:321 src/menu/game_mode_editor.cpp:102
+#: src/game/game_mode.cpp:317 src/menu/game_mode_editor.cpp:102
 msgid "Blitz"
 msgstr "闪电"
 
@@ -641,7 +641,7 @@ msgstr "网上检查升级？"
 msgid "Choose randomly between the different maps"
 msgstr "在地图中随机选择"
 
-#: src/game/game_mode.cpp:319 src/menu/game_mode_editor.cpp:101
+#: src/game/game_mode.cpp:315 src/menu/game_mode_editor.cpp:101
 msgid "Classic"
 msgstr "经典"
 
@@ -684,7 +684,7 @@ msgstr ""
 "无法重复选择同一队伍。"
 
 #. Client Mode
-#: src/menu/network_menu.cpp:168 src/network/network.cpp:489
+#: src/menu/network_menu.cpp:174 src/network/network.cpp:489
 msgid "Client mode"
 msgstr "客户端模式 "
 
@@ -719,7 +719,7 @@ msgstr "自杀"
 msgid "Configuration menu"
 msgstr "配置菜单"
 
-#: src/menu/network_connection_menu.cpp:282
+#: src/menu/network_connection_menu.cpp:281
 msgid "Connect to game"
 msgstr "连上游戏"
 
@@ -803,7 +803,7 @@ msgstr "跃动手雷"
 msgid "Displays this message"
 msgstr "显示这条信息"
 
-#: src/menu/network_menu.cpp:170
+#: src/menu/network_menu.cpp:176
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr "别忘了选择队伍之后要确认！"
 
@@ -966,11 +966,11 @@ msgstr "喷火器"
 msgid "Football Bomb"
 msgstr "足球炸弹"
 
-#: src/menu/options_menu.cpp:109
+#: src/menu/options_menu.cpp:108
 msgid "Fullscreen?"
 msgstr "全屏?"
 
-#: src/menu/game_menu.cpp:96 src/menu/network_menu.cpp:198
+#: src/menu/game_menu.cpp:96 src/menu/network_menu.cpp:194
 msgid "Game"
 msgstr "游戏"
 
@@ -989,10 +989,7 @@ msgid "Game menu"
 msgstr "游戏菜单"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#. Using the game mode editor but currently we are not able to send
-#. custom parameters to client
 #: src/menu/game_mode_editor.cpp:70 src/menu/help_menu.cpp:73
-#: src/menu/network_menu.cpp:194
 msgid "Game mode"
 msgstr "游戏模式"
 
@@ -1018,7 +1015,7 @@ msgstr ""
 "按下空格发射\n"
 "治疗你的队友或者慢性杀死敌人"
 
-#: src/menu/benchmark_menu.cpp:112 src/menu/options_menu.cpp:151
+#: src/menu/benchmark_menu.cpp:112 src/menu/options_menu.cpp:150
 msgid "Graphics"
 msgstr "图象"
 
@@ -1063,7 +1060,7 @@ msgstr "指挥官"
 msgid "Help"
 msgstr "帮助"
 
-#: src/menu/options_menu.cpp:121
+#: src/menu/options_menu.cpp:120
 msgid "High"
 msgstr "高"
 
@@ -1210,7 +1207,7 @@ msgstr ""
 msgid "Key"
 msgstr "按键"
 
-#: src/menu/options_menu.cpp:161
+#: src/menu/options_menu.cpp:160
 msgid "Key bindings"
 msgstr "键绑定"
 
@@ -1223,7 +1220,7 @@ msgstr "键盘"
 msgid "Kicks the player designated by <nickname> out of the game"
 msgstr "踢出 <nickname>  "
 
-#: src/menu/options_menu.cpp:156
+#: src/menu/options_menu.cpp:155
 msgid "Language"
 msgstr "语言"
 
@@ -1247,7 +1244,7 @@ msgstr "读取队伍:"
 msgid "Local teams:"
 msgstr "本地队伍:"
 
-#: src/menu/options_menu.cpp:118
+#: src/menu/options_menu.cpp:117
 msgid "Low memory"
 msgstr "低内存"
 
@@ -1255,12 +1252,12 @@ msgstr "低内存"
 msgid "LowGrav"
 msgstr "漫步-低重力"
 
-#: src/menu/network_connection_menu.cpp:281
+#: src/menu/network_connection_menu.cpp:282
 msgid "Manual connection"
 msgstr "手动连接"
 
 #: src/menu/game_menu.cpp:80 src/menu/game_menu.cpp:84
-#: src/menu/network_menu.cpp:100 src/menu/network_menu.cpp:104
+#: src/menu/network_menu.cpp:106 src/menu/network_menu.cpp:110
 msgid "Map"
 msgstr "地图"
 
@@ -1283,7 +1280,7 @@ msgstr "地图作者信息: 姓名，email，昵称，国家"
 msgid "Maps"
 msgstr "地图"
 
-#: src/menu/network_menu.cpp:446 src/menu/network_menu.cpp:448
+#: src/menu/network_menu.cpp:442 src/menu/network_menu.cpp:444
 msgid "Master mode"
 msgstr "控制者模式"
 
@@ -1291,11 +1288,11 @@ msgstr "控制者模式"
 msgid "Max energy"
 msgstr "最大能量"
 
-#: src/menu/options_menu.cpp:114
+#: src/menu/options_menu.cpp:113
 msgid "Maximum FPS"
 msgstr "最大 FPS"
 
-#: src/menu/options_menu.cpp:119
+#: src/menu/options_menu.cpp:118
 msgid "Medium"
 msgstr "适中"
 
@@ -1392,7 +1389,7 @@ msgstr "向右移动"
 msgid "Move right slowly"
 msgstr "向右缓慢移动"
 
-#: src/menu/options_menu.cpp:95
+#: src/menu/options_menu.cpp:94
 msgid "Multi-layer sky?"
 msgstr "多层次天空？"
 
@@ -1520,7 +1517,7 @@ msgstr ""
 msgid "Play"
 msgstr "要玩了哦"
 
-#: src/menu/network_menu.cpp:128
+#: src/menu/network_menu.cpp:134
 msgid "Play several times"
 msgstr "玩了几次了"
 
@@ -1528,15 +1525,15 @@ msgstr "玩了几次了"
 msgid "Player"
 msgstr "玩家"
 
-#: src/menu/options_menu.cpp:100
+#: src/menu/options_menu.cpp:99
 msgid "Player energy?"
 msgstr "耐久度?"
 
-#: src/menu/options_menu.cpp:104
+#: src/menu/options_menu.cpp:103
 msgid "Player's name?"
 msgstr "请问尊姓大名?"
 
-#: src/menu/game_menu.cpp:145 src/menu/network_menu.cpp:274
+#: src/menu/game_menu.cpp:145 src/menu/network_menu.cpp:270
 msgid "Please select a group different from your opponent!"
 msgstr ""
 
@@ -1640,7 +1637,7 @@ msgstr ""
 msgid "Public battles"
 msgstr "公开战斗"
 
-#: src/menu/options_menu.cpp:123
+#: src/menu/options_menu.cpp:122
 msgid "Quality"
 msgstr "质量"
 
@@ -1714,7 +1711,7 @@ msgstr ""
 msgid "Replay saved"
 msgstr "回放保存"
 
-#: src/menu/options_menu.cpp:146
+#: src/menu/options_menu.cpp:145
 msgid "Resolution"
 msgstr "分辨率"
 
@@ -1773,7 +1770,8 @@ msgstr "服务器地址"
 msgid "Server available on Internet"
 msgstr "Internet可用服务器"
 
-#: src/menu/network_menu.cpp:175 src/network/network.cpp:519
+#. Server Mode
+#: src/menu/network_menu.cpp:180 src/network/network.cpp:519
 msgid "Server mode"
 msgstr "服务器设置"
 
@@ -1942,7 +1940,7 @@ msgstr "队伍状态"
 
 #. Teams
 #: src/game/game.cpp:169 src/menu/game_menu.cpp:79 src/menu/game_menu.cpp:83
-#: src/menu/network_menu.cpp:99 src/menu/network_menu.cpp:103
+#: src/menu/network_menu.cpp:105 src/menu/network_menu.cpp:109
 #: src/menu/replay_menu.cpp:117
 msgid "Teams"
 msgstr "队伍"
@@ -1989,7 +1987,7 @@ msgstr "球膨胀前离开战场"
 msgid "The bigger the faster you'll fall!"
 msgstr "越大越快越失败!"
 
-#: src/menu/game_mode_editor.cpp:315
+#: src/menu/game_mode_editor.cpp:319
 msgid ""
 "The blitz mode does not reset the time between each team turn. A team looses "
 "when it has no players left or its time has ran out."
@@ -2018,7 +2016,7 @@ msgstr "您断线了。"
 msgid "The grenade left the battlefield before exploding!"
 msgstr "手榴弹离开战场前发生爆炸"
 
-#: src/menu/network_menu.cpp:392
+#: src/menu/network_menu.cpp:388
 msgid "The others are waiting for you! Wake up! :-)"
 msgstr "别人在等你！ 快醒吧:-)"
 
@@ -2045,7 +2043,7 @@ msgid ""
 "The weapon %s has infinite ammo, but bonus boxes might contain ammo for it!"
 msgstr "%s 有无限弹药，但是盒子里可能是它的弹药..."
 
-#: src/menu/game_menu.cpp:128 src/menu/network_menu.cpp:258
+#: src/menu/game_menu.cpp:128 src/menu/network_menu.cpp:254
 #, fuzzy, c-format
 #| msgid "There is only %i team."
 #| msgid_plural "There are only %i teams."
@@ -2174,7 +2172,7 @@ msgstr "未知命令"
 msgid "Unknown command of type %i"
 msgstr "未知命令种类 %i"
 
-#: src/game/game_mode.cpp:320
+#: src/game/game_mode.cpp:316
 msgid "Unlimited"
 msgstr "无限"
 
@@ -2228,11 +2226,11 @@ msgstr "版本"
 msgid "Version verification failed because: %s"
 msgstr "版本改变失败原因: %s"
 
-#: src/menu/network_menu.cpp:460
+#: src/menu/network_menu.cpp:456
 msgid "Wait until some opponent(s) connect!"
 msgstr "等待到对手连接！"
 
-#: src/menu/network_menu.cpp:309
+#: src/menu/network_menu.cpp:305
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -2247,7 +2245,7 @@ msgstr "等待 %s"
 msgid "Waiting for remote players"
 msgstr "等待远方的玩家"
 
-#: src/menu/network_menu.cpp:536
+#: src/menu/network_menu.cpp:532
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr "等着接受服务吧, 现在先聊天 ！"
 
@@ -2278,7 +2276,7 @@ msgstr "网站："
 
 #. First %s will be replaced with the name of the network game,
 #. second %s by the server hostname
-#: src/menu/network_menu.cpp:160
+#: src/menu/network_menu.cpp:166
 #, c-format
 msgid "Welcome to %s on %s!"
 msgstr "欢迎来到 %s %s！"
@@ -2298,7 +2296,7 @@ msgstr " %s 悲惨死去，不能瞑目！"
 msgid "When a character can be switched"
 msgstr "当一个角色可以切换时"
 
-#: src/menu/options_menu.cpp:89
+#: src/menu/options_menu.cpp:88
 msgid "Wind particles?"
 msgstr "风来了?"
 
@@ -2344,11 +2342,11 @@ msgstr "队伍错了！"
 msgid "Wrote %i/%i bytes"
 msgstr "写入 %i/%i 比特"
 
-#: src/menu/network_menu.cpp:304 src/menu/network_menu.cpp:396
+#: src/menu/network_menu.cpp:300 src/menu/network_menu.cpp:392
 msgid "You are alone. :-/"
 msgstr "你是孤单的 :-/"
 
-#: src/menu/network_menu.cpp:459
+#: src/menu/network_menu.cpp:455
 msgid ""
 "You are the new turn master! Learn about your new powers by typing /help"
 msgstr "你是新回合的控制者！键入 /help 了解你的新力量"
@@ -2365,7 +2363,7 @@ msgstr "你需要可用的地图！"
 msgid "You need at least two valid teams!"
 msgstr "至少有2组才能开始 ！"
 
-#: src/menu/network_menu.cpp:291
+#: src/menu/network_menu.cpp:287
 msgid "You won't be able to play before selecting a team!"
 msgstr "没有队伍，就不会有战斗！"
 

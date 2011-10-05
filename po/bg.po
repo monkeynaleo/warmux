@@ -30,14 +30,14 @@ msgstr "! Не мога да намеря картата %s :-("
 msgid "%.1f fps"
 msgstr "%.1f fps"
 
-#: src/menu/network_menu.cpp:131 src/menu/network_menu.cpp:376
+#: src/menu/network_menu.cpp:137 src/menu/network_menu.cpp:372
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "%i играч се свърза"
 msgstr[1] "%i играча се свързаха"
 
-#: src/menu/network_menu.cpp:135 src/menu/network_menu.cpp:386
+#: src/menu/network_menu.cpp:141 src/menu/network_menu.cpp:382
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -526,7 +526,7 @@ msgstr "Всички отбори"
 msgid "Always"
 msgstr "Винаги"
 
-#: src/menu/game_mode_editor.cpp:214
+#: src/menu/game_mode_editor.cpp:218
 msgid "Ammos"
 msgstr ""
 
@@ -589,7 +589,7 @@ msgstr "Преди действие"
 msgid "Benchmark"
 msgstr ""
 
-#: src/game/game_mode.cpp:321 src/menu/game_mode_editor.cpp:102
+#: src/game/game_mode.cpp:317 src/menu/game_mode_editor.cpp:102
 msgid "Blitz"
 msgstr "Светкавичен"
 
@@ -708,7 +708,7 @@ msgstr "Да проверявам за нови версии онлайн?"
 msgid "Choose randomly between the different maps"
 msgstr "Избери случайно измежду картите"
 
-#: src/game/game_mode.cpp:319 src/menu/game_mode_editor.cpp:101
+#: src/game/game_mode.cpp:315 src/menu/game_mode_editor.cpp:101
 msgid "Classic"
 msgstr "Класически"
 
@@ -744,7 +744,7 @@ msgid ""
 msgstr ""
 
 #. Client Mode
-#: src/menu/network_menu.cpp:168 src/network/network.cpp:489
+#: src/menu/network_menu.cpp:174 src/network/network.cpp:489
 msgid "Client mode"
 msgstr "Клиентски режим"
 
@@ -778,7 +778,7 @@ msgstr "Последен опит"
 msgid "Configuration menu"
 msgstr "Конфигурационно меню"
 
-#: src/menu/network_connection_menu.cpp:282
+#: src/menu/network_connection_menu.cpp:281
 msgid "Connect to game"
 msgstr "Свържи се към игра"
 
@@ -860,7 +860,7 @@ msgstr "Диско-граната!"
 msgid "Displays this message"
 msgstr "Покажи това съобщение"
 
-#: src/menu/network_menu.cpp:170
+#: src/menu/network_menu.cpp:176
 msgid "Don't forget to validate once you have selected your team(s)!"
 msgstr "Не забравяй да потвърдиш след като си избрал отбора(ите) си !"
 
@@ -1031,11 +1031,11 @@ msgstr "Огнехвъргачка"
 msgid "Football Bomb"
 msgstr "Футбол-бомба"
 
-#: src/menu/options_menu.cpp:109
+#: src/menu/options_menu.cpp:108
 msgid "Fullscreen?"
 msgstr "Цял екран?"
 
-#: src/menu/game_menu.cpp:96 src/menu/network_menu.cpp:198
+#: src/menu/game_menu.cpp:96 src/menu/network_menu.cpp:194
 msgid "Game"
 msgstr "Игра"
 
@@ -1053,10 +1053,7 @@ msgid "Game menu"
 msgstr "Игрови Режим"
 
 #. TRANSLATORS: please be imaginative and keep it short!
-#. Using the game mode editor but currently we are not able to send
-#. custom parameters to client
 #: src/menu/game_mode_editor.cpp:70 src/menu/help_menu.cpp:73
-#: src/menu/network_menu.cpp:194
 msgid "Game mode"
 msgstr "Игрови Режим"
 
@@ -1079,7 +1076,7 @@ msgid ""
 "Will cure your teammate or slowly kill your opponent"
 msgstr ""
 
-#: src/menu/benchmark_menu.cpp:112 src/menu/options_menu.cpp:151
+#: src/menu/benchmark_menu.cpp:112 src/menu/options_menu.cpp:150
 msgid "Graphics"
 msgstr "Графика"
 
@@ -1124,7 +1121,7 @@ msgstr "Командир"
 msgid "Help"
 msgstr "Помощ"
 
-#: src/menu/options_menu.cpp:121
+#: src/menu/options_menu.cpp:120
 #, fuzzy
 msgid "High"
 msgstr "Висок скок"
@@ -1276,7 +1273,7 @@ msgstr ""
 msgid "Key"
 msgstr ""
 
-#: src/menu/options_menu.cpp:161
+#: src/menu/options_menu.cpp:160
 msgid "Key bindings"
 msgstr ""
 
@@ -1290,7 +1287,7 @@ msgstr ""
 msgid "Kicks the player designated by <nickname> out of the game"
 msgstr "Kick-ва играчите избрани от <nickname> от играта."
 
-#: src/menu/options_menu.cpp:156
+#: src/menu/options_menu.cpp:155
 msgid "Language"
 msgstr "Език"
 
@@ -1315,7 +1312,7 @@ msgstr "Отбори които да заредя:"
 msgid "Local teams:"
 msgstr "Лични отбори:"
 
-#: src/menu/options_menu.cpp:118
+#: src/menu/options_menu.cpp:117
 msgid "Low memory"
 msgstr ""
 
@@ -1323,12 +1320,12 @@ msgstr ""
 msgid "LowGrav"
 msgstr "Ниска гравитация"
 
-#: src/menu/network_connection_menu.cpp:281
+#: src/menu/network_connection_menu.cpp:282
 msgid "Manual connection"
 msgstr "Ръчна връзка"
 
 #: src/menu/game_menu.cpp:80 src/menu/game_menu.cpp:84
-#: src/menu/network_menu.cpp:100 src/menu/network_menu.cpp:104
+#: src/menu/network_menu.cpp:106 src/menu/network_menu.cpp:110
 msgid "Map"
 msgstr "Карта"
 
@@ -1351,7 +1348,7 @@ msgstr ""
 msgid "Maps"
 msgstr "Карти"
 
-#: src/menu/network_menu.cpp:446 src/menu/network_menu.cpp:448
+#: src/menu/network_menu.cpp:442 src/menu/network_menu.cpp:444
 msgid "Master mode"
 msgstr "Господарски Режим"
 
@@ -1359,11 +1356,11 @@ msgstr "Господарски Режим"
 msgid "Max energy"
 msgstr "Максимално здраве"
 
-#: src/menu/options_menu.cpp:114
+#: src/menu/options_menu.cpp:113
 msgid "Maximum FPS"
 msgstr "Максимални FPS"
 
-#: src/menu/options_menu.cpp:119
+#: src/menu/options_menu.cpp:118
 msgid "Medium"
 msgstr ""
 
@@ -1467,7 +1464,7 @@ msgstr ""
 msgid "Move right slowly"
 msgstr ""
 
-#: src/menu/options_menu.cpp:95
+#: src/menu/options_menu.cpp:94
 msgid "Multi-layer sky?"
 msgstr "Многослойно небе ?"
 
@@ -1594,7 +1591,7 @@ msgstr ""
 msgid "Play"
 msgstr "Играй!"
 
-#: src/menu/network_menu.cpp:128
+#: src/menu/network_menu.cpp:134
 msgid "Play several times"
 msgstr "Играй няколко пъти"
 
@@ -1602,15 +1599,15 @@ msgstr "Играй няколко пъти"
 msgid "Player"
 msgstr "Играч"
 
-#: src/menu/options_menu.cpp:100
+#: src/menu/options_menu.cpp:99
 msgid "Player energy?"
 msgstr "Здраве?"
 
-#: src/menu/options_menu.cpp:104
+#: src/menu/options_menu.cpp:103
 msgid "Player's name?"
 msgstr "Името на играча?"
 
-#: src/menu/game_menu.cpp:145 src/menu/network_menu.cpp:274
+#: src/menu/game_menu.cpp:145 src/menu/network_menu.cpp:270
 msgid "Please select a group different from your opponent!"
 msgstr ""
 
@@ -1696,7 +1693,7 @@ msgstr ""
 msgid "Public battles"
 msgstr "Публични Битки"
 
-#: src/menu/options_menu.cpp:123
+#: src/menu/options_menu.cpp:122
 msgid "Quality"
 msgstr ""
 
@@ -1770,7 +1767,7 @@ msgstr ""
 msgid "Replay saved"
 msgstr ""
 
-#: src/menu/options_menu.cpp:146
+#: src/menu/options_menu.cpp:145
 msgid "Resolution"
 msgstr "Разделителна способност"
 
@@ -1828,7 +1825,8 @@ msgstr "Адрес на Сървъра:"
 msgid "Server available on Internet"
 msgstr "Достъпен сървър в интернет"
 
-#: src/menu/network_menu.cpp:175 src/network/network.cpp:519
+#. Server Mode
+#: src/menu/network_menu.cpp:180 src/network/network.cpp:519
 msgid "Server mode"
 msgstr "Сървъров Режим"
 
@@ -1992,7 +1990,7 @@ msgstr "Статистика"
 
 #. Teams
 #: src/game/game.cpp:169 src/menu/game_menu.cpp:79 src/menu/game_menu.cpp:83
-#: src/menu/network_menu.cpp:99 src/menu/network_menu.cpp:103
+#: src/menu/network_menu.cpp:105 src/menu/network_menu.cpp:109
 #: src/menu/replay_menu.cpp:117
 msgid "Teams"
 msgstr "Отбори"
@@ -2039,7 +2037,7 @@ msgstr "Топчето може да попадне в детски ръчичк
 msgid "The bigger the faster you'll fall!"
 msgstr ""
 
-#: src/menu/game_mode_editor.cpp:315
+#: src/menu/game_mode_editor.cpp:319
 msgid ""
 "The blitz mode does not reset the time between each team turn. A team looses "
 "when it has no players left or its time has ran out."
@@ -2070,7 +2068,7 @@ msgstr "Играта беше прекъсната, защото ти излез
 msgid "The grenade left the battlefield before exploding!"
 msgstr "Ходи я търси..."
 
-#: src/menu/network_menu.cpp:392
+#: src/menu/network_menu.cpp:388
 msgid "The others are waiting for you! Wake up! :-)"
 msgstr "Другите те чакат! Събуди се :-)"
 
@@ -2099,7 +2097,7 @@ msgstr ""
 "Оръжието %s има безкрайни муниции, но все пак бонус-кутиите могат да "
 "съдържат муниции за него!"
 
-#: src/menu/game_menu.cpp:128 src/menu/network_menu.cpp:258
+#: src/menu/game_menu.cpp:128 src/menu/network_menu.cpp:254
 #, fuzzy, c-format
 #| msgid "There is only %i team."
 #| msgid_plural "There are only %i teams."
@@ -2233,7 +2231,7 @@ msgstr "Непозната команда"
 msgid "Unknown command of type %i"
 msgstr "Непозната команда"
 
-#: src/game/game_mode.cpp:320
+#: src/game/game_mode.cpp:316
 msgid "Unlimited"
 msgstr "Безкраен"
 
@@ -2285,11 +2283,11 @@ msgstr "Версия"
 msgid "Version verification failed because: %s"
 msgstr "Проверка на версията се провали заради: %s"
 
-#: src/menu/network_menu.cpp:460
+#: src/menu/network_menu.cpp:456
 msgid "Wait until some opponent(s) connect!"
 msgstr "Изчакай да се свърже(ат) опонент(и)!"
 
-#: src/menu/network_menu.cpp:309
+#: src/menu/network_menu.cpp:305
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -2305,7 +2303,7 @@ msgstr "Чакам за %s"
 msgid "Waiting for remote players"
 msgstr "Чакам за отдалечени играчи"
 
-#: src/menu/network_menu.cpp:536
+#: src/menu/network_menu.cpp:532
 msgid "Waiting for the server. All you can do is cancel or chat!"
 msgstr ""
 "Изчаквам за сървър, всичко което може да правиш е да откажеш или да си чатиш!"
@@ -2341,7 +2339,7 @@ msgstr "Страница: "
 
 #. First %s will be replaced with the name of the network game,
 #. second %s by the server hostname
-#: src/menu/network_menu.cpp:160
+#: src/menu/network_menu.cpp:166
 #, c-format
 msgid "Welcome to %s on %s!"
 msgstr "Добре Дошъл %s във %s!"
@@ -2363,7 +2361,7 @@ msgstr ""
 msgid "When a character can be switched"
 msgstr "На войник: Избиране"
 
-#: src/menu/options_menu.cpp:89
+#: src/menu/options_menu.cpp:88
 msgid "Wind particles?"
 msgstr "Красотички носени от вятъра?"
 
@@ -2406,11 +2404,11 @@ msgstr "Грешен отбор !"
 msgid "Wrote %i/%i bytes"
 msgstr ""
 
-#: src/menu/network_menu.cpp:304 src/menu/network_menu.cpp:396
+#: src/menu/network_menu.cpp:300 src/menu/network_menu.cpp:392
 msgid "You are alone. :-/"
 msgstr "Ти си сам :-/"
 
-#: src/menu/network_menu.cpp:459
+#: src/menu/network_menu.cpp:455
 msgid ""
 "You are the new turn master! Learn about your new powers by typing /help"
 msgstr ""
@@ -2427,7 +2425,7 @@ msgstr "Трябва ми поне една валидна карта!"
 msgid "You need at least two valid teams!"
 msgstr "Трябват ми поне два валидни отбора!"
 
-#: src/menu/network_menu.cpp:291
+#: src/menu/network_menu.cpp:287
 msgid "You won't be able to play before selecting a team!"
 msgstr "Не може да играеш без отбор. Избери един!"
 
