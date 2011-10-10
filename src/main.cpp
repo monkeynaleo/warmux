@@ -55,7 +55,7 @@
 #include "sound/jukebox.h"
 #include "tool/stats.h"
 #ifdef MAEMO
-#include "maemo/osso.h"
+#include "maemo/maemo.h"
 #include "menu/pause_menu.h"
 #endif
 #ifdef WMX_LOG
@@ -299,7 +299,7 @@ void AppWarmux::End() const
 bool AppWarmux::CheckInactive(SDL_Event& evnt)
 {
 #ifdef MAEMO
-  Osso::Process();
+  Maemo::Process();
 #endif
 
 #ifdef HAVE_HANDHELD
@@ -318,7 +318,7 @@ bool AppWarmux::CheckInactive(SDL_Event& evnt)
 
     while (SDL_WaitEvent(&evnt)) {
 #ifdef MAEMO
-      Osso::Process();
+      Maemo::Process();
 #endif
       if (evnt.type == SDL_QUIT) AppWarmux::EmergencyExit();
       if (evnt.type == SDL_ACTIVEEVENT && evnt.active.gain == 1) {
@@ -568,7 +568,7 @@ extern "C" int main(int argc, char *argv[])
   }
 
 #ifdef MAEMO
-  Osso::Init();
+  Maemo::Init();
 #endif
 
 #if SDL_GFXPRIMITIVES_MAJOR>2 || SDL_GFXPRIMITIVES_MINOR>0 || SDL_GFXPRIMITIVES_MICRO>20

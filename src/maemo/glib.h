@@ -16,16 +16,19 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Maemo 
+ *
  *****************************************************************************/
 
-#ifndef OSSO_HPP_INCLUDED
-#define OSSO_HPP_INCLUDED
+#ifndef GLIB_HPP_INCLUDED
+#define GLIB_HPP_INCLUDED
 
-namespace Osso {
+namespace Glib {
 
-  int Init();
+  void Init();
   void DeInit();
+  void Process(bool blocking = false);
+  void EnterSleep();
+  void LeaveSleep();
 
 }
 
