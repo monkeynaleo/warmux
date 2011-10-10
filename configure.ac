@@ -312,7 +312,7 @@ AC_ARG_ENABLE(maemo, AC_HELP_STRING([--enable-maemo], [enable Maemo support]) )
 if test "${enable_maemo}" = "yes"; then
   AC_DEFINE([MAEMO], [yes], [Maemo support])
   PKG_CHECK_MODULES(GLIB, glib-2.0, [], [AC_MSG_FAILURE([libglib-2.0 not found])])
-  PKG_CHECK_MODULES(OSSO, osso, [AC_DEFINE([HAVE_LIBOSSO], [1], [Use libosso])] use_osso=yes, [:])
+  PKG_CHECK_MODULES(OSSO, libosso, [AC_DEFINE([HAVE_LIBOSSO], [1], [Use libosso])] use_osso=yes, [:])
   PKG_CHECK_MODULES(RESOURCE, libresource0-glib, [AC_DEFINE([HAVE_LIBRESOURCE], [1], ["Use libresource"])] use_resource=yes, [:])
   PKG_CHECK_MODULES(CONIC, conic, [AC_DEFINE([HAVE_LIBCONIC], [1], [Use libconic])] use_conic=yes, [:])
   CFLAGS="$CFLAGS $GLIB_CFLAGS $RESOURCE_CFLAGS $CONIC_CFLAGS $OSSO_CFLAGS"
