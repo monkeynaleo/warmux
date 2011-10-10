@@ -98,10 +98,10 @@ namespace Osso {
     return 0;
   }
 
-  int DeInit()
+  void DeInit()
   {
-    if (osso_context_t != NULL)
-      osso_deinitialize(osso_context_t);
+    if (osso_context != NULL)
+      osso_deinitialize(osso_context);
   }
 
 }
