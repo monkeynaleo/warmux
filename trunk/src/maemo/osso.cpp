@@ -16,39 +16,32 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Maemo 
+ * libosso support
  *****************************************************************************/
 
 #include <iostream>
-#include <glib.h>
-#include <glib-object.h>
 #include <libosso.h>
 #include <SDL/SDL.h>
 #include "sound/jukebox.h"
 #include "game/game_time.h"
 #include "interface/mouse.h"
+#include "maemo/glib.h"
+#include "maemo/osso.h"
 
 namespace {
 
-  static void init_timer(void);
-  static void remove_timer(void);
-
-
-  GMainContext* maincontext = NULL;
-  GMainLoop* mainloop = NULL;
-  osso_context_t* osso_context = NULL;
   bool display_off = false;
-  SDL_TimerID timer_id = 0;
 
-  static gboolean display_off_loop(gpointer data) {
-    remove_timer();
-    SDL_QuitSubSystem(SDL_INIT_TIMER);
+  static gboolean display_off_loop(gpointer data)
+  {
+
+    Glib::EnterSleep();
     GameTime::GetInstance()->SetWaitingForUser(true);
     JukeBox::GetInstance()->CloseDevice();
 
     while(display_off) {
       MSG_DEBUG("display", "display_off loop");
-      g_main_context_iteration(maincontext, true);
+      Glib::Process(true);
     }
 
     if (Mouse::GetInstance()->HasFocus()) {
@@ -57,13 +50,12 @@ namespace {
       GameTime::GetInstance()->SetWaitingForUser(false);
     }
 
-    SDL_InitSubSystem(SDL_INIT_TIMER);
-    init_timer();
-
+    Glib::LeaveSleep();
     return false;
   }
 
-  static void osso_display_event_callback(osso_display_state_t state, gpointer data) {
+  static void osso_display_event_callback(osso_display_state_t state, gpointer data)
+  {
     switch(state) {
     case OSSO_DISPLAY_ON:
       MSG_DEBUG("display", "DISPLAY ON");
@@ -80,43 +72,16 @@ namespace {
     }
   }
 
-  Uint32 send_null_event(Uint32 interval, void *param) {
-    SDL_Event event;
-    SDL_UserEvent userevent;
-
-    userevent.type = SDL_USEREVENT;
-    userevent.code = 0;
-    userevent.data1 = NULL;
-    userevent.data2 = NULL;
-
-    event.type = SDL_USEREVENT;
-    event.user = userevent;
-
-    SDL_PushEvent(&event);
-    return(interval);
-  }
-
-  /* Send SDL events regularly to guarantee Glib event processing when stuck with SDL_WaitEvent */
-  static void init_timer() {
-    if (timer_id == 0)
-      timer_id = SDL_AddTimer(2000, send_null_event, NULL);
-  }
-
-  static void remove_timer() {
-    if (timer_id != 0) {
-      SDL_RemoveTimer(timer_id);
-      timer_id = 0;
-    }
-  }
 }
 
 namespace Osso {
 
-  int Init() {
-    g_type_init();
-    maincontext = g_main_context_default();
-    mainloop = g_main_loop_new(maincontext, false);
-    osso_context = osso_initialize("org.warmux.game", "1.0", 0, maincontext);
+  static osso_context_t* osso_context = NULL;
+
+  int Init()
+  {
+    Glib::Init();
+    osso_context = osso_initialize("org.warmux.game", "1.0", 0, NULL);
 
     if(!osso_context) {
       std::cerr << "could not initialize libosso\n";
@@ -130,18 +95,13 @@ namespace Osso {
       return -1;
     }
 
-    init_timer();
-
     return 0;
   }
 
-  void Process() {
-    if (maincontext == NULL || osso_context == NULL)
-      return;
-    
-    while(g_main_context_pending(maincontext)) {
-      g_main_context_iteration(maincontext, false);
-    }
+  int DeInit()
+  {
+    if (osso_context_t != NULL)
+      osso_deinitialize(osso_context_t);
   }
 
 }

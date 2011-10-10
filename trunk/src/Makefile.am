@@ -440,7 +440,17 @@ warmux_SOURCES += warmux.rc
 endif
 
 if MAEMO
+warmux_SOURCES += maemo/glib.cpp maemo/glib.h
+warmux_SOURCES += maemo/maemo.cpp maemo/maemo.h
+endif
+if HAVE_LIBOSSO
 warmux_SOURCES += maemo/osso.cpp maemo/osso.h
+endif
+if HAVE_LIBRESOURCE
+warmux_SOURCES += maemo/resource.cpp maemo/resource.h
+endif
+if HAVE_LIBCONIC
+warmux_SOURCES += maemo/conic.cpp maemo/conic.h
 endif
 
 LIBS+=@LIBINTL@

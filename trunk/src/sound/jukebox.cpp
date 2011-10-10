@@ -34,6 +34,9 @@
 #include "sound/sound_sample.h"
 #include "tool/xml_document.h"
 #include "tool/string_tools.h"
+#ifdef HAVE_LIBRESOURCE
+#include "maemo/resource.h"
+#endif
 
 JukeBox::JukeBox()
   : music(NULL)
@@ -112,6 +115,10 @@ bool JukeBox::OpenDevice()
     End();
     return false;
   }
+#ifdef HAVE_LIBRESOURCE
+  if (!Resource::AcquireResources())
+    return false;
+#endif
 
   /* Initialize the SDL library */
   if (SDL_InitSubSystem(SDL_INIT_AUDIO) < 0) {
@@ -152,6 +159,10 @@ void JukeBox::CloseDevice()
 {
   if (!m_init)
     return;
+
+#ifdef HAVE_LIBRESOURCE
+  Resource::ReleaseResources();
+#endif
 
   Mix_CloseAudio();
 

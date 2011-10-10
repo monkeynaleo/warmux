@@ -16,17 +16,15 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Maemo 
+ *
  *****************************************************************************/
 
-#ifndef OSSO_HPP_INCLUDED
-#define OSSO_HPP_INCLUDED
+#ifndef CONIC_HPP_INCLUDED
+#define CONIC_HPP_INCLUDED
 
-namespace Osso {
-
-  int Init();
-  void DeInit();
-
+namespace Conic
+{
+  void Init();
+  void ConnectionConnect(void (*cb)());
 }
-
 #endif
