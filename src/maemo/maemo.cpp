@@ -1,5 +1,7 @@
 #include <stdlib.h>
+#include <WARMUX_config.h>
 #include "maemo/maemo.h"
+#include "maemo/conic.h"
 #include "maemo/glib.h"
 #include "maemo/osso.h"
 #include "maemo/resource.h"
@@ -34,9 +36,6 @@ namespace Maemo
 #endif
 #ifdef HAVE_LIBRESOURCE
     Resource::ReleaseResources();
-#endif
-#ifdef HAVE_LIBCONIC
-    Conic::DeInit();
 #endif
     Glib::DeInit();
   }

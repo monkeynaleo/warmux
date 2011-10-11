@@ -22,6 +22,8 @@
 #ifndef GLIB_HPP_INCLUDED
 #define GLIB_HPP_INCLUDED
 
+#include <glib.h>
+
 namespace Glib {
 
   void Init();
@@ -29,6 +31,7 @@ namespace Glib {
   void Process(bool blocking = false);
   void EnterSleep();
   void LeaveSleep();
+  GMainContext* GetContext();
 
 }
 

@@ -34,7 +34,6 @@ namespace {
 
   static gboolean display_off_loop(gpointer data)
   {
-
     Glib::EnterSleep();
     GameTime::GetInstance()->SetWaitingForUser(true);
     JukeBox::GetInstance()->CloseDevice();
@@ -76,12 +75,12 @@ namespace {
 
 namespace Osso {
 
-  static osso_context_t* osso_context = NULL;
+  osso_context_t* osso_context = NULL;
 
   int Init()
   {
     Glib::Init();
-    osso_context = osso_initialize("org.warmux.game", "1.0", 0, NULL);
+    osso_context = osso_initialize("org.warmux.game", "1.0", 0, Glib::GetContext());
 
     if(!osso_context) {
       std::cerr << "could not initialize libosso\n";
