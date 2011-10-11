@@ -80,5 +80,10 @@ namespace Glib
     SDL_Init(SDL_INIT_TIMER);
     init_timer();
   }
+
+  GMainContext* GetContext()
+  {
+    return maincontext;
+  }
 }
 
