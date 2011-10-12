@@ -23,24 +23,29 @@
 #include <conicconnectionevent.h>
 #include "maemo/conic.h"
 #include "maemo/glib.h"
+#include <stdio.h>
 
 namespace {
 
   static void connection_handler(ConIcConnection *connection,
                                  ConIcConnectionEvent *event,
-                                 GCallback cb)
+                                 void (*cb)(bool))
   {
+    printf("ConnectEvent\n");
       ConIcConnectionStatus status = con_ic_connection_event_get_status(event);
       switch(status) {
           case CON_IC_STATUS_CONNECTED:
               g_debug("Connected...");
-              (cb)();
+              if (cb)
+                (cb)(true);
               break;
           case CON_IC_STATUS_DISCONNECTING:
               g_debug("Disconnecting...");
               break;
           case CON_IC_STATUS_DISCONNECTED:
               g_debug("Disconnected...");
+              if (cb)
+                (cb)(false);
               break;
           default:
               g_debug("Unknown connection status received");
@@ -57,8 +62,9 @@ namespace Conic
     connection = con_ic_connection_new();
   }
 
-  void ConnectionConnect(void (*cb)())
+  void ConnectionConnect(void (*cb)(bool))
   {
+    printf("Connect\n");
     con_ic_connection_connect(connection, CON_IC_CONNECT_FLAG_NONE);
     g_signal_connect(connection, "connection-event", G_CALLBACK(connection_handler), (void*)cb);
     Glib::Process();

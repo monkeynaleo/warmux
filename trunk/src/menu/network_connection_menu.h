@@ -87,7 +87,7 @@ private:
                        const std::string& passwd);
 
   static SDL_Thread* thread_refresh;
-  void ThreadRefreshList();
+  static void ThreadRefreshList();
 
 public:
   NetworkConnectionMenu(network_menu_action_t action);

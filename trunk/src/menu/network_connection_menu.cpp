@@ -39,6 +39,11 @@
 #include "team/teams_list.h"
 #include "tool/resource_manager.h"
 #include "tool/string_tools.h"
+#ifdef HAVE_LIBCONIC
+#include "maemo/conic.h"
+
+static bool network_interface_up = false;
+#endif
 
 class GameInfoBox : public HBox
 {
@@ -141,6 +146,26 @@ static int RefreshNetInfo(void *)
   return 0;
 }
 
+#ifdef HAVE_LIBCONIC
+static void NetworkInterfaceEvent(bool new_network_interface_up)
+{
+  printf("RestartNetwork\n");
+  if (!network_interface_up && new_network_interface_up) {
+    network_interface_up = new_network_interface_up;
+    NetworkConnectionMenu::ThreadRefreshList();
+  } else if (network_interface_up && !new_network_interface_up) {
+    CleanNetInfo();
+    if (IndexServer::GetInstance()->IsConnected())
+      IndexServer::GetInstance()->Disconnect();
+    if (Network::IsConnected())
+      Network::Disconnect();
+    InitNetInfo();
+  }
+
+  network_interface_up = new_network_interface_up;
+}
+#endif
+
 #define TAB_MANUAL_ID   "TAB_manual"
 #define TAB_CLIENT_ID   "TAB_client"
 #define TAB_SERVER_ID   "TAB_server"
@@ -159,6 +184,9 @@ NetworkConnectionMenu::NetworkConnectionMenu(network_menu_action_t action) :
   Font::font_size_t fmedium = Font::GetFixedSize(Font::FONT_MEDIUM*zoom);
   Font::font_size_t fadapt  = (fmedium > Font::FONT_BIG) ? Font::FONT_BIG : fmedium;
 
+#ifdef HAVE_LIBCONIC
+  Conic::ConnectionConnect(NetworkInterfaceEvent);
+#endif
   /* Tabs */
   tabs = new MultiTabs(Point2i(max_width,
                                GetMainWindow().GetHeight()*0.6f), fadapt);
@@ -407,6 +435,10 @@ void NetworkConnectionMenu::__RefreshList()
 
 void NetworkConnectionMenu::ThreadRefreshList()
 {
+#ifdef HAVE_LIBCONIC
+  if (!network_interface_up)
+    return;
+#endif
   SDL_SemWait(net_info.lock);
 
   if (net_info.thread_refresh != NULL) {
