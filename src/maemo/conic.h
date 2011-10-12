@@ -25,6 +25,6 @@
 namespace Conic
 {
   void Init();
-  void ConnectionConnect(void (*cb)());
+  void ConnectionConnect(void (*cb)(bool));
 }
 #endif
