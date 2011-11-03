@@ -45,8 +45,8 @@ private:
   void DisplayWelcomeMessage() const;
   void End() const;
 
-  Menu* GetCurrentMenu() const { return menu; }
 public:
+  Menu* GetCurrentMenu() const { return menu; }
   void SetCurrentMenu(Menu *_menu) { menu = _menu; }
   void RefreshDisplay();
   static void DisplayError(const std::string &msg);
