@@ -180,16 +180,17 @@ bool VirtualKeyboardParser::parserCallback_mode(const xmlNode *node)
   // overlay size and the resolution dimensions.
   // TODO: improve this by giving preference to a resolution that is smaller
   // than the overlay res (so the keyboard can't be too big for the screen)
-  std::list<std::string>::iterator it = tok.begin();
-  std::list<std::string>::iterator it_end = tok.end();
+  std::list<std::string>::iterator it;
   int scrW = GetMainWindow().GetWidth();
   int scrH = GetMainWindow().GetHeight();
   uint32 diff = 0xFFFFFFFF;
   String newResolution;
-  for (String res = *it; it != it_end; res = *(++it)) {
+  String res;
+  for (it = tok.begin(); it != tok.end(); it++) {
+    res = *it;
     int resW, resH;
     if (sscanf(res.c_str(), "%dx%d", &resW, &resH) != 2) {
-      return printf("Invalid resolution specification");
+      Error("Invalid resolution specification");
     } else {
       if (resW == scrW && resH == scrH) {
         newResolution = res;
