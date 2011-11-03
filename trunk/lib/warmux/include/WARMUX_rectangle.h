@@ -166,6 +166,26 @@ template<class T> class rectangle
       return position.y;
     }
 
+    inline T GetLeft() const{
+      ASSERT( !IsSizeZero() );
+      return GetPositionX();
+    }
+
+    inline T GetRight() const{
+      ASSERT( !IsSizeZero() );
+      return position.x + size.x;
+    }
+
+    inline T GetTop() const{
+      ASSERT( !IsSizeZero() );
+      return GetPositionY();
+    }
+
+    inline T GetBottom() const{
+      ASSERT( !IsSizeZero() );
+      return position.y + size.y;
+    }
+
     /**
      * Return the size of the rectangle.
      */
