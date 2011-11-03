@@ -32,6 +32,11 @@
 #include "gui/text_box.h"
 #include "tool/text_handling.h"
 #include "tool/copynpaste.h"
+#ifdef ENABLE_VKEYBD
+#include "include/app.h"
+#include "menu/menu.h"
+#include "vkeybd/virtual-keyboard.h"
+#endif
 
 TextBox::TextBox(const std::string &label, uint width,
                  Font::font_size_t fsize, Font::font_style_t fstyle) :
@@ -138,6 +143,14 @@ Widget * TextBox::ClickUp(const Point2i & mousePosition, uint button)
   if (SDL_ANDROID_GetScreenKeyboardTextInput(buffer, 256)) {
     SetText(buffer);
   }
+#elif defined(ENABLE_VKEYBD)
+  Common::VirtualKeyboard vkb = Common::VirtualKeyboard();
+  if (!vkb.loadKeyboardPack("vkeybd_default"))
+    printf("loadKeyboardPack failed\n");
+  vkb.setString(GetText());
+  if (vkb.show())
+    SetText(vkb.getString());
+  AppWarmux::GetInstance()->GetCurrentMenu()->RedrawMenu();
 #else
   if (button == SDL_BUTTON_MIDDLE) {
     std::string new_txt = GetText();

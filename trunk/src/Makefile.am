@@ -423,7 +423,19 @@ warmux_SOURCES = \
         weapon/weapon_strength_bar.cpp \
         weapon/weapon_strength_bar.h \
         weapon/weapons_list.cpp \
-        weapon/weapons_list.h
+        weapon/weapons_list.h \
+        vkeybd/virtual-keyboard.cpp \
+        vkeybd/virtual-keyboard.h \
+        vkeybd/virtual-keyboard-gui.cpp \
+        vkeybd/virtual-keyboard-gui.h \
+        vkeybd/virtual-keyboard-parser.cpp \
+        vkeybd/virtual-keyboard-parser.h \
+        vkeybd/image-map.cpp \
+        vkeybd/image-map.h \
+        vkeybd/vkpolygon.cpp \
+        vkeybd/vkpolygon.h \
+        vkeybd/types.h \
+        vkeybd/keycode-descriptions.h
 
 warmux_LDFLAGS = -Wl,--as-needed
 
