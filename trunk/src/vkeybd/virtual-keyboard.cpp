@@ -319,15 +319,15 @@ void VirtualKeyboard::KeyPressQueue::insertKey(KeyState key)
   if (key.scancode >= 32 && key.scancode <= 255) {
     //if (key.mod & KMOD_SHIFT && (key.scancode < 65 || key.scancode > 90))
     //keyStr += "Shift+";
-    keyStr += (char) key.unicode;
+    keyStr = (char) key.unicode;
   } else {
     //if (key.mod & KMOD_SHIFT) keyStr += "Shift+";
     if (key.scancode >= 0 && key.scancode < keycodeDescTableSize)
-      keyStr += keycodeDescTable[key.scancode];
+      keyStr = keycodeDescTable[key.scancode];
   }
 
   if (keyStr.empty())
-    keyStr += "???";
+    keyStr = "???";
 
   const char *k = keyStr.c_str();
   while (char ch = *k++)

@@ -356,31 +356,8 @@ void VirtualKeyboardGUI::updateDisplay()
   if (!_displayEnabled)
     return;
 
-  // calculate the text to display
-  uint cursorPos = _kbd->_keyQueue.getInsertIndex();
-  String wholeText = _kbd->_keyQueue.getString();
-  uint dispTextEnd;
-  if (_dispI > cursorPos)
-    _dispI = cursorPos;
-
-  dispTextEnd = calculateEndIndex(wholeText, _dispI);
-  while (cursorPos > dispTextEnd)
-    dispTextEnd = calculateEndIndex(wholeText, ++_dispI);
-  String dispText = wholeText;//String(wholeText.c_str() + _dispI, wholeText.c_str() + dispTextEnd);
-  Text dispTextToScreen = Text(dispText, _dispForeColor);
-
-  // draw to display surface
-  _dispSurface.FillRect(Rectanglei(Point2i(0, 0), Point2i(_dispSurface.GetWidth(),
-      _dispSurface.GetHeight())), _dispBackColor);
-  //_dispFont->drawString(&_dispSurface, dispText, 0, 0, _dispSurface.w, _dispForeColor);
+  Text dispTextToScreen = Text(_kbd->_keyQueue.getString(), _dispForeColor);
   dispTextToScreen.DrawLeftTop(Point2i(_dispX, _dispY + dispTextToScreen.GetHeight() / 2));
-
-  /*	String beforeCaret(wholeText.c_str() + _dispI, wholeText.c_str() + cursorPos);
-   _caretX = _dispFont->getStringWidth(beforeCaret);
-   if (_drawCaret) _dispSurface.drawLine(_caretX, 0, _caretX, _dispSurface.h, _dispForeColor);
-   */
-  extendDirtyRect(Rectanglei(_dispX, _dispY, _dispX + _dispSurface.GetWidth(), _dispY
-      + _dispSurface.GetHeight()));
 }
 
 void VirtualKeyboardGUI::setupCursor()
