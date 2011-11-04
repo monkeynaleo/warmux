@@ -733,7 +733,7 @@ msgstr "خودکشی"
 msgid "Configuration menu"
 msgstr "مشکل در بارگذاری پرونده‌ی تنظیمات: %s"
 
-#: src/menu/network_connection_menu.cpp:309
+#: src/menu/network_connection_menu.cpp:281
 msgid "Connect to game"
 msgstr "اتصال به بازی"
 
@@ -897,28 +897,28 @@ msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr "مشکل در ساخت پوشه‌ی جدید \"%s\": ناتوان در ذخیره‌ی پرونده‌ی تنظیمات."
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:552
+#: src/menu/network_connection_menu.cpp:520
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "مشکل: ناتوان در اتصال به %s:%s"
 
-#: src/menu/network_connection_menu.cpp:502
+#: src/menu/network_connection_menu.cpp:470
 #, fuzzy
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "مشکل: ناتوان در ارتباط با کارگزار برای میزبانی یک بازی"
 
-#: src/menu/network_connection_menu.cpp:409
+#: src/menu/network_connection_menu.cpp:381
 #, fuzzy
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr "مشکل: ناتوان در ارتباط با کارگزار برای جستجوی یک بازی اینترنتی"
 
-#: src/menu/network_connection_menu.cpp:530
+#: src/menu/network_connection_menu.cpp:498
 #, fuzzy
 msgid "Error: Unable to start the server"
 msgstr "مشکل: ناتوان در راه‌اندازی یک کارگزار"
 
-#: src/menu/network_connection_menu.cpp:523
+#: src/menu/network_connection_menu.cpp:491
 #: tools/servers/game_server/server.cpp:401
 #, c-format
 msgid ""
@@ -1008,7 +1008,7 @@ msgstr "حالت کارگیر (کلاینت)"
 msgid "Game mode"
 msgstr "حالت کارگیر (کلاینت)"
 
-#: src/menu/network_connection_menu.cpp:285
+#: src/menu/network_connection_menu.cpp:257
 msgid "Game name:"
 msgstr ""
 
@@ -1056,7 +1056,7 @@ msgstr ""
 msgid "Gun"
 msgstr "اسلحه"
 
-#: src/menu/network_connection_menu.cpp:335
+#: src/menu/network_connection_menu.cpp:307
 msgid "Have a good game!"
 msgstr "بازی خوبی داشته باشید!"
 
@@ -1080,7 +1080,7 @@ msgstr ""
 msgid "High jump"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:311
+#: src/menu/network_connection_menu.cpp:283
 msgid "Host a game"
 msgstr "میزبانی یک بازی"
 
@@ -1267,7 +1267,7 @@ msgstr ""
 msgid "LowGrav"
 msgstr "ضد جاذبه"
 
-#: src/menu/network_connection_menu.cpp:310
+#: src/menu/network_connection_menu.cpp:282
 msgid "Manual connection"
 msgstr ""
 
@@ -1522,9 +1522,9 @@ msgid ""
 "Use left/right to change direction"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:221
-#: src/menu/network_connection_menu.cpp:258
-#: src/menu/network_connection_menu.cpp:297
+#: src/menu/network_connection_menu.cpp:193
+#: src/menu/network_connection_menu.cpp:230
+#: src/menu/network_connection_menu.cpp:269
 msgid "Password:"
 msgstr ""
 
@@ -1571,8 +1571,8 @@ msgstr ""
 msgid "Polecat Launcher"
 msgstr "راسو بوگندو"
 
-#: src/menu/network_connection_menu.cpp:247
-#: src/menu/network_connection_menu.cpp:274
+#: src/menu/network_connection_menu.cpp:219
+#: src/menu/network_connection_menu.cpp:246
 msgid "Port:"
 msgstr "پورت: "
 
@@ -1641,7 +1641,7 @@ msgid ""
 "Ends when selecting another weapon"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:207
+#: src/menu/network_connection_menu.cpp:179
 msgid "Public battles"
 msgstr ""
 
@@ -1771,12 +1771,12 @@ msgstr ""
 msgid "Select number of playing teams"
 msgstr "حداکثر تعداد بازیکنان: "
 
-#: src/menu/network_connection_menu.cpp:237
+#: src/menu/network_connection_menu.cpp:209
 msgid "Server address:"
 msgstr "آدرس کارگزار:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:305
+#: src/menu/network_connection_menu.cpp:277
 msgid "Server available on Internet"
 msgstr "کارگزار حاضر در اینترنت"
 
@@ -1862,11 +1862,11 @@ msgstr "تفنگ دوربین‌دار"
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:414
+#: src/menu/network_connection_menu.cpp:386
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "شرمنده، در حال حاضر، هیچ بازی منتظر بازیکنان دیگر نیست."
 
-#: src/menu/network_connection_menu.cpp:472
+#: src/menu/network_connection_menu.cpp:440
 #: tools/servers/game_server/server.cpp:386
 #, c-format
 msgid ""
@@ -2071,7 +2071,7 @@ msgstr[0] "فقط %i تیم وجود دارد."
 msgid "This key has already been attributed to '%s'"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:337
+#: src/menu/network_connection_menu.cpp:309
 msgid "This version was compiled without curl, you can't list public games!"
 msgstr ""
 
@@ -2436,16 +2436,16 @@ msgstr ""
 msgid "no configuration file!"
 msgstr "مشکل در بارگذاری پرونده‌ی تنظیمات: %s"
 
-#: src/sound/jukebox.cpp:215
+#: src/sound/jukebox.cpp:204
 msgid "o Loading music"
 msgstr "در حال بارگذاری موسیقی"
 
-#: src/sound/jukebox.cpp:397
+#: src/sound/jukebox.cpp:386
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "در حال بارگذاری پرونده‌ی موسیقی: %s"
 
-#: src/sound/jukebox.cpp:149
+#: src/sound/jukebox.cpp:142
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "صدا با %d هرتز و %d بیت باز شد"

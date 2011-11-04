@@ -1,10 +1,10 @@
 [Desktop Entry]
 Version=1.0
 Encoding=UTF-8
-Name=WarMUX
+Name=Warmux
 Type=Application
-Icon=/usr/share/themes/base/meegotouch/icons/warmux.svg
-Exec=env PULSE_PROP_media.role=x-maemo WARMUX_LOCALEDIR=/opt/warmux/share/locale LD_LIBRARY_PATH=/opt/warmux/games  invoker --single-instance --type=e --splash=/opt/warmux/share/games/warmux/menu/background_loading.jpg /opt/warmux/games/warmux
+Icon=warmux_128x128.png
+Exec=warmux
 Terminal=false
 StartupNotify=false
 GenericName=Arcade Game
