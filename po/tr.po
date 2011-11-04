@@ -713,7 +713,7 @@ msgstr "İntihar"
 msgid "Configuration menu"
 msgstr "Ayar dosyası yüklenirken hata: %s"
 
-#: src/menu/network_connection_menu.cpp:281
+#: src/menu/network_connection_menu.cpp:309
 msgid "Connect to game"
 msgstr ""
 
@@ -877,28 +877,28 @@ msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr "\"%s\" dizini oluşturulurken hata: ayar dosyası saklanamadı."
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:520
+#: src/menu/network_connection_menu.cpp:552
 #, fuzzy, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "(%s) harita dizini açılamadı!"
 
-#: src/menu/network_connection_menu.cpp:470
+#: src/menu/network_connection_menu.cpp:502
 #, fuzzy
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "(%s) harita dizini açılamadı!"
 
-#: src/menu/network_connection_menu.cpp:381
+#: src/menu/network_connection_menu.cpp:409
 #, fuzzy
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr "(%s) harita dizini açılamadı!"
 
-#: src/menu/network_connection_menu.cpp:498
+#: src/menu/network_connection_menu.cpp:530
 #, fuzzy
 msgid "Error: Unable to start the server"
 msgstr "(%s) harita dizini açılamadı!"
 
-#: src/menu/network_connection_menu.cpp:491
+#: src/menu/network_connection_menu.cpp:523
 #: tools/servers/game_server/server.cpp:401
 #, c-format
 msgid ""
@@ -986,7 +986,7 @@ msgstr ""
 msgid "Game mode"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:257
+#: src/menu/network_connection_menu.cpp:285
 msgid "Game name:"
 msgstr ""
 
@@ -1034,7 +1034,7 @@ msgstr ""
 msgid "Gun"
 msgstr "Tabanca"
 
-#: src/menu/network_connection_menu.cpp:307
+#: src/menu/network_connection_menu.cpp:335
 msgid "Have a good game!"
 msgstr ""
 
@@ -1058,7 +1058,7 @@ msgstr ""
 msgid "High jump"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:283
+#: src/menu/network_connection_menu.cpp:311
 msgid "Host a game"
 msgstr ""
 
@@ -1239,7 +1239,7 @@ msgstr ""
 msgid "LowGrav"
 msgstr "Düşük yer çekimi"
 
-#: src/menu/network_connection_menu.cpp:282
+#: src/menu/network_connection_menu.cpp:310
 msgid "Manual connection"
 msgstr ""
 
@@ -1492,9 +1492,9 @@ msgid ""
 "Use left/right to change direction"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:193
-#: src/menu/network_connection_menu.cpp:230
-#: src/menu/network_connection_menu.cpp:269
+#: src/menu/network_connection_menu.cpp:221
+#: src/menu/network_connection_menu.cpp:258
+#: src/menu/network_connection_menu.cpp:297
 msgid "Password:"
 msgstr ""
 
@@ -1542,8 +1542,8 @@ msgstr ""
 msgid "Polecat Launcher"
 msgstr "Kokarca Mancınığı"
 
-#: src/menu/network_connection_menu.cpp:219
-#: src/menu/network_connection_menu.cpp:246
+#: src/menu/network_connection_menu.cpp:247
+#: src/menu/network_connection_menu.cpp:274
 msgid "Port:"
 msgstr ""
 
@@ -1612,7 +1612,7 @@ msgid ""
 "Ends when selecting another weapon"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:179
+#: src/menu/network_connection_menu.cpp:207
 msgid "Public battles"
 msgstr ""
 
@@ -1740,12 +1740,12 @@ msgstr ""
 msgid "Select number of playing teams"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:209
+#: src/menu/network_connection_menu.cpp:237
 msgid "Server address:"
 msgstr ""
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:277
+#: src/menu/network_connection_menu.cpp:305
 msgid "Server available on Internet"
 msgstr ""
 
@@ -1831,11 +1831,11 @@ msgstr "Suikast Tüfeği"
 msgid "Someone put a booby trap into the crate!"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:386
+#: src/menu/network_connection_menu.cpp:414
 msgid "Sorry, currently, no game is waiting for players"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:440
+#: src/menu/network_connection_menu.cpp:472
 #: tools/servers/game_server/server.cpp:386
 #, c-format
 msgid ""
@@ -2036,7 +2036,7 @@ msgstr[0] ""
 msgid "This key has already been attributed to '%s'"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:309
+#: src/menu/network_connection_menu.cpp:337
 msgid "This version was compiled without curl, you can't list public games!"
 msgstr ""
 
@@ -2378,16 +2378,16 @@ msgstr ""
 msgid "no configuration file!"
 msgstr "Ayar dosyası yüklenirken hata: %s"
 
-#: src/sound/jukebox.cpp:204
+#: src/sound/jukebox.cpp:215
 msgid "o Loading music"
 msgstr ""
 
-#: src/sound/jukebox.cpp:386
+#: src/sound/jukebox.cpp:397
 #, fuzzy, c-format
 msgid "o Loading sound profile: %s"
 msgstr "Ayar dosyası yüklenirken hata: %s"
 
-#: src/sound/jukebox.cpp:142
+#: src/sound/jukebox.cpp:149
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr ""

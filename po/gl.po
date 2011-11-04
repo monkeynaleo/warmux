@@ -795,7 +795,7 @@ msgstr "Suicidarse"
 msgid "Configuration menu"
 msgstr "Menú de configuración"
 
-#: src/menu/network_connection_menu.cpp:281
+#: src/menu/network_connection_menu.cpp:309
 msgid "Connect to game"
 msgstr "Conectarse a unha partida"
 
@@ -971,29 +971,29 @@ msgstr ""
 "personalizado."
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:520
+#: src/menu/network_connection_menu.cpp:552
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Houbo un erro: non se puido conectarse a «%s: %s»."
 
-#: src/menu/network_connection_menu.cpp:470
+#: src/menu/network_connection_menu.cpp:502
 msgid "Error: Unable to contact the index server to host a game"
 msgstr ""
 "Houbo un erro: non se puido contactar co servidor principal para aloxar unha "
 "partida."
 
-#: src/menu/network_connection_menu.cpp:381
+#: src/menu/network_connection_menu.cpp:409
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
 "Houbo un erro: non se puido contactar co servidor principal para buscar unha "
 "partida na Internet."
 
-#: src/menu/network_connection_menu.cpp:498
+#: src/menu/network_connection_menu.cpp:530
 msgid "Error: Unable to start the server"
 msgstr "Houbo un erro: non se puido iniciar o servidor."
 
-#: src/menu/network_connection_menu.cpp:491
+#: src/menu/network_connection_menu.cpp:523
 #: tools/servers/game_server/server.cpp:401
 #, c-format
 msgid ""
@@ -1091,7 +1091,7 @@ msgstr "Menú do xogo"
 msgid "Game mode"
 msgstr "Modo de xogo"
 
-#: src/menu/network_connection_menu.cpp:257
+#: src/menu/network_connection_menu.cpp:285
 msgid "Game name:"
 msgstr "Nome da partida:"
 
@@ -1143,7 +1143,7 @@ msgstr "O equipo %s perdeu."
 msgid "Gun"
 msgstr "Pistola"
 
-#: src/menu/network_connection_menu.cpp:307
+#: src/menu/network_connection_menu.cpp:335
 msgid "Have a good game!"
 msgstr "Pásao ben!"
 
@@ -1167,7 +1167,7 @@ msgstr "Alta"
 msgid "High jump"
 msgstr "Saltar alto"
 
-#: src/menu/network_connection_menu.cpp:283
+#: src/menu/network_connection_menu.cpp:311
 msgid "Host a game"
 msgstr "Aloxar unha partida"
 
@@ -1352,7 +1352,7 @@ msgstr "Pouca memoria"
 msgid "LowGrav"
 msgstr "Casco antigravidade"
 
-#: src/menu/network_connection_menu.cpp:282
+#: src/menu/network_connection_menu.cpp:310
 msgid "Manual connection"
 msgstr "Conexión manual"
 
@@ -1595,9 +1595,9 @@ msgstr ""
 "Ábrese automaticamente.\n"
 "Usa esquerda e dereita para cambiar a dirección."
 
-#: src/menu/network_connection_menu.cpp:193
-#: src/menu/network_connection_menu.cpp:230
-#: src/menu/network_connection_menu.cpp:269
+#: src/menu/network_connection_menu.cpp:221
+#: src/menu/network_connection_menu.cpp:258
+#: src/menu/network_connection_menu.cpp:297
 msgid "Password:"
 msgstr "Contrasinal:"
 
@@ -1647,8 +1647,8 @@ msgstr "Podio"
 msgid "Polecat Launcher"
 msgstr "Lanzador de mofeta"
 
-#: src/menu/network_connection_menu.cpp:219
-#: src/menu/network_connection_menu.cpp:246
+#: src/menu/network_connection_menu.cpp:247
+#: src/menu/network_connection_menu.cpp:274
 msgid "Port:"
 msgstr "Porto:"
 
@@ -1735,7 +1735,7 @@ msgstr ""
 "A gravidade diminúe.\n"
 "O efecto remata ao coller outra arma."
 
-#: src/menu/network_connection_menu.cpp:179
+#: src/menu/network_connection_menu.cpp:207
 msgid "Public battles"
 msgstr "Batallas públicas"
 
@@ -1863,12 +1863,12 @@ msgstr "Non se puido gardar a repetición."
 msgid "Select number of playing teams"
 msgstr "Escolle o número de equipos."
 
-#: src/menu/network_connection_menu.cpp:209
+#: src/menu/network_connection_menu.cpp:237
 msgid "Server address:"
 msgstr "Enderezo do servidor:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:277
+#: src/menu/network_connection_menu.cpp:305
 msgid "Server available on Internet"
 msgstr "Servidor dispoñíbel na Internet."
 
@@ -1961,11 +1961,11 @@ msgstr "Rifle de francotirador"
 msgid "Someone put a booby trap into the crate!"
 msgstr "Alguén puxo unha bomba trampa na caixa!"
 
-#: src/menu/network_connection_menu.cpp:386
+#: src/menu/network_connection_menu.cpp:414
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Nestes momentos non hai partidas agardando por xogadores."
 
-#: src/menu/network_connection_menu.cpp:440
+#: src/menu/network_connection_menu.cpp:472
 #: tools/servers/game_server/server.cpp:386
 #, c-format
 msgid ""
@@ -2169,7 +2169,7 @@ msgstr[1] "Hai só %i equipos."
 msgid "This key has already been attributed to '%s'"
 msgstr "Esa tecla xa se lle asignou a «%s»."
 
-#: src/menu/network_connection_menu.cpp:309
+#: src/menu/network_connection_menu.cpp:337
 msgid "This version was compiled without curl, you can't list public games!"
 msgstr ""
 
@@ -2536,16 +2536,16 @@ msgstr "cargando..."
 msgid "no configuration file!"
 msgstr "non hai ningún ficheiro de configuración!"
 
-#: src/sound/jukebox.cpp:204
+#: src/sound/jukebox.cpp:215
 msgid "o Loading music"
 msgstr "o Cargando a música"
 
-#: src/sound/jukebox.cpp:386
+#: src/sound/jukebox.cpp:397
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Cargando o perfil de son: %s"
 
-#: src/sound/jukebox.cpp:142
+#: src/sound/jukebox.cpp:149
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Son aberto a %d Hz e %d bits"
