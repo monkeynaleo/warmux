@@ -778,7 +778,7 @@ msgstr "Itsemurhaisku"
 msgid "Configuration menu"
 msgstr "Asetusvalikko"
 
-#: src/menu/network_connection_menu.cpp:309
+#: src/menu/network_connection_menu.cpp:281
 msgid "Connect to game"
 msgstr "Yhdistä peliin"
 
@@ -949,25 +949,25 @@ msgstr ""
 "tiimiä."
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:552
+#: src/menu/network_connection_menu.cpp:520
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Virhe: Ei voitu yhdistää: %s:%s"
 
-#: src/menu/network_connection_menu.cpp:502
+#: src/menu/network_connection_menu.cpp:470
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "Virhe: Ei saatu yhteyttä palvelimeen pelin isännöimiseksi"
 
-#: src/menu/network_connection_menu.cpp:409
+#: src/menu/network_connection_menu.cpp:381
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr "Virhe: Ei saatu yhteyttä palvelimeen pelien etsimiseksi"
 
-#: src/menu/network_connection_menu.cpp:530
+#: src/menu/network_connection_menu.cpp:498
 msgid "Error: Unable to start the server"
 msgstr "Virhe: Palvelimen käynnistäminen epäonnistui"
 
-#: src/menu/network_connection_menu.cpp:523
+#: src/menu/network_connection_menu.cpp:491
 #: tools/servers/game_server/server.cpp:401
 #, c-format
 msgid ""
@@ -1062,7 +1062,7 @@ msgstr "Pelivalikko"
 msgid "Game mode"
 msgstr "Pelitila"
 
-#: src/menu/network_connection_menu.cpp:285
+#: src/menu/network_connection_menu.cpp:257
 msgid "Game name:"
 msgstr "Pelin nimi:"
 
@@ -1114,7 +1114,7 @@ msgstr "Joukkue %s tapettiin."
 msgid "Gun"
 msgstr "Pyssy"
 
-#: src/menu/network_connection_menu.cpp:335
+#: src/menu/network_connection_menu.cpp:307
 msgid "Have a good game!"
 msgstr "Pidähän hauskaa!"
 
@@ -1138,7 +1138,7 @@ msgstr "Korkea"
 msgid "High jump"
 msgstr "Korkea hyppy"
 
-#: src/menu/network_connection_menu.cpp:311
+#: src/menu/network_connection_menu.cpp:283
 msgid "Host a game"
 msgstr "Isännöi peli"
 
@@ -1323,7 +1323,7 @@ msgstr "Muistia säästävä"
 msgid "LowGrav"
 msgstr "Painottomuus"
 
-#: src/menu/network_connection_menu.cpp:310
+#: src/menu/network_connection_menu.cpp:282
 msgid "Manual connection"
 msgstr "Manuaalinen yhteys"
 
@@ -1564,9 +1564,9 @@ msgstr ""
 "Avautuu automaattisesti\n"
 "Vasen/oikea ohjaa suuntaa"
 
-#: src/menu/network_connection_menu.cpp:221
-#: src/menu/network_connection_menu.cpp:258
-#: src/menu/network_connection_menu.cpp:297
+#: src/menu/network_connection_menu.cpp:193
+#: src/menu/network_connection_menu.cpp:230
+#: src/menu/network_connection_menu.cpp:269
 msgid "Password:"
 msgstr "Salasana:"
 
@@ -1616,8 +1616,8 @@ msgstr "Palkintokoroke"
 msgid "Polecat Launcher"
 msgstr "Haisunäätä"
 
-#: src/menu/network_connection_menu.cpp:247
-#: src/menu/network_connection_menu.cpp:274
+#: src/menu/network_connection_menu.cpp:219
+#: src/menu/network_connection_menu.cpp:246
 msgid "Port:"
 msgstr "Portti:"
 
@@ -1704,7 +1704,7 @@ msgstr ""
 "Vähentää painovoimaa\n"
 "Loppuu kun valitset toisen aseen"
 
-#: src/menu/network_connection_menu.cpp:207
+#: src/menu/network_connection_menu.cpp:179
 msgid "Public battles"
 msgstr "Julkiset taistelut"
 
@@ -1832,12 +1832,12 @@ msgstr "Tallenteen kirjoitus epäonnistui"
 msgid "Select number of playing teams"
 msgstr "Pelaajien määrä joukkueessa:"
 
-#: src/menu/network_connection_menu.cpp:237
+#: src/menu/network_connection_menu.cpp:209
 msgid "Server address:"
 msgstr "Palvelimen osoite:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:305
+#: src/menu/network_connection_menu.cpp:277
 msgid "Server available on Internet"
 msgstr "Palvelimelle on pääsy internetistä"
 
@@ -1930,11 +1930,11 @@ msgstr "Tarkkuuskivääri"
 msgid "Someone put a booby trap into the crate!"
 msgstr "Joku viritti ansan laatikkoon!"
 
-#: src/menu/network_connection_menu.cpp:414
+#: src/menu/network_connection_menu.cpp:386
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Valitettavasti tällä hetkellä yksikään peli ei odota pelaajia"
 
-#: src/menu/network_connection_menu.cpp:472
+#: src/menu/network_connection_menu.cpp:440
 #: tools/servers/game_server/server.cpp:386
 #, c-format
 msgid ""
@@ -2135,7 +2135,7 @@ msgstr[1] "On olemassa vain %i joukkuetta."
 msgid "This key has already been attributed to '%s'"
 msgstr "Tämä näppäin on jo asetettu toiminnolle '%s'"
 
-#: src/menu/network_connection_menu.cpp:337
+#: src/menu/network_connection_menu.cpp:309
 msgid "This version was compiled without curl, you can't list public games!"
 msgstr ""
 
@@ -2493,16 +2493,16 @@ msgstr "ladataan..."
 msgid "no configuration file!"
 msgstr "ei asetustiedostoa!"
 
-#: src/sound/jukebox.cpp:215
+#: src/sound/jukebox.cpp:204
 msgid "o Loading music"
 msgstr "o Ladataan musiikki"
 
-#: src/sound/jukebox.cpp:397
+#: src/sound/jukebox.cpp:386
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Ladataan ääniprofiili: %s"
 
-#: src/sound/jukebox.cpp:149
+#: src/sound/jukebox.cpp:142
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Avataan äänet: %d Hz %d bittiä."

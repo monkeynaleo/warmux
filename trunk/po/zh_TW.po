@@ -718,7 +718,7 @@ msgstr "自殺攻擊"
 msgid "Configuration menu"
 msgstr "配置選單"
 
-#: src/menu/network_connection_menu.cpp:309
+#: src/menu/network_connection_menu.cpp:281
 msgid "Connect to game"
 msgstr "連上遊戲"
 
@@ -888,25 +888,25 @@ msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr "刪除檔案「%s」時發生錯誤。無法刪除自訂隊伍。"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:552
+#: src/menu/network_connection_menu.cpp:520
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "錯誤：無法連接至 %s:%s"
 
-#: src/menu/network_connection_menu.cpp:502
+#: src/menu/network_connection_menu.cpp:470
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "錯誤：無法連接至索引伺服器來主辦遊戲"
 
-#: src/menu/network_connection_menu.cpp:409
+#: src/menu/network_connection_menu.cpp:381
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr "錯誤：無法連接至索引伺服器來搜索線上遊戲"
 
-#: src/menu/network_connection_menu.cpp:530
+#: src/menu/network_connection_menu.cpp:498
 msgid "Error: Unable to start the server"
 msgstr "錯誤：無法啟動伺服器"
 
-#: src/menu/network_connection_menu.cpp:523
+#: src/menu/network_connection_menu.cpp:491
 #: tools/servers/game_server/server.cpp:401
 #, c-format
 msgid ""
@@ -999,7 +999,7 @@ msgstr "遊戲選單"
 msgid "Game mode"
 msgstr "遊戲模式"
 
-#: src/menu/network_connection_menu.cpp:285
+#: src/menu/network_connection_menu.cpp:257
 msgid "Game name:"
 msgstr "遊戲名稱："
 
@@ -1051,7 +1051,7 @@ msgstr "%s 隊伍滅團了。"
 msgid "Gun"
 msgstr "槍"
 
-#: src/menu/network_connection_menu.cpp:335
+#: src/menu/network_connection_menu.cpp:307
 msgid "Have a good game!"
 msgstr "祝您玩得愉快！"
 
@@ -1075,7 +1075,7 @@ msgstr "高"
 msgid "High jump"
 msgstr "高跳"
 
-#: src/menu/network_connection_menu.cpp:311
+#: src/menu/network_connection_menu.cpp:283
 msgid "Host a game"
 msgstr "主辦遊戲"
 
@@ -1259,7 +1259,7 @@ msgstr "低記憶體"
 msgid "LowGrav"
 msgstr "低重力"
 
-#: src/menu/network_connection_menu.cpp:310
+#: src/menu/network_connection_menu.cpp:282
 msgid "Manual connection"
 msgstr "手動連線"
 
@@ -1502,9 +1502,9 @@ msgstr ""
 "會自動開啟\n"
 "使用左右鍵來改變方向"
 
-#: src/menu/network_connection_menu.cpp:221
-#: src/menu/network_connection_menu.cpp:258
-#: src/menu/network_connection_menu.cpp:297
+#: src/menu/network_connection_menu.cpp:193
+#: src/menu/network_connection_menu.cpp:230
+#: src/menu/network_connection_menu.cpp:269
 msgid "Password:"
 msgstr "密碼："
 
@@ -1554,8 +1554,8 @@ msgstr "舞台"
 msgid "Polecat Launcher"
 msgstr "臭鼬發射器"
 
-#: src/menu/network_connection_menu.cpp:247
-#: src/menu/network_connection_menu.cpp:274
+#: src/menu/network_connection_menu.cpp:219
+#: src/menu/network_connection_menu.cpp:246
 msgid "Port:"
 msgstr "連接埠："
 
@@ -1643,7 +1643,7 @@ msgstr ""
 "減少所受重力\n"
 "選擇另一個武器後結束"
 
-#: src/menu/network_connection_menu.cpp:207
+#: src/menu/network_connection_menu.cpp:179
 msgid "Public battles"
 msgstr "公開對戰"
 
@@ -1772,12 +1772,12 @@ msgstr "選擇重播："
 msgid "Select number of playing teams"
 msgstr "選擇遊戲的隊伍數量"
 
-#: src/menu/network_connection_menu.cpp:237
+#: src/menu/network_connection_menu.cpp:209
 msgid "Server address:"
 msgstr "伺服器位址："
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:305
+#: src/menu/network_connection_menu.cpp:277
 msgid "Server available on Internet"
 msgstr "網際網路上有可用的伺服器"
 
@@ -1871,11 +1871,11 @@ msgstr "狙擊步槍"
 msgid "Someone put a booby trap into the crate!"
 msgstr "有人在箱子裡面放了陷阱！"
 
-#: src/menu/network_connection_menu.cpp:414
+#: src/menu/network_connection_menu.cpp:386
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "抱歉，目前沒有任何遊戲有空缺"
 
-#: src/menu/network_connection_menu.cpp:472
+#: src/menu/network_connection_menu.cpp:440
 #: tools/servers/game_server/server.cpp:386
 #, c-format
 msgid ""
@@ -2075,7 +2075,7 @@ msgstr[0] "只有 %i 組隊伍。"
 msgid "This key has already been attributed to '%s'"
 msgstr "這個按鍵已經被分配到「%s」"
 
-#: src/menu/network_connection_menu.cpp:337
+#: src/menu/network_connection_menu.cpp:309
 msgid "This version was compiled without curl, you can't list public games!"
 msgstr ""
 
@@ -2437,16 +2437,16 @@ msgstr "載入中..."
 msgid "no configuration file!"
 msgstr "沒有設定檔！"
 
-#: src/sound/jukebox.cpp:215
+#: src/sound/jukebox.cpp:204
 msgid "o Loading music"
 msgstr "o 載入音樂中"
 
-#: src/sound/jukebox.cpp:397
+#: src/sound/jukebox.cpp:386
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o 載入聲音資料：%s"
 
-#: src/sound/jukebox.cpp:149
+#: src/sound/jukebox.cpp:142
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o 開啟音樂：%d Hz %d bit"

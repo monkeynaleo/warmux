@@ -236,7 +236,6 @@ void VirtualKeyboardGUI::mainLoop()
     AppWarmux::GetInstance()->video->Flip();
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
-      AppWarmux::GetInstance()->CheckInactive(event);
       handleEvent(event);
     }
     // Delay for a moment

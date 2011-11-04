@@ -768,7 +768,7 @@ msgstr "Öngyilkosság"
 msgid "Configuration menu"
 msgstr "Konfigurációs menü"
 
-#: src/menu/network_connection_menu.cpp:309
+#: src/menu/network_connection_menu.cpp:281
 msgid "Connect to game"
 msgstr "Kapcsolódás játékhoz"
 
@@ -938,28 +938,28 @@ msgstr ""
 "Hiba a(z) \"%s\" fájl törlése közben: nem lehet az egyéni csapatot törölni."
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:552
+#: src/menu/network_connection_menu.cpp:520
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Hiba: Nem sikerült csatlakozni (%s:%s)"
 
-#: src/menu/network_connection_menu.cpp:502
+#: src/menu/network_connection_menu.cpp:470
 msgid "Error: Unable to contact the index server to host a game"
 msgstr ""
 "Hiba: Nem sikerült kapcsolódni a központi szerverhez a játék létrehozásához"
 
-#: src/menu/network_connection_menu.cpp:409
+#: src/menu/network_connection_menu.cpp:381
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
 "Hiba: Nem sikerült a központi szerverhez kapcsolódni játékok kereséséhez"
 
-#: src/menu/network_connection_menu.cpp:530
+#: src/menu/network_connection_menu.cpp:498
 #, fuzzy
 msgid "Error: Unable to start the server"
 msgstr "Hiba: Nem sikerült a szerver indítása"
 
-#: src/menu/network_connection_menu.cpp:523
+#: src/menu/network_connection_menu.cpp:491
 #: tools/servers/game_server/server.cpp:401
 #, fuzzy, c-format
 msgid ""
@@ -1052,7 +1052,7 @@ msgstr "Játékmód"
 msgid "Game mode"
 msgstr "Játékmód"
 
-#: src/menu/network_connection_menu.cpp:285
+#: src/menu/network_connection_menu.cpp:257
 msgid "Game name:"
 msgstr "Játék neve:"
 
@@ -1102,7 +1102,7 @@ msgstr "%s csapat elpusztult."
 msgid "Gun"
 msgstr "Pisztoly"
 
-#: src/menu/network_connection_menu.cpp:335
+#: src/menu/network_connection_menu.cpp:307
 msgid "Have a good game!"
 msgstr "Jó játékot!"
 
@@ -1127,7 +1127,7 @@ msgstr "Magasugrás"
 msgid "High jump"
 msgstr "Magasugrás"
 
-#: src/menu/network_connection_menu.cpp:311
+#: src/menu/network_connection_menu.cpp:283
 msgid "Host a game"
 msgstr "Játék létrehozása"
 
@@ -1316,7 +1316,7 @@ msgstr ""
 msgid "LowGrav"
 msgstr "Alacsony gravitáció"
 
-#: src/menu/network_connection_menu.cpp:310
+#: src/menu/network_connection_menu.cpp:282
 msgid "Manual connection"
 msgstr "Kézi kapcsolat"
 
@@ -1569,9 +1569,9 @@ msgid ""
 "Use left/right to change direction"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:221
-#: src/menu/network_connection_menu.cpp:258
-#: src/menu/network_connection_menu.cpp:297
+#: src/menu/network_connection_menu.cpp:193
+#: src/menu/network_connection_menu.cpp:230
+#: src/menu/network_connection_menu.cpp:269
 msgid "Password:"
 msgstr "Jelszó:"
 
@@ -1618,8 +1618,8 @@ msgstr ""
 msgid "Polecat Launcher"
 msgstr "Borz-lövõ"
 
-#: src/menu/network_connection_menu.cpp:247
-#: src/menu/network_connection_menu.cpp:274
+#: src/menu/network_connection_menu.cpp:219
+#: src/menu/network_connection_menu.cpp:246
 msgid "Port:"
 msgstr "Port:"
 
@@ -1688,7 +1688,7 @@ msgid ""
 "Ends when selecting another weapon"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:207
+#: src/menu/network_connection_menu.cpp:179
 msgid "Public battles"
 msgstr "Nyilvános játékok"
 
@@ -1816,12 +1816,12 @@ msgstr ""
 msgid "Select number of playing teams"
 msgstr "Játékosok maximális száma:"
 
-#: src/menu/network_connection_menu.cpp:237
+#: src/menu/network_connection_menu.cpp:209
 msgid "Server address:"
 msgstr "Szerver címe:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:305
+#: src/menu/network_connection_menu.cpp:277
 msgid "Server available on Internet"
 msgstr "Interneten elérhetõ szerver"
 
@@ -1908,11 +1908,11 @@ msgstr "Mesterlövész puska"
 msgid "Someone put a booby trap into the crate!"
 msgstr "Valaki bombát rejtett a ládába!"
 
-#: src/menu/network_connection_menu.cpp:414
+#: src/menu/network_connection_menu.cpp:386
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Sajnálom, most egy játék sem vár játékosokat!"
 
-#: src/menu/network_connection_menu.cpp:472
+#: src/menu/network_connection_menu.cpp:440
 #: tools/servers/game_server/server.cpp:386
 #, fuzzy, c-format
 msgid ""
@@ -2120,7 +2120,7 @@ msgstr[1] "Csak %i csapat van."
 msgid "This key has already been attributed to '%s'"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:337
+#: src/menu/network_connection_menu.cpp:309
 msgid "This version was compiled without curl, you can't list public games!"
 msgstr ""
 
@@ -2490,16 +2490,16 @@ msgstr ""
 msgid "no configuration file!"
 msgstr "nincs konfigurációs fájl!"
 
-#: src/sound/jukebox.cpp:215
+#: src/sound/jukebox.cpp:204
 msgid "o Loading music"
 msgstr "Zene betöltése"
 
-#: src/sound/jukebox.cpp:397
+#: src/sound/jukebox.cpp:386
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "Hangprofil betöltése: %s"
 
-#: src/sound/jukebox.cpp:149
+#: src/sound/jukebox.cpp:142
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "Hangminõség: %d Hz, %d bit"

@@ -811,7 +811,7 @@ msgstr "Самогубство"
 msgid "Configuration menu"
 msgstr "Меню налаштувань"
 
-#: src/menu/network_connection_menu.cpp:309
+#: src/menu/network_connection_menu.cpp:281
 msgid "Connect to game"
 msgstr "Підключитись до гри"
 
@@ -979,26 +979,26 @@ msgstr ""
 "Помилка при видаленні файлу \"%s\": не вийшло видалити особисту команду."
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:552
+#: src/menu/network_connection_menu.cpp:520
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Помилка: не вийшло підключитись к %s: %s"
 
-#: src/menu/network_connection_menu.cpp:502
+#: src/menu/network_connection_menu.cpp:470
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "Помилка: Не вийшло з'єднатися з сервером, щоб створити гру"
 
-#: src/menu/network_connection_menu.cpp:409
+#: src/menu/network_connection_menu.cpp:381
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
 "Помилка: Не вийшло з'єднатися з вказаним сервером, щоб знайти інтернет-гру"
 
-#: src/menu/network_connection_menu.cpp:530
+#: src/menu/network_connection_menu.cpp:498
 msgid "Error: Unable to start the server"
 msgstr "Помилка: Не вийшло запустити сервер"
 
-#: src/menu/network_connection_menu.cpp:523
+#: src/menu/network_connection_menu.cpp:491
 #: tools/servers/game_server/server.cpp:401
 #, c-format
 msgid ""
@@ -1090,7 +1090,7 @@ msgstr "Меню гри"
 msgid "Game mode"
 msgstr "Режим гри"
 
-#: src/menu/network_connection_menu.cpp:285
+#: src/menu/network_connection_menu.cpp:257
 msgid "Game name:"
 msgstr "Ім'я гри:"
 
@@ -1139,7 +1139,7 @@ msgstr "Команду %s було знищено"
 msgid "Gun"
 msgstr "Пістолет"
 
-#: src/menu/network_connection_menu.cpp:335
+#: src/menu/network_connection_menu.cpp:307
 msgid "Have a good game!"
 msgstr "Гарної гри!"
 
@@ -1164,7 +1164,7 @@ msgstr "Високий стрибок"
 msgid "High jump"
 msgstr "Високий стрибок"
 
-#: src/menu/network_connection_menu.cpp:311
+#: src/menu/network_connection_menu.cpp:283
 msgid "Host a game"
 msgstr "Стати сервером"
 
@@ -1347,7 +1347,7 @@ msgstr ""
 msgid "LowGrav"
 msgstr "Антигравітатор"
 
-#: src/menu/network_connection_menu.cpp:310
+#: src/menu/network_connection_menu.cpp:282
 msgid "Manual connection"
 msgstr "З'єднання вручну"
 
@@ -1591,9 +1591,9 @@ msgid ""
 "Use left/right to change direction"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:221
-#: src/menu/network_connection_menu.cpp:258
-#: src/menu/network_connection_menu.cpp:297
+#: src/menu/network_connection_menu.cpp:193
+#: src/menu/network_connection_menu.cpp:230
+#: src/menu/network_connection_menu.cpp:269
 msgid "Password:"
 msgstr "Гасло:"
 
@@ -1640,8 +1640,8 @@ msgstr ""
 msgid "Polecat Launcher"
 msgstr "Скунс"
 
-#: src/menu/network_connection_menu.cpp:247
-#: src/menu/network_connection_menu.cpp:274
+#: src/menu/network_connection_menu.cpp:219
+#: src/menu/network_connection_menu.cpp:246
 msgid "Port:"
 msgstr "Порт:"
 
@@ -1708,7 +1708,7 @@ msgid ""
 "Ends when selecting another weapon"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:207
+#: src/menu/network_connection_menu.cpp:179
 msgid "Public battles"
 msgstr "Доступні битви"
 
@@ -1832,12 +1832,12 @@ msgstr ""
 msgid "Select number of playing teams"
 msgstr "Макс. кількість гравців:"
 
-#: src/menu/network_connection_menu.cpp:237
+#: src/menu/network_connection_menu.cpp:209
 msgid "Server address:"
 msgstr "Адреса сервера:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:305
+#: src/menu/network_connection_menu.cpp:277
 msgid "Server available on Internet"
 msgstr "Сервер доступний в інтернеті"
 
@@ -1921,11 +1921,11 @@ msgstr "Снайперська гвинтівка"
 msgid "Someone put a booby trap into the crate!"
 msgstr "В контейнері була міна-пастка!"
 
-#: src/menu/network_connection_menu.cpp:414
+#: src/menu/network_connection_menu.cpp:386
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Вибачте, на даний момент немає ігор, що очікують гравців"
 
-#: src/menu/network_connection_menu.cpp:472
+#: src/menu/network_connection_menu.cpp:440
 #: tools/servers/game_server/server.cpp:386
 #, c-format
 msgid ""
@@ -2127,7 +2127,7 @@ msgstr[2] "Всього %i команд"
 msgid "This key has already been attributed to '%s'"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:337
+#: src/menu/network_connection_menu.cpp:309
 msgid "This version was compiled without curl, you can't list public games!"
 msgstr ""
 
@@ -2480,16 +2480,16 @@ msgstr ""
 msgid "no configuration file!"
 msgstr "немає конфігураційного файлу!"
 
-#: src/sound/jukebox.cpp:215
+#: src/sound/jukebox.cpp:204
 msgid "o Loading music"
 msgstr "o Завантаження музики"
 
-#: src/sound/jukebox.cpp:397
+#: src/sound/jukebox.cpp:386
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Завантаження звукового профілю: %s"
 
-#: src/sound/jukebox.cpp:149
+#: src/sound/jukebox.cpp:142
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Відкрито аудіо в %d Hz %d bit"
