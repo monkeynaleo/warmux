@@ -42,5 +42,5 @@
 #ifdef GEKKO
 #  define HAVE_HANDHELD // Not really true, but saves memory and CPU
 #endif
-
+#define ENABLE_VKEYBD //!!!!!!!!!!!!!!!
 #endif // WARMUX_CONFIG_H

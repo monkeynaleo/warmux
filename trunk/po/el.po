@@ -797,7 +797,7 @@ msgstr "Αυτοκτονία"
 msgid "Configuration menu"
 msgstr "Μενού Διαμόρφωσης"
 
-#: src/menu/network_connection_menu.cpp:281
+#: src/menu/network_connection_menu.cpp:309
 msgid "Connect to game"
 msgstr "Συνδεθείτε σε παιχνίδι"
 
@@ -970,18 +970,18 @@ msgstr ""
 "ομάδα."
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:520
+#: src/menu/network_connection_menu.cpp:552
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Αδύνατη η σύνδεση στο %s:%s"
 
-#: src/menu/network_connection_menu.cpp:470
+#: src/menu/network_connection_menu.cpp:502
 msgid "Error: Unable to contact the index server to host a game"
 msgstr ""
 "Αδύνατη η επικοινωνία με το δείκτη διακομιστή για τη δημιουργία ενός "
 "παιχνιδιού."
 
-#: src/menu/network_connection_menu.cpp:381
+#: src/menu/network_connection_menu.cpp:409
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
@@ -989,12 +989,12 @@ msgstr ""
 "διαδίκτυο."
 
 # Impossible de se connecter à %s : %s
-#: src/menu/network_connection_menu.cpp:498
+#: src/menu/network_connection_menu.cpp:530
 msgid "Error: Unable to start the server"
 msgstr "Αδύνατη η έναρξη του διακομιστή."
 
 # Erreur : Votre serveur n'est pas accessible depuis Internet. Vérifier la configuration de votre firewall : le port TCP %s doit accepter les connexions extérieures. Si vous n'êtes pas directement connecté à Internet, vérifier la configuration de votre routeur : le port TCP %s doit être redirigé vers votre ordinateur.
-#: src/menu/network_connection_menu.cpp:491
+#: src/menu/network_connection_menu.cpp:523
 #: tools/servers/game_server/server.cpp:401
 #, c-format
 msgid ""
@@ -1092,7 +1092,7 @@ msgstr "Μενού παιχνιδιού"
 msgid "Game mode"
 msgstr "Κατάσταση παιχνιδιού"
 
-#: src/menu/network_connection_menu.cpp:257
+#: src/menu/network_connection_menu.cpp:285
 msgid "Game name:"
 msgstr "Όνομα παιχνιδιού:"
 
@@ -1144,7 +1144,7 @@ msgstr "Η ομάδα %s αποδεκατίστηκε."
 msgid "Gun"
 msgstr "Πιστόλι"
 
-#: src/menu/network_connection_menu.cpp:307
+#: src/menu/network_connection_menu.cpp:335
 msgid "Have a good game!"
 msgstr "Καλό παιχνίδι!"
 
@@ -1168,7 +1168,7 @@ msgstr "Ψηλό"
 msgid "High jump"
 msgstr "Ψηλό άλμα"
 
-#: src/menu/network_connection_menu.cpp:283
+#: src/menu/network_connection_menu.cpp:311
 msgid "Host a game"
 msgstr "Δημιουργήστε ένα παιχνίδι"
 
@@ -1354,7 +1354,7 @@ msgstr "Χαμηλή μνήμη"
 msgid "LowGrav"
 msgstr "Αντιβαρύτητα"
 
-#: src/menu/network_connection_menu.cpp:282
+#: src/menu/network_connection_menu.cpp:310
 msgid "Manual connection"
 msgstr "Χειροποίητη σύνδεση"
 
@@ -1595,9 +1595,9 @@ msgstr ""
 "Ανοίγει αυτόματα \n"
 "Δεξιά/αριστερά αλλάζεις κατεύθυνση"
 
-#: src/menu/network_connection_menu.cpp:193
-#: src/menu/network_connection_menu.cpp:230
-#: src/menu/network_connection_menu.cpp:269
+#: src/menu/network_connection_menu.cpp:221
+#: src/menu/network_connection_menu.cpp:258
+#: src/menu/network_connection_menu.cpp:297
 msgid "Password:"
 msgstr "Κωδικός:"
 
@@ -1649,8 +1649,8 @@ msgstr "Πόντιουμ"
 msgid "Polecat Launcher"
 msgstr "Εκτόξευση Ασβού"
 
-#: src/menu/network_connection_menu.cpp:219
-#: src/menu/network_connection_menu.cpp:246
+#: src/menu/network_connection_menu.cpp:247
+#: src/menu/network_connection_menu.cpp:274
 msgid "Port:"
 msgstr "Θύρα:"
 
@@ -1737,7 +1737,7 @@ msgstr ""
 "Η βαρύτητα μειώνεται\n"
 "Λήγει με την επιλογή άλλου όπλου"
 
-#: src/menu/network_connection_menu.cpp:179
+#: src/menu/network_connection_menu.cpp:207
 msgid "Public battles"
 msgstr "Δημόσιες μάχες"
 
@@ -1867,12 +1867,12 @@ msgstr "Επίλεξε μία επανάληψη:"
 msgid "Select number of playing teams"
 msgstr "Επίλεξε τον αριθμό των παικτών"
 
-#: src/menu/network_connection_menu.cpp:209
+#: src/menu/network_connection_menu.cpp:237
 msgid "Server address:"
 msgstr "Διεύθυνση διακομιστή:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:277
+#: src/menu/network_connection_menu.cpp:305
 msgid "Server available on Internet"
 msgstr "Διακομιστής διαθέσιμος στο διαδίκτυο"
 
@@ -1967,11 +1967,11 @@ msgid "Someone put a booby trap into the crate!"
 msgstr "Κάποιος παγίδευσε το κιβώτιο!"
 
 # Désolé, il n'y a actuellement aucun jeu en attente de joueurs
-#: src/menu/network_connection_menu.cpp:386
+#: src/menu/network_connection_menu.cpp:414
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Συγγνώμη, δεν υπάρχει κανένα παιχνίδι να περιμένει παίκτες"
 
-#: src/menu/network_connection_menu.cpp:440
+#: src/menu/network_connection_menu.cpp:472
 #: tools/servers/game_server/server.cpp:386
 #, c-format
 msgid ""
@@ -2184,7 +2184,7 @@ msgstr[1] "Υπάρχουν μόνο %i ομάδες."
 msgid "This key has already been attributed to '%s'"
 msgstr "Αυτό το κουμπί έχει αποδοθεί στο '%s'"
 
-#: src/menu/network_connection_menu.cpp:309
+#: src/menu/network_connection_menu.cpp:337
 msgid "This version was compiled without curl, you can't list public games!"
 msgstr ""
 
@@ -2552,17 +2552,17 @@ msgstr "φόρτωση"
 msgid "no configuration file!"
 msgstr "δεν υπάρχει αρχείο διαμόρφωσης!"
 
-#: src/sound/jukebox.cpp:204
+#: src/sound/jukebox.cpp:215
 msgid "o Loading music"
 msgstr "o Φόρτωση μουσικής"
 
-#: src/sound/jukebox.cpp:386
+#: src/sound/jukebox.cpp:397
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Φόρτωση ηχητικού προφίλ: %s"
 
 # o Démarrage du son à %d Hz %d bit
-#: src/sound/jukebox.cpp:142
+#: src/sound/jukebox.cpp:149
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Άνοιγμα ήχου στα %d Hz %d bit"
