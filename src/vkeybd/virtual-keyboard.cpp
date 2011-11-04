@@ -35,11 +35,7 @@
 #include <WARMUX_file_tools.h>
 #include "graphic/video.h"
 #include "include/constant.h"
-
-#include "vkeybd/types.h"
-
 #include "vkeybd/virtual-keyboard.h"
-
 #include "vkeybd/virtual-keyboard-gui.h"
 #include "vkeybd/virtual-keyboard-parser.h"
 #include "vkeybd/keycode-descriptions.h"
@@ -90,7 +86,7 @@ void VirtualKeyboard::reset()
   _kbdGUI->reset();
 }
 
-bool VirtualKeyboard::openPack(const String &packName, const String &node)
+bool VirtualKeyboard::openPack(const std::string &packName, const std::string &node)
 {
   if (DoesFileExist(node + "/" + packName + "/" + packName + ".xml")) {
     //_fileArchive = new FSDirectory(node, 1);
@@ -127,7 +123,7 @@ bool VirtualKeyboard::openPack(const String &packName, const String &node)
   return false;
 }
 
-bool VirtualKeyboard::loadKeyboardPack(const String &packName)
+bool VirtualKeyboard::loadKeyboardPack(const std::string &packName)
 {
   _kbdGUI->initSize(GetMainWindow().GetWidth(), GetMainWindow().GetHeight());
 
@@ -165,12 +161,12 @@ bool VirtualKeyboard::checkModeResolutions()
   return _loaded;
 }
 
-String VirtualKeyboard::findArea(int16 x, int16 y)
+std::string VirtualKeyboard::findArea(int x, int y)
 {
   return _currentMode->imageMap.findMapArea(x, y);
 }
 
-void VirtualKeyboard::processAreaClick(const String& area)
+void VirtualKeyboard::processAreaClick(const std::string& area)
 {
   if (!_currentMode->events.count(area))
     return;
@@ -183,7 +179,7 @@ void VirtualKeyboard::processAreaClick(const String& area)
     _keyQueue.insertKey(*(KeyState*) evt->data);
     break;
   case kVKEventModifier:
-    _keyQueue.toggleFlags(*(byte*) (evt->data));
+    _keyQueue.toggleFlags(*(int*) (evt->data));
     break;
   case kVKEventSwitchMode:
     // switch to new mode
@@ -217,7 +213,7 @@ void VirtualKeyboard::switchMode(Mode *newMode)
   _currentMode = newMode;
 }
 
-void VirtualKeyboard::switchMode(const String &newMode)
+void VirtualKeyboard::switchMode(const std::string&newMode)
 {
   if (!_modes.count(newMode)) {
     //warning("Keyboard mode '%s' unknown", newMode.c_str());
@@ -226,14 +222,14 @@ void VirtualKeyboard::switchMode(const String &newMode)
   }
 }
 
-void VirtualKeyboard::handleMouseDown(int16 x, int16 y)
+void VirtualKeyboard::handleMouseDown(int x, int y)
 {
   _areaDown = findArea(x, y);
   if (_areaDown.empty())
     _kbdGUI->startDrag(x, y);
 }
 
-void VirtualKeyboard::handleMouseUp(int16 x, int16 y)
+void VirtualKeyboard::handleMouseUp(int x, int y)
 {
   if (!_areaDown.empty() && _areaDown == findArea(x, y)) {
     processAreaClick(_areaDown);
@@ -293,7 +289,7 @@ VirtualKeyboard::KeyPressQueue::KeyPressQueue()
   _flags = 0;
 }
 
-void VirtualKeyboard::KeyPressQueue::toggleFlags(byte fl)
+void VirtualKeyboard::KeyPressQueue::toggleFlags(int fl)
 {
   _flags ^= fl;
   _flagsStr.clear();
@@ -314,7 +310,7 @@ void VirtualKeyboard::KeyPressQueue::insertKey(KeyState key)
   if ((key.sym >= SDLK_a) && (key.sym <= SDLK_z))
     key.unicode = (key.mod & KMOD_SHIFT) ? key.scancode - 32 : key.scancode;
   clearFlags();
-  String keyStr;
+  std::string keyStr = "";
 
   if (key.scancode >= 32 && key.scancode <= 255) {
     //if (key.mod & KMOD_SHIFT && (key.scancode < 65 || key.scancode > 90))
@@ -404,12 +400,12 @@ bool VirtualKeyboard::KeyPressQueue::empty()
   return _keys.empty();
 }
 
-String VirtualKeyboard::KeyPressQueue::getString()
+std::string VirtualKeyboard::KeyPressQueue::getString()
 {
   return _keysStr;
 }
 
-void VirtualKeyboard::KeyPressQueue::setString(String str)
+void VirtualKeyboard::KeyPressQueue::setString(std::string str)
 {
   _keysStr = str;
   _strPos = str.length();

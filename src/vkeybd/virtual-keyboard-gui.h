@@ -33,7 +33,6 @@
 #include <WARMUX_config.h>
 
 #ifdef ENABLE_VKEYBD
-#include "vkeybd/types.h"
 
 #include "vkeybd/virtual-keyboard.h"
 #include "graphic/surface.h"
@@ -84,7 +83,7 @@ public:
    * Activates drag mode. Takes the keyboard-relative coordinates of the
    * cursor as an argument.
    */
-  void startDrag(int16 x, int16 y);
+  void startDrag(int x, int y);
 
   /**
    * Deactivates drag mode
@@ -100,7 +99,7 @@ public:
   /**
    * Sets the GUI's internal screen size variables
    */
-  void initSize(int16 w, int16 h);
+  void initSize(int w, int h);
 
 private:
 
@@ -121,18 +120,18 @@ private:
   bool _displayEnabled;
   Surface _dispSurface;
   const Font *_dispFont;
-  int16 _dispX, _dispY;
+  int _dispX, _dispY;
   uint _dispI;
   Color _dispForeColor, _dispBackColor;
 
   int _lastScreenChanged;
-  int16 _screenW, _screenH;
+  int _screenW, _screenH;
 
   bool _displaying;
   bool _firstRun;
 
   void setupDisplayArea(Rectanglei& r, Color forecolor);
-  void move(int16 x, int16 y);
+  void move(int x, int y);
   void moveToDefaultPosition();
   void screenChanged();
   void mainLoop();
@@ -142,17 +141,17 @@ private:
   void forceRedraw();
   void updateDisplay();
   bool fontIsSuitable(const Font *font, const Rectanglei& rect);
-  uint calculateEndIndex(const String& str, uint startIndex);
+  uint calculateEndIndex(const std::string &str, uint startIndex);
 
   bool _drawCaret;
-  int16 _caretX;
+  int _caretX;
   static const int kCaretBlinkTime = 500;
   void animateCaret();
 
   static const int kCursorAnimateDelay = 250;
   int _cursorAnimateCounter;
   int _cursorAnimateTimer;
-  byte _cursor[2048];
+  //byte _cursor[2048];
   void setupCursor();
   void removeCursor();
   void animateCursor();

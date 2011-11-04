@@ -34,7 +34,6 @@
 
 #include <WARMUX_point.h>
 #include <map>
-#include "vkeybd/types.h"
 #include "vkeybd/vkpolygon.h"
 #include "vkeybd/image-map.h"
 
@@ -45,7 +44,7 @@ ImageMap::~ImageMap()
   removeAllAreas();
 }
 
-Polygon *ImageMap::createArea(const String& id)
+Polygon *ImageMap::createArea(const std::string& id)
 {
   if (_areas.count(id)) {
     printf("Image map already contains an area with target of '%s'\n", id.c_str());
@@ -56,7 +55,7 @@ Polygon *ImageMap::createArea(const String& id)
   return p;
 }
 
-void ImageMap::removeArea(const String& id)
+void ImageMap::removeArea(const std::string& id)
 {
   if (!_areas.count(id))
     return;
@@ -66,23 +65,23 @@ void ImageMap::removeArea(const String& id)
 
 void ImageMap::removeAllAreas()
 {
-  std::map<String, Polygon*>::iterator it;
+  std::map<std::string, Polygon*>::iterator it;
   for (it = _areas.begin(); it != _areas.end(); ++it) {
     delete it->second;
   }
   _areas.clear();
 }
 
-String ImageMap::findMapArea(int16 x, int16 y)
+std::string ImageMap::findMapArea(int x, int y)
 {
-  std::map<String, Polygon*>::iterator it;
+  std::map<std::string, Polygon*>::iterator it;
   for (it = _areas.begin(); it != _areas.end(); ++it) {
     if (it->second->contains(x, y)) {
       printf("Virtual Keyboard pressed: %s\n", it->first.c_str());
       return it->first;
     }
   }
-  return String();
+  return std::string();
 }
 
 } // End of namespace Common

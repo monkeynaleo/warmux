@@ -32,7 +32,6 @@
 #ifdef ENABLE_VKEYBD
 #include <assert.h>
 #include <SDL/SDL.h>
-#include "vkeybd/types.h"
 #include "vkeybd/virtual-keyboard-gui.h"
 #include "include/app.h"
 #include "graphic/surface.h"
@@ -106,7 +105,7 @@ void VirtualKeyboardGUI::checkScreenChanged()
   screenChanged();
 }
 
-void VirtualKeyboardGUI::initSize(int16 w, int16 h)
+void VirtualKeyboardGUI::initSize(int w, int h)
 {
   _screenW = w;
   _screenH = h;
@@ -150,8 +149,8 @@ void VirtualKeyboardGUI::reset()
 
 void VirtualKeyboardGUI::moveToDefaultPosition()
 {
-  int16 kbdW = _kbdBound.GetSizeX(), kbdH = _kbdBound.GetSizeY();
-  int16 x = 0, y = 0;
+  int kbdW = _kbdBound.GetSizeX(), kbdH = _kbdBound.GetSizeY();
+  int x = 0, y = 0;
   if (_screenW != kbdW) {
     switch (_kbd->_hAlignment) {
     case VirtualKeyboard::kAlignLeft:
@@ -181,7 +180,7 @@ void VirtualKeyboardGUI::moveToDefaultPosition()
   move(x, y);
 }
 
-void VirtualKeyboardGUI::move(int16 x, int16 y)
+void VirtualKeyboardGUI::move(int x, int y)
 {
   // add old position to dirty area
   if (_displaying)
@@ -190,12 +189,12 @@ void VirtualKeyboardGUI::move(int16 x, int16 y)
   // snap to edge of screen
   if (abs(x) < SNAP_WIDTH)
     x = 0;
-  int16 x2 = _screenW - _kbdBound.GetSizeX();
+  int x2 = _screenW - _kbdBound.GetSizeX();
   if (abs(x - x2) < SNAP_WIDTH)
     x = x2;
   if (abs(y) < SNAP_WIDTH)
     y = 0;
-  int16 y2 = _screenH - _kbdBound.GetSizeY();
+  int y2 = _screenH - _kbdBound.GetSizeY();
   if (abs(y - y2) < SNAP_WIDTH)
     y = y2;
 
@@ -215,8 +214,8 @@ void VirtualKeyboardGUI::screenChanged()
   //	g_gui.checkScreenChange();
 
   //	_lastScreenChanged = _system->getScreenChangeID();
-  int16 newScreenW = GetMainWindow().GetWidth();
-  int16 newScreenH = GetMainWindow().GetHeight();
+  int newScreenW = GetMainWindow().GetWidth();
+  int newScreenH = GetMainWindow().GetHeight();
 
   if (_screenW != newScreenW || _screenH != newScreenH) {
     _screenW = newScreenW;
@@ -277,7 +276,7 @@ void VirtualKeyboardGUI::mainLoop()
 
 }
 
-void VirtualKeyboardGUI::startDrag(int16 x, int16 y)
+void VirtualKeyboardGUI::startDrag(int x, int y)
 {
   _drag = true;
   _dragPoint.x = x;
@@ -320,9 +319,9 @@ void VirtualKeyboardGUI::redraw()
   GetMainWindow().Blit(*_kbdSurface, _kbdBound.GetTopLeftPoint());
 }
 
-uint VirtualKeyboardGUI::calculateEndIndex(const String& str, uint startIndex)
+uint VirtualKeyboardGUI::calculateEndIndex(const std::string& str, uint startIndex)
 {
-  int16 w = 0;
+  int w = 0;
   while (w <= _dispSurface.GetWidth() && startIndex < str.size()) {
     w += _dispFont->GetWidth(str.substr(startIndex++));//_dispFont->getCharWidth(str[startIndex++]);
   }

@@ -33,7 +33,6 @@
 
 #ifdef ENABLE_VKEYBD
 
-#include "vkeybd/types.h"
 #include "tool/xml_document.h"
 #include "vkeybd/virtual-keyboard.h"
 
@@ -218,7 +217,7 @@ protected:
   /** internal state variables of parser */
   ParseMode _parseMode;
   VirtualKeyboard::Mode *_mode;
-  String _initialModeName;
+  std::string _initialModeName;
   bool _kbdParsed;
   bool _layoutParsed;
 
@@ -234,10 +233,10 @@ protected:
   bool parserCallback_area(const xmlNode *node);
 
   /** Parse helper functions */
-  byte parseFlags(const String& flags);
-  bool parseRect(Rectanglei &rect, const String& coords);
-  bool parsePolygon(Polygon &poly, const String& coords);
-  bool parseRectAsPolygon(Polygon &poly, const String& coords);
+  int parseFlags(const std::string& flags);
+  bool parseRect(Rectanglei &rect, const std::string& coords);
+  bool parsePolygon(Polygon &poly, const std::string& coords);
+  bool parseRectAsPolygon(Polygon &poly, const std::string& coords);
 };
 
 } // End of namespace GUI
