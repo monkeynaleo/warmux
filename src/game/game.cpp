@@ -64,6 +64,10 @@
 #include <WARMUX_random.h>
 #include "tool/stats.h"
 #include "weapon/weapons_list.h"
+#ifdef ENABLE_VKEYBD
+#include "vkeybd/virtual-keyboard.h"
+using namespace Common;
+#endif
 
 // Uncomment this to get an image during the game
 // DON'T USE THIS IF YOU INTEND TO PLAY NETWORKED GAMES!
@@ -201,6 +205,12 @@ void Game::InitEverything()
 
   // Reset time at end of initialisation, so that the first player doesn't loose a few seconds.
   GameTime::GetInstance()->Reset();
+
+#ifdef ENABLE_VKEYBD
+  if(!VirtualKeyboard::GetInstance()->isLoaded())
+    VirtualKeyboard::GetInstance()->loadKeyboardPack("vkeybd_default");
+  //VirtualKeyboard::GetInstance()->show(false);
+#endif
 
   std::cout << std::endl;
   std::cout << "[ " << _("Starting a new game") << " ]" << std::endl;
@@ -522,6 +532,11 @@ void Game::RefreshInput()
         ask_for_end = true;
       }
     } else {
+#ifdef ENABLE_VKEYBD
+      if (VirtualKeyboard::GetInstance()->isDisplaying())
+        if (VirtualKeyboard::GetInstance()->handleEvent(evnt))
+          continue;
+#endif
       // Mouse event
       if (Mouse::GetInstance()->HandleEvent(evnt))
         continue;
@@ -634,6 +649,12 @@ void Game::Draw()
   StatStart("GameDraw:interface");
   Interface::GetInstance()->Draw();
   StatStop("GameDraw:interface");
+
+#ifdef ENABLE_VKEYBD
+  // Draw virtual keyboard
+  if (VirtualKeyboard::GetInstance()->isDisplaying())
+    VirtualKeyboard::GetInstance()->handleDraw();
+#endif
 
   // Draw game messages
   StatStart("GameDraw::game_messages");

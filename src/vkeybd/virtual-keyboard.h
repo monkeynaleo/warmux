@@ -37,6 +37,7 @@
 #include <SDL/SDL.h>
 #include <map>
 #include <list>
+#include <WARMUX_singleton.h>
 #include "graphic/surface.h"
 #include "vkeybd/image-map.h"
 
@@ -56,7 +57,7 @@ class VirtualKeyboardParser;
  * a key and delivery of them when the keyboard is closed, as well as managing
  * the internal state of the keyboard, such as its active mode.
  */
-class VirtualKeyboard
+class VirtualKeyboard: public Singleton<VirtualKeyboard>
 {
 protected:
 
@@ -220,7 +221,7 @@ public:
    * user input (like a modal GUI dialog).
    * It is assumed that the game has been paused, before this is called
    */
-  bool show();
+  bool show(bool blocking = true);
 
   /**
    * Hides the keyboard, ending the event loop.
@@ -240,6 +241,10 @@ public:
   bool isLoaded() {
     return _loaded;
   }
+
+  bool handleEvent(SDL_Event event);
+
+  void handleDraw();
 
   std::string getString() {
     return _keyQueue.getString();

@@ -238,7 +238,7 @@ void VirtualKeyboard::handleMouseUp(int x, int y)
   _kbdGUI->endDrag();
 }
 
-bool VirtualKeyboard::show()
+bool VirtualKeyboard::show(bool blocking)
 {
   if (!_loaded) {
     Warning("Virtual keyboard not loaded");
@@ -248,25 +248,8 @@ bool VirtualKeyboard::show()
   }
 
   switchMode(_initialMode);
-  _kbdGUI->run();
+  _kbdGUI->run(blocking);
 
-  if (_submitKeys) {
-    /*		EventManager *eventMan = _system->getEventManager();
-     assert(eventMan);
-
-     // push keydown & keyup events into the event manager
-     Event evt;
-     evt.synthetic = false;
-     while (!_keyQueue.empty()) {
-     evt.kbd = _keyQueue.pop();
-     evt.type = EVENT_KEYDOWN;
-     eventMan->pushEvent(evt);
-     evt.type = EVENT_KEYUP;
-     eventMan->pushEvent(evt);
-     }
-     */} else {
-    _keyQueue.clear();
-  }
   return _submitKeys;
 }
 
@@ -280,6 +263,15 @@ bool VirtualKeyboard::isDisplaying()
 {
   return _kbdGUI->isDisplaying();
 }
+
+bool VirtualKeyboard::handleEvent(SDL_Event event) {
+  return _kbdGUI->handleEvent(event);
+}
+
+void VirtualKeyboard::handleDraw() {
+  _kbdGUI->handleDraw();
+}
+
 
 VirtualKeyboard::KeyPressQueue::KeyPressQueue()
 {
