@@ -111,23 +111,20 @@ void VirtualKeyboardGUI::initSize(int w, int h)
   _screenH = h;
 }
 
-void VirtualKeyboardGUI::run()
+void VirtualKeyboardGUI::run(bool run_mainloop)
 {
   if (_firstRun) {
     _firstRun = false;
     moveToDefaultPosition();
   }
 
-  //	setupCursor();
-
   forceRedraw();
   _displaying = true;
-  mainLoop();
-
-  //	removeCursor();
-
-  _overlayBackup.Free();
-  _dispSurface.Free();
+  if (run_mainloop) {
+    mainLoop();
+    _overlayBackup.Free();
+    _dispSurface.Free();
+  }
 }
 
 void VirtualKeyboardGUI::close()
@@ -235,45 +232,54 @@ void VirtualKeyboardGUI::mainLoop()
 {
 
   while (_displaying) {
-    animateCaret();
-    animateCursor();
-    redraw();
-    //if (_kbd->_keyQueue.hasStringChanged())
-    updateDisplay();
+    handleDraw();
     AppWarmux::GetInstance()->video->Flip();
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
-      switch (event.type) {
-      case SDL_MOUSEBUTTONDOWN:
-        if (_kbdBound.Contains(Point2i(event.button.x, event.button.y))) {
-          _kbd->handleMouseDown(event.button.x - _kbdBound.GetLeft(), event.button.y
-              - _kbdBound.GetTop());
-        }
-        break;
-      case SDL_MOUSEBUTTONUP:
-        if (_kbdBound.Contains(Point2i(event.button.x, event.button.y))) {
-          _kbd->handleMouseUp(event.button.x - _kbdBound.GetLeft(), event.button.y
-              - _kbdBound.GetTop());
-        }
-        break;
-      case SDL_MOUSEMOTION:
-        if (_drag)
-          move(event.motion.x - _dragPoint.x, event.motion.y - _dragPoint.y);
-        break;
-      case SDL_VIDEORESIZE:
-        screenChanged();
-        break;
-      case SDL_QUIT:
-        SDL_Quit();
-        return;
-      default:
-        break;
-      }
+      handleEvent(event);
     }
     // Delay for a moment
     SDL_Delay(10);
   }
 
+}
+void VirtualKeyboardGUI::handleDraw() {
+  animateCaret();
+  animateCursor();
+  redraw();
+  //if (_kbd->_keyQueue.hasStringChanged())
+  updateDisplay();
+}
+bool VirtualKeyboardGUI::handleEvent(SDL_Event event) {
+  bool contains = false;
+  switch (event.type) {
+  case SDL_MOUSEBUTTONDOWN:
+    if (_kbdBound.Contains(Point2i(event.button.x, event.button.y))) {
+       _kbd->handleMouseDown(event.button.x - _kbdBound.GetLeft(), event.button.y - _kbdBound.GetTop());
+       contains = true;
+    }
+    break;
+  case SDL_MOUSEBUTTONUP:
+    if (_kbdBound.Contains(Point2i(event.button.x, event.button.y))) {
+      _kbd->handleMouseUp(event.button.x - _kbdBound.GetLeft(), event.button.y - _kbdBound.GetTop());
+      contains = true;
+    }
+    break;
+  case SDL_MOUSEMOTION:
+    if (_drag) {
+      move(event.motion.x - _dragPoint.x, event.motion.y - _dragPoint.y);
+      contains = true;
+    }
+    break;
+  case SDL_VIDEORESIZE:
+    screenChanged();
+    break;
+  case SDL_QUIT:
+    SDL_Quit();
+  default:
+    break;
+  }
+  return contains;
 }
 
 void VirtualKeyboardGUI::startDrag(int x, int y)

@@ -62,7 +62,7 @@ public:
   /**
    * Starts the drawing of the keyboard, and runs the main event loop.
    */
-  void run();
+  void run(bool run_mainloop);
 
   /**
    * Interrupts the event loop and resets the overlay to its initial state.
@@ -100,6 +100,10 @@ public:
    * Sets the GUI's internal screen size variables
    */
   void initSize(int w, int h);
+
+  bool handleEvent(SDL_Event event);
+
+  void handleDraw();
 
 private:
 
