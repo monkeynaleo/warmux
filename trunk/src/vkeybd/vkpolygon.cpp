@@ -31,12 +31,11 @@
 
 #ifdef ENABLE_VKEYBD
 
-#include "vkeybd/types.h"
 #include "vkeybd/vkpolygon.h"
 
 namespace Common {
 
-bool Polygon::contains(int16 x, int16 y) const
+bool Polygon::contains(int x, int y) const
 {
   int yflag0;
   int yflag1;

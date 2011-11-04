@@ -36,7 +36,6 @@
 #include <WARMUX_rectangle.h>
 #include <WARMUX_point.h>
 #include <vector>
-#include "vkeybd/types.h"
 
 namespace Common {
 
@@ -68,7 +67,7 @@ struct Polygon
     //_bound.extend(Rect(p.x, p.y, p.x, p.y));
   }
 
-  void addPoint(int16 x, int16 y)
+  void addPoint(int x, int y)
   {
     addPoint(Point2i(x, y));
   }
@@ -85,7 +84,7 @@ struct Polygon
    * @param y the vertical position to check
    * @return true if the given position is inside this polygon, false otherwise
    */
-  bool contains(int16 x, int16 y) const;
+  bool contains(int x, int y) const;
 
   /**
    * Check if given point is inside this polygon.
@@ -98,10 +97,10 @@ struct Polygon
     return contains(p.x, p.y);
   }
 
-  void moveTo(int16 x, int16 y)
+  void moveTo(int x, int y)
   {
-    int16 dx = x - ((_bound.GetRight() + _bound.GetLeft()) / 2);
-    int16 dy = y - ((_bound.GetBottom() + _bound.GetTop()) / 2);
+    int dx = x - ((_bound.GetRight() + _bound.GetLeft()) / 2);
+    int dy = y - ((_bound.GetBottom() + _bound.GetTop()) / 2);
     translate(dx, dy);
   }
 
@@ -110,7 +109,7 @@ struct Polygon
     moveTo(p.x, p.y);
   }
 
-  void translate(int16 dx, int16 dy)
+  void translate(int dx, int dy)
   {
     vector<Point2i>::iterator it;
     for (it = _points.begin(); it != _points.end(); it++) {

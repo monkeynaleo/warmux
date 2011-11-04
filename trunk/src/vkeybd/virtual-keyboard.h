@@ -36,9 +36,12 @@
 
 #include <SDL/SDL.h>
 #include <map>
+#include <list>
 #include "graphic/surface.h"
-#include "vkeybd/types.h"
 #include "vkeybd/image-map.h"
+
+typedef SDL_keysym KeyState;
+typedef Uint8 KeyCode; //SDL_keysym.scancode
 
 namespace Common {
 
@@ -86,7 +89,7 @@ protected:
   /** VKEvent struct encapsulates data on a virtual keyboard event */
   struct VKEvent
   {
-    String name;
+    std::string name;
     VKEventType type;
     /**
      * Void pointer that will point to different types of data depending
@@ -108,16 +111,16 @@ protected:
     }
   };
 
-  typedef std::map<String, VKEvent*> VKEventMap;
+  typedef std::map<std::string, VKEvent*> VKEventMap;
 
   /**
    * Mode struct encapsulates all the data for each mode of the keyboard
    */
   struct Mode
   {
-    String name;
-    String resolution;
-    String bitmapName;
+    std::string name;
+    std::string resolution;
+    std::string bitmapName;
     Surface image;
     Color transparentColor;
     ImageMap imageMap;
@@ -139,7 +142,7 @@ protected:
     }
   };
 
-  typedef std::map<String, Mode> ModeMap;
+  typedef std::map<std::string, Mode> ModeMap;
 
   enum HorizontalAlignment
   {
@@ -170,7 +173,7 @@ protected:
   {
   public:
     KeyPressQueue();
-    void toggleFlags(byte fl);
+    void toggleFlags(int fl);
     void clearFlags();
     void insertKey(KeyState key);
     void deleteKey();
@@ -179,21 +182,21 @@ protected:
     KeyState pop();
     void clear();
     bool empty();
-    String getString();
-    void setString(String str);
+    std::string getString();
+    void setString(std::string str);
     uint getInsertIndex();
     bool hasStringChanged();
 
   private:
-    byte _flags;
-    String _flagsStr;
+    int _flags;
+    std::string _flagsStr;
 
-    List<VirtualKeyPress> _keys;
-    String _keysStr;
+    std::list<VirtualKeyPress> _keys;
+    std::string _keysStr;
 
     bool _strChanged;
 
-    List<VirtualKeyPress>::iterator _keyPos;
+    std::list<VirtualKeyPress>::iterator _keyPos;
     uint _strPos;
   };
 
@@ -210,7 +213,7 @@ public:
    * searches for a compressed keyboard pack by looking for packName.zip.
    * @param packName	name of the keyboard pack
    */
-  bool loadKeyboardPack(const String &packName);
+  bool loadKeyboardPack(const std::string &packName);
 
   /**
    * Shows the keyboard, starting an event loop that will intercept all
@@ -238,11 +241,11 @@ public:
     return _loaded;
   }
 
-  String getString() {
+  std::string getString() {
     return _keyQueue.getString();
   }
 
-  void setString(String str) {
+  void setString(std::string str) {
     _keyQueue.setString(str);
   }
 
@@ -259,15 +262,15 @@ protected:
   VirtualKeyboardParser *_parser;
 
   void reset();
-  bool openPack(const String &packName, const String &node);
+  bool openPack(const std::string &packName, const std::string &node);
   void deleteEvents();
   bool checkModeResolutions();
   void switchMode(Mode *newMode);
-  void switchMode(const String& newMode);
-  void handleMouseDown(int16 x, int16 y);
-  void handleMouseUp(int16 x, int16 y);
-  String findArea(int16 x, int16 y);
-  void processAreaClick(const String &area);
+  void switchMode(const std::string& newMode);
+  void handleMouseDown(int x, int y);
+  void handleMouseUp(int x, int y);
+  std::string findArea(int x, int y);
+  void processAreaClick(const std::string &area);
 
   bool _loaded;
 
@@ -278,7 +281,7 @@ protected:
   HorizontalAlignment _hAlignment;
   VerticalAlignment _vAlignment;
 
-  String _areaDown;
+  std::string _areaDown;
 
   bool _submitKeys;
 

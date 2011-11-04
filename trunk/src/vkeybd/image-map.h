@@ -33,8 +33,8 @@
 #include <WARMUX_config.h>
 
 #ifdef ENABLE_VKEYBD
+#include <string>
 #include <map>
-#include "vkeybd/types.h"
 #include "vkeybd/vkpolygon.h"
 
 namespace Common {
@@ -46,13 +46,13 @@ public:
 
   ~ImageMap();
 
-  Polygon *createArea(const String& id);
-  void removeArea(const String& id);
+  Polygon *createArea(const std::string& id);
+  void removeArea(const std::string& id);
   void removeAllAreas();
-  String findMapArea(int16 x, int16 y);
+  std::string findMapArea(int x, int y);
 
 protected:
-  std::map<String, Polygon *> _areas;
+  std::map<std::string, Polygon *> _areas;
 };
 
 } // End of namespace Common

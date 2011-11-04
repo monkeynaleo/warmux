@@ -32,7 +32,6 @@
 #ifdef ENABLE_VKEYBD
 
 #include <WARMUX_error.h>
-#include "vkeybd/types.h"
 #include "vkeybd/virtual-keyboard-parser.h"
 #include "vkeybd/vkpolygon.h"
 #include "include/constant.h"
@@ -40,6 +39,8 @@
 #include "graphic/color.h"
 #include "graphic/video.h"
 #include "tool/resource_manager.h"
+
+using namespace std;
 
 namespace Common {
 
@@ -67,7 +68,7 @@ bool vparseIntegerKey(const char *key, int count, va_list args)
   return (*key == 0);
 }
 
-bool parseIntegerKey(const String &key, int count, ...)
+bool parseIntegerKey(const string &key, int count, ...)
 {
   bool result;
   va_list args;
@@ -120,7 +121,7 @@ bool VirtualKeyboardParser::parserCallback_keyboard(const xmlNode *node)
     return true;
 
   ReadStringAttr(node, "initial_mode", _initialModeName);
-  String h;
+  string h;
   if (ReadStringAttr(node, "h_align", h)) {
     if (h == "left")
       _keyboard->_hAlignment = VirtualKeyboard::kAlignLeft;
@@ -129,7 +130,7 @@ bool VirtualKeyboardParser::parserCallback_keyboard(const xmlNode *node)
     else if (h == "right")
       _keyboard->_hAlignment = VirtualKeyboard::kAlignRight;
   }
-  String v;
+  string v;
   if (ReadStringAttr(node, "v_align", v)) {
     if (v == "top")
       _keyboard->_vAlignment = VirtualKeyboard::kAlignTop;
@@ -144,7 +145,7 @@ bool VirtualKeyboardParser::parserCallback_keyboard(const xmlNode *node)
 
 bool VirtualKeyboardParser::parserCallback_mode(const xmlNode *node)
 {
-  String name;
+  string name;
   ReadStringAttr(node, "name", name);
 
   if (_parseMode == kParseFull) {
@@ -160,19 +161,19 @@ bool VirtualKeyboardParser::parserCallback_mode(const xmlNode *node)
   _mode = &(_keyboard->_modes[name]);
   if (name == _initialModeName)
     _keyboard->_initialMode = _mode;
-  String resolutions;
+  string resolutions;
   ReadStringAttr(node, "resolutions", resolutions);
   //StringTokenizer tok (resolutions, " ,");
   std::list<std::string> tok;
   size_t pos = resolutions.find_first_of(" ,");
   while (pos != std::string::npos) {
-    String resolution = resolutions.substr(0, pos);
+    string resolution = resolutions.substr(0, pos);
     tok.insert(tok.end(), resolution);
     resolutions.erase(0, pos + 1);
     pos = resolutions.find_first_of(" ,");
   }
   if (!resolutions.empty()) {
-    String resolution = resolutions.substr(0, resolutions.size());
+    string resolution = resolutions.substr(0, resolutions.size());
     tok.insert(tok.end(), resolution);
   }
 
@@ -183,9 +184,9 @@ bool VirtualKeyboardParser::parserCallback_mode(const xmlNode *node)
   std::list<std::string>::iterator it;
   int scrW = GetMainWindow().GetWidth();
   int scrH = GetMainWindow().GetHeight();
-  uint32 diff = 0xFFFFFFFF;
-  String newResolution;
-  String res;
+  int diff = INT_MAX;
+  string newResolution;
+  string res;
   for (it = tok.begin(); it != tok.end(); it++) {
     res = *it;
     int resW, resH;
@@ -196,7 +197,7 @@ bool VirtualKeyboardParser::parserCallback_mode(const xmlNode *node)
         newResolution = res;
         break;
       } else {
-        uint32 newDiff = abs(scrW - resW) + abs(scrH - resH);
+        int newDiff = abs(scrW - resW) + abs(scrH - resH);
         if (newDiff < diff) {
           diff = newDiff;
           newResolution = res;
@@ -237,18 +238,18 @@ bool VirtualKeyboardParser::parserCallback_event(const xmlNode *node)
   // if just checking resolutions we're done
   if (_parseMode == kParseCheckResolutions)
     return true;
-  String name;
+  string name;
   ReadStringAttr(node, "name", name);
   if (_mode->events.count(name))
     Error("Event '" + name + "' has already been defined");
 
   VirtualKeyboard::VKEvent *evt = new VirtualKeyboard::VKEvent();
   evt->name = name;
-  String type;
+  string type;
   ReadStringAttr(node, "type", type);
   if (type == "key") {
-    String code;
-    String ascii;
+    string code;
+    string ascii;
     if (!ReadStringAttr(node, "code", code) | !ReadStringAttr(node, "ascii", ascii)) {
       delete evt;
       Error("Key event element must contain code and ascii attributes");
@@ -261,20 +262,20 @@ bool VirtualKeyboardParser::parserCallback_event(const xmlNode *node)
     ks->sym = (SDLKey) atoi(code.c_str());
     ks->unicode = atoi(ascii.c_str());
     ks->mod = (SDLMod) 0;
-    String mods;
+    string mods;
     if (ReadStringAttr(node, "modifiers", mods))
       ks->mod = (SDLMod) parseFlags(mods);
     evt->data = ks;
 
   } else if (type == "modifier") {
-    String modifier;
+    string modifier;
     if (!ReadStringAttr(node, "modifiers", modifier)) {
       delete evt;
       Error("Key modifier element must contain modifier attributes");
     }
 
     evt->type = VirtualKeyboard::kVKEventModifier;
-    byte *flags = (byte*) malloc(sizeof(byte));
+    int *flags = (int*) malloc(sizeof(int));
     if (!flags)
       Error("[VirtualKeyboardParser::parserCallback_event] Cannot allocate memory");
 
@@ -282,7 +283,7 @@ bool VirtualKeyboardParser::parserCallback_event(const xmlNode *node)
     evt->data = flags;
 
   } else if (type == "switch_mode") {
-    String mode;
+    string mode;
     if (!ReadStringAttr(node, "mode", mode)) {
       delete evt;
       Error("Switch mode event element must contain mode attribute");
@@ -322,7 +323,7 @@ bool VirtualKeyboardParser::parserCallback_event(const xmlNode *node)
 bool VirtualKeyboardParser::parserCallback_layout(const xmlNode *node)
 {
   assert(!_mode->resolution.empty());
-  String res;
+  string res;
   ReadStringAttr(node, "resolution", res);
 
   if (res != _mode->resolution) {
@@ -333,7 +334,7 @@ bool VirtualKeyboardParser::parserCallback_layout(const xmlNode *node)
   ReadStringAttr(node, "bitmap", _mode->bitmapName);
 
   int r, g, b;
-  String tcolor;
+  string tcolor;
   if (ReadStringAttr(node, "transparent_color", tcolor)) {
     if (!parseIntegerKey(tcolor, 3, &r, &g, &b))
       Error("Could not parse color value");
@@ -370,9 +371,9 @@ bool VirtualKeyboardParser::parserCallback_map(const xmlNode *node)
 
 bool VirtualKeyboardParser::parserCallback_area(const xmlNode *node)
 {
-  String shape;
-  String target;
-  String coords;
+  string shape;
+  string target;
+  string coords;
 
   ReadStringAttr(node, "shape", shape);
   ReadStringAttr(node, "target", target);
@@ -394,7 +395,7 @@ bool VirtualKeyboardParser::parserCallback_area(const xmlNode *node)
   return false;
 }
 
-byte VirtualKeyboardParser::parseFlags(const String& flags)
+int VirtualKeyboardParser::parseFlags(const string& flags)
 {
   if (flags.empty())
     return 0;
@@ -404,18 +405,18 @@ byte VirtualKeyboardParser::parseFlags(const String& flags)
   std::list<std::string> tok;
   size_t pos = tflags.find_first_of(" ,");
   while (pos != std::string::npos) {
-    String flag = tflags.substr(0, pos);
+    string flag = tflags.substr(0, pos);
     tok.insert(tok.end(), flag);
     tflags.erase(0, pos + 1);
     pos = tflags.find_first_of(" ,");
   }
   if (!tflags.empty()) {
-    String flag = tflags.substr(0, tflags.size());
+    string flag = tflags.substr(0, tflags.size());
     tok.insert(tok.end(), flag);
   }
 
-  byte val = KMOD_NONE;
-  for (String fl = tok.front(); !tok.empty(); fl = tok.front()) {
+  int val = KMOD_NONE;
+  for (string fl = tok.front(); !tok.empty(); fl = tok.front()) {
     if (fl == "ctrl" || fl == "control")
       val |= KMOD_CTRL;
     else if (fl == "alt")
@@ -427,7 +428,7 @@ byte VirtualKeyboardParser::parseFlags(const String& flags)
   return val;
 }
 
-bool VirtualKeyboardParser::parseRect(Rectanglei &rect, const String& coords)
+bool VirtualKeyboardParser::parseRect(Rectanglei &rect, const string& coords)
 {
   int x1, y1, x2, y2;
   if (!parseIntegerKey(coords, 4, &x1, &y1, &x2, &y2))
@@ -456,7 +457,7 @@ bool VirtualKeyboardParser::parseRect(Rectanglei &rect, const String& coords)
  return true;
  }
  */
-bool VirtualKeyboardParser::parseRectAsPolygon(Polygon &poly, const String& coords)
+bool VirtualKeyboardParser::parseRectAsPolygon(Polygon &poly, const string& coords)
 {
   Rectanglei rect;
   if (!parseRect(rect, coords))
