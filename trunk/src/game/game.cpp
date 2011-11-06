@@ -66,7 +66,9 @@
 #include "weapon/weapons_list.h"
 #ifdef ENABLE_VKEYBD
 #include "vkeybd/virtual-keyboard.h"
+#include "gui/button.h"
 using namespace Common;
+Button *openvkb_button;
 #endif
 
 // Uncomment this to get an image during the game
@@ -209,7 +211,10 @@ void Game::InitEverything()
 #ifdef ENABLE_VKEYBD
   if(!VirtualKeyboard::GetInstance()->isLoaded())
     VirtualKeyboard::GetInstance()->loadKeyboardPack("vkeybd_default");
-  //VirtualKeyboard::GetInstance()->show(false);
+  Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml",false);
+  openvkb_button = new Button(res, "menu/send_txt");
+  openvkb_button->SetPosition(1,1);
+  openvkb_button->SetVisible(false);
 #endif
 
   std::cout << std::endl;
@@ -536,6 +541,10 @@ void Game::RefreshInput()
       if (VirtualKeyboard::GetInstance()->isDisplaying())
         if (VirtualKeyboard::GetInstance()->handleEvent(evnt))
           continue;
+      if (evnt.type == SDL_MOUSEBUTTONUP && openvkb_button->ClickUp(Mouse::GetInstance()->GetPosition(),0)) {
+        VirtualKeyboard::GetInstance()->show(false);
+        continue;
+      }
 #endif
       // Mouse event
       if (Mouse::GetInstance()->HandleEvent(evnt))
@@ -652,8 +661,16 @@ void Game::Draw()
 
 #ifdef ENABLE_VKEYBD
   // Draw virtual keyboard
+  if (Network::IsConnected()) {
+    if (ActiveTeam().IsLocalHuman())
+      openvkb_button->SetVisible(false);
+    else
+      openvkb_button->SetVisible(true);
+  }
+
   if (VirtualKeyboard::GetInstance()->isDisplaying())
     VirtualKeyboard::GetInstance()->handleDraw();
+  openvkb_button->Draw(Mouse::GetInstance()->GetPosition());
 #endif
 
   // Draw game messages
