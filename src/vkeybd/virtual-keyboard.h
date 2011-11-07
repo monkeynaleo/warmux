@@ -166,6 +166,8 @@ protected:
     uint strLen;
   };
 
+  typedef void (*SubmitCallbackFunction)(const std::string &);
+
   /**
    * Class that stores the queue of virtual key presses, as well as
    * maintaining a string that represents a preview of the queue
@@ -254,6 +256,8 @@ public:
     _keyQueue.setString(str);
   }
 
+  void setSubmitCallback(SubmitCallbackFunction submitCallback);
+
 protected:
 
   Archive *_fileArchive;
@@ -289,7 +293,7 @@ protected:
   std::string _areaDown;
 
   bool _submitKeys;
-
+  SubmitCallbackFunction _submitCallback;
 };
 
 } // End of namespace Common
