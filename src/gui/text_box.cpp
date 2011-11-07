@@ -150,7 +150,6 @@ Widget * TextBox::ClickUp(const Point2i & mousePosition, uint button)
   vkb.setString(GetText());
   if (vkb.show())
     SetText(vkb.getString());
-  AppWarmux::GetInstance()->GetCurrentMenu()->RedrawMenu();
 #else
   if (button == SDL_BUTTON_MIDDLE) {
     std::string new_txt = GetText();

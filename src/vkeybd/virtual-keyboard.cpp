@@ -35,6 +35,7 @@
 #include <WARMUX_file_tools.h>
 #include "graphic/video.h"
 #include "include/constant.h"
+#include "include/app.h"
 #include "vkeybd/virtual-keyboard.h"
 #include "vkeybd/virtual-keyboard-gui.h"
 #include "vkeybd/virtual-keyboard-parser.h"
@@ -258,6 +259,7 @@ bool VirtualKeyboard::show(bool blocking)
 
 void VirtualKeyboard::close(bool submit)
 {
+  AppWarmux::GetInstance()->RefreshDisplay();
   _submitKeys = submit;
   _kbdGUI->close();
 }
