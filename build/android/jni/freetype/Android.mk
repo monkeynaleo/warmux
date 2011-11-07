@@ -1,4 +1,4 @@
-LOCAL_PATH := $(call my-dir)
+LOCAL_PATH := $(call my-dir)/../../../lib/freetype
 
 include $(CLEAR_VARS)
 
@@ -10,7 +10,7 @@ APP_SUBDIRS := src/autofit src/cache src/tools \
 
 # Add more subdirs here, like src/subdir1 src/subdir2
 
-LOCAL_CFLAGS := -I$(LOCAL_PATH)/include -DFT2_BUILD_LIBRARY
+LOCAL_CFLAGS := -DFT2_BUILD_LIBRARY
 
 #Change C++ file extension as appropriate
 LOCAL_CPP_EXTENSION := .cpp

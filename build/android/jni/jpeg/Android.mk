@@ -1,4 +1,4 @@
-LOCAL_PATH:= $(call my-dir)
+LOCAL_PATH:= $(call my-dir)/../../../lib/jpeg
 include $(CLEAR_VARS)
 
 LOCAL_ARM_MODE := arm
@@ -28,6 +28,7 @@ else
 LOCAL_SRC_FILES += jidctint.c jidctfst.S
 endif
 
+LOCAL_C_INCLUDES += $(LOCAL_PATH)
 LOCAL_CFLAGS += -DAVOID_TABLES
 LOCAL_CFLAGS += -fstrict-aliasing -fprefetch-loop-arrays
 #LOCAL_CFLAGS += -march=armv6j

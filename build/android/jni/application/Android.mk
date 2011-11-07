@@ -1,4 +1,5 @@
 OTHER_PATH := $(call my-dir)
+LIBS_PATH  := $(OTHER_PATH)/../../../lib
 LOCAL_PATH := $(OTHER_PATH)/../../../..
 
 include $(CLEAR_VARS)
@@ -29,12 +30,12 @@ LOCAL_CFLAGS := -fno-exceptions -fno-rtti \
 LOCAL_CPP_EXTENSION := .cpp
 LOCAL_SRC_FILES := $(foreach F, $(APP_SRCS), \
                      $(addprefix $(dir $(F)), $(notdir $(wildcard $(LOCAL_PATH)/$(F)))))
-LOCAL_C_INCLUDES += $(OTHER_PATH)/../sdl/include $(OTHER_PATH)/../sdl_mixer \
-                    $(OTHER_PATH)/../sdl_image $(OTHER_PATH)/../sdl_gfx \
-                    $(OTHER_PATH)/../sdl_ttf $(LOCAL_PATH)/src \
-                    $(LOCAL_PATH)/lib/fixedpoint $(OTHER_PATH)/../png \
-                    $(OTHER_PATH)/../sdl_net $(OTHER_PATH)/../xml2/include \
-                    $(OTHER_PATH)/../intl $(LOCAL_PATH)/lib/warmux/include
+LOCAL_C_INCLUDES += $(LIBS_PATH)/sdl/include $(LIBS_PATH)/sdl_mixer \
+                    $(LIBS_PATH)/sdl_image $(LIBS_PATH)/sdl_gfx \
+                    $(LIBS_PATH)/sdl_ttf $(LOCAL_PATH)/src \
+                    $(LOCAL_PATH)/lib/fixedpoint $(LIBS_PATH)/png \
+                    $(LIBS_PATH)/sdl_net $(LIBS_PATH)/xml2/include \
+                    $(LIBS_PATH)/intl $(LOCAL_PATH)/lib/warmux/include
 
 LOCAL_STATIC_LIBRARIES := sdl_net sdl_gfx sdl_ttf xml2 freetype intl
 LOCAL_SHARED_LIBRARIES := sdl sdl_mixer sdl_image png
