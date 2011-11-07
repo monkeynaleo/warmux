@@ -1,4 +1,4 @@
-LOCAL_PATH:= $(call my-dir)
+LOCAL_PATH := $(call my-dir)/../../../lib/png
 
 include $(CLEAR_VARS)
 
@@ -23,7 +23,7 @@ common_SRC_FILES := \
 
 common_CFLAGS := -O3 -fvisibility=hidden 
 
-common_C_INCLUDES += \
+common_C_INCLUDES += $(LOCAL_PATH)
 
 # For the host
 # =====================================================

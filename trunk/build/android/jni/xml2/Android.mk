@@ -3,7 +3,7 @@
 # and therefore we statically link in the object files from our
 # own libxml2.
 
-LOCAL_PATH := $(call my-dir)
+LOCAL_PATH := $(call my-dir)/../../../lib/xml2
 include $(CLEAR_VARS)
 
 LIBXML_SOURCE_FILES := \

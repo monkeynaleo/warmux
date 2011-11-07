@@ -1,4 +1,4 @@
-LOCAL_PATH := $(call my-dir)
+LOCAL_PATH := $(call my-dir)/../../../lib/intl
 
 include $(CLEAR_VARS)
 
