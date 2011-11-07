@@ -108,6 +108,11 @@ AC_ARG_ENABLE([profile],
                    CXXFLAGS="$CXXFLAGS -pg"
                fi])
 
+AC_ARG_ENABLE(vkeybd, AC_HELP_STRING([--enable-vkeybd], [Enable Virtual Keybord]) )
+if test "${enable_vkeybd}" = "yes"; then
+       AC_DEFINE([ENABLE_VKEYBD], [1], [Enable Virtual Keyboard])
+fi
+
 # Check whether user supplied the option to statically link binaries.
 if test "$static" = yes; then
 # if we're using gcc, add `-static' to LDFLAGS
