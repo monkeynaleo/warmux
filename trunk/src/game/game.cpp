@@ -211,6 +211,7 @@ void Game::InitEverything()
 #ifdef ENABLE_VKEYBD
   if(!VirtualKeyboard::GetInstance()->isLoaded())
     VirtualKeyboard::GetInstance()->loadKeyboardPack("vkeybd_default");
+  VirtualKeyboard::GetInstance()->setSubmitCallback(&Chat::ProcessSendMessage);
   Profile *res = GetResourceManager().LoadXMLProfile( "graphism.xml",false);
   openvkb_button = new Button(res, "menu/send_txt");
   openvkb_button->SetPosition(1,1);

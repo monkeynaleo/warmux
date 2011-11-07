@@ -63,11 +63,7 @@ void TalkBox::SendChatMsg()
 {
   std::string empty = "";
   std::string txt = line_to_send_tbox->GetText();
-  if (txt[0] == '/')
-    ProcessCommand(txt);
-  else if (txt != "")
-    Chat::SendMessage(txt, false);
-
+  Chat::ProcessSendMessage(txt);
   line_to_send_tbox->SetText(empty);
 }
 

@@ -20,6 +20,7 @@
  * nefertum - Jon de Andres
  *****************************************************************************/
 
+#include "game/game.h"
 #include "game/game_time.h"
 #include "graphic/text.h"
 #include "graphic/text_list.h"
@@ -115,6 +116,18 @@ void Chat::SendMessage(const std::string &msg, bool in_game)
   ActionHandler::GetInstance()->NewAction(a);
 }
 
+void Chat::ProcessSendMessage(const std::string &msg)
+{
+  if (msg.size() == 0)
+    return;
+
+  bool in_game = GameIsRunning();
+  if (msg[0] == '/')
+    ProcessCommand(msg);
+  else if (msg != "")
+    SendMessage(msg, in_game);
+}
+
 void Chat::CloseInput()
 {
   check_input = false; //Hide input widget
@@ -146,11 +159,7 @@ void Chat::HandleKeyReleased(const SDL_Event& evnt)
 
   case SDLK_RETURN:
   case SDLK_KP_ENTER:
-    if (txt[0] == '/')
-      ProcessCommand(txt);
-    else if (txt != "")
-      SendMessage(txt);
-
+    ProcessSendMessage(txt);
     CloseInput();
     break;
   case SDLK_ESCAPE:

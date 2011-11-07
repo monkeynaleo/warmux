@@ -47,7 +47,8 @@
 namespace Common {
 
 VirtualKeyboard::VirtualKeyboard() :
-  _currentMode(0)
+  _currentMode(0),
+  _submitCallback(NULL)
 {
   _parser = new VirtualKeyboardParser(this);
   _kbdGUI = new VirtualKeyboardGUI(this);
@@ -187,6 +188,8 @@ void VirtualKeyboard::processAreaClick(const std::string& area)
     _keyQueue.clearFlags();
     break;
   case kVKEventSubmit:
+    if (_submitCallback != NULL)
+      _submitCallback(getString());
     close(true);
     break;
   case kVKEventCancel:
@@ -272,6 +275,9 @@ void VirtualKeyboard::handleDraw() {
   _kbdGUI->handleDraw();
 }
 
+void VirtualKeyboard::setSubmitCallback(SubmitCallbackFunction submitCallback) {
+  _submitCallback = submitCallback;
+}
 
 VirtualKeyboard::KeyPressQueue::KeyPressQueue()
 {
