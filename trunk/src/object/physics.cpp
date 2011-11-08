@@ -546,7 +546,7 @@ void Physics::Rebound(Point2d /*contactPos*/, Double contact_angle)
 
       m_rope_angle.x0 = HALF_PI - V.ComputeAngle();
 
-      m_rope_angle.x1 = -PENDULUM_REBOUND_FACTOR * m_rope_angle.x1;
+      m_rope_angle.x1 = - m_rebound_factor * m_rope_angle.x1;
 
       m_rope_angle.x2 = 0;
       m_extern_force.Clear();

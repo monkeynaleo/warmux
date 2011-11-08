@@ -97,6 +97,7 @@ public:
                WeaponLauncher * p_launcher);
   virtual ~WeaponBullet(){};
   virtual void Refresh();
+  virtual bool IsBullet() const { return true; }
 protected:
   virtual void SignalGroundCollision(const Point2d& speed_before, const Double& contactAngle);
   virtual void SignalObjectCollision(const Point2d& my_speed_before,
