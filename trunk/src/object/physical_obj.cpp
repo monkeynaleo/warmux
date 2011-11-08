@@ -378,7 +378,7 @@ void PhysicalObj::Collide(collision_t collision,
       }
     }
     SetSpeedXY(my_new_speedx*GetReboundingFactor()*m_cfg.m_rebound_factor);
-    collided_obj->SetSpeedXY(other_new_speedx*GetReboundingFactor()*m_cfg.m_rebound_factor);
+    collided_obj->SetSpeedXY(other_new_speedx*collided_obj->GetReboundingFactor()*m_cfg.m_rebound_factor);
 
     if (GetMotionType() == Pendulum) {
       Rebound(contactPos, contactAngle);
