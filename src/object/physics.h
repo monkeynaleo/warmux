@@ -105,6 +105,7 @@ public:
 
   void SetRebounding(bool rebounding) { m_rebounding = rebounding; }
   bool GetRebounding() const { return m_rebounding; }
+  Double GetReboundingFactor() const { return m_rebound_factor; }
 
   void SetAlignParticleState(bool state) { m_align_particle_state = state; }
   bool GetAlignParticleState(void) const { return m_align_particle_state; }

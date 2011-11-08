@@ -302,7 +302,7 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 
   ContactPointAngleOnGround(pos, contactPos, contactAngle);
 
-  Collide(collision, collided_obj, pos);
+  Collide(collision, collided_obj, pos, contactPos, contactAngle);
 
   // ===================================
   // it's time to signal object(s) about collision!
@@ -327,10 +327,12 @@ collision_t PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
   return collision;
 }
 
-void PhysicalObj::Collide(collision_t collision, PhysicalObj* collided_obj, const Point2d& position)
+void PhysicalObj::Collide(collision_t collision,
+                          PhysicalObj* collided_obj,
+                          const Point2d& /*position*/,
+                          Point2d& contactPos,
+                          Double& contactAngle)
 {
-  Point2d contactPos;
-  Double contactAngle;
 
   switch (collision) {
   case NO_COLLISION:
@@ -338,43 +340,55 @@ void PhysicalObj::Collide(collision_t collision, PhysicalObj* collided_obj, cons
     return;
 
   case COLLISION_ON_GROUND:
-    ContactPointAngleOnGround(position, contactPos, contactAngle);
+    // Make it rebound!!
+    MSG_DEBUG("physic.state", "%s rebounds at %.3f,%.3f", GetName().c_str(),
+              contactPos.x.tofloat(), contactPos.y.tofloat());
+    Rebound(contactPos, contactAngle);
     ASSERT(!collided_obj);
     break;
 
   case COLLISION_ON_OBJECT:
-    contactPos = position;
-    contactAngle = - GetSpeedAngle();
+    Point2d my_speedx = GetSpeedXY();
+    Point2d other_speedx = collided_obj->GetSpeedXY();
+    Point2d my_new_speedx = my_speedx;
+    Point2d other_new_speedx = other_speedx;
+    Double my_mass = GetMass();
+    Double other_mass = collided_obj->GetMass();
 
-    // Compute the new speed norm of this and collided_obj, new speed angle will be set
-    // thanks to Rebound()
+    if (!IsBullet() && !collided_obj->IsBullet()) {
+      // Elastic collision
+      // v'1 =  ((m1 - m2) * v1 + 2m1 *v2) / (m1 + m2)
+      // v'2 =  ((m2 - m1) * v2 + 2m1 *v1) / (m1 + m2)
+      if(GetRebounding()) {
+        my_new_speedx = ((my_mass - other_mass) * my_speedx + 2 * my_mass * other_speedx) / (my_mass + other_mass);
+      }
 
-    // Get the current speed
-    Double v1, v2, mass1, angle1, angle2, mass2;
-    collided_obj->GetSpeed(v1, angle1);
-    GetSpeed(v2, angle2);
-    mass1 = GetMass();
-    mass2 = collided_obj->GetMass();
+      if(GetRebounding()) {
+        other_new_speedx = ((other_mass - my_mass) * other_speedx + 2 * other_mass * my_speedx) / (other_mass + my_mass);
+      }
+    }
+    else {
+      // Inelastic collision
+      if (!IsBullet()) {
+        my_new_speedx = (my_mass * my_speedx +  other_mass * other_speedx) / (my_mass + other_mass);
+      }
 
-    // Give speed to the other object
-    // thanks to physic and calculations about chocs, we know that :
-    //
-    // v'1 =  ((m1 - m2) * v1 + 2m1 *v2) / (m1 + m2)
-    // v'2 =  ((m2 - m1) * v2 + 2m1 *v1) / (m1 + m2)
-    collided_obj->SetSpeed(abs(((mass1 - mass2) * v1 + 2 * mass1 *v2 * m_cfg.m_rebound_factor) / (mass1 + mass2)),
-                           angle1);
-    SetSpeed(abs(((mass2 - mass1) * v2 + 2 * mass1 *v1 * m_cfg.m_rebound_factor) / (mass1 + mass2)), angle2);
+      if (!collided_obj->IsBullet()) {
+        other_new_speedx = (other_mass * other_speedx + my_mass * my_speedx) / (other_mass + my_mass);
+      }
+    }
+    SetSpeedXY(my_new_speedx*GetReboundingFactor()*m_cfg.m_rebound_factor);
+    collided_obj->SetSpeedXY(other_new_speedx*GetReboundingFactor()*m_cfg.m_rebound_factor);
+
+    if (GetMotionType() == Pendulum) {
+      Rebound(contactPos, contactAngle);
+    }
     break;
   }
 
   // Mark it as last collided object
   m_last_collided_object = collided_obj;
 
-  // Make it rebound!!
-  MSG_DEBUG("physic.state", "%s rebounds at %.3f,%.3f", GetName().c_str(),
-            contactPos.x.tofloat(), contactPos.y.tofloat());
-
-  Rebound(contactPos, contactAngle);
   CheckRebound();
 }
 
@@ -395,6 +409,7 @@ void PhysicalObj::ContactPointAngleOnGround(const Point2d& oldPos,
       contactPos.x = (Double)cx * METER_PER_PIXEL;
       contactPos.y = (Double)cy * METER_PER_PIXEL;
     } else {
+      Warning("No good contact angle found");
       contactAngle = - GetSpeedAngle();
       contactPos = oldPos;
     }
@@ -781,14 +796,14 @@ bool PhysicalObj::ContactPoint(int & contact_x, int & contact_y) const
 
   // We are looking for a point in contact on the left hand of object:
   x1 = GetX() + m_test_left;
-  x2 = x1 + 1;
+  x2 = x1 - 1;
 
   for (int y = GetY() + m_test_top; y <= GetY() + m_height - m_test_bottom; y++) {
     pointA.SetValues(x1, y);
     pointB.SetValues(x2, y);
 
     if (!GetWorld().IsOutsideWorld(pointA) && !GetWorld().IsOutsideWorld(pointB) &&
-        !GetWorld().ground.IsEmpty(pointA) &&  GetWorld().ground.IsEmpty(pointB)) {
+         GetWorld().ground.IsEmpty(pointA) && !GetWorld().ground.IsEmpty(pointB)) {
       contact_x = GetX() + m_test_left;
       contact_y = y;
       return true;
@@ -819,7 +834,7 @@ bool PhysicalObj::ContactPoint(int & contact_x, int & contact_y) const
     pointB.SetValues(x, y2);
 
     if (!GetWorld().IsOutsideWorld(pointA) && !GetWorld().IsOutsideWorld(pointB) &&
-        !GetWorld().ground.IsEmpty(pointA) && GetWorld().ground.IsEmpty(pointB)) {
+         GetWorld().ground.IsEmpty(pointA) && !GetWorld().ground.IsEmpty(pointB)) {
       contact_x = x;
       contact_y = GetY() + m_test_top;
       return true;

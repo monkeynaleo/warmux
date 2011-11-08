@@ -212,6 +212,7 @@ public:
   bool IsDrowned() const { return m_alive == DROWNED; };
   bool IsDead() const { return IsGhost() || IsDrowned() || m_alive==DEAD; };
   bool IsFire() const { return m_is_fire; }
+  virtual bool IsBullet() const { return false; }
 
   // Are the two object in contact ? (uses test rectangles)
   bool Overlapse(const PhysicalObj &b) const { return GetTestRect().Intersect( b.GetTestRect() ); };
@@ -242,7 +243,7 @@ private:
   // Directly after a rebound, if we are stuck in a wall, we stop moving
   void CheckRebound();
 
-  void Collide(collision_t collision, PhysicalObj* collided_obj, const Point2d& position);
+  void Collide(collision_t collision, PhysicalObj* collided_obj, const Point2d& position, Point2d& contactPos, Double& contactAngle);
 
   void ContactPointAngleOnGround(const Point2d& oldPos,
                                  Point2d& contactPos,
