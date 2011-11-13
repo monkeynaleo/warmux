@@ -168,18 +168,6 @@ Downloader::~Downloader() { }
 bool Downloader::GetUrl(const char* /*url*/, std::string& /*file*/) { return false; }
 #endif
 
-static ssize_t getline(std::string& line, FILE* file)
-{
-  line.clear();
-  char buffer[1024];
-
-  int r = fscanf(file, "%1024s\n", buffer);
-  if (r == 1)
-    line = buffer;
-
-  return line.size();
-}
-
 bool Downloader::GetLatestVersion(std::string& line)
 {
   static const char url[] = "http://www.warmux.org/last";
