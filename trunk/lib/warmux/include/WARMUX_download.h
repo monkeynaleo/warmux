@@ -41,7 +41,7 @@ class Downloader : public Singleton<Downloader>
 #endif
 
   // Return true if the download was successful
-  bool Get(const char* url, FILE* file);
+  bool GetUrl(const char* url, std::string& out);
 
 protected:
   friend class Singleton<Downloader>;
