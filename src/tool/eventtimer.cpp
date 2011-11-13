@@ -25,7 +25,6 @@
 
 static Uint32 send_null_event(Uint32 interval, void */*param*/)
 {
-  printf("send_evnt\n");
   SDL_Event event;
   SDL_UserEvent userevent;
 
