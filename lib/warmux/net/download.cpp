@@ -65,7 +65,7 @@ Downloader::~Downloader()
   delete[] curl_error_buf;
 }
 
-void Downloader::FillCurlError()
+void Downloader::FillCurlError(int r)
 {
   error = std::string(curl_error_buf);
   if (error.empty()) {
@@ -78,10 +78,11 @@ bool Downloader::GetUrl(const char* url, std::string& out)
 {
   curl_easy_setopt(curl, CURLOPT_WRITEDATA, &out);
   curl_easy_setopt(curl, CURLOPT_URL, url);
-  if (CURLE_OK == curl_easy_perform(curl))
+  CURLcode r = curl_easy_perform(curl);
+  if (CURLE_OK == r)
     return true;
 
-  FillCurlError();
+  FillCurlError(r);
   return false;
 }
 
