@@ -38,6 +38,9 @@ protected:
   int  selected_item;
   Widget *last;
 
+  virtual void __Update(const Point2i & mousePosition,
+                        const Point2i & lastMousePosition);
+
 public:
   SelectBox(const Point2i& size,
             bool always_one_selected = true,
@@ -67,6 +70,7 @@ public:
   void SetDefaultItemColor(const Color& color) { default_item_color = color; };
   virtual void Select(uint index);
   void Deselect();
+  void ScrollToItem(uint index);
   Widget* MouseIsOnWhichWidget(const Point2i & mousePosition) const
   {
     int index = MouseIsOnWhichItem(mousePosition);

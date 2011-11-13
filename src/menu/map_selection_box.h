@@ -64,6 +64,8 @@ class MapSelectionBox : public VBox
 
   virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
   virtual void Pack();
+  virtual bool Update(const Point2i & mousePosition,
+                      const Point2i & lastMousePosition);
 };
 
 

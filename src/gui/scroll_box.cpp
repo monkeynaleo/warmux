@@ -27,7 +27,17 @@
 #include "gui/vertical_box.h"
 #include "gui/scroll_box.h"
 #include "include/app.h"
+#include "tool/eventtimer.h"
 
+static const float MAX_CAMERA_SPEED = 5000;
+static const float MAX_CAMERA_ACCELERATION = 1.5;
+
+#define REACTIVITY             2*0.6f
+#define SPEED_REACTIVITY       0.05f
+#define ANTICIPATION               18/2
+#define SPEED_REACTIVITY_CEIL       4
+
+#define SCROLL_UPDATE_INTERVAL    33
 #define SCROLL_SPEED  6
 #define NO_DRAG      -1
 
@@ -39,11 +49,16 @@ ScrollBox::ScrollBox(const Point2i & _size, bool force, bool alt, bool v)
   , alternate_colors(alt)
   , m_dec(NULL)
   , m_inc(NULL)
+  , scroll_target(0)
+  , scroll_counter(0)
   , start_drag(NO_DRAG)
   , start_drag_offset(NO_DRAG)
   , offset(0)
+  , scroll_speed(0.0,0.0)
+  , first_mouse_position(0,0)
   , scroll_mode(SCROLL_MODE_NONE)
   , vertical(v)
+
 {
   // Load buttons
   Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
@@ -73,11 +88,21 @@ ScrollBox::ScrollBox(const Point2i & _size, bool force, bool alt, bool v)
   WidgetList::AddWidget(m_inc);
 }
 
+ScrollBox::~ScrollBox() {
+  EventTimer::GetInstance()->Stop();
+}
+
 Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
 {
   ScrollMode old_mode = scroll_mode;
   start_drag_offset = NO_DRAG;
-  scroll_mode = SCROLL_MODE_NONE;
+  if (scroll_mode == SCROLL_MODE_DRAG) {
+    EventTimer::GetInstance()->Start(SCROLL_UPDATE_INTERVAL);
+    scroll_mode = SCROLL_MODE_KINETIC;
+  } else if (scroll_mode != SCROLL_MODE_TOTARGET) {
+    scroll_mode = SCROLL_MODE_NONE;
+    EventTimer::GetInstance()->Stop();
+  }
 
   if (!box->GetFirstWidget()) {
     return NULL;
@@ -151,14 +176,15 @@ Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
 
 Widget * ScrollBox::Click(const Point2i & mousePosition, uint button)
 {
+  first_mouse_position = mousePosition;
+  scroll_counter = 0;
   if (!Contains(mousePosition)) {
     return NULL;
   }
 
-  start_drag_offset = NO_DRAG;
-  scroll_mode = SCROLL_MODE_NONE;
-
   if (HasScrollBar() && Mouse::IS_CLICK_BUTTON(button)) {
+    start_drag_offset = NO_DRAG;
+    scroll_mode = SCROLL_MODE_NONE;
     start_drag = (vertical) ? mousePosition.y : mousePosition.x;
     if (GetScrollThumb().Contains(mousePosition)) {
       if (!offset) {
@@ -190,6 +216,14 @@ Widget * ScrollBox::Click(const Point2i & mousePosition, uint button)
 void ScrollBox::__Update(const Point2i & mousePosition,
                          const Point2i & /*lastMousePosition*/)
 {
+  if (scroll_mode == SCROLL_MODE_TOTARGET)
+    __ScrollToPos(scroll_target);
+
+  if (scroll_mode == SCROLL_MODE_DRAG) {
+    scroll_counter++;
+    scroll_speed = (mousePosition - first_mouse_position) / scroll_counter;
+  }
+
   // update position of items because of dragging
   if (HasScrollBar() && scroll_mode!=SCROLL_MODE_NONE) {
     int max_offset = GetMaxOffset();
@@ -217,6 +251,20 @@ void ScrollBox::__Update(const Point2i & mousePosition,
         new_offset -= mousePosition.y;
       else
         new_offset -= mousePosition.x;
+    } else if (scroll_mode == SCROLL_MODE_KINETIC) {
+      if (vertical)
+        new_offset -= scroll_speed.y;
+      else
+        new_offset -= scroll_speed.x;
+      scroll_speed = scroll_speed - scroll_speed*0.04;
+      if (scroll_speed.Norm() < 3) {
+        if (vertical) {
+          scroll_mode = SCROLL_MODE_NONE;
+          EventTimer::GetInstance()->Stop();
+        }
+        else
+          scroll_mode = SCROLL_MODE_KINETIC_DONE;
+      }
     }
 
     if (new_offset < 0)
@@ -228,6 +276,65 @@ void ScrollBox::__Update(const Point2i & mousePosition,
       offset = new_offset;
       Pack();
     }
+  }
+}
+
+void ScrollBox::ScrollToPos(int new_offset)
+{
+  if (vertical)
+    return;
+
+  scroll_target = new_offset;
+  scroll_mode = SCROLL_MODE_TOTARGET;
+  NeedRedrawing();
+  EventTimer::GetInstance()->Start(SCROLL_UPDATE_INTERVAL);;
+}
+
+void ScrollBox::__ScrollToPos(int new_offset)
+{
+  if (scroll_mode != SCROLL_MODE_TOTARGET)
+    return;
+
+  float target = new_offset;
+  float prev_position;
+  float position = offset;
+  float speed;
+  float prev_speed;
+
+  if (vertical)
+    speed = scroll_speed.x;
+  else
+    speed = scroll_speed.y;
+
+  //Compute new speed to reach target
+  float acceleration = (target - speed*ANTICIPATION - position)*REACTIVITY;
+  // Limit acceleration
+  if (acceleration > MAX_CAMERA_ACCELERATION) acceleration = MAX_CAMERA_ACCELERATION;
+  if (acceleration < -MAX_CAMERA_ACCELERATION) acceleration = -MAX_CAMERA_ACCELERATION;
+
+  if ((int)abs(speed) > SPEED_REACTIVITY_CEIL) {
+    acceleration *= (1 + SPEED_REACTIVITY * ((int)abs(speed) - SPEED_REACTIVITY_CEIL));
+  }
+
+  //Apply acceleration
+  prev_speed = speed;
+  speed += acceleration;
+
+  //Limit
+  if (speed > MAX_CAMERA_SPEED) speed = MAX_CAMERA_SPEED;
+  if (speed < -MAX_CAMERA_SPEED) speed = -MAX_CAMERA_SPEED;
+
+  //Update position
+  prev_position = position;
+  position = position + speed;
+  //printf("pos=%i target=%f speed=%.2f\n", offset, scroll_target, speed);
+  offset = position;
+  scroll_speed = Point2f(speed, speed);
+  Pack();
+
+  if (abs(position - target) < 20 && abs(position - prev_position) < 2) {
+    scroll_mode = SCROLL_MODE_NONE;
+    EventTimer::GetInstance()->Stop();
   }
 }
 
@@ -292,6 +399,9 @@ bool ScrollBox::Update(const Point2i &mousePosition,
   if (start_drag_offset!=NO_DRAG && mousePosition!=lastMousePosition) {
     //NeedRedrawing();
   }
+
+  if (scroll_mode != SCROLL_MODE_NONE)
+    NeedRedrawing();
 
   bool redraw = need_redrawing;
   bool updated = Widget::Update(mousePosition, lastMousePosition);

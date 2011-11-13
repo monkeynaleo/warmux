@@ -16,36 +16,26 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Vertical or Horizontal Box
+ *  Very simple timed events generator
  *****************************************************************************/
 
-#ifndef GUI_BOX_H
-#define GUI_BOX_H
+#ifndef EVENTTIMER_H
+#define EVENTTIMER_H
 
-#include "gui/widget_list.h"
-#include "tool/resource_manager.h"
+#include <WARMUX_singleton.h>
+//#include <WARMUX_types.h>
 
-class Box : public WidgetList
+typedef SDL_TimerID TimerID;
+
+class EventTimer: public Singleton<EventTimer>
 {
-protected:
-  uint    margin;
-
+private:
+  TimerID timer_id;
 public:
-  Box(void);
-  Box(const Point2i & size,
-      bool _draw_border = true,
-      bool shadowed = true);
-  Box(Profile * _profile,
-      const xmlNode * _boxNode);
-  virtual ~Box();
-
-  void ParseXMLBoxParameters(void);
-
-  void SetMargin(uint _margin) { margin = _margin; };
-  uint GetMargin() { return margin; }
-
-  virtual void Pack() = 0;
+  EventTimer() {timer_id = 0;}
+  void Start(int interval);
+  void Stop();
+  bool IsRunning() const;
 };
 
 #endif
-

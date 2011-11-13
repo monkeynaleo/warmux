@@ -47,13 +47,24 @@ bool SelectBox::Update(const Point2i& mousePosition,
   int item = MouseIsOnWhichItem(mousePosition);
   if (item!=-1 && item!=selected_item) {
     last = m_items[item];
-    last->SetHighlighted(true);
-    last->SetHighlightBgColor(default_item_color);
+    //last->SetHighlighted(true);
+    //last->SetHighlightBgColor(default_item_color);
     updated = true;
   }
 
   updated |= ScrollBox::Update(mousePosition, lastMousePosition);
   return updated;
+}
+
+void SelectBox::__Update(const Point2i & mousePosition,
+                         const Point2i & lastMousePosition)
+{
+  if (scroll_mode == SCROLL_MODE_KINETIC_DONE) {
+    int item = MouseIsOnWhichItem(GetPosition()+GetSize()/2);
+    if (item != -1 && selected_item != item && selected_item != MouseIsOnWhichItem(mousePosition))
+      Select(item);
+  }
+  ScrollBox::__Update(mousePosition, lastMousePosition);
 }
 
 Widget * SelectBox::ClickUp(const Point2i & mousePosition, uint button)
@@ -122,6 +133,7 @@ void SelectBox::Select(uint index)
   m_items[index]->SetHighlightBgColor(selected_item_color);
   m_items[index]->SetHighlighted(true);
   SetFocusOn(m_items[index]);
+  ScrollToItem(index);
   //m_items[index]->NeedRedrawing();
   NeedRedrawing();
 }
@@ -136,6 +148,20 @@ void SelectBox::Deselect()
   selected_item = -1;
   SetFocusOn(NULL);
   NeedRedrawing();
+}
+
+void SelectBox::ScrollToItem(uint index)
+{
+  if (m_items.empty())
+    return;
+
+  uint i=0;
+  int offset = 0;
+  for (i=0; i<m_items.size() && i<index ; i++) {
+    offset += m_items[i]->GetSizeX() + GetMargin();
+  }
+
+  ScrollToPos(offset - GetSizeX()/2 + m_items[i]->GetSizeX()/2);
 }
 
 void SelectBox::RemoveSelected()

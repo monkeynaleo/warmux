@@ -67,11 +67,13 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool show_border, bool _d
                                Font::FONT_BOLD, dark_gray_color,
                                Text::ALIGN_CENTER_TOP, false);
   AddWidget(map_author_label);
+  Pack();
+  ChangeMapCallback();
 }
 
 void MapSelectionBox::ChangeMap(uint index)
 {
-  if (index > common.size()+1 || selected_map_index == index)
+  if (index > common.size() || selected_map_index == index)
     return;
 
   // Callback other network players
@@ -122,6 +124,12 @@ Widget* MapSelectionBox::ClickUp(const Point2i &mousePosition, uint button)
 {
   if (display_only)
     return NULL;
+
+  if (button == SDL_BUTTON_WHEELDOWN)
+    ChangeMap(selected_map_index -1);
+  if (button == SDL_BUTTON_WHEELUP)
+    ChangeMap(selected_map_index +1);
+
   Widget *w = WidgetList::ClickUp(mousePosition, button);
   if (w == box) {
     uint i = box->GetSelectedItem();
@@ -200,7 +208,6 @@ void MapSelectionBox::Pack()
       wlist[i]->SetSize(w, h);
   }
   VBox::Pack();
-  ChangeMapCallback();
 }
 
 void MapSelectionBox::RefreshBox()
@@ -243,4 +250,13 @@ void MapSelectionBox::RefreshBox()
     // Inform network if need be - will call back up to this very function
     Network::GetInstance()->SendMapsList();
   }
+}
+
+bool MapSelectionBox::Update(const Point2i & mousePosition,
+                               const Point2i & lastMousePosition) {
+  if (box->GetSelectedItem() >= 0 && (uint)box->GetSelectedItem() != selected_map_index) {
+    ChangeMap(box->GetSelectedItem());
+  }
+  return VBox::Update(mousePosition, lastMousePosition);
+
 }

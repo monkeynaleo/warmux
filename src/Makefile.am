@@ -325,6 +325,8 @@ warmux_SOURCES = \
         tool/config_element.h \
         tool/copynpaste.cpp \
         tool/copynpaste.h \
+        tool/eventtimer.h \
+        tool/eventtimer.cpp \
         tool/isnan.h \
         tool/math_tools.h \
         tool/resource_manager.cpp \

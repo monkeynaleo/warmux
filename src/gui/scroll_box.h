@@ -36,9 +36,13 @@ public:
   typedef enum {
     SCROLL_MODE_NONE,
     SCROLL_MODE_THUMB,
-    SCROLL_MODE_DRAG
+    SCROLL_MODE_DRAG,
+    SCROLL_MODE_KINETIC,
+    SCROLL_MODE_KINETIC_DONE,
+    SCROLL_MODE_TOTARGET
   } ScrollMode;
-
+private:
+  void __ScrollToPos(int position);
 protected:
   // Internal box
   Box *box;
@@ -49,10 +53,14 @@ protected:
   Button * m_inc;
 
   // Scroll information
+  float        scroll_target;
+  int          scroll_counter;
   int          start_drag;
   int          start_drag_offset;
   int          offset;
   int          scrollbar_dim;
+  Point2f      scroll_speed;
+  Point2i      first_mouse_position;
   ScrollMode   scroll_mode;
   bool         vertical;
 
@@ -69,6 +77,7 @@ protected:
     return Rectanglei(GetScrollTrackPos(), s);
   }
   Point2i    GetScrollTrackPos() const;
+  void ScrollToPos(int position);
   int GetMaxOffset() const
   {
     if (vertical)
@@ -84,7 +93,7 @@ protected:
 
 public:
   ScrollBox(const Point2i & size, bool force = true, bool alternate = false, bool vertical=true);
-  virtual ~ScrollBox() { };
+  virtual ~ScrollBox();
 
   // No need for a Draw method: the additional stuff drawn is made by Update
   virtual bool Update(const Point2i &mousePosition,
@@ -112,6 +121,7 @@ public:
   virtual void Empty() { offset = 0; box->Empty(); }
   virtual void Clear() { offset = 0; box->Clear(); }
   void SetMargin(uint margin) { box->SetMargin(margin); }
+  uint GetMargin() { return box->GetMargin(); }
   int GetTrackDimension() const;
 };
 
