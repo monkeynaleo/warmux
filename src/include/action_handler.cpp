@@ -997,7 +997,7 @@ static void Action_Network_VerifyRandomSync(Action *a)
   if (local_seed != remote_seed) {
     Replay *replay = Replay::GetInstance();
     if (replay->IsRecording())
-      replay->SaveReplay(GetHome() + "bug.wrf", "I'm bugged");
+      replay->SaveReplay(GetHome() + PATH_SEPARATOR "bug.wrf", "I'm bugged");
 
     Question question(Question::WARNING);
     question.Set(_("Game is not synchronized anymore! This is BAD, the network game will be "
