@@ -1,7 +1,7 @@
 #include <iostream>
 #include <glib.h>
 #include <glib-object.h>
-#include <SDL/SDL.h>
+#include <SDL.h>
 
 SDL_TimerID timer_id = 0;
 
