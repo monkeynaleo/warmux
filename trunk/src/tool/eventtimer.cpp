@@ -16,36 +16,48 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Vertical or Horizontal Box
+ *  Very simple timed events generator
  *****************************************************************************/
 
-#ifndef GUI_BOX_H
-#define GUI_BOX_H
+#include <SDL/SDL.h>
+#include "tool/eventtimer.h"
 
-#include "gui/widget_list.h"
-#include "tool/resource_manager.h"
 
-class Box : public WidgetList
+static Uint32 send_null_event(Uint32 interval, void */*param*/)
 {
-protected:
-  uint    margin;
+  printf("send_evnt\n");
+  SDL_Event event;
+  SDL_UserEvent userevent;
 
-public:
-  Box(void);
-  Box(const Point2i & size,
-      bool _draw_border = true,
-      bool shadowed = true);
-  Box(Profile * _profile,
-      const xmlNode * _boxNode);
-  virtual ~Box();
+  userevent.type = SDL_USEREVENT;
+  userevent.code = 0;
+  userevent.data1 = NULL;
+  userevent.data2 = NULL;
 
-  void ParseXMLBoxParameters(void);
+  event.type = SDL_USEREVENT;
+  event.user = userevent;
 
-  void SetMargin(uint _margin) { margin = _margin; };
-  uint GetMargin() { return margin; }
+  SDL_PushEvent(&event);
+  return(interval);
+}
 
-  virtual void Pack() = 0;
-};
+void EventTimer::Start(int interval)
+{
+  if (timer_id == 0)
+    timer_id = SDL_AddTimer(interval, send_null_event, NULL);
+}
 
-#endif
+void EventTimer::Stop()
+{
+  if (timer_id != 0) {
+    SDL_RemoveTimer(timer_id);
+    timer_id = 0;
+  }
+}
 
+bool EventTimer::IsRunning() const
+{
+  if (timer_id != 0)
+    return true;
+  return false;
+}
