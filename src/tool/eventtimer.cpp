@@ -19,7 +19,7 @@
  *  Very simple timed events generator
  *****************************************************************************/
 
-#include <SDL/SDL.h>
+#include <SDL.h>
 #include "tool/eventtimer.h"
 
 
