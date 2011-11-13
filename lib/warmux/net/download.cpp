@@ -60,26 +60,31 @@ Downloader::Downloader()
 Downloader::~Downloader()
 {
   curl_easy_cleanup(curl);
+
   curl_global_cleanup();
   delete[] curl_error_buf;
+}
+
+void Downloader::FillCurlError()
+{
+  error = std::string(curl_error_buf);
+  if (error.empty()) {
+    snprintf(curl_error_buf, CURLOPT_ERRORBUFFER-1, "Unknown Curl error no.%i", r);
+    error = std::string(curl_error_buf);
+  }
 }
 
 bool Downloader::GetUrl(const char* url, std::string& out)
 {
   curl_easy_setopt(curl, CURLOPT_WRITEDATA, &out);
   curl_easy_setopt(curl, CURLOPT_URL, url);
-  CURLcode r = curl_easy_perform(curl);
-
-  if (r == CURLE_OK)
+  if (CURLE_OK == curl_easy_perform(curl))
     return true;
 
-  error = std::string(curl_error_buf);
-  if (error.empty()) {
-    snprintf(curl_error_buf, CURLOPT_ERRORBUFFER-1, "Unknown Curl error no.%i", r);
-    error = std::string(curl_error_buf);
-  }
+  FillCurlError();
   return false;
 }
+
 #elif defined(ANDROID)
 # include <jni.h>
 

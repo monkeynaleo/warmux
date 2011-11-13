@@ -31,6 +31,8 @@
 
 #include <WARMUX_singleton.h>
 
+#define HAVE_FACEBOOK 1
+
 class Downloader : public Singleton<Downloader>
 {
   std::string error;
@@ -38,6 +40,7 @@ class Downloader : public Singleton<Downloader>
 #ifdef HAVE_LIBCURL
   void* curl;
   char* curl_error_buf;
+  void FillCurlError();
 #endif
 
   // Return true if the download was successful
