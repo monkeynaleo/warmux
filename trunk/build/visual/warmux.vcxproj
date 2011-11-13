@@ -350,7 +350,9 @@ echo #define __TIME__ "%TIME" &gt;&gt; resource.h
     <ClCompile Include="..\..\src\team\team_group.cpp" />
     <ClCompile Include="..\..\src\tool\affine_transform.cpp" />
     <ClCompile Include="..\..\src\tool\ansi_convert.cpp" />
+    <ClCompile Include="..\..\src\tool\config_element.cpp" />
     <ClCompile Include="..\..\src\tool\copynpaste.cpp" />
+    <ClCompile Include="..\..\src\tool\eventtimer.cpp" />
     <ClCompile Include="..\..\src\tool\resource_manager.cpp" />
     <ClCompile Include="..\..\src\tool\stats.cpp" />
     <ClCompile Include="..\..\src\tool\string_tools.cpp" />
@@ -392,6 +394,7 @@ echo #define __TIME__ "%TIME" &gt;&gt; resource.h
     <ClCompile Include="..\..\src\weapon\suicide.cpp" />
     <ClCompile Include="..\..\src\weapon\supertux.cpp" />
     <ClCompile Include="..\..\src\weapon\syringe.cpp" />
+    <ClCompile Include="..\..\src\weapon\target_launcher.cpp" />
     <ClCompile Include="..\..\src\weapon\teleportation.cpp" />
     <ClCompile Include="..\..\src\weapon\weapon.cpp" />
     <ClCompile Include="..\..\src\weapon\weapon_cfg.cpp" />
@@ -573,7 +576,9 @@ echo #define __TIME__ "%TIME" &gt;&gt; resource.h
     <ClInclude Include="..\..\src\team\team_group.h" />
     <ClInclude Include="..\..\src\tool\affine_transform.h" />
     <ClInclude Include="..\..\src\tool\ansi_convert.h" />
+    <ClInclude Include="..\..\src\tool\config_element.h" />
     <ClInclude Include="..\..\src\tool\copynpaste.h" />
+    <ClInclude Include="..\..\src\tool\eventtimer.h" />
     <ClInclude Include="..\..\src\tool\isnan.h" />
     <ClInclude Include="..\..\src\tool\math_tools.h" />
     <ClInclude Include="..\..\src\tool\resource_manager.h" />
@@ -618,6 +623,7 @@ echo #define __TIME__ "%TIME" &gt;&gt; resource.h
     <ClInclude Include="..\..\src\weapon\suicide.h" />
     <ClInclude Include="..\..\src\weapon\supertux.h" />
     <ClInclude Include="..\..\src\weapon\syringe.h" />
+    <ClInclude Include="..\..\src\weapon\target_launcher.h" />
     <ClInclude Include="..\..\src\weapon\teleportation.h" />
     <ClInclude Include="..\..\src\weapon\weapon.h" />
     <ClInclude Include="..\..\src\weapon\weapon_cfg.h" />
@@ -646,6 +652,7 @@ echo #define __TIME__ "%TIME" &gt;&gt; resource.h
     <CustomBuildStep Include="..\..\data\graphism.xml">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Handheld|Win32'">true</ExcludedFromBuild>
+      <SubType>Designer</SubType>
     </CustomBuildStep>
     <CustomBuildStep Include="..\..\data\warmux_default_config.xml">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
