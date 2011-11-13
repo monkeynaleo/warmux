@@ -105,7 +105,7 @@ connection_state_t IndexServer::Connect(const std::string& warmux_version)
     goto out;
   }
 
-  // Cycle through the list of server
+  // Cycle through the list of servers
   // Until we find one running
   while (GetServerAddress(addr, port, nb_servers_tried)) {
     r = ConnectTo(addr, port, warmux_version);
