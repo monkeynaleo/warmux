@@ -33,9 +33,13 @@
 #ifdef HAVE_LIBCURL
 # include <curl/curl.h>
 
-static size_t download_callback(void* buf, size_t size, size_t nmemb, void* fd)
+static size_t download_callback(void* buf, size_t size, size_t nmemb, void* str)
 {
-  return fwrite(buf, size, nmemb, (FILE*)fd);
+  std::string* out = (std::string*)str;
+  size_t       sz  = size*nmemb;
+
+  out->append((char*)buf, sz);
+  return sz;
 }
 
 Downloader::Downloader()
@@ -60,12 +64,11 @@ Downloader::~Downloader()
   delete[] curl_error_buf;
 }
 
-bool Downloader::Get(const char* url, FILE* file)
+bool Downloader::GetUrl(const char* url, std::string& out)
 {
-  curl_easy_setopt(curl, CURLOPT_FILE, file);
+  curl_easy_setopt(curl, CURLOPT_WRITEDATA, &out);
   curl_easy_setopt(curl, CURLOPT_URL, url);
   CURLcode r = curl_easy_perform(curl);
-  fflush(file);
 
   if (r == CURLE_OK)
     return true;
@@ -119,7 +122,7 @@ JAVA_EXPORT_NAME(URLDownloader_nativeInitCallbacks)(JNIEnv * libEnv, jobject thi
 
 Downloader::Downloader() { }
 Downloader::~Downloader() { }
-bool Downloader::Get(const char* url, FILE* file)
+bool Downloader::GetUrl(const char* url, std::string& out)
 {
   bool       ret    = false;
   jboolean   isCopy = JNI_FALSE;
@@ -145,15 +148,14 @@ bool Downloader::Get(const char* url, FILE* file)
     goto out;
   }
 
-  written = fwrite(ptr, sizeof(jbyte), len, file);
-  if (isCopy == JNI_TRUE)
-    env->ReleaseByteArrayElements(buffer, ptr, 0);
-
-
-  if (written != len)
-    error = Format(_("Wrote %i/%i bytes"), written, len);
-  else
+  if (len) {
+    out.append((char*)ptr, sizeof(jbyte)*len);
+    if (isCopy == JNI_TRUE)
+      env->ReleaseByteArrayElements(buffer, ptr, 0);
     ret = true;
+  } else {
+    error = Format(_("Wrote %i/%i bytes"), written, len);
+  }
 
 out:
   // Done with JNI calls, detach
@@ -163,7 +165,7 @@ out:
 #else  // waiting for an alternate implementation
 Downloader::Downloader() { }
 Downloader::~Downloader() { }
-bool Downloader::Get(const char* /*url*/, FILE* /*file*/) { return false; }
+bool Downloader::GetUrl(const char* /*url*/, std::string& /*file*/) { return false; }
 #endif
 
 static ssize_t getline(std::string& line, FILE* file)
@@ -181,37 +183,13 @@ static ssize_t getline(std::string& line, FILE* file)
 bool Downloader::GetLatestVersion(std::string& line)
 {
   static const char url[] = "http://www.warmux.org/last";
-  int fd;
-  const std::string last_file = CreateTmpFile("warmux_version", &fd);
-
-  if (fd == -1) {
-    error = Format(_("Fail to create temporary file: %s"), strerror(errno));
-    fprintf(stderr, "%s\n", error.c_str());
-    return false;
-  }
-
-  FILE* file = fdopen(fd, "r+");
-  if (!file) {
-    error = Format(_("Fail to open temporary file: %s"), strerror(errno));
-    fprintf(stderr, "%s\n", error.c_str());
-    return false;
-  }
-
   error.clear();
-  if (!Get(url, file)) {
+  if (!GetUrl(url, line)) {
     if (error.empty())
       error = Format(_("Couldn't fetch last version from %s"), url);
     fprintf(stderr, "%s\n", error.c_str());
     return false;
   }
-
-  // Parse the file
-  rewind(file);
-  getline(line, file);
-  fclose(file);
-
-  // remove the file
-  remove(last_file.c_str());
 
   return true;
 }
@@ -222,25 +200,19 @@ bool Downloader::GetServerList(std::map<std::string, int>& server_lst, const std
 
   // Download the list of server
   const std::string list_url = "http://www.warmux.org/" + list_name;
-  int fd;
-  const std::string server_file = CreateTmpFile("warmux_servers", &fd);
+  std::string       list_line;
 
-  if (fd == -1) {
-    error = Format(_("Fail to create temporary file: %s"), strerror(errno));
-    fprintf(stderr, "%s\n", error.c_str());
-    return false;
-  }
+  error.clear();
 
-  FILE* file = fdopen(fd, "r+");
-  if (!Get(list_url.c_str(), file))
+  if (!GetUrl(list_url.c_str(), list_line))
     return false;
+  MSG_DEBUG("downloader", "Received '%s'", list_line.c_str());
 
   // Parse the file
-  std::string line;
-  rewind(file);
+  std::stringstream list(list_line);
+  std::string       line;
 
-  // GNU getline isn't available on *BSD and Win32, so we use a new function, see getline above
-  while (getline(line, file) > 0) {
+  while (std::getline(list, line)) {
     if (line.at(0) == '#'
         || line.at(0) == '\n'
         || line.at(0) == '\0')
@@ -253,12 +225,10 @@ bool Downloader::GetServerList(std::map<std::string, int>& server_lst, const std
     std::string hostname = line.substr(0, port_pos);
     std::string portstr = line.substr(port_pos+1);
     int port = atoi(portstr.c_str());
+    MSG_DEBUG("downloader", "Received %s:%i", hostname.c_str(), port);
 
     server_lst[ hostname ] = port;
   }
-
-  fclose(file);
-  remove(server_file.c_str());
 
   MSG_DEBUG("downloader", "Server list retrieved. %u servers are running",
             (uint)server_lst.size());
