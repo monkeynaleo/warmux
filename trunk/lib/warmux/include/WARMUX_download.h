@@ -40,7 +40,7 @@ class Downloader : public Singleton<Downloader>
 #ifdef HAVE_LIBCURL
   void* curl;
   char* curl_error_buf;
-  void FillCurlError();
+  void FillCurlError(int r);
 #endif
 
   // Return true if the download was successful
