@@ -69,7 +69,9 @@ class ResultsMenu : public Menu
 
   void Draw(const Point2i &mousePosition);
   void OnClickUp(const Point2i &mousePosition, int button);
-  void Publish();
+#ifdef HAVE_FACEBOOK
+  void Publish(const std::string& user, const std::string& pwd);
+#endif
 
 public:
   ResultsMenu(std::vector<TeamResults*>& v, bool disconnected = false);
