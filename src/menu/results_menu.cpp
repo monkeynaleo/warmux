@@ -426,7 +426,8 @@ void ResultsMenu::Publish(const std::string& email, const std::string& pwd)
   if (dl->InitFaceBook(email, pwd)) {
     std::vector<std::string> remote;
     std::string local;
-    for (uint i=0; i<results.size(); i++) {
+    // There's a dummy team inserted for best of game
+    for (uint i=0; i<results.size()-1; i++) {
       const Team *team = results.at(i)->getTeam();
       if (team->IsRemote()) {
         remote.push_back(team->GetPlayerName());
