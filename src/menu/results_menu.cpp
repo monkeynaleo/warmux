@@ -419,12 +419,13 @@ void ResultsMenu::DrawTeamOnPodium(const Team& team, const Point2i& relative_pos
 }
 
 #ifdef HAVE_FACEBOOK
-void ResultsMenu::Publish(const std::string& user, const std::string& pwd)
+void ResultsMenu::Publish(const std::string& email, const std::string& pwd)
 {
   uint rank = results.size(), max = 0;
   Downloader* dl = Downloader::GetInstance();
   if (dl->InitFaceBook(email, pwd)) {
     std::vector<std::string> remote;
+    std::string local;
     for (uint i=0; i<results.size(); i++) {
       const Team *team = results.at(i)->getTeam();
       if (team->IsRemote()) {
@@ -495,9 +496,9 @@ void ResultsMenu::key_ok()
   // return was pressed while chat texbox still had focus (player wants to send his msg)
   if (msg_box && msg_box->TextHasFocus()) {
 #ifdef HAVE_FACEBOOK
-    const Config  *cfg      = Config::GetConstInstance();
-    const TextBox *text_box = msg_box->GetTextBox();
-    const std::string &msg  = text_box->GetText();
+    Config  *cfg      = Config::GetInstance();
+    TextBox *text_box = msg_box->GetTextBox();
+    const std::string &msg = text_box->GetText();
     if (cfg->GetFaceBookPublish() && msg.find("/publish") == 0) {
       std::string email, pwd, local;
       cfg->GetFaceBookCreds(email, pwd);
