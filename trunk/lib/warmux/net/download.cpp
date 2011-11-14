@@ -302,7 +302,7 @@ bool Downloader::InitFaceBook(const std::string& semail, const std::string& spwd
   char *pass  = curl_easy_escape(curl, spwd.c_str(), spwd.size());
 #endif
   if (!GetUrl("http://m.facebook.com/login.php?http&refsrc=http%3A%2F%2Fm.facebook.com%2F&no_next_msg&refid=8", &html)) {
-    error = "Can't find login connect";
+    error = _("Can't find login connect");
     goto end;
   }
   MSG_DEBUG("downloader", "Login connect success!");
@@ -330,15 +330,16 @@ bool Downloader::InitFaceBook(const std::string& semail, const std::string& spwd
 
   html.clear();
 
-#ifdef HAVE_LIBCURL
-  //curl_easy_setopt(curl, CURLOPT_HEADER, 0);
-#endif
   form = "http://m.facebook.com" + form;
-  fields = "lsd=&post_form_id=" + post_form_id + "&charset_test=%E2%82%AC%2C%C2%B4%2C%E2%82%AC%2C%C2%B4%2C%E6%B0%B4%2C%D0%94%2C%D0%84" +
-           "&version=1&ajax=1&width=1366&pxr=1&gps=1&email=" + email + "&pass=" + pass + "&m_ts=" + m_ts + "&login=Login";
+  fields = "lsd=&post_form_id=" + post_form_id +
+           "&version=1&ajax=0&pxr=0&gps=0&email=" + email + "&pass=" + pass + "&m_ts=" + m_ts + "&login=Login";
   MSG_DEBUG("downloader", "Fields: %s\n", fields.c_str());
   if (!Post(form.c_str(), &html, fields)) {
-    error = "Login failed";
+    error = _("Login failed");
+    goto end;
+  }
+  if (html.find("abb acr aps") != std::string::npos) {
+    error = _("Login error, probably invalid email or password");
     goto end;
   }
   MSG_DEBUG("downloader", "Login success!\n");
