@@ -421,19 +421,25 @@ void ResultsMenu::DrawTeamOnPodium(const Team& team, const Point2i& relative_pos
 #ifdef HAVE_FACEBOOK
 void ResultsMenu::Publish(const std::string& email, const std::string& pwd)
 {
-  uint rank = results.size(), max = 0;
   Downloader* dl = Downloader::GetInstance();
   if (dl->InitFaceBook(email, pwd)) {
     std::vector<std::string> remote;
-    std::string local;
+    std::string              local;
+    uint rank = results.size(), max = 0, nb = 0;
+    uint others = 0, self = 0;
     // There's a dummy team inserted for best of game
     for (uint i=0; i<results.size()-1; i++) {
       const Team *team = results.at(i)->getTeam();
       if (team->IsRemote()) {
         remote.push_back(team->GetPlayerName());
-      } else if (i < rank) {
-        local = team->GetPlayerName();
-        rank = i;
+        others += team->GetNbCharacters();
+      } else {
+        if (i < rank) {
+          local = team->GetPlayerName();
+          rank = i;
+        }
+        nb++;
+        self += team->GetNbCharacters();
       }
       if (results.at(i)->GetDeathTime() > max)
         max = results.at(i)->GetDeathTime();
@@ -445,11 +451,12 @@ void ResultsMenu::Publish(const std::string& email, const std::string& pwd)
       l = remote[0];
     else {
       for (uint i=0; i<remote.size()-1; i++)
-        l += Format("%s,", remote[i].c_str());
-      l += Format(" and %s", remote.back().c_str());
+        l += Format("%s, ", remote[i].c_str());
+      l += Format("and %s", remote.back().c_str());
     }
-    std::string txt = Format("%s battled against %s during %u seconds and finished at rank %u",
-                              local.c_str(), l.c_str(), max, rank);
+    std::string txt = Format("%s played a game of WarMUX, using %u characters in %u teams, against %s during %u seconds and finished at rank %u",
+                              local.c_str(), self, nb, l.c_str(), max, rank+1);
+    printf("%s\n", txt.c_str());
     dl->FBStatus(txt);
   }
 }
