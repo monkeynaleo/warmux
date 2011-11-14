@@ -230,7 +230,7 @@ void ScrollBox::__Update(const Point2i & mousePosition,
     int new_offset = offset;
 
     if (scroll_mode == SCROLL_MODE_THUMB) {
-      Point2i track_pos  = GetScrollTrackPos();
+      //Point2i track_pos  = GetScrollTrackPos();
 
       if (vertical) {
         int   height     = GetTrackDimension();
@@ -299,7 +299,7 @@ void ScrollBox::__ScrollToPos(int new_offset)
   float prev_position;
   float position = offset;
   float speed;
-  float prev_speed;
+  //float prev_speed;
 
   if (vertical)
     speed = scroll_speed.x;
@@ -317,7 +317,7 @@ void ScrollBox::__ScrollToPos(int new_offset)
   }
 
   //Apply acceleration
-  prev_speed = speed;
+  //prev_speed = speed;
   speed += acceleration;
 
   //Limit
