@@ -86,6 +86,13 @@ void WidgetList::RemoveWidget(Widget* w)
   delete w;
 }
 
+void WidgetList::SetVisible(bool v)
+{
+  Widget::SetVisible(v);
+  for (wit w = widget_list.begin(); w != widget_list.end(); w++)
+    (*w)->SetVisible(v);
+}
+
 void WidgetList::SetHighlighted(bool focus)
 {
   Widget::SetHighlighted(focus);

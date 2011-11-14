@@ -99,7 +99,7 @@ public:
   void SetActionName(const std::string & _actionName) { this->actionName = _actionName; };
 
   // widget may be hidden
-  void SetVisible(bool _visible);
+  virtual void SetVisible(bool _visible);
   bool IsVisible() const { return visible; }
   virtual bool Contains(const Point2i & point) const { return (Rectanglei::Contains(point) && visible); }
 
