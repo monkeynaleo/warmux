@@ -146,6 +146,10 @@ Config::Config()
 #else
   , quality(QUALITY_32BPP)
 #endif
+#ifdef HAVE_FACEBOOK
+  , fb_publish(false)
+  , fb_email("")
+#endif
 {
   // Set audio volume
   volume_music = JukeBox::GetMaxVolume()/2;
@@ -556,6 +560,14 @@ void Config::LoadXml(const xmlNode *xml)
     XmlReader::ReadBool(elem, "left-handed_mouse", lefthanded_mouse);
   }
 
+  //=== Social ===
+  if ((elem = XmlReader::GetMarker(xml, "social"))) {
+#ifdef HAVE_FACEBOOK
+    XmlReader::ReadString(elem, "facebook_email", fb_email);
+    XmlReader::ReadString(elem, "facebook_password", fb_pwd);
+#endif
+  }
+
   //=== game mode ===
   XmlReader::ReadString(xml, "game_mode", m_game_mode);
 
@@ -696,6 +708,13 @@ bool Config::SaveXml(bool save_current_teams)
   xmlNode *misc_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"misc"));
   doc.WriteElement(misc_node, "check_updates", bool2str(check_updates));
   doc.WriteElement(misc_node, "left-handed_mouse", bool2str(lefthanded_mouse));
+
+  //=== Social ===
+  xmlNode *social_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"social"));
+#ifdef HAVE_FACEBOOK
+  doc.WriteElement(social_node, "facebook_email", fb_email);
+  doc.WriteElement(social_node, "facebook_password", fb_pwd);
+#endif
 
   //=== game mode ===
   doc.WriteElement(root, "game_mode", m_game_mode);
