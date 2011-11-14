@@ -49,6 +49,7 @@ public:
   virtual ~WidgetList();
 
   // Highlight and background
+  virtual void SetVisible(bool _visible);
   virtual void SetHighlighted(bool focus);
   virtual void SetBackgroundColor(const Color &background_color);
   virtual void SetHighlightBgColor(const Color &highlight_bg_color);
