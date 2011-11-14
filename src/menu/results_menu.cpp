@@ -23,11 +23,13 @@
 #include <time.h>
 
 #include <WARMUX_debug.h>
+#include <WARMUX_download.h>
 
 #include "menu/results_menu.h"
 
 #include "character/character.h"
 #include "character/damage_stats.h"
+#include "game/config.h"
 #include "game/game_time.h"
 #include "graphic/font.h"
 #include "graphic/sprite.h"
@@ -416,6 +418,44 @@ void ResultsMenu::DrawTeamOnPodium(const Team& team, const Point2i& relative_pos
   podium_img.MergeSurface(tmp, position);
 }
 
+void ResultsMenu::Publish()
+{
+  const Config *cfg = Config::GetConstInstance();
+  if (cfg->GetFaceBookPublish()) {
+    std::string email, pwd, local;
+    uint rank = results.size(), max = 0;
+    Downloader* dl = Downloader::GetInstance();
+    cfg->GetFaceBookCreds(email, pwd);
+    if (dl->InitFaceBook(email, pwd)) {
+      std::vector<std::string> remote;
+      for (uint i=0; i<results.size(); i++) {
+        const Team *team = results.at(i)->getTeam();
+        if (team->IsRemote()) {
+          remote.push_back(team->GetPlayerName());
+        } else if (i < rank) {
+          local = team->GetPlayerName();
+          rank = i;
+        }
+        if (results.at(i)->GetDeathTime() > max)
+          max = results.at(i)->GetDeathTime();
+      }
+      std::string l;
+      if (remote.empty())
+        l = _("Himself");
+      else if (remote.size() == 1)
+        l = remote[0];
+      else {
+        for (uint i=0; i<remote.size()-1; i++)
+          l += Format("%s,", remote[i].c_str());
+        l += Format(" and %s", remote.back().c_str());
+      }
+      std::string txt = Format("%s battled against %s during %u seconds and finished at rank %u",
+                               local.c_str(), l.c_str(), max, rank);
+      dl->FBStatus(txt);
+    }
+  }
+}
+
 bool ResultsMenu::SaveReplay()
 {
   std::string filename = replay_name->GetText();
@@ -456,8 +496,12 @@ bool ResultsMenu::signal_ok()
 void ResultsMenu::key_ok()
 {
   // return was pressed while chat texbox still had focus (player wants to send his msg)
-  if (msg_box != NULL && msg_box->TextHasFocus()) {
-    msg_box->SendChatMsg();
+  if (msg_box && msg_box->TextHasFocus()) {
+    if (msg_box->GetTextBox()->GetText() == "/publish") {
+      Publish();
+      msg_box->GetTextBox()->SetText("");
+    } else
+      msg_box->SendChatMsg();
     return;
   }
   Menu::key_ok();

@@ -69,6 +69,7 @@ class ResultsMenu : public Menu
 
   void Draw(const Point2i &mousePosition);
   void OnClickUp(const Point2i &mousePosition, int button);
+  void Publish();
 
 public:
   ResultsMenu(std::vector<TeamResults*>& v, bool disconnected = false);
