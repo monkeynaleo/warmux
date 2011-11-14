@@ -331,10 +331,12 @@ void WeaponsMenu::RefreshWeaponList()
 
 AffineTransform2D WeaponsMenu::ComputeToolTransformation()
 {
+#if 0 // dead code
   uint scroll_border = 0;
   if (Config::GetInstance()->GetScrollOnBorder()) {
     scroll_border = Config::GetInstance()->GetScrollBorderSize();
   }
+#endif
 
   Point2i start = click_pos - Point2i(tools_menu->GetWidth(), 0);
   Point2i end = click_pos + Point2i(weapons_menu->GetWidth()+10, 0);
@@ -349,10 +351,12 @@ AffineTransform2D WeaponsMenu::ComputeToolTransformation()
 
 AffineTransform2D WeaponsMenu::ComputeWeaponTransformation()
 {
+#if 0 // dead code
   uint scroll_border = 0;
   if (Config::GetInstance()->GetScrollOnBorder()) {
     scroll_border = Config::GetInstance()->GetScrollBorderSize();
   }
+#endif
 
   // Init animation parameter
   Point2i start = click_pos
