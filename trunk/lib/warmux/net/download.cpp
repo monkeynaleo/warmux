@@ -49,7 +49,7 @@ static size_t download_callback(void* buf, size_t size, size_t nmemb, void* str)
 Downloader::Downloader()
 {
 #ifdef HAVE_FACEBOOK
-  curl = NULL;
+  logged = false;
   curl_global_init(CURL_GLOBAL_ALL);
 #else
 #  ifdef WIN32
@@ -292,6 +292,8 @@ bool Downloader::FindNameValue(std::string& value, const std::string& name, cons
 
 bool Downloader::InitFaceBook(const std::string& semail, const std::string& spwd)
 {
+  if (logged)
+    return true;
   std::string html, fields;
 
   logged = false;

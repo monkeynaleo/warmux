@@ -31,8 +31,6 @@
 
 #include <WARMUX_singleton.h>
 
-#define HAVE_FACEBOOK 1
-
 class Downloader : public Singleton<Downloader>
 {
   std::string error;

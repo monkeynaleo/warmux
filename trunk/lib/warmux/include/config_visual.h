@@ -117,5 +117,7 @@
 /* Version number of package */
 #define VERSION "svn"
 
+#define HAVE_FACEBOOK 1
+
 /* Define curl_free() as free() if our version of curl lacks curl_free. */
 /* #undef curl_free */
