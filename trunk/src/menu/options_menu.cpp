@@ -70,7 +70,6 @@ OptionMenu::OptionMenu() :
   float   factor = window_h / 420.0f;
   if (factor > 1.5f) factor = 1.5f;
   Font::font_size_t fmedium = Font::GetFixedSize(Font::FONT_MEDIUM*factor+0.5f);
-  Font::font_size_t fbig    = Font::GetFixedSize(Font::FONT_BIG*factor+0.5f);
   Font::font_size_t fadapt  = (fmedium > Font::FONT_BIG) ? Font::FONT_BIG : fmedium;
   fadapt  = (fadapt < Font::FONT_MEDIUM) ? Font::FONT_MEDIUM : fadapt;
 
@@ -382,6 +381,7 @@ OptionMenu::OptionMenu() :
   int ssize = tabs_size.x - 10*factor;
   VBox * social_options = new VBox(ssize);
 #ifdef HAVE_FACEBOOK
+  Font::font_size_t fbig    = Font::GetFixedSize(Font::FONT_BIG*factor+0.5f);
   ssize -= 10*factor;
   VBox *vbox = new VBox(ssize, false, false);
   vbox->SetBorder(5*factor); vbox->SetBackgroundColor(transparent_color);
@@ -476,7 +476,7 @@ void OptionMenu::SaveOptions()
   bool p = publish->GetValue();
   if (p) {
     config->SetFaceBookPublish(p);
-    config->SetFaceBookCreds(email->GetText(), pass->GetText());
+    config->SetFaceBookCreds(email->GetText(), pass->GetPassword());
   }
 #endif
 
