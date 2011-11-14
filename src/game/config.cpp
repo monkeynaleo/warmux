@@ -563,7 +563,7 @@ void Config::LoadXml(const xmlNode *xml)
   //=== Social ===
   if ((elem = XmlReader::GetMarker(xml, "social"))) {
 #ifdef HAVE_FACEBOOK
-    XmlReader::ReadBool(elem, "facebook_email", fb_publish);
+    XmlReader::ReadBool(elem, "facebook_publish", fb_publish);
     XmlReader::ReadString(elem, "facebook_email", fb_email);
     XmlReader::ReadString(elem, "facebook_password", fb_pwd);
 #endif
