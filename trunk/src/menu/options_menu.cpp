@@ -38,6 +38,7 @@
 #include "gui/big/button_pic.h"
 #include "gui/combo_box.h"
 #include "gui/check_box.h"
+#include "gui/null_widget.h"
 #include "gui/picture_widget.h"
 #include "gui/picture_text_cbox.h"
 #include "gui/select_box.h"
@@ -69,6 +70,7 @@ OptionMenu::OptionMenu() :
   float   factor = window_h / 420.0f;
   if (factor > 1.5f) factor = 1.5f;
   Font::font_size_t fmedium = Font::GetFixedSize(Font::FONT_MEDIUM*factor+0.5f);
+  Font::font_size_t fbig    = Font::GetFixedSize(Font::FONT_BIG*factor+0.5f);
   Font::font_size_t fadapt  = (fmedium > Font::FONT_BIG) ? Font::FONT_BIG : fmedium;
   fadapt  = (fadapt < Font::FONT_MEDIUM) ? Font::FONT_MEDIUM : fadapt;
 
@@ -377,6 +379,39 @@ OptionMenu::OptionMenu() :
 # endif
 #endif
 
+  int ssize = tabs_size.x - 10*factor;
+  VBox * social_options = new VBox(ssize);
+#ifdef HAVE_FACEBOOK
+  ssize -= 10*factor;
+  VBox *vbox = new VBox(ssize, false, false);
+  vbox->SetBorder(5*factor); vbox->SetBackgroundColor(transparent_color);
+  vbox->AddWidget(new Label("Facebook", 8, fbig, Font::FONT_BOLD, c_red));
+  bool p = Config::GetInstance()->GetFaceBookPublish();
+  publish = new CheckBox(_("Publish updates"), ssize - 10*factor, p, fmedium);
+  vbox->AddWidget(publish);
+
+  hide = new VBox(ssize, false, false); hide->SetBackgroundColor(transparent_color);
+
+  std::string semail, spwd;
+  Config::GetInstance()->GetFaceBookCreds(semail, spwd);
+  HBox *hbox = new HBox(30*factor, false); hbox->SetNoBorder(); hbox->SetBackgroundColor(transparent_color);
+  hbox->AddWidget(new Label(_("E-mail"), ssize/3-5*factor, fmedium));
+  email = new TextBox(semail, (2*ssize)/3-5*factor, fmedium);
+  hbox->AddWidget(email);
+  hide->AddWidget(hbox);
+
+  hbox = new HBox(30*factor, false); hbox->SetNoBorder(); hbox->SetBackgroundColor(transparent_color);
+  hbox->AddWidget(new Label(_("Password"), ssize/3-5*factor, fmedium));
+  pass = new PasswordBox(spwd, (2*ssize)/3-5*factor, fmedium);
+  hbox->AddWidget(pass);
+  hide->AddWidget(hbox);
+
+  hide->SetVisible(p);
+  vbox->AddWidget(hide);
+  social_options->AddWidget(vbox);
+#endif
+  tabs->AddNewTab("unused", _("Social"), social_options);
+
   widgets.AddWidget(tabs);
   widgets.Pack();
 }
@@ -387,22 +422,23 @@ void OptionMenu::OnClickUp(const Point2i &mousePosition, int button)
 
   // Now that the click has been processed by the underlying widgets,
   // make use of their newer values in near-realtime!
-  if (w == volume_music)
+  if (w == volume_music) {
     Config::GetInstance()->SetVolumeMusic(toVolume(volume_music->GetValue()));
-  else if (w == volume_effects) {
+  } else if (w == volume_effects) {
     Config::GetInstance()->SetVolumeEffects(toVolume(volume_effects->GetValue()));
     JukeBox::GetInstance()->Play("default", "menu/clic");
-  }
-  else if (w == music_cbox) {
+  } else if (w == music_cbox) {
     JukeBox::GetInstance()->ActiveMusic(music_cbox->GetValue());
-  }
-  else if (w == effects_cbox) {
+  } else if (w == effects_cbox) {
     Config::GetInstance()->SetSoundEffects(effects_cbox->GetValue());
-  }
-  else if (w == add_team) {
+  } else if (w == add_team) {
     AddTeam();
-  }
-  else if (w == delete_team) {
+#ifdef HAVE_FACEBOOK
+  } else if (w == publish) {
+    hide->SetVisible(publish->GetValue());
+    RedrawMenu();
+#endif
+  } else if (w == delete_team) {
     DeleteTeam();
   }
   else if (w == NULL && lbox_teams->Contains(mousePosition)) {
@@ -434,6 +470,14 @@ void OptionMenu::SaveOptions()
   config->SetScrollOnBorder(opt_scroll_on_border->GetValue());
   config->SetScrollBorderSize(opt_scroll_border_size->GetValue());
 # endif
+#endif
+
+#ifdef HAVE_FACEBOOK
+  bool p = publish->GetValue();
+  if (p) {
+    config->SetFaceBookPublish(p);
+    config->SetFaceBookCreds(email->GetText(), pass->GetText());
+  }
 #endif
 
   // Sound settings - volume already saved
