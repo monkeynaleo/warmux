@@ -261,7 +261,8 @@ void Character::SignalDrowning()
   SetEnergy(0, &ActiveCharacter());
   SetMovement("drowned", true);
   JukeBox::GetInstance()->Play(GetTeam().GetSoundProfile(),"sink");
-  Game::GetInstance()->SignalCharacterDeath (this);
+  Game::GetInstance()->SignalCharacterDeath(this);
+  damage_stats->SetDeathTime(GameTime::GetInstance()->Read());
 }
 
 // Signal the character death (short life as you can notice)
@@ -270,6 +271,7 @@ void Character::SignalGhostState(bool was_dead)
 {
   // Report to damage performer this character lost all of its energy
   ActiveCharacter().damage_stats->MadeDamage(GetEnergy(), *this);
+  damage_stats->SetDeathTime(GameTime::GetInstance()->Read());
 
   MSG_DEBUG("character", "ghost");
   // Signal the death
