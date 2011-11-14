@@ -563,6 +563,7 @@ void Config::LoadXml(const xmlNode *xml)
   //=== Social ===
   if ((elem = XmlReader::GetMarker(xml, "social"))) {
 #ifdef HAVE_FACEBOOK
+    XmlReader::ReadBool(elem, "facebook_email", fb_publish);
     XmlReader::ReadString(elem, "facebook_email", fb_email);
     XmlReader::ReadString(elem, "facebook_password", fb_pwd);
 #endif
@@ -710,8 +711,9 @@ bool Config::SaveXml(bool save_current_teams)
   doc.WriteElement(misc_node, "left-handed_mouse", bool2str(lefthanded_mouse));
 
   //=== Social ===
-  xmlNode *social_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"social"));
 #ifdef HAVE_FACEBOOK
+  xmlNode *social_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"social"));
+  doc.WriteElement(social_node, "facebook_publish", bool2str(fb_publish));
   doc.WriteElement(social_node, "facebook_email", fb_email);
   doc.WriteElement(social_node, "facebook_password", fb_pwd);
 #endif
