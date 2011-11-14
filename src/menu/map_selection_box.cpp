@@ -74,13 +74,12 @@ void MapSelectionBox::ChangeMap(uint index)
   if (index > common.size() || selected_map_index == index)
     return;
 
+  selected_map_index = index;
+  box->Select(index);
   // Callback other network players
   if (Network::GetInstance()->IsGameMaster()) {
-
-    selected_map_index = index;
     // We need to do it here to send the right map to still not connected clients
     // in distant_cpu::distant_cpu
-
     if (selected_map_index == common.size()) { // random map
       MapsList::GetInstance()->SelectMapByName("random");
     } else {
@@ -90,9 +89,6 @@ void MapSelectionBox::ChangeMap(uint index)
     Action a(Action::ACTION_GAME_SET_MAP);
     MapsList::GetInstance()->FillActionMenuSetMap(a);
     Network::GetInstance()->SendActionToAll(a);
-  } else {
-    selected_map_index = index;
-    box->Select(index);
   }
 
   // Set Map information
