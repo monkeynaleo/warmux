@@ -67,8 +67,6 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool show_border, bool _d
                                Font::FONT_BOLD, dark_gray_color,
                                Text::ALIGN_CENTER_TOP, false);
   AddWidget(map_author_label);
-  Pack();
-  ChangeMapCallback();
 }
 
 void MapSelectionBox::ChangeMap(uint index)
@@ -134,7 +132,7 @@ Widget* MapSelectionBox::ClickUp(const Point2i &mousePosition, uint button)
   if (w == box) {
     uint i = box->GetSelectedItem();
     if (i != selected_map_index) {
-      Pack();
+      ChangeMap(i);
       NeedRedrawing();
     }
     selected_map_index = i;
@@ -208,6 +206,7 @@ void MapSelectionBox::Pack()
       wlist[i]->SetSize(w, h);
   }
   VBox::Pack();
+  ChangeMapCallback();
 }
 
 void MapSelectionBox::RefreshBox()
