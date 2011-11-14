@@ -118,9 +118,7 @@ void Video::AddUniqueConfigSorted(int w, int h)
   std::list<Point2i>::iterator res  = available_configs.begin(),
                                end  = available_configs.end();
 
-  for (std::list<Point2i>::iterator res = available_configs.begin();
-       res != available_configs.end();
-       res++) {
+  for (; res != end; res++) {
     // Are they identical ?
     if (p == *res)
       return;
