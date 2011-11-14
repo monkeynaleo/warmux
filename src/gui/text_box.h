@@ -64,7 +64,10 @@ public:
               uint max_width,
               Font::font_size_t fsize = Font::FONT_SMALL,
               Font::font_style_t fstyle = Font::FONT_BOLD)
-    : TextBox(label, max_width, fsize, fstyle) { }
+    : TextBox("", max_width, fsize, fstyle)
+  {
+    BasicSetText(label);
+  }
   PasswordBox(Profile * profile, const xmlNode * passwordBoxNode)
     : TextBox(profile, passwordBoxNode) { }
 
