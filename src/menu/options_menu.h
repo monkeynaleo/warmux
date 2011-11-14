@@ -39,6 +39,9 @@ class CustomTeam;
 class SpinButtonWithPicture;
 class TextBox;
 class ControlConfig;
+class CheckBox;
+class PasswordBox;
+class VBox;
 
 class OptionMenu : public Menu
 {
@@ -97,6 +100,14 @@ private:
   TextBox *tbox_team_name;
   Label *team_name;
   std::vector<TextBox *> tbox_character_name_list;
+
+  /* Social */
+#ifdef HAVE_FACEBOOK
+  CheckBox* publish;
+  VBox*     hide;
+  TextBox*  email;
+  PasswordBox* pass;
+#endif
 
 #ifdef ENABLE_NLS
   void AddLanguageItem(const char* label, const char* value, uint fsize);
