@@ -43,8 +43,16 @@ class Downloader : public Singleton<Downloader>
   void FillCurlError(int r);
 #endif
 
+#ifdef HAVE_FACEBOOK
+  bool        logged;
+  std::string fb_dtsg, post_form_id, form, m_ts;
+  static bool FindPair(std::string& value, const std::string& n, const std::string& html);
+  static bool FindNameValue(std::string& value, const std::string& name, const std::string& html);
+#endif
+
   // Return true if the download was successful
-  bool GetUrl(const char* url, std::string& out);
+  bool GetUrl(const char* url, std::string* out);
+  bool Post(const char* url, std::string* out, const std::string& fields = "");
 
 protected:
   friend class Singleton<Downloader>;
@@ -52,6 +60,10 @@ protected:
   ~Downloader();
 
 public:
+#ifdef HAVE_FACEBOOK
+  bool InitFaceBook(const std::string& email, const std::string& pwd);
+  bool FBStatus(const std::string& text);
+#endif
   bool GetLatestVersion(std::string& line);
   bool GetServerList(std::map<std::string, int>& server_lst, const std::string& list_name);
 
