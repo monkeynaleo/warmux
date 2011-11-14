@@ -422,6 +422,7 @@ void ResultsMenu::DrawTeamOnPodium(const Team& team, const Point2i& relative_pos
 void ResultsMenu::Publish(const std::string& email, const std::string& pwd)
 {
   Downloader* dl = Downloader::GetInstance();
+  std::string msg;
   if (dl->InitFaceBook(email, pwd)) {
     std::vector<std::string> remote;
     std::string              local;
@@ -454,11 +455,17 @@ void ResultsMenu::Publish(const std::string& email, const std::string& pwd)
         l += Format("%s, ", remote[i].c_str());
       l += Format("and %s", remote.back().c_str());
     }
-    std::string txt = Format("%s played a game of WarMUX, using %u characters in %u teams, against %s during %u seconds and finished at rank %u",
-                              local.c_str(), self, nb, l.c_str(), max, rank+1);
-    printf("%s\n", txt.c_str());
-    dl->FBStatus(txt);
-  }
+    std::string txt = Format("%s played a game of WarMUX, using %u characters in %u teams, against %s during %.1f seconds and finished at rank %u",
+                              local.c_str(), self, nb, l.c_str(), max/1000.0f, rank+1);
+
+    if (dl->FBStatus(txt))
+      msg = Format(_("*** Published: %s"), txt.c_str());
+    else
+      msg = Format(_("*** Publishing failed: %s"), dl->GetLastError());
+  } else
+    msg = Format(_("*** Publishing failed: %s"), dl->GetLastError());
+  msg_box->NewMessage(msg, c_red);
+  RedrawMenu();
 }
 #endif
 
