@@ -129,6 +129,13 @@ public:
   bool GetLeftHandedMouse() const { return lefthanded_mouse; }
   void SetLeftHandedMouse(const bool left) { lefthanded_mouse = left; }
 
+#ifdef HAVE_FACEBOOK
+  bool GetFaceBookPublish() const { return fb_publish; }
+  void SetFaceBookPublish(bool b) { fb_publish = b; }
+  void GetFaceBookCreds(std::string& email, std::string& pwd) const { email = fb_email; pwd = fb_pwd; }
+  void SetFaceBookCreds(const std::string& email, const std::string& pwd) { fb_email = email; fb_pwd = pwd; }
+#endif
+
   std::list<ConfigTeam> & AccessTeamList() { return teams; };
   const std::string & GetMapName() const { return map_name; };
   void SetMapName(const std::string& new_name) { map_name = new_name; }
@@ -237,6 +244,13 @@ protected:
   std::string ttf_filename;
 
   Quality quality;
+
+  // Social stuff
+#ifdef HAVE_FACEBOOK
+  bool        fb_publish;
+  std::string fb_email;
+  std::string fb_pwd;
+#endif
 
   friend class Singleton<Config>;
   Config();
