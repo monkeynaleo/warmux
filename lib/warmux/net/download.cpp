@@ -272,7 +272,6 @@ bool Downloader::GetServerList(std::map<std::string, int>& server_lst, const std
   return true;
 }
 
-#ifdef HAVE_FACEBOOK
 bool Downloader::FindPair(std::string& value, const std::string& n, const std::string& html)
 {
   size_t s = html.find(n);
@@ -285,11 +284,13 @@ bool Downloader::FindPair(std::string& value, const std::string& n, const std::s
   value = html.substr(s, e-s);
   return true;
 }
+
 bool Downloader::FindNameValue(std::string& value, const std::string& name, const std::string& html)
 {
   return FindPair(value, "name=\"" + name + "\" value=\"", html);
 }
 
+#ifdef HAVE_FACEBOOK
 bool Downloader::InitFaceBook(const std::string& semail, const std::string& spwd)
 {
   if (logged)
