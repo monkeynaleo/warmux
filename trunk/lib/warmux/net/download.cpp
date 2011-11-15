@@ -377,6 +377,14 @@ end:
   curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, dummy_callback);
   curl_easy_setopt(curl, CURLOPT_WRITEDATA, NULL);
 #endif
+
+  if (!logged && IsLOGGING("download")) {
+    FILE *f = fopen("out.htm", "wt");
+    fwrite(html.c_str(), html.size(), 1, f);
+    fclose(f);
+    MSG_DEBUG("downloader", "Login failed: %s\n", error.c_str());
+  }
+
   return logged;
 }
 
