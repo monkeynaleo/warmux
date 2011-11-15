@@ -329,44 +329,44 @@ OptionMenu::OptionMenu() :
 
 #ifdef ENABLE_NLS
   // Setting language selection
-    AddLanguageItem(_("(system language)"),"", fmedium);
-    AddLanguageItem("Български (bg)",      "bg", fmedium);
-    AddLanguageItem("Bosanski",            "bs", fmedium);
-    AddLanguageItem("Castellano",          "es", fmedium);
-    AddLanguageItem("Català",              "ca", fmedium);
-    AddLanguageItem("čeština (Czech)",     "cs", fmedium);
-    AddLanguageItem("Créole",              "cpf", fmedium);
-    AddLanguageItem("Dansk",               "da", fmedium);
-    AddLanguageItem("Deutsch",             "de", fmedium);
-    AddLanguageItem("Esperanto",           "eo", fmedium);
-    AddLanguageItem("English",             "en", fmedium);
-    AddLanguageItem("Ελληνικά",            "el", fmedium);
-    AddLanguageItem("Eesti keel",          "et", fmedium);
-    AddLanguageItem("ارسی (Farsi)",        "fa", fmedium);
-    AddLanguageItem("Français",            "fr", fmedium);
-    AddLanguageItem("Galego",              "gl", fmedium);
-    AddLanguageItem("עברית (Hebrew)",      "he", fmedium);
-    AddLanguageItem("Magyar",              "hu", fmedium);
-    AddLanguageItem("Italiano",            "it", fmedium);
-    AddLanguageItem("日本語 (japanese)",   "ja_JP", fmedium);
-    AddLanguageItem("Kernewek",            "kw", fmedium);
-    AddLanguageItem("latviešu valoda",     "lv", fmedium);
-    AddLanguageItem("Norsk (bokmål)",      "nb", fmedium);
-    AddLanguageItem("Norsk (nynorsk)",     "nn", fmedium);
-    AddLanguageItem("Nederlands",          "nl", fmedium);
-    AddLanguageItem("Polski",              "pl", fmedium);
-    AddLanguageItem("Português",           "pt", fmedium);
-    AddLanguageItem("Português do Brasil", "pt_BR", fmedium);
-    AddLanguageItem("Română",              "ro", fmedium);
-    AddLanguageItem("Pусский язык (ru)",   "ru", fmedium);
-    AddLanguageItem("Slovenčina",          "sk", fmedium);
-    AddLanguageItem("Slovenščina",         "sl", fmedium);
-    AddLanguageItem("Suomi",               "fi", fmedium);
-    AddLanguageItem("Svenska",             "sv", fmedium);
-    AddLanguageItem("Türkçe",              "tr", fmedium);
-    AddLanguageItem("украї́нська мо́ва",   "uk", fmedium);
-    AddLanguageItem("中文（简体）Simplified Chinese",  "zh_CN", fmedium);
-    AddLanguageItem("中文（正體）Traditional Chinese", "zh_TW", fmedium);
+  AddLanguageItem(_("(system language)"),"", fmedium);
+  AddLanguageItem("Български (bg)",      "bg", fmedium);
+  AddLanguageItem("Bosanski",            "bs", fmedium);
+  AddLanguageItem("Castellano",          "es", fmedium);
+  AddLanguageItem("Català",              "ca", fmedium);
+  AddLanguageItem("čeština (Czech)",     "cs", fmedium);
+  AddLanguageItem("Créole",              "cpf", fmedium);
+  AddLanguageItem("Dansk",               "da", fmedium);
+  AddLanguageItem("Deutsch",             "de", fmedium);
+  AddLanguageItem("Esperanto",           "eo", fmedium);
+  AddLanguageItem("English",             "en", fmedium);
+  AddLanguageItem("Ελληνικά",            "el", fmedium);
+  AddLanguageItem("Eesti keel",          "et", fmedium);
+  AddLanguageItem("ارسی (Farsi)",        "fa", fmedium);
+  AddLanguageItem("Français",            "fr", fmedium);
+  AddLanguageItem("Galego",              "gl", fmedium);
+  AddLanguageItem("עברית (Hebrew)",      "he", fmedium);
+  AddLanguageItem("Magyar",              "hu", fmedium);
+  AddLanguageItem("Italiano",            "it", fmedium);
+  AddLanguageItem("日本語 (japanese)",   "ja_JP", fmedium);
+  AddLanguageItem("Kernewek",            "kw", fmedium);
+  AddLanguageItem("latviešu valoda",     "lv", fmedium);
+  AddLanguageItem("Norsk (bokmål)",      "nb", fmedium);
+  AddLanguageItem("Norsk (nynorsk)",     "nn", fmedium);
+  AddLanguageItem("Nederlands",          "nl", fmedium);
+  AddLanguageItem("Polski",              "pl", fmedium);
+  AddLanguageItem("Português",           "pt", fmedium);
+  AddLanguageItem("Português do Brasil", "pt_BR", fmedium);
+  AddLanguageItem("Română",              "ro", fmedium);
+  AddLanguageItem("Pусский язык (ru)",   "ru", fmedium);
+  AddLanguageItem("Slovenčina",          "sk", fmedium);
+  AddLanguageItem("Slovenščina",         "sl", fmedium);
+  AddLanguageItem("Suomi",               "fi", fmedium);
+  AddLanguageItem("Svenska",             "sv", fmedium);
+  AddLanguageItem("Türkçe",              "tr", fmedium);
+  AddLanguageItem("украї́нська мо́ва",   "uk", fmedium);
+  AddLanguageItem("中文（简体）Simplified Chinese",  "zh_CN", fmedium);
+  AddLanguageItem("中文（正體）Traditional Chinese", "zh_TW", fmedium);
 #endif
 
 #if USE_MISC_TAB
@@ -386,28 +386,30 @@ OptionMenu::OptionMenu() :
   VBox *vbox = new VBox(ssize, false, false);
   vbox->SetBorder(5*factor); vbox->SetBackgroundColor(transparent_color);
   vbox->AddWidget(new Label("Facebook", 8, fbig, Font::FONT_BOLD, c_red));
-  bool p = Config::GetInstance()->GetFaceBookPublish();
-  publish = new CheckBox(_("Publish updates"), ssize - 10*factor, p, fmedium);
-  vbox->AddWidget(publish);
-
-  hide = new VBox(ssize, false, false); hide->SetBackgroundColor(transparent_color);
 
   std::string semail, spwd;
   Config::GetInstance()->GetFaceBookCreds(semail, spwd);
+
+  // Email
   HBox *hbox = new HBox(30*factor, false); hbox->SetNoBorder(); hbox->SetBackgroundColor(transparent_color);
   hbox->AddWidget(new Label(_("E-mail"), ssize/3-5*factor, fmedium));
   email = new TextBox(semail, (2*ssize)/3-5*factor, fmedium);
   hbox->AddWidget(email);
-  hide->AddWidget(hbox);
+  vbox->AddWidget(hbox);
 
+  // Password
+  bool p = Config::GetInstance()->GetFaceBookSave();
+  savepwd = new CheckBox(_("Save password"), ssize - 10*factor, p, fmedium);
+  savepwd->SetValue(p);
+  vbox->AddWidget(savepwd);
   hbox = new HBox(30*factor, false); hbox->SetNoBorder(); hbox->SetBackgroundColor(transparent_color);
   hbox->AddWidget(new Label(_("Password"), ssize/3-5*factor, fmedium));
   pass = new PasswordBox(spwd, (2*ssize)/3-5*factor, fmedium);
   hbox->AddWidget(pass);
   hide->AddWidget(hbox);
-
   hide->SetVisible(p);
   vbox->AddWidget(hide);
+
   social_options->AddWidget(vbox);
 #endif
   tabs->AddNewTab("unused", _("Social"), social_options);
@@ -434,8 +436,8 @@ void OptionMenu::OnClickUp(const Point2i &mousePosition, int button)
   } else if (w == add_team) {
     AddTeam();
 #ifdef HAVE_FACEBOOK
-  } else if (w == publish) {
-    hide->SetVisible(publish->GetValue());
+  } else if (w == savepwd) {
+    hide->SetVisible(savepwd->GetValue());
     RedrawMenu();
 #endif
   } else if (w == delete_team) {
@@ -473,11 +475,8 @@ void OptionMenu::SaveOptions()
 #endif
 
 #ifdef HAVE_FACEBOOK
-  bool p = publish->GetValue();
-  if (p) {
-    config->SetFaceBookPublish(p);
-    config->SetFaceBookCreds(email->GetText(), pass->GetPassword());
-  }
+  config->SetFaceBookSave(savepwd->GetValue());
+  config->SetFaceBookCreds(email->GetText(), pass->GetPassword());
 #endif
 
   // Sound settings - volume already saved
