@@ -130,8 +130,8 @@ public:
   void SetLeftHandedMouse(const bool left) { lefthanded_mouse = left; }
 
 #ifdef HAVE_FACEBOOK
-  bool GetFaceBookPublish() const { return fb_publish; }
-  void SetFaceBookPublish(bool b) { fb_publish = b; }
+  bool GetFaceBookSave() const { return fb_save_pwd; }
+  void SetFaceBookSave(bool b) { fb_save_pwd = b; }
   void GetFaceBookCreds(std::string& email, std::string& pwd) const { email = fb_email; pwd = fb_pwd; }
   void SetFaceBookCreds(const std::string& email, const std::string& pwd) { fb_email = email; fb_pwd = pwd; }
 #endif
@@ -247,8 +247,8 @@ protected:
 
   // Social stuff
 #ifdef HAVE_FACEBOOK
-  bool        fb_publish;
   std::string fb_email;
+  bool        fb_save_pwd;
   std::string fb_pwd;
 #endif
 

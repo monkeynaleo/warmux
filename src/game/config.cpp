@@ -147,8 +147,8 @@ Config::Config()
   , quality(QUALITY_32BPP)
 #endif
 #ifdef HAVE_FACEBOOK
-  , fb_publish(false)
   , fb_email("")
+  , fb_save_pwd(false)
 #endif
 {
   // Set audio volume
@@ -563,9 +563,10 @@ void Config::LoadXml(const xmlNode *xml)
   //=== Social ===
   if ((elem = XmlReader::GetMarker(xml, "social"))) {
 #ifdef HAVE_FACEBOOK
-    XmlReader::ReadBool(elem, "facebook_publish", fb_publish);
     XmlReader::ReadString(elem, "facebook_email", fb_email);
-    XmlReader::ReadString(elem, "facebook_password", fb_pwd);
+    XmlReader::ReadBool(elem, "facebook_publish", fb_save_pwd);
+    if (fb_save_pwd)
+      XmlReader::ReadString(elem, "facebook_password", fb_pwd);
 #endif
   }
 
@@ -713,9 +714,10 @@ bool Config::SaveXml(bool save_current_teams)
   //=== Social ===
 #ifdef HAVE_FACEBOOK
   xmlNode *social_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"social"));
-  doc.WriteElement(social_node, "facebook_publish", bool2str(fb_publish));
   doc.WriteElement(social_node, "facebook_email", fb_email);
-  doc.WriteElement(social_node, "facebook_password", fb_pwd);
+  doc.WriteElement(social_node, "facebook_publish", bool2str(fb_save_pwd));
+  if (fb_save_pwd)
+    doc.WriteElement(social_node, "facebook_password", fb_pwd);
 #endif
 
   //=== game mode ===
