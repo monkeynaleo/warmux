@@ -41,11 +41,12 @@ class Downloader : public Singleton<Downloader>
   void FillCurlError(int r);
 #endif
 
+  static bool FindPair(std::string& value, const std::string& n, const std::string& html);
+  static bool FindNameValue(std::string& value, const std::string& name, const std::string& html);
+
 #ifdef HAVE_FACEBOOK
   bool        logged;
   std::string fb_dtsg, post_form_id, form, m_ts;
-  static bool FindPair(std::string& value, const std::string& n, const std::string& html);
-  static bool FindNameValue(std::string& value, const std::string& name, const std::string& html);
 #endif
 
   // Return true if the download was successful
