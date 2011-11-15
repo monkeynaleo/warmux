@@ -172,6 +172,7 @@ public:
 
   bool IsRandom() const { return random_map; }
   void FillActionMenuSetMap(Action& a) const;
+  Action GetActionMenuSetMap() const;
   std::vector<std::string> GetAvailableMaps() const;
 };
 

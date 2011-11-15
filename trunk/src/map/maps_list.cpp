@@ -403,6 +403,13 @@ void MapsList::FillActionMenuSetMap(Action& a) const
   }
 }
 
+Action MapsList::GetActionMenuSetMap() const
+{
+  Action a(Action::ACTION_GAME_SET_MAP);
+  FillActionMenuSetMap(a);
+  return a;
+}
+
 std::vector<std::string> MapsList::GetAvailableMaps() const
 {
   std::vector<std::string> list;
