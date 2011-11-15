@@ -29,13 +29,13 @@
 #include "include/app.h"
 #include "tool/eventtimer.h"
 
-static const float MAX_CAMERA_SPEED = 5000;
+static const float MAX_CAMERA_SPEED = 200;
 static const float MAX_CAMERA_ACCELERATION = 1.5;
 
-#define REACTIVITY             2*0.6f
-#define SPEED_REACTIVITY       0.05f
-#define ANTICIPATION               18/2
-#define SPEED_REACTIVITY_CEIL       4
+#define REACTIVITY                1.2f
+#define SPEED_REACTIVITY          0.05f
+#define ANTICIPATION              9
+#define SPEED_REACTIVITY_CEIL     4
 
 #define SCROLL_UPDATE_INTERVAL    33
 #define SCROLL_SPEED  6
@@ -327,7 +327,7 @@ void ScrollBox::__ScrollToPos(int new_offset)
   //Update position
   prev_position = position;
   position = position + speed;
-  //printf("pos=%i target=%f speed=%.2f\n", offset, scroll_target, speed);
+  //printf("pos=%i target=%f speed=%.2f acceleration=%.2f\n", offset, scroll_target, speed, acceleration);
   offset = position;
   scroll_speed = Point2f(speed, speed);
   Pack();
