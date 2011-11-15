@@ -150,6 +150,10 @@ Config::Config()
   , fb_email("")
   , fb_save_pwd(false)
 #endif
+#ifdef HAVE_TWITTER
+  , twit_user("")
+  , twit_save_pwd(false)
+#endif
 {
   // Set audio volume
   volume_music = JukeBox::GetMaxVolume()/2;
@@ -568,6 +572,12 @@ void Config::LoadXml(const xmlNode *xml)
     if (fb_save_pwd)
       XmlReader::ReadString(elem, "facebook_password", fb_pwd);
 #endif
+#ifdef HAVE_TWITTER
+    XmlReader::ReadString(elem, "twitter_user", twit_user);
+    XmlReader::ReadBool(elem, "twitter_publish", twit_save_pwd);
+    if (twit_save_pwd)
+      XmlReader::ReadString(elem, "twitter_password", twit_pwd);
+#endif
   }
 
   //=== game mode ===
@@ -712,12 +722,20 @@ bool Config::SaveXml(bool save_current_teams)
   doc.WriteElement(misc_node, "left-handed_mouse", bool2str(lefthanded_mouse));
 
   //=== Social ===
-#ifdef HAVE_FACEBOOK
+#if defined(HAVE_FACEBOOK) || defined(HAVE_TWITTER)
   xmlNode *social_node = xmlAddChild(root, xmlNewNode(NULL /* empty prefix */, (const xmlChar*)"social"));
+#endif
+#ifdef HAVE_FACEBOOK
   doc.WriteElement(social_node, "facebook_email", fb_email);
   doc.WriteElement(social_node, "facebook_publish", bool2str(fb_save_pwd));
   if (fb_save_pwd)
     doc.WriteElement(social_node, "facebook_password", fb_pwd);
+#endif
+#ifdef HAVE_TWITTER
+  doc.WriteElement(social_node, "twitter_user", twit_user);
+  doc.WriteElement(social_node, "twitter_publish", bool2str(twit_save_pwd));
+  if (twit_save_pwd)
+    doc.WriteElement(social_node, "twitter_password", twit_pwd);
 #endif
 
   //=== game mode ===
