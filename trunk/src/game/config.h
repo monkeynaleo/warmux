@@ -135,6 +135,12 @@ public:
   void GetFaceBookCreds(std::string& email, std::string& pwd) const { email = fb_email; pwd = fb_pwd; }
   void SetFaceBookCreds(const std::string& email, const std::string& pwd) { fb_email = email; fb_pwd = pwd; }
 #endif
+#ifdef HAVE_TWITTER
+  bool GetTwitterSave() const { return twit_save_pwd; }
+  void SetTwitterSave(bool b) { twit_save_pwd = b; }
+  void GetTwitterCreds(std::string& user, std::string& pwd) const { user = twit_user; pwd = twit_pwd; }
+  void SetTwitterCreds(const std::string& user, const std::string& pwd) { twit_user = user; twit_pwd = pwd; }
+#endif
 
   std::list<ConfigTeam> & AccessTeamList() { return teams; };
   const std::string & GetMapName() const { return map_name; };
@@ -250,6 +256,11 @@ protected:
   std::string fb_email;
   bool        fb_save_pwd;
   std::string fb_pwd;
+#endif
+#ifdef HAVE_TWITTER
+  std::string twit_user;
+  bool        twit_save_pwd;
+  std::string twit_pwd;
 #endif
 
   friend class Singleton<Config>;

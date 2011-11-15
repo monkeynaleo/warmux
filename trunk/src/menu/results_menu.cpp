@@ -514,13 +514,13 @@ void ResultsMenu::key_ok()
     Config  *cfg      = Config::GetInstance();
     TextBox *text_box = msg_box->GetTextBox();
     const std::string &msg = text_box->GetText();
-    if (msg.find("/publish") == 0) {
+    if (msg.find("/fb") == 0) {
       std::string email, pwd;
       cfg->GetFaceBookCreds(email, pwd);
 
       // Always attempt to look in the command line for the password
-      if (msg.size() > 10) {
-        pwd = msg.substr(9);
+      if (msg.size() > 4) {
+        pwd = msg.substr(3);
         // Save the credentials for the session
         cfg->SetFaceBookCreds(email, pwd);
       }
