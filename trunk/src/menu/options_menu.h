@@ -103,9 +103,9 @@ private:
 
   /* Social */
 #ifdef HAVE_FACEBOOK
-  CheckBox* publish;
-  VBox*     hide;
-  TextBox*  email;
+  TextBox*     email;
+  CheckBox*    savepwd;
+  HBox*        hide;
   PasswordBox* pass;
 #endif
 

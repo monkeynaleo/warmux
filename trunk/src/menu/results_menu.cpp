@@ -456,14 +456,14 @@ void ResultsMenu::Publish(const std::string& email, const std::string& pwd)
       l += Format("and %s", remote.back().c_str());
     }
     std::string txt = Format("%s played a game of WarMUX, using %u characters in %u teams, against %s during %.1f seconds and finished at rank %u",
-                              local.c_str(), self, nb, l.c_str(), max/1000.0f, rank+1);
+                             local.c_str(), self, nb, l.c_str(), max/1000.0f, rank+1);
 
     if (dl->FBStatus(txt))
       msg = Format(_("*** Published: %s"), txt.c_str());
     else
-      msg = Format(_("*** Publishing failed: %s"), dl->GetLastError());
+      msg = Format(_("*** Publishing failed: %s"), dl->GetLastError().c_str());
   } else
-    msg = Format(_("*** Publishing failed: %s"), dl->GetLastError());
+    msg = Format(_("*** Publishing failed: %s"), dl->GetLastError().c_str());
   msg_box->NewMessage(msg, c_red);
   RedrawMenu();
 }
@@ -514,14 +514,23 @@ void ResultsMenu::key_ok()
     Config  *cfg      = Config::GetInstance();
     TextBox *text_box = msg_box->GetTextBox();
     const std::string &msg = text_box->GetText();
-    if (cfg->GetFaceBookPublish() && msg.find("/publish") == 0) {
-      std::string email, pwd, local;
+    if (msg.find("/publish") == 0) {
+      std::string email, pwd;
       cfg->GetFaceBookCreds(email, pwd);
+
+      // Always attempt to look in the command line for the password
       if (msg.size() > 10) {
         pwd = msg.substr(9);
+        // Save the credentials for the session
         cfg->SetFaceBookCreds(email, pwd);
       }
-      Publish(email, pwd);
+
+      // Do we have all credentials?
+      if (!email.empty() && !pwd.empty()) {
+        Publish(email, pwd);
+      } else {
+        msg_box->NewMessage(_("*** Publishing failed: incomplete credentials"), c_red);
+      }
       text_box->SetText("");
     } else
 #endif
