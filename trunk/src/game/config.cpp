@@ -568,13 +568,13 @@ void Config::LoadXml(const xmlNode *xml)
   if ((elem = XmlReader::GetMarker(xml, "social"))) {
 #ifdef HAVE_FACEBOOK
     XmlReader::ReadString(elem, "facebook_email", fb_email);
-    XmlReader::ReadBool(elem, "facebook_publish", fb_save_pwd);
+    XmlReader::ReadBool(elem, "facebook_savepwd", fb_save_pwd);
     if (fb_save_pwd)
       XmlReader::ReadString(elem, "facebook_password", fb_pwd);
 #endif
 #ifdef HAVE_TWITTER
     XmlReader::ReadString(elem, "twitter_user", twit_user);
-    XmlReader::ReadBool(elem, "twitter_publish", twit_save_pwd);
+    XmlReader::ReadBool(elem, "twitter_savepwd", twit_save_pwd);
     if (twit_save_pwd)
       XmlReader::ReadString(elem, "twitter_password", twit_pwd);
 #endif
