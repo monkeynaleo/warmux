@@ -395,14 +395,6 @@ int ScrollBox::GetTrackDimension() const
 bool ScrollBox::Update(const Point2i &mousePosition,
                        const Point2i &lastMousePosition)
 {
-  // Force redrawing if we are scrolling and the mouse has moved
-  if (start_drag_offset!=NO_DRAG && mousePosition!=lastMousePosition) {
-    //NeedRedrawing();
-  }
-
-  if (scroll_mode != SCROLL_MODE_NONE)
-    NeedRedrawing();
-
   bool redraw = need_redrawing;
   bool updated = Widget::Update(mousePosition, lastMousePosition);
   need_redrawing = redraw;
@@ -479,4 +471,9 @@ bool ScrollBox::SendKey(const SDL_keysym & key)
     }
   }
   return true;
+}
+
+bool ScrollBox::IsScrolling()
+{
+  return scroll_mode != SCROLL_MODE_NONE;
 }
