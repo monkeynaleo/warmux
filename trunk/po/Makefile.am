@@ -54,6 +54,7 @@ POTFILES = \
         src/gui/picture_widget.cpp \
         src/gui/progress_bar.cpp \
         src/gui/question.cpp \
+        src/gui/social_widget.cpp \
         src/gui/spin_button.cpp \
         src/gui/spin_button_picture.cpp \
         src/gui/tabs.cpp \

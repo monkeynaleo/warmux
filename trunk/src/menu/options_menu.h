@@ -40,8 +40,8 @@ class SpinButtonWithPicture;
 class TextBox;
 class ControlConfig;
 class CheckBox;
-class PasswordBox;
 class VBox;
+class SocialPanel;
 
 class SocialWidget;
 
@@ -104,11 +104,8 @@ private:
   std::vector<TextBox *> tbox_character_name_list;
 
   /* Social */
-#ifdef HAVE_FACEBOOK
-  SocialWidget *facebook;
-#endif
-#ifdef HAVE_TWITTER
-  SocialWidget *twitter;
+#if defined(HAVE_FACEBOOK) || defined(HAVE_TWITTER)
+  SocialPanel *social_panel;
 #endif
 
 #ifdef ENABLE_NLS

@@ -41,11 +41,12 @@
 #include "gui/null_widget.h"
 #include "gui/picture_widget.h"
 #include "gui/picture_text_cbox.h"
+#include "gui/question.h"
 #include "gui/select_box.h"
+#include "gui/social_panel.h"
 #include "gui/spin_button_picture.h"
 #include "gui/tabs.h"
 #include "gui/text_box.h"
-#include "gui/question.h"
 #include "gui/vertical_box.h"
 #include "map/maps_list.h"
 #include "map/wind.h"
@@ -55,63 +56,6 @@
 #include "team/custom_teams_list.h"
 #include "tool/string_tools.h"
 #include "tool/resource_manager.h"
-
-#if defined(HAVE_FACEBOOK) || defined(HAVE_TWITTER)
-class SocialWidget : public VBox
-{
-
-public:
-  TextBox*     UserBox;
-  CheckBox*    SaveBox;
-  HBox*        HideBox;
-  PasswordBox* PwdBox;
-  SocialWidget(const std::string& name, int ssize, float factor,
-               Font::font_size_t fbig, Font::font_size_t fmedium,
-               const std::string& user, const std::string& pwd, bool saved)
-    : VBox(ssize, false, false)
-  {
-    // Default look
-    SetBorder(5*factor);
-    SetBackgroundColor(transparent_color);
-
-    // Name
-    AddWidget(new Label(name, 20, fbig, Font::FONT_BOLD, c_red));
-
-    // Email
-    HBox *hbox = new HBox(30*factor, false); hbox->SetNoBorder(); hbox->SetBackgroundColor(transparent_color);
-    hbox->AddWidget(new Label(_("User"), ssize/3-5*factor, fmedium));
-    UserBox = new TextBox(user, (2*ssize)/3-5*factor, fmedium);
-    hbox->AddWidget(UserBox);
-    AddWidget(hbox);
-
-    // Password
-    SaveBox = new CheckBox(_("Save password"), ssize - 10*factor, saved, fmedium);
-    SaveBox->SetBackgroundColor(transparent_color);
-    SaveBox->SetValue(saved);
-    AddWidget(SaveBox);
-    HideBox = new HBox(30*factor, false);
-    HideBox->SetNoBorder(); HideBox->SetBackgroundColor(transparent_color);
-    HideBox->AddWidget(new Label(_("Password"), ssize/3-5*factor, fmedium));
-    PwdBox = new PasswordBox(pwd, (2*ssize)/3-5*factor, fmedium);
-    HideBox->AddWidget(PwdBox);
-    HideBox->SetVisible(saved);
-    AddWidget(HideBox);
-  }
-
-  virtual Widget * ClickUp(const Point2i & mousePosition, uint button)
-  {
-    Widget *w = VBox::ClickUp(mousePosition, button);
-    if (w == SaveBox) {
-      HideBox->SetVisible(SaveBox->GetValue());
-    }
-    return w;
-  }
-
-  bool IsSaved() const { return SaveBox->GetValue(); }
-  const std::string& GetUser() const { return UserBox->GetText(); }
-  const std::string& GetPassword() const { return PwdBox->GetPassword(); }
-};
-#endif
 
 OptionMenu::OptionMenu() :
   Menu("menu/bg_option")
@@ -435,24 +379,8 @@ OptionMenu::OptionMenu() :
 # endif
 #endif
 
-  int ssize = tabs_size.x - 10*factor;
-  VBox * social_options = new VBox(ssize);
-  std::string user, pwd;
-  Font::font_size_t fbig    = Font::GetFixedSize(Font::FONT_BIG*factor+0.5f);
-  ssize -= 10*factor;
-#ifdef HAVE_FACEBOOK
-  Config::GetInstance()->GetFaceBookCreds(user, pwd);
-  facebook = new SocialWidget("Facebook", ssize, factor, fbig, fmedium,
-                              user, pwd, Config::GetInstance()->GetFaceBookSave());
-  social_options->AddWidget(facebook);
-#endif
-#ifdef HAVE_TWITTER
-  Config::GetInstance()->GetTwitterCreds(user, pwd);
-  twitter = new SocialWidget("Twitter", ssize, factor, fbig, fmedium,
-                             user, pwd, Config::GetInstance()->GetTwitterSave());
-  social_options->AddWidget(twitter);
-#endif
-  tabs->AddNewTab("unused", _("Social"), social_options);
+  social_panel = new SocialPanel(tabs_size.x - 10*factor, factor, true);
+  tabs->AddNewTab("unused", _("Social"), social_panel);
 
   widgets.AddWidget(tabs);
   widgets.Pack();
@@ -478,7 +406,7 @@ void OptionMenu::OnClickUp(const Point2i &mousePosition, int button)
   } else if (w == delete_team) {
     DeleteTeam();
   }
-  else if (w == NULL && lbox_teams->Contains(mousePosition)) {
+  else if (!w && lbox_teams->Contains(mousePosition)) {
     SelectTeam();
   }
 }
@@ -509,13 +437,8 @@ void OptionMenu::SaveOptions()
 # endif
 #endif
 
-#ifdef HAVE_FACEBOOK
-  config->SetFaceBookSave(facebook->IsSaved());
-  config->SetFaceBookCreds(facebook->GetUser(), facebook->GetPassword());
-#endif
-#ifdef HAVE_TWITTER
-  config->SetTwitterSave(twitter->IsSaved());
-  config->SetTwitterCreds(twitter->GetUser(), twitter->GetPassword());
+#if defined(HAVE_FACEBOOK) || defined(HAVE_TWITTER)
+  social_panel->Close();
 #endif
 
   // Sound settings - volume already saved
