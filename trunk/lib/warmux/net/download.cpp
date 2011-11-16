@@ -49,7 +49,13 @@ static size_t download_callback(void* buf, size_t size, size_t nmemb, void* str)
 Downloader::Downloader()
 {
 #ifdef HAVE_FACEBOOK
-  logged = false;
+  fb_logged = false;
+#endif
+#ifdef HAVE_TWITTER
+  twitter_logged = false;
+#endif
+
+#if defined(HAVE_FACEBOOK) || defined(HAVE_TWITTER)
   curl_global_init(CURL_GLOBAL_ALL);
 #else
 #  ifdef WIN32
@@ -272,38 +278,42 @@ bool Downloader::GetServerList(std::map<std::string, int>& server_lst, const std
   return true;
 }
 
-bool Downloader::FindPair(std::string& value, const std::string& n, const std::string& html)
+bool Downloader::FindPair(std::string& value, const std::string& value_name,
+                          const std::string& name, const std::string& html)
 {
-  size_t s = html.find(n);
+  size_t s = html.find(name);
   if (s == std::string::npos)
     return false;
-  s += n.size();
+  s += name.size();
+  s = html.find(value_name + "=\"", s);
+  if (s == std::string::npos)
+    return false;
+  s += value_name.size() + 2;
   size_t e = html.find('"', s);
   if (e == std::string::npos || e <= s)
     return false;
   value = html.substr(s, e-s);
   return true;
 }
-
 bool Downloader::FindNameValue(std::string& value, const std::string& name, const std::string& html)
 {
-  return FindPair(value, "name=\"" + name + "\" value=\"", html);
+  return FindPair(value, "value", "name=\"" + name + "\"", html);
 }
 
+
 #ifdef HAVE_FACEBOOK
-bool Downloader::InitFaceBook(const std::string& semail, const std::string& spwd)
+bool Downloader::FacebookLogin(const std::string& semail, const std::string& spwd)
 {
-  if (logged)
+  if (fb_logged)
     return true;
   std::string html, fields;
 
-  logged = false;
+  fb_logged = false;
 #ifdef HAVE_LIBCURL
   char *email = curl_easy_escape(curl, semail.c_str(), semail.size());
   char *pass  = curl_easy_escape(curl, spwd.c_str(), spwd.size());
 #endif
   if (!GetUrl("http://m.facebook.com/login.php?http&refsrc=http%3A%2F%2Fm.facebook.com%2F&no_next_msg&refid=8", &html)) {
-    error = _("Can't find login connect");
     goto end;
   }
   MSG_DEBUG("downloader", "Login connect success!");
@@ -323,7 +333,7 @@ bool Downloader::InitFaceBook(const std::string& semail, const std::string& spwd
    MSG_DEBUG("downloader", "post_form_id=%s", post_form_id.c_str());
   
   // Find form
-  if (!FindPair(form, "id=\"login_form\" action=\"", html)) {
+  if (!FindPair(form, "action", "id=\"login_form\"", html)) {
     error = "Can't find form";
     goto end;
   } 
@@ -336,7 +346,6 @@ bool Downloader::InitFaceBook(const std::string& semail, const std::string& spwd
            "&version=1&ajax=0&pxr=0&gps=0&email=" + email + "&pass=" + pass + "&m_ts=" + m_ts + "&login=Login";
   MSG_DEBUG("downloader", "Fields: %s\n", fields.c_str());
   if (!Post(form.c_str(), &html, fields)) {
-    error = _("Login failed");
     goto end;
   }
   if (html.find("abb acr aps") != std::string::npos) {
@@ -346,7 +355,7 @@ bool Downloader::InitFaceBook(const std::string& semail, const std::string& spwd
   MSG_DEBUG("downloader", "Login success!\n");
 
   // Find form
-  if (!FindPair(form, "id=\"composer_form\" action=\"", html)) {
+  if (!FindPair(form, "action", "id=\"composer_form\"", html)) {
     error = "Can't find form";
     goto end;
   } 
@@ -369,7 +378,7 @@ bool Downloader::InitFaceBook(const std::string& semail, const std::string& spwd
   form = "http://m.facebook.com" + form;
   html.clear();
 
-  logged = true;
+  fb_logged = true;
 
 end:
   free(pass);
@@ -379,19 +388,19 @@ end:
   curl_easy_setopt(curl, CURLOPT_WRITEDATA, NULL);
 #endif
 
-  if (!logged && IsLOGGING("download")) {
+  if (!fb_logged && IsLOGGING("download")) {
     FILE *f = fopen("out.htm", "wt");
     fwrite(html.c_str(), html.size(), 1, f);
     fclose(f);
     MSG_DEBUG("downloader", "Login failed: %s\n", error.c_str());
   }
 
-  return logged;
+  return fb_logged;
 }
 
-bool Downloader::FBStatus(const std::string& text)
+bool Downloader::FacebookStatus(const std::string& text)
 {
-  if (!logged)
+  if (!fb_logged)
     return false;
   std::string txt;
 #ifdef HAVE_LIBCURL
@@ -401,5 +410,104 @@ bool Downloader::FBStatus(const std::string& text)
 #endif
   MSG_DEBUG("downloader", "fields=%s", txt.c_str());
   return Post(form.c_str(), NULL, txt);
+}
+#endif
+
+
+
+#ifdef HAVE_TWITTER
+bool Downloader::TwitterLogin(const std::string& suser, const std::string& spwd)
+{
+  if (twitter_logged)
+    return true;
+  std::string html, fields;
+
+  twitter_logged = false;
+#ifdef HAVE_LIBCURL
+  char *user = curl_easy_escape(curl, suser.c_str(), suser.size());
+  char *pass  = curl_easy_escape(curl, spwd.c_str(), spwd.size());
+#endif
+  if (!GetUrl("http://mobile.twitter.com/session/new", &html)) {
+    goto end;
+  }
+  MSG_DEBUG("downloader", "Login connect success!");
+
+  // Find authenticity_token value
+  if (!FindNameValue(auth, "authenticity_token", html)) {
+    error = _("Can't find authenticity_token");
+    goto end;
+  }
+  MSG_DEBUG("downloader", "authenticity_token=%s", auth.c_str());
+
+  html.clear();
+
+  fields = "authenticity_token=" + auth + "&username=" + user + "&password=" + pass;
+  MSG_DEBUG("downloader", "Fields: %s\n", fields.c_str());
+  if (!Post("http://mobile.twitter.com/session", &html, fields)) {
+    goto end;
+  }
+#if 0
+  if (html.find("class=\"warning\"") != std::string::npos) {
+    printf("Login failed, probably incorrect credentials\n");
+    goto end;
+  }
+#endif
+  MSG_DEBUG("downloader", "Login success!\n");
+
+  // Find form
+  if (!FindPair(form, "action", "id=\"composer_form\"", html)) {
+    error = "Can't find form";
+    goto end;
+  } 
+  MSG_DEBUG("downloader", "form=%s", form.c_str());
+  
+  // Find fb_dtsg
+  if (!FindNameValue(fb_dtsg, "fb_dtsg", html)) {
+    error = "Can't find fb_dtsg";
+    goto end;
+  } 
+  MSG_DEBUG("downloader", "fb_dtsg=%s", fb_dtsg.c_str());
+
+  // Find post_form_id value
+  if (!FindNameValue(post_form_id, "post_form_id", html)) {
+    error = "Can't find post_form_id";
+    goto end;
+  } 
+  MSG_DEBUG("downloader", "post_form_id=%s", post_form_id.c_str());
+  
+  html.clear();
+
+  twitter_logged = true;
+
+end:
+  free(pass);
+  free(user);
+#ifdef HAVE_LIBCURL
+  curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, dummy_callback);
+  curl_easy_setopt(curl, CURLOPT_WRITEDATA, NULL);
+#endif
+
+  if (!twitter_logged && IsLOGGING("download")) {
+    FILE *f = fopen("out.htm", "wt");
+    fwrite(html.c_str(), html.size(), 1, f);
+    fclose(f);
+    MSG_DEBUG("downloader", "Login failed: %s\n", error.c_str());
+  }
+
+  return twitter_logged;
+}
+
+bool Downloader::Tweet(const std::string& text)
+{
+  if (!twitter_logged)
+    return false;
+  std::string txt;
+#ifdef HAVE_LIBCURL
+  char *msg = curl_easy_escape(curl, text.c_str(), text.size());
+  txt = "authenticity_token=" + auth + "&tweet%5Btext%5D=" + msg;
+  free(msg);
+#endif
+  MSG_DEBUG("downloader", "fields=%s", txt.c_str());
+  return Post("https://mobile.twitter.com/", NULL, txt);
 }
 #endif
