@@ -25,12 +25,16 @@
 #include "gui/label.h"
 #include "gui/check_box.h"
 #include "gui/horizontal_box.h"
+#include "gui/picture_widget.h"
 #include "gui/social_panel.h"
 #include "gui/text_box.h"
 #include "gui/vertical_box.h"
 
-class SocialWidget : public VBox
+class SocialWidget : public HBox
 {
+  Surface        icon;
+  PictureWidget *pic;
+
   TextBox*     UserBox;
   CheckBox*    SaveBox;
   HBox*        HideBox;
@@ -39,41 +43,51 @@ class SocialWidget : public VBox
 
 public:
   SocialWidget(const std::string& name, int ssize, float factor, bool use_save,
-               const std::string& user, const std::string& pwd, bool saved,
-               Font::font_size_t fbig, Font::font_size_t fmedium)
-    : VBox(ssize, false, false)
+               const std::string& user, const std::string& pwd, bool saved)
+    : HBox(122*factor, false)
   {
+    Profile *res = GetResourceManager().LoadXMLProfile("graphism.xml", false);
+    Font::font_size_t fbig = Font::GetFixedSize(Font::FONT_BIG*factor+0.5f);
+    Font::font_size_t fmedium = Font::GetFixedSize(Font::FONT_MEDIUM*factor+0.5f);
+
     // Default look
     SetBorder(5*factor);
-    SetBackgroundColor(transparent_color);
 
+    // Set the icon
+    icon = LOAD_RES_IMAGE("menu/" + name);
+    pic  = new PictureWidget(icon);
+    AddWidget(pic);
+
+    ssize -= 10*factor + icon.GetWidth();
+    VBox *vbox = new VBox(ssize, false, false, false);
     // Name
-    AddWidget(new Label(name, 20, fbig, Font::FONT_BOLD, c_red));
+    vbox->AddWidget(new Label(name, ssize, fbig, Font::FONT_BOLD, c_red));
 
     // Email
-    HBox *hbox = new HBox(30*factor, false); hbox->SetNoBorder(); hbox->SetBackgroundColor(transparent_color);
+    HBox *hbox = new HBox(30*factor, false); hbox->SetNoBorder();
     hbox->AddWidget(new Label(_("User"), ssize/3-5*factor, fmedium));
     UserBox = new TextBox(user, (2*ssize)/3-5*factor, fmedium);
     hbox->AddWidget(UserBox);
-    AddWidget(hbox);
+    vbox->AddWidget(hbox);
 
     // Password
     SaveBox = new CheckBox(_("Save password"), ssize - 10*factor, saved, fmedium);
-    SaveBox->SetBackgroundColor(transparent_color);
     SaveBox->SetValue(saved);
-    AddWidget(SaveBox);
-    HideBox = new HBox(30*factor, false);
-    HideBox->SetNoBorder(); HideBox->SetBackgroundColor(transparent_color);
+    vbox->AddWidget(SaveBox);
+
+    HideBox = new HBox(30*factor, false); HideBox->SetNoBorder();
     HideBox->AddWidget(new Label(_("Password"), ssize/3-5*factor, fmedium));
     PwdBox = new PasswordBox(pwd, (2*ssize)/3-5*factor, fmedium);
     HideBox->AddWidget(PwdBox);
-    if (use_save) HideBox->SetVisible(saved);
-    AddWidget(HideBox);
+    //if (use_save) HideBox->SetVisible(saved);
+    vbox->AddWidget(HideBox);
+
+    AddWidget(vbox);
   }
 
   virtual Widget * ClickUp(const Point2i & mousePosition, uint button)
   {
-    Widget *w = VBox::ClickUp(mousePosition, button);
+    Widget *w = HBox::ClickUp(mousePosition, button);
     if (use_save && w == SaveBox) {
       HideBox->SetVisible(SaveBox->GetValue());
     }
@@ -90,24 +104,22 @@ SocialPanel::SocialPanel(int width, float factor, bool s)
   , save(s)
 {
   std::string user, pwd;
-  Font::font_size_t fbig = Font::GetFixedSize(Font::FONT_BIG*factor+0.5f);
-  Font::font_size_t fmed = Font::GetFixedSize(Font::FONT_MEDIUM*factor+0.5f);
-  SetBackgroundColor(transparent_color);
-  width -= 10*factor;
+
 #ifdef HAVE_FACEBOOK
   Config::GetInstance()->GetFaceBookCreds(user, pwd);
   facebook = new SocialWidget("Facebook", width, factor, s,
-                              user, pwd, Config::GetInstance()->GetFaceBookSave(),
-                              fbig, fmed);
+                              user, pwd, Config::GetInstance()->GetFaceBookSave());
   AddWidget(facebook);
 #endif
 #ifdef HAVE_TWITTER
   Config::GetInstance()->GetTwitterCreds(user, pwd);
   twitter = new SocialWidget("Twitter", width, factor, s,
-                             user, pwd, Config::GetInstance()->GetTwitterSave(),
-                             fbig, fmed);
+                             user, pwd, Config::GetInstance()->GetTwitterSave());
   AddWidget(twitter);
 #endif
+
+  // To set every child background color
+  SetBackgroundColor(transparent_color);
 }
 
 void SocialPanel::Close()
