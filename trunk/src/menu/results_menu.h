@@ -69,8 +69,15 @@ class ResultsMenu : public Menu
 
   void Draw(const Point2i &mousePosition);
   void OnClickUp(const Point2i &mousePosition, int button);
+
+#if defined(HAVE_FACEBOOK) || defined(HAVE_TWITTER)
+  std::string StringMessagge();
+#endif
 #ifdef HAVE_FACEBOOK
-  void Publish(const std::string& user, const std::string& pwd);
+  void Facepalm(const std::string& user, const std::string& pwd);
+#endif
+#ifdef HAVE_TWITTER
+  void Tweet(const std::string& user, const std::string& pwd);
 #endif
 
 public:

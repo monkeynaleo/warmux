@@ -418,52 +418,78 @@ void ResultsMenu::DrawTeamOnPodium(const Team& team, const Point2i& relative_pos
   podium_img.MergeSurface(tmp, position);
 }
 
+#if defined(HAVE_FACEBOOK) || defined(HAVE_TWITTER)
+std::string ResultsMenu::StringMessagge()
+{
+  std::vector<std::string> remote;
+  std::string              local;
+  uint rank = results.size(), max = 0, nb = 0;
+  uint others = 0, self = 0;
+  // There's a dummy team inserted for best of game
+  for (uint i=0; i<results.size()-1; i++) {
+    const Team *team = results.at(i)->getTeam();
+    if (team->IsRemote()) {
+      remote.push_back(team->GetPlayerName());
+      others += team->GetNbCharacters();
+    } else {
+      if (i < rank) {
+        local = team->GetPlayerName();
+        rank = i;
+      }
+      nb++;
+      self += team->GetNbCharacters();
+    }
+    if (results.at(i)->GetDeathTime() > max)
+      max = results.at(i)->GetDeathTime();
+  }
+  std::string l;
+  if (remote.empty())
+    l = _("Himself");
+  else if (remote.size() == 1)
+    l = remote[0];
+  else {
+    for (uint i=0; i<remote.size()-1; i++)
+      l += Format("%s, ", remote[i].c_str());
+    l += Format("and %s", remote.back().c_str());
+  }
+  return Format("%s played a game of WarMUX, using %u characters in %u teams, against %s for %.1fs and reached rank %u.",
+                local.c_str(), self, nb, l.c_str(), max/1000.0f, rank+1);
+}
+#endif
+
 #ifdef HAVE_FACEBOOK
-void ResultsMenu::Publish(const std::string& email, const std::string& pwd)
+void ResultsMenu::Facepalm(const std::string& email, const std::string& pwd)
 {
   Downloader* dl = Downloader::GetInstance();
-  std::string msg;
-  if (dl->InitFaceBook(email, pwd)) {
-    std::vector<std::string> remote;
-    std::string              local;
-    uint rank = results.size(), max = 0, nb = 0;
-    uint others = 0, self = 0;
-    // There's a dummy team inserted for best of game
-    for (uint i=0; i<results.size()-1; i++) {
-      const Team *team = results.at(i)->getTeam();
-      if (team->IsRemote()) {
-        remote.push_back(team->GetPlayerName());
-        others += team->GetNbCharacters();
-      } else {
-        if (i < rank) {
-          local = team->GetPlayerName();
-          rank = i;
-        }
-        nb++;
-        self += team->GetNbCharacters();
-      }
-      if (results.at(i)->GetDeathTime() > max)
-        max = results.at(i)->GetDeathTime();
-    }
-    std::string l;
-    if (remote.empty())
-      l = _("Himself");
-    else if (remote.size() == 1)
-      l = remote[0];
-    else {
-      for (uint i=0; i<remote.size()-1; i++)
-        l += Format("%s, ", remote[i].c_str());
-      l += Format("and %s", remote.back().c_str());
-    }
-    std::string txt = Format("%s played a game of WarMUX, using %u characters in %u teams, against %s during %.1f seconds and finished at rank %u",
-                             local.c_str(), self, nb, l.c_str(), max/1000.0f, rank+1);
+  std::string msg; 
+  if (dl->FacebookLogin(email, pwd)) {
+    std::string txt = StringMessagge();
 
-    if (dl->FBStatus(txt))
+    if (dl->FacebookStatus(txt))
       msg = Format(_("*** Published: %s"), txt.c_str());
     else
       msg = Format(_("*** Publishing failed: %s"), dl->GetLastError().c_str());
   } else
     msg = Format(_("*** Publishing failed: %s"), dl->GetLastError().c_str());
+  msg_box->NewMessage(msg, c_red);
+  RedrawMenu();
+}
+#endif
+
+#ifdef HAVE_TWITTER
+void ResultsMenu::Tweet(const std::string& email, const std::string& pwd)
+{
+  Downloader* dl = Downloader::GetInstance();
+  std::string msg; 
+  if (dl->TwitterLogin(email, pwd)) {
+    std::string txt = StringMessagge();
+
+    if (dl->Tweet(txt))
+      msg = Format(_("*** Tweeted: %s"), txt.c_str());
+    else
+      msg = Format(_("*** Tweet failed: %s"), dl->GetLastError().c_str());
+  } else
+    msg = Format(_("*** Tweet failed: %s"), dl->GetLastError().c_str());
   msg_box->NewMessage(msg, c_red);
   RedrawMenu();
 }
@@ -510,24 +536,41 @@ void ResultsMenu::key_ok()
 {
   // return was pressed while chat texbox still had focus (player wants to send his msg)
   if (msg_box && msg_box->TextHasFocus()) {
-#ifdef HAVE_FACEBOOK
     Config  *cfg      = Config::GetInstance();
     TextBox *text_box = msg_box->GetTextBox();
     const std::string &msg = text_box->GetText();
-    if (msg.find("/fb") == 0) {
+
+#ifdef HAVE_FACEBOOK
+    if (msg.compare(0, 3, "/fb") == 0) {
       std::string email, pwd;
       cfg->GetFaceBookCreds(email, pwd);
-
       // Always attempt to look in the command line for the password
       if (msg.size() > 4) {
         pwd = msg.substr(3);
         // Save the credentials for the session
         cfg->SetFaceBookCreds(email, pwd);
       }
-
-      // Do we have all credentials?
       if (!email.empty() && !pwd.empty()) {
-        Publish(email, pwd);
+        Facepalm(email, pwd);
+      } else {
+        msg_box->NewMessage(_("*** Publishing failed: incomplete credentials"), c_red);
+      }
+      text_box->SetText("");
+    } else
+#endif
+
+#ifdef HAVE_TWITTER
+    if (msg.compare(0, 6, "/tweet") == 0) {
+      std::string user, pwd;
+      cfg->GetFaceBookCreds(user, pwd);
+      // Always attempt to look in the command line for the password
+      if (msg.size() > 7) {
+        pwd = msg.substr(6);
+        // Save the credentials for the session
+        cfg->SetTwitterCreds(user, pwd);
+      }
+      if (!user.empty() && !pwd.empty()) {
+        Tweet(user, pwd);
       } else {
         msg_box->NewMessage(_("*** Publishing failed: incomplete credentials"), c_red);
       }
