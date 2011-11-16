@@ -275,11 +275,11 @@ bool Downloader::GetServerList(std::map<std::string, int>& server_lst, const std
 bool Downloader::FindPair(std::string& value, const std::string& n, const std::string& html)
 {
   size_t s = html.find(n);
-  if (!s)
+  if (s == std::string::npos)
     return false;
   s += n.size();
   size_t e = html.find('"', s);
-  if (e <= s)
+  if (e == std::string::npos || e <= s)
     return false;
   value = html.substr(s, e-s);
   return true;
