@@ -133,6 +133,8 @@ public:
 
   virtual void Pack() = 0;
 
+  virtual bool IsScrolling() { return false; }
+
   // Clipping
   Rectanglei GetClip(Rectanglei& backup) const;
   void UnsetClip(Rectanglei& backup) const;

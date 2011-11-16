@@ -123,6 +123,9 @@ public:
   void SetMargin(uint margin) { box->SetMargin(margin); }
   uint GetMargin() { return box->GetMargin(); }
   int GetTrackDimension() const;
+
+  virtual bool IsScrolling();
+
 };
 
 #endif  //SCROLL_BOX_H

@@ -233,7 +233,9 @@ bool Widget::Update(const Point2i &mousePosition,
 {
   bool updated = false;
   if (need_redrawing ||
-      (Rectanglei::Contains(mousePosition) && mousePosition != lastMousePosition) ||
+      IsScrolling() ||
+      (SDL_GetMouseState(NULL, NULL) && Rectanglei::Contains(mousePosition)) ||
+      (Rectanglei::Contains(mousePosition) && !Rectanglei::Contains(lastMousePosition)) ||
       (Rectanglei::Contains(lastMousePosition) && !Rectanglei::Contains(mousePosition))) {
 
     // Redraw the border and the background
