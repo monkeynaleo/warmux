@@ -45,6 +45,10 @@
   <surface name="annulus_background" file="menu/annulus_background.png" />
   <surface name="annulus_foreground" file="menu/annulus_foreground.png" />
   <color name="annulus_progress_color" r="4" g="77" b="134" a="255" />
+  
+  <!-- Social icons -->
+  <surface name="Facebook" file="menu/facebook.png"/>
+  <surface name="Twitter" file="menu/twitter.png"/>
 
   <!-- Various options -->
   <surface name="team_number" file="menu/team_number.png" />
