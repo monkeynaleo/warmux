@@ -121,6 +121,8 @@ warmux_SOURCES = \
         gui/scroll_box.h \
         gui/select_box.cpp \
         gui/select_box.h \
+        gui/social_widget.cpp \
+        gui/social_widget.h \
         gui/spin_button.cpp \
         gui/spin_button.h \
         gui/spin_button_picture.cpp \
