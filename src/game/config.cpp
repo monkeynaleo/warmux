@@ -727,13 +727,13 @@ bool Config::SaveXml(bool save_current_teams)
 #endif
 #ifdef HAVE_FACEBOOK
   doc.WriteElement(social_node, "facebook_email", fb_email);
-  doc.WriteElement(social_node, "facebook_publish", bool2str(fb_save_pwd));
+  doc.WriteElement(social_node, "facebook_savepwd", bool2str(fb_save_pwd));
   if (fb_save_pwd)
     doc.WriteElement(social_node, "facebook_password", fb_pwd);
 #endif
 #ifdef HAVE_TWITTER
   doc.WriteElement(social_node, "twitter_user", twit_user);
-  doc.WriteElement(social_node, "twitter_publish", bool2str(twit_save_pwd));
+  doc.WriteElement(social_node, "twitter_savepwd", bool2str(twit_save_pwd));
   if (twit_save_pwd)
     doc.WriteElement(social_node, "twitter_password", twit_pwd);
 #endif
