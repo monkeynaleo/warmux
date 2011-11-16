@@ -64,7 +64,11 @@ protected:
       Double cluster_deviation = (angle_range * i)/fragments - angle_range*ONE_HALF;
 
       cluster = new ClusterType(cfg, p_launcher);
+#ifdef CLUSTERS_SPAWN_CLUSTERS
       cluster->Shoot(pos, speed, angle+cluster_deviation, recursion_depth);
+#else
+      cluster->Shoot(pos, speed, angle+cluster_deviation);
+#endif
 
       ObjectsList::GetRef().AddObject(cluster);
     }
@@ -96,7 +100,11 @@ class CluzookaCluster : public WeaponProjectile, public ClusterSpawner< Cluzooka
 public:
   CluzookaCluster(ExplosiveWeaponConfig& cfg, WeaponLauncher * p_launcher);
   void Refresh();
+#ifdef CLUSTERS_SPAWN_CLUSTERS
   void Shoot(const Point2i & start_pos, Double strength, Double angle, uint recurse_times);
+#else
+  void Shoot(const Point2i & start_pos, Double strength, Double angle);
+#endif
   virtual void SetEnergyDelta(int delta, bool do_report = true);
 
 protected:
@@ -113,12 +121,13 @@ CluzookaCluster::CluzookaCluster(ExplosiveWeaponConfig& cfg,
   explode_colliding_character = true;
 }
 
+#ifdef CLUSTERS_SPAWN_CLUSTERS
 void CluzookaCluster::Shoot(const Point2i & start_pos, Double strength, Double angle, uint recurse_times)
 {
-#ifdef CLUSTERS_SPAWN_CLUSTERS
   m_recursion_depth = recurse_times;
 #else
-  recurse_times = 0; // to keep compiler happy
+void CluzookaCluster::Shoot(const Point2i & start_pos, Double strength, Double angle)
+{
 #endif
 
   Camera::GetInstance()->FollowObject(this);
