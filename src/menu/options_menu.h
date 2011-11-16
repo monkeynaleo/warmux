@@ -43,6 +43,8 @@ class CheckBox;
 class PasswordBox;
 class VBox;
 
+class SocialWidget;
+
 class OptionMenu : public Menu
 {
 private:
@@ -103,10 +105,10 @@ private:
 
   /* Social */
 #ifdef HAVE_FACEBOOK
-  TextBox*     email;
-  CheckBox*    savepwd;
-  HBox*        hide;
-  PasswordBox* pass;
+  SocialWidget *facebook;
+#endif
+#ifdef HAVE_TWITTER
+  SocialWidget *twitter;
 #endif
 
 #ifdef ENABLE_NLS
