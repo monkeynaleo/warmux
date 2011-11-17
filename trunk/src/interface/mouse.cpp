@@ -44,6 +44,8 @@
 
 #define MOUSE_CLICK_SQUARE_DISTANCE 5*5
 #define LONG_CLICK_DURATION 600
+#define DOUBLE_CLICK_DURATION 300
+#define DOUBLE_CLICK_SQUARE_DISTANCE 25
 
 std::string __pointers[] = {
   "mouse/pointer_standard",
@@ -70,6 +72,7 @@ Mouse::Mouse()
   , click_pos(-1,-1)
   , is_long_click(false)
   , was_long_click(false)
+  , clickup_time(0)
 {
   visible = MOUSE_VISIBLE;
 
@@ -246,9 +249,14 @@ bool Mouse::HandleEvent(const SDL_Event& evnt)
       was_long_click = false;
       return true;
     } else {
+      uint double_click_time = GameTime::GetInstance()->Read() - clickup_time;
+      clickup_time = GameTime::GetInstance()->Read();
       EndLongClickTimer();
       if (Interface::GetInstance()->ActionClickUp(pos, click_pos))
         return true;
+      if (double_click_time < DOUBLE_CLICK_DURATION && click_pos.SquareDistance(pos) < DOUBLE_CLICK_SQUARE_DISTANCE)
+        if (Interface::GetInstance()->ActionDoubleClick(pos))
+          return true;
       if (click_pos.SquareDistance(pos) > MOUSE_CLICK_SQUARE_DISTANCE)
         return true;
     }
