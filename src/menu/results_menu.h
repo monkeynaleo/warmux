@@ -36,6 +36,7 @@ class TextBox;
 class FileListBox;
 class PictureWidget;
 class Button;
+class SocialPanel;
 
 class ResultsMenu : public Menu
 {
@@ -58,6 +59,10 @@ class ResultsMenu : public Menu
   FileListBox *folders;
   TextBox     *replay_name;
   TextBox     *comment;
+
+#if defined(HAVE_FACEBOOK) || defined(HAVE_TWITTER)
+  SocialPanel *social_panel;
+#endif
 
   bool signal_ok();
   void key_ok();

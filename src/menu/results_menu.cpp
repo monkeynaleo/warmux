@@ -44,6 +44,7 @@
 #include "gui/null_widget.h"
 #include "gui/question.h"
 #include "gui/scroll_box.h"
+#include "gui/social_panel.h"
 #include "gui/tabs.h"
 #include "gui/talk_box.h"
 #include "gui/text_box.h"
@@ -383,6 +384,11 @@ ResultsMenu::ResultsMenu(std::vector<TeamResults*>& v, bool disconnected)
     tabs->AddNewTab(REPLAY_ID, _("Save replay?"), vbox);
   }
 
+#if defined(HAVE_FACEBOOK) || defined(HAVE_TWITTER)
+  social_panel = new SocialPanel(tab_size.x-2*BORDER, (tab_size.x-2*BORDER)/720.0f, false);
+  tabs->AddNewTab("unused", _("Social"), social_panel);
+#endif
+
   // Final box
   VBox *vbox = new VBox(tab_size.x, false, false, false);
   vbox->SetNoBorder();
@@ -536,11 +542,13 @@ void ResultsMenu::key_ok()
 {
   // return was pressed while chat texbox still had focus (player wants to send his msg)
   if (msg_box && msg_box->TextHasFocus()) {
+
+#if defined(HAVE_FACEBOOK) || defined(HAVE_TWITTER)
     Config  *cfg      = Config::GetInstance();
     TextBox *text_box = msg_box->GetTextBox();
     const std::string &msg = text_box->GetText();
 
-#ifdef HAVE_FACEBOOK
+#  ifdef HAVE_FACEBOOK
     if (msg.compare(0, 3, "/fb") == 0) {
       std::string email, pwd;
       cfg->GetFaceBookCreds(email, pwd);
@@ -557,9 +565,9 @@ void ResultsMenu::key_ok()
       }
       text_box->SetText("");
     } else
-#endif
+#  endif
 
-#ifdef HAVE_TWITTER
+#  ifdef HAVE_TWITTER
     if (msg.compare(0, 6, "/tweet") == 0) {
       std::string user, pwd;
       cfg->GetFaceBookCreds(user, pwd);
@@ -576,7 +584,9 @@ void ResultsMenu::key_ok()
       }
       text_box->SetText("");
     } else
+#  endif
 #endif
+
       msg_box->SendChatMsg();
     return;
   }
@@ -617,4 +627,17 @@ void ResultsMenu::OnClickUp(const Point2i &mousePosition, int button)
       }
     }
   }
+
+#if defined(HAVE_FACEBOOK) || defined(HAVE_TWITTER)
+  std::string user, pwd;
+#endif
+#if defined(HAVE_FACEBOOK)
+  if (social_panel->FacebookButtonPushed(w, user, pwd))
+    Facepalm(user, pwd);
+#endif
+#if defined(HAVE_TWITTER)
+  if (social_panel->TwitterButtonPushed(w, user, pwd))
+    Tweet(user, pwd);
+#endif
+
 }

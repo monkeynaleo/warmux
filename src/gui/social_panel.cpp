@@ -30,6 +30,8 @@
 #include "gui/text_box.h"
 #include "gui/vertical_box.h"
 
+#if defined(HAVE_FACEBOOK) || defined(HAVE_TWITTER)
+
 class SocialWidget : public HBox
 {
   Surface        icon;
@@ -79,7 +81,7 @@ public:
     HideBox->AddWidget(new Label(_("Password"), ssize/3-5*factor, fmedium));
     PwdBox = new PasswordBox(pwd, (2*ssize)/3-5*factor, fmedium);
     HideBox->AddWidget(PwdBox);
-    //if (use_save) HideBox->SetVisible(saved);
+    if (use_save) HideBox->SetVisible(saved);
     vbox->AddWidget(HideBox);
 
     AddWidget(vbox);
@@ -87,6 +89,8 @@ public:
 
   virtual Widget * ClickUp(const Point2i & mousePosition, uint button)
   {
+    if (pic->Contains(mousePosition))
+      return pic;
     Widget *w = HBox::ClickUp(mousePosition, button);
     if (use_save && w == SaveBox) {
       HideBox->SetVisible(SaveBox->GetValue());
@@ -95,6 +99,7 @@ public:
   }
 
   bool IsSaved() const { return SaveBox->GetValue(); }
+  bool ButtonPushed(const Widget* w) const { return w == pic; }
   const std::string& GetUser() const { return UserBox->GetText(); }
   const std::string& GetPassword() const { return PwdBox->GetPassword(); }
 };
@@ -126,13 +131,38 @@ void SocialPanel::Close()
 {
   if (save) {
     Config* config = Config::GetInstance();
-#ifdef HAVE_FACEBOOK
+#  ifdef HAVE_FACEBOOK
     config->SetFaceBookSave(facebook->IsSaved());
     config->SetFaceBookCreds(facebook->GetUser(), facebook->GetPassword());
-#endif
-#ifdef HAVE_TWITTER
+#  endif
+#  ifdef HAVE_TWITTER
     config->SetTwitterSave(twitter->IsSaved());
     config->SetTwitterCreds(twitter->GetUser(), twitter->GetPassword());
-#endif
+#  endif
   }
 }
+
+#ifdef HAVE_FACEBOOK
+bool SocialPanel::FacebookButtonPushed(const Widget *w, std::string& user, std::string& pwd) const
+{
+  if (facebook->ButtonPushed(w)) {
+    user = facebook->GetUser();
+    pwd  = facebook->GetPassword();
+    return true;
+  }
+  return false;
+}
+#endif
+#ifdef HAVE_TWITTER
+bool SocialPanel::TwitterButtonPushed(const Widget *w, std::string& user, std::string& pwd) const
+{
+  if (twitter->ButtonPushed(w)) {
+    user = twitter->GetUser();
+    pwd  = twitter->GetPassword();
+    return true;
+  }
+  return false;
+}
+#endif
+
+#endif
