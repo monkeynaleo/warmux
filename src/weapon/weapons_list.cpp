@@ -59,12 +59,12 @@ WeaponsList::WeaponsList(const xmlNode* weapons_xml)
   m_launcher_weapons_list.push_back(new GnuLauncher);
   m_launcher_weapons_list.push_back(new PolecatLauncher);
   m_launcher_weapons_list.push_back(new BounceBallLauncher);
+  m_launcher_weapons_list.push_back(new Bazooka);
   m_launcher_weapons_list.push_back(new AutomaticBazooka);
   m_launcher_weapons_list.push_back(new GrenadeLauncher);
   m_launcher_weapons_list.push_back(new DiscoGrenadeLauncher);
   m_launcher_weapons_list.push_back(new ClusterLauncher);
   m_launcher_weapons_list.push_back(new FootBombLauncher);
-  m_launcher_weapons_list.push_back(new Bazooka);
   m_launcher_weapons_list.push_back(new RiotBomb);
   m_launcher_weapons_list.push_back(new Cluzooka);
   m_launcher_weapons_list.push_back(new SubMachineGun);
