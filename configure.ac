@@ -311,14 +311,17 @@ dnl === Check for curl =====================================================
 
 LIBCURL_CHECK_CONFIG([yes],[7.0],[check_curl=yes],[check_curl=no])
 if test "${check_curl}" = "yes"; then
-  CXXFLAGS="$CXXFLAGS -DHAVE_FACEBOOK"
-  if test "${libcurl_protocol_https}" != "yes"; then
+  if test "${libcurl_protocol_HTTPS}" != "yes"; then
     AC_MSG_WARN([No HTTPS support in curl, Twitter support off])
+    social="Facebook"
+    CXXFLAGS="$CXXFLAGS -DHAVE_FACEBOOK"
   else
-    CXXFLAGS="$CXXFLAGS -DHAVE_TWITTER"
+    CXXFLAGS="$CXXFLAGS -DHAVE_FACEBOOK -DHAVE_TWITTER"
+    social="Facebook Twitter"
   fi
 else
   AC_MSG_WARN(Absolutely no network support!)
+  social="None"
 fi
 
 dnl === Check for Maemo ====================================================
@@ -453,6 +456,7 @@ echo ""
 echo "* [[Optional]] Bi-directional rendering (fribidi) : ${enable_fribidi:-no}"
 echo "* [[Optional]] Internationalisation (gettext)     : ${USE_NLS:-no}"
 echo "* [[Optional]] Index and game servers             : ${enable_servers:-no}"
+echo "* [[Optional]] Publishing to social services      : ${social}"
 echo "***********************************************************"
 echo ""
 echo "Execute make to compile then execute make install to install..."
