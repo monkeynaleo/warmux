@@ -54,6 +54,7 @@ ScrollBox::ScrollBox(const Point2i & _size, bool force, bool alt, bool v)
   , start_drag(NO_DRAG)
   , start_drag_offset(NO_DRAG)
   , offset(0)
+  , nonselectable_width(0)
   , scroll_speed(0.0,0.0)
   , first_mouse_position(0,0)
   , scroll_mode(SCROLL_MODE_NONE)
@@ -124,6 +125,7 @@ Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
   if (HasScrollBar()) {
     bool is_click   = Mouse::IS_CLICK_BUTTON(button);
     int  max_offset = GetMaxOffset();
+    int  min_offset = GetMinOffset();
     int  new_offset = offset;
 
     // The event involves the scrollbar or its buttons
@@ -150,7 +152,7 @@ Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
                         + (height/2)) / scroll_track.GetSizeY();
         } else {
           int width = scroll_track.GetSizeX();
-          new_offset = ((mousePosition.x - scroll_track.GetPositionX()) * (size.x+max_offset)
+          new_offset = GetMinOffset() + ((mousePosition.x - scroll_track.GetPositionX()) * (size.x+max_offset)
                         + (width/2)) / scroll_track.GetSizeX();
         }
       }
@@ -159,8 +161,8 @@ Widget * ScrollBox::ClickUp(const Point2i & mousePosition, uint button)
     // Clip new offset to correct value
     if (new_offset > max_offset)
       new_offset = max_offset;
-    if (new_offset < 0)
-      new_offset = 0;
+    if (new_offset < min_offset)
+      new_offset = min_offset;
 
     if (new_offset != offset) {
       offset = new_offset;
@@ -196,7 +198,7 @@ Widget * ScrollBox::Click(const Point2i & mousePosition, uint button)
                      + (height/2) ) / height;
         } else {
           int width = scroll_track.GetSizeX();
-          offset = ( (mousePosition.x - scroll_track.GetPositionX()) * (size.x+GetMaxOffset())
+          offset = GetMinOffset() +  ((mousePosition.x - scroll_track.GetPositionX()) * (size.x+GetMaxOffset())
                      + (width/2) ) / width;
         }
       }
@@ -227,6 +229,7 @@ void ScrollBox::__Update(const Point2i & mousePosition,
   // update position of items because of dragging
   if (HasScrollBar() && scroll_mode!=SCROLL_MODE_NONE) {
     int max_offset = GetMaxOffset();
+    int min_offset = GetMinOffset();
     int new_offset = offset;
 
     if (scroll_mode == SCROLL_MODE_THUMB) {
@@ -267,8 +270,8 @@ void ScrollBox::__Update(const Point2i & mousePosition,
       }
     }
 
-    if (new_offset < 0)
-      new_offset = 0;
+    if (new_offset < min_offset)
+      new_offset = min_offset;
     if (new_offset > max_offset)
       new_offset = max_offset;
 
@@ -373,11 +376,11 @@ Rectanglei ScrollBox::GetScrollThumb() const
                       scrollbar_dim, tmp_h);
   } else {
     uint tmp_w = ((size.x - 2*border_size) * scroll_track.GetSizeX())
-               / ((size.x - 2*border_size) + GetMaxOffset());
+               / ((size.x - 2*border_size) + GetMaxOffset() - GetMinOffset());
     // Start position: from the offset
-    uint w     = size.x + GetMaxOffset();
+    uint w     = size.x + GetMaxOffset() - GetMinOffset();
     uint tmp_x = scroll_track.GetPositionX()
-               + (offset * scroll_track.GetSizeX() + w/2) / w;
+               + ((offset - GetMinOffset()) * scroll_track.GetSizeX() + w/2) / w;
     if (tmp_w < 6)
       tmp_w = 6;
     return Rectanglei(tmp_x, scroll_track.GetPositionY(),

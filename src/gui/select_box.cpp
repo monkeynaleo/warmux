@@ -63,6 +63,10 @@ void SelectBox::__Update(const Point2i & mousePosition,
     int item = MouseIsOnWhichItem(GetPosition()+GetSize()/2);
     if (item != -1 && selected_item != item && selected_item != MouseIsOnWhichItem(mousePosition))
       Select(item);
+    else if (item == -1 && offset > GetMaxOffset())
+      Select(m_items.size()-1);
+    else if (item == -1 && offset < 0)
+      Select(0);
   }
   ScrollBox::__Update(mousePosition, lastMousePosition);
 }
@@ -125,8 +129,6 @@ void SelectBox::Clear()
 void SelectBox::Select(uint index)
 {
   ASSERT(index < m_items.size());
-  if (selected_item == (int)index)
-    return;
   if (selected_item != -1)
     m_items[selected_item]->SetHighlighted(false);
   selected_item = index;
