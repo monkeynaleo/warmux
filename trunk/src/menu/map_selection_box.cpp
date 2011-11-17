@@ -54,6 +54,7 @@ MapSelectionBox::MapSelectionBox(const Point2i &_size, bool show_border, bool _d
   box = new ItemBox(preview_size, true, true, false);
   box->SetNoBorder();
   box->SetMargin(5);
+  box->SetExtraWidthMode();
   AddWidget(box);
   RefreshBox();
 
