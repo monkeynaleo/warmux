@@ -1101,7 +1101,9 @@ void SendInitialGameInfo(DistantComputer* client, int added_player_id)
 
   Network::GetInstance()->UnlockRemoteHosts();
 
-  Network::GetInstance()->SendActionToOne(MapsList::GetInstance()->GetActionMenuSetMap(), client);
+  Action b(Action::ACTION_GAME_SET_MAP);
+  MapsList::GetInstance()->FillActionMenuSetMap(b);
+  Network::GetInstance()->SendActionToOne(b, client);
   Network::GetInstance()->SendActionToOne(a, client);
 }
 

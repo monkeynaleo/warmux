@@ -85,7 +85,9 @@ void MapSelectionBox::ChangeMap(uint index)
 
   // Callback other network players
   if (Network::GetInstance()->IsGameMaster()) {
-    Network::GetInstance()->SendActionToAll(MapsList::GetInstance()->GetActionMenuSetMap());
+    Action a(Action::ACTION_GAME_SET_MAP);
+    MapsList::GetInstance()->FillActionMenuSetMap(a);
+    Network::GetInstance()->SendActionToAll(a);
   }
 
   // Set Map information
