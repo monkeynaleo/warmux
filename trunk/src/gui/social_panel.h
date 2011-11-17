@@ -22,6 +22,8 @@
 #ifndef SOCIAL_PANEL_H
 #define SOCIAL_PANEL_H
 
+#if defined(HAVE_FACEBOOK) || defined(HAVE_TWITTER)
+
 #include "gui/vertical_box.h"
 
 class TextBox;
@@ -33,6 +35,8 @@ class SocialPanel : public VBox
 {
 #ifdef HAVE_FACEBOOK
   SocialWidget *facebook;
+#endif
+#ifdef HAVE_TWITTER
   SocialWidget *twitter;
 #endif
   bool save;
@@ -40,6 +44,15 @@ class SocialPanel : public VBox
 public:
   SocialPanel(int width, float factor, bool save);
   void Close();
+
+#ifdef HAVE_FACEBOOK
+  bool FacebookButtonPushed(const Widget *w, std::string& user, std::string& pwd) const;
+#endif
+#ifdef HAVE_TWITTER
+  bool TwitterButtonPushed(const Widget *w, std::string& user, std::string& pwd) const;
+#endif
 };
+
+#endif
 
 #endif //  SOCIAL_PANEL_H

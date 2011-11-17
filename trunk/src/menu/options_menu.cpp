@@ -379,8 +379,10 @@ OptionMenu::OptionMenu() :
 # endif
 #endif
 
+#if defined(HAVE_FACEBOOK) || defined(HAVE_TWITTER)
   social_panel = new SocialPanel(tabs_size.x - 10*factor, factor, true);
   tabs->AddNewTab("unused", _("Social"), social_panel);
+#endif
 
   widgets.AddWidget(tabs);
   widgets.Pack();
