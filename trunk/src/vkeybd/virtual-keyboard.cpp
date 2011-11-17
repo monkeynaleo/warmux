@@ -62,7 +62,6 @@ VirtualKeyboard::~VirtualKeyboard()
   deleteEvents();
   delete _kbdGUI;
   delete _parser;
-  //delete _fileArchive;
 }
 
 void VirtualKeyboard::deleteEvents()
@@ -91,37 +90,12 @@ void VirtualKeyboard::reset()
 bool VirtualKeyboard::openPack(const std::string &packName, const std::string &node)
 {
   if (DoesFileExist(node + "/" + packName + "/" + packName + ".xml")) {
-    //_fileArchive = new FSDirectory(node, 1);
-
     // uncompressed keyboard pack
     if (!_parser->Load(node + "/" + packName + "/" + packName + ".xml")) {
-      //	delete _fileArchive;
-      //	_fileArchive = 0;
       return false;
     }
-
     return true;
   }
-  /*
-   if (node.getChild(packName + ".zip").exists()) {
-   // compressed keyboard pack
-   _fileArchive = makeZipArchive(node.getChild(packName + ".zip"));
-   if (_fileArchive && _fileArchive->hasFile(packName + ".xml")) {
-   if (!_parser->loadStream(_fileArchive->createReadStreamForMember(packName + ".xml"))) {
-   delete _fileArchive;
-   _fileArchive = 0;
-   return false;
-   }
-   } else {
-   warning("Could not find %s.xml file in %s.zip keyboard pack", packName.c_str(), packName.c_str());
-   delete _fileArchive;
-   _fileArchive = 0;
-   return false;
-   }
-
-   return true;
-   }
-   */
   return false;
 }
 
@@ -220,7 +194,7 @@ void VirtualKeyboard::switchMode(Mode *newMode)
 void VirtualKeyboard::switchMode(const std::string&newMode)
 {
   if (!_modes.count(newMode)) {
-    //warning("Keyboard mode '%s' unknown", newMode.c_str());
+    Warning("Keyboard mode '" + newMode + "' unknown");
   } else {
     switchMode(&_modes[newMode]);
   }
@@ -313,11 +287,8 @@ void VirtualKeyboard::KeyPressQueue::insertKey(KeyState key)
   std::string keyStr = "";
 
   if (key.scancode >= 32 && key.scancode <= 255) {
-    //if (key.mod & KMOD_SHIFT && (key.scancode < 65 || key.scancode > 90))
-    //keyStr += "Shift+";
     keyStr = (char) key.unicode;
   } else {
-    //if (key.mod & KMOD_SHIFT) keyStr += "Shift+";
     if (key.scancode >= 0 && key.scancode < keycodeDescTableSize)
       keyStr = keycodeDescTable[key.scancode];
   }
@@ -328,26 +299,12 @@ void VirtualKeyboard::KeyPressQueue::insertKey(KeyState key)
   const char *k = keyStr.c_str();
   while (char ch = *k++)
     _keysStr.insert(_strPos++, &ch);
-
-  /*	VirtualKeyPress kp;
-   kp.key = key;
-   kp.strLen = keyStr.size();// + 2;
-   _keys.insert(_keyPos, kp);*/
 }
 
 void VirtualKeyboard::KeyPressQueue::deleteKey()
 {
   if (!_keysStr.empty())
     _keysStr.erase(--_strPos, 1);
-  /*        if (_keyPos == _keys.begin())
-   return;
-   List<VirtualKeyPress>::iterator it = _keyPos;
-   it--;
-   _strPos -= it->strLen;
-   while ((it->strLen)-- > 0)
-   _keysStr.erase(_strPos,1);
-   _keys.erase(it);
-   _strChanged = true;*/
 }
 
 void VirtualKeyboard::KeyPressQueue::moveLeft()
