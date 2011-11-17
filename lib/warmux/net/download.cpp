@@ -453,27 +453,6 @@ bool Downloader::TwitterLogin(const std::string& suser, const std::string& spwd)
   }
 #endif
   MSG_DEBUG("downloader", "Login success!\n");
-
-  // Find form
-  if (!FindPair(form, "action", "id=\"composer_form\"", html)) {
-    error = "Can't find form";
-    goto end;
-  } 
-  MSG_DEBUG("downloader", "form=%s", form.c_str());
-  
-  // Find fb_dtsg
-  if (!FindNameValue(fb_dtsg, "fb_dtsg", html)) {
-    error = "Can't find fb_dtsg";
-    goto end;
-  } 
-  MSG_DEBUG("downloader", "fb_dtsg=%s", fb_dtsg.c_str());
-
-  // Find post_form_id value
-  if (!FindNameValue(post_form_id, "post_form_id", html)) {
-    error = "Can't find post_form_id";
-    goto end;
-  } 
-  MSG_DEBUG("downloader", "post_form_id=%s", post_form_id.c_str());
   
   html.clear();
 
