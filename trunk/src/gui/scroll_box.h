@@ -59,6 +59,7 @@ protected:
   int          start_drag_offset;
   int          offset;
   int          scrollbar_dim;
+  int          nonselectable_width;
   Point2f      scroll_speed;
   Point2i      first_mouse_position;
   ScrollMode   scroll_mode;
@@ -82,7 +83,13 @@ protected:
   {
     if (vertical)
       return box->GetSizeY() - size.y;
-    return box->GetSizeX() - size.x;
+    return box->GetSizeX() - (size.x - nonselectable_width);
+  }
+  int GetMinOffset() const
+  {
+    if (vertical)
+      return 0;
+    return - nonselectable_width;
   }
   bool HasScrollBar() const { return GetMaxOffset() > 0; }
   bool LargeDrag(const Point2i& mousePos) const
@@ -123,6 +130,7 @@ public:
   void SetMargin(uint margin) { box->SetMargin(margin); }
   uint GetMargin() { return box->GetMargin(); }
   int GetTrackDimension() const;
+  void SetExtraWidthMode() { nonselectable_width = size.x/2; }
 
   virtual bool IsScrolling();
 
