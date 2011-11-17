@@ -1172,6 +1172,15 @@ bool Interface::ActionClickUp(const Point2i &mouse_pos, const Point2i &old_click
   return false;
 }
 
+bool Interface::ActionDoubleClick(const Point2i &/*mouse_pos*/) {
+  // Drop Bonusbox if double click happened outside interface area
+  if (Game::GetInstance()->GetCurrentBox()) {
+    Game::GetInstance()->RequestBonusBoxDrop();
+  }
+
+  return true;
+}
+
 bool Interface::Intersect(const Point2i &mouse_pos)
 {
   if (!IsDisplayed())

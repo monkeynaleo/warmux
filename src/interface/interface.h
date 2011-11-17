@@ -184,6 +184,7 @@ public:
   bool ActionClickUp(const Point2i &mouse_pos, const Point2i &old_click_pos);
   bool ActionLongClick(const Point2i &mouse_pos, const Point2i &old_mouse_pos);
   bool ActionClickDown(const Point2i &mouse_pos);
+  bool ActionDoubleClick(const Point2i &mouse_pos);
 
   int GetMenuHeight() const;
 };

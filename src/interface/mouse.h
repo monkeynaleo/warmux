@@ -72,6 +72,7 @@ private:
   SDL_TimerID long_click_timer;
   Point2i     click_pos;
   bool        is_long_click, was_long_click;
+  uint clickup_time;
 
   void EndLongClickTimer();
 
