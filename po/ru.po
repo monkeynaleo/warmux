@@ -15,13 +15,13 @@ msgstr ""
 "PO-Revision-Date: 2011-10-05 03:14+0300\n"
 "Last-Translator: Vlad Kras <vlad.kras@gmail.com>\n"
 "Language-Team: Russian\n"
-"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-Language: Russian\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -73,34 +73,34 @@ msgstr "Команда %s"
 msgid "%s Team - Remote"
 msgstr "Команда %s - Удалённо"
 
-#: src/game/game.cpp:1172
+#: src/game/game.cpp:1208
 #, c-format
 msgid "%s from %s team committed suicide!"
 msgstr "%s из команды %s совершает самоубийство!"
 
 #. Could be modified, but for now, save on translation
-#: src/game/game.cpp:1198 src/game/game.cpp:1217
+#: src/game/game.cpp:1234 src/game/game.cpp:1253
 #, c-format
 msgid "%s from %s team has died."
 msgstr "%s из команды %s погиб."
 
-#: src/game/game.cpp:1164
+#: src/game/game.cpp:1200
 #, c-format
 msgid "%s from %s team has fallen into the water!"
 msgstr "%s из команды %s упал в воду."
 
-#: src/game/game.cpp:1158
+#: src/game/game.cpp:1194
 #, c-format
 msgid "%s from %s team has fallen off the map!"
 msgstr "%s из команды %s выпал с карты!"
 
-#: src/game/game.cpp:1178
+#: src/game/game.cpp:1214
 #, c-format
 msgid "%s from %s team has hit the ground too hard!"
 msgstr "%s из команды %s очень сильно ударился об землю!"
 
 #. The playing character killed himself
-#: src/game/game.cpp:1185
+#: src/game/game.cpp:1221
 #, c-format
 msgid "%s from %s team is dead because he is clumsy!"
 msgstr "%s из команды %s был слишком неповоротливым!"
@@ -122,7 +122,7 @@ msgstr "%s сделал кое-что для окружающей среды, о
 msgid "%s has won %u points of energy!"
 msgstr "%s выиграл %u единиц энергии!"
 
-#: src/game/game.cpp:1209
+#: src/game/game.cpp:1245
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr "%s - псих, он убил члена команды %s!"
@@ -139,7 +139,7 @@ msgid "%s just connected"
 msgstr "%s только что присоединился"
 
 #. For translators: extended in "<nickname> (<host>) just disconnected
-#: src/include/action_handler.cpp:1143
+#: src/include/action_handler.cpp:1146
 #, c-format
 msgid "%s just disconnected"
 msgstr "%s только что отсоединился"
@@ -166,7 +166,7 @@ msgstr "Команда %s уже имеет бесконечный запас б
 msgid "%s team has skipped its turn."
 msgstr "Команда %s пропустила свой ход."
 
-#: src/weapon/cluzooka.cpp:368
+#: src/weapon/cluzooka.cpp:377
 #, c-format
 msgid "%s team has won %u Cluster bazookas!"
 msgid_plural "%s team has won %u Cluster bazookas!"
@@ -498,7 +498,7 @@ msgstr[2] ""
 "Команда %s выиграла %u tux'ов взрывателей! Никогда не видели летающего "
 "пингвина?"
 
-#: src/game/game.cpp:1193 src/game/game.cpp:1205
+#: src/game/game.cpp:1229 src/game/game.cpp:1241
 #, c-format
 msgid "%s took a member of the %s team to the grave with him!"
 msgstr "%s увёл члена команды %s с собой в могилу!"
@@ -541,7 +541,7 @@ msgid "(dead)"
 msgstr "(мёртв)"
 
 #. Setting language selection
-#: src/menu/options_menu.cpp:331
+#: src/menu/options_menu.cpp:333
 msgid "(system language)"
 msgstr "(системный язык)"
 
@@ -554,7 +554,31 @@ msgstr "(неизвестное время)"
 msgid "(unlimited)"
 msgstr "(бесконечно)"
 
-#: src/menu/options_menu.cpp:528
+#: src/menu/results_menu.cpp:475
+#, c-format
+msgid "*** Published: %s"
+msgstr ""
+
+#: src/menu/results_menu.cpp:477 src/menu/results_menu.cpp:479
+#, c-format
+msgid "*** Publishing failed: %s"
+msgstr ""
+
+#: src/menu/results_menu.cpp:564 src/menu/results_menu.cpp:583
+msgid "*** Publishing failed: incomplete credentials"
+msgstr ""
+
+#: src/menu/results_menu.cpp:496 src/menu/results_menu.cpp:498
+#, c-format
+msgid "*** Tweet failed: %s"
+msgstr ""
+
+#: src/menu/results_menu.cpp:494
+#, c-format
+msgid "*** Tweeted: %s"
+msgstr ""
+
+#: src/menu/options_menu.cpp:535
 #, c-format
 msgid ""
 "A new version %s is available, while your version is %s. You may want to "
@@ -576,7 +600,7 @@ msgstr "Воздушная атака"
 msgid "Airhammer"
 msgstr "Отбойный молоток"
 
-#: src/menu/results_menu.cpp:315
+#: src/menu/results_menu.cpp:318
 msgid "All teams"
 msgstr "Все команды"
 
@@ -662,6 +686,10 @@ msgstr "Прыгучий мяч"
 msgid "Bye bye Tux..."
 msgstr "Пока-пока, Tux..."
 
+#: lib/warmux/net/download.cpp:437
+msgid "Can't find authenticity_token"
+msgstr ""
+
 #: src/team/teams_list.cpp:489 src/team/teams_list.cpp:525
 #: src/team/teams_list.cpp:534 src/team/teams_list.cpp:540
 #: src/team/teams_list.cpp:598
@@ -742,7 +770,7 @@ msgstr ""
 "Энергия персонажа.\n"
 "Название команды."
 
-#: src/menu/options_menu.cpp:186
+#: src/menu/options_menu.cpp:188
 msgid "Character names:"
 msgstr "Имена персонажей:"
 
@@ -754,11 +782,11 @@ msgstr "Выбор игрока"
 msgid "Chat"
 msgstr "Чат"
 
-#: src/menu/options_menu.cpp:237
+#: src/menu/options_menu.cpp:239
 msgid "Check updates online?"
 msgstr "Проверять обновления игры?"
 
-#: src/menu/map_selection_box.cpp:109
+#: src/menu/map_selection_box.cpp:104
 msgid "Choose randomly between the different maps"
 msgstr "Выбрать карту случайно"
 
@@ -812,7 +840,7 @@ msgstr ""
 msgid "Client mode"
 msgstr "Режим клиента"
 
-#: src/menu/results_menu.cpp:181 src/menu/results_menu.cpp:183
+#: src/menu/results_menu.cpp:184 src/menu/results_menu.cpp:186
 msgid "Clumsiest"
 msgstr "Самый неуклюжий"
 
@@ -820,7 +848,7 @@ msgstr "Самый неуклюжий"
 msgid "Cluster Bomb"
 msgstr "Кассетная бомба"
 
-#: src/weapon/cluzooka.cpp:362
+#: src/weapon/cluzooka.cpp:371
 msgid "Cluzooka"
 msgstr "Осколочная базука"
 
@@ -829,7 +857,7 @@ msgstr "Осколочная базука"
 msgid "Comment"
 msgstr "Комментарий"
 
-#: src/menu/results_menu.cpp:368
+#: src/menu/results_menu.cpp:371
 msgid "Comment:"
 msgstr "Комментировать:"
 
@@ -842,7 +870,7 @@ msgstr "Покончить жизнь самоубийством"
 msgid "Configuration menu"
 msgstr "Меню настроек"
 
-#: src/menu/network_connection_menu.cpp:281
+#: src/menu/network_connection_menu.cpp:309
 msgid "Connect to game"
 msgstr "Подключиться к игре"
 
@@ -858,11 +886,11 @@ msgstr "Присоединённые игроки:"
 msgid "Construct"
 msgstr "Строительство"
 
-#: src/menu/results_menu.cpp:293
+#: src/menu/results_menu.cpp:296
 msgid "Controlled by: "
 msgstr "Контролируется: "
 
-#: lib/warmux/net/download.cpp:203
+#: lib/warmux/net/download.cpp:231
 #, c-format
 msgid "Couldn't fetch last version from %s"
 msgstr "Не получается скачать новую версию с %s"
@@ -962,15 +990,15 @@ msgstr "Продолжительность хода"
 msgid "Dynamite"
 msgstr "Динамит"
 
-#: src/game/game.cpp:510
+#: src/game/game.cpp:526
 msgid "END OF GAME"
 msgstr "КОНЕЦ ИГРЫ"
 
-#: src/menu/options_menu.cpp:283
+#: src/menu/options_menu.cpp:285
 msgid "Effects volume"
 msgstr "Громкость эффектов"
 
-#: src/menu/results_menu.cpp:341
+#: src/menu/results_menu.cpp:344
 msgid "Energy"
 msgstr "Энергия"
 
@@ -987,7 +1015,7 @@ msgstr "Ошибка загрузки поверхности"
 msgid "Error loading team :"
 msgstr "Ошибка пзагрузки команды :"
 
-#: src/game/config.cpp:579 src/team/custom_team.cpp:155
+#: src/game/config.cpp:603 src/team/custom_team.cpp:155
 #: src/team/custom_team.cpp:166 src/team/custom_team.cpp:177
 #, c-format
 msgid ""
@@ -1007,27 +1035,27 @@ msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
 msgstr "Ошибка при удалении файла \"%s\": не удалось удалить личную команду."
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:520
+#: src/menu/network_connection_menu.cpp:552
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Ошибка: не удалось подключиться к %s: %s"
 
-#: src/menu/network_connection_menu.cpp:470
+#: src/menu/network_connection_menu.cpp:502
 msgid "Error: Unable to contact the index server to host a game"
 msgstr "Ошибка: Не удалось соединиться с сервером, чтобы создать игру"
 
-#: src/menu/network_connection_menu.cpp:381
+#: src/menu/network_connection_menu.cpp:409
 msgid ""
 "Error: Unable to contact the index server to search for an internet game"
 msgstr ""
 "Ошибка: Не удалось соединиться с указанным сервером, чтобы найти Интернет-"
 "игру"
 
-#: src/menu/network_connection_menu.cpp:498
+#: src/menu/network_connection_menu.cpp:530
 msgid "Error: Unable to start the server"
 msgstr "Ошибка: Не удалось запустить сервер"
 
-#: src/menu/network_connection_menu.cpp:491
+#: src/menu/network_connection_menu.cpp:523
 #: tools/servers/game_server/server.cpp:401
 #, c-format
 msgid ""
@@ -1067,21 +1095,11 @@ msgstr "Задержка взрыва %u"
 msgid "FPS"
 msgstr "кадр/сек"
 
-#: lib/warmux/net/download.cpp:188 lib/warmux/net/download.cpp:229
-#, c-format
-msgid "Fail to create temporary file: %s"
-msgstr "Ошибка создания временного файла: %s"
-
-#: lib/warmux/net/download.cpp:195
-#, c-format
-msgid "Fail to open temporary file: %s"
-msgstr "Невозможно открыть временный файл: %s"
-
-#: src/menu/results_menu.cpp:436
+#: src/menu/results_menu.cpp:521
 msgid "Failed to save replay"
 msgstr "Ошибка сохранения повтора"
 
-#: src/menu/results_menu.cpp:356
+#: src/menu/results_menu.cpp:359
 msgid "Filename:"
 msgstr "Имя файла:"
 
@@ -1093,7 +1111,7 @@ msgstr "Огнемет"
 msgid "Football Bomb"
 msgstr "Футбольная бомба"
 
-#: src/menu/options_menu.cpp:108
+#: src/menu/options_menu.cpp:110
 msgid "Fullscreen?"
 msgstr "На весь экран?"
 
@@ -1122,7 +1140,7 @@ msgstr "Меню игры"
 msgid "Game mode"
 msgstr "Режим игры"
 
-#: src/menu/network_connection_menu.cpp:257
+#: src/menu/network_connection_menu.cpp:285
 msgid "Game name:"
 msgstr "Имя игры:"
 
@@ -1144,7 +1162,7 @@ msgstr ""
 "Нажмите Пробел, чтобы ввести инъекцию\n"
 "Это вылечит персонажа или медленно убьет врага"
 
-#: src/menu/benchmark_menu.cpp:112 src/menu/options_menu.cpp:150
+#: src/menu/benchmark_menu.cpp:112 src/menu/options_menu.cpp:152
 msgid "Graphics"
 msgstr "Графика"
 
@@ -1173,12 +1191,12 @@ msgstr "Команда %u была уничтожена"
 msgid "Gun"
 msgstr "Пистолет"
 
-#: src/menu/network_connection_menu.cpp:307
+#: src/menu/network_connection_menu.cpp:335
 msgid "Have a good game!"
 msgstr "Удачной игры!"
 
 #. ***    Names: "Head commander" + text/custom team    ***
-#: src/interface/interface.cpp:281 src/menu/options_menu.cpp:178
+#: src/interface/interface.cpp:281 src/menu/options_menu.cpp:180
 #: src/menu/team_box.cpp:103
 msgid "Head commander"
 msgstr "Командующий"
@@ -1188,7 +1206,7 @@ msgstr "Командующий"
 msgid "Help"
 msgstr "Справка"
 
-#: src/menu/options_menu.cpp:120
+#: src/menu/options_menu.cpp:122
 msgid "High"
 msgstr "Высоко"
 
@@ -1197,7 +1215,11 @@ msgstr "Высоко"
 msgid "High jump"
 msgstr "Высокий прыжок"
 
-#: src/menu/network_connection_menu.cpp:283
+#: src/menu/results_menu.cpp:453
+msgid "Himself"
+msgstr ""
+
+#: src/menu/network_connection_menu.cpp:311
 msgid "Host a game"
 msgstr "Стать сервером"
 
@@ -1205,7 +1227,7 @@ msgstr "Стать сервером"
 msgid "Hurry up, you are too slow !!"
 msgstr "Торопитесь, вы слишком медленные !!"
 
-#: src/menu/results_menu.cpp:369
+#: src/menu/results_menu.cpp:372
 msgid "I like WarMUX :)"
 msgstr "Я торчу от WarMUX :)"
 
@@ -1264,7 +1286,7 @@ msgstr "Внутреигровой вид"
 msgid "Initial energy"
 msgstr "Начальная энергия"
 
-#: src/weapon/bazooka.cpp:120 src/weapon/cluzooka.cpp:363
+#: src/weapon/bazooka.cpp:120 src/weapon/cluzooka.cpp:372
 #: src/weapon/riot_bomb.cpp:120
 msgid ""
 "Initial fire angle: Up/Down\n"
@@ -1275,20 +1297,20 @@ msgstr ""
 "Стрельба : удерживайте пробел до достижения желаемой силы\n"
 "Один выстрел за ход"
 
-#: src/game/game.cpp:124
+#: src/game/game.cpp:130
 msgid "Initialisation"
 msgstr "Инициализация"
 
 #. Load the map
-#: src/game/game.cpp:161
+#: src/game/game.cpp:167
 msgid "Initialise map"
 msgstr "Инициализация карты"
 
-#: src/game/game.cpp:172
+#: src/game/game.cpp:178
 msgid "Initialise sounds"
 msgstr "Инициализация звуков"
 
-#: src/game/game.cpp:168
+#: src/game/game.cpp:174
 msgid "Initialise teams"
 msgstr "Инициализация команд"
 
@@ -1302,11 +1324,11 @@ msgstr "Интерфейс"
 msgid "Interface and touch controls, more details in other tabs"
 msgstr "Интерфейс и управление, больше деталей на других вкладках"
 
-#: src/menu/results_menu.cpp:424
+#: src/menu/results_menu.cpp:509
 msgid "Invalid filename"
 msgstr "Неподходящее имя файла"
 
-#: src/game/game.cpp:1042
+#: src/game/game.cpp:1078
 msgid "It's a present!"
 msgstr "Это - подарок!"
 
@@ -1338,7 +1360,7 @@ msgstr ""
 msgid "Key"
 msgstr "Клавиша"
 
-#: src/menu/options_menu.cpp:160
+#: src/menu/options_menu.cpp:162
 msgid "Key bindings"
 msgstr "Привязанные клавиши"
 
@@ -1351,11 +1373,11 @@ msgstr "Клавиатура"
 msgid "Kicks the player designated by <nickname> out of the game"
 msgstr "Выкидывает участников, обозначеных <nickname>, из игры"
 
-#: src/menu/options_menu.cpp:155
+#: src/menu/options_menu.cpp:157
 msgid "Language"
 msgstr "Язык"
 
-#: src/menu/options_menu.cpp:243
+#: src/menu/options_menu.cpp:245
 msgid "Left-handed mouse?"
 msgstr "Мышь для левши?"
 
@@ -1375,7 +1397,11 @@ msgstr "Загрузка команд:"
 msgid "Local teams:"
 msgstr "Локальные команды:"
 
-#: src/menu/options_menu.cpp:117
+#: lib/warmux/net/download.cpp:352
+msgid "Login error, probably invalid email or password"
+msgstr ""
+
+#: src/menu/options_menu.cpp:119
 msgid "Low memory"
 msgstr "Недостаточно памяти"
 
@@ -1383,7 +1409,7 @@ msgstr "Недостаточно памяти"
 msgid "LowGrav"
 msgstr "Антигравитатор"
 
-#: src/menu/network_connection_menu.cpp:282
+#: src/menu/network_connection_menu.cpp:310
 msgid "Manual connection"
 msgstr "Соединение вручную"
 
@@ -1407,7 +1433,7 @@ msgstr "Карту %s создал: "
 msgid "Map author information: name, email, nickname, country"
 msgstr "Информация об авторе карты: имя, емейл, ник, страна"
 
-#: src/game/game.cpp:162
+#: src/game/game.cpp:168
 msgid "Maps"
 msgstr "Карты"
 
@@ -1419,11 +1445,11 @@ msgstr "Режим мастера"
 msgid "Max energy"
 msgstr "Максимальная энергия"
 
-#: src/menu/options_menu.cpp:113
+#: src/menu/options_menu.cpp:115
 msgid "Maximum FPS"
 msgstr "Максимальный FPS"
 
-#: src/menu/options_menu.cpp:118
+#: src/menu/options_menu.cpp:120
 msgid "Medium"
 msgstr "Средний"
 
@@ -1444,7 +1470,7 @@ msgstr "Миникарта"
 msgid "Minimap, more details in another tab"
 msgstr "Миникарта, больше информации на другой вкладке"
 
-#: src/menu/options_menu.cpp:258
+#: src/menu/options_menu.cpp:260
 msgid "Misc"
 msgstr "Разное"
 
@@ -1458,23 +1484,23 @@ msgstr "Модификаторы"
 msgid "More energy, more shots needed"
 msgstr "Больше энергии, больше выстрелов необходимо"
 
-#: src/menu/results_menu.cpp:189 src/menu/results_menu.cpp:191
+#: src/menu/results_menu.cpp:192 src/menu/results_menu.cpp:194
 msgid "Most accurate"
 msgstr "Самый точный"
 
-#: src/menu/results_menu.cpp:173 src/menu/results_menu.cpp:175
+#: src/menu/results_menu.cpp:176 src/menu/results_menu.cpp:178
 msgid "Most sold-out"
 msgstr "Самый продажный"
 
-#: src/menu/results_menu.cpp:157 src/menu/results_menu.cpp:159
+#: src/menu/results_menu.cpp:160 src/menu/results_menu.cpp:162
 msgid "Most useful"
 msgstr "Самый полезный"
 
-#: src/menu/results_menu.cpp:165 src/menu/results_menu.cpp:167
+#: src/menu/results_menu.cpp:168 src/menu/results_menu.cpp:170
 msgid "Most useless"
 msgstr "Самый бесполезный"
 
-#: src/menu/results_menu.cpp:149 src/menu/results_menu.cpp:151
+#: src/menu/results_menu.cpp:152 src/menu/results_menu.cpp:154
 msgid "Most violent"
 msgstr "Самый жестокий"
 
@@ -1520,19 +1546,19 @@ msgstr "Дигаться вправо"
 msgid "Move right slowly"
 msgstr "Медленно дигаться вправо"
 
-#: src/menu/options_menu.cpp:94
+#: src/menu/options_menu.cpp:96
 msgid "Multi-layer sky?"
 msgstr "Многослойное небо?"
 
-#: src/menu/options_menu.cpp:272
+#: src/menu/options_menu.cpp:274
 msgid "Music volume"
 msgstr "Громкость музыки"
 
-#: src/menu/options_menu.cpp:266
+#: src/menu/options_menu.cpp:268
 msgid "Music?"
 msgstr "Музыка?"
 
-#: src/game/game.cpp:185
+#: src/game/game.cpp:191
 msgid "Network"
 msgstr "Сеть"
 
@@ -1549,7 +1575,7 @@ msgstr "Никогда"
 msgid "New network game at "
 msgstr "Новая игра по сети"
 
-#: src/menu/options_menu.cpp:308
+#: src/menu/options_menu.cpp:310
 msgid "New player warning?"
 msgstr "Предупреждать о новом игроке?"
 
@@ -1566,11 +1592,11 @@ msgstr "Элемент <%s> не найден в файле с настройк�
 msgid "No player connected"
 msgstr "Нет присоединённых игроков"
 
-#: lib/warmux/net/download.cpp:144
+#: lib/warmux/net/download.cpp:201
 msgid "No pointer"
 msgstr "Нет указателя"
 
-#: src/menu/results_menu.cpp:88
+#: src/menu/results_menu.cpp:91
 msgid "Nobody!"
 msgstr "Никто!"
 
@@ -1624,9 +1650,15 @@ msgstr ""
 "Открывается автоматически\n"
 "Используйте стрелки Влево/Вправо для изменения направления"
 
-#: src/menu/network_connection_menu.cpp:193
-#: src/menu/network_connection_menu.cpp:230
-#: src/menu/network_connection_menu.cpp:269
+#: src/gui/social_panel.cpp:81
+#, fuzzy
+#| msgid "Password:"
+msgid "Password"
+msgstr "Пароль:"
+
+#: src/menu/network_connection_menu.cpp:221
+#: src/menu/network_connection_menu.cpp:258
+#: src/menu/network_connection_menu.cpp:297
 msgid "Password:"
 msgstr "Пароль:"
 
@@ -1656,11 +1688,11 @@ msgstr "Играть несколько раз"
 msgid "Player"
 msgstr "Игрок"
 
-#: src/menu/options_menu.cpp:99
+#: src/menu/options_menu.cpp:101
 msgid "Player energy?"
 msgstr "Энергия игрока?"
 
-#: src/menu/options_menu.cpp:103
+#: src/menu/options_menu.cpp:105
 msgid "Player's name?"
 msgstr "Имена игроков?"
 
@@ -1668,7 +1700,7 @@ msgstr "Имена игроков?"
 msgid "Please select a group different from your opponent!"
 msgstr "Пожалуйста, выберите группу, отличающуюся от противника"
 
-#: src/menu/results_menu.cpp:306
+#: src/menu/results_menu.cpp:309
 msgid "Podium"
 msgstr "Подиум"
 
@@ -1676,8 +1708,8 @@ msgstr "Подиум"
 msgid "Polecat Launcher"
 msgstr "Скунс"
 
-#: src/menu/network_connection_menu.cpp:219
-#: src/menu/network_connection_menu.cpp:246
+#: src/menu/network_connection_menu.cpp:247
+#: src/menu/network_connection_menu.cpp:274
 msgid "Port:"
 msgstr "Порт:"
 
@@ -1761,11 +1793,11 @@ msgstr ""
 "Gravity is decreased\n"
 "Ends when selecting another weapon"
 
-#: src/menu/network_connection_menu.cpp:179
+#: src/menu/network_connection_menu.cpp:207
 msgid "Public battles"
 msgstr "Доступные битвы"
 
-#: src/menu/options_menu.cpp:122
+#: src/menu/options_menu.cpp:124
 msgid "Quality"
 msgstr "Качество"
 
@@ -1791,20 +1823,20 @@ msgid "Rail Gun"
 msgstr "Рельсотрон"
 
 #. Random map selected
-#: src/menu/map_selection_box.cpp:108
+#: src/menu/map_selection_box.cpp:103
 msgid "Random map"
 msgstr "Случайная карта"
 
-#: lib/warmux/net/download.cpp:138
+#: lib/warmux/net/download.cpp:195
 #, fuzzy, c-format
 msgid "Read only %i bytes"
 msgstr "Только чтение %i байт."
 
-#: src/game/config.cpp:401
+#: src/game/config.cpp:409
 msgid "Reading the default config file"
 msgstr "Чтение файла конфигурации по умолчанию"
 
-#: src/game/config.cpp:482
+#: src/game/config.cpp:490
 msgid "Reading the personal config file"
 msgstr "Чтение персонального файла конфигурации"
 
@@ -1821,7 +1853,7 @@ msgstr "Управление видео"
 msgid "Replay info"
 msgstr "Информация о видео"
 
-#: src/game/game.cpp:212
+#: src/game/game.cpp:228
 msgid "Replay mode"
 msgstr "Режим записи"
 
@@ -1834,11 +1866,11 @@ msgstr ""
 "Полоса прокрутки записи, не используется для точного поиска.\n"
 "Короткий клик для прыжка +30с, длинный для прыжка +60s."
 
-#: src/menu/results_menu.cpp:443
+#: src/menu/results_menu.cpp:528
 msgid "Replay saved"
 msgstr "Запись сохранена"
 
-#: src/menu/options_menu.cpp:145
+#: src/menu/options_menu.cpp:147
 msgid "Resolution"
 msgstr "Разрешение"
 
@@ -1863,19 +1895,26 @@ msgstr "Правила"
 msgid "Run game"
 msgstr "Начать игру"
 
-#: src/menu/results_menu.cpp:381
+#. Password
+#: src/gui/social_panel.cpp:76
+#, fuzzy
+#| msgid "Password:"
+msgid "Save password"
+msgstr "Пароль:"
+
+#: src/menu/results_menu.cpp:384
 msgid "Save replay?"
 msgstr "Сохранить повтор?"
 
-#: src/network/chat.cpp:83
+#: src/network/chat.cpp:84
 msgid "Say: "
 msgstr "Сказать: "
 
-#: src/menu/options_menu.cpp:253
+#: src/menu/options_menu.cpp:255
 msgid "Scroll border size"
 msgstr "Размер границы прокрутки"
 
-#: src/menu/options_menu.cpp:248
+#: src/menu/options_menu.cpp:250
 msgid "Scroll on border"
 msgstr "Прокрутка на границе"
 
@@ -1887,12 +1926,12 @@ msgstr "Выбрать запись"
 msgid "Select number of playing teams"
 msgstr "Выберите количество команд"
 
-#: src/menu/network_connection_menu.cpp:209
+#: src/menu/network_connection_menu.cpp:237
 msgid "Server address:"
 msgstr "Адрес сервера:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:277
+#: src/menu/network_connection_menu.cpp:305
 msgid "Server available on Internet"
 msgstr "Сервер доступен в интернете"
 
@@ -1980,15 +2019,19 @@ msgstr "Меньший угол прицела и шаг хода"
 msgid "Sniper Rifle"
 msgstr "Снайперская винтовка"
 
+#: src/menu/options_menu.cpp:384 src/menu/results_menu.cpp:389
+msgid "Social"
+msgstr ""
+
 #: src/object/bonus_box.cpp:75
 msgid "Someone put a booby trap into the crate!"
 msgstr "В контейнере была мина-ловушка!"
 
-#: src/menu/network_connection_menu.cpp:386
+#: src/menu/network_connection_menu.cpp:414
 msgid "Sorry, currently, no game is waiting for players"
 msgstr "Извините, в данный момент нет игр ожидающих игроков"
 
-#: src/menu/network_connection_menu.cpp:440
+#: src/menu/network_connection_menu.cpp:472
 #: tools/servers/game_server/server.cpp:386
 #, fuzzy, c-format
 msgid ""
@@ -1999,24 +2042,24 @@ msgstr ""
 "версии следующие: %s. Вы можете загрузить свежую версию по адресу http://www."
 "warmux.org/wiki/download.php"
 
-#: src/menu/options_menu.cpp:312
+#: src/menu/options_menu.cpp:314
 msgid "Sound"
 msgstr "Звуки"
 
-#: src/menu/options_menu.cpp:277
+#: src/menu/options_menu.cpp:279
 msgid "Sound effects?"
 msgstr "Звуковые эффекты?"
 
-#: src/menu/options_menu.cpp:303
+#: src/menu/options_menu.cpp:305
 msgid "Sound frequency"
 msgstr "Частота звука"
 
 #. Load teams' sound profiles
-#: src/game/game.cpp:174
+#: src/game/game.cpp:180
 msgid "Sounds"
 msgstr "Звуки"
 
-#: src/game/game.cpp:206
+#: src/game/game.cpp:222
 msgid "Starting a new game"
 msgstr "Начинаем новую игру"
 
@@ -2049,30 +2092,30 @@ msgstr "Сделать скриншот"
 msgid "Talk in network battles"
 msgstr "Разговор в сетевых битвах"
 
-#: src/menu/options_menu.cpp:606
+#: src/menu/options_menu.cpp:613
 msgid "Team deleted"
 msgstr "Команда удалена"
 
-#: src/menu/results_menu.cpp:340
+#: src/menu/results_menu.cpp:343
 msgid "Team graphs"
 msgstr "Графики команды"
 
-#: src/menu/options_menu.cpp:586
+#: src/menu/options_menu.cpp:593
 msgid "Team saved"
 msgstr "Команда сохранена"
 
-#: src/menu/results_menu.cpp:318
+#: src/menu/results_menu.cpp:321
 msgid "Team stats"
 msgstr "Статистика команды"
 
 #. Teams
-#: src/game/game.cpp:169 src/menu/game_menu.cpp:79 src/menu/game_menu.cpp:83
+#: src/game/game.cpp:175 src/menu/game_menu.cpp:79 src/menu/game_menu.cpp:83
 #: src/menu/network_menu.cpp:105 src/menu/network_menu.cpp:109
 #: src/menu/replay_menu.cpp:117
 msgid "Teams"
 msgstr "Команды"
 
-#: src/menu/options_menu.cpp:219
+#: src/menu/options_menu.cpp:221
 msgid "Teams editor"
 msgstr "Редактор команд"
 
@@ -2139,7 +2182,7 @@ msgstr "Превышено время подключения. Проверьте
 msgid "The disco grenade has left the dance floor before exploding!"
 msgstr "Диско-граната улетела с поля битвы не успев взорваться"
 
-#: src/game/game.cpp:766
+#: src/game/game.cpp:805
 msgid "The game was interrupted because you got disconnected."
 msgstr "Игра была прервана, потому что вы были отсоединены."
 
@@ -2155,7 +2198,7 @@ msgstr "Все ждут тебя! Проснись! :-)"
 msgid "The parachute is activated automatically."
 msgstr "Парашют раскрылся автоматически."
 
-#: src/weapon/bazooka.cpp:80 src/weapon/cluzooka.cpp:312
+#: src/weapon/bazooka.cpp:80 src/weapon/cluzooka.cpp:321
 #: src/weapon/riot_bomb.cpp:85
 msgid "The rocket has left the battlefield..."
 msgstr "Ракета улетела за пределы поля битвы..."
@@ -2189,13 +2232,13 @@ msgstr[2] "Всего %u команд"
 msgid "This key has already been attributed to '%s'"
 msgstr "Эта клавиша уже привязанна к '%s'"
 
-#: src/menu/network_connection_menu.cpp:309
+#: src/menu/network_connection_menu.cpp:337
 msgid "This version was compiled without curl, you can't list public games!"
 msgstr ""
 "Эта версия была скомпилированна без curl, Вы не можете составлять список "
 "публичных игр"
 
-#: src/menu/benchmark_menu.cpp:113 src/menu/results_menu.cpp:341
+#: src/menu/benchmark_menu.cpp:113 src/menu/results_menu.cpp:344
 msgid "Time"
 msgstr "Время"
 
@@ -2352,12 +2395,16 @@ msgstr ""
 "Стрельба : удерживайте пробел до достижения желаемой силы\n"
 "Один выстрел за ход"
 
+#: src/gui/social_panel.cpp:70
+msgid "User"
+msgstr ""
+
 #. Version
 #: src/main.cpp:210 src/menu/main_menu.cpp:90 src/menu/replay_menu.cpp:97
 msgid "Version"
 msgstr "Версия"
 
-#: src/menu/options_menu.cpp:535
+#: src/menu/options_menu.cpp:542
 #, c-format
 msgid "Version verification failed because: %s"
 msgstr "Проверка версии не удалась по причине: %s"
@@ -2374,12 +2421,12 @@ msgstr[0] "Подождите! %i-й игрок пока не готов!"
 msgstr[1] "Подождите! %i игрока пока не готовы!"
 msgstr[2] "Подождите! %i игроков пока не готовы!"
 
-#: src/game/game.cpp:661
+#: src/game/game.cpp:700
 #, c-format
 msgid "Waiting for %s"
 msgstr "Ожидание %s"
 
-#: src/game/game.cpp:184
+#: src/game/game.cpp:190
 msgid "Waiting for remote players"
 msgstr "Ожидание удалённых игроков"
 
@@ -2406,7 +2453,7 @@ msgstr "Категория оружия 8"
 msgid "Weapon: Fire / Bonus box: drop"
 msgstr "Оружие: Огонь / Бонусные коробки: упасть"
 
-#: src/game/game.cpp:165
+#: src/game/game.cpp:171
 msgid "Weapons"
 msgstr "Оружие"
 
@@ -2421,12 +2468,12 @@ msgstr "Веб-сайт: "
 msgid "Welcome to %s on %s!"
 msgstr "Приветствуем в %s на %s!"
 
-#: src/game/game.cpp:1151
+#: src/game/game.cpp:1187
 #, c-format
 msgid "What a beautiful homerun! %s from %s team is in another world..."
 msgstr "Какой красивый побег! %s из команды %s уже в другом мире..."
 
-#: src/game/game.cpp:1214
+#: src/game/game.cpp:1250
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Какой позор для %s - его убили из простого пистолета!"
@@ -2436,7 +2483,7 @@ msgstr "Какой позор для %s - его убили из простог�
 msgid "When a character can be switched"
 msgstr "Когда можно менять персонажа"
 
-#: src/menu/options_menu.cpp:88
+#: src/menu/options_menu.cpp:90
 msgid "Wind particles?"
 msgstr "Частицы в воздухе?"
 
@@ -2447,7 +2494,7 @@ msgid ""
 msgstr ""
 "Сила и направление ветраКликните здесь, чтобы переключаться к управлению"
 
-#: src/menu/results_menu.cpp:285
+#: src/menu/results_menu.cpp:288
 msgid "Winner"
 msgstr "Победитель"
 
@@ -2475,7 +2522,7 @@ msgstr "Неверное имя карты!"
 msgid "Wrong team!"
 msgstr "Неверная команда!"
 
-#: lib/warmux/net/download.cpp:154
+#: lib/warmux/net/download.cpp:211
 #, c-format
 msgid "Wrote %i/%i bytes"
 msgstr "Записано %i/%i байт"
@@ -2489,7 +2536,7 @@ msgid ""
 "You are the new turn master! Learn about your new powers by typing /help"
 msgstr "Вы - мастер нового хода! Узнайте о новых возможностях набрав /help"
 
-#: src/menu/options_menu.cpp:575
+#: src/menu/options_menu.cpp:582
 msgid "You must fill Head Commander and all player names"
 msgstr "Вы должны заполнить имена Командира и всех игроков"
 
@@ -2497,7 +2544,7 @@ msgstr "Вы должны заполнить имена Командира и в
 msgid "You need at least one valid map!"
 msgstr "Вам нужна хотя бы одна рабочая карта!"
 
-#: src/game/game.cpp:304 src/team/teams_list.cpp:179
+#: src/game/game.cpp:320 src/team/teams_list.cpp:179
 msgid "You need at least two valid teams!"
 msgstr "Вам нужны хотя бы две полноценные команды!"
 
@@ -2505,7 +2552,7 @@ msgstr "Вам нужны хотя бы две полноценные коман
 msgid "You won't be able to play before selecting a team!"
 msgstr "Вы не сможете играть не выбрав команду!"
 
-#: src/weapon/weapon_launcher.cpp:552
+#: src/weapon/weapon_launcher.cpp:551
 msgid "Your shot has missed!"
 msgstr "Вы промазали!"
 
@@ -2557,19 +2604,30 @@ msgstr "загрузка..."
 msgid "no configuration file!"
 msgstr "нет конфигурационного файла!"
 
-#: src/sound/jukebox.cpp:204
+#: src/sound/jukebox.cpp:215
 msgid "o Loading music"
 msgstr "o Загрузка музыки"
 
-#: src/sound/jukebox.cpp:386
+#: src/sound/jukebox.cpp:397
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr "o Загрузка звукового профиля: %s"
 
-#: src/sound/jukebox.cpp:142
+#: src/sound/jukebox.cpp:149
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Открыто аудио в %d Hz %d bit"
+
+#, fuzzy
+#~| msgid "Public battles"
+#~ msgid "Publish updates"
+#~ msgstr "Доступные битвы"
+
+#~ msgid "Fail to create temporary file: %s"
+#~ msgstr "Ошибка создания временного файла: %s"
+
+#~ msgid "Fail to open temporary file: %s"
+#~ msgstr "Невозможно открыть временный файл: %s"
 
 #~ msgid "You are the new turn master!"
 #~ msgstr "Вы - новый владелец хода!"
