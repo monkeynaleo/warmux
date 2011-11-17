@@ -108,7 +108,7 @@ AC_ARG_ENABLE([profile],
                    CXXFLAGS="$CXXFLAGS -pg"
                fi])
 
-AC_ARG_ENABLE(vkeybd, AC_HELP_STRING([--enable-vkeybd], [Enable Virtual Keybord]) )
+AC_ARG_ENABLE(vkeybd, AC_HELP_STRING([--enable-vkeybd], [Enable Virtual Keyboard]) )
 if test "${enable_vkeybd}" = "yes"; then
        AC_DEFINE([ENABLE_VKEYBD], [1], [Enable Virtual Keyboard])
 fi
@@ -310,6 +310,16 @@ int main(void)
 dnl === Check for curl =====================================================
 
 LIBCURL_CHECK_CONFIG([yes],[7.0],[check_curl=yes],[check_curl=no])
+if test "${check_curl}" = "yes"; then
+  CXXFLAGS="$CXXFLAGS -DHAVE_FACEBOOK"
+  if test "${libcurl_protocol_https}" != "yes"; then
+    AC_MSG_WARN([No HTTPS support in curl, Twitter support off])
+  else
+    CXXFLAGS="$CXXFLAGS -DHAVE_TWITTER"
+  fi
+else
+  AC_MSG_WARN(Absolutely no network support!)
+fi
 
 dnl === Check for Maemo ====================================================
 
