@@ -55,6 +55,7 @@ typedef unsigned int size_t;
 
 #ifndef _INTPTR_T_DECLARED
 typedef unsigned int uintptr_t;
+typedef unsigned int intptr_t;
 #define _INTPTR_T_DECLARED
 #endif 
 
