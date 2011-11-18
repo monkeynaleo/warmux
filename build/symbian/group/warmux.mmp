@@ -19,7 +19,7 @@ SYSTEMINCLUDE   \epoc32\include\SDL
 SYSTEMINCLUDE   \epoc32\include\libpng-1.2
 SYSTEMINCLUDE   ..\..\..\lib\warmux\include
 SYSTEMINCLUDE   ..\..\..\lib\fixedpoint
-SYSTEMINCLUDE   ..\..\build\lib\curl\include
+SYSTEMINCLUDE   ..\..\lib\curl\include
 SYSTEMINCLUDE   ..\lib\libxml2\inc\libxml2
 
 USERINCLUDE   ..\..\..\src
@@ -42,7 +42,7 @@ SOURCE file_list_box.cpp
 SOURCEPATH ..\..\..\src\gui\big
 SOURCE button_pic.cpp
 SOURCEPATH ..\..\..\src\gui
-SOURCE box.cpp button.cpp button_text.cpp check_box.cpp combo_box.cpp control_config.cpp energy_bar.cpp figure_widget.cpp graph_canvas.cpp grid_box.cpp horizontal_box.cpp label.cpp msg_box.cpp picture_text_cbox.cpp picture_widget.cpp progress_bar.cpp question.cpp scroll_box.cpp select_box.cpp spin_button.cpp spin_button_picture.cpp tabs.cpp talk_box.cpp text_box.cpp torus_cache.cpp vertical_box.cpp widget.cpp widget_list.cpp
+SOURCE box.cpp button.cpp button_text.cpp check_box.cpp combo_box.cpp control_config.cpp energy_bar.cpp figure_widget.cpp graph_canvas.cpp grid_box.cpp horizontal_box.cpp label.cpp msg_box.cpp social_panel.cpp picture_text_cbox.cpp picture_widget.cpp progress_bar.cpp question.cpp scroll_box.cpp select_box.cpp spin_button.cpp spin_button_picture.cpp tabs.cpp talk_box.cpp text_box.cpp torus_cache.cpp vertical_box.cpp widget.cpp widget_list.cpp
 SOURCEPATH ..\..\..\src\include
 SOURCE action_handler.cpp constant.cpp
 SOURCEPATH ..\..\..\src\interface
@@ -65,11 +65,11 @@ SOURCE body_member.cpp bullet.cpp dark_smoke.cpp explosion_particle.cpp explosio
 SOURCEPATH ..\..\..\src\sound
 SOURCE jukebox.cpp sample_cache.cpp sound_sample.cpp
 SOURCEPATH ..\..\..\src\team
-SOURCE custom_team.cpp custom_teams_list.cpp results.cpp team.cpp team_energy.cpp teams_list.cpp
+SOURCE custom_team.cpp custom_teams_list.cpp results.cpp team.cpp team_group.cpp team_energy.cpp teams_list.cpp
 SOURCEPATH ..\..\..\src\tool
-SOURCE affine_transform.cpp copynpaste.cpp resource_manager.cpp stats.cpp string_tools.cpp text_handling.cpp xml_document.cpp
+SOURCE affine_transform.cpp config_element.cpp copynpaste.cpp eventtimer.cpp resource_manager.cpp stats.cpp string_tools.cpp text_handling.cpp xml_document.cpp
 SOURCEPATH ..\..\..\src\weapon
-SOURCE air_attack.cpp airhammer.cpp anvil.cpp auto_bazooka.cpp baseball.cpp bazooka.cpp blowtorch.cpp bounce_ball.cpp cluster_bomb.cpp cluzooka.cpp construct.cpp crosshair.cpp disco_grenade.cpp dynamite.cpp explosion.cpp flamethrower.cpp footbomb.cpp gnu.cpp grapple.cpp grenade.cpp gun.cpp jetpack.cpp lowgrav.cpp mine.cpp parachute.cpp polecat.cpp rail_gun.cpp riot_bomb.cpp shotgun.cpp skip_turn.cpp slap.cpp snipe_rifle.cpp submachine_gun.cpp suicide.cpp supertux.cpp syringe.cpp teleportation.cpp weapon.cpp weapon_cfg.cpp weapon_launcher.cpp weapon_strength_bar.cpp weapons_list.cpp
+SOURCE air_attack.cpp airhammer.cpp anvil.cpp auto_bazooka.cpp baseball.cpp bazooka.cpp blowtorch.cpp bounce_ball.cpp cluster_bomb.cpp cluzooka.cpp construct.cpp crosshair.cpp disco_grenade.cpp dynamite.cpp explosion.cpp flamethrower.cpp footbomb.cpp gnu.cpp grapple.cpp grenade.cpp gun.cpp jetpack.cpp lowgrav.cpp mine.cpp parachute.cpp polecat.cpp rail_gun.cpp riot_bomb.cpp shotgun.cpp skip_turn.cpp slap.cpp snipe_rifle.cpp submachine_gun.cpp suicide.cpp supertux.cpp syringe.cpp target_launcher.cpp teleportation.cpp weapon.cpp weapon_cfg.cpp weapon_launcher.cpp weapon_strength_bar.cpp weapons_list.cpp
 SOURCEPATH ..\..\..\src\replay
 SOURCE replay_info.cpp
 SOURCE replay.cpp

@@ -1,4 +1,4 @@
-#include "../../../../symbian/group/build_conf.inf"
+#include "../../../symbian/group/build_conf.inf"
 
 TARGET		warmux_sdl.dll
 TARGETTYPE	dll
