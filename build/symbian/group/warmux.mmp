@@ -62,17 +62,21 @@ SOURCEPATH ..\..\..\src\object
 SOURCE barrel.cpp bonus_box.cpp medkit.cpp objbox.cpp object_cfg.cpp objects_list.cpp physical_obj.cpp physics.cpp
 SOURCEPATH ..\..\..\src\particles
 SOURCE body_member.cpp bullet.cpp dark_smoke.cpp explosion_particle.cpp explosion_smoke.cpp fading_text.cpp fire.cpp ground_particles.cpp ill_bubble.cpp magic_star.cpp particle.cpp polecat_fart.cpp smoke.cpp star.cpp teleport_member.cpp water_drop.cpp
+SOURCEPATH ..\..\..\src\replay
+SOURCE replay_info.cpp
+SOURCE replay.cpp
 SOURCEPATH ..\..\..\src\sound
 SOURCE jukebox.cpp sample_cache.cpp sound_sample.cpp
 SOURCEPATH ..\..\..\src\team
 SOURCE custom_team.cpp custom_teams_list.cpp results.cpp team.cpp team_group.cpp team_energy.cpp teams_list.cpp
 SOURCEPATH ..\..\..\src\tool
 SOURCE affine_transform.cpp config_element.cpp copynpaste.cpp eventtimer.cpp resource_manager.cpp stats.cpp string_tools.cpp text_handling.cpp xml_document.cpp
+SOURCEPATH ..\..\..\src\tool
+SOURCE ansi_convert.cpp
+SOURCEPATH ..\..\..\src\vkeybd
+SOURCE image-map.cpp virtual-keyboard-gui.cpp virtual-keyboard-parser.cpp virtual-keyboard.cpp vkpolygon.cpp
 SOURCEPATH ..\..\..\src\weapon
 SOURCE air_attack.cpp airhammer.cpp anvil.cpp auto_bazooka.cpp baseball.cpp bazooka.cpp blowtorch.cpp bounce_ball.cpp cluster_bomb.cpp cluzooka.cpp construct.cpp crosshair.cpp disco_grenade.cpp dynamite.cpp explosion.cpp flamethrower.cpp footbomb.cpp gnu.cpp grapple.cpp grenade.cpp gun.cpp jetpack.cpp lowgrav.cpp mine.cpp parachute.cpp polecat.cpp rail_gun.cpp riot_bomb.cpp shotgun.cpp skip_turn.cpp slap.cpp snipe_rifle.cpp submachine_gun.cpp suicide.cpp supertux.cpp syringe.cpp target_launcher.cpp teleportation.cpp weapon.cpp weapon_cfg.cpp weapon_launcher.cpp weapon_strength_bar.cpp weapons_list.cpp
-SOURCEPATH ..\..\..\src\replay
-SOURCE replay_info.cpp
-SOURCE replay.cpp
 SOURCEPATH ..\src
 SOURCE joystick.cpp
 
@@ -120,6 +124,3 @@ END
 CAPABILITY NetworkServices
 
 ALWAYS_BUILD_AS_ARM
-
-SOURCEPATH ..\..\..\src\tool
-SOURCE ansi_convert.cpp
