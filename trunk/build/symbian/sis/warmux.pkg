@@ -1064,7 +1064,7 @@ ENDIF
 "../../../data/map/qingqong/sky.jpg" - "!:\private\ecf75e71\data/map/qingqong/sky.jpg"
 "../../../data/map/randomamoebas/config.xml" - "!:\private\ecf75e71\data/map/randomamoebas/config.xml"
 "../../../data/map/randomamoebas/preview.jpg" - "!:\private\ecf75e71\data/map/randomamoebas/preview.jpg"
-"../../../data/map/randomamoebas/sky.jpg" - "!:\private\ecf75e71\data/map/randomamoebas/sky.jpg"
+"../../../data/map/randomamoebas/sky.png" - "!:\private\ecf75e71\data/map/randomamoebas/sky.png"
 "../../../data/map/randomamoebas/texture.png" - "!:\private\ecf75e71\data/map/randomamoebas/texture.png"
 "../../../data/map/randomisland/config.xml" - "!:\private\ecf75e71\data/map/randomisland/config.xml"
 "../../../data/map/randomisland/palm-tree.png" - "!:\private\ecf75e71\data/map/randomisland/palm-tree.png"
