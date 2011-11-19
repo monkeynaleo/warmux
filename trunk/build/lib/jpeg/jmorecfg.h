@@ -305,9 +305,9 @@ typedef int boolean;
 /* Decoder capability options: */
 
 #undef  D_ARITH_CODING_SUPPORTED    /* Arithmetic coding back end? */
-#undef D_MULTISCAN_FILES_SUPPORTED /* Multiple-scan JPEG files? */
-#undef D_PROGRESSIVE_SUPPORTED      /* Progressive JPEG? (Requires MULTISCAN)*/
-#undef SAVE_MARKERS_SUPPORTED     /* jpeg_save_markers() needed? */
+#define D_MULTISCAN_FILES_SUPPORTED /* Multiple-scan JPEG files? */
+#define D_PROGRESSIVE_SUPPORTED      /* Progressive JPEG? (Requires MULTISCAN)*/
+#define SAVE_MARKERS_SUPPORTED     /* jpeg_save_markers() needed? */
 #undef BLOCK_SMOOTHING_SUPPORTED   /* Block smoothing? (Progressive only) */
 #undef IDCT_SCALING_SUPPORTED     /* Output rescaling via IDCT? */
 #undef  UPSAMPLE_SCALING_SUPPORTED  /* Output rescaling at upsample stage? */
