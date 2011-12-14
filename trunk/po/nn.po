@@ -9,10 +9,10 @@ msgstr ""
 "PO-Revision-Date: 2011-03-27 22:52+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
+"Language: nn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: nn\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 1.0\n"
 
@@ -965,7 +965,8 @@ msgstr ""
 #: src/team/custom_team.cpp:125
 #, c-format
 msgid "Error while deleting the file \"%s\". Unable to delete the custom team."
-msgstr "Klarte ikkje sletta fila «%s», og kan derfor ikkje sletta tilpassa lag."
+msgstr ""
+"Klarte ikkje sletta fila «%s», og kan derfor ikkje sletta tilpassa lag."
 
 #. translators: %s:%s will expand to something like "example.org:9999"
 #: src/menu/network_connection_menu.cpp:552
