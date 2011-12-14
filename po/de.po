@@ -10,13 +10,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: warmux-dev@gna.org\n"
-"PO-Revision-Date: 2011-07-04 23:14+0100\n"
+"PO-Revision-Date: 2011-12-14 20:50+0100\n"
 "Last-Translator: Robert Clausecker <fuzxxl@gmail.com>\n"
 "Language-Team: German <de@li.org>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Basepath: /home/robert/warmux\n"
@@ -498,26 +498,26 @@ msgstr "(unbegrenzt)"
 #: src/menu/results_menu.cpp:475
 #, c-format
 msgid "*** Published: %s"
-msgstr ""
+msgstr "*** veröffentlicht: %s"
 
 #: src/menu/results_menu.cpp:477 src/menu/results_menu.cpp:479
 #, c-format
 msgid "*** Publishing failed: %s"
-msgstr ""
+msgstr "*** Veröffetlichung fehlgeschlagen: %s"
 
 #: src/menu/results_menu.cpp:564 src/menu/results_menu.cpp:583
 msgid "*** Publishing failed: incomplete credentials"
-msgstr ""
+msgstr "*** Veröffentlichung fehlgeschlagen: Anmeldedaten unvollständig"
 
 #: src/menu/results_menu.cpp:496 src/menu/results_menu.cpp:498
 #, c-format
 msgid "*** Tweet failed: %s"
-msgstr ""
+msgstr "*** Fehler beim twittern: %s"
 
 #: src/menu/results_menu.cpp:494
 #, c-format
 msgid "*** Tweeted: %s"
-msgstr ""
+msgstr "*** Getwittert: %s"
 
 #: src/menu/options_menu.cpp:535
 #, c-format
@@ -630,7 +630,7 @@ msgstr "Und Tschüss, Tux …"
 
 #: lib/warmux/net/download.cpp:437
 msgid "Can't find authenticity_token"
-msgstr ""
+msgstr "Authentifizierungstoken nicht gefunden"
 
 #: src/team/teams_list.cpp:489 src/team/teams_list.cpp:525
 #: src/team/teams_list.cpp:534 src/team/teams_list.cpp:540
@@ -945,8 +945,8 @@ msgstr "Lebenspunkte"
 #, c-format
 msgid "Error initializing network: Client %s does not agree with you!! - %s"
 msgstr ""
-"Fehler beim Netzwerkaufbau: Spieler %s ist nicht mit Ihnen einverstanden! - %"
-"s"
+"Fehler beim Netzwerkaufbau: Spieler %s ist nicht mit Ihnen einverstanden! - "
+"%s"
 
 #: src/map/ground.cpp:61
 msgid "Error loading ground"
@@ -962,8 +962,8 @@ msgstr "Fehler beim Laden des Teams:"
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
-"Fehler beim Erstellen des Verzeichnisses »%s«: kann Konfigurationsdatei nicht "
-"speichern."
+"Fehler beim Erstellen des Verzeichnisses »%s«: kann Konfigurationsdatei "
+"nicht speichern."
 
 #: src/team/custom_team.cpp:134
 #, c-format
@@ -1161,7 +1161,7 @@ msgstr "hoher Sprung"
 
 #: src/menu/results_menu.cpp:453
 msgid "Himself"
-msgstr ""
+msgstr "selbst"
 
 #: src/menu/network_connection_menu.cpp:311
 msgid "Host a game"
@@ -1313,7 +1313,8 @@ msgstr "Tastatur"
 #: src/network/admin_commands.cpp:35
 msgid "Kicks the player designated by <nickname> out of the game"
 msgstr ""
-"Schließt den Spieler mit Namen <nickname> aus dem Spiel aus (Spieler »kicken«)"
+"Schließt den Spieler mit Namen <nickname> aus dem Spiel aus (Spieler "
+"»kicken«)"
 
 #: src/menu/options_menu.cpp:157
 msgid "Language"
@@ -1342,6 +1343,8 @@ msgstr "Lokale Teams:"
 #: lib/warmux/net/download.cpp:352
 msgid "Login error, probably invalid email or password"
 msgstr ""
+"Fehler bei der Anmeldung, möglicherweise ist die Mailadresse oder das "
+"Passwort falsch"
 
 #: src/menu/options_menu.cpp:119
 msgid "Low memory"
@@ -1595,10 +1598,8 @@ msgstr ""
 "Mit Links/Rechts kann die Richtung gest. werden"
 
 #: src/gui/social_panel.cpp:81
-#, fuzzy
-#| msgid "Password:"
 msgid "Password"
-msgstr "Passwort:"
+msgstr "Passwort"
 
 #: src/menu/network_connection_menu.cpp:221
 #: src/menu/network_connection_menu.cpp:258
@@ -1843,10 +1844,8 @@ msgstr "Spiel starten"
 
 #. Password
 #: src/gui/social_panel.cpp:76
-#, fuzzy
-#| msgid "Password:"
 msgid "Save password"
-msgstr "Passwort:"
+msgstr "Passwort speichern"
 
 #: src/menu/results_menu.cpp:384
 msgid "Save replay?"
@@ -1967,7 +1966,7 @@ msgstr "Scharfschützengewehr"
 
 #: src/menu/options_menu.cpp:384 src/menu/results_menu.cpp:389
 msgid "Social"
-msgstr ""
+msgstr "social"
 
 #: src/object/bonus_box.cpp:75
 msgid "Someone put a booby trap into the crate!"
@@ -2349,7 +2348,7 @@ msgstr ""
 
 #: src/gui/social_panel.cpp:70
 msgid "User"
-msgstr ""
+msgstr "Benutzer"
 
 #. Version
 #: src/main.cpp:210 src/menu/main_menu.cpp:90 src/menu/replay_menu.cpp:97
@@ -2563,7 +2562,6 @@ msgstr "o Lade Soundprofil: %s"
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio geöffnet mit %d Hz und %d Bit"
 
-#, fuzzy
 #~| msgid "Public battles"
 #~ msgid "Publish updates"
 #~ msgstr "Öffentliche Spiele"

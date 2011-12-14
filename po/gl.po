@@ -14,10 +14,10 @@ msgstr ""
 "Last-Translator: Adrián Chaves Fernández (Gallaecio) <adriyetichaves@gmail."
 "com>\n"
 "Language-Team: American English <proxecto@trasno.net>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);X-Generator: KBabel 1.11.4\n"
 "X-Poedit-Language: Galician\n"
 "X-Poedit-Country: SPAIN\n"
@@ -121,8 +121,8 @@ msgstr "%s gañou %u puntos de enerxía!"
 #, c-format
 msgid "%s is a psychopath, he has killed a member of the %s team!"
 msgstr ""
-"%s é un psicópata, asasinou a un dos seus compañeiros! Os demais membros de %"
-"s non deben estar moi contentos..."
+"%s é un psicópata, asasinou a un dos seus compañeiros! Os demais membros de "
+"%s non deben estar moi contentos..."
 
 #: src/weapon/mine.cpp:120
 #, c-format
@@ -1039,7 +1039,8 @@ msgstr ""
 #: src/team/team.cpp:162
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
-msgstr "Houbo un erro: non se puido atopar o individuo «%s» para o equipo «%s»."
+msgstr ""
+"Houbo un erro: non se puido atopar o individuo «%s» para o equipo «%s»."
 
 #: src/menu/help_menu.cpp:65
 msgid "Experiment new game rules"
