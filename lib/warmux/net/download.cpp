@@ -19,11 +19,13 @@
  * Download a file using libcurl
  *****************************************************************************/
 #include <cerrno>
-#include <stdio.h>
+#include <cstdio>
 #include <map>
 #include <fstream>
 #include <cstdlib>
 #include <cstring>
+#include <ctype.h>
+
 #include <WARMUX_debug.h>
 #include <WARMUX_download.h>
 #include <WARMUX_error.h>
@@ -94,9 +96,9 @@ void Downloader::FillCurlError(int r)
   }
 }
 
-bool Downloader::GetUrl(const char* url, std::string* out)
+bool Downloader::HttpMethod(const std::string& url, std::string* out, int option)
 {
-  curl_easy_setopt(curl, CURLOPT_HTTPGET, 1);
+  curl_easy_setopt(curl, (CURLoption)option, 1);
   if (out) {
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, out);
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, download_callback);
@@ -104,7 +106,6 @@ bool Downloader::GetUrl(const char* url, std::string* out)
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, NULL);
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, dummy_callback);
   }
-  curl_easy_setopt(curl, CURLOPT_URL, url);
   int r = curl_easy_perform(curl);
   if (CURLE_OK == r)
     return true;
@@ -113,28 +114,20 @@ bool Downloader::GetUrl(const char* url, std::string* out)
   return false;
 }
 
-bool Downloader::Post(const char* url, std::string* out, const std::string& fields)
+bool Downloader::GetUrl(const std::string& url, std::string* out)
+{
+  return HttpMethod(url, out, CURLOPT_HTTPGET);
+}
+
+bool Downloader::Post(const std::string& url, std::string* out, const std::string& fields)
 {
   if (!fields.empty())
-    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, fields.c_str());
-  if (out) {
-    curl_easy_setopt(curl, CURLOPT_WRITEDATA, out);
-    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, download_callback);
-  } else {
-    curl_easy_setopt(curl, CURLOPT_WRITEDATA, NULL);
-    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, dummy_callback);
-  }
-  curl_easy_setopt(curl, CURLOPT_POST, 1);
-  curl_easy_setopt(curl, CURLOPT_URL, url);
-  int r = curl_easy_perform(curl);
-  if (CURLE_OK == r)
-    return true;
-
-  FillCurlError(r);
-  return false;
+    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, fields);
+  return HttpMethod(url, out, CURLOPT_POST);
 }
 
 #elif defined(ANDROID)
+#include <cctype>
 # include <jni.h>
 
 #ifndef SDL_JAVA_PACKAGE_PATH
@@ -161,6 +154,7 @@ JNIEXPORT void JNICALL JNI_OnUnload(JavaVM *_vm, void *reserved)
 
 static JNIEnv    *env       = NULL;
 static jmethodID  FetchURL  = NULL;
+static jmethodID  Post      = NULL;
 static jobject    dler      = NULL;
 
 void
@@ -170,13 +164,14 @@ JAVA_EXPORT_NAME(URLDownloader_nativeInitCallbacks)(JNIEnv * libEnv, jobject thi
   dler = env->NewGlobalRef(thiz); //Never freed!
   jclass dlerClass = env->GetObjectClass(dler);
   FetchURL = env->GetMethodID(dlerClass, "FetchURL", "(Ljava/lang/String;)[B");
+  Post     = env->GetMethodID(dlerClass, "PostURL", "(Ljava/lang/String;Ljava/lang/String;)[B");
 }
 
 };
 
 Downloader::Downloader() { }
 Downloader::~Downloader() { }
-bool Downloader::GetUrl(const char* url, std::string& out)
+bool Downloader::GetUrl(const std::string& url, std::string* out)
 {
   bool       ret    = false;
   jboolean   isCopy = JNI_FALSE;
@@ -186,24 +181,25 @@ bool Downloader::GetUrl(const char* url, std::string& out)
   // Now make sure to properly detach even in case of error
   vm->AttachCurrentThread(&env, NULL);
 
-  jstring    jurl   = env->NewStringUTF(url);
+  // No explicit deallocation needed
+  jstring    jurl   = env->NewStringUTF(url.c_str());
   jbyteArray buffer = (jbyteArray)env->CallObjectMethod(dler, FetchURL, jurl);
   int        len    = env->GetArrayLength(buffer);
   jbyte     *ptr;
 
   if (!len) {
     error = Format(_("Read only %i bytes"), len);
-    goto out;
+    goto end;
   }
 
   ptr = env->GetByteArrayElements(buffer, &isCopy);
   if (!ptr) {
     error = _("No pointer");
-    goto out;
+    goto end;
   }
 
   if (len) {
-    out.append((char*)ptr, sizeof(jbyte)*len);
+    out->append((char*)ptr, sizeof(jbyte)*len);
     if (isCopy == JNI_TRUE)
       env->ReleaseByteArrayElements(buffer, ptr, 0);
     ret = true;
@@ -211,20 +207,99 @@ bool Downloader::GetUrl(const char* url, std::string& out)
     error = Format(_("Wrote %i/%i bytes"), written, len);
   }
 
-out:
+end:
   // Done with JNI calls, detach
   vm->DetachCurrentThread();
   return ret;
 }
+
+bool Downloader::Post(const std::string& url, std::string* out, const std::string& fields)
+{
+  bool       ret    = false;
+  jboolean   isCopy = JNI_FALSE;
+  int        written;
+
+  // Attach to avoid: "JNI ERROR: non-VM thread making JNI calls"
+  // Now make sure to properly detach even in case of error
+  vm->AttachCurrentThread(&env, NULL);
+
+  // No explicit deallocation needed
+  jstring    jurl   = env->NewStringUTF(url.c_str());
+  jstring    jfield = env->NewStringUTF((fields.empty()) ? "" : fields.c_str());
+  jbyteArray buffer = (jbyteArray)env->CallObjectMethod(dler, FetchURL, jurl, jfield);
+  int        len    = env->GetArrayLength(buffer);
+  jbyte     *ptr;
+
+  if (!len) {
+    error = Format(_("Read only %i bytes"), len);
+    goto end;
+  }
+
+  ptr = env->GetByteArrayElements(buffer, &isCopy);
+  if (!ptr) {
+    error = _("No pointer");
+    goto end;
+  }
+
+  if (len) {
+    out->append((char*)ptr, sizeof(jbyte)*len);
+    if (isCopy == JNI_TRUE)
+      env->ReleaseByteArrayElements(buffer, ptr, 0);
+    ret = true;
+  } else {
+    error = Format(_("Wrote %i/%i bytes"), written, len);
+  }
+
+end:
+  // Done with JNI calls, detach
+  vm->DetachCurrentThread();
+  return ret;
+}
+
 #else  // waiting for an alternate implementation
 Downloader::Downloader() { }
 Downloader::~Downloader() { }
-bool Downloader::GetUrl(const char* /*url*/, std::string& /*file*/) { return false; }
+bool Downloader::GetUrl(const std::string& /*url*/, std::string* /*out*/) { return false; }
+bool Downloader::GetPost(const std::string& /*url*/, std::string* /*out*/, const std::string& /*fields*/) { return false; }
 #endif
+
+std::string Downloader::UrlEncode(const std::string& str)
+{
+  std::string ret;
+  uint        len = str.size();
+#ifdef HAVE_CURL
+  char       *ue_str;
+  ue_str = curl_easy_escape(curl, str.c_str(), str.size());
+  ret = ue_str;
+  free(ue_str);
+  return ret;
+#else
+  static const char digits[] = "0123456789ABCDEF";
+  const char*       src      = str.c_str();
+
+  while (len && *src) {
+    unsigned char ch = (unsigned char)*src;
+    if (*src == ' ') {
+      ret += '+';
+    }
+    else if (isalnum(ch) || strchr("-_.!~*'()", ch)) {
+      ret += *src;
+    }
+    else {
+      ret += '%';
+      ret += digits[(ch >> 4) & 0x0F];
+      ret += digits[       ch & 0x0F];
+    }  
+    src++;
+  }
+  ret += '\0';
+#endif
+  return ret;
+}
 
 bool Downloader::GetLatestVersion(std::string& line)
 {
-  static const char url[] = "http://www.warmux.org/last";
+  static const char url[] = "http://www.wormux.org/last";
   error.clear();
   if (!GetUrl(url, &line)) {
     if (error.empty())
@@ -241,7 +316,7 @@ bool Downloader::GetServerList(std::map<std::string, int>& server_lst, const std
   MSG_DEBUG("downloader", "Retrieving server list: %s", list_name.c_str());
 
   // Download the list of server
-  const std::string list_url = "http://www.warmux.org/" + list_name;
+  const std::string list_url = "http://www.wormux.org/" + list_name;
   std::string       list_line;
 
   error.clear();
@@ -302,17 +377,13 @@ bool Downloader::FindNameValue(std::string& value, const std::string& name, cons
 
 
 #ifdef HAVE_FACEBOOK
-bool Downloader::FacebookLogin(const std::string& semail, const std::string& spwd)
+bool Downloader::FacebookLogin(const std::string& email, const std::string& pwd)
 {
   if (fb_logged)
     return true;
   std::string html, fields;
 
   fb_logged = false;
-#ifdef HAVE_LIBCURL
-  char *email = curl_easy_escape(curl, semail.c_str(), semail.size());
-  char *pass  = curl_easy_escape(curl, spwd.c_str(), spwd.size());
-#endif
   if (!GetUrl("http://m.facebook.com/login.php?http&refsrc=http%3A%2F%2Fm.facebook.com%2F&no_next_msg&refid=8", &html)) {
     goto end;
   }
@@ -343,9 +414,10 @@ bool Downloader::FacebookLogin(const std::string& semail, const std::string& spw
 
   form = "http://m.facebook.com" + form;
   fields = "lsd=&post_form_id=" + post_form_id +
-           "&version=1&ajax=0&pxr=0&gps=0&email=" + email + "&pass=" + pass + "&m_ts=" + m_ts + "&login=Login";
+           "&version=1&ajax=0&pxr=0&gps=0&email=" + UrlEncode(email) +
+           "&pass=" + UrlEncode(pwd) + "&m_ts=" + m_ts + "&login=Login";
   MSG_DEBUG("downloader", "Fields: %s\n", fields.c_str());
-  if (!Post(form.c_str(), &html, fields)) {
+  if (!Post(form.c_str(), &html, fields.c_str())) {
     goto end;
   }
   if (html.find("abb acr aps") != std::string::npos) {
@@ -381,13 +453,6 @@ bool Downloader::FacebookLogin(const std::string& semail, const std::string& spw
   fb_logged = true;
 
 end:
-  free(pass);
-  free(email);
-#ifdef HAVE_LIBCURL
-  curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, dummy_callback);
-  curl_easy_setopt(curl, CURLOPT_WRITEDATA, NULL);
-#endif
-
   if (!fb_logged && IsLOGGING("download")) {
     FILE *f = fopen("out.htm", "wt");
     fwrite(html.c_str(), html.size(), 1, f);
@@ -402,31 +467,21 @@ bool Downloader::FacebookStatus(const std::string& text)
 {
   if (!fb_logged)
     return false;
-  std::string txt;
-#ifdef HAVE_LIBCURL
-  char *msg = curl_easy_escape(curl, text.c_str(), text.size());
-  txt = "fb_dtsg=" + fb_dtsg + "&post_form_id=" + post_form_id + "&status=" + msg + "&update=Update&target=";
-  free(msg);
-#endif
+  std::string txt = "fb_dtsg=" + fb_dtsg + "&post_form_id=" + post_form_id +
+                    "&status=" + UrlEncode(text) + "&update=Update&target=";
   MSG_DEBUG("downloader", "fields=%s", txt.c_str());
-  return Post(form.c_str(), NULL, txt);
+  return Post(form.c_str(), NULL, txt.c_str());
 }
 #endif
 
-
-
 #ifdef HAVE_TWITTER
-bool Downloader::TwitterLogin(const std::string& suser, const std::string& spwd)
+bool Downloader::TwitterLogin(const std::string& user, const std::string& pwd)
 {
   if (twitter_logged)
     return true;
   std::string html, fields;
 
   twitter_logged = false;
-#ifdef HAVE_LIBCURL
-  char *user = curl_easy_escape(curl, suser.c_str(), suser.size());
-  char *pass  = curl_easy_escape(curl, spwd.c_str(), spwd.size());
-#endif
   if (!GetUrl("http://mobile.twitter.com/session/new", &html)) {
     goto end;
   }
@@ -441,7 +496,8 @@ bool Downloader::TwitterLogin(const std::string& suser, const std::string& spwd)
 
   html.clear();
 
-  fields = "authenticity_token=" + auth + "&username=" + user + "&password=" + pass;
+  fields = "authenticity_token=" + auth + "&username=" + UrlEncode(user) +
+           "&password=" + UrlEncode(pwd);
   MSG_DEBUG("downloader", "Fields: %s\n", fields.c_str());
   if (!Post("http://mobile.twitter.com/session", &html, fields)) {
     goto end;
@@ -459,13 +515,6 @@ bool Downloader::TwitterLogin(const std::string& suser, const std::string& spwd)
   twitter_logged = true;
 
 end:
-  free(pass);
-  free(user);
-#ifdef HAVE_LIBCURL
-  curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, dummy_callback);
-  curl_easy_setopt(curl, CURLOPT_WRITEDATA, NULL);
-#endif
-
   if (!twitter_logged && IsLOGGING("download")) {
     FILE *f = fopen("out.htm", "wt");
     fwrite(html.c_str(), html.size(), 1, f);
@@ -480,12 +529,7 @@ bool Downloader::Tweet(const std::string& text)
 {
   if (!twitter_logged)
     return false;
-  std::string txt;
-#ifdef HAVE_LIBCURL
-  char *msg = curl_easy_escape(curl, text.c_str(), text.size());
-  txt = "authenticity_token=" + auth + "&tweet%5Btext%5D=" + msg;
-  free(msg);
-#endif
+  std::string txt = "authenticity_token=" + auth + "&tweet%5Btext%5D=" + UrlEncode(text);
   MSG_DEBUG("downloader", "fields=%s", txt.c_str());
   return Post("https://mobile.twitter.com/", NULL, txt);
 }

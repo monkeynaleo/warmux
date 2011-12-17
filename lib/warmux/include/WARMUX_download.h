@@ -55,8 +55,10 @@ class Downloader : public Singleton<Downloader>
 #endif
 
   // Return true if the download was successful
-  bool GetUrl(const char* url, std::string* out);
-  bool Post(const char* url, std::string* out, const std::string& fields = "");
+  bool HttpMethod(const std::string& url, std::string* out, int option);
+  bool GetUrl(const std::string& url, std::string* out);
+  bool Post(const std::string& url, std::string* out, const std::string& fields = "");
+  std::string UrlEncode(const std::string& str);
 
 protected:
   friend class Singleton<Downloader>;
