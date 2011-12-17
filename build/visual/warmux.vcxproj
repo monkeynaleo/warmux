@@ -200,6 +200,7 @@ echo #define __TIME__ "%TIME" &gt;&gt; resource.h
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\gui\social_panel.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\ai\ai_command.cpp" />
     <ClCompile Include="..\..\src\ai\ai_idea.cpp" />
@@ -475,6 +476,7 @@ echo #define __TIME__ "%TIME" &gt;&gt; resource.h
     <ClInclude Include="..\..\src\gui\question.h" />
     <ClInclude Include="..\..\src\gui\scroll_box.h" />
     <ClInclude Include="..\..\src\gui\select_box.h" />
+    <ClInclude Include="..\..\src\gui\social_panel.h" />
     <ClInclude Include="..\..\src\gui\spin_button.h" />
     <ClInclude Include="..\..\src\gui\spin_button_picture.h" />
     <ClInclude Include="..\..\src\gui\tabs.h" />
@@ -630,7 +632,6 @@ echo #define __TIME__ "%TIME" &gt;&gt; resource.h
     <ClInclude Include="..\..\src\weapon\weapon_launcher.h" />
     <ClInclude Include="..\..\src\weapon\weapon_strength_bar.h" />
     <ClInclude Include="..\..\src\weapon\weapons_list.h" />
-    <ClInclude Include="..\..\src\msvc\config.h" />
     <ClInclude Include="..\..\src\msvc\getopt.h" />
     <ClInclude Include="..\..\src\replay\game_mode_info.h" />
     <ClInclude Include="..\..\src\replay\replay.h" />
